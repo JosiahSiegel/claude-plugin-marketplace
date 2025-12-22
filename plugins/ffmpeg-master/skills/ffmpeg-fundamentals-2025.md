@@ -1,0 +1,408 @@
+---
+name: ffmpeg-fundamentals-2025
+description: FFmpeg 7.1/8.0 core features, command syntax, common operations, and essential knowledge for 2025
+---
+
+## CRITICAL GUIDELINES
+
+### Windows File Path Requirements
+
+**MANDATORY: Always Use Backslashes on Windows for File Paths**
+
+When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
+
+### Documentation Guidelines
+
+**NEVER create new documentation files unless explicitly requested by the user.**
+
+---
+
+# FFmpeg Fundamentals (2025)
+
+Complete guide to FFmpeg core concepts, syntax, and essential operations with FFmpeg 7.1 LTS and 8.0 Huffman.
+
+## FFmpeg Version Overview (December 2025)
+
+### FFmpeg 8.0 "Huffman" (August 2025)
+- **Whisper AI Filter**: Built-in speech recognition for live subtitle generation
+- **Vulkan Compute Codecs**: FFv1 encode/decode, ProRes RAW decode via compute shaders
+- **AV1 Vulkan Encoder**: GPU-accelerated AV1 encoding
+- **VVC VA-API Decoding**: H.266/VVC hardware acceleration
+- **APV Codec**: Samsung Advanced Professional Video encoder/decoder
+- **ProRes RAW Decoder**: Native ProRes RAW support
+- **WHIP Muxer**: Sub-second latency WebRTC streaming
+- **Dropped**: OpenSSL 1.1.0, yasm (use nasm)
+
+### FFmpeg 7.1 "Péter" LTS (September 2024)
+- **VVC Decoder Stable**: Full native H.266/VVC decoder (production-ready)
+- **MV-HEVC Decoder**: 3D HEVC for Apple Vision Pro / iPhone spatial video
+- **LC-EVC Decoder**: MPEG-5 Part 2 enhancement layer
+- **xHE-AAC Decoder**: Extended High Efficiency AAC
+- **Vulkan H.264/H.265 Encoders**: GPU encoding via Vulkan Video
+- **Native Intel QSV VVC Decoder**: Hardware-accelerated VVC
+- **AVX2 VVC Optimizations**: Faster software VVC decoding
+- **Full-Range Color Fixes**: Correct color range handling throughout pipeline
+
+## Basic Command Syntax
+
+```bash
+ffmpeg [global_options] {[input_options] -i input} ... {[output_options] output} ...
+```
+
+### Essential Options
+
+```bash
+# Basic transcode
+ffmpeg -i input.mp4 output.mkv
+
+# Specify codecs
+ffmpeg -i input.mp4 -c:v libx264 -c:a aac output.mp4
+
+# Copy streams without re-encoding (remux)
+ffmpeg -i input.mkv -c copy output.mp4
+
+# Set quality (CRF mode)
+ffmpeg -i input.mp4 -c:v libx264 -crf 23 output.mp4
+
+# Set bitrate
+ffmpeg -i input.mp4 -c:v libx264 -b:v 5M output.mp4
+
+# Overwrite output without asking
+ffmpeg -y -i input.mp4 output.mp4
+
+# Show progress/stats
+ffmpeg -progress - -i input.mp4 output.mp4
+```
+
+## Codec Reference (2025)
+
+### Video Codecs
+
+| Codec | Encoder | Use Case | Quality | Speed |
+|-------|---------|----------|---------|-------|
+| H.264/AVC | libx264 | Universal compatibility | Excellent | Medium |
+| H.265/HEVC | libx265 | 4K, HDR, storage efficiency | Excellent | Slow |
+| H.266/VVC | libvvenc | Next-gen, 8K | Best | Very Slow |
+| AV1 | libsvtav1, libaom-av1 | Web streaming, royalty-free | Excellent | Slow-Medium |
+| VP9 | libvpx-vp9 | WebM, YouTube | Very Good | Slow |
+| ProRes | prores_ks | Professional editing | Lossless | Fast |
+
+### Hardware Encoders
+
+| Platform | H.264 | H.265 | AV1 |
+|----------|-------|-------|-----|
+| NVIDIA | h264_nvenc | hevc_nvenc | av1_nvenc |
+| Intel | h264_qsv | hevc_qsv | av1_qsv |
+| AMD | h264_amf | hevc_amf | av1_amf |
+| Apple | h264_videotoolbox | hevc_videotoolbox | - |
+| Vulkan | h264_vulkan | hevc_vulkan | av1_vulkan (8.0+) |
+
+### Audio Codecs
+
+| Codec | Encoder | Use Case | Bitrate Range |
+|-------|---------|----------|---------------|
+| AAC | aac, libfdk_aac | Universal, streaming | 96-320 kbps |
+| MP3 | libmp3lame | Legacy compatibility | 128-320 kbps |
+| Opus | libopus | VoIP, streaming, WebM | 32-256 kbps |
+| FLAC | flac | Lossless archival | ~900 kbps |
+| AC3 | ac3 | DVD, Blu-ray | 384-640 kbps |
+| EAC3 | eac3 | Streaming, Dolby Digital+ | 192-768 kbps |
+
+## Common Operations
+
+### Format Conversion
+
+```bash
+# MP4 to WebM
+ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -c:a libopus output.webm
+
+# MKV to MP4 (no re-encoding)
+ffmpeg -i input.mkv -c copy output.mp4
+
+# AVI to MP4 with H.265
+ffmpeg -i input.avi -c:v libx265 -crf 28 -c:a aac output.mp4
+
+# GIF to MP4
+ffmpeg -i input.gif -movflags +faststart -pix_fmt yuv420p output.mp4
+
+# MP4 to GIF (optimized)
+ffmpeg -i input.mp4 -vf "fps=15,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" output.gif
+```
+
+### Resolution & Scaling
+
+```bash
+# Scale to 1080p (maintain aspect ratio)
+ffmpeg -i input.mp4 -vf "scale=1920:-2" output.mp4
+
+# Scale to 720p
+ffmpeg -i input.mp4 -vf "scale=-2:720" output.mp4
+
+# Scale to fit within bounds
+ffmpeg -i input.mp4 -vf "scale='min(1920,iw)':'min(1080,ih)':force_original_aspect_ratio=decrease" output.mp4
+
+# Scale with padding (letterbox)
+ffmpeg -i input.mp4 -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2" output.mp4
+```
+
+### Trimming & Splitting
+
+```bash
+# Extract segment (fast seek)
+ffmpeg -ss 00:01:00 -i input.mp4 -t 00:00:30 -c copy output.mp4
+
+# Extract from timestamp to end
+ffmpeg -ss 00:05:00 -i input.mp4 -c copy output.mp4
+
+# Extract first 10 seconds
+ffmpeg -i input.mp4 -t 10 -c copy output.mp4
+
+# Split into segments
+ffmpeg -i input.mp4 -c copy -map 0 -segment_time 60 -f segment output_%03d.mp4
+
+# Accurate trim (re-encode)
+ffmpeg -i input.mp4 -ss 00:01:00 -t 00:00:30 -c:v libx264 -c:a aac output.mp4
+```
+
+### Concatenation
+
+```bash
+# Create file list
+echo "file 'part1.mp4'" > list.txt
+echo "file 'part2.mp4'" >> list.txt
+echo "file 'part3.mp4'" >> list.txt
+
+# Concatenate (same codecs)
+ffmpeg -f concat -safe 0 -i list.txt -c copy output.mp4
+
+# Concatenate with re-encoding
+ffmpeg -f concat -safe 0 -i list.txt -c:v libx264 -c:a aac output.mp4
+```
+
+### Audio Operations
+
+```bash
+# Extract audio
+ffmpeg -i input.mp4 -vn -c:a copy output.aac
+ffmpeg -i input.mp4 -vn -c:a libmp3lame -b:a 320k output.mp3
+
+# Replace audio
+ffmpeg -i video.mp4 -i audio.mp3 -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 output.mp4
+
+# Add audio to video
+ffmpeg -i video.mp4 -i audio.mp3 -c:v copy -c:a aac -shortest output.mp4
+
+# Remove audio
+ffmpeg -i input.mp4 -an -c:v copy output.mp4
+
+# Adjust volume
+ffmpeg -i input.mp4 -af "volume=1.5" output.mp4
+ffmpeg -i input.mp4 -af "volume=6dB" output.mp4
+
+# Normalize audio (EBU R128)
+ffmpeg -i input.mp4 -af loudnorm=I=-16:TP=-1.5:LRA=11 output.mp4
+```
+
+### Subtitles
+
+```bash
+# Burn subtitles (hardcode)
+ffmpeg -i input.mp4 -vf "subtitles=subs.srt" output.mp4
+
+# Add subtitle track
+ffmpeg -i input.mp4 -i subs.srt -c copy -c:s mov_text output.mp4
+
+# Extract subtitles
+ffmpeg -i input.mkv -map 0:s:0 output.srt
+```
+
+### Image Operations
+
+```bash
+# Video to images
+ffmpeg -i input.mp4 -vf "fps=1" frame_%04d.png
+
+# Images to video
+ffmpeg -framerate 30 -i frame_%04d.png -c:v libx264 -pix_fmt yuv420p output.mp4
+
+# Extract single frame
+ffmpeg -ss 00:00:10 -i input.mp4 -vframes 1 thumbnail.jpg
+
+# Create video from single image
+ffmpeg -loop 1 -i image.jpg -c:v libx264 -t 10 -pix_fmt yuv420p output.mp4
+```
+
+## Filter Essentials
+
+### Video Filters (-vf)
+
+```bash
+# Chain multiple filters
+ffmpeg -i input.mp4 -vf "scale=1280:720,fps=30,format=yuv420p" output.mp4
+
+# Crop
+ffmpeg -i input.mp4 -vf "crop=640:480:100:50" output.mp4
+
+# Rotate
+ffmpeg -i input.mp4 -vf "transpose=1" output.mp4  # 90° clockwise
+ffmpeg -i input.mp4 -vf "transpose=2" output.mp4  # 90° counter-clockwise
+ffmpeg -i input.mp4 -vf "hflip" output.mp4        # Horizontal flip
+ffmpeg -i input.mp4 -vf "vflip" output.mp4        # Vertical flip
+
+# Overlay/Watermark
+ffmpeg -i video.mp4 -i logo.png -filter_complex "overlay=10:10" output.mp4
+ffmpeg -i video.mp4 -i logo.png -filter_complex "overlay=W-w-10:H-h-10" output.mp4
+
+# Text overlay
+ffmpeg -i input.mp4 -vf "drawtext=text='Hello World':x=10:y=10:fontsize=24:fontcolor=white" output.mp4
+
+# Fade in/out
+ffmpeg -i input.mp4 -vf "fade=t=in:st=0:d=1,fade=t=out:st=9:d=1" output.mp4
+
+# Speed up/slow down
+ffmpeg -i input.mp4 -vf "setpts=0.5*PTS" -af "atempo=2.0" output.mp4  # 2x speed
+ffmpeg -i input.mp4 -vf "setpts=2.0*PTS" -af "atempo=0.5" output.mp4  # 0.5x speed
+
+# Deinterlace
+ffmpeg -i input.mp4 -vf "yadif" output.mp4
+
+# Denoise
+ffmpeg -i input.mp4 -vf "nlmeans" output.mp4
+ffmpeg -i input.mp4 -vf "hqdn3d" output.mp4
+
+# Sharpen
+ffmpeg -i input.mp4 -vf "unsharp=5:5:1.0:5:5:0.0" output.mp4
+
+# Color correction
+ffmpeg -i input.mp4 -vf "eq=brightness=0.1:contrast=1.2:saturation=1.3" output.mp4
+```
+
+### Audio Filters (-af)
+
+```bash
+# Multiple audio filters
+ffmpeg -i input.mp4 -af "volume=1.5,highpass=f=200,lowpass=f=3000" output.mp4
+
+# Noise reduction
+ffmpeg -i input.mp4 -af "afftdn=nf=-25" output.mp4
+
+# Compressor/limiter
+ffmpeg -i input.mp4 -af "acompressor=threshold=-20dB:ratio=4:attack=5:release=50" output.mp4
+
+# Equalizer
+ffmpeg -i input.mp4 -af "equalizer=f=1000:width_type=h:width=200:g=-10" output.mp4
+
+# Fade audio
+ffmpeg -i input.mp4 -af "afade=t=in:ss=0:d=3,afade=t=out:st=57:d=3" output.mp4
+
+# Channel remix (stereo to mono)
+ffmpeg -i input.mp4 -af "pan=mono|c0=0.5*c0+0.5*c1" output.mp4
+```
+
+### Complex Filtergraphs
+
+```bash
+# Picture-in-picture
+ffmpeg -i main.mp4 -i pip.mp4 -filter_complex "[1:v]scale=320:240[pip];[0:v][pip]overlay=W-w-10:H-h-10" output.mp4
+
+# Side by side
+ffmpeg -i left.mp4 -i right.mp4 -filter_complex "[0:v]pad=iw*2:ih[bg];[bg][1:v]overlay=W/2:0" output.mp4
+
+# Grid layout (2x2)
+ffmpeg -i 1.mp4 -i 2.mp4 -i 3.mp4 -i 4.mp4 -filter_complex \
+  "[0:v]scale=640:360[v0];[1:v]scale=640:360[v1];[2:v]scale=640:360[v2];[3:v]scale=640:360[v3];\
+   [v0][v1]hstack[top];[v2][v3]hstack[bottom];[top][bottom]vstack" output.mp4
+```
+
+## Probing & Analysis
+
+```bash
+# Get media info
+ffprobe -v quiet -print_format json -show_format -show_streams input.mp4
+
+# Get duration
+ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 input.mp4
+
+# Get resolution
+ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 input.mp4
+
+# Get codec
+ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 input.mp4
+
+# Check if file is valid
+ffprobe -v error input.mp4 && echo "Valid" || echo "Invalid"
+```
+
+## Output Optimization
+
+### Web Delivery
+
+```bash
+# MP4 for web (faststart)
+ffmpeg -i input.mp4 -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k -movflags +faststart output.mp4
+
+# WebM for web
+ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -c:a libopus -b:a 128k output.webm
+```
+
+### iOS/Apple Compatibility
+
+```bash
+# H.265 with hvc1 tag (required for Apple)
+ffmpeg -i input.mp4 -c:v libx265 -vtag hvc1 -c:a aac output.mp4
+
+# Baseline profile for older iOS
+ffmpeg -i input.mp4 -c:v libx264 -profile:v baseline -level 3.0 -c:a aac output.mp4
+```
+
+### Android Compatibility
+
+```bash
+# Widely compatible H.264
+ffmpeg -i input.mp4 -c:v libx264 -profile:v main -level 4.0 -c:a aac output.mp4
+```
+
+## Best Practices
+
+### Performance
+1. Use `-threads 0` to auto-detect optimal thread count
+2. Place `-ss` before `-i` for fast seeking (may be less accurate)
+3. Use `-c copy` when possible to avoid re-encoding
+4. Use hardware acceleration when available
+
+### Quality
+1. Prefer CRF over bitrate for single-pass encoding
+2. Use `-preset slow` or slower for better compression
+3. Use `-tune` options (film, animation, grain) when appropriate
+4. Maintain pixel format: `-pix_fmt yuv420p` for compatibility
+
+### Compatibility
+1. Use `-movflags +faststart` for web MP4 files
+2. Use `-vtag hvc1` for HEVC on Apple devices
+3. Test on target devices before mass conversion
+4. Consider fallback formats for older browsers
+
+### Error Prevention
+1. Always test commands on a sample file first
+2. Use `-report` for detailed logging
+3. Check output file size and duration
+4. Verify audio/video sync on converted files
+
+## Quick Reference
+
+### Get FFmpeg Capabilities
+```bash
+ffmpeg -encoders          # List all encoders
+ffmpeg -decoders          # List all decoders
+ffmpeg -formats           # List all formats
+ffmpeg -filters           # List all filters
+ffmpeg -hwaccels          # List hardware acceleration methods
+ffmpeg -h encoder=libx264 # Get encoder options
+```
+
+### Common Exit Codes
+- 0: Success
+- 1: Error (check stderr for details)
+- 255: Interrupted (Ctrl+C)
+
+This guide covers FFmpeg fundamentals for 2025. For hardware acceleration, streaming, containers, and advanced topics, see the specialized skill documents.

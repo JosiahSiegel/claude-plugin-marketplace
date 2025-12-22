@@ -428,6 +428,69 @@
         "ocelot",
         "entityframework"
       ]
+    },
+    {
+      "name": "ffmpeg-master",
+      "source": "./plugins/ffmpeg-master",
+      "description": "Complete FFmpeg expertise system with FFmpeg 7.1/8.0 features, hardware acceleration, Docker/containers, Cloudflare Workers/Containers, CI/CD, streaming, and audio processing. PROACTIVELY activate for: (1) ANY FFmpeg task (encoding, transcoding, streaming), (2) Video format conversion, (3) Hardware acceleration (NVENC, CUDA, QSV, VAAPI, AMF, Vulkan), (4) Docker container FFmpeg usage, (5) Cloudflare Workers/Containers video processing, (6) GitHub Actions CI pipeline video processing, (7) Live streaming (RTMP, HLS, DASH, SRT), (8) Audio encoding/normalization (AAC, MP3, EBU R128), (9) Quality optimization (CRF, presets), (10) FFmpeg debugging, (11) VVC/H.266, AV1, HEVC encoding. Provides: FFmpeg 8.0 Huffman features (Whisper AI, Vulkan codecs), FFmpeg 7.1 LTS features (VVC, MV-HEVC), hardware acceleration guides, Docker best practices, Cloudflare Containers native FFmpeg, WebAssembly (ffmpeg.wasm) patterns, CI/CD optimization, streaming protocols, audio workflows, and production-ready configurations.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "ffmpeg",
+        "video",
+        "audio",
+        "encoding",
+        "transcoding",
+        "streaming",
+        "rtmp",
+        "hls",
+        "dash",
+        "nvenc",
+        "cuda",
+        "qsv",
+        "hardware-acceleration",
+        "docker",
+        "cloudflare-containers",
+        "webassembly",
+        "github-actions",
+        "h264",
+        "h265",
+        "av1",
+        "vvc",
+        "aac",
+        "normalization"
+      ]
+    },
+    {
+      "name": "tailwindcss-master",
+      "source": "./plugins/tailwindcss-master",
+      "description": "Complete Tailwind CSS v4 expertise system with 2025 best practices. PROACTIVELY activate for: (1) ANY Tailwind CSS task, (2) Tailwind v4 CSS-first configuration (@theme, @utility, @custom-variant), (3) Responsive design and breakpoints, (4) Dark mode implementation, (5) Plugin integration (@tailwindcss/typography, @tailwindcss/forms), (6) Framework integration (React, Vue, Next.js, Vite), (7) Migration from v3 to v4, (8) Custom utility and component creation, (9) Debugging and troubleshooting, (10) Production build optimization. Provides: Tailwind v4.1 complete features, CSS-first @theme configuration, @utility and @custom-variant directives, PostCSS and Vite plugin setup, responsive breakpoints, dark mode patterns, typography and forms plugins, animation/transition utilities, framework integration patterns, performance optimization, and debugging techniques.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "tailwindcss",
+        "tailwind",
+        "css",
+        "utility-first",
+        "responsive",
+        "dark-mode",
+        "v4",
+        "theme",
+        "postcss",
+        "vite",
+        "react",
+        "vue",
+        "nextjs",
+        "typography",
+        "forms",
+        "animation",
+        "jit",
+        "performance"
+      ]
     }
   ]
 }

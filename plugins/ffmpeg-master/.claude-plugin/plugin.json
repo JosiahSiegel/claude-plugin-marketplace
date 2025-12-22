@@ -1,0 +1,41 @@
+{
+  "name": "ffmpeg-master",
+  "version": "1.0.0",
+  "description": "Complete FFmpeg expertise system with comprehensive coverage of FFmpeg 7.1/8.0 features, hardware acceleration (NVIDIA NVENC, Intel QSV, AMD AMF, Vulkan), Docker/container usage, Cloudflare Workers/WebAssembly (ffmpeg.wasm), CI/CD runner optimization (GitHub Actions), live streaming (RTMP/HLS/DASH), audio processing and normalization, encoding optimization (CRF, presets, quality tuning), and common gotchas/troubleshooting. PROACTIVELY activate for: (1) ANY FFmpeg task (encoding, transcoding, streaming, filtering), (2) Video format conversion (MP4, WebM, MKV, AVI), (3) Hardware acceleration setup (NVENC, CUDA, QSV, VAAPI, AMF), (4) Docker container FFmpeg usage (jrottenberg/ffmpeg, linuxserver/ffmpeg), (5) Browser/WebAssembly FFmpeg (ffmpeg.wasm), (6) Cloudflare Workers video processing, (7) GitHub Actions/CI pipeline video processing, (8) Live streaming setup (RTMP ingest, HLS/DASH delivery), (9) Audio encoding/normalization (AAC, MP3, loudnorm, EBU R128), (10) Quality optimization (CRF, bitrate, presets), (11) FFmpeg debugging and error resolution, (12) VVC/H.266, AV1, HEVC encoding, (13) Filter graphs and complex filtergraphs, (14) Batch processing and automation. Provides: FFmpeg 8.0 Huffman features (Whisper AI, Vulkan codecs, APV), FFmpeg 7.1 LTS features (VVC decoder, MV-HEVC), hardware acceleration guides, Docker best practices, WebAssembly limitations and workarounds, CI/CD optimization strategies, streaming protocol guidance, audio processing workflows, encoding presets and recommendations, systematic debugging approaches, and production-ready configurations for all platforms.",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
+  "keywords": [
+    "ffmpeg",
+    "video",
+    "audio",
+    "encoding",
+    "transcoding",
+    "streaming",
+    "rtmp",
+    "hls",
+    "dash",
+    "nvenc",
+    "cuda",
+    "qsv",
+    "vaapi",
+    "hardware-acceleration",
+    "docker",
+    "webassembly",
+    "wasm",
+    "cloudflare-workers",
+    "github-actions",
+    "cicd",
+    "h264",
+    "h265",
+    "hevc",
+    "av1",
+    "vvc",
+    "aac",
+    "mp3",
+    "normalization",
+    "loudnorm"
+  ],
+  "license": "MIT"
+}

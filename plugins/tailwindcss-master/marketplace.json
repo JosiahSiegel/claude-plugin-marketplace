@@ -1,0 +1,8 @@
+{
+  "name": "tailwindcss-master",
+  "displayName": "TailwindCSS Master",
+  "description": "Complete Tailwind CSS v4 expertise with CSS-first configuration, responsive design, dark mode, plugins, and framework integration",
+  "version": "1.0.0",
+  "category": "CSS Frameworks",
+  "tags": ["tailwindcss", "css", "responsive", "dark-mode", "v4", "utility-first"]
+}
