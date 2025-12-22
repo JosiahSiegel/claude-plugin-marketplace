@@ -1,0 +1,64 @@
+{
+  "name": "nextjs-master",
+  "version": "1.0.0",
+  "description": "Comprehensive Next.js 15 plugin covering App Router, Server Components, Server Actions, caching, middleware, and modern patterns",
+  "author": "Claude Marketplace",
+  "keywords": [
+    "nextjs",
+    "next.js",
+    "app router",
+    "server components",
+    "server actions",
+    "react server components",
+    "rsc",
+    "next 15",
+    "next 14",
+    "ssr",
+    "ssg",
+    "isr",
+    "caching",
+    "middleware",
+    "routing",
+    "data fetching",
+    "streaming",
+    "parallel routes",
+    "intercepting routes",
+    "route handlers",
+    "api routes",
+    "authentication",
+    "vercel",
+    "deployment",
+    "turbopack",
+    "edge runtime"
+  ],
+  "matchPatterns": [
+    "next.config.*",
+    "app/**/*",
+    "**/layout.tsx",
+    "**/page.tsx",
+    "**/loading.tsx",
+    "**/error.tsx",
+    "**/not-found.tsx",
+    "**/route.ts",
+    "middleware.ts"
+  ],
+  "skills": [
+    "skills/nextjs-app-router.md",
+    "skills/nextjs-data-fetching.md",
+    "skills/nextjs-server-actions.md",
+    "skills/nextjs-caching.md",
+    "skills/nextjs-middleware.md",
+    "skills/nextjs-routing-advanced.md",
+    "skills/nextjs-deployment.md",
+    "skills/nextjs-authentication.md"
+  ],
+  "commands": [
+    "commands/nextjs-page.md",
+    "commands/nextjs-api-route.md",
+    "commands/nextjs-server-action.md",
+    "commands/nextjs-middleware.md"
+  ],
+  "agents": [
+    "agents/nextjs-expert.md"
+  ]
+}

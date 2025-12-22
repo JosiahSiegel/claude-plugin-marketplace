@@ -1,0 +1,22 @@
+{
+  "name": "nextjs-master",
+  "displayName": "Next.js Master",
+  "description": "Comprehensive Next.js 15 plugin covering App Router, Server Components, Server Actions, caching, middleware, authentication, and deployment patterns",
+  "version": "1.0.0",
+  "author": "Claude Marketplace",
+  "license": "MIT",
+  "repository": "https://github.com/anthropics/claude-code-marketplace",
+  "keywords": [
+    "nextjs",
+    "next.js",
+    "app router",
+    "server components",
+    "server actions",
+    "caching",
+    "middleware",
+    "authentication",
+    "vercel",
+    "turbopack"
+  ],
+  "category": "frameworks"
+}
