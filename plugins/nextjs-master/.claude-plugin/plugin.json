@@ -1,67 +1,34 @@
 {
   "name": "nextjs-master",
   "version": "1.0.0",
-  "description": "Comprehensive Next.js 15 plugin covering App Router, Server Components, Server Actions, caching, middleware, and modern patterns",
+  "description": "Comprehensive Next.js 15 expertise system covering App Router, Server Components, Server Actions, caching, middleware, authentication, and deployment. PROACTIVELY activate for: (1) ANY Next.js task, (2) App Router layouts/pages/loading/error, (3) Server Components and Client Components, (4) Server Actions for mutations, (5) Data fetching and caching strategies, (6) Route Handlers (API routes), (7) Middleware for auth/i18n/redirects, (8) Dynamic and parallel routes, (9) Authentication with NextAuth.js, (10) Deployment (Vercel, Docker, static export). Provides: Next.js 15 complete features, App Router file conventions, Server/Client Component patterns, Server Actions with useActionState, caching (Data Cache, Full Route Cache, Router Cache), revalidatePath/revalidateTag, middleware patterns, advanced routing (parallel, intercepting), NextAuth.js authentication, deployment strategies.",
   "author": {
     "name": "Josiah Siegel",
     "email": "JosiahSiegel@users.noreply.github.com"
   },
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/nextjs-master",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
+  "license": "MIT",
   "keywords": [
     "nextjs",
-    "next.js",
-    "app router",
-    "server components",
-    "server actions",
-    "react server components",
-    "rsc",
-    "next 15",
-    "next 14",
-    "ssr",
-    "ssg",
-    "isr",
+    "next15",
+    "app-router",
+    "server-components",
+    "server-actions",
     "caching",
     "middleware",
-    "routing",
-    "data fetching",
-    "streaming",
-    "parallel routes",
-    "intercepting routes",
-    "route handlers",
-    "api routes",
     "authentication",
+    "nextauth",
+    "routing",
+    "parallel-routes",
+    "intercepting-routes",
+    "route-handlers",
+    "api-routes",
     "vercel",
     "deployment",
-    "turbopack",
-    "edge runtime"
-  ],
-  "matchPatterns": [
-    "next.config.*",
-    "app/**/*",
-    "**/layout.tsx",
-    "**/page.tsx",
-    "**/loading.tsx",
-    "**/error.tsx",
-    "**/not-found.tsx",
-    "**/route.ts",
-    "middleware.ts"
-  ],
-  "skills": [
-    "skills/nextjs-app-router.md",
-    "skills/nextjs-data-fetching.md",
-    "skills/nextjs-server-actions.md",
-    "skills/nextjs-caching.md",
-    "skills/nextjs-middleware.md",
-    "skills/nextjs-routing-advanced.md",
-    "skills/nextjs-deployment.md",
-    "skills/nextjs-authentication.md"
-  ],
-  "commands": [
-    "commands/nextjs-page.md",
-    "commands/nextjs-api-route.md",
-    "commands/nextjs-server-action.md",
-    "commands/nextjs-middleware.md"
-  ],
-  "agents": [
-    "agents/nextjs-expert.md"
+    "docker",
+    "ssr",
+    "ssg",
+    "isr"
   ]
 }
