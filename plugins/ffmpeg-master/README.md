@@ -40,7 +40,7 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-code-marketplace
-/plugin install ffmpeg-master@claude-code-marketplace
+/plugin install ffmpeg-master@claude-plugin-marketplace
 ```
 
 ## Usage

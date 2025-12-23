@@ -31,7 +31,7 @@ This plugin provides:
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-code-marketplace
-/plugin install windows-path-master@claude-code-marketplace
+/plugin install windows-path-master@claude-plugin-marketplace
 ```
 
 ### Local Installation (Windows/Mac/Linux)

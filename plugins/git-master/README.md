@@ -20,7 +20,7 @@ When installed, Claude becomes a complete Git expert with:
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-code-marketplace
-/plugin install git-master@claude-code-marketplace
+/plugin install git-master@claude-plugin-marketplace
 ```
 
 ### Local Installation (Mac/Linux)

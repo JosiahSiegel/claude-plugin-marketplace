@@ -21,7 +21,7 @@ This plugin makes Claude a PowerShell expert with comprehensive 2025 knowledge:
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-code-marketplace
-/plugin install powershell-master@claude-code-marketplace
+/plugin install powershell-master@claude-plugin-marketplace
 ```
 
 ### Local Installation (Mac/Linux)

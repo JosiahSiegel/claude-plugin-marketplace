@@ -1,5 +1,5 @@
 {
-  "name": "claude-code-marketplace",
+  "name": "claude-plugin-marketplace",
   "description": "A curated collection of Claude Code plugins for plugin development, context optimization, and productivity tools",
   "owner": {
     "name": "Josiah Siegel",

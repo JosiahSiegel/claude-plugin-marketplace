@@ -50,7 +50,7 @@ Complete management plugin for **Vitest 4.0 + Playwright 1.55 + MSW 2.11+** test
 /plugin marketplace add claude-code-marketplace/claude-code-marketplace
 
 # Install the plugin
-/plugin install test-master@claude-code-marketplace
+/plugin install test-master@claude-plugin-marketplace
 ```
 
 ### Local Installation (Mac/Linux)

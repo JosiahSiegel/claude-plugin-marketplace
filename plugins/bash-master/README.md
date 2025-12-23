@@ -35,7 +35,7 @@ When installed, Claude becomes an expert in:
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-code-marketplace
-/plugin install bash-master@claude-code-marketplace
+/plugin install bash-master@claude-plugin-marketplace
 ```
 
 ### Local Installation (Mac/Linux)

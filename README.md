@@ -11,7 +11,7 @@
 
 **2. Install any plugin:**
 ```bash
-/plugin install <plugin-name>@claude-code-marketplace
+/plugin install <plugin-name>@claude-plugin-marketplace
 ```
 
 **3. Browse available plugins below and install what you need!**

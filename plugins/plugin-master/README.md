@@ -28,7 +28,7 @@ This plugin teaches Claude how to create plugins with 2025 features:
 /plugin marketplace add JosiahSiegel/claude-code-marketplace
 
 # Install this plugin
-/plugin install plugin-master@claude-code-marketplace
+/plugin install plugin-master@claude-plugin-marketplace
 ```
 
 ### Local Installation (Mac/Linux)

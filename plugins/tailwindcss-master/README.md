@@ -41,7 +41,7 @@ The TailwindCSS Master plugin equips Claude Code with comprehensive Tailwind CSS
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-code-marketplace
-/plugin install tailwindcss-master@claude-code-marketplace
+/plugin install tailwindcss-master@claude-plugin-marketplace
 ```
 
 ## Usage

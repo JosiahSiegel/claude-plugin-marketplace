@@ -46,7 +46,7 @@ For ANY multi-file project, follow these 5 steps:
 
 2. **Install the plugin:**
    ```bash
-   /plugin install context-master@claude-code-marketplace
+   /plugin install context-master@claude-plugin-marketplace
    ```
 
 ### Option 2: Local Installation (Mac/Linux)
