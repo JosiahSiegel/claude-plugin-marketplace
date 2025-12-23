@@ -48,6 +48,14 @@
 
 - **[dotnet-microservices-master](./plugins/dotnet-microservices-master)** `v1.0.0` ([Docs](./plugins/dotnet-microservices-master/README.md)) - .NET microservices architecture expert with Docker, DDD, CQRS, and cloud-native patterns based on Microsoft's official guide
 
+### Languages & Frameworks
+
+- **[python-master](./plugins/python-master)** `v1.0.0` ([Docs](./plugins/python-master/README.md)) - Python 3.13+ expertise with free-threading, JIT, asyncio, type hints, FastAPI, uv package management, pytest, and Cloudflare deployment
+- **[react-master](./plugins/react-master)** `v1.0.0` ([Docs](./plugins/react-master/README.md)) - React 19 expertise with Server/Client Components, hooks, state management, TypeScript, and testing patterns
+- **[nextjs-master](./plugins/nextjs-master)** `v1.0.0` ([Docs](./plugins/nextjs-master/README.md)) - Next.js 15 expertise with App Router, Server Actions, caching, middleware, NextAuth.js, and deployment
+- **[tailwindcss-master](./plugins/tailwindcss-master)** `v1.0.0` ([Docs](./plugins/tailwindcss-master/README.md)) - Tailwind CSS v4 expertise with CSS-first configuration, responsive design, dark mode, and framework integration
+- **[ffmpeg-master](./plugins/ffmpeg-master)** `v1.0.0` ([Docs](./plugins/ffmpeg-master/README.md)) - FFmpeg expertise with video/audio encoding, hardware acceleration, streaming, Docker, and Cloudflare deployment
+
 ### Database & Data
 
 - **[ssdt-master](./plugins/ssdt-master)** `v1.6.0` ([Docs](./plugins/ssdt-master/README.md)) - SQL Server with Git Bash SqlPackage compatibility, path conversion for database deployments, and Windows shell detection
