@@ -1,0 +1,24 @@
+{
+  "name": "python-master",
+  "version": "1.0.0",
+  "description": "Comprehensive Python 3.13+ expertise covering modern development, async programming, type hints, FastAPI, testing, Cloudflare deployment, and GitHub Actions optimization.",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "python",
+    "python3.13",
+    "asyncio",
+    "type-hints",
+    "fastapi",
+    "pytest",
+    "cloudflare",
+    "github-actions",
+    "uv",
+    "ruff"
+  ],
+  "category": "language",
+  "featured": true
+}
