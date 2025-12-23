@@ -20,7 +20,7 @@ This plugin makes Claude a PowerShell expert with comprehensive 2025 knowledge:
 ### Via GitHub Marketplace (Recommended)
 
 ```bash
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 /plugin install powershell-master@claude-plugin-marketplace
 ```
 

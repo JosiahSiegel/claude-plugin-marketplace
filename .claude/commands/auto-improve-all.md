@@ -5,7 +5,7 @@ description: Fully autonomous plugin improvement - agents discover, decide, and 
 # Auto-Improve All Plugins
 
 ## Purpose
-**Fully autonomous improvement** of every plugin in the claude-code-marketplace repository. Each plugin's expert agent will:
+**Fully autonomous improvement** of every plugin in the claude-plugin-marketplace repository. Each plugin's expert agent will:
 1. **Self-determine** what needs improvement using web search and Context7
 2. **Autonomously decide** what features/fixes to add
 3. **Complete all improvements** themselves (no pausing, no asking)
@@ -42,7 +42,7 @@ Use a **single message with multiple Task tool calls** to launch all agents simu
 Give each agent these instructions (they will work independently in their own contexts):
 
 ```
-You are the expert for the [PLUGIN_NAME] plugin in the claude-code-marketplace repository.
+You are the expert for the [PLUGIN_NAME] plugin in the claude-plugin-marketplace repository.
 
 Your task: AUTONOMOUSLY IMPROVE your plugin. You will:
 1. Self-determine what needs improvement (no one will tell you what to do)
@@ -317,7 +317,7 @@ All plugins now include current 2025 best practices with minimal context usage!
 **README.md Not Updated:**
 - Verify marketplace.json has all plugin entries with descriptions
 - Check that README.md categories match the organizational structure
-- Ensure Edit tool used with correct file path (D:\repos\claude-code-marketplace\README.md or ./README.md)
+- Ensure Edit tool used with correct file path (D:\repos\claude-plugin-marketplace\README.md or ./README.md)
 - Manually verify all plugin links work (./plugins/PLUGIN_NAME/README.md)
 - Confirm descriptions in README match marketplace.json exactly
 

@@ -77,7 +77,7 @@ Edit tool fails with "file not found" or "no such file or directory"
 Using forward slashes copied from Git Bash output:
 ```bash
 # Git Bash shows:
-/s/repos/claude-code-marketplace/file.tsx
+/s/repos/claude-plugin-marketplace/file.tsx
 ```
 
 **Incorrect usage:**

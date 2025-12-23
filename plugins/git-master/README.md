@@ -19,7 +19,7 @@ When installed, Claude becomes a complete Git expert with:
 ### Via GitHub Marketplace (Recommended)
 
 ```bash
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 /plugin install git-master@claude-plugin-marketplace
 ```
 
@@ -509,7 +509,7 @@ git push --force-with-lease
 
 ## 🤝 Contributing
 
-This plugin is part of the claude-code-marketplace. Contributions welcome!
+This plugin is part of the claude-plugin-marketplace. Contributions welcome!
 
 ## 📄 License
 

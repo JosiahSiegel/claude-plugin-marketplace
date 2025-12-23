@@ -41,7 +41,7 @@ For ANY multi-file project, follow these 5 steps:
 
 1. **Add this marketplace:**
    ```bash
-   /plugin marketplace add JosiahSiegel/claude-code-marketplace
+   /plugin marketplace add JosiahSiegel/claude-plugin-marketplace
    ```
 
 2. **Install the plugin:**

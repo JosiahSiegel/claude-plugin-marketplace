@@ -45,7 +45,7 @@ The Docker Master plugin equips Claude Code with comprehensive Docker expertise,
 ### Via Marketplace
 
 ```bash
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 /plugin install docker-master@claude-plugin-marketplace
 ```
 

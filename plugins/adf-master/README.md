@@ -78,7 +78,7 @@ The **adf-master** plugin provides comprehensive Azure Data Factory expertise, c
 
 ```bash
 # Add the marketplace
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 
 # Install the plugin
 /plugin install adf-master@claude-plugin-marketplace
@@ -502,7 +502,7 @@ If you encounter issues or have questions:
 ### Filing Issues
 
 For plugin-specific issues:
-- Repository: https://github.com/JosiahSiegel/claude-code-marketplace
+- Repository: https://github.com/JosiahSiegel/claude-plugin-marketplace
 - Create an issue with:
   - Command or feature used
   - Expected vs actual behavior
@@ -672,7 +672,7 @@ MIT License - See LICENSE file for details.
 
 **Josiah Siegel**
 - Email: JosiahSiegel@users.noreply.github.com
-- Marketplace: JosiahSiegel/claude-code-marketplace
+- Marketplace: JosiahSiegel/claude-plugin-marketplace
 
 ## Acknowledgments
 

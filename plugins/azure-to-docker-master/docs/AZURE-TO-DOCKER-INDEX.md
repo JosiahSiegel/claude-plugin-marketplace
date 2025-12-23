@@ -70,7 +70,7 @@ Located in `scripts/`:
 ## 📁 Project Structure
 
 ```
-claude-code-marketplace/
+claude-plugin-marketplace/
 │
 ├── AZURE-TO-DOCKER-QUICKSTART.md          # ⭐ Start here
 ├── azure-to-docker-compose-guide.md       # Complete guide

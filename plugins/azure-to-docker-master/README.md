@@ -75,8 +75,8 @@ claude-code plugin add azure-to-docker-master
 ### From GitHub
 
 ```bash
-git clone https://github.com/JosiahSiegel/claude-code-marketplace.git
-cd claude-code-marketplace/plugins/azure-to-docker-master
+git clone https://github.com/JosiahSiegel/claude-plugin-marketplace.git
+cd claude-plugin-marketplace/plugins/azure-to-docker-master
 ```
 
 ## Commands
@@ -531,8 +531,8 @@ Contributions are welcome! Please ensure:
 ## Support
 
 For issues, questions, or feature requests:
-- GitHub Issues: [claude-code-marketplace](https://github.com/JosiahSiegel/claude-code-marketplace/issues)
-- Documentation: [Plugin README](https://github.com/JosiahSiegel/claude-code-marketplace/tree/main/plugins/azure-to-docker-master)
+- GitHub Issues: [claude-plugin-marketplace](https://github.com/JosiahSiegel/claude-plugin-marketplace/issues)
+- Documentation: [Plugin README](https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/azure-to-docker-master)
 
 ## License
 

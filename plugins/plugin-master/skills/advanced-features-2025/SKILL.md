@@ -426,7 +426,7 @@ repo-root/
 {
   "extraKnownMarketplaces": [
     "company-org/internal-plugins",
-    "JosiahSiegel/claude-code-marketplace"
+    "JosiahSiegel/claude-plugin-marketplace"
   ],
   "plugins": {
     "enabled": [

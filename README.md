@@ -6,7 +6,7 @@
 
 **1. Add this marketplace:**
 ```bash
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 ```
 
 **2. Install any plugin:**
@@ -65,9 +65,9 @@ Want to add a plugin to this marketplace? See [`CONTRIBUTING.md`](./CONTRIBUTING
 ## 📊 Marketplace Info
 
 - **Owner:** Josiah Siegel
-- **Repository:** https://github.com/JosiahSiegel/claude-code-marketplace
+- **Repository:** https://github.com/JosiahSiegel/claude-plugin-marketplace
 - **License:** MIT
-- **Issues:** [Report here](https://github.com/JosiahSiegel/claude-code-marketplace/issues)
+- **Issues:** [Report here](https://github.com/JosiahSiegel/claude-plugin-marketplace/issues)
 
 ## 📄 License
 

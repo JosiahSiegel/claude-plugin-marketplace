@@ -107,8 +107,8 @@ Use MIT License for consistency with the marketplace, or another permissive open
 
 2. **Clone your fork**
    ```bash
-   git clone https://github.com/YOUR-USERNAME/claude-code-marketplace.git
-   cd claude-code-marketplace
+   git clone https://github.com/YOUR-USERNAME/claude-plugin-marketplace.git
+   cd claude-plugin-marketplace
    ```
 
 3. **Create a new branch**
@@ -130,7 +130,7 @@ Use MIT License for consistency with the marketplace, or another permissive open
 6. **Update marketplace.json**
    ```json
    {
-     "name": "claude-code-marketplace",
+     "name": "claude-plugin-marketplace",
      "description": "A curated collection of Claude Code plugins for plugin development, context optimization, and productivity tools",
      "owner": {
        "name": "Josiah Siegel",
@@ -300,7 +300,7 @@ Plugins are evaluated on:
 
 ## Getting Help
 
-- **Questions**: Open an [issue](https://github.com/JosiahSiegel/claude-code-marketplace/issues) with the "question" label
+- **Questions**: Open an [issue](https://github.com/JosiahSiegel/claude-plugin-marketplace/issues) with the "question" label
 - **Bugs**: Report with detailed reproduction steps
 - **Suggestions**: Open an issue with the "enhancement" label
 - **Documentation**: Refer to [Claude Code docs](https://docs.claude.com/en/docs/claude-code/plugins)

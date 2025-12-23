@@ -78,8 +78,8 @@ claude-code plugin install azure-master
 
 ```bash
 # Clone repository
-git clone https://github.com/JosiahSiegel/claude-code-marketplace
-cd claude-code-marketplace/plugins/azure-master
+git clone https://github.com/JosiahSiegel/claude-plugin-marketplace
+cd claude-plugin-marketplace/plugins/azure-master
 
 # Link plugin
 claude-code plugin link .

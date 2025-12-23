@@ -30,7 +30,7 @@ This plugin provides:
 ### Via Marketplace (Recommended)
 
 ```bash
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 /plugin install windows-path-master@claude-plugin-marketplace
 ```
 
@@ -38,7 +38,7 @@ This plugin provides:
 
 ```bash
 # Clone or download this repository
-git clone https://github.com/JosiahSiegel/claude-code-marketplace
+git clone https://github.com/JosiahSiegel/claude-plugin-marketplace
 
 # Copy plugin to Claude Code plugins directory
 # Windows (Git Bash):
@@ -120,7 +120,7 @@ The plugin includes extensive documentation on:
 ```bash
 # In Git Bash, you see:
 pwd
-# Output: /s/repos/claude-code-marketplace
+# Output: /s/repos/claude-plugin-marketplace
 
 # You ask Claude:
 "Edit the file /s/repos/myproject/README.md"
@@ -246,7 +246,7 @@ When you provide a file path, the plugin follows this logic:
 
 **MINGW to Windows:**
 ```
-Input:  /s/repos/claude-code-marketplace/file.tsx
+Input:  /s/repos/claude-plugin-marketplace/file.tsx
 
 Steps:
 1. Extract drive letter: "s" → "S"
@@ -422,7 +422,7 @@ The plugin activates based on:
 
 ## Contributing
 
-Contributions are welcome! This plugin is part of the [Claude Code Marketplace](https://github.com/JosiahSiegel/claude-code-marketplace).
+Contributions are welcome! This plugin is part of the [Claude Code Marketplace](https://github.com/JosiahSiegel/claude-plugin-marketplace).
 
 To contribute:
 1. Fork the repository
@@ -436,8 +436,8 @@ MIT License - See LICENSE file for details
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/JosiahSiegel/claude-code-marketplace/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/JosiahSiegel/claude-code-marketplace/discussions)
+- **Issues:** [GitHub Issues](https://github.com/JosiahSiegel/claude-plugin-marketplace/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/JosiahSiegel/claude-plugin-marketplace/discussions)
 - **Marketplace:** [Claude Code Marketplace](https://claudecodemarketplace.com/)
 
 ## Related Plugins

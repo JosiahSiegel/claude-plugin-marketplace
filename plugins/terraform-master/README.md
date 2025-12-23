@@ -72,7 +72,7 @@ Complete Terraform expertise system for Claude Code. Provides comprehensive infr
 
 ```bash
 # In Claude Code
-/plugin marketplace add local file:///path/to/claude-code-marketplace
+/plugin marketplace add local file:///path/to/claude-plugin-marketplace
 /plugin install terraform-master@local
 ```
 

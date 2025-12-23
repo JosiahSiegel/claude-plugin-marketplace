@@ -34,7 +34,7 @@ When installed, Claude becomes an expert in:
 ### Via GitHub Marketplace (Recommended)
 
 ```bash
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 /plugin install bash-master@claude-plugin-marketplace
 ```
 
@@ -288,7 +288,7 @@ This plugin teaches Claude to use and recommend:
 
 ## 🤝 Contributing
 
-This plugin is part of the claude-code-marketplace. Contributions welcome!
+This plugin is part of the claude-plugin-marketplace. Contributions welcome!
 
 ## 📄 License
 

@@ -6,8 +6,8 @@
     "name": "Josiah Siegel",
     "email": "JosiahSiegel@users.noreply.github.com"
   },
-  "homepage": "https://github.com/JosiahSiegel/claude-code-marketplace/tree/main/plugins/plugin-master",
-  "repository": "https://github.com/JosiahSiegel/claude-code-marketplace",
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/plugin-master",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
   "license": "MIT",
   "keywords": [
     "plugin",

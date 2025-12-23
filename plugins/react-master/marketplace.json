@@ -3,7 +3,7 @@
   "description": "Comprehensive React 19 expertise including hooks, server components, state management, performance optimization, testing, and modern patterns",
   "version": "1.0.0",
   "author": "Claude Code Marketplace",
-  "repository": "https://github.com/JosiahSiegel/claude-code-marketplace",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
   "category": "frontend",
   "tags": ["react", "react-19", "hooks", "typescript", "frontend", "ui", "components"]
 }

@@ -25,7 +25,7 @@ This plugin teaches Claude how to create plugins with 2025 features:
 
 ```bash
 # Add the marketplace
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 
 # Install this plugin
 /plugin install plugin-master@claude-plugin-marketplace
@@ -35,10 +35,10 @@ This plugin teaches Claude how to create plugins with 2025 features:
 
 ```bash
 # Clone or download this repository
-git clone https://github.com/JosiahSiegel/claude-code-marketplace.git
+git clone https://github.com/JosiahSiegel/claude-plugin-marketplace.git
 
 # Extract just the plugin
-cd claude-code-marketplace/plugins
+cd claude-plugin-marketplace/plugins
 cp -r plugin-master ~/.local/share/claude/plugins/
 
 # Restart Claude Code
@@ -232,7 +232,7 @@ This plugin includes comprehensive documentation:
 **Version:** 2.2.0
 **Author:** Josiah Siegel
 **License:** MIT
-**Repository:** https://github.com/JosiahSiegel/claude-code-marketplace
+**Repository:** https://github.com/JosiahSiegel/claude-plugin-marketplace
 
 **Components:**
 - 7 slash commands (create, generate, test, validate, publish, setup, guide)
@@ -271,7 +271,7 @@ For help:
 - Check the included comprehensive guide
 - Review [official Claude Code docs](https://docs.claude.com/en/docs/claude-code/plugins)
 - Join Claude Developers Discord
-- File [issues on GitHub](https://github.com/JosiahSiegel/claude-code-marketplace/issues)
+- File [issues on GitHub](https://github.com/JosiahSiegel/claude-plugin-marketplace/issues)
 
 ## 📄 License
 

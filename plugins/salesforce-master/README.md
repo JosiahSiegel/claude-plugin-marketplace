@@ -20,7 +20,7 @@ The `salesforce-master` plugin transforms Claude into a comprehensive Salesforce
 
 ```bash
 # Add the marketplace
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 
 # Install salesforce-master
 /plugin install salesforce-master@claude-plugin-marketplace
@@ -32,10 +32,10 @@ The `salesforce-master` plugin transforms Claude into a comprehensive Salesforce
 
 ```bash
 # Clone the repository
-git clone https://github.com/JosiahSiegel/claude-code-marketplace.git
+git clone https://github.com/JosiahSiegel/claude-plugin-marketplace.git
 
 # Copy plugin to Claude Code plugins directory
-cp -r claude-code-marketplace/plugins/salesforce-master ~/.local/share/claude/plugins/
+cp -r claude-plugin-marketplace/plugins/salesforce-master ~/.local/share/claude/plugins/
 ```
 
 ## Windows & Git Bash Compatibility
@@ -375,7 +375,7 @@ The plugin always references official Salesforce documentation for the most up-t
 
 Contributions are welcome! If you find issues or have suggestions for improvements:
 
-1. Open an issue: https://github.com/JosiahSiegel/claude-code-marketplace/issues
+1. Open an issue: https://github.com/JosiahSiegel/claude-plugin-marketplace/issues
 2. Submit a pull request with your changes
 3. Follow the existing code style and documentation patterns
 
@@ -387,7 +387,7 @@ MIT License - See LICENSE file for details
 
 For questions, issues, or feature requests:
 
-- **GitHub Issues**: https://github.com/JosiahSiegel/claude-code-marketplace/issues
+- **GitHub Issues**: https://github.com/JosiahSiegel/claude-plugin-marketplace/issues
 - **Plugin Documentation**: https://docs.claude.com/en/docs/claude-code/plugins
 
 ## Acknowledgments

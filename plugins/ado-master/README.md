@@ -71,7 +71,7 @@ The ADO Master plugin equips Claude Code with comprehensive Azure DevOps experti
 ### Via Marketplace
 
 ```bash
-/plugin marketplace add JosiahSiegel/claude-code-marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 /plugin install ado-master@claude-plugin-marketplace
 ```
 

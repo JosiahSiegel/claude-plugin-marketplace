@@ -47,7 +47,7 @@ Complete management plugin for **Vitest 4.0 + Playwright 1.55 + MSW 2.11+** test
 
 ```bash
 # Add the marketplace
-/plugin marketplace add claude-code-marketplace/claude-code-marketplace
+/plugin marketplace add claude-plugin-marketplace/claude-plugin-marketplace
 
 # Install the plugin
 /plugin install test-master@claude-plugin-marketplace
@@ -582,7 +582,7 @@ MIT
 
 ## 🔗 Links
 
-- **Plugin Repository:** [claude-code-marketplace](https://github.com/claude-code-marketplace/claude-code-marketplace)
+- **Plugin Repository:** [claude-plugin-marketplace](https://github.com/claude-plugin-marketplace/claude-plugin-marketplace)
 - **Vitest Docs:** https://vitest.dev/
 - **Playwright Docs:** https://playwright.dev/
 - **MSW Docs:** https://mswjs.io/

@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "author": "Claude Marketplace",
   "license": "MIT",
-  "repository": "https://github.com/anthropics/claude-code-marketplace",
+  "repository": "https://github.com/anthropics/claude-plugin-marketplace",
   "keywords": [
     "nextjs",
     "next.js",

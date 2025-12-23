@@ -109,7 +109,7 @@ claude-code plugins install ssdt-master
 
 ```bash
 # Clone to plugins directory
-git clone https://github.com/anthropics/claude-code-marketplace.git ~/tmp/marketplace
+git clone https://github.com/anthropics/claude-plugin-marketplace.git ~/tmp/marketplace
 mkdir -p ~/.claude-code/plugins
 cp -r ~/tmp/marketplace/ssdt-master ~/.claude-code/plugins/
 rm -rf ~/tmp/marketplace
@@ -119,7 +119,7 @@ rm -rf ~/tmp/marketplace
 
 ```powershell
 # Clone to plugins directory
-git clone https://github.com/anthropics/claude-code-marketplace.git $env:TEMP\marketplace
+git clone https://github.com/anthropics/claude-plugin-marketplace.git $env:TEMP\marketplace
 New-Item -ItemType Directory -Force -Path "$env:APPDATA\Claude\plugins"
 Copy-Item -Recurse "$env:TEMP\marketplace\ssdt-master" "$env:APPDATA\Claude\plugins\"
 Remove-Item -Recurse -Force "$env:TEMP\marketplace"
@@ -870,7 +870,7 @@ steps:
 
 Found an issue or have a suggestion?
 
-1. Open an issue: [GitHub Issues](https://github.com/anthropics/claude-code-marketplace/issues)
+1. Open an issue: [GitHub Issues](https://github.com/anthropics/claude-plugin-marketplace/issues)
 2. Submit a pull request with improvements
 3. Share your SSDT workflows and tips
 
@@ -880,7 +880,7 @@ MIT License - See [LICENSE](../../LICENSE) file for details
 
 ## Support
 
-- GitHub Issues: [claude-code-marketplace/issues](https://github.com/anthropics/claude-code-marketplace/issues)
+- GitHub Issues: [claude-plugin-marketplace/issues](https://github.com/anthropics/claude-plugin-marketplace/issues)
 - Claude Code Docs: [docs.claude.com](https://docs.claude.com)
 
 ---
