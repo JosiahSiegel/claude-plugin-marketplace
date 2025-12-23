@@ -2,7 +2,10 @@
   "name": "react-master",
   "description": "Comprehensive React 19 expertise including hooks, server components, state management, performance optimization, testing, and modern patterns",
   "version": "1.0.0",
-  "author": "Claude Code Marketplace",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
   "keywords": [
     "react",
     "react-19",

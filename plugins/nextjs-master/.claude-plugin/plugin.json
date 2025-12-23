@@ -2,7 +2,10 @@
   "name": "nextjs-master",
   "version": "1.0.0",
   "description": "Comprehensive Next.js 15 plugin covering App Router, Server Components, Server Actions, caching, middleware, and modern patterns",
-  "author": "Claude Marketplace",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
   "keywords": [
     "nextjs",
     "next.js",

@@ -3,9 +3,11 @@
   "displayName": "Next.js Master",
   "description": "Comprehensive Next.js 15 plugin covering App Router, Server Components, Server Actions, caching, middleware, authentication, and deployment patterns",
   "version": "1.0.0",
-  "author": "Claude Marketplace",
+  "author": {
+    "name": "Josiah Siegel"
+  },
   "license": "MIT",
-  "repository": "https://github.com/anthropics/claude-plugin-marketplace",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
   "keywords": [
     "nextjs",
     "next.js",

@@ -582,7 +582,7 @@ MIT
 
 ## 🔗 Links
 
-- **Plugin Repository:** [claude-plugin-marketplace](https://github.com/claude-plugin-marketplace/claude-plugin-marketplace)
+- **Plugin Repository:** [claude-plugin-marketplace](https://github.com/JosiahSiegel/claude-plugin-marketplace)
 - **Vitest Docs:** https://vitest.dev/
 - **Playwright Docs:** https://playwright.dev/
 - **MSW Docs:** https://mswjs.io/
