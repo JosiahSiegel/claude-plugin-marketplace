@@ -1,0 +1,37 @@
+{
+  "name": "fal-ai-master",
+  "version": "1.0.0",
+  "description": "Complete fal.ai generative media platform expertise for Claude Code. PROACTIVELY activate for: (1) ANY fal.ai task, (2) AI image generation (FLUX, Stable Diffusion), (3) AI video generation (Kling, Sora, LTX), (4) Audio processing (Whisper, TTS), (5) 3D generation, (6) fal-client Python integration, (7) @fal-ai/client JavaScript/TypeScript integration, (8) fal serverless deployment, (9) Custom ML model deployment, (10) GPU compute (H100/H200/B200), (11) Real-time/WebSocket connections, (12) Queue-based execution, (13) fal.media CDN uploads, (14) ComfyUI workflows, (15) Cost optimization strategies. Provides: Complete API reference for 600+ models, client library patterns (JS/Python), serverless deployment with fal.App, real-time streaming, WebSocket integration, model selection guidance, performance optimization, authentication patterns, error handling, production best practices.",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/fal-ai-master",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "fal.ai",
+    "fal",
+    "generative-ai",
+    "image-generation",
+    "video-generation",
+    "flux",
+    "stable-diffusion",
+    "kling",
+    "sora",
+    "whisper",
+    "text-to-image",
+    "text-to-video",
+    "image-to-video",
+    "serverless",
+    "gpu-compute",
+    "ml-deployment",
+    "realtime",
+    "streaming",
+    "comfyui",
+    "h100",
+    "h200",
+    "ai-models",
+    "inference"
+  ]
+}

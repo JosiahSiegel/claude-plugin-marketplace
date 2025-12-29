@@ -38,6 +38,7 @@ When creating plugins (the core purpose of this plugin):
 - ✅ **DO create** all necessary plugin files: README.md, agents/*.md, skills/*.md, commands/*.md
 - ✅ **DO create** complete, comprehensive documentation as part of plugin structure
 - ✅ **DO create** marketplace.json and plugin.json manifest files
+- 🚨 **MANDATORY: Register plugin in `.claude-plugin/marketplace.json`** - See Marketplace Registration section below
 
 For other scenarios (when NOT creating a plugin):
 - ❌ **DON'T create** additional supplementary documentation beyond the plugin structure
@@ -191,6 +192,51 @@ The Plugin Architect agent automatically uses the plugin-master skill to:
 - Marketplace compatibility
 - Version management
 - Publishing checklist
+
+## 🚨 MANDATORY: Marketplace Registration
+
+**CRITICAL REQUIREMENT: When creating a plugin in a marketplace repository, you MUST register it in `.claude-plugin/marketplace.json`.**
+
+This is a NON-NEGOTIABLE final step. Plugin creation is NOT complete until the plugin is registered.
+
+### Detection
+
+Check if you're in a marketplace repository:
+1. Look for `.claude-plugin/marketplace.json` at the repo root
+2. Look for existing `plugins/` directory with other plugins
+3. Check if the repo name contains "marketplace" or "plugins"
+
+### Registration Steps
+
+When `.claude-plugin/marketplace.json` exists:
+
+1. **Read the existing marketplace.json** to understand the structure
+2. **Add a new entry** to the `plugins` array with:
+   ```json
+   {
+     "name": "your-plugin-name",
+     "source": "./plugins/your-plugin-name",
+     "description": "Same description as plugin.json",
+     "version": "1.0.0",
+     "author": {
+       "name": "Author Name"
+     },
+     "keywords": ["keyword1", "keyword2"]
+   }
+   ```
+3. **Synchronize descriptions** between plugin.json, marketplace.json, and README.md
+4. **Verify the entry** is valid JSON before completing
+
+### Verification Checklist
+
+Before declaring plugin creation complete:
+- [ ] Plugin directory exists in `plugins/`
+- [ ] `.claude-plugin/plugin.json` is valid
+- [ ] `.claude-plugin/marketplace.json` has new plugin entry
+- [ ] Description matches across all files
+- [ ] Keywords are consistent
+
+**FAILURE TO REGISTER = INCOMPLETE PLUGIN CREATION**
 
 ## Communication Style
 

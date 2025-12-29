@@ -64,11 +64,14 @@ Guides Claude through the complete plugin creation workflow: fetching latest doc
    - ✅ `commands` field is **optional** - auto-discovered from `commands/` directory by default
    - ✅ Only include: name, version, description, author (object), homepage, repository (string), license, keywords (array)
    - ❌ NEVER include `agents: {...}` or `skills: {...}` in plugin.json - these cause validation errors
-7. **CRITICAL: Update BOTH marketplace files**:
-   - Update `.claude-plugin/marketplace.json` (if exists) - Add plugin entry to plugins array
-   - Update `README.md` - Add plugin to appropriate category
-   - Synchronize descriptions and keywords between both files
-8. **Provide clear instructions** for GitHub-first installation and repository-level configuration
+7. **🚨 MANDATORY: Register in marketplace.json** (NON-NEGOTIABLE):
+   - **FIRST**: Check if `.claude-plugin/marketplace.json` exists at repo root
+   - **IF EXISTS**: Read it and add new plugin entry to `plugins` array
+   - **FORMAT**: `{"name": "plugin-name", "source": "./plugins/plugin-name", "description": "...", "version": "1.0.0", "author": {"name": "..."}, "keywords": [...]}`
+   - **SYNCHRONIZE**: Descriptions must match between plugin.json, marketplace.json, and README.md
+   - **⚠️ PLUGIN CREATION IS NOT COMPLETE UNTIL REGISTERED IN MARKETPLACE.JSON ⚠️**
+8. **Update README.md** - Add plugin to appropriate category
+9. **Provide clear instructions** for GitHub-first installation and repository-level configuration
 
 ## Best Practices
 

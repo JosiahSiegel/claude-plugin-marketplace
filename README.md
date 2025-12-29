@@ -1,4 +1,4 @@
-# Claude Code Marketplace
+# Claude Plugin Marketplace
 
 > A curated collection of Claude Code plugins for plugin development, context optimization, cloud infrastructure, DevOps automation, and productivity tools
 

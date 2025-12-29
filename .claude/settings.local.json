@@ -22,5 +22,8 @@
     ],
     "deny": [],
     "ask": []
+  },
+  "enabledPlugins": {
+    "python-master@claude-plugin-marketplace": true
   }
 }
