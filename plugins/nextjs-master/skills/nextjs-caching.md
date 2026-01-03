@@ -1,3 +1,46 @@
+---
+name: nextjs-caching
+description: Complete Next.js caching system. PROACTIVELY activate for: (1) Understanding 4 caching layers (Request Memoization, Data Cache, Full Route Cache, Router Cache), (2) fetch() caching options, (3) Time-based revalidation, (4) On-demand revalidation with revalidatePath/revalidateTag, (5) unstable_cache for non-fetch, (6) Static generation with generateStaticParams, (7) Cache debugging. Provides: Caching strategies, revalidation patterns, ISR setup, cache headers. Ensures optimal performance with correct cache invalidation.
+---
+
+## Quick Reference
+
+| Cache Layer | Location | Duration | Purpose |
+|-------------|----------|----------|---------|
+| Request Memoization | Server | Per-request | Dedupe same fetches |
+| Data Cache | Server | Persistent | Store fetch results |
+| Full Route Cache | Server | Persistent | Pre-rendered HTML/RSC |
+| Router Cache | Client | Session | Client-side navigation |
+
+| Fetch Option | Code | Effect |
+|--------------|------|--------|
+| Default | `fetch(url)` | Cached indefinitely |
+| No cache | `{ cache: 'no-store' }` | Always fresh |
+| Revalidate | `{ next: { revalidate: 60 } }` | Stale after 60s |
+| Tags | `{ next: { tags: ['posts'] } }` | Tag for invalidation |
+
+| Revalidation | Code | Use Case |
+|--------------|------|----------|
+| `revalidatePath('/posts')` | Path | After mutation |
+| `revalidateTag('posts')` | Tag | Invalidate tagged data |
+| `router.refresh()` | Client | Refresh current route |
+
+## When to Use This Skill
+
+Use for **caching and revalidation**:
+- Understanding Next.js caching behavior
+- Configuring fetch caching strategies
+- Setting up Incremental Static Regeneration (ISR)
+- Implementing on-demand revalidation
+- Debugging cache issues
+
+**Related skills:**
+- For data fetching: see `nextjs-data-fetching`
+- For Server Actions: see `nextjs-server-actions`
+- For static generation: see `nextjs-deployment`
+
+---
+
 # Next.js Caching
 
 ## Caching Overview

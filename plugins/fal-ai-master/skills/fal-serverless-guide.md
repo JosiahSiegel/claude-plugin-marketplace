@@ -1,3 +1,48 @@
+---
+name: fal-serverless-guide
+description: Complete fal.ai serverless deployment system. PROACTIVELY activate for: (1) Creating fal.App class, (2) GPU machine selection (T4/A10G/A100/H100), (3) setup() for model loading, (4) @fal.endpoint decorators, (5) Persistent volumes for weights, (6) Secrets management, (7) Scaling configuration (min/max concurrency), (8) Multi-GPU deployment, (9) fal deploy commands, (10) Local development with fal run. Provides: App structure, Dockerfile patterns, deployment commands, scaling config. Ensures production-ready serverless ML deployment.
+---
+
+## Quick Reference
+
+| Machine Type | GPU | VRAM | Use Case |
+|--------------|-----|------|----------|
+| `GPU-T4` | T4 | 16GB | Dev, small models |
+| `GPU-A10G` | A10G | 24GB | 7B-13B models |
+| `GPU-A100` | A100 | 40/80GB | 13B-70B models |
+| `GPU-H100` | H100 | 80GB | Cutting-edge |
+
+| App Attribute | Purpose | Example |
+|---------------|---------|---------|
+| `machine_type` | GPU selection | `"GPU-A100"` |
+| `requirements` | Dependencies | `["torch", "transformers"]` |
+| `keep_alive` | Warm duration | `300` (5 min) |
+| `min_concurrency` | Min instances | `0` (scale to zero) |
+| `max_concurrency` | Max parallel | `4` |
+
+| Command | Purpose |
+|---------|---------|
+| `fal deploy app.py::MyApp` | Deploy to fal |
+| `fal run app.py::MyApp` | Run locally |
+| `fal logs <app-id>` | View logs |
+| `fal secrets set KEY=value` | Set secrets |
+
+## When to Use This Skill
+
+Use for **custom model deployment**:
+- Deploying custom ML models on fal infrastructure
+- Configuring GPU instances and scaling
+- Setting up persistent storage for model weights
+- Creating multi-endpoint apps
+- Managing secrets and environment variables
+
+**Related skills:**
+- For API integration: see `fal-api-reference`
+- For optimization: see `fal-optimization`
+- For using hosted models: see `fal-model-guide`
+
+---
+
 # fal.ai Serverless Deployment Guide
 
 Complete guide to deploying custom ML models on fal.ai's serverless infrastructure.

@@ -1,3 +1,47 @@
+---
+name: python-asyncio
+description: Complete Python asyncio system. PROACTIVELY activate for: (1) async/await syntax, (2) asyncio.gather for concurrent execution, (3) TaskGroup (3.11+), (4) Semaphores for rate limiting, (5) Timeouts with asyncio.timeout, (6) Producer-consumer with Queue, (7) Async generators and context managers, (8) uvloop performance, (9) Common async gotchas. Provides: Concurrent patterns, I/O optimization, async libraries (aiohttp, httpx, asyncpg). Ensures correct async patterns without blocking.
+---
+
+## Quick Reference
+
+| Function | Purpose | Code |
+|----------|---------|------|
+| `asyncio.run()` | Entry point | `asyncio.run(main())` |
+| `asyncio.gather()` | Concurrent tasks | `await asyncio.gather(*tasks)` |
+| `asyncio.create_task()` | Fire-and-await | `task = asyncio.create_task(coro)` |
+| `asyncio.TaskGroup()` | Structured concurrency | `async with asyncio.TaskGroup() as tg:` |
+| `asyncio.Semaphore()` | Rate limiting | `async with semaphore:` |
+| `asyncio.timeout()` | Timeout (3.11+) | `async with asyncio.timeout(5.0):` |
+
+| Pattern | Sequential | Concurrent |
+|---------|------------|------------|
+| Execution | `await a(); await b()` | `await gather(a(), b())` |
+| Time | Sum of durations | Max of durations |
+
+| Library | Use Case |
+|---------|----------|
+| `aiohttp` | HTTP client (most popular) |
+| `httpx` | HTTP (sync + async) |
+| `asyncpg` | PostgreSQL |
+| `uvloop` | 2-4x faster event loop |
+
+## When to Use This Skill
+
+Use for **async/concurrent programming**:
+- Network requests (HTTP, WebSockets)
+- Database queries
+- File I/O operations
+- Multiple concurrent I/O operations
+- FastAPI/Starlette async endpoints
+
+**Related skills:**
+- For FastAPI: see `python-fastapi`
+- For type hints: see `python-type-hints`
+- For gotchas: see `python-gotchas`
+
+---
+
 # Python Asyncio Complete Guide
 
 ## Overview

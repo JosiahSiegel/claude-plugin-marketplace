@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-streaming
-description: RTMP, HLS, DASH live streaming, adaptive bitrate, and production streaming patterns
+description: Complete live streaming and protocol system. PROACTIVELY activate for: (1) RTMP streaming to Twitch/YouTube/Facebook, (2) HLS output and adaptive bitrate (ABR), (3) DASH streaming setup, (4) Low-latency streaming (LL-HLS, LL-DASH), (5) SRT protocol configuration, (6) WebRTC/WHIP (FFmpeg 8.0+), (7) Protocol conversion (RTMP to HLS), (8) Multi-destination streaming, (9) nginx-rtmp integration, (10) Docker streaming services. Provides: Platform-specific stream commands, ABR ladder examples, encryption setup, latency optimization, production patterns. Ensures: Reliable live streaming with optimal quality and latency.
 ---
 
 ## CRITICAL GUIDELINES
@@ -10,6 +10,33 @@ description: RTMP, HLS, DASH live streaming, adaptive bitrate, and production st
 **MANDATORY: Always Use Backslashes on Windows for File Paths**
 
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
+
+---
+
+## Quick Reference
+
+| Protocol | Latency | Output Format | Best For |
+|----------|---------|---------------|----------|
+| RTMP | 2-5s | `-f flv rtmp://...` | Twitch, YouTube ingest |
+| HLS | 10-30s | `-f hls output.m3u8` | Web playback, CDN |
+| LL-HLS | 2-5s | `-hls_flags low_latency` | Low-latency web |
+| SRT | <1s | `-f mpegts srt://...` | Reliable contribution |
+| DASH | 10-30s | `-f dash output.mpd` | ABR streaming |
+
+| Platform | Ingest URL |
+|----------|------------|
+| Twitch | `rtmp://live.twitch.tv/app/{key}` |
+| YouTube | `rtmp://a.rtmp.youtube.com/live2/{key}` |
+| Facebook | `rtmps://live-api-s.facebook.com:443/rtmp/{key}` |
+
+## When to Use This Skill
+
+Use for **live streaming workflows**:
+- Broadcasting to Twitch, YouTube, Facebook
+- Setting up HLS/DASH servers for VOD
+- Building ABR encoding ladders
+- Low-latency streaming requirements
+- Multi-destination restreaming
 
 ---
 

@@ -1,3 +1,45 @@
+---
+name: fal-model-guide
+description: Complete fal.ai model selection system. PROACTIVELY activate for: (1) Choosing image generation models (FLUX, SDXL), (2) Choosing video models (Kling, Sora, LTX), (3) Choosing audio models (Whisper, ElevenLabs), (4) Model quality vs speed comparison, (5) Cost optimization by model tier, (6) 3D generation models, (7) Model-specific parameters, (8) Development vs production model selection. Provides: Model comparison tables, decision trees, pricing tiers, performance benchmarks. Ensures optimal model selection for quality, speed, and cost.
+---
+
+## Quick Reference
+
+| Category | Fast/Cheap | Balanced | Best Quality |
+|----------|------------|----------|--------------|
+| Image | FLUX Schnell | FLUX.1 Dev | FLUX.2 Pro |
+| Video | Runway Turbo | LTX-2 Pro | Kling 2.6 Pro |
+| Audio STT | Whisper Turbo | Whisper | Whisper Large v3 |
+| Audio TTS | Kokoro | XTTS | ElevenLabs |
+
+| FLUX Model | Endpoint | Steps | Use Case |
+|------------|----------|-------|----------|
+| FLUX.2 Pro | `fal-ai/flux-2-pro` | 28 | Production |
+| FLUX.1 Dev | `fal-ai/flux/dev` | 28 | High quality |
+| FLUX Schnell | `fal-ai/flux/schnell` | 4 | Fast iteration |
+
+| Video Model | Duration | Audio | Speed |
+|-------------|----------|-------|-------|
+| Kling 2.6 Pro | 5-10s | Yes | Slow |
+| LTX-2 Pro | 5s | Yes | Medium |
+| Runway Turbo | 5-10s | No | Fast |
+
+## When to Use This Skill
+
+Use for **model selection decisions**:
+- Comparing FLUX vs SDXL for image generation
+- Choosing video models by quality tier
+- Optimizing costs with appropriate model selection
+- Understanding model-specific parameters
+- Building production vs development pipelines
+
+**Related skills:**
+- For text-to-image: see `fal-text-to-image`
+- For text-to-video: see `fal-text-to-video`
+- For audio models: see `fal-audio`
+
+---
+
 # fal.ai Model Selection Guide
 
 Comprehensive guide to selecting the right fal.ai model for your use case.

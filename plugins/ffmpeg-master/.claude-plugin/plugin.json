@@ -35,7 +35,23 @@
     "aac",
     "mp3",
     "normalization",
-    "loudnorm"
+    "loudnorm",
+    "subtitles",
+    "captions",
+    "srt",
+    "ass",
+    "vtt",
+    "waveform",
+    "visualization",
+    "spectrum",
+    "transitions",
+    "xfade",
+    "effects",
+    "shapes",
+    "drawbox",
+    "drawtext",
+    "overlay",
+    "graphics"
   ],
   "license": "MIT"
 }

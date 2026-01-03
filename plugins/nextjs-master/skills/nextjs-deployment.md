@@ -1,3 +1,50 @@
+---
+name: nextjs-deployment
+description: Complete Next.js deployment system. PROACTIVELY activate for: (1) Vercel deployment and configuration, (2) Self-hosted Node.js deployment, (3) Docker containerization, (4) Static export with output:'export', (5) Edge Runtime configuration, (6) Environment variables, (7) CI/CD with GitHub Actions, (8) Health checks and monitoring, (9) Production optimization. Provides: Dockerfile, docker-compose, PM2 config, vercel.json, GitHub Actions workflows. Ensures production-ready deployment with proper configuration.
+---
+
+## Quick Reference
+
+| Output Mode | Config | Use Case |
+|-------------|--------|----------|
+| Default | - | Vercel/Node.js hosting |
+| Standalone | `output: 'standalone'` | Docker containers |
+| Static | `output: 'export'` | Static hosting (no SSR) |
+
+| Platform | Command | Notes |
+|----------|---------|-------|
+| Vercel | `vercel --prod` | Automatic, recommended |
+| Node.js | `npm run build && npm start` | Self-hosted |
+| Docker | `docker build -t app .` | Container deployment |
+| Static | `npm run build` → `out/` | CDN hosting |
+
+| Runtime | Config | Features |
+|---------|--------|----------|
+| Node.js | Default | Full features |
+| Edge | `export const runtime = 'edge'` | Fast, limited APIs |
+
+| Environment | File | Usage |
+|-------------|------|-------|
+| Development | `.env.local` | Local dev |
+| Production | `.env.production` | Build time |
+| Runtime | Platform secrets | Server runtime |
+
+## When to Use This Skill
+
+Use for **deployment and production**:
+- Deploying to Vercel (easiest path)
+- Self-hosting with Docker or Node.js
+- Static export for CDN hosting
+- Setting up CI/CD pipelines
+- Production configuration and monitoring
+
+**Related skills:**
+- For middleware: see `nextjs-middleware`
+- For caching in production: see `nextjs-caching`
+- For authentication: see `nextjs-authentication`
+
+---
+
 # Next.js Deployment
 
 ## Vercel Deployment

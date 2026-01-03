@@ -1,3 +1,34 @@
+---
+name: ffmpeg-cloudflare-containers
+description: Complete Cloudflare Container FFmpeg system. PROACTIVELY activate for: (1) Cloudflare Containers setup, (2) Native FFmpeg at edge, (3) GPU-accelerated containers, (4) Durable Objects integration, (5) R2 storage for video files, (6) Container autoscaling, (7) Streaming large files, (8) Workers + Containers architecture, (9) Live streaming relay at edge, (10) Container vs Workers comparison. Provides: Dockerfile examples, Worker code, container configuration, GPU setup, R2 integration, production patterns. Ensures: Native FFmpeg performance at Cloudflare edge with full GPU support.
+---
+
+## Quick Reference
+
+| Component | Configuration |
+|-----------|---------------|
+| Container Class | `export class FFmpegContainer extends Container` |
+| Dockerfile | `FROM jrottenberg/ffmpeg:7.1-alpine` |
+| wrangler.toml | `[[containers]]` with `class_name` and `image` |
+
+| Feature | Workers (ffmpeg.wasm) | Containers (Native) |
+|---------|----------------------|---------------------|
+| Size Limit | 10MB | Unlimited |
+| Performance | 10-100x slower | Native speed |
+| GPU Support | None | NVIDIA available |
+| Cold Start | Instant | 2-3 seconds |
+
+## When to Use This Skill
+
+Use for **edge video processing at scale**:
+- Native FFmpeg performance at Cloudflare edge
+- GPU-accelerated transcoding in containers
+- Large file processing (>10MB)
+- Complex FFmpeg pipelines
+- R2 storage integration for video files
+
+---
+
 # FFmpeg in Cloudflare Containers (2025)
 
 ## Overview

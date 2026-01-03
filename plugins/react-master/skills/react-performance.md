@@ -1,3 +1,39 @@
+---
+name: react-performance
+description: Complete React performance optimization system. PROACTIVELY activate for: (1) React.memo and memoization, (2) useMemo and useCallback usage, (3) Code splitting with React.lazy, (4) List virtualization (react-window, react-virtuoso), (5) Avoiding unnecessary re-renders, (6) useTransition and useDeferredValue, (7) Bundle optimization, (8) Web Vitals and profiling. Provides: Profiler setup, memoization patterns, lazy loading, virtualization config, state colocation. Ensures optimal React performance with measurable improvements.
+---
+
+## Quick Reference
+
+| Issue | Solution |
+|-------|----------|
+| Unnecessary re-renders | `React.memo`, `useMemo`, `useCallback` |
+| Expensive computations | `useMemo` |
+| Large bundles | Code splitting, `React.lazy` |
+| Long lists | Virtualization (`react-window`) |
+| Slow state updates | `useTransition`, `useDeferredValue` |
+| State too high | State colocation |
+
+| Tool | Purpose |
+|------|---------|
+| React DevTools Profiler | Component render timing |
+| `web-vitals` | CLS, INP, LCP, FCP, TTFB |
+| Bundle analyzer | Identify large dependencies |
+
+## When to Use This Skill
+
+Use for **React performance optimization**:
+- Diagnosing slow rendering issues
+- Implementing memoization correctly
+- Setting up code splitting and lazy loading
+- Virtualizing long lists for smooth scrolling
+- Using concurrent features for responsiveness
+- Measuring and improving Web Vitals
+
+**For general hooks**: see `react-hooks-complete`
+
+---
+
 # React Performance Optimization
 
 ## Measuring Performance

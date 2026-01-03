@@ -1,3 +1,35 @@
+---
+name: react-patterns
+description: Complete React component patterns system. PROACTIVELY activate for: (1) Compound components with context, (2) Render props pattern, (3) Higher-Order Components (HOC), (4) Custom hooks as patterns, (5) Provider pattern with reducer, (6) Controlled vs uncontrolled components, (7) Prop getter pattern, (8) State reducer pattern. Provides: Pattern implementations, composition strategies, reusable component APIs, flexible state control. Ensures clean, maintainable component architecture.
+---
+
+## Quick Reference
+
+| Pattern | Use Case | Example |
+|---------|----------|---------|
+| Compound Components | Related components sharing state | `<Tabs><Tab /><Panel /></Tabs>` |
+| Render Props | Dynamic rendering with shared logic | `<Mouse>{({x,y}) => ...}</Mouse>` |
+| HOC | Cross-cutting concerns | `withAuth(Component)` |
+| Custom Hooks | Stateful logic reuse | `useToggle()`, `useDebounce()` |
+| Provider Pattern | Global/shared state | `<CartProvider>...</CartProvider>` |
+| Controlled/Uncontrolled | Form input flexibility | `value` vs `defaultValue` |
+| Prop Getters | Accessible component APIs | `getButtonProps()` |
+| State Reducer | Customizable state logic | `useReducer(customReducer)` |
+
+## When to Use This Skill
+
+Use for **React component architecture**:
+- Building flexible, reusable component APIs
+- Implementing compound component patterns
+- Creating render props for dynamic content
+- Developing custom hooks for logic reuse
+- Managing controlled vs uncontrolled inputs
+- Designing accessible component interfaces
+
+**For state management**: see `react-state-management`
+
+---
+
 # React Component Patterns
 
 ## Compound Components

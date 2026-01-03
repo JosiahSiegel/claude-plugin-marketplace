@@ -1,3 +1,50 @@
+---
+name: nextjs-routing-advanced
+description: Complete Next.js advanced routing system. PROACTIVELY activate for: (1) Dynamic routes with [slug], (2) Catch-all routes [...slug], (3) Route groups for organization, (4) Parallel routes with @slot, (5) Intercepting routes for modals, (6) Private folders with _prefix, (7) Route Handlers (API), (8) Search params handling, (9) Programmatic navigation. Provides: Dynamic routing patterns, parallel route slots, modal interception, API handlers. Ensures flexible routing with proper URL structure.
+---
+
+## Quick Reference
+
+| Route Type | Folder Pattern | URL Example |
+|------------|----------------|-------------|
+| Dynamic | `[slug]` | `/blog/hello` → `{ slug: 'hello' }` |
+| Catch-all | `[...slug]` | `/docs/a/b` → `{ slug: ['a', 'b'] }` |
+| Optional catch-all | `[[...slug]]` | `/shop` or `/shop/a/b` |
+| Route group | `(name)` | No URL impact, layout grouping |
+| Parallel route | `@slot` | Independent loading/error |
+| Intercept same level | `(.)path` | Modal pattern |
+| Private folder | `_folder` | Not a route |
+
+| Navigation | Code | Use Case |
+|------------|------|----------|
+| Link | `<Link href="/path">` | Declarative nav |
+| router.push | `router.push('/path')` | Programmatic nav |
+| router.replace | `router.replace('/path')` | No history entry |
+| redirect | `redirect('/path')` | Server redirect |
+
+| Route Handler | Method | Pattern |
+|---------------|--------|---------|
+| `GET` | Read | `export async function GET() {}` |
+| `POST` | Create | `export async function POST() {}` |
+| `PUT` | Update | `export async function PUT() {}` |
+| `DELETE` | Delete | `export async function DELETE() {}` |
+
+## When to Use This Skill
+
+Use for **advanced routing patterns**:
+- Dynamic blog/product pages with slugs
+- Documentation with catch-all routes
+- Dashboard layouts with parallel routes
+- Photo gallery modals with intercepting routes
+- API endpoints with Route Handlers
+
+**Related skills:**
+- For App Router basics: see `nextjs-app-router`
+- For middleware routing: see `nextjs-middleware`
+- For data in routes: see `nextjs-data-fetching`
+
+---
+
 # Next.js Advanced Routing
 
 ## Dynamic Routes

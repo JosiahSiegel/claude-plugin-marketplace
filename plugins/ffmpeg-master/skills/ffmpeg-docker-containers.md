@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-docker-containers
-description: FFmpeg in Docker containers - images, GPU support, optimization, and production patterns
+description: Complete Docker FFmpeg deployment system. PROACTIVELY activate for: (1) Docker FFmpeg image selection (jrottenberg, linuxserver), (2) GPU passthrough (NVIDIA, Intel, AMD), (3) Volume mounting and permissions, (4) Docker Compose video processing, (5) Kubernetes FFmpeg jobs, (6) Custom Dockerfile builds, (7) Windows/Linux/macOS Docker usage, (8) Resource limits and optimization, (9) Watch folder automation, (10) Production container patterns. Provides: Image comparison tables, GPU Docker commands, Compose examples, K8s manifests, troubleshooting guides. Ensures: Consistent, isolated FFmpeg environments across platforms.
 ---
 
 ## CRITICAL GUIDELINES
@@ -10,6 +10,26 @@ description: FFmpeg in Docker containers - images, GPU support, optimization, an
 **MANDATORY: Always Use Backslashes on Windows for File Paths**
 
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
+
+---
+
+## Quick Reference
+
+| Image | Size | GPU | Command |
+|-------|------|-----|---------|
+| `jrottenberg/ffmpeg:7.1-alpine320` | ~100MB | No | `docker run --rm -v $(pwd):/data jrottenberg/ffmpeg:7.1-alpine320 -i /data/input.mp4 /data/output.mp4` |
+| `jrottenberg/ffmpeg:7.1-nvidia2404` | ~1.5GB | NVIDIA | `docker run --gpus all --rm -v $(pwd):/data jrottenberg/ffmpeg:7.1-nvidia2404 ...` |
+| `jrottenberg/ffmpeg:7.1-vaapi2404` | ~300MB | Intel/AMD | Add `--device /dev/dri:/dev/dri` |
+| `linuxserver/ffmpeg:latest` | ~150MB | No | LinuxServer.io maintained |
+
+## When to Use This Skill
+
+Use for **containerized FFmpeg deployments**:
+- CI/CD pipelines needing consistent FFmpeg versions
+- Multi-user systems with different FFmpeg requirements
+- Production transcoding services
+- Kubernetes video processing jobs
+- GPU passthrough configurations
 
 ---
 

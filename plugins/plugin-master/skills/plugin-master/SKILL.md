@@ -4,6 +4,44 @@ description: "Complete Claude Code plugin development system. PROACTIVELY activa
 license: MIT
 ---
 
+## Quick Reference
+
+| Component | Location | Required |
+|-----------|----------|----------|
+| Plugin manifest | `.claude-plugin/plugin.json` | Yes |
+| Commands | `commands/*.md` | No (auto-discovered) |
+| Agents | `agents/*.md` | No (auto-discovered) |
+| Agent Skills | `skills/*/SKILL.md` | No (auto-discovered) |
+| Hooks | `hooks/hooks.json` or inline | No |
+| MCP Servers | inline or `.mcp.json` | No |
+
+| Task | Action |
+|------|--------|
+| Create plugin | Ask Claude: "Create a plugin for X" |
+| Install from marketplace | `/plugin marketplace add user/repo` then `/plugin install name@user` |
+| Validate plugin | `/validate-plugin` |
+| Test locally (Mac/Linux) | Copy to `~/.local/share/claude/plugins/` |
+
+| Field | Format | Example |
+|-------|--------|---------|
+| `author` | Object | `{"name": "Name", "email": "email"}` |
+| `version` | String | `"1.0.0"` |
+| `keywords` | Array | `["keyword1", "keyword2"]` |
+
+## When to Use This Skill
+
+Use for **plugin development tasks**:
+- Creating new Claude Code plugins from scratch
+- Adding commands, agents, or skills to existing plugins
+- Packaging code as shareable plugins
+- Publishing plugins to marketplaces
+- Validating plugin structure before release
+- Exporting skills for claude.ai web app
+
+**For advanced topics**: hooks, MCP integration, team distribution → see `advanced-features-2025` skill
+
+---
+
 # Plugin Creator - Complete Beginner's Guide
 
 ## 🚨 CRITICAL GUIDELINES

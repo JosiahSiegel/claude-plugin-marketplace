@@ -1,3 +1,44 @@
+---
+name: fal-api-reference
+description: Complete fal.ai API reference system. PROACTIVELY activate for: (1) @fal-ai/client JavaScript setup, (2) fal_client Python setup, (3) fal.subscribe/run/stream methods, (4) Queue management (submit/status/result), (5) Webhook configuration, (6) File upload to fal.media, (7) REST API endpoints, (8) Real-time WebSocket connections, (9) Error handling patterns. Provides: Client configuration, method signatures, queue workflow, webhook payloads, common parameters. Ensures correct API usage with proper authentication and error handling.
+---
+
+## Quick Reference
+
+| Method | Use Case | Code |
+|--------|----------|------|
+| `fal.subscribe()` | Queue-based (recommended) | `await fal.subscribe("model", { input })` |
+| `fal.run()` | Fast endpoints (<30s) | `await fal.run("model", { input })` |
+| `fal.stream()` | Progressive output | `for await (const event of stream) {}` |
+| `fal.realtime.connect()` | WebSocket interactive | `fal.realtime.connect("model", callbacks)` |
+
+| Queue Method | Purpose |
+|--------------|---------|
+| `fal.queue.submit()` | Submit job, get request_id |
+| `fal.queue.status()` | Check job status |
+| `fal.queue.result()` | Get completed result |
+| `fal.queue.cancel()` | Cancel pending job |
+
+| Auth | Header | Format |
+|------|--------|--------|
+| API Key | `Authorization` | `Key YOUR_FAL_KEY` |
+
+## When to Use This Skill
+
+Use for **API integration fundamentals**:
+- Setting up fal.ai client in JavaScript/TypeScript
+- Setting up fal_client in Python
+- Choosing between subscribe, run, and stream methods
+- Implementing webhook callbacks
+- Uploading files to fal.media CDN
+
+**Related skills:**
+- For model selection: see `fal-model-guide`
+- For performance optimization: see `fal-optimization`
+- For custom model deployment: see `fal-serverless-guide`
+
+---
+
 # fal.ai API Reference
 
 Complete API reference for fal.ai client libraries and REST endpoints.

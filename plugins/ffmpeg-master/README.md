@@ -33,6 +33,10 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 - **ffmpeg-cicd-runners** - GitHub Actions, GitLab CI, Jenkins optimization
 - **ffmpeg-streaming** - RTMP, HLS, DASH, SRT, ABR streaming patterns
 - **ffmpeg-audio-processing** - Audio encoding, EBU R128 normalization, loudnorm
+- **ffmpeg-captions-subtitles** - Subtitle formats (SRT, ASS, VTT), burning captions, extracting subtitles, styling
+- **ffmpeg-waveforms-visualization** - Audio waveforms, spectrum analyzers, showwaves, showspectrum filters
+- **ffmpeg-transitions-effects** - Video transitions (xfade), fades, dissolves, wipes, slides, creative effects
+- **ffmpeg-shapes-graphics** - Drawing shapes, drawbox, drawtext, overlays, geometric patterns, graphics
 
 ## Installation
 
@@ -165,6 +169,34 @@ The FFmpeg Expert agent can help with:
 - **Filters**: EQ, compression, noise reduction, fade
 - **Standards**: Broadcast (-23 LUFS), Streaming (-14 LUFS), Podcast (-16 LUFS)
 
+### Captions and Subtitles
+
+- **Formats**: SRT, ASS/SSA, VTT, TTML, CEA-608/708
+- **Operations**: Burn-in, extract, convert, style, position
+- **Whisper AI**: Automatic transcription (FFmpeg 8.0+)
+- **Accessibility**: Font sizing, colors, positioning
+
+### Audio Visualization
+
+- **Waveforms**: showwaves, showwavespic - animated and static
+- **Spectrum**: showspectrum, showspectrumpic, showcqt
+- **Other**: showfreqs, avectorscope, ahistogram
+- **Templates**: Music videos, podcast visuals, dashboards
+
+### Video Transitions
+
+- **xfade Filter**: 40+ built-in transitions
+- **Types**: Fade, dissolve, wipe, slide, circle, zoom, pixelize
+- **Features**: Custom expressions, audio crossfade sync
+- **Multi-clip**: Slideshow creation, varied transitions
+
+### Shapes and Graphics
+
+- **Drawing**: drawbox, drawgrid, drawtext, geq
+- **Overlays**: Logos, watermarks, lower thirds
+- **Effects**: Blend modes, vignettes, color tints
+- **Animation**: Moving, scaling, rotating graphics
+
 ## Quality Settings Reference
 
 ### CRF Values (Constant Rate Factor)
@@ -240,6 +272,45 @@ ffmpeg -hwaccel cuda -hwaccel_output_format cuda \
   -i input.mp4 \
   -c:v h264_nvenc -preset p4 -cq 23 \
   -c:a copy \
+  output.mp4
+```
+
+### Example: Burn Subtitles
+
+```bash
+# Burn SRT subtitles with custom styling
+ffmpeg -i video.mp4 \
+  -vf "subtitles=subs.srt:force_style='FontSize=24,Outline=2'" \
+  output.mp4
+```
+
+### Example: Generate Waveform Video
+
+```bash
+# Create waveform visualization
+ffmpeg -i audio.mp3 \
+  -filter_complex "[0:a]showwaves=s=1280x720:mode=cline:colors=green[v]" \
+  -map "[v]" -map 0:a \
+  waveform.mp4
+```
+
+### Example: Video Transition
+
+```bash
+# Crossfade between two clips
+ffmpeg -i clip1.mp4 -i clip2.mp4 \
+  -filter_complex "[0:v][1:v]xfade=transition=fade:duration=1:offset=4[v]" \
+  -map "[v]" \
+  output.mp4
+```
+
+### Example: Draw Shapes
+
+```bash
+# Add semi-transparent box with text
+ffmpeg -i video.mp4 \
+  -vf "drawbox=x=10:y=10:w=300:h=80:color=black@0.7:t=fill,\
+       drawtext=text='LIVE':x=30:y=30:fontsize=48:fontcolor=red" \
   output.mp4
 ```
 

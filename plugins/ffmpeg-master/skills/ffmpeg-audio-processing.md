@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-audio-processing
-description: Audio encoding, normalization, EBU R128, loudnorm, AAC, MP3, Opus, and professional audio workflows
+description: Complete audio encoding and normalization system. PROACTIVELY activate for: (1) Audio codec selection (AAC, MP3, Opus, FLAC), (2) Loudness normalization (EBU R128, loudnorm), (3) Audio extraction from video, (4) Format conversion, (5) Volume adjustment and dynamics, (6) Noise reduction and EQ, (7) Channel operations (stereo/mono/surround), (8) Sample rate and bit depth conversion, (9) Audio fade in/out and crossfades, (10) Podcast and broadcast processing chains. Provides: Codec comparison tables, loudness standards reference, two-pass normalization scripts, professional mastering chains. Ensures: Broadcast-compliant audio with proper loudness and quality.
 ---
 
 ## CRITICAL GUIDELINES
@@ -10,6 +10,34 @@ description: Audio encoding, normalization, EBU R128, loudnorm, AAC, MP3, Opus, 
 **MANDATORY: Always Use Backslashes on Windows for File Paths**
 
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
+
+---
+
+## Quick Reference
+
+| Task | Command |
+|------|---------|
+| Extract audio | `ffmpeg -i video.mp4 -vn -c:a copy audio.m4a` |
+| Convert to MP3 | `ffmpeg -i input.flac -c:a libmp3lame -q:a 2 output.mp3` |
+| Normalize (EBU R128) | `-af loudnorm=I=-23:LRA=7:TP=-2` |
+| Podcast standard | `-af loudnorm=I=-16:TP=-1.5` |
+| Adjust volume | `-af "volume=1.5"` or `-af "volume=6dB"` |
+| Mono to stereo | `-ac 2` |
+
+| Codec | Recommended Bitrate | Use Case |
+|-------|---------------------|----------|
+| AAC | 128-192k (music), 64k (speech) | Streaming, mobile |
+| MP3 | 192-320k (music), 128k (speech) | Universal compatibility |
+| Opus | 96-128k (music), 48k (speech) | WebM, VoIP, modern |
+
+## When to Use This Skill
+
+Use for **audio-focused operations**:
+- Extracting audio from video files
+- Loudness normalization for broadcast/streaming compliance
+- Podcast and audiobook processing
+- Audio format conversion
+- Audio effects (EQ, compression, noise reduction)
 
 ---
 

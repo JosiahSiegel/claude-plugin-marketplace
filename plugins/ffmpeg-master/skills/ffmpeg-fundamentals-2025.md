@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-fundamentals-2025
-description: FFmpeg 7.1/8.0 core features, command syntax, common operations, and essential knowledge for 2025
+description: Complete FFmpeg core knowledge system. PROACTIVELY activate for: (1) Basic transcoding and format conversion, (2) Command syntax questions, (3) Codec selection (H.264, H.265, AV1, VP9), (4) Quality settings (CRF, bitrate, presets), (5) Video/audio filter chains, (6) Trimming, splitting, concatenating, (7) Resolution scaling and aspect ratios, (8) FFmpeg version features (7.1/8.0). Provides: Command syntax reference, codec comparison tables, filter examples, format conversion recipes, probing commands. Ensures: Correct FFmpeg usage with modern best practices.
 ---
 
 ## CRITICAL GUIDELINES
@@ -14,6 +14,30 @@ When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in fil
 ### Documentation Guidelines
 
 **NEVER create new documentation files unless explicitly requested by the user.**
+
+---
+
+## Quick Reference
+
+| Task | Command Pattern |
+|------|-----------------|
+| Convert format | `ffmpeg -i input.ext output.ext` |
+| Set quality (CRF) | `-c:v libx264 -crf 23` |
+| Scale video | `-vf "scale=1920:1080"` |
+| Trim video | `-ss 00:00:10 -t 00:00:30` |
+| Extract audio | `-vn -c:a aac output.m4a` |
+| Probe file | `ffprobe -v error -show_format -show_streams file` |
+
+## When to Use This Skill
+
+Use for **foundational FFmpeg operations**:
+- First-time FFmpeg users needing syntax help
+- Basic transcoding between formats (MP4, WebM, MKV, MOV)
+- Understanding codec options and quality settings
+- Simple filter operations (scale, crop, rotate)
+- File analysis with ffprobe
+
+**For specialized topics**: hardware encoding → `ffmpeg-hardware-acceleration`, streaming → `ffmpeg-streaming`, Docker → `ffmpeg-docker-containers`
 
 ---
 

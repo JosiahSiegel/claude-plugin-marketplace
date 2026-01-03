@@ -1,3 +1,53 @@
+---
+name: python-package-management
+description: Complete Python package management system. PROACTIVELY activate for: (1) uv package manager (10-100x faster), (2) pyproject.toml configuration, (3) Virtual environment setup, (4) Dependency management with uv.lock, (5) Ruff linting and formatting, (6) src layout project structure, (7) Publishing to PyPI, (8) pip and requirements.txt. Provides: uv commands, pyproject.toml templates, ruff config, pre-commit setup. Ensures modern Python project setup with fast tooling.
+---
+
+## Quick Reference
+
+| uv Command | Purpose |
+|------------|---------|
+| `uv init my-project` | Create new project |
+| `uv add <package>` | Add dependency |
+| `uv add --dev <package>` | Add dev dependency |
+| `uv sync` | Install all dependencies |
+| `uv run <command>` | Run in virtual env |
+| `uv lock --upgrade` | Update all deps |
+| `uv python install 3.13` | Install Python version |
+
+| Tool | Command | Speed |
+|------|---------|-------|
+| uv | `uv add requests` | 10-100x faster |
+| pip | `pip install requests` | Baseline |
+
+| ruff Command | Purpose |
+|--------------|---------|
+| `ruff check .` | Lint code |
+| `ruff check --fix .` | Auto-fix issues |
+| `ruff format .` | Format code |
+
+| Project Layout | Recommended |
+|----------------|-------------|
+| src layout | `src/my_package/` |
+| Tests | `tests/` |
+| Config | `pyproject.toml` |
+
+## When to Use This Skill
+
+Use for **project setup and dependencies**:
+- Starting new Python projects
+- Setting up uv for fast package management
+- Configuring pyproject.toml
+- Setting up linting with ruff
+- Publishing packages to PyPI
+
+**Related skills:**
+- For CI/CD: see `python-github-actions`
+- For testing: see `python-testing`
+- For type hints config: see `python-type-hints`
+
+---
+
 # Python Package Management (2025)
 
 ## Overview

@@ -1,3 +1,56 @@
+---
+name: python-testing
+description: Complete Python testing system. PROACTIVELY activate for: (1) pytest fundamentals, (2) Fixtures and scopes, (3) Parameterized tests, (4) Mocking with pytest-mock, (5) Async testing with pytest-asyncio, (6) Coverage configuration, (7) FastAPI testing with httpx, (8) Property-based testing with hypothesis, (9) Snapshot testing. Provides: pytest patterns, fixture examples, mock setup, coverage config. Ensures comprehensive test coverage with best practices.
+---
+
+## Quick Reference
+
+| pytest Command | Purpose |
+|----------------|---------|
+| `pytest` | Run all tests |
+| `pytest -v` | Verbose output |
+| `pytest -k "name"` | Run tests matching pattern |
+| `pytest -x` | Stop on first failure |
+| `pytest --lf` | Run last failed |
+| `pytest -n auto` | Parallel execution |
+
+| Fixture Scope | Duration |
+|---------------|----------|
+| `function` | Per test (default) |
+| `class` | Per test class |
+| `module` | Per test file |
+| `session` | Entire test run |
+
+| Mock Pattern | Code |
+|--------------|------|
+| Patch function | `mocker.patch("module.func")` |
+| Return value | `mock.return_value = {...}` |
+| Side effect | `mock.side_effect = [a, b, exc]` |
+| Assert called | `mock.assert_called_once()` |
+
+| Marker | Use Case |
+|--------|----------|
+| `@pytest.mark.asyncio` | Async tests |
+| `@pytest.mark.parametrize` | Multiple inputs |
+| `@pytest.mark.skip` | Skip test |
+| `@pytest.mark.xfail` | Expected failure |
+
+## When to Use This Skill
+
+Use for **testing Python code**:
+- Writing pytest tests with fixtures
+- Mocking external dependencies
+- Testing async code
+- Setting up code coverage
+- Testing FastAPI applications
+
+**Related skills:**
+- For FastAPI: see `python-fastapi`
+- For async patterns: see `python-asyncio`
+- For CI/CD: see `python-github-actions`
+
+---
+
 # Python Testing Best Practices (2025)
 
 ## Overview

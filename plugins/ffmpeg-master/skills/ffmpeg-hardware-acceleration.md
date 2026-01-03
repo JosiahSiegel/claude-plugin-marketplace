@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-hardware-acceleration
-description: NVIDIA NVENC, Intel QSV, AMD AMF, Apple VideoToolbox, VAAPI, and Vulkan hardware acceleration guide
+description: Complete GPU-accelerated encoding/decoding system. PROACTIVELY activate for: (1) NVIDIA NVENC/NVDEC encoding, (2) Intel Quick Sync Video (QSV), (3) AMD AMF encoding, (4) Apple VideoToolbox, (5) Linux VAAPI setup, (6) Vulkan Video (FFmpeg 7.1+/8.0), (7) GPU pipeline optimization, (8) Hardware decoder + encoder chains, (9) Docker GPU containers, (10) Performance benchmarking. Provides: Platform-specific commands, preset comparisons, quality tuning, full GPU pipeline examples, troubleshooting guides. Ensures: Maximum encoding speed with optimal quality using GPU acceleration.
 ---
 
 ## CRITICAL GUIDELINES
@@ -10,6 +10,29 @@ description: NVIDIA NVENC, Intel QSV, AMD AMF, Apple VideoToolbox, VAAPI, and Vu
 **MANDATORY: Always Use Backslashes on Windows for File Paths**
 
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
+
+---
+
+## Quick Reference
+
+| Platform | Encoder | Decoder | Detect Command |
+|----------|---------|---------|----------------|
+| NVIDIA | `h264_nvenc`, `hevc_nvenc`, `av1_nvenc` | `h264_cuvid`, `hevc_cuvid` | `ffmpeg -encoders \| grep nvenc` |
+| Intel QSV | `h264_qsv`, `hevc_qsv`, `av1_qsv` | `h264_qsv`, `hevc_qsv` | `ffmpeg -encoders \| grep qsv` |
+| AMD AMF | `h264_amf`, `hevc_amf`, `av1_amf` | N/A (use software) | `ffmpeg -encoders \| grep amf` |
+| Apple | `h264_videotoolbox`, `hevc_videotoolbox` | `h264_videotoolbox` | macOS only |
+| VAAPI | `h264_vaapi`, `hevc_vaapi`, `av1_vaapi` | with `-hwaccel vaapi` | Linux only |
+
+## When to Use This Skill
+
+Use when **GPU acceleration is needed**:
+- Encoding speed is critical (10-30x faster than CPU)
+- Processing large batches of videos
+- Real-time encoding for streaming
+- Server-side transcoding at scale
+- Docker containers with GPU passthrough
+
+**Key decision**: GPU encoding trades some quality for massive speed. Use `-cq` or `-qp` for quality control.
 
 ---
 

@@ -1,3 +1,46 @@
+---
+name: fal-text-to-image
+description: Complete fal.ai text-to-image system. PROACTIVELY activate for: (1) FLUX.1/2 Pro/Dev/Schnell generation, (2) SDXL and Fast SDXL, (3) Image size presets (square_hd, landscape_16_9), (4) Guidance scale and inference steps, (5) LoRA model application, (6) Seed for reproducibility, (7) Batch generation (num_images), (8) Ideogram for text in images, (9) Recraft for design assets. Provides: Model endpoints, parameter reference, prompt engineering, quality vs speed trade-offs. Ensures optimal text-to-image generation.
+---
+
+## Quick Reference
+
+| Model | Endpoint | Speed | Quality | Cost |
+|-------|----------|-------|---------|------|
+| FLUX.2 Pro | `fal-ai/flux-2-pro` | Medium | Highest | $$$ |
+| FLUX.1 Dev | `fal-ai/flux/dev` | Medium | High | $$ |
+| FLUX Schnell | `fal-ai/flux/schnell` | Fast | Good | $ |
+| Fast SDXL | `fal-ai/fast-sdxl` | Fast | Good | $ |
+
+| Image Size | Preset | Dimensions |
+|------------|--------|------------|
+| Square HD | `square_hd` | 1024x1024 |
+| Landscape | `landscape_16_9` | 1024x576 |
+| Portrait | `portrait_16_9` | 576x1024 |
+| Custom | `{ width, height }` | Any |
+
+| Parameter | FLUX Default | SDXL Default |
+|-----------|--------------|--------------|
+| `guidance_scale` | 3.5 | 7.5 |
+| `num_inference_steps` | 28 | 25 |
+| `num_images` | 1 | 1 |
+
+## When to Use This Skill
+
+Use for **text-to-image generation**:
+- Generating images from text prompts
+- Choosing between FLUX and SDXL models
+- Configuring image sizes and quality parameters
+- Using LoRA models for custom styles
+- Batch generating multiple images
+
+**Related skills:**
+- For image editing: see `fal-image-to-image`
+- For model comparison: see `fal-model-guide`
+- For API integration: see `fal-api-reference`
+
+---
+
 # fal.ai Text-to-Image Models
 
 Complete reference for all text-to-image generation models on fal.ai.

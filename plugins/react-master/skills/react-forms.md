@@ -1,3 +1,43 @@
+---
+name: react-forms
+description: Complete React forms system. PROACTIVELY activate for: (1) Controlled form patterns, (2) React Hook Form setup and validation, (3) Zod schema validation, (4) Dynamic fields with useFieldArray, (5) Server Actions with forms, (6) useOptimistic for optimistic updates, (7) File upload handling, (8) Multi-step form wizards. Provides: Form validation, error handling, field arrays, file drag-drop, form state management. Ensures robust form handling with proper validation and UX.
+---
+
+## Quick Reference
+
+| Approach | Best For | Example |
+|----------|----------|---------|
+| Controlled | Simple forms | `value={state} onChange={...}` |
+| React Hook Form | Complex forms | `useForm()` + `register()` |
+| Server Actions | Next.js forms | `action={serverAction}` |
+
+| React Hook Form | Usage |
+|-----------------|-------|
+| `register` | Connect input | `{...register('name')}` |
+| `handleSubmit` | Form submission | `onSubmit={handleSubmit(fn)}` |
+| `formState.errors` | Validation errors | `errors.name?.message` |
+| `useFieldArray` | Dynamic fields | `fields.map(...)` |
+
+| Validation | Setup |
+|------------|-------|
+| Inline | `register('email', { required: true })` |
+| Zod | `resolver: zodResolver(schema)` |
+
+## When to Use This Skill
+
+Use for **React form implementation**:
+- Building controlled forms with validation
+- Setting up React Hook Form
+- Adding Zod schema validation
+- Creating dynamic form fields
+- Handling file uploads with preview
+- Building multi-step form wizards
+- Using Server Actions for form submission
+
+**For state management**: see `react-state-management`
+
+---
+
 # React Forms
 
 ## Controlled Forms

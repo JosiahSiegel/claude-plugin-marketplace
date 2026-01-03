@@ -1,3 +1,46 @@
+---
+name: fal-image-to-video
+description: Complete fal.ai image-to-video system. PROACTIVELY activate for: (1) Kling 2.5/2.6 Pro image animation, (2) MiniMax Hailuo with prompt optimizer, (3) LTX image-to-video, (4) Runway Gen-3 Turbo, (5) Luma Dream Machine with loop, (6) Stable Video Diffusion, (7) Motion description prompts, (8) Portrait/product animation workflows. Provides: Model endpoints, motion keywords, animation techniques, workflow examples. Ensures natural image animation with proper motion description.
+---
+
+## Quick Reference
+
+| Model | Endpoint | Audio | Loop | Best For |
+|-------|----------|-------|------|----------|
+| Kling 2.6 Pro | `fal-ai/kling-video/v2.6/pro/image-to-video` | Yes | No | Cinematic |
+| MiniMax | `fal-ai/minimax-video/image-to-video` | No | No | Reliable |
+| Luma | `fal-ai/luma-dream-machine` | No | Yes | Creative |
+| SVD | `fal-ai/stable-video-diffusion` | No | No | Fast test |
+
+| Motion Type | Keywords | Example |
+|-------------|----------|---------|
+| Character | walks, turns, smiles | "She slowly turns her head" |
+| Nature | sways, flows, falls | "Leaves flutter in the wind" |
+| Camera | pans, zooms, tracks | "Camera slowly pans right" |
+
+| Use Case | Recommended Model |
+|----------|-------------------|
+| Portraits | Kling 2.5/2.6 Pro |
+| Products | MiniMax (optimizer) |
+| Landscapes | Luma (loop) |
+| Fast testing | SVD, Runway Turbo |
+
+## When to Use This Skill
+
+Use for **image animation**:
+- Animating still portraits with natural motion
+- Creating product showcase videos
+- Generating ambient loop videos
+- Adding subtle motion to landscapes
+- Preview workflow before final render
+
+**Related skills:**
+- For text-to-video: see `fal-text-to-video`
+- For video editing: see `fal-video-to-video`
+- For text-to-image first: see `fal-text-to-image`
+
+---
+
 # fal.ai Image-to-Video Models
 
 Complete reference for all image animation and image-to-video models on fal.ai.

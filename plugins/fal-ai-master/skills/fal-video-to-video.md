@@ -1,3 +1,51 @@
+---
+name: fal-video-to-video
+description: Complete fal.ai video-to-video system. PROACTIVELY activate for: (1) Kling O1 video editing, (2) Sora Remix transformation, (3) Video upscaling, (4) Frame interpolation, (5) Style transfer (anime, painting), (6) Object replacement/removal, (7) Color correction, (8) Video enhancement pipelines. Provides: Edit types (general/style/object), upscaling options, style keywords, enhancement workflows. Ensures consistent video transformation without flickering.
+---
+
+## Quick Reference
+
+| Task | Endpoint | Key Parameter |
+|------|----------|---------------|
+| Style/Edit | `fal-ai/kling-video/o1/video-to-video/edit` | `edit_type` |
+| Remix | `fal-ai/sora/remix` | `prompt` |
+| Upscale | `fal-ai/video-upscaler` | `scale: 2,4` |
+| Interpolate | `fal-ai/frame-interpolation` | `target_fps` |
+
+| Edit Type | Use Case |
+|-----------|----------|
+| `general` | Color, lighting, quality |
+| `style` | Anime, painting, noir |
+| `object` | Replace/remove elements |
+
+| Style Keyword | Effect |
+|---------------|--------|
+| "anime style" | Japanese animation |
+| "oil painting" | Textured brushstrokes |
+| "noir" | High contrast B&W |
+| "cyberpunk" | Neon futuristic |
+
+| Upscale | Size Impact |
+|---------|-------------|
+| 2x | 4x file size |
+| 4x | 16x file size |
+
+## When to Use This Skill
+
+Use for **video editing and transformation**:
+- Applying style transfer to videos
+- Upscaling low-resolution videos
+- Increasing frame rate for smooth motion
+- Replacing or removing objects
+- Enhancing video quality
+
+**Related skills:**
+- For text-to-video: see `fal-text-to-video`
+- For image-to-video: see `fal-image-to-video`
+- For model selection: see `fal-model-guide`
+
+---
+
 # fal.ai Video-to-Video Models
 
 Complete reference for video editing, transformation, and upscaling models on fal.ai.

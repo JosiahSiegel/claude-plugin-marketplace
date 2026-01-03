@@ -1,3 +1,42 @@
+---
+name: react-hooks-complete
+description: Complete React hooks reference system. PROACTIVELY activate for: (1) useState and useReducer patterns, (2) useEffect and lifecycle, (3) useRef for DOM and values, (4) useContext for shared state, (5) useMemo and useCallback optimization, (6) React 19 hooks (useTransition, useDeferredValue, useActionState, useOptimistic), (7) Custom hook development, (8) Hook rules and best practices. Provides: Hook syntax, effect cleanup patterns, performance optimization, custom hook patterns. Ensures correct hook usage following React best practices.
+---
+
+## Quick Reference
+
+| Hook | Purpose | Example |
+|------|---------|---------|
+| `useState` | Local state | `const [count, setCount] = useState(0)` |
+| `useReducer` | Complex state | `const [state, dispatch] = useReducer(reducer, init)` |
+| `useEffect` | Side effects | `useEffect(() => { ... }, [deps])` |
+| `useRef` | Mutable ref / DOM | `const ref = useRef<HTMLInputElement>(null)` |
+| `useContext` | Consume context | `const value = useContext(MyContext)` |
+| `useMemo` | Memoize value | `const computed = useMemo(() => calc(), [deps])` |
+| `useCallback` | Stable function | `const fn = useCallback(() => {}, [deps])` |
+
+| React 19 Hook | Purpose |
+|---------------|---------|
+| `useTransition` | Non-blocking updates |
+| `useDeferredValue` | Defer expensive renders |
+| `useActionState` | Server Action state |
+| `useOptimistic` | Optimistic UI updates |
+| `useFormStatus` | Form pending state |
+
+## When to Use This Skill
+
+Use for **React hooks implementation**:
+- Choosing the right hook for your use case
+- Managing component state with useState/useReducer
+- Handling side effects and cleanup with useEffect
+- Building custom reusable hooks
+- Optimizing with useMemo and useCallback
+- Using React 19 concurrent features
+
+**For state management libraries**: see `react-state-management`
+
+---
+
 # React Hooks Complete Guide
 
 ## State Hooks

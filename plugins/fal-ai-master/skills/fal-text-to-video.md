@@ -1,3 +1,47 @@
+---
+name: fal-text-to-video
+description: Complete fal.ai text-to-video system. PROACTIVELY activate for: (1) Kling 2.0/2.5/2.6 Pro video generation, (2) Sora 2 for creative videos, (3) LTX Video with audio, (4) Runway Gen-3 Turbo for fast iteration, (5) Luma Dream Machine, (6) Video duration and aspect ratio, (7) Motion prompt engineering, (8) Camera movement keywords. Provides: Model endpoints, quality tiers, prompt structure, duration options. Ensures cinematic video generation with proper motion description.
+---
+
+## Quick Reference
+
+| Model | Endpoint | Duration | Audio | Speed |
+|-------|----------|----------|-------|-------|
+| Kling 2.6 Pro | `fal-ai/kling-video/v2.6/pro/text-to-video` | 5-10s | Yes | Slow |
+| Sora 2 | `fal-ai/sora` | 5-20s | Optional | Slow |
+| LTX-2 Pro | `fal-ai/ltx-2-pro` | 5s | Yes | Medium |
+| Runway Turbo | `fal-ai/runway-gen3/turbo/text-to-video` | 5-10s | No | Fast |
+| Luma | `fal-ai/luma-dream-machine` | 5s | No | Medium |
+
+| Aspect Ratio | Value | Use Case |
+|--------------|-------|----------|
+| Landscape | `"16:9"` | Standard video |
+| Portrait | `"9:16"` | Social/mobile |
+| Square | `"1:1"` | Social posts |
+
+| Prompt Structure | Example |
+|------------------|---------|
+| Subject + Action | "A woman walks" |
+| + Setting | "through a forest" |
+| + Style | "cinematic lighting" |
+| + Camera | "tracking shot" |
+
+## When to Use This Skill
+
+Use for **text-to-video generation**:
+- Creating videos from text descriptions
+- Choosing models by quality/speed tier
+- Crafting motion-oriented prompts
+- Generating videos with native audio
+- Preview workflow (fast) → Final (quality)
+
+**Related skills:**
+- For image-to-video: see `fal-image-to-video`
+- For video editing: see `fal-video-to-video`
+- For model comparison: see `fal-model-guide`
+
+---
+
 # fal.ai Text-to-Video Models
 
 Complete reference for all text-to-video generation models on fal.ai.

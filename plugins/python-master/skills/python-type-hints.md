@@ -1,3 +1,48 @@
+---
+name: python-type-hints
+description: Complete Python type hints system. PROACTIVELY activate for: (1) Built-in generics (list[str], dict[str, int]), (2) Union types (str | None), (3) Type parameter syntax 3.12+, (4) Protocol for structural typing, (5) TypedDict for dict schemas, (6) Literal and Final types, (7) TypeGuard and TypeIs, (8) ParamSpec for decorators, (9) Mypy/Pyright configuration. Provides: Type syntax, Protocol patterns, TypedDict, mypy config. Ensures static type safety with gradual typing strategy.
+---
+
+## Quick Reference
+
+| Type | Syntax (3.9+) | Example |
+|------|---------------|---------|
+| List | `list[str]` | `names: list[str] = []` |
+| Dict | `dict[str, int]` | `ages: dict[str, int] = {}` |
+| Optional | `str \| None` | `name: str \| None = None` |
+| Union | `int \| str` | `value: int \| str` |
+| Callable | `Callable[[int], str]` | `func: Callable[[int], str]` |
+
+| Feature | Version | Syntax |
+|---------|---------|--------|
+| Type params | 3.12+ | `def first[T](items: list[T]) -> T:` |
+| type alias | 3.12+ | `type Point = tuple[float, float]` |
+| Self | 3.11+ | `def copy(self) -> Self:` |
+| TypeIs | 3.13+ | `def is_str(x) -> TypeIs[str]:` |
+
+| Construct | Use Case |
+|-----------|----------|
+| `Protocol` | Structural subtyping (duck typing) |
+| `TypedDict` | Dict with specific keys |
+| `Literal["a", "b"]` | Specific values only |
+| `Final[str]` | Cannot be reassigned |
+
+## When to Use This Skill
+
+Use for **static type checking**:
+- Adding type hints to functions and classes
+- Creating typed dictionaries with TypedDict
+- Defining protocols for duck typing
+- Configuring mypy or pyright
+- Writing generic functions and classes
+
+**Related skills:**
+- For Python fundamentals: see `python-fundamentals-313`
+- For testing: see `python-testing`
+- For FastAPI schemas: see `python-fastapi`
+
+---
+
 # Python Type Hints Complete Guide
 
 ## Overview

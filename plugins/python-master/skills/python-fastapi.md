@@ -1,3 +1,54 @@
+---
+name: python-fastapi
+description: Complete FastAPI production system. PROACTIVELY activate for: (1) Project structure (scalable layout), (2) Pydantic schemas (input/output separation), (3) Dependency injection, (4) Async database with SQLAlchemy, (5) JWT authentication, (6) Error handling patterns, (7) Docker deployment, (8) Gunicorn + Uvicorn production, (9) Rate limiting, (10) Testing with httpx. Provides: Project templates, schema patterns, auth setup, Docker config. Ensures production-ready FastAPI applications.
+---
+
+## Quick Reference
+
+| Layer | File | Purpose |
+|-------|------|---------|
+| Entrypoint | `main.py` | App factory, lifespan |
+| Config | `config.py` | pydantic-settings |
+| Routes | `api/v1/endpoints/` | Endpoint handlers |
+| Schemas | `schemas/` | Pydantic models |
+| Models | `models/` | SQLAlchemy models |
+| Services | `services/` | Business logic |
+| Deps | `api/deps.py` | Dependency injection |
+
+| Pydantic Pattern | Use Case |
+|------------------|----------|
+| `UserCreate` | Input for creation |
+| `UserUpdate` | Input for updates |
+| `UserResponse` | API output |
+| `UserInDB` | Internal with hash |
+
+| Dependency | Code |
+|------------|------|
+| DB session | `db: Annotated[AsyncSession, Depends(get_db)]` |
+| Current user | `user: Annotated[User, Depends(get_current_user)]` |
+| Type alias | `CurrentUser = Annotated[User, Depends(...)]` |
+
+| Production | Config |
+|------------|--------|
+| Server | `gunicorn -w 4 -k uvicorn.workers.UvicornWorker` |
+| Workers | `CPU cores` for async |
+
+## When to Use This Skill
+
+Use for **FastAPI development**:
+- Setting up FastAPI project structure
+- Creating Pydantic schemas with validation
+- Implementing dependency injection
+- JWT authentication setup
+- Docker deployment configuration
+
+**Related skills:**
+- For async patterns: see `python-asyncio`
+- For testing: see `python-testing`
+- For type hints: see `python-type-hints`
+
+---
+
 # FastAPI Production Best Practices (2025)
 
 ## Overview

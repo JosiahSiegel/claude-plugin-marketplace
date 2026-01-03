@@ -1,3 +1,49 @@
+---
+name: python-gotchas
+description: Complete Python gotchas reference. PROACTIVELY activate for: (1) Mutable default arguments, (2) Mutating lists while iterating, (3) is vs == comparison, (4) Late binding in closures, (5) Variable scope (LEGB), (6) Floating point precision, (7) Exception handling pitfalls, (8) Dict mutation during iteration, (9) Circular imports, (10) Class vs instance attributes. Provides: Problem explanations, code examples, fixes for each gotcha. Ensures bug-free Python code.
+---
+
+## Quick Reference
+
+| Gotcha | Problem | Fix |
+|--------|---------|-----|
+| Mutable default | `def f(x=[])` | Use `None`, create in function |
+| Iterate + mutate | Skips items | Iterate over copy `items[:]` |
+| `is` vs `==` | Identity vs value | Use `is` only for `None` |
+| Late binding | `lambda: i` captures var | `lambda i=i: i` |
+| Float precision | `0.1 + 0.2 != 0.3` | `math.isclose()` |
+| Dict mutation | RuntimeError | `list(d.keys())` |
+| Class attribute | Shared mutable | Init in `__init__` |
+
+| Falsy Values | Examples |
+|--------------|----------|
+| Boolean | `False` |
+| None | `None` |
+| Numbers | `0`, `0.0`, `0j` |
+| Empty collections | `""`, `[]`, `{}`, `set()` |
+
+| Scope Rule | Order |
+|------------|-------|
+| LEGB | Local → Enclosing → Global → Built-in |
+| `global` | Access module-level variable |
+| `nonlocal` | Access enclosing function variable |
+
+## When to Use This Skill
+
+Use for **debugging and prevention**:
+- Understanding why code behaves unexpectedly
+- Avoiding common Python pitfalls
+- Reviewing code for subtle bugs
+- Learning Python's evaluation rules
+- Fixing mutable default arguments
+
+**Related skills:**
+- For fundamentals: see `python-fundamentals-313`
+- For testing: see `python-testing`
+- For type hints: see `python-type-hints`
+
+---
+
 # Python Common Gotchas and Pitfalls
 
 ## Overview

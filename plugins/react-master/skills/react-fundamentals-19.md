@@ -1,3 +1,38 @@
+---
+name: react-fundamentals-19
+description: Complete React 19 fundamentals system. PROACTIVELY activate for: (1) React 19 new features and changes, (2) Server vs Client Components, (3) Server Actions setup, (4) use() hook usage, (5) JSX and component basics, (6) Props and state patterns, (7) Suspense and Error Boundaries, (8) Fragments and Portals. Provides: React 19 syntax, Server Component patterns, async data handling, component composition, best practices. Ensures modern React 19 patterns with proper server/client architecture.
+---
+
+## Quick Reference
+
+| Feature | Pattern | Example |
+|---------|---------|---------|
+| Server Component | Default (no directive) | `async function Page() {}` |
+| Client Component | `'use client'` directive | `'use client'; function Counter() {}` |
+| Server Action | `'use server'` directive | `async function submit(formData) {}` |
+| use() hook | Read promises/context | `const data = use(promise)` |
+
+| Concept | Syntax |
+|---------|--------|
+| Conditional render | `{condition && <Component />}` |
+| List render | `{items.map(item => <Item key={item.id} />)}` |
+| Props destructure | `function Card({ title, children }) {}` |
+| State update | `setItems(prev => [...prev, newItem])` |
+
+## When to Use This Skill
+
+Use for **React 19 core concepts**:
+- Learning React 19 new features and syntax
+- Deciding between Server and Client Components
+- Setting up Server Actions for forms
+- Understanding the use() hook for async data
+- Component composition and JSX patterns
+- Error handling with Suspense and Error Boundaries
+
+**For specific topics**: hooks → `react-hooks-complete`, state management → `react-state-management`, performance → `react-performance`
+
+---
+
 # React 19 Fundamentals
 
 ## Overview

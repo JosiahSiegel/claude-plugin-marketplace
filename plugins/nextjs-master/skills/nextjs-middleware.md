@@ -1,3 +1,49 @@
+---
+name: nextjs-middleware
+description: Complete Next.js Middleware system. PROACTIVELY activate for: (1) Creating middleware.ts, (2) Matcher configuration, (3) Authentication protection, (4) Role-based access control, (5) Redirects and rewrites, (6) Internationalization (i18n), (7) Security headers (CSP, CORS), (8) Geolocation routing, (9) Bot detection, (10) Rate limiting patterns. Provides: Middleware patterns, matcher syntax, auth guards, header manipulation, cookie handling. Ensures Edge-optimized request handling with proper security.
+---
+
+## Quick Reference
+
+| Response Type | Code | Purpose |
+|---------------|------|---------|
+| Continue | `NextResponse.next()` | Pass through |
+| Redirect | `NextResponse.redirect(url)` | 307/308 redirect |
+| Rewrite | `NextResponse.rewrite(url)` | URL rewrite (no redirect) |
+| JSON | `NextResponse.json(data)` | Return JSON response |
+
+| Matcher Pattern | Matches |
+|-----------------|---------|
+| `'/about'` | Exact path |
+| `'/dashboard/:path*'` | Dashboard and all sub-paths |
+| `'/((?!api\|_next).*)` | All except api and _next |
+
+| Request Data | Access |
+|--------------|--------|
+| Path | `request.nextUrl.pathname` |
+| Search params | `request.nextUrl.searchParams` |
+| Cookies | `request.cookies.get('name')` |
+| Headers | `request.headers.get('name')` |
+| Geo | `request.geo?.country` |
+| IP | `request.ip` |
+
+## When to Use This Skill
+
+Use for **Edge request handling**:
+- Protecting routes with authentication
+- Implementing role-based access control
+- Setting security headers (CSP, CORS)
+- Internationalization and locale detection
+- A/B testing with rewrites
+- Geolocation-based routing
+
+**Related skills:**
+- For authentication: see `nextjs-authentication`
+- For routing: see `nextjs-routing-advanced`
+- For deployment: see `nextjs-deployment`
+
+---
+
 # Next.js Middleware
 
 ## Basic Middleware

@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-cicd-runners
-description: FFmpeg in CI/CD pipelines - GitHub Actions, GitLab CI, Jenkins, and build optimization
+description: Complete CI/CD video processing system. PROACTIVELY activate for: (1) GitHub Actions FFmpeg setup, (2) GitLab CI video pipelines, (3) Jenkins declarative pipelines, (4) FFmpeg caching strategies, (5) Windows runner workarounds, (6) GPU-enabled self-hosted runners, (7) Matrix builds for multi-format, (8) Artifact upload/download, (9) Video validation workflows, (10) BtbN/FFmpeg-Builds integration. Provides: YAML workflow examples, Docker container patterns, caching configuration, platform-specific solutions, debugging guides. Ensures: Fast, reliable video processing in CI/CD pipelines.
 ---
 
 ## CRITICAL GUIDELINES
@@ -10,6 +10,31 @@ description: FFmpeg in CI/CD pipelines - GitHub Actions, GitLab CI, Jenkins, and
 **MANDATORY: Always Use Backslashes on Windows for File Paths**
 
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
+
+---
+
+## Quick Reference
+
+| Platform | Install Method | Example |
+|----------|---------------|---------|
+| GitHub Actions | `apt-get` or action | `uses: FedericoCarboni/setup-ffmpeg@v3` |
+| GitLab CI | Docker image | `image: jrottenberg/ffmpeg:7.1-ubuntu2404` |
+| Jenkins | Docker container | `docker { image 'jrottenberg/ffmpeg:7.1' }` |
+
+| Task | YAML Snippet |
+|------|--------------|
+| Cache FFmpeg | `uses: actions/cache@v4` with `path: /usr/local/bin/ffmpeg` |
+| Upload artifact | `uses: actions/upload-artifact@v4` |
+| Matrix build | `strategy: { matrix: { format: [mp4, webm, mkv] } }` |
+
+## When to Use This Skill
+
+Use for **CI/CD video processing pipelines**:
+- GitHub Actions FFmpeg workflows
+- GitLab CI/CD video transcoding
+- Jenkins video processing jobs
+- Caching FFmpeg for faster builds
+- Windows runner workarounds
 
 ---
 

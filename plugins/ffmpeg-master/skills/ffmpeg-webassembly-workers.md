@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-webassembly-workers
-description: ffmpeg.wasm for browsers, Cloudflare Workers limitations, and WebAssembly deployment patterns
+description: Complete browser-based FFmpeg system. PROACTIVELY activate for: (1) ffmpeg.wasm setup and loading, (2) Browser video transcoding, (3) React/Vue/Next.js integration, (4) SharedArrayBuffer and COOP/COEP headers, (5) Multi-threaded ffmpeg-core-mt, (6) Cloudflare Workers limitations, (7) Custom ffmpeg.wasm builds, (8) Memory management and cleanup, (9) Progress tracking and UI, (10) IndexedDB core caching. Provides: Framework-specific examples, header configuration, common operation recipes, performance optimization, troubleshooting guides. Ensures: Client-side video processing without server dependencies.
 ---
 
 ## CRITICAL GUIDELINES
@@ -10,6 +10,34 @@ description: ffmpeg.wasm for browsers, Cloudflare Workers limitations, and WebAs
 **MANDATORY: Always Use Backslashes on Windows for File Paths**
 
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
+
+---
+
+## Quick Reference
+
+| Package | Size | Threading | Install |
+|---------|------|-----------|---------|
+| `@ffmpeg/core` | ~31MB | Single | `npm install @ffmpeg/ffmpeg @ffmpeg/util` |
+| `@ffmpeg/core-mt` | ~31MB | Multi | Requires COOP/COEP headers |
+
+| Header | Value | Purpose |
+|--------|-------|---------|
+| Cross-Origin-Embedder-Policy | `require-corp` | SharedArrayBuffer |
+| Cross-Origin-Opener-Policy | `same-origin` | Multi-threading |
+
+| Operation | Command |
+|-----------|---------|
+| Convert WebM→MP4 | `await ffmpeg.exec(['-i', 'input.webm', 'output.mp4'])` |
+| Extract frame | `await ffmpeg.exec(['-i', 'video.mp4', '-ss', '5', '-vframes', '1', 'thumb.jpg'])` |
+
+## When to Use This Skill
+
+Use for **browser-based video processing**:
+- Client-side transcoding without server
+- React/Vue/Next.js FFmpeg integration
+- Setting up COOP/COEP headers
+- Cloudflare Workers FFmpeg limitations
+- Memory management and cleanup
 
 ---
 

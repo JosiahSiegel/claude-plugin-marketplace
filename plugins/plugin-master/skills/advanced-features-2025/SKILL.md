@@ -4,6 +4,42 @@ description: "Complete guide to 2025 Claude Code plugin features: Agent Skills, 
 license: MIT
 ---
 
+## Quick Reference
+
+| Feature | Configuration Location | Key Pattern |
+|---------|----------------------|-------------|
+| Agent Skills | `skills/*/SKILL.md` | Progressive disclosure: frontmatter → body → linked files |
+| Hooks | `hooks/hooks.json` or `plugin.json` | Event-based: PreToolUse, PostToolUse, SessionStart, etc. |
+| MCP Servers | `plugin.json` or `.mcp.json` | `"command": "...", "args": [...]` |
+| Team Config | `.claude/settings.json` | `extraKnownMarketplaces` + `plugins.enabled` |
+
+| Hook Event | When It Fires | Common Use |
+|------------|---------------|------------|
+| `PreToolUse` | Before tool execution | Validation, preparation |
+| `PostToolUse` | After tool execution | Testing, cleanup, linting |
+| `SessionStart` | Session begins | Logging, initialization |
+| `SessionEnd` | Session terminates | Cleanup, state save |
+| `UserPromptSubmit` | After user prompt | Preprocessing, logging |
+
+| Environment Variable | Purpose |
+|---------------------|---------|
+| `${CLAUDE_PLUGIN_ROOT}` | Resolves to plugin's absolute path |
+| `${TOOL_INPUT_*}` | Access tool input parameters in hooks |
+
+## When to Use This Skill
+
+Use for **advanced plugin features**:
+- Implementing Agent Skills with progressive disclosure
+- Setting up hook automation (testing, linting, validation)
+- Configuring MCP server integration
+- Team plugin distribution via repository configuration
+- Performance optimization and context efficiency
+- Migrating legacy plugins to 2025 patterns
+
+**For basic plugin creation**: see `plugin-master` skill
+
+---
+
 ## 🚨 CRITICAL GUIDELINES
 
 ### Windows File Path Requirements

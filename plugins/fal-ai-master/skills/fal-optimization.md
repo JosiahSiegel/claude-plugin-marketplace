@@ -1,3 +1,45 @@
+---
+name: fal-optimization
+description: Complete fal.ai optimization system. PROACTIVELY activate for: (1) Queue vs run performance, (2) Parallel request batching, (3) Streaming for real-time UI, (4) WebSocket for interactive apps, (5) Model cost comparison, (6) Image size optimization, (7) Inference step tuning, (8) Webhook vs polling, (9) Result caching by seed, (10) Serverless scaling config. Provides: Parallel patterns, cost strategies, caching examples, monitoring setup. Ensures optimal performance and cost-effective usage.
+---
+
+## Quick Reference
+
+| Optimization | Technique | Impact |
+|--------------|-----------|--------|
+| Parallel requests | `Promise.all()` with batches | 5-10x throughput |
+| Avoid polling | Use webhooks | Lower API calls |
+| Cache by seed | Store `prompt+seed` results | Avoid regeneration |
+| Right-size images | Use needed resolution | Lower cost |
+| Fewer steps | Reduce inference steps | Faster, cheaper |
+
+| Model Tier | Development | Production |
+|------------|-------------|------------|
+| Image | FLUX Schnell | FLUX.2 Pro |
+| Video | Runway Turbo | Kling 2.6 Pro |
+
+| Serverless Config | Cost-Optimized | Latency-Optimized |
+|-------------------|----------------|-------------------|
+| `min_concurrency` | `0` | `1+` |
+| `keep_alive` | `120` | `600+` |
+| `machine_type` | Smallest viable | Higher tier |
+
+## When to Use This Skill
+
+Use for **performance and cost optimization**:
+- Reducing generation latency
+- Lowering API costs
+- Implementing parallel processing
+- Choosing between polling and webhooks
+- Configuring serverless scaling
+
+**Related skills:**
+- For API patterns: see `fal-api-reference`
+- For model selection: see `fal-model-guide`
+- For serverless config: see `fal-serverless-guide`
+
+---
+
 # fal.ai Performance and Cost Optimization
 
 Strategies for optimizing performance, reducing costs, and scaling fal.ai integrations.

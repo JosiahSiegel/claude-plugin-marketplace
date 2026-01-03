@@ -1,3 +1,51 @@
+---
+name: python-github-actions
+description: Complete Python GitHub Actions system. PROACTIVELY activate for: (1) uv-based CI workflows (10-100x faster), (2) Matrix testing across Python versions, (3) Dependency caching with setup-uv, (4) Parallel test execution, (5) Reusable workflows, (6) Publishing to PyPI with trusted publishing, (7) Code coverage with codecov, (8) Security scanning. Provides: Workflow templates, caching config, matrix strategies, composite actions. Ensures fast, reliable CI/CD pipelines.
+---
+
+## Quick Reference
+
+| Action | Purpose | Speed |
+|--------|---------|-------|
+| `astral-sh/setup-uv@v4` | Install uv + caching | 10-100x faster |
+| `actions/setup-python@v5` | Traditional pip | Baseline |
+
+| uv CI Pattern | Code |
+|---------------|------|
+| Setup | `uses: astral-sh/setup-uv@v4` with `enable-cache: true` |
+| Install Python | `uv python install ${{ matrix.python-version }}` |
+| Sync deps | `uv sync --all-extras` |
+| Run tests | `uv run pytest` |
+
+| Matrix Strategy | Config |
+|-----------------|--------|
+| Python versions | `python-version: ["3.11", "3.12", "3.13"]` |
+| Operating systems | `os: [ubuntu-latest, windows-latest, macos-latest]` |
+| Fail fast | `fail-fast: false` for full coverage |
+
+| Optimization | Technique |
+|--------------|-----------|
+| Caching | `enable-cache: true` with setup-uv |
+| Parallel jobs | Split lint/test/build |
+| Concurrency | `cancel-in-progress: true` |
+| Path filters | `paths: ["src/**", "tests/**"]` |
+
+## When to Use This Skill
+
+Use for **CI/CD pipelines**:
+- Setting up GitHub Actions for Python projects
+- Caching dependencies for fast builds
+- Matrix testing across Python versions
+- Publishing packages to PyPI
+- Code coverage and security scanning
+
+**Related skills:**
+- For package management: see `python-package-management`
+- For testing: see `python-testing`
+- For type checking: see `python-type-hints`
+
+---
+
 # Python GitHub Actions Optimization
 
 ## Overview

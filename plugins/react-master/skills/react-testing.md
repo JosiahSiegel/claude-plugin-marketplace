@@ -1,3 +1,45 @@
+---
+name: react-testing
+description: Complete React testing system. PROACTIVELY activate for: (1) Vitest/Jest setup and configuration, (2) React Testing Library patterns, (3) Component testing with userEvent, (4) Custom hook testing with renderHook, (5) Mocking modules and components, (6) Async component testing, (7) Context and provider testing, (8) Accessibility testing with jest-axe. Provides: Test setup, query priority, user simulation, mock patterns, integration testing. Ensures reliable tests that focus on user behavior.
+---
+
+## Quick Reference
+
+| Tool | Purpose | Install |
+|------|---------|---------|
+| Vitest | Test runner | `npm i -D vitest` |
+| @testing-library/react | Component testing | `npm i -D @testing-library/react` |
+| @testing-library/user-event | User simulation | `npm i -D @testing-library/user-event` |
+| jest-axe | Accessibility testing | `npm i -D jest-axe` |
+
+| Query | When to Use |
+|-------|-------------|
+| `getByRole` | Best - accessible elements |
+| `getByLabelText` | Form inputs |
+| `getByText` | Static text |
+| `getByTestId` | Last resort |
+
+| Pattern | Example |
+|---------|---------|
+| Setup user | `const user = userEvent.setup()` |
+| Click | `await user.click(button)` |
+| Type | `await user.type(input, 'text')` |
+| Wait for async | `await waitFor(() => expect(...))` |
+
+## When to Use This Skill
+
+Use for **React testing implementation**:
+- Setting up Vitest or Jest with React
+- Writing component tests with Testing Library
+- Testing forms, async operations, hooks
+- Mocking API calls and modules
+- Testing components with context/providers
+- Adding accessibility tests
+
+**For component patterns**: see `react-patterns`
+
+---
+
 # React Testing Guide
 
 ## Testing Tools

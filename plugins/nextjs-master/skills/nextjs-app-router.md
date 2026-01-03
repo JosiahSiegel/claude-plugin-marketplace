@@ -1,3 +1,43 @@
+---
+name: nextjs-app-router
+description: Complete Next.js App Router fundamentals system. PROACTIVELY activate for: (1) App directory structure and conventions, (2) Layouts and templates, (3) Loading and error boundaries, (4) Route groups and organization, (5) Parallel routes setup, (6) Metadata and SEO, (7) Server vs Client Components, (8) Navigation patterns. Provides: File conventions, layout nesting, streaming UI, error handling, metadata templates. Ensures correct App Router architecture with proper component boundaries.
+---
+
+## Quick Reference
+
+| Convention | File | Purpose |
+|------------|------|---------|
+| Page | `page.tsx` | Route UI (required for route) |
+| Layout | `layout.tsx` | Shared UI (persists across navigations) |
+| Loading | `loading.tsx` | Loading UI with Suspense |
+| Error | `error.tsx` | Error boundary (must be 'use client') |
+| Not Found | `not-found.tsx` | 404 UI |
+| Template | `template.tsx` | Re-renders on navigation |
+
+| Pattern | Syntax | Example |
+|---------|--------|---------|
+| Dynamic Route | `[slug]` | `/blog/[slug]/page.tsx` |
+| Catch-all | `[...slug]` | `/docs/[...slug]/page.tsx` |
+| Optional Catch-all | `[[...slug]]` | `/shop/[[...slug]]/page.tsx` |
+| Route Group | `(name)` | `/(marketing)/about/page.tsx` |
+| Parallel Route | `@slot` | `/@analytics/page.tsx` |
+
+## When to Use This Skill
+
+Use for **App Router fundamentals**:
+- Setting up new Next.js 15 projects with App Router
+- Understanding file-based routing conventions
+- Creating layouts that persist across navigation
+- Implementing loading states and error boundaries
+- Organizing routes with groups
+
+**Related skills:**
+- For data fetching: see `nextjs-data-fetching`
+- For advanced routing: see `nextjs-routing-advanced`
+- For caching strategies: see `nextjs-caching`
+
+---
+
 # Next.js App Router Fundamentals
 
 ## Project Structure

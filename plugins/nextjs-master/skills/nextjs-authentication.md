@@ -1,3 +1,47 @@
+---
+name: nextjs-authentication
+description: Complete Next.js authentication system. PROACTIVELY activate for: (1) NextAuth.js (Auth.js) setup, (2) OAuth providers (GitHub, Google), (3) Credentials provider, (4) Session management (JWT/database), (5) Protected routes with middleware, (6) Role-based access control (RBAC), (7) Login/registration forms, (8) Authorization patterns, (9) Type augmentation for sessions. Provides: Auth.js configuration, middleware protection, session hooks, RBAC patterns, login forms. Ensures secure authentication with proper session handling.
+---
+
+## Quick Reference
+
+| Auth.js Export | Purpose | Usage |
+|----------------|---------|-------|
+| `auth` | Get session (server) | `const session = await auth()` |
+| `signIn` | Trigger sign in | `await signIn('github')` |
+| `signOut` | Trigger sign out | `await signOut()` |
+| `handlers` | API route handlers | `export const { GET, POST } = handlers` |
+
+| Session Access | Location | Code |
+|----------------|----------|------|
+| Server Component | Server | `const session = await auth()` |
+| Client Component | Client | `const { data: session } = useSession()` |
+| Middleware | Edge | `req.auth` |
+| Server Action | Server | `const session = await auth()` |
+
+| Protection Pattern | Location | Method |
+|--------------------|----------|--------|
+| Route-level | `middleware.ts` | Check `req.auth` |
+| Page-level | Server Component | `if (!session) redirect()` |
+| Component-level | Client | `useSession()` + guard |
+| Action-level | Server Action | `await auth()` check |
+
+## When to Use This Skill
+
+Use for **authentication and authorization**:
+- Setting up NextAuth.js (Auth.js v5)
+- Adding OAuth providers (GitHub, Google, etc.)
+- Implementing credentials-based login
+- Protecting routes with middleware
+- Role-based access control
+
+**Related skills:**
+- For middleware patterns: see `nextjs-middleware`
+- For Server Actions: see `nextjs-server-actions`
+- For form handling: see `nextjs-server-actions`
+
+---
+
 # Next.js Authentication
 
 ## NextAuth.js (Auth.js)

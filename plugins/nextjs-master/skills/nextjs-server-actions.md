@@ -1,3 +1,45 @@
+---
+name: nextjs-server-actions
+description: Complete Next.js Server Actions system. PROACTIVELY activate for: (1) Defining Server Actions with 'use server', (2) Form handling with actions, (3) useActionState for form state, (4) useFormStatus for pending states, (5) Optimistic updates with useOptimistic, (6) Validation with Zod, (7) Authorization in actions, (8) File uploads, (9) Revalidation after mutations. Provides: Action patterns, form integration, validation, optimistic UI, error handling. Ensures secure server mutations with proper validation and UX.
+---
+
+## Quick Reference
+
+| Pattern | Code | Purpose |
+|---------|------|---------|
+| Inline action | `async function action() { 'use server'; }` | Define in component |
+| Actions file | `'use server'` at file top | Dedicated actions file |
+| Form action | `<form action={serverAction}>` | Native form integration |
+| Bind args | `action.bind(null, id)` | Pass additional args |
+
+| Hook | Import | Purpose |
+|------|--------|---------|
+| `useActionState` | `react` | Form state + pending |
+| `useFormStatus` | `react-dom` | Pending state in children |
+| `useOptimistic` | `react` | Optimistic UI updates |
+
+| Revalidation | Function | Scope |
+|--------------|----------|-------|
+| `revalidatePath('/posts')` | Path-based | Specific route |
+| `revalidateTag('posts')` | Tag-based | All tagged fetches |
+| `redirect('/success')` | Navigation | After mutation |
+
+## When to Use This Skill
+
+Use for **server-side mutations**:
+- Form submissions without API routes
+- Database mutations (create, update, delete)
+- File uploads to server
+- Implementing optimistic updates
+- Form validation with error display
+
+**Related skills:**
+- For data fetching: see `nextjs-data-fetching`
+- For caching/revalidation: see `nextjs-caching`
+- For authentication in actions: see `nextjs-authentication`
+
+---
+
 # Next.js Server Actions
 
 ## Defining Server Actions

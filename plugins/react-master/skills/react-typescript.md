@@ -1,3 +1,46 @@
+---
+name: react-typescript
+description: Complete React TypeScript system. PROACTIVELY activate for: (1) Component props typing, (2) Event handler types, (3) Hooks with TypeScript, (4) Generic components, (5) forwardRef typing, (6) Context with type safety, (7) Utility types (Partial, Pick, Omit), (8) Discriminated unions for state. Provides: Props interfaces, event types, generic patterns, type-safe context, polymorphic components. Ensures type-safe React with proper TypeScript patterns.
+---
+
+## Quick Reference
+
+| Type | Usage | Example |
+|------|-------|---------|
+| Props interface | Component props | `interface ButtonProps { variant: 'primary' }` |
+| `ReactNode` | Children | `children: ReactNode` |
+| `ChangeEvent` | Input change | `(e: ChangeEvent<HTMLInputElement>)` |
+| `FormEvent` | Form submit | `(e: FormEvent<HTMLFormElement>)` |
+| `MouseEvent` | Click | `(e: MouseEvent<HTMLButtonElement>)` |
+
+| Pattern | Example |
+|---------|---------|
+| Extend HTML props | `extends ButtonHTMLAttributes<HTMLButtonElement>` |
+| Generic component | `function List<T>({ items }: { items: T[] })` |
+| forwardRef | `forwardRef<HTMLInputElement, Props>` |
+| Discriminated union | `{ status: 'success'; data: T } \| { status: 'error'; error: Error }` |
+
+| Utility Type | Purpose |
+|--------------|---------|
+| `Partial<T>` | All props optional |
+| `Pick<T, K>` | Select specific props |
+| `Omit<T, K>` | Exclude specific props |
+| `ComponentProps<'button'>` | Get element props |
+
+## When to Use This Skill
+
+Use for **React TypeScript integration**:
+- Typing component props and children
+- Handling events with proper types
+- Building generic reusable components
+- Creating type-safe context and hooks
+- Using utility types for prop manipulation
+- Implementing polymorphic components
+
+**For React basics**: see `react-fundamentals-19`
+
+---
+
 # React with TypeScript
 
 ## Component Props

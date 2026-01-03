@@ -1,3 +1,49 @@
+---
+name: fal-image-to-image
+description: Complete fal.ai image-to-image system. PROACTIVELY activate for: (1) FLUX image-to-image transformation, (2) ControlNet (canny, depth, pose), (3) Inpainting with masks, (4) Upscaling (ESRGAN, Clarity), (5) Background removal (BiRefNet, RemBG), (6) Face restoration (GFPGAN, CodeFormer), (7) IP-Adapter style transfer, (8) Strength parameter tuning. Provides: Transformation endpoints, mask formats, ControlNet types, upscaling options. Ensures proper image editing and enhancement workflows.
+---
+
+## Quick Reference
+
+| Task | Endpoint | Key Parameter |
+|------|----------|---------------|
+| Transform | `fal-ai/flux/dev/image-to-image` | `strength: 0-1` |
+| Inpaint | `fal-ai/flux/dev/inpainting` | `mask_url` |
+| ControlNet | `fal-ai/flux-controlnet-union` | `control_type` |
+| Upscale | `fal-ai/clarity-upscaler` | `scale_factor: 2-4` |
+| Remove BG | `fal-ai/birefnet` | - |
+| Face fix | `fal-ai/codeformer` | `fidelity: 0-1` |
+
+| Strength Value | Effect |
+|----------------|--------|
+| 0.2-0.3 | Subtle style hint |
+| 0.5-0.7 | Moderate transform |
+| 0.8-1.0 | Full regeneration |
+
+| ControlNet Type | Use Case |
+|-----------------|----------|
+| `canny` | Edge guidance |
+| `depth` | 3D structure |
+| `pose` | Human pose |
+| `tile` | Detail enhancement |
+
+## When to Use This Skill
+
+Use for **image editing and transformation**:
+- Style transfer while preserving structure
+- Inpainting to edit specific regions
+- ControlNet for guided generation
+- Upscaling low-resolution images
+- Removing backgrounds
+- Restoring faces in old photos
+
+**Related skills:**
+- For text-to-image: see `fal-text-to-image`
+- For image-to-video: see `fal-image-to-video`
+- For model selection: see `fal-model-guide`
+
+---
+
 # fal.ai Image-to-Image Models
 
 Complete reference for all image transformation, editing, and enhancement models on fal.ai.

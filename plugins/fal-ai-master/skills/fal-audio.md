@@ -1,3 +1,49 @@
+---
+name: fal-audio
+description: Complete fal.ai audio system. PROACTIVELY activate for: (1) Whisper speech-to-text, (2) Transcription with timestamps, (3) Translation to English, (4) F5-TTS voice cloning, (5) ElevenLabs premium TTS, (6) Kokoro multi-language TTS, (7) XTTS open-source cloning, (8) Subtitle generation (SRT), (9) Audio file formats. Provides: STT/TTS endpoints, language codes, voice cloning setup, timestamp formatting. Ensures accurate transcription and natural speech synthesis.
+---
+
+## Quick Reference
+
+| STT Model | Endpoint | Speed | Accuracy |
+|-----------|----------|-------|----------|
+| Whisper | `fal-ai/whisper` | Medium | Highest |
+| Whisper Turbo | `fal-ai/whisper-turbo` | Fast | High |
+| Whisper Large v3 | `fal-ai/whisper-large-v3` | Slow | Highest |
+
+| TTS Model | Endpoint | Voice Clone | Quality |
+|-----------|----------|-------------|---------|
+| F5-TTS | `fal-ai/f5-tts` | Yes | High |
+| ElevenLabs | `fal-ai/elevenlabs/tts` | Via API | Highest |
+| Kokoro | `fal-ai/kokoro/american-english` | No | Good |
+| XTTS | `fal-ai/xtts` | Yes | Good |
+
+| Whisper Task | Use Case |
+|--------------|----------|
+| `transcribe` | Same language text |
+| `translate` | Non-English → English |
+
+| Whisper Parameter | Value |
+|-------------------|-------|
+| `chunk_level` | `"segment"` for timestamps |
+| `language` | ISO code (e.g., `"en"`) |
+
+## When to Use This Skill
+
+Use for **audio processing**:
+- Transcribing audio/video to text
+- Generating subtitles with timestamps
+- Translating speech to English
+- Cloning voices from reference audio
+- Generating natural speech from text
+
+**Related skills:**
+- For video with audio: see `fal-text-to-video`
+- For API integration: see `fal-api-reference`
+- For model comparison: see `fal-model-guide`
+
+---
+
 # fal.ai Audio Models
 
 Complete reference for speech-to-text (STT) and text-to-speech (TTS) models on fal.ai.

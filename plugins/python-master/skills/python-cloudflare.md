@@ -1,3 +1,51 @@
+---
+name: python-cloudflare
+description: Complete Python Cloudflare deployment system. PROACTIVELY activate for: (1) Python Workers with Pyodide, (2) FastAPI on Workers, (3) Cloudflare Containers for heavy compute, (4) Service bindings (RPC), (5) Environment variables in Workers, (6) Cold start optimization, (7) Workflows for durable execution, (8) GPU containers for AI. Provides: Worker code patterns, wrangler config, Dockerfile templates, FastAPI integration. Ensures edge deployment with proper architecture choices.
+---
+
+## Quick Reference
+
+| Platform | Cold Start | Packages | Best For |
+|----------|------------|----------|----------|
+| Workers (Pyodide) | ~50ms | Limited | API endpoints |
+| Containers | ~10s | Any | Heavy compute, AI |
+
+| Worker Pattern | Code |
+|----------------|------|
+| Basic handler | `class Default(WorkerEntrypoint):` |
+| FastAPI | `await asgi.fetch(app, request, self.env)` |
+| Env vars | `self.env.API_KEY` |
+| Service binding | `await self.env.WORKER_B.method()` |
+
+| Command | Purpose |
+|---------|---------|
+| `pywrangler init` | Create Python Worker |
+| `pywrangler dev` | Local development |
+| `pywrangler deploy` | Deploy to Cloudflare |
+
+| Container vs Worker | Recommendation |
+|---------------------|----------------|
+| Simple API | Worker |
+| pandas/numpy | Container |
+| GPU/AI | Container |
+| <50ms latency | Worker |
+
+## When to Use This Skill
+
+Use for **Cloudflare edge deployment**:
+- Deploying Python APIs to Cloudflare Workers
+- Running FastAPI on Cloudflare edge
+- Using Containers for heavy compute
+- Setting up service-to-service RPC
+- Optimizing cold starts
+
+**Related skills:**
+- For FastAPI: see `python-fastapi`
+- For async patterns: see `python-asyncio`
+- For Docker: see `python-github-actions`
+
+---
+
 # Python on Cloudflare (Workers & Containers)
 
 ## Overview

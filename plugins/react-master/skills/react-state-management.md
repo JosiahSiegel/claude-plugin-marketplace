@@ -1,3 +1,40 @@
+---
+name: react-state-management
+description: Complete React state management system. PROACTIVELY activate for: (1) Context API patterns and optimization, (2) Zustand store setup and usage, (3) Jotai atomic state, (4) TanStack Query (React Query) for server state, (5) SWR data fetching, (6) useState vs useReducer decisions, (7) State normalization, (8) Avoiding prop drilling. Provides: Store configuration, context optimization, server state caching, optimistic updates, infinite queries. Ensures scalable state architecture with proper tool selection.
+---
+
+## Quick Reference
+
+| Library | Best For | Install |
+|---------|----------|---------|
+| Context | Small apps, themes | Built-in |
+| Zustand | Simple global state | `npm i zustand` |
+| Jotai | Atomic/granular state | `npm i jotai` |
+| TanStack Query | Server state/caching | `npm i @tanstack/react-query` |
+| SWR | Data fetching | `npm i swr` |
+
+| Scenario | Recommended |
+|----------|-------------|
+| Simple local state | `useState` |
+| Complex local state | `useReducer` |
+| Shared state (small app) | Context + useReducer |
+| Shared state (large app) | Zustand or Jotai |
+| Server state | TanStack Query or SWR |
+
+## When to Use This Skill
+
+Use for **state management decisions**:
+- Choosing between state management solutions
+- Setting up Zustand, Jotai, or Context stores
+- Configuring TanStack Query for server state
+- Implementing optimistic updates
+- Normalizing complex state structures
+- Avoiding unnecessary re-renders
+
+**For React hooks basics**: see `react-hooks-complete`
+
+---
+
 # React State Management
 
 ## Built-in State Management

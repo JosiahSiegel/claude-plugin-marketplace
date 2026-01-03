@@ -1,3 +1,44 @@
+---
+name: nextjs-data-fetching
+description: Complete Next.js data fetching system. PROACTIVELY activate for: (1) Server Component data fetching, (2) Parallel and sequential fetching, (3) Streaming with Suspense, (4) Route Handlers (API routes), (5) Client-side fetching with SWR/TanStack Query, (6) generateStaticParams for static generation, (7) Revalidation strategies, (8) Error handling for data. Provides: Fetch patterns, caching options, streaming UI, API route handlers, client fetching setup. Ensures optimal data loading with proper caching and error handling.
+---
+
+## Quick Reference
+
+| Pattern | Code | Purpose |
+|---------|------|---------|
+| Server fetch | `await fetch(url)` | Cached by default |
+| No cache | `{ cache: 'no-store' }` | Always fresh |
+| Revalidate | `{ next: { revalidate: 60 } }` | Time-based refresh |
+| Tags | `{ next: { tags: ['posts'] } }` | Tag-based invalidation |
+
+| Config | Value | Effect |
+|--------|-------|--------|
+| `dynamic` | `'force-dynamic'` | Always SSR |
+| `revalidate` | `60` | ISR every 60s |
+| `fetchCache` | `'force-no-store'` | No caching |
+
+| Client Library | Hook | Use Case |
+|----------------|------|----------|
+| SWR | `useSWR(key, fetcher)` | Simple client fetching |
+| TanStack Query | `useQuery({ queryKey, queryFn })` | Complex state/mutations |
+
+## When to Use This Skill
+
+Use for **data loading patterns**:
+- Fetching data in Server Components
+- Setting up parallel data fetching with Promise.all
+- Implementing streaming with Suspense boundaries
+- Creating API routes with Route Handlers
+- Client-side data fetching and mutations
+
+**Related skills:**
+- For caching strategies: see `nextjs-caching`
+- For Server Actions (mutations): see `nextjs-server-actions`
+- For App Router basics: see `nextjs-app-router`
+
+---
+
 # Next.js Data Fetching
 
 ## Server Components Data Fetching
