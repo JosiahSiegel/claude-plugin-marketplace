@@ -1,0 +1,68 @@
+{
+  "name": "modal-master",
+  "version": "1.0.0",
+  "description": "Comprehensive Modal.com serverless cloud platform expertise. GPU-accelerated Python functions, web endpoints, scheduled tasks, and AI/ML deployments with automatic scaling and per-second billing.",
+  "author": "Claude Plugin Marketplace",
+  "license": "MIT",
+  "keywords": [
+    "modal",
+    "serverless",
+    "gpu",
+    "cloud",
+    "python",
+    "ml",
+    "ai",
+    "deployment",
+    "containers",
+    "fastapi",
+    "scheduling",
+    "cron"
+  ],
+  "repository": "https://github.com/anthropics/claude-code-marketplace",
+  "agents": [
+    {
+      "name": "modal-expert",
+      "path": "agents/modal-expert.md",
+      "description": "Expert agent for Modal.com serverless cloud platform. Covers GPU configuration, web endpoints, scheduling, image building, volumes, secrets, parallel processing, and deployment best practices."
+    }
+  ],
+  "slashCommands": [
+    {
+      "name": "modal-setup",
+      "path": "commands/modal-setup.md",
+      "description": "Initialize a Modal project with proper structure, configuration, and best practices"
+    },
+    {
+      "name": "modal-deploy",
+      "path": "commands/modal-deploy.md",
+      "description": "Deploy Modal application with environment configuration and CI/CD setup"
+    },
+    {
+      "name": "modal-gpu",
+      "path": "commands/modal-gpu.md",
+      "description": "Configure GPU functions with optimal settings, fallbacks, and cost optimization"
+    },
+    {
+      "name": "modal-web",
+      "path": "commands/modal-web.md",
+      "description": "Create web endpoints using FastAPI, ASGI, WSGI, or custom web servers"
+    },
+    {
+      "name": "modal-schedule",
+      "path": "commands/modal-schedule.md",
+      "description": "Set up scheduled and cron functions with timezone support"
+    },
+    {
+      "name": "modal-debug",
+      "path": "commands/modal-debug.md",
+      "description": "Debug Modal issues including container failures, GPU errors, and deployment problems"
+    }
+  ],
+  "skills": [
+    {
+      "name": "modal-knowledge",
+      "path": "skills/modal-knowledge.md",
+      "description": "Comprehensive Modal.com platform knowledge covering all features, pricing, and best practices"
+    }
+  ]
+}

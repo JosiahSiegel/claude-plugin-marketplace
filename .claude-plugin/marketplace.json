@@ -618,6 +618,39 @@
         "ai-models",
         "inference"
       ]
+    },
+    {
+      "name": "modal-master",
+      "source": "./plugins/modal-master",
+      "description": "Comprehensive Modal.com serverless cloud platform expertise. PROACTIVELY activate for: (1) ANY Modal.com task, (2) GPU-accelerated Python functions (T4, L4, A10G, A100, H100, H200, B200), (3) Web endpoints (FastAPI, ASGI, WSGI, WebSocket), (4) Scheduled/cron functions with timezone support, (5) Container image building and optimization, (6) Volumes, secrets, and storage, (7) Parallel processing (map, starmap, spawn), (8) ML model inference servers, (9) CI/CD deployment workflows, (10) Cost optimization and GPU selection. Provides: Complete Modal API reference, all GPU types with pricing, container image patterns, web endpoint patterns (FastAPI, Flask), scheduling with Cron/Period, volume and secret management, parallel execution patterns, class lifecycle (@modal.enter/@exit), deployment and CI/CD, debugging and troubleshooting, cost optimization strategies, production-ready code patterns.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "modal",
+        "modal.com",
+        "serverless",
+        "gpu",
+        "cloud",
+        "python",
+        "ml",
+        "ai",
+        "deployment",
+        "containers",
+        "fastapi",
+        "scheduling",
+        "cron",
+        "inference",
+        "training",
+        "vllm",
+        "llm",
+        "h100",
+        "a100",
+        "web-endpoints",
+        "parallel",
+        "batch-processing"
+      ]
     }
   ]
 }

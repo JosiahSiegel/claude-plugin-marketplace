@@ -1,0 +1,52 @@
+{
+  "name": "modal-master",
+  "version": "1.0.0",
+  "description": "Comprehensive Modal.com serverless cloud platform expertise. GPU-accelerated Python functions, web endpoints, scheduled tasks, and AI/ML deployments with automatic scaling and per-second billing.",
+  "author": "Josiah Siegel",
+  "license": "MIT",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/modal-master",
+  "keywords": [
+    "modal",
+    "serverless",
+    "gpu",
+    "cloud",
+    "python",
+    "ml",
+    "ai",
+    "deployment",
+    "containers",
+    "fastapi",
+    "scheduling",
+    "cron",
+    "inference",
+    "training",
+    "vllm",
+    "llm",
+    "h100",
+    "a100",
+    "web-endpoints"
+  ],
+  "categories": [
+    "cloud",
+    "serverless",
+    "ai",
+    "machine-learning",
+    "deployment"
+  ],
+  "engines": {
+    "claude-code": ">=1.0.0"
+  },
+  "files": [
+    "plugin.json",
+    "agents/modal-expert.md",
+    "commands/modal-setup.md",
+    "commands/modal-deploy.md",
+    "commands/modal-gpu.md",
+    "commands/modal-web.md",
+    "commands/modal-schedule.md",
+    "commands/modal-debug.md",
+    "skills/modal-knowledge.md",
+    "README.md"
+  ]
+}
