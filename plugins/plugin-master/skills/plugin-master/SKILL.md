@@ -28,6 +28,67 @@ license: MIT
 | `version` | String | `"1.0.0"` |
 | `keywords` | Array | `["keyword1", "keyword2"]` |
 
+## 🚨 CRITICAL: Plugin Directory Structure
+
+**The plugin.json MUST be inside `.claude-plugin/` subdirectory - NOT in the plugin root!**
+
+### ✅ CORRECT Structure
+```
+plugins/your-plugin-name/
+├── .claude-plugin/
+│   └── plugin.json          # ← MUST be HERE inside .claude-plugin/
+├── agents/
+│   └── your-agent.md
+├── commands/
+│   └── your-command.md
+├── skills/
+│   └── your-skill.md
+├── README.md
+└── marketplace.json
+```
+
+### ❌ WRONG Structure
+```
+plugins/your-plugin-name/
+├── plugin.json              # ← WRONG! Not in .claude-plugin/
+├── agents/
+└── commands/
+```
+
+### 🚨 Plugin.json FORBIDDEN Keys
+
+**The following keys are NOT allowed in plugin.json:**
+- ❌ `"agents": [...]` - agents are auto-discovered from `agents/*.md`
+- ❌ `"skills": [...]` - skills are auto-discovered from `skills/*.md`
+- ❌ `"slashCommands": [...]` - commands are auto-discovered from `commands/*.md`
+
+**Only include metadata fields:**
+```json
+{
+  "name": "plugin-name",
+  "version": "1.0.0",
+  "description": "...",
+  "author": { "name": "...", "email": "..." },
+  "homepage": "...",
+  "repository": "...",
+  "license": "MIT",
+  "keywords": ["..."]
+}
+```
+
+### 🚨 Author MUST Be Object
+
+```json
+// ❌ WRONG - will cause validation error
+"author": "Author Name"
+
+// ✅ CORRECT
+"author": {
+  "name": "Author Name",
+  "email": "author@example.com"
+}
+```
+
 ## When to Use This Skill
 
 Use for **plugin development tasks**:

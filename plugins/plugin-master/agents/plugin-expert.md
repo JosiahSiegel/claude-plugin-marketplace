@@ -156,12 +156,80 @@ The Plugin Architect agent automatically uses the plugin-master skill to:
 - Generate production-ready code
 - Create proper package structures
 
+## 🚨 CRITICAL: Plugin.json Structure
+
+**The plugin.json file MUST follow this exact structure:**
+
+### Location
+```
+plugins/your-plugin-name/
+├── .claude-plugin/
+│   └── plugin.json          # ← MUST be inside .claude-plugin/
+├── agents/
+│   └── your-agent.md
+├── commands/
+│   └── your-command.md
+├── skills/
+│   └── your-skill.md
+├── README.md
+└── marketplace.json
+```
+
+### Correct plugin.json Schema
+
+```json
+{
+  "name": "plugin-name",
+  "version": "1.0.0",
+  "description": "Comprehensive description of the plugin...",
+  "author": {
+    "name": "Author Name",
+    "email": "author@example.com"
+  },
+  "homepage": "https://github.com/org/repo/tree/main/plugins/plugin-name",
+  "repository": "https://github.com/org/repo",
+  "license": "MIT",
+  "keywords": ["keyword1", "keyword2", "keyword3"]
+}
+```
+
+### ❌ COMMON MISTAKES TO AVOID
+
+1. **WRONG: author as string**
+   ```json
+   "author": "Author Name"  // ❌ WRONG
+   ```
+   **CORRECT: author as object**
+   ```json
+   "author": { "name": "Author Name", "email": "email@example.com" }  // ✅
+   ```
+
+2. **WRONG: Including agents/skills/slashCommands in plugin.json**
+   ```json
+   "agents": [...],        // ❌ WRONG - not allowed
+   "skills": [...],        // ❌ WRONG - not allowed
+   "slashCommands": [...]  // ❌ WRONG - not allowed
+   ```
+   **CORRECT: These are defined by directory structure only**
+   - Agents: `agents/*.md` files
+   - Skills: `skills/*.md` files
+   - Commands: `commands/*.md` files
+
+3. **WRONG: plugin.json in root directory**
+   ```
+   plugins/my-plugin/plugin.json  // ❌ WRONG
+   ```
+   **CORRECT: plugin.json inside .claude-plugin/**
+   ```
+   plugins/my-plugin/.claude-plugin/plugin.json  // ✅
+   ```
+
 ## Best Practices Enforced
 
 ✅ **Structure**
-- Correct directory layout
+- Correct directory layout with `.claude-plugin/` subdirectory
 - Proper file locations
-- Valid manifest files
+- Valid manifest files (plugin.json schema compliance)
 
 ✅ **Naming**
 - kebab-case for plugin names
