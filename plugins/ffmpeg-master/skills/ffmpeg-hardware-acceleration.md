@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-hardware-acceleration
-description: Complete GPU-accelerated encoding/decoding system. PROACTIVELY activate for: (1) NVIDIA NVENC/NVDEC encoding, (2) Intel Quick Sync Video (QSV), (3) AMD AMF encoding, (4) Apple VideoToolbox, (5) Linux VAAPI setup, (6) Vulkan Video (FFmpeg 7.1+/8.0), (7) GPU pipeline optimization, (8) Hardware decoder + encoder chains, (9) Docker GPU containers, (10) Performance benchmarking. Provides: Platform-specific commands, preset comparisons, quality tuning, full GPU pipeline examples, troubleshooting guides. Ensures: Maximum encoding speed with optimal quality using GPU acceleration.
+description: Complete GPU-accelerated encoding/decoding system for FFmpeg 7.1 LTS and 8.0 Huffman. PROACTIVELY activate for: (1) NVIDIA NVENC/NVDEC encoding, (2) Intel Quick Sync Video (QSV), (3) AMD AMF encoding, (4) Apple VideoToolbox, (5) Linux VAAPI setup, (6) Vulkan Video 8.0 (FFv1, AV1, VP9, ProRes RAW), (7) VVC/H.266 hardware decoding (VAAPI/QSV), (8) GPU pipeline optimization with pad_cuda, (9) Docker GPU containers, (10) Performance benchmarking. Provides: Platform-specific commands, preset comparisons, quality tuning, full GPU pipeline examples, Vulkan compute codecs, VVC decoding, troubleshooting guides. Ensures: Maximum encoding speed with optimal quality using GPU acceleration.
 ---
 
 ## CRITICAL GUIDELINES
@@ -138,6 +138,16 @@ ffmpeg -y -vsync 0 \
 ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i main.mp4 \
   -hwaccel cuda -hwaccel_output_format cuda -i overlay.mp4 \
   -filter_complex "[0:v][1:v]overlay_cuda=10:10" \
+  -c:v h264_nvenc output.mp4
+
+# GPU padding with pad_cuda (FFmpeg 8.0+)
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i input.mp4 \
+  -vf "pad_cuda=1920:1080:(ow-iw)/2:(oh-ih)/2:black" \
+  -c:v h264_nvenc output.mp4
+
+# Letterbox with pad_cuda
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i input.mp4 \
+  -vf "scale_cuda=1920:-2,pad_cuda=1920:1080:(ow-iw)/2:(oh-ih)/2" \
   -c:v h264_nvenc output.mp4
 ```
 
@@ -401,14 +411,41 @@ ffmpeg -hwaccel vaapi \
 
 ### VVC VAAPI Decoding (FFmpeg 8.0+)
 
+FFmpeg 8.0 adds VVC/H.266 hardware decoding on Intel and AMD GPUs via VAAPI.
+
 ```bash
 # Hardware VVC/H.266 decoding
 ffmpeg -hwaccel vaapi \
   -hwaccel_device /dev/dri/renderD128 \
-  -c:v vvc \
+  -hwaccel_output_format vaapi \
   -i input.vvc \
+  -c:v h264_vaapi \
+  output.mp4
+
+# VVC decode + transcode to H.265
+ffmpeg -hwaccel vaapi \
+  -hwaccel_device /dev/dri/renderD128 \
+  -hwaccel_output_format vaapi \
+  -i input.mkv \
+  -c:v hevc_vaapi \
+  -b:v 4M \
+  output.mp4
+
+# VVC with Screen Content Coding (SCC) support
+# FFmpeg 8.0 adds full SCC support including:
+# - IBC (Inter Block Copy)
+# - Palette Mode
+# - ACT (Adaptive Color Transform)
+ffmpeg -hwaccel vaapi \
+  -hwaccel_device /dev/dri/renderD128 \
+  -i screen_recording.vvc \
   output.mp4
 ```
+
+**VVC VAAPI Requirements:**
+- Intel Xe2 graphics (Lunar Lake) or newer for full VVC support
+- FFmpeg 8.0 or later
+- Intel media driver with VVC support
 
 ## Apple VideoToolbox
 
@@ -465,17 +502,22 @@ ffmpeg -hwaccel videotoolbox \
 ## Vulkan Video (FFmpeg 7.1+/8.0)
 
 ### Overview
-Vulkan Video provides cross-platform GPU acceleration using Vulkan compute shaders.
+Vulkan Video provides cross-platform GPU acceleration using Vulkan compute shaders. Unlike proprietary hardware accelerators, Vulkan codecs are based on compute shaders and work on any implementation of Vulkan 1.3.
 
 ### FFmpeg 7.1 Vulkan Features
 - H.264 Vulkan encoding
 - H.265/HEVC Vulkan encoding
 
-### FFmpeg 8.0 Vulkan Features
-- AV1 Vulkan encoding
-- VP9 Vulkan decoding
-- FFv1 Vulkan encode/decode
-- ProRes RAW Vulkan decode
+### FFmpeg 8.0 Vulkan Features (New)
+- **AV1 Vulkan encoding** - GPU-accelerated AV1 via compute shaders
+- **VP9 Vulkan decoding** - Hardware-accelerated VP9 decode
+- **FFv1 Vulkan encode/decode** - Lossless codec for archival/capture
+- **ProRes RAW Vulkan decode** - Apple ProRes RAW hardware decode
+
+**Benefits of Vulkan Compute Codecs:**
+- Cross-platform: Same code works on AMD, Intel, and NVIDIA
+- No vendor lock-in: Works with any Vulkan 1.3 driver
+- Ideal for: Lossless screen capture, high-throughput archival, professional workflows
 
 ### Basic Vulkan Encoding
 
@@ -487,12 +529,25 @@ ffmpeg -init_hw_device vulkan \
   -b:v 5M \
   output.mp4
 
+# H.265/HEVC Vulkan
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -c:v hevc_vulkan \
+  -b:v 4M \
+  output.mp4
+
 # AV1 Vulkan (FFmpeg 8.0+)
 ffmpeg -init_hw_device vulkan \
   -i input.mp4 \
   -c:v av1_vulkan \
   -b:v 3M \
   output.mp4
+
+# FFv1 Vulkan Lossless (FFmpeg 8.0+)
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -c:v ffv1_vulkan \
+  output.mkv
 ```
 
 ### Full Vulkan Pipeline
@@ -508,6 +563,50 @@ ffmpeg -init_hw_device vulkan=vk \
   -c:v h264_vulkan \
   output.mp4
 ```
+
+### VP9 Vulkan Decoding (FFmpeg 8.0+)
+
+```bash
+# Hardware decode VP9 with Vulkan
+ffmpeg -init_hw_device vulkan \
+  -hwaccel vulkan \
+  -hwaccel_output_format vulkan \
+  -i input.webm \
+  -c:v h264_vulkan \
+  output.mp4
+```
+
+### ProRes RAW Vulkan Decoding (FFmpeg 8.0+)
+
+```bash
+# Hardware decode ProRes RAW with Vulkan
+ffmpeg -init_hw_device vulkan \
+  -hwaccel vulkan \
+  -i input.mov \
+  -c:v libx264 \
+  output.mp4
+```
+
+### Lossless Screen Capture with FFv1 Vulkan
+
+```bash
+# High-throughput lossless capture (Linux X11)
+ffmpeg -init_hw_device vulkan \
+  -f x11grab -framerate 60 -i :0.0 \
+  -c:v ffv1_vulkan \
+  screen_capture.mkv
+
+# Lossless screen recording (Windows)
+ffmpeg -init_hw_device vulkan \
+  -f gdigrab -framerate 60 -i desktop \
+  -c:v ffv1_vulkan \
+  screen_capture.mkv
+```
+
+### Upcoming Vulkan Codecs
+The next minor update will add:
+- ProRes (encode and decode)
+- VC-2 (encode and decode)
 
 ## Docker with Hardware Acceleration
 

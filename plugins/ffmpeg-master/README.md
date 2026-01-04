@@ -29,7 +29,9 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 - **ffmpeg-fundamentals-2025** - FFmpeg 7.1/8.0 features, command syntax, codecs, and essential operations
 - **ffmpeg-hardware-acceleration** - NVIDIA NVENC, Intel QSV, AMD AMF, VAAPI, Vulkan Video guides
 - **ffmpeg-docker-containers** - Docker images, GPU support, Kubernetes patterns
+- **ffmpeg-modal-containers** - Modal.com serverless video processing, GPU/CPU containers, parallel processing
 - **ffmpeg-webassembly-workers** - ffmpeg.wasm, Cloudflare Workers limitations and workarounds
+- **ffmpeg-cloudflare-containers** - Cloudflare Containers, native FFmpeg at edge, GPU support
 - **ffmpeg-cicd-runners** - GitHub Actions, GitLab CI, Jenkins optimization
 - **ffmpeg-streaming** - RTMP, HLS, DASH, SRT, ABR streaming patterns
 - **ffmpeg-audio-processing** - Audio encoding, EBU R128 normalization, loudnorm
@@ -117,13 +119,20 @@ The FFmpeg Expert agent can help with:
 
 ### FFmpeg Versions
 
-**FFmpeg 8.0 "Huffman" (August 2025)**
-- Whisper AI filter for speech recognition
-- Vulkan compute codecs (FFv1, ProRes RAW)
-- AV1 Vulkan encoder
-- VVC VA-API decoding
-- APV codec support
-- WHIP muxer for WebRTC
+**FFmpeg 8.0 "Huffman" (August 2025) - Current Stable**
+
+One of the largest FFmpeg releases to date, named after the Huffman code algorithm.
+
+| Feature | Description |
+|---------|-------------|
+| **Whisper AI** | Built-in speech recognition via whisper.cpp for subtitle generation and transcription |
+| **Vulkan Compute** | FFv1 encode/decode, ProRes RAW decode, AV1 encode, VP9 decode via Vulkan 1.3 |
+| **APV Codec** | Samsung Advanced Professional Video encoder (via libopenapv) and native decoder |
+| **VVC Hardware** | VA-API and QSV hardware decoding for H.266/VVC |
+| **WHIP Muxer** | Sub-second latency WebRTC ingestion protocol |
+| **New Codecs** | ProRes RAW, RealVideo 6.0, G.728, Sanyo LD-ADPCM, libx265 alpha |
+| **New Filters** | whisper, colordetect, pad_cuda, scale_d3d11 |
+| **Breaking** | Dropped OpenSSL 1.1.0, yasm; deprecated OpenMAX encoders |
 
 **FFmpeg 7.1 "Péter" LTS (September 2024)**
 - Production-ready VVC/H.266 decoder
@@ -143,11 +152,13 @@ The FFmpeg Expert agent can help with:
 | Vulkan Video | h264, hevc, av1 | Cross-platform |
 | VideoToolbox | h264, hevc, prores | Apple native |
 
-### Container/Edge Deployment
+### Container/Edge/Serverless Deployment
 
 - **Docker**: jrottenberg/ffmpeg, linuxserver/ffmpeg, GPU-enabled images
+- **Modal.com**: Serverless GPU/CPU containers, parallel processing with map/starmap
+- **Cloudflare Workers**: ffmpeg.wasm limitations and workarounds
+- **Cloudflare Containers**: Native FFmpeg at edge with GPU support
 - **WebAssembly**: ffmpeg.wasm with COOP/COEP configuration
-- **Cloudflare Workers**: Limitations and workarounds
 - **CI/CD**: GitHub Actions, GitLab CI, Jenkins patterns
 
 ### Streaming Protocols
@@ -284,6 +295,15 @@ ffmpeg -i video.mp4 \
   output.mp4
 ```
 
+### Example: Whisper AI Transcription (FFmpeg 8.0+)
+
+```bash
+# Generate SRT subtitles automatically
+ffmpeg -i video.mp4 -vn \
+  -af "whisper=model=ggml-base.bin:language=auto:destination=subtitles.srt:format=srt" \
+  -f null -
+```
+
 ### Example: Generate Waveform Video
 
 ```bash
@@ -304,6 +324,27 @@ ffmpeg -i clip1.mp4 -i clip2.mp4 \
   output.mp4
 ```
 
+### Example: WHIP WebRTC Streaming (FFmpeg 8.0+)
+
+```bash
+# Sub-second latency streaming to WebRTC endpoint
+ffmpeg -re -i input.mp4 \
+  -c:v libx264 -preset ultrafast -tune zerolatency \
+  -c:a libopus \
+  -f whip \
+  "https://whip-server.example.com/publish/stream"
+```
+
+### Example: Vulkan FFv1 Lossless Capture (FFmpeg 8.0+)
+
+```bash
+# High-throughput lossless screen capture
+ffmpeg -init_hw_device vulkan \
+  -f gdigrab -framerate 60 -i desktop \
+  -c:v ffv1_vulkan \
+  screen_capture.mkv
+```
+
 ### Example: Draw Shapes
 
 ```bash
@@ -312,6 +353,37 @@ ffmpeg -i video.mp4 \
   -vf "drawbox=x=10:y=10:w=300:h=80:color=black@0.7:t=fill,\
        drawtext=text='LIVE':x=30:y=30:fontsize=48:fontcolor=red" \
   output.mp4
+```
+
+### Example: Modal.com Batch Processing
+
+```python
+# Parallel video transcoding on Modal.com
+import modal
+
+app = modal.App("batch-transcode")
+ffmpeg_image = modal.Image.debian_slim().apt_install("ffmpeg")
+
+@app.function(image=ffmpeg_image)
+def transcode(video_bytes: bytes) -> bytes:
+    import subprocess, tempfile
+    from pathlib import Path
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        input_path = Path(tmpdir) / "input"
+        output_path = Path(tmpdir) / "output.mp4"
+        input_path.write_bytes(video_bytes)
+
+        subprocess.run([
+            "ffmpeg", "-y", "-i", str(input_path),
+            "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+            str(output_path)
+        ], check=True)
+
+        return output_path.read_bytes()
+
+# Process 100 videos in parallel across 100 containers
+results = list(transcode.map(video_list))
 ```
 
 ## Requirements

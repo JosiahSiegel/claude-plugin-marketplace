@@ -18,7 +18,8 @@
       "Bash(jq:*)",
       "Bash(test:*)",
       "WebFetch(domain:code.claude.com)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "WebFetch(domain:modal.com)"
     ],
     "deny": [],
     "ask": []

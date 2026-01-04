@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-fundamentals-2025
-description: Complete FFmpeg core knowledge system. PROACTIVELY activate for: (1) Basic transcoding and format conversion, (2) Command syntax questions, (3) Codec selection (H.264, H.265, AV1, VP9), (4) Quality settings (CRF, bitrate, presets), (5) Video/audio filter chains, (6) Trimming, splitting, concatenating, (7) Resolution scaling and aspect ratios, (8) FFmpeg version features (7.1/8.0). Provides: Command syntax reference, codec comparison tables, filter examples, format conversion recipes, probing commands. Ensures: Correct FFmpeg usage with modern best practices.
+description: Complete FFmpeg core knowledge system for FFmpeg 7.1 LTS and 8.0 Huffman. PROACTIVELY activate for: (1) Basic transcoding and format conversion, (2) Command syntax questions, (3) Codec selection (H.264, H.265, VVC, AV1, VP9, APV), (4) Quality settings (CRF, bitrate, presets), (5) Video/audio filter chains, (6) Trimming, splitting, concatenating, (7) Resolution scaling and aspect ratios, (8) FFmpeg 8.0 features (Whisper AI, Vulkan codecs, APV, WHIP). Provides: Command syntax reference, codec comparison tables, filter examples, format conversion recipes, probing commands, Whisper transcription examples. Ensures: Correct FFmpeg usage with 2025 best practices.
 ---
 
 ## CRITICAL GUIDELINES
@@ -45,17 +45,62 @@ Use for **foundational FFmpeg operations**:
 
 Complete guide to FFmpeg core concepts, syntax, and essential operations with FFmpeg 7.1 LTS and 8.0 Huffman.
 
-## FFmpeg Version Overview (December 2025)
+## FFmpeg Version Overview (January 2026)
 
-### FFmpeg 8.0 "Huffman" (August 2025)
-- **Whisper AI Filter**: Built-in speech recognition for live subtitle generation
-- **Vulkan Compute Codecs**: FFv1 encode/decode, ProRes RAW decode via compute shaders
+### FFmpeg 8.0 "Huffman" (August 2025) - Current Stable
+FFmpeg 8.0 is one of the largest releases to date, named after the Huffman code algorithm invented in 1952.
+
+**AI and Transcription:**
+- **Whisper AI Filter**: Built-in speech recognition via whisper.cpp for live subtitle generation and transcription
+- Supports 99 languages with automatic language detection
+- Outputs to SRT, JSON, or plain text formats
+- Voice Activity Detection (VAD) support with Silero VAD
+
+**Vulkan Compute Codecs (Cross-Platform GPU):**
+- **FFv1 Vulkan**: Encode and decode via Vulkan 1.3 compute shaders
+- **ProRes RAW Vulkan**: Hardware-accelerated decode
 - **AV1 Vulkan Encoder**: GPU-accelerated AV1 encoding
-- **VVC VA-API Decoding**: H.266/VVC hardware acceleration
-- **APV Codec**: Samsung Advanced Professional Video encoder/decoder
-- **ProRes RAW Decoder**: Native ProRes RAW support
-- **WHIP Muxer**: Sub-second latency WebRTC streaming
-- **Dropped**: OpenSSL 1.1.0, yasm (use nasm)
+- **VP9 Vulkan Decoder**: Hardware-accelerated VP9 decode
+- Works on any Vulkan 1.3 implementation (AMD, Intel, NVIDIA)
+
+**New Codecs:**
+- **APV Codec**: Samsung Advanced Professional Video encoder (via libopenapv) and native decoder
+- **ProRes RAW Decoder**: Native Apple ProRes RAW decode
+- **RealVideo 6.0 Decoder**: Native RV6 decode support
+- **G.728 Decoder**: Low-delay CELP audio codec
+- **Sanyo LD-ADPCM Decoder**: Sanyo audio format
+- **ADPCM IMA Xbox Decoder**: Xbox audio format
+- **libx265 Alpha Layer Encoding**: HEVC with alpha channel
+
+**Hardware Acceleration:**
+- **VVC VA-API Decoding**: H.266/VVC hardware decode on Intel/AMD Linux
+- **VVC QSV Decoding**: Intel Quick Sync VVC hardware decode
+- **OpenHarmony Support**: H.264/H.265 encode/decode for HarmonyOS platform
+
+**New Features:**
+- **WHIP Muxer**: Sub-second latency WebRTC ingestion
+- **Animated JPEG XL Encoding**: Via libjxl library
+- **FLV v2 Support**: Multitrack audio/video and modern codecs
+- **VVC in Matroska**: H.266/VVC support in MKV container
+- **VVC SCC Support**: Screen Content Coding with IBC, Palette Mode, ACT
+- **TLS Verification**: Enabled by default for HTTPS connections
+
+**New Filters:**
+- **whisper**: AI speech recognition filter
+- **colordetect**: Detect JPEG/MPEG range and alpha channel properties
+- **pad_cuda**: GPU-accelerated padding filter
+- **scale_d3d11**: Direct3D 11 hardware scaling filter
+
+**Breaking Changes:**
+- **Dropped**: OpenSSL 1.1.0 support (requires 1.1.1+)
+- **Dropped**: yasm assembler support (use nasm instead)
+- **Deprecated**: OpenMAX encoders
+- **Changed**: Default PNG prediction method set to PAETH
+- **Changed**: GCC autovectorization no longer disabled on x86/ARM/AArch64
+
+**Infrastructure:**
+- New Forgejo-based code hosting at code.ffmpeg.org
+- Modernized mailing list infrastructure
 
 ### FFmpeg 7.1 "Péter" LTS (September 2024)
 - **VVC Decoder Stable**: Full native H.266/VVC decoder (production-ready)
@@ -113,13 +158,21 @@ ffmpeg -progress - -i input.mp4 output.mp4
 
 ### Hardware Encoders
 
-| Platform | H.264 | H.265 | AV1 |
-|----------|-------|-------|-----|
-| NVIDIA | h264_nvenc | hevc_nvenc | av1_nvenc |
-| Intel | h264_qsv | hevc_qsv | av1_qsv |
-| AMD | h264_amf | hevc_amf | av1_amf |
-| Apple | h264_videotoolbox | hevc_videotoolbox | - |
-| Vulkan | h264_vulkan | hevc_vulkan | av1_vulkan (8.0+) |
+| Platform | H.264 | H.265 | AV1 | VVC | FFv1 |
+|----------|-------|-------|-----|-----|------|
+| NVIDIA | h264_nvenc | hevc_nvenc | av1_nvenc | - | - |
+| Intel | h264_qsv | hevc_qsv | av1_qsv | - | - |
+| AMD | h264_amf | hevc_amf | av1_amf | - | - |
+| Apple | h264_videotoolbox | hevc_videotoolbox | - | - | - |
+| Vulkan | h264_vulkan | hevc_vulkan | av1_vulkan (8.0+) | - | ffv1_vulkan (8.0+) |
+
+### Hardware Decoders (FFmpeg 8.0+)
+
+| Platform | VVC/H.266 | VP9 | ProRes RAW |
+|----------|-----------|-----|------------|
+| VAAPI | vvc (8.0+) | Yes | - |
+| QSV | vvc_qsv (7.1+) | Yes | - |
+| Vulkan | - | vp9 (8.0+) | Yes (8.0+) |
 
 ### Audio Codecs
 
@@ -239,6 +292,44 @@ ffmpeg -i input.mp4 -i subs.srt -c copy -c:s mov_text output.mp4
 # Extract subtitles
 ffmpeg -i input.mkv -map 0:s:0 output.srt
 ```
+
+### Whisper AI Transcription (FFmpeg 8.0+)
+
+```bash
+# Generate SRT subtitles from video using Whisper
+ffmpeg -i input.mp4 -vn \
+  -af "whisper=model=ggml-base.bin:language=auto:queue=3:destination=output.srt:format=srt" \
+  -f null -
+
+# Live transcription from microphone
+ffmpeg -loglevel warning -f pulse -i default \
+  -af "highpass=f=200,lowpass=f=3000,whisper=model=ggml-medium-q5_0.bin:language=en:queue=10:destination=-:format=json:vad_model=for-tests-silero-v5.1.2-ggml.bin" \
+  -f null -
+
+# Display live subtitles on video (reads from frame metadata)
+ffmpeg -i input.mp4 \
+  -af "whisper=model=ggml-base.en.bin:language=en" \
+  -vf "drawtext=text='%{metadata\:lavfi.whisper.text}':fontsize=24:fontcolor=white:x=10:y=h-th-10" \
+  output_with_subtitles.mp4
+```
+
+**Whisper Model Sizes:**
+| Model | Size | Speed | Quality | VRAM |
+|-------|------|-------|---------|------|
+| tiny | 39 MB | Fastest | Basic | ~1 GB |
+| base | 74 MB | Fast | Good | ~1 GB |
+| small | 244 MB | Medium | Better | ~2 GB |
+| medium | 769 MB | Slow | High | ~5 GB |
+| large | 1.55 GB | Slowest | Best | ~10 GB |
+
+**Whisper Filter Parameters:**
+- `model`: Path to GGML model file
+- `language`: Language code or "auto" for detection
+- `format`: Output format - "text", "srt", or "json"
+- `destination`: Output file path (or "-" for stdout)
+- `queue`: Buffer size (increase for VAD, e.g., 20)
+- `vad_model`: Path to Silero VAD model for voice detection
+- `use_gpu`: Set to "false" to disable GPU acceleration
 
 ### Image Operations
 

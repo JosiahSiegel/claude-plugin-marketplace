@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-streaming
-description: Complete live streaming and protocol system. PROACTIVELY activate for: (1) RTMP streaming to Twitch/YouTube/Facebook, (2) HLS output and adaptive bitrate (ABR), (3) DASH streaming setup, (4) Low-latency streaming (LL-HLS, LL-DASH), (5) SRT protocol configuration, (6) WebRTC/WHIP (FFmpeg 8.0+), (7) Protocol conversion (RTMP to HLS), (8) Multi-destination streaming, (9) nginx-rtmp integration, (10) Docker streaming services. Provides: Platform-specific stream commands, ABR ladder examples, encryption setup, latency optimization, production patterns. Ensures: Reliable live streaming with optimal quality and latency.
+description: Complete live streaming and protocol system for FFmpeg 7.1 LTS and 8.0 Huffman. PROACTIVELY activate for: (1) RTMP streaming to Twitch/YouTube/Facebook, (2) HLS output and adaptive bitrate (ABR), (3) DASH streaming setup, (4) Low-latency streaming (LL-HLS, LL-DASH), (5) SRT protocol configuration, (6) WebRTC/WHIP sub-second latency (FFmpeg 8.0+), (7) Protocol conversion (RTMP to HLS), (8) Multi-destination streaming, (9) nginx-rtmp integration, (10) Docker streaming services. Provides: Platform-specific stream commands, ABR ladder examples, encryption setup, latency optimization, WHIP authentication, production patterns. Ensures: Reliable live streaming with optimal quality and latency.
 ---
 
 ## CRITICAL GUIDELINES
@@ -331,6 +331,9 @@ ffmpeg -i "srt://server:9000?mode=caller" \
 
 ## WebRTC/WHIP (FFmpeg 8.0+)
 
+### Overview
+FFmpeg 8.0 introduces the WHIP (WebRTC-HTTP Ingestion Protocol) muxer, enabling sub-second latency streaming to WebRTC endpoints. WHIP is becoming the standard for WebRTC ingestion, replacing proprietary solutions.
+
 ### WHIP Output
 
 ```bash
@@ -340,7 +343,68 @@ ffmpeg -re -i input.mp4 \
   -c:a libopus \
   -f whip \
   "https://whip-server.example.com/publish/stream_id"
+
+# Low-latency webcam to WHIP (Linux)
+ffmpeg -f v4l2 -i /dev/video0 \
+  -f pulse -i default \
+  -c:v libx264 -preset ultrafast -tune zerolatency -b:v 2500k \
+  -c:a libopus -b:a 64k \
+  -f whip \
+  "https://whip-server.example.com/publish/stream_id"
+
+# Low-latency webcam to WHIP (macOS)
+ffmpeg -f avfoundation -framerate 30 -i "0:0" \
+  -c:v libx264 -preset ultrafast -tune zerolatency -b:v 2500k \
+  -c:a libopus -b:a 64k \
+  -f whip \
+  "https://whip-server.example.com/publish/stream_id"
+
+# Low-latency screen capture to WHIP (Windows)
+ffmpeg -f gdigrab -framerate 30 -i desktop \
+  -c:v libx264 -preset ultrafast -tune zerolatency -b:v 3000k \
+  -c:a libopus -b:a 64k \
+  -f whip \
+  "https://whip-server.example.com/publish/stream_id"
 ```
+
+### WHIP with Hardware Encoding
+
+```bash
+# NVIDIA NVENC WHIP streaming
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda \
+  -i input.mp4 \
+  -c:v h264_nvenc -preset p3 -tune ll -zerolatency 1 -b:v 3000k \
+  -c:a libopus -b:a 64k \
+  -f whip \
+  "https://whip-server.example.com/publish/stream_id"
+
+# Intel QSV WHIP streaming
+ffmpeg -init_hw_device qsv=hw -filter_hw_device hw \
+  -i input.mp4 \
+  -c:v h264_qsv -preset fast -b:v 3000k \
+  -c:a libopus -b:a 64k \
+  -f whip \
+  "https://whip-server.example.com/publish/stream_id"
+```
+
+### WHIP Authentication
+
+```bash
+# With bearer token authentication
+ffmpeg -re -i input.mp4 \
+  -c:v libx264 -preset ultrafast -tune zerolatency \
+  -c:a libopus \
+  -f whip \
+  -headers "Authorization: Bearer YOUR_TOKEN" \
+  "https://whip-server.example.com/publish/stream_id"
+```
+
+### WHIP Servers/Platforms
+- **Cloudflare Stream** - WebRTC ingest via WHIP
+- **Dolby.io** - Interactive streaming
+- **Janus** - Open-source WebRTC gateway
+- **mediasoup** - Open-source SFU with WHIP support
+- **LiveKit** - WebRTC platform with WHIP ingestion
 
 ## Multicast Streaming
 
