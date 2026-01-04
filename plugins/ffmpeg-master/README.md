@@ -119,9 +119,15 @@ The FFmpeg Expert agent can help with:
 
 ### FFmpeg Versions
 
-**FFmpeg 8.0 "Huffman" (August 2025) - Current Stable**
+**FFmpeg 8.0.1 (Released 2025-11-20) - Current Latest Stable**
 
-One of the largest FFmpeg releases to date, named after the Huffman code algorithm.
+The latest stable release from the 8.0 "Huffman" branch (cut from master 2025-08-09). Contains important bug fixes and security updates. One of the largest FFmpeg releases to date, named after the Huffman code algorithm.
+
+**Check your version**: `ffmpeg -version`
+
+**Official sources for updates**:
+- https://ffmpeg.org/download.html
+- https://github.com/FFmpeg/FFmpeg/releases
 
 | Feature | Description |
 |---------|-------------|

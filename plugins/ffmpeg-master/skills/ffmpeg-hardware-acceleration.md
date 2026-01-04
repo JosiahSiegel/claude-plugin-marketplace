@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-hardware-acceleration
-description: Complete GPU-accelerated encoding/decoding system for FFmpeg 7.1 LTS and 8.0 Huffman. PROACTIVELY activate for: (1) NVIDIA NVENC/NVDEC encoding, (2) Intel Quick Sync Video (QSV), (3) AMD AMF encoding, (4) Apple VideoToolbox, (5) Linux VAAPI setup, (6) Vulkan Video 8.0 (FFv1, AV1, VP9, ProRes RAW), (7) VVC/H.266 hardware decoding (VAAPI/QSV), (8) GPU pipeline optimization with pad_cuda, (9) Docker GPU containers, (10) Performance benchmarking. Provides: Platform-specific commands, preset comparisons, quality tuning, full GPU pipeline examples, Vulkan compute codecs, VVC decoding, troubleshooting guides. Ensures: Maximum encoding speed with optimal quality using GPU acceleration.
+description: Complete GPU-accelerated encoding/decoding system for FFmpeg 7.1 LTS and 8.0.1 (latest stable, released 2025-11-20). PROACTIVELY activate for: (1) NVIDIA NVENC/NVDEC encoding, (2) Intel Quick Sync Video (QSV), (3) AMD AMF encoding, (4) Apple VideoToolbox, (5) Linux VAAPI setup, (6) Vulkan Video 8.0 (FFv1, AV1, VP9, ProRes RAW), (7) VVC/H.266 hardware decoding (VAAPI/QSV), (8) GPU pipeline optimization with pad_cuda, (9) Docker GPU containers, (10) Performance benchmarking. Provides: Platform-specific commands, preset comparisons, quality tuning, full GPU pipeline examples, Vulkan compute codecs, VVC decoding, troubleshooting guides. Ensures: Maximum encoding speed with optimal quality using GPU acceleration.
 ---
 
 ## CRITICAL GUIDELINES
@@ -39,6 +39,8 @@ Use when **GPU acceleration is needed**:
 # FFmpeg Hardware Acceleration (2025)
 
 Comprehensive guide to GPU-accelerated encoding and decoding with NVIDIA, Intel, AMD, Apple, and Vulkan.
+
+**Current Latest**: FFmpeg 8.0.1 (released 2025-11-20) - Check with `ffmpeg -version`
 
 ## Hardware Acceleration Overview
 

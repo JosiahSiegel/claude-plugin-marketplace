@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-streaming
-description: Complete live streaming and protocol system for FFmpeg 7.1 LTS and 8.0 Huffman. PROACTIVELY activate for: (1) RTMP streaming to Twitch/YouTube/Facebook, (2) HLS output and adaptive bitrate (ABR), (3) DASH streaming setup, (4) Low-latency streaming (LL-HLS, LL-DASH), (5) SRT protocol configuration, (6) WebRTC/WHIP sub-second latency (FFmpeg 8.0+), (7) Protocol conversion (RTMP to HLS), (8) Multi-destination streaming, (9) nginx-rtmp integration, (10) Docker streaming services. Provides: Platform-specific stream commands, ABR ladder examples, encryption setup, latency optimization, WHIP authentication, production patterns. Ensures: Reliable live streaming with optimal quality and latency.
+description: Complete live streaming and protocol system for FFmpeg 7.1 LTS and 8.0.1 (latest stable, released 2025-11-20). PROACTIVELY activate for: (1) RTMP streaming to Twitch/YouTube/Facebook, (2) HLS output and adaptive bitrate (ABR), (3) DASH streaming setup, (4) Low-latency streaming (LL-HLS, LL-DASH), (5) SRT protocol configuration, (6) WebRTC/WHIP sub-second latency (FFmpeg 8.0+), (7) Protocol conversion (RTMP to HLS), (8) Multi-destination streaming, (9) nginx-rtmp integration, (10) Docker streaming services. Provides: Platform-specific stream commands, ABR ladder examples, encryption setup, latency optimization, WHIP authentication, production patterns. Ensures: Reliable live streaming with optimal quality and latency.
 ---
 
 ## CRITICAL GUIDELINES
@@ -43,6 +43,8 @@ Use for **live streaming workflows**:
 # FFmpeg Streaming Guide (2025)
 
 Complete guide to live streaming with FFmpeg covering RTMP, HLS, DASH, SRT, and WebRTC protocols.
+
+**Current Latest**: FFmpeg 8.0.1 (released 2025-11-20) - Check with `ffmpeg -version`
 
 ## Streaming Protocols Overview
 

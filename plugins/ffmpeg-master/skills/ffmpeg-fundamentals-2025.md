@@ -1,6 +1,6 @@
 ---
 name: ffmpeg-fundamentals-2025
-description: Complete FFmpeg core knowledge system for FFmpeg 7.1 LTS and 8.0 Huffman. PROACTIVELY activate for: (1) Basic transcoding and format conversion, (2) Command syntax questions, (3) Codec selection (H.264, H.265, VVC, AV1, VP9, APV), (4) Quality settings (CRF, bitrate, presets), (5) Video/audio filter chains, (6) Trimming, splitting, concatenating, (7) Resolution scaling and aspect ratios, (8) FFmpeg 8.0 features (Whisper AI, Vulkan codecs, APV, WHIP). Provides: Command syntax reference, codec comparison tables, filter examples, format conversion recipes, probing commands, Whisper transcription examples. Ensures: Correct FFmpeg usage with 2025 best practices.
+description: Complete FFmpeg core knowledge system for FFmpeg 7.1 LTS and 8.0.1 (latest stable, released 2025-11-20). PROACTIVELY activate for: (1) Basic transcoding and format conversion, (2) Command syntax questions, (3) Codec selection (H.264, H.265, VVC, AV1, VP9, APV), (4) Quality settings (CRF, bitrate, presets), (5) Video/audio filter chains, (6) Trimming, splitting, concatenating, (7) Resolution scaling and aspect ratios, (8) FFmpeg 8.0 features (Whisper AI, Vulkan codecs, APV, WHIP), (9) Version checking and update guidance. Provides: Command syntax reference, codec comparison tables, filter examples, format conversion recipes, probing commands, Whisper transcription examples, version checking commands. Ensures: Correct FFmpeg usage with 2025 best practices and latest stable version.
 ---
 
 ## CRITICAL GUIDELINES
@@ -43,11 +43,29 @@ Use for **foundational FFmpeg operations**:
 
 # FFmpeg Fundamentals (2025)
 
-Complete guide to FFmpeg core concepts, syntax, and essential operations with FFmpeg 7.1 LTS and 8.0 Huffman.
+Complete guide to FFmpeg core concepts, syntax, and essential operations with FFmpeg 7.1 LTS and 8.0.1 (latest stable).
 
-## FFmpeg Version Overview (January 2026)
+## FFmpeg Version Overview
 
-### FFmpeg 8.0 "Huffman" (August 2025) - Current Stable
+**IMPORTANT: Always verify you are using the latest FFmpeg version for security and bug fixes.**
+
+### Checking Your Version
+```bash
+# Check installed version
+ffmpeg -version
+
+# Check build configuration
+ffmpeg -buildconf
+```
+
+### Official Sources for Latest Version
+- **Official Download Page**: https://ffmpeg.org/download.html
+- **Official Git Repository**: https://git.ffmpeg.org/gitweb/ffmpeg.git
+- **GitHub Releases**: https://github.com/FFmpeg/FFmpeg/releases
+
+### FFmpeg 8.0.1 (Released 2025-11-20) - Current Latest Stable
+The latest stable release from the 8.0 "Huffman" branch (originally cut from master on 2025-08-09). This patch release contains important bug fixes and security updates.
+
 FFmpeg 8.0 is one of the largest releases to date, named after the Huffman code algorithm invented in 1952.
 
 **AI and Transcription:**
@@ -519,5 +537,23 @@ ffmpeg -h encoder=libx264 # Get encoder options
 - 0: Success
 - 1: Error (check stderr for details)
 - 255: Interrupted (Ctrl+C)
+
+## Staying Up-to-Date
+
+### Why Version Matters
+- **Security fixes**: Patch releases address vulnerabilities
+- **Bug fixes**: Issues with specific codecs or filters get resolved
+- **New features**: Major versions add codec support and filters
+- **Performance**: Optimizations improve encoding speed
+
+### Recommended Update Strategy
+1. **Production**: Use LTS releases (7.1) for stability, apply patch updates
+2. **Development**: Use latest stable (8.0.1) for new features
+3. **Always**: Check release notes before upgrading
+
+### Official Resources
+- **Release Notes**: https://ffmpeg.org/download.html
+- **Security Advisories**: https://ffmpeg.org/security.html
+- **Mailing Lists**: https://ffmpeg.org/contact.html
 
 This guide covers FFmpeg fundamentals for 2025. For hardware acceleration, streaming, containers, and advanced topics, see the specialized skill documents.
