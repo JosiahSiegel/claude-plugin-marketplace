@@ -651,6 +651,45 @@
         "parallel",
         "batch-processing"
       ]
+    },
+    {
+      "name": "viral-video-master",
+      "source": "./plugins/viral-video-master",
+      "description": "Complete viral video optimization system with comprehensive 2025-2026 research-backed strategies for maximizing video virality across all platforms. PROACTIVELY activate for: (1) ANY viral video strategy (TikTok, YouTube, Instagram, Facebook), (2) Short-form content optimization (Reels, Shorts, TikTok), (3) Long-form YouTube optimization, (4) Video hook and opening optimization (1.3-second attention capture), (5) Caption and subtitle strategy (80% engagement boost), (6) Thumbnail design and CTR optimization, (7) Hashtag and SEO strategy, (8) Posting schedule optimization, (9) Content repurposing strategies, (10) Audience retention improvement, (11) Trending audio and sound selection, (12) Video editing pacing and transitions, (13) Call-to-action optimization (380% conversion increase), (14) UGC and authenticity strategies, (15) Platform algorithm understanding (TikTok, YouTube, Instagram 2025), (16) Faceless content creation, (17) Community engagement and growth, (18) Shoppable video and social commerce, (19) Collaboration and cross-promotion, (20) Analytics and metrics interpretation. Provides: Research-backed viral video formulas, platform-specific optimization guides, hook templates, retention strategies, trending content patterns, algorithm insights, and production best practices for 2025-2026.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "viral",
+        "video",
+        "tiktok",
+        "youtube",
+        "instagram",
+        "reels",
+        "shorts",
+        "hooks",
+        "retention",
+        "algorithm",
+        "social-media",
+        "content-creation",
+        "video-marketing",
+        "thumbnails",
+        "captions",
+        "subtitles",
+        "trending",
+        "engagement",
+        "ugc",
+        "faceless-content",
+        "video-seo",
+        "hashtags",
+        "cta",
+        "storytelling",
+        "video-editing",
+        "content-repurposing",
+        "social-commerce",
+        "shoppable-video"
+      ]
     }
   ]
 }

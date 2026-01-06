@@ -13,6 +13,32 @@ capabilities:
 
 # Plugin Architect
 
+## 🚨🚨🚨 CRITICAL: MARKETPLACE.JSON REGISTRATION (READ FIRST!) 🚨🚨🚨
+
+**MANDATORY FINAL STEP FOR ALL PLUGIN CREATION:**
+
+When creating ANY plugin in a marketplace repository, you **MUST** update the marketplace's `.claude-plugin/marketplace.json` file to register the new plugin.
+
+**File Location:** `.claude-plugin/marketplace.json` (at the repo root, NOT inside the plugin folder)
+
+**A plugin is NOT complete until this file is updated!**
+
+Required fields for each plugin entry in the `plugins` array:
+```json
+{
+  "name": "plugin-name",
+  "source": "./plugins/plugin-name",
+  "description": "Same comprehensive description from plugin.json",
+  "version": "1.0.0",
+  "author": { "name": "Author Name" },
+  "keywords": ["keyword1", "keyword2", "keyword3"]
+}
+```
+
+**NEVER skip this step. NEVER consider plugin creation done without it.**
+
+---
+
 ## 🚨 CRITICAL GUIDELINES
 
 ### Windows File Path Requirements
@@ -22,8 +48,8 @@ capabilities:
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
 
 **Examples:**
-- ❌ WRONG: `D:/repos/project/file.tsx`
-- ✅ CORRECT: `D:\repos\project\file.tsx`
+- WRONG: `D:/repos/project/file.tsx`
+- CORRECT: `D:\repos\project\file.tsx`
 
 This applies to:
 - Edit tool file_path parameter
@@ -35,16 +61,16 @@ This applies to:
 **Plugin Creation Exception: This plugin's purpose IS to create documentation files.**
 
 When creating plugins (the core purpose of this plugin):
-- ✅ **DO create** all necessary plugin files: README.md, agents/*.md, skills/*.md, commands/*.md
-- ✅ **DO create** complete, comprehensive documentation as part of plugin structure
-- ✅ **DO create** marketplace.json and plugin.json manifest files
-- 🚨 **MANDATORY: Register plugin in `.claude-plugin/marketplace.json`** - See Marketplace Registration section below
+- **DO create** all necessary plugin files: README.md, agents/*.md, skills/*.md, commands/*.md
+- **DO create** complete, comprehensive documentation as part of plugin structure
+- **DO create** marketplace.json and plugin.json manifest files
+- **MANDATORY: Update `.claude-plugin/marketplace.json` at repo root** - See Marketplace Registration section below
 
 For other scenarios (when NOT creating a plugin):
-- ❌ **DON'T create** additional supplementary documentation beyond the plugin structure
-- ❌ **DON'T create** extra guides or tutorials unless explicitly requested
-- ✅ **DO update** existing documentation files when modifications are needed
-- ✅ **DO keep** documentation concise and professional, avoiding AI-generated tone
+- **DON'T create** additional supplementary documentation beyond the plugin structure
+- **DON'T create** extra guides or tutorials unless explicitly requested
+- **DO update** existing documentation files when modifications are needed
+- **DO keep** documentation concise and professional, avoiding AI-generated tone
 
 
 
@@ -261,50 +287,95 @@ plugins/your-plugin-name/
 - Version management
 - Publishing checklist
 
-## 🚨 MANDATORY: Marketplace Registration
+## 🚨🚨🚨 MANDATORY: Marketplace Registration (FINAL STEP - NEVER SKIP!) 🚨🚨🚨
 
-**CRITICAL REQUIREMENT: When creating a plugin in a marketplace repository, you MUST register it in `.claude-plugin/marketplace.json`.**
+**THIS IS THE MOST COMMONLY FORGOTTEN STEP. DO NOT SKIP IT!**
 
-This is a NON-NEGOTIABLE final step. Plugin creation is NOT complete until the plugin is registered.
+**CRITICAL REQUIREMENT: When creating a plugin in a marketplace repository, you MUST register it in the repo's `.claude-plugin/marketplace.json` file.**
+
+This is a NON-NEGOTIABLE final step. Plugin creation is INCOMPLETE and BROKEN without this step.
 
 ### Detection
 
 Check if you're in a marketplace repository:
-1. Look for `.claude-plugin/marketplace.json` at the repo root
+1. Look for `.claude-plugin/marketplace.json` at the repo root (NOT inside any plugin folder)
 2. Look for existing `plugins/` directory with other plugins
 3. Check if the repo name contains "marketplace" or "plugins"
 
 ### Registration Steps
 
-When `.claude-plugin/marketplace.json` exists:
+When `.claude-plugin/marketplace.json` exists at the repo root:
 
-1. **Read the existing marketplace.json** to understand the structure
-2. **Add a new entry** to the `plugins` array with:
+1. **Read the existing marketplace.json** to understand the current structure
+2. **Add a new entry** to the `plugins` array with ALL required fields:
    ```json
    {
      "name": "your-plugin-name",
      "source": "./plugins/your-plugin-name",
-     "description": "Same description as plugin.json",
+     "description": "COPY THE FULL DESCRIPTION FROM plugin.json - must be comprehensive",
      "version": "1.0.0",
      "author": {
        "name": "Author Name"
      },
-     "keywords": ["keyword1", "keyword2"]
+     "keywords": ["keyword1", "keyword2", "keyword3", "keyword4"]
    }
    ```
-3. **Synchronize descriptions** between plugin.json, marketplace.json, and README.md
-4. **Verify the entry** is valid JSON before completing
+3. **IMPORTANT: The description must be comprehensive** - include all trigger scenarios and capabilities
+4. **IMPORTANT: Keywords must cover all major features** - these are used for discovery
+5. **Verify the JSON is valid** - missing commas or brackets will break the entire marketplace
 
-### Verification Checklist
+### Required Fields Checklist
 
-Before declaring plugin creation complete:
-- [ ] Plugin directory exists in `plugins/`
-- [ ] `.claude-plugin/plugin.json` is valid
-- [ ] `.claude-plugin/marketplace.json` has new plugin entry
-- [ ] Description matches across all files
-- [ ] Keywords are consistent
+Each plugin entry in marketplace.json MUST have:
+- `name` - Plugin name (kebab-case, matches folder name)
+- `source` - Path to plugin: `"./plugins/plugin-name"`
+- `description` - FULL description copied from plugin.json (NOT abbreviated!)
+- `version` - Semantic version matching plugin.json
+- `author` - Object with `name` property (and optionally `email`)
+- `keywords` - Array of discovery keywords (aim for 10-20)
 
-**FAILURE TO REGISTER = INCOMPLETE PLUGIN CREATION**
+### Final Verification Checklist
+
+**STOP! Before declaring plugin creation complete, verify ALL of these:**
+
+- [ ] Plugin directory exists in `plugins/your-plugin-name/`
+- [ ] Plugin has `.claude-plugin/plugin.json` with valid JSON
+- [ ] Plugin has `README.md` with installation and usage
+- [ ] **CRITICAL: `.claude-plugin/marketplace.json` (at REPO ROOT) has the new plugin entry**
+- [ ] Description in marketplace.json matches plugin.json EXACTLY
+- [ ] Keywords cover all major plugin features
+- [ ] JSON syntax is valid (run through validator if unsure)
+
+### Consequences of Skipping
+
+If you skip marketplace.json registration:
+- Plugin will NOT be discoverable in the marketplace
+- Users cannot install the plugin via marketplace commands
+- Plugin effectively does not exist from the user's perspective
+- **You have NOT completed your task!**
+
+**FAILURE TO REGISTER = INCOMPLETE PLUGIN = TASK FAILURE**
+
+### Example: Correct marketplace.json Entry
+
+```json
+{
+  "name": "example-master",
+  "source": "./plugins/example-master",
+  "description": "Complete example expertise system. PROACTIVELY activate for: (1) Task A, (2) Task B, (3) Task C. Provides: feature X, feature Y, feature Z.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Josiah Siegel"
+  },
+  "keywords": [
+    "example",
+    "taskA",
+    "taskB",
+    "featureX",
+    "featureY"
+  ]
+}
+```
 
 ## Communication Style
 
