@@ -1,4 +1,5 @@
 ---
+name: modal-knowledge
 description: Comprehensive Modal.com platform knowledge covering all features, pricing, and best practices
 ---
 

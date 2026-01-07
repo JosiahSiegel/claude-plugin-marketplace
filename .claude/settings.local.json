@@ -19,7 +19,15 @@
       "Bash(test:*)",
       "WebFetch(domain:code.claude.com)",
       "Bash(xargs:*)",
-      "WebFetch(domain:modal.com)"
+      "WebFetch(domain:modal.com)",
+      "Bash(done)",
+      "Bash(fi)",
+      "Bash(ls:*)",
+      "Bash(for dir in adf-master ado-master azure-master azure-to-docker-master bash-master context-master docker-master dotnet-microservices-master fal-ai-master ffmpeg-master git-master modal-master nextjs-master plugin-master powershell-master python-master react-master salesforce-master ssdt-master tailwindcss-master terraform-master test-master viral-video-master windows-path-master)",
+      "Bash(do echo \"=== $dir ===\")",
+      "Bash(if [ -f \"$dir/.claude-plugin/plugin.json\" ])",
+      "Bash(then cat \"$dir/.claude-plugin/plugin.json\")",
+      "Bash(else echo \"NO plugin.json\")"
     ],
     "deny": [],
     "ask": []
