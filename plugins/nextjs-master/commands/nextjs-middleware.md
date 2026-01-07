@@ -1,3 +1,7 @@
+---
+description: Create Next.js middleware for authentication, redirects, or headers
+---
+
 # Generate Next.js Middleware
 
 Create middleware with common patterns for authentication, redirects, or headers.

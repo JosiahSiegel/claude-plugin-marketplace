@@ -1,3 +1,7 @@
+---
+description: Generate AI images using fal.ai models like FLUX, Stable Diffusion, and more
+---
+
 # Generate Image with fal.ai
 
 Generate AI images using fal.ai models like FLUX, Stable Diffusion, and more.

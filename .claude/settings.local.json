@@ -25,6 +25,7 @@
     "ask": []
   },
   "enabledPlugins": {
-    "python-master@claude-plugin-marketplace": true
+    "python-master@claude-plugin-marketplace": true,
+    "viral-video-master@claude-plugin-marketplace": true
   }
 }

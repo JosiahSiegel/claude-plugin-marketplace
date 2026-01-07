@@ -1,3 +1,7 @@
+---
+description: Diagnose and fix common issues with fal.ai integrations including authentication, API errors, and timeouts
+---
+
 # Debug fal.ai Integration Issues
 
 Diagnose and fix common issues with fal.ai integrations, including authentication, API errors, timeouts, and deployment problems.

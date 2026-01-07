@@ -1,3 +1,7 @@
+---
+description: Create a Next.js Server Action with validation and proper error handling
+---
+
 # Generate Next.js Server Action
 
 Create a Server Action with validation and proper error handling.

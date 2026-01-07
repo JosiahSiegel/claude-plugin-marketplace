@@ -1,3 +1,7 @@
+---
+description: Create web endpoints using FastAPI, ASGI, WSGI, or custom web servers
+---
+
 # Modal Web Command
 
 Create web endpoints using FastAPI, ASGI, WSGI, or custom web servers.

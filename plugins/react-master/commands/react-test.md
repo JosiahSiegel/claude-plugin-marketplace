@@ -1,3 +1,7 @@
+---
+description: Create comprehensive tests for a React component using React Testing Library
+---
+
 # Generate React Component Tests
 
 Create comprehensive tests for a React component using React Testing Library.

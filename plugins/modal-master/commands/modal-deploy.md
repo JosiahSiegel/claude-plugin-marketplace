@@ -1,3 +1,7 @@
+---
+description: Deploy a Modal application with environment configuration and CI/CD setup
+---
+
 # Modal Deploy Command
 
 Deploy a Modal application with environment configuration and CI/CD setup.

@@ -1,3 +1,7 @@
+---
+description: Initialize a Modal project with proper structure, configuration, and best practices
+---
+
 # Modal Setup Command
 
 Initialize a Modal project with proper structure, configuration, and best practices.

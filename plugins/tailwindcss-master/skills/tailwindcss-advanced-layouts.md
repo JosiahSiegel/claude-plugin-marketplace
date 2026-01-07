@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS advanced layout techniques including CSS Grid and Flexbox patterns
+---
+
 # Tailwind CSS Advanced Layout Techniques
 
 ## CSS Grid Mastery

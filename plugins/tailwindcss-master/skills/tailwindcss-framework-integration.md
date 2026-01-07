@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS integration guide for React, Vue, Next.js, and other frameworks
+---
+
 # Tailwind CSS Framework Integration
 
 ## React with Vite

@@ -1,3 +1,7 @@
+---
+description: Create a new Next.js App Router page with proper structure
+---
+
 # Generate Next.js Page
 
 Create a new Next.js App Router page with proper structure.

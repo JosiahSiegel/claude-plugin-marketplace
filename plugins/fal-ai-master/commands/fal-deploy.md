@@ -1,3 +1,7 @@
+---
+description: Deploy custom ML models to fal.ai's serverless infrastructure with automatic scaling and GPU support
+---
+
 # Deploy Custom Model to fal Serverless
 
 Deploy your own ML models to fal.ai's serverless infrastructure with automatic scaling and GPU support.

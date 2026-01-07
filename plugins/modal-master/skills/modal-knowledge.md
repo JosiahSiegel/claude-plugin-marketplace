@@ -1,3 +1,7 @@
+---
+description: Comprehensive Modal.com platform knowledge covering all features, pricing, and best practices
+---
+
 # Modal Knowledge Skill
 
 Comprehensive Modal.com platform knowledge covering all features, pricing, and best practices. Activate this skill when users need detailed information about Modal's serverless cloud platform.

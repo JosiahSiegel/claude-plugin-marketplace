@@ -1,3 +1,7 @@
+---
+description: Expert agent for Modal.com serverless cloud platform with comprehensive knowledge of GPU functions, web endpoints, scheduling, and deployment
+---
+
 # Modal Expert Agent
 
 Expert agent for Modal.com serverless cloud platform. Provides comprehensive guidance on GPU-accelerated Python functions, web endpoints, scheduled tasks, image building, volumes, secrets, parallel processing, and deployment best practices.

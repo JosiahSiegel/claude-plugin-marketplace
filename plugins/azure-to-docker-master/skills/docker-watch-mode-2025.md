@@ -1,3 +1,7 @@
+---
+description: Docker Compose Watch mode for automatic hot reload during local development with sync, rebuild, and restart actions
+---
+
 # Docker Compose Watch Mode (2025 GA)
 
 Docker Compose Watch enables automatic hot reload during local development by synchronizing file changes instantly without manual container restarts.

@@ -1,3 +1,7 @@
+---
+description: Debug Modal issues including container failures, GPU errors, and deployment problems
+---
+
 # Modal Debug Command
 
 Debug Modal issues including container failures, GPU errors, and deployment problems.

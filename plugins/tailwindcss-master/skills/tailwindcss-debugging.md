@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS debugging and troubleshooting guide for common issues and solutions
+---
+
 # Tailwind CSS Debugging & Troubleshooting
 
 ## Common Issues & Solutions

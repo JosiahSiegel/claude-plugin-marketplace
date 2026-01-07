@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS advanced component patterns with CVA integration and variant management
+---
+
 # Tailwind CSS Advanced Component Patterns
 
 ## Component Variants with CVA

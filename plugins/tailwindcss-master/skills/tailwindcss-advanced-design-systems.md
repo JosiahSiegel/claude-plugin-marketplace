@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS advanced design systems with design tokens and @theme configuration
+---
+
 # Tailwind CSS Advanced Design Systems
 
 ## Building Design Tokens with @theme

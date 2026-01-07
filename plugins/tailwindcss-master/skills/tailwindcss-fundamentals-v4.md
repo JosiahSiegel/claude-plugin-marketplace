@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS v4 fundamentals covering installation, CSS-first configuration, and the new Rust-based engine
+---
+
 # Tailwind CSS v4 Fundamentals (2025)
 
 ## Overview

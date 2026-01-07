@@ -1,3 +1,7 @@
+---
+description: Create a new React component following best practices for React 19
+---
+
 # Generate React Component
 
 Create a new React component following best practices for React 19.

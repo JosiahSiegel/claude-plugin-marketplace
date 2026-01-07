@@ -1,3 +1,7 @@
+---
+description: Set up scheduled and cron functions with timezone support
+---
+
 # Modal Schedule Command
 
 Set up scheduled and cron functions with timezone support.

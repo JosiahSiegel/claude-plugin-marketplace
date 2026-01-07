@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS responsive design and dark mode implementation patterns
+---
+
 # Tailwind CSS Responsive Design & Dark Mode
 
 ## Responsive Design

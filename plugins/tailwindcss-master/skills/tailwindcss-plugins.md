@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS plugins including official plugins and custom plugin development
+---
+
 # Tailwind CSS Plugins
 
 ## Official Plugins

@@ -1,3 +1,7 @@
+---
+description: Create a Next.js Route Handler with proper HTTP methods and error handling
+---
+
 # Generate Next.js API Route
 
 Create a Next.js Route Handler with proper HTTP methods and error handling.

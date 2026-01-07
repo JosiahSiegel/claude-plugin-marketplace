@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS accessibility patterns including focus management and ARIA support
+---
+
 # Tailwind CSS Accessibility Patterns
 
 ## Focus Management

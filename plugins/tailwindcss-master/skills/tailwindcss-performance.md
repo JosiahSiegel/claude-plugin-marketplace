@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS performance optimization including v4 improvements and best practices
+---
+
 # Tailwind CSS Performance Optimization
 
 ## v4 Performance Improvements

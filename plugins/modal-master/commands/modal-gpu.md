@@ -1,3 +1,7 @@
+---
+description: Configure GPU functions with optimal settings, fallbacks, and cost optimization
+---
+
 # Modal GPU Command
 
 Configure GPU functions with optimal settings, fallbacks, and cost optimization.

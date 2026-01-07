@@ -1,3 +1,7 @@
+---
+description: Tailwind CSS animations and transitions including built-in utilities and custom animation patterns
+---
+
 # Tailwind CSS Animations & Transitions
 
 ## Built-in Animations

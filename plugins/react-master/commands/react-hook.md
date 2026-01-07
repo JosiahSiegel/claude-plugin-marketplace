@@ -1,3 +1,7 @@
+---
+description: Create a custom React hook following best practices
+---
+
 # Generate React Custom Hook
 
 Create a custom React hook following best practices.

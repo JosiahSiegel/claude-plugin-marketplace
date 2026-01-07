@@ -1,3 +1,7 @@
+---
+description: Analyze and optimize a React component for better performance
+---
+
 # Optimize React Component Performance
 
 Analyze and optimize a React component for better performance.

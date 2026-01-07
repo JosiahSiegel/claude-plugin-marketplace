@@ -1,3 +1,7 @@
+---
+description: Generate AI videos using fal.ai models like Kling, Sora, LTX, and more
+---
+
 # Generate Video with fal.ai
 
 Generate AI videos using fal.ai models like Kling, Sora, LTX, and more.

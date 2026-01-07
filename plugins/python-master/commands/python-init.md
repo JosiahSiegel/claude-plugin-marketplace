@@ -1,3 +1,7 @@
+---
+description: Initialize a modern Python project with best practices configuration
+---
+
 # Initialize Python Project
 
 Initialize a modern Python project with best practices configuration.

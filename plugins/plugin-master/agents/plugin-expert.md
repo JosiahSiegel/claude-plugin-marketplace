@@ -250,6 +250,87 @@ plugins/your-plugin-name/
    plugins/my-plugin/.claude-plugin/plugin.json  // ✅
    ```
 
+## 🚨🚨🚨 CRITICAL: YAML Frontmatter Requirements (PLUGIN WILL NOT WORK WITHOUT THIS!) 🚨🚨🚨
+
+**ALL markdown files in `agents/`, `commands/`, and `skills/` directories MUST begin with YAML frontmatter containing a `description` field.**
+
+Without this frontmatter, Claude Code CANNOT:
+- Parse the file as a valid plugin component
+- Register the command in the slash command list
+- Display the agent in available agents
+- Activate the skill when relevant
+
+**THE PLUGIN WILL APPEAR INSTALLED BUT BE COMPLETELY NON-FUNCTIONAL!**
+
+### Required Format
+
+Every `.md` file in `agents/`, `commands/`, and `skills/` MUST start with:
+
+```markdown
+---
+description: Short, clear description of what this component does
+---
+
+# Title
+
+Content...
+```
+
+### Examples
+
+**✅ CORRECT - Command file:**
+```markdown
+---
+description: Deploy application with environment configuration and CI/CD setup
+---
+
+# Deploy Command
+
+Deploy your application...
+```
+
+**✅ CORRECT - Agent file:**
+```markdown
+---
+description: Expert agent for platform X with comprehensive knowledge of feature Y and feature Z
+---
+
+# Expert Agent
+
+Expert agent for platform X...
+```
+
+**✅ CORRECT - Skill file:**
+```markdown
+---
+description: Comprehensive knowledge about topic X covering features A, B, and C
+---
+
+# Knowledge Skill
+
+Comprehensive knowledge about topic X...
+```
+
+**❌ WRONG - Missing frontmatter (PLUGIN WILL NOT WORK!):**
+```markdown
+# Deploy Command
+
+Deploy your application...
+```
+
+### Frontmatter Validation Checklist
+
+Before considering ANY plugin complete:
+- [ ] Every file in `agents/*.md` has `---` frontmatter with `description`
+- [ ] Every file in `commands/*.md` has `---` frontmatter with `description`
+- [ ] Every file in `skills/*.md` has `---` frontmatter with `description`
+- [ ] Frontmatter starts at line 1 (no blank lines before `---`)
+- [ ] Frontmatter has closing `---` after description
+
+**FAILURE TO ADD FRONTMATTER = NON-FUNCTIONAL PLUGIN = TASK FAILURE**
+
+---
+
 ## Best Practices Enforced
 
 ✅ **Structure**
@@ -270,7 +351,7 @@ plugins/your-plugin-name/
 
 ✅ **Quality**
 - Valid JSON syntax
-- Proper frontmatter
+- **YAML frontmatter with description in ALL agent/command/skill markdown files**
 - Error handling
 - Security considerations
 
