@@ -1,5 +1,3 @@
 {
-  "enabledPlugins": {
-    "plugin-master@claude-plugin-marketplace": true
-  }
+  "enabledPlugins": {}
 }

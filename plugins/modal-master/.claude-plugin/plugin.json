@@ -1,6 +1,6 @@
 {
   "name": "modal-master",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Comprehensive Modal.com serverless cloud platform expertise. GPU-accelerated Python functions, web endpoints, scheduled tasks, and AI/ML deployments with automatic scaling and per-second billing. PROACTIVELY activate for: (1) ANY Modal.com task, (2) GPU configuration (T4, L4, A10G, L40S, A100, H100, H200, B200), (3) Container images and dependencies, (4) Web endpoints (FastAPI, ASGI, WSGI), (5) Scheduling (cron, periodic), (6) Volumes and secrets management, (7) Parallel processing (map, starmap, spawn), (8) Container lifecycle (@modal.enter, @modal.exit), (9) Deployment and CI/CD, (10) Cost optimization and pricing. Provides: Complete GPU selection guide with pricing, image building best practices, web endpoint patterns, scheduling syntax, storage primitives (Volume, Dict, Queue), parallel processing patterns, lifecycle hooks, CLI commands, GitHub Actions deployment, pricing tiers and optimization strategies.",
   "author": {
     "name": "Claude Plugin Marketplace",
