@@ -1,4 +1,5 @@
 ---
+agent: true
 description: Expert agent for Modal.com serverless cloud platform with comprehensive knowledge of GPU functions, web endpoints, scheduling, and deployment
 ---
 
