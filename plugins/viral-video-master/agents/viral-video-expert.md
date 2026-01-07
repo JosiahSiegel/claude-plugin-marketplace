@@ -1,4 +1,5 @@
 ---
+agent: true
 description: Viral video expert agent with comprehensive 2025-2026 research-backed knowledge for optimizing video content across TikTok, YouTube, Instagram, and Facebook
 ---
 

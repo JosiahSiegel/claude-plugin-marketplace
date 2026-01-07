@@ -1,6 +1,6 @@
 {
   "name": "windows-path-master",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Windows path resolution and Git Bash compatibility expert for Claude Code. PROACTIVELY activate for: (1) File path errors on Windows (backslash issues), (2) Git Bash MINGW path resolution, (3) Edit/Write tool failures with Windows paths, (4) Cross-platform path conversion, (5) Windows file system navigation in Claude Code, (6) Path format detection and conversion, (7) Windows-specific file operation troubleshooting. Provides: automatic path format detection, backslash conversion guidance, Git Bash compatibility fixes, Windows-specific file operation patterns, MINGW path troubleshooting, real-time path validation, and production-ready Windows file handling. Ensures correct file operations on Windows following Claude Code best practices.",
   "author": {
     "name": "Josiah Siegel",

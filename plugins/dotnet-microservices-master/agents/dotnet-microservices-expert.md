@@ -1,4 +1,5 @@
 ---
+agent: true
 description: .NET microservices architecture expert for containerized applications, Kubernetes deployment, and distributed system design
 ---
 

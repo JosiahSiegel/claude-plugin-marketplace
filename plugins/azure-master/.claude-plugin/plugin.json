@@ -1,6 +1,6 @@
 {
   "name": "azure-master",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Complete Azure cloud expertise system with 2025 features including AKS Automatic, Container Apps GPU support, and Deployment Stacks. PROACTIVELY activate for: (1) ANY Azure resource provisioning or management, (2) AKS Automatic with Karpenter autoscaling, (3) Container Apps with serverless GPU and Dapr integration, (4) Azure OpenAI GPT-5 and reasoning models (o4-mini, o3), (5) Deployment Stacks for infrastructure lifecycle management, (6) Bicep v0.37+ with externalInput() and custom extensions, (7) Azure CLI 2.79+ with latest breaking changes, (8) SRE Agent integration for monitoring and incident response, (9) Azure AI Foundry model deployment, (10) Security, networking, and cost optimization. Provides: AKS Automatic GA features, Container Apps GPU workloads, Deployment Stacks best practices, latest Azure OpenAI models, Bicep 2025 patterns, Azure CLI expertise, comprehensive service configurations (compute, networking, storage, databases, AI/ML), Well-Architected Framework guidance, high availability patterns, security hardening, cost optimization strategies, and production-ready configurations. Ensures enterprise-ready, secure, scalable Azure infrastructure following Microsoft 2025 standards.",
   "author": {
     "name": "Josiah Siegel",

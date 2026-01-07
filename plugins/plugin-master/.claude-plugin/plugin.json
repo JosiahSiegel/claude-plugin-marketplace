@@ -1,6 +1,6 @@
 {
   "name": "plugin-master",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Complete Claude Code plugin development system for 2025. PROACTIVELY activate when users want to: (1) Create/build/make plugins with 2025 features, (2) Add Agent Skills/commands/agents/hooks, (3) Test and validate plugins, (4) Configure repository-level plugin distribution, (5) Implement MCP server integration, (6) Setup automated workflows with hooks, (7) Publish to marketplace, (8) Get plugin development guidance. Autonomously creates production-ready plugins with: plugin.json manifest, slash commands, specialized agents, Agent Skills (progressive disclosure, unbounded capacity), hooks (nine event types), MCP servers, testing automation, repository configuration (.claude/settings.json), comprehensive README. Uses evaluation-driven development and structural scalability patterns. ALWAYS fetches latest official documentation. Includes plugin-architect agent and advanced-features-2025 skill. NEW in 2.2.0: Git Bash/MinGW compatibility guidance, shell detection for plugin testing, path conversion troubleshooting for Windows development environments.",
   "author": {
     "name": "Josiah Siegel",

@@ -1,4 +1,5 @@
 ---
+agent: true
 description: fal.ai expert agent for generative AI models, image/video generation, serverless deployment, and GPU compute optimization
 ---
 

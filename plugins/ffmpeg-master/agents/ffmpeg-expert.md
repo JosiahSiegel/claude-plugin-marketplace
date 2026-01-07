@@ -1,4 +1,5 @@
 ---
+agent: true
 description: FFmpeg expert agent with comprehensive knowledge of video/audio processing, encoding, streaming, and optimization
 ---
 

@@ -1,4 +1,5 @@
 ---
+agent: true
 description: React expert agent for React 19 components, hooks, state management, performance optimization, and testing best practices
 ---
 

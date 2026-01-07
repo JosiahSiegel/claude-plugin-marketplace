@@ -1,4 +1,5 @@
 ---
+agent: true
 description: Python expert agent for modern Python 3.11+ development, FastAPI, async programming, testing, and cloud deployment
 ---
 

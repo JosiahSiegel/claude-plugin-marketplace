@@ -27,7 +27,10 @@
       "Bash(do echo \"=== $dir ===\")",
       "Bash(if [ -f \"$dir/.claude-plugin/plugin.json\" ])",
       "Bash(then cat \"$dir/.claude-plugin/plugin.json\")",
-      "Bash(else echo \"NO plugin.json\")"
+      "Bash(else echo \"NO plugin.json\")",
+      "Bash(python fix_skills.py:*)",
+      "Bash(python fix_agents.py:*)",
+      "mcp__context7__query-docs"
     ],
     "deny": [],
     "ask": []

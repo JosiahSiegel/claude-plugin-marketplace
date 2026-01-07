@@ -1,6 +1,6 @@
 {
   "name": "nextjs-master",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Comprehensive Next.js 15 expertise system covering App Router, Server Components, Server Actions, caching, middleware, authentication, and deployment. PROACTIVELY activate for: (1) ANY Next.js task, (2) App Router layouts/pages/loading/error, (3) Server Components and Client Components, (4) Server Actions for mutations, (5) Data fetching and caching strategies, (6) Route Handlers (API routes), (7) Middleware for auth/i18n/redirects, (8) Dynamic and parallel routes, (9) Authentication with NextAuth.js, (10) Deployment (Vercel, Docker, static export). Provides: Next.js 15 complete features, App Router file conventions, Server/Client Component patterns, Server Actions with useActionState, caching (Data Cache, Full Route Cache, Router Cache), revalidatePath/revalidateTag, middleware patterns, advanced routing (parallel, intercepting), NextAuth.js authentication, deployment strategies.",
   "author": {
     "name": "Josiah Siegel",

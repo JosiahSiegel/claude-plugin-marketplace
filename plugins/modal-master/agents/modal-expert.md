@@ -730,6 +730,42 @@ modal app list
 modal app stop my-app
 ```
 
+#### Logs and Monitoring
+
+```bash
+# Stream logs from deployed app (real-time, runs indefinitely)
+modal app logs my-app
+
+# IMPORTANT: To avoid indefinite streaming, use timeout or head:
+timeout 30 modal app logs my-app    # Stop after 30 seconds
+modal app logs my-app | head -100   # Get first 100 lines then exit
+
+# View logs for specific app (by name or ID)
+modal app logs my-app
+modal app logs ap-123456
+
+# Add timestamps to log output
+modal app logs --timestamps my-app
+
+# JSON format output (useful for parsing)
+modal app logs --json my-app
+
+# Enable debug logging during development
+MODAL_LOGLEVEL=DEBUG modal run app.py
+
+# Stream logs during run (also runs until app completes)
+modal run --stream-logs app.py
+
+# View deployment history
+modal app history my-app
+```
+
+**Log Command Behavior:**
+- `modal app logs` streams logs in **real-time** and runs **indefinitely** until interrupted (Ctrl+C)
+- Use `timeout <seconds>` prefix to auto-terminate after a duration
+- Use `| head -n <lines>` to capture a fixed number of log lines
+- For CI/CD, always use timeout or head to prevent hung pipelines
+
 #### Resources
 
 ```bash

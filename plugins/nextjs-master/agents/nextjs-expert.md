@@ -1,4 +1,5 @@
 ---
+agent: true
 description: Next.js expert agent for App Router, Server Components, Server Actions, caching, authentication, and deployment
 ---
 

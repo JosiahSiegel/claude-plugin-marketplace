@@ -1,6 +1,6 @@
 {
   "name": "powershell-master",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Complete PowerShell 7.5/7.6 expertise system across ALL platforms (Windows/Linux/macOS) with 2025 breaking changes coverage and shell detection. PROACTIVELY activate for: (1) ANY PowerShell task (scripts/modules/cmdlets), (2) PowerShell 7.5/7.6 new features (ConvertTo-CliXml, Test-Path time filtering, PSResourceGet), (3) 2025 migrations (MSOnline/AzureAD retirement, PowerShell 2.0 removal, WMIC replacement), (4) Modern security (JEA, WDAC, Constrained Language Mode), (5) CI/CD automation (GitHub Actions/Azure DevOps/Bitbucket), (6) PSResourceGet package management (2x faster than PowerShellGet), (7) Azure Az 14.5.0 with zone redundancy, (8) Microsoft.Graph 2.32.0 automation, (9) Cross-platform scripting with .NET 9 performance, (10) Shell detection and cross-shell compatibility (PowerShell vs Git Bash/MSYS2). Provides: PowerShell 7.5.4 stable / 7.6 preview features, 2025 breaking changes guidance, MSOnline/AzureAD to Microsoft.Graph migration paths, PSResourceGet adoption patterns, latest security best practices (JEA, WDAC), popular module expertise (Az 14.5.0, Microsoft.Graph 2.32.0, PnP, AWS Tools), shell detection on Windows (PowerShell vs Git Bash), path conversion knowledge, and production-ready 2025 automation patterns.",
   "author": {
     "name": "Josiah Siegel",

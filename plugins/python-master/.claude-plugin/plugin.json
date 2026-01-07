@@ -1,6 +1,6 @@
 {
   "name": "python-master",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Comprehensive Python 3.13+ expertise system covering modern Python development, async programming, type hints, performance optimization, and cloud deployment. PROACTIVELY activate for: (1) ANY Python task, (2) Python 3.13+ features (free-threading, JIT), (3) asyncio and concurrent programming, (4) Type hints and mypy/pyright, (5) Package management (uv, pip, poetry), (6) Project structure (src layout, pyproject.toml), (7) FastAPI and web development, (8) Pydantic data validation, (9) Testing (pytest, coverage), (10) Cloudflare Workers/Containers Python, (11) GitHub Actions Python workflows, (12) Performance optimization and profiling, (13) Security best practices (OWASP), (14) Ruff linting and formatting. Provides: Python 3.13 free-threading and JIT, asyncio patterns, comprehensive type hints, uv package management, FastAPI production patterns, Pydantic vs dataclass guidance, pytest testing, Cloudflare Python optimization, GitHub Actions caching, memory profiling, security hardening.",
   "author": {
     "name": "Josiah Siegel",
