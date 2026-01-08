@@ -433,8 +433,8 @@
     {
       "name": "ffmpeg-master",
       "source": "./plugins/ffmpeg-master",
-      "description": "Complete FFmpeg expertise system with FFmpeg 7.1/8.0 features, hardware acceleration, Docker/containers, Cloudflare Workers/Containers, CI/CD, streaming, and audio processing. PROACTIVELY activate for: (1) ANY FFmpeg task (encoding, transcoding, streaming), (2) Video format conversion, (3) Hardware acceleration (NVENC, CUDA, QSV, VAAPI, AMF, Vulkan), (4) Docker container FFmpeg usage, (5) Cloudflare Workers/Containers video processing, (6) GitHub Actions CI pipeline video processing, (7) Live streaming (RTMP, HLS, DASH, SRT), (8) Audio encoding/normalization (AAC, MP3, EBU R128), (9) Quality optimization (CRF, presets), (10) FFmpeg debugging, (11) VVC/H.266, AV1, HEVC encoding. Provides: FFmpeg 8.0 Huffman features (Whisper AI, Vulkan codecs), FFmpeg 7.1 LTS features (VVC, MV-HEVC), hardware acceleration guides, Docker best practices, Cloudflare Containers native FFmpeg, WebAssembly (ffmpeg.wasm) patterns, CI/CD optimization, streaming protocols, audio workflows, and production-ready configurations.",
-      "version": "1.0.1",
+      "description": "Complete FFmpeg expertise system with comprehensive coverage of FFmpeg 8.0.1 (2025-11-20) features, hardware acceleration (NVIDIA NVENC, Intel QSV, AMD AMF, VAAPI, Vulkan), Docker/container usage, Modal.com serverless containers (CPU/GPU), Cloudflare Workers/WebAssembly (ffmpeg.wasm), CI/CD runner optimization (GitHub Actions), live streaming (RTMP/HLS/DASH/SRT/WebRTC/WHIP), audio processing and normalization, encoding optimization (CRF, presets, quality tuning), and common gotchas/troubleshooting. PROACTIVELY activate for: (1) ANY FFmpeg task (encoding, transcoding, streaming, filtering), (2) Video format conversion (MP4, WebM, MKV, AVI), (3) Hardware acceleration setup (NVENC, CUDA, QSV, VAAPI, AMF, Vulkan), (4) Docker container FFmpeg usage (jrottenberg/ffmpeg, linuxserver/ffmpeg), (5) Modal.com serverless video processing (GPU/CPU containers, parallel processing, volumes), (6) Browser/WebAssembly FFmpeg (ffmpeg.wasm), (7) Cloudflare Workers video processing, (8) GitHub Actions/CI pipeline video processing, (9) Live streaming setup (RTMP ingest, HLS/DASH/WHIP/WebRTC delivery), (10) Audio encoding/normalization (AAC, MP3, loudnorm, EBU R128), (11) Quality optimization (CRF, bitrate, presets), (12) FFmpeg debugging and error resolution, (13) VVC/H.266, AV1, HEVC encoding, (14) Filter graphs and complex filtergraphs, (15) Batch processing and automation, (16) Whisper AI subtitle generation. Provides: FFmpeg 8.0.1 patch release features, FFmpeg 8.0 Huffman features (Whisper AI filter, Vulkan compute codecs for FFv1/ProRes RAW/AV1/VP9, APV codec, VVC VA-API/QSV decoding, WHIP muxer for WebRTC, colordetect/pad_cuda/scale_d3d11 filters, ProRes RAW decoder, RealVideo 6.0, G.728), FFmpeg 7.1 LTS features (VVC decoder, MV-HEVC for Apple Vision Pro, xHE-AAC, Vulkan H.264/H.265), hardware acceleration guides, Docker best practices, Modal.com parallel processing patterns, WebAssembly limitations and workarounds, CI/CD optimization strategies, streaming protocol guidance, audio processing workflows, encoding presets and recommendations, systematic debugging approaches, and production-ready 2025 configurations for all platforms.",
+      "version": "2.0.0",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -451,24 +451,59 @@
         "nvenc",
         "cuda",
         "qsv",
+        "vaapi",
         "hardware-acceleration",
         "docker",
-        "cloudflare-containers",
+        "modal",
+        "modal-com",
+        "serverless",
+        "parallel-processing",
+        "gpu-containers",
         "webassembly",
+        "wasm",
+        "cloudflare-workers",
         "github-actions",
+        "cicd",
         "h264",
         "h265",
+        "hevc",
         "av1",
         "vvc",
         "aac",
-        "normalization"
+        "mp3",
+        "normalization",
+        "loudnorm",
+        "subtitles",
+        "captions",
+        "srt",
+        "ass",
+        "vtt",
+        "waveform",
+        "visualization",
+        "spectrum",
+        "transitions",
+        "xfade",
+        "effects",
+        "shapes",
+        "drawbox",
+        "drawtext",
+        "overlay",
+        "graphics",
+        "whisper",
+        "speech-to-text",
+        "vulkan",
+        "apv",
+        "whip",
+        "webrtc",
+        "prores-raw",
+        "2025"
       ]
     },
     {
       "name": "tailwindcss-master",
       "source": "./plugins/tailwindcss-master",
-      "description": "Complete Tailwind CSS v4 expertise system with 2025 best practices. PROACTIVELY activate for: (1) ANY Tailwind CSS task, (2) Tailwind v4 CSS-first configuration (@theme, @utility, @custom-variant), (3) Responsive design and breakpoints, (4) Dark mode implementation, (5) Plugin integration (@tailwindcss/typography, @tailwindcss/forms), (6) Framework integration (React, Vue, Next.js, Vite), (7) Migration from v3 to v4, (8) Custom utility and component creation, (9) Debugging and troubleshooting, (10) Production build optimization. Provides: Tailwind v4.1 complete features, CSS-first @theme configuration, @utility and @custom-variant directives, PostCSS and Vite plugin setup, responsive breakpoints, dark mode patterns, typography and forms plugins, animation/transition utilities, framework integration patterns, performance optimization, and debugging techniques.",
-      "version": "1.0.1",
+      "description": "Complete Tailwind CSS v4 expertise system with 2025 best practices. PROACTIVELY activate for: (1) ANY Tailwind CSS task, (2) Tailwind v4 CSS-first configuration (@theme, @utility, @custom-variant), (3) Responsive design and dark mode implementation, (4) Performance optimization and JIT, (5) Plugin integration (@tailwindcss/typography, @tailwindcss/forms), (6) Framework integration (React, Vue, Next.js, Vite), (7) Migration from v3 to v4, (8) Custom utility and component creation, (9) Debugging and troubleshooting, (10) Production build optimization. Provides: Tailwind v4.1 complete features, CSS-first @theme configuration, @utility and @custom-variant directives, PostCSS and Vite plugin setup, responsive breakpoints, dark mode patterns (media/selector strategies), typography and forms plugins, animation/transition utilities, framework-specific integration patterns, performance optimization (tree-shaking, JIT), debugging techniques, VS Code extension setup, Prettier plugin configuration, and production-ready 2025 patterns. Ensures modern, performant, maintainable Tailwind CSS implementations.",
+      "version": "2.0.0",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -481,6 +516,7 @@
         "dark-mode",
         "v4",
         "theme",
+        "utility",
         "postcss",
         "vite",
         "react",
@@ -490,16 +526,21 @@
         "forms",
         "animation",
         "jit",
-        "performance"
+        "performance",
+        "container-queries",
+        "accessibility",
+        "oklch",
+        "design-system",
+        "2025"
       ]
     },
     {
       "name": "react-master",
       "source": "./plugins/react-master",
       "description": "Comprehensive React 19 expertise system covering Server Components, Client Components, hooks, state management, patterns, and testing. PROACTIVELY activate for: (1) ANY React task, (2) React 19 Server/Client Components, (3) Server Actions with 'use server', (4) React hooks (useState, useEffect, useRef, useMemo, useCallback, useTransition, useDeferredValue, useActionState, useOptimistic, useFormStatus), (5) State management (Context, Zustand, Jotai, TanStack Query, SWR), (6) Component patterns (compound, render props, HOC, custom hooks), (7) TypeScript with React, (8) Form handling (React Hook Form, Zod), (9) Performance optimization (React.memo, code splitting, virtualization), (10) Testing with Vitest/Jest and React Testing Library. Provides: React 19 complete features, use() hook for promises, Server Components architecture, Client Component patterns, all hooks with TypeScript, state management solutions, component patterns, forms and validation, performance optimization techniques, comprehensive testing patterns.",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "author": {
-        "name": "Claude Marketplace"
+        "name": "Josiah Siegel"
       },
       "keywords": [
         "react",
@@ -559,7 +600,7 @@
       "name": "python-master",
       "source": "./plugins/python-master",
       "description": "Comprehensive Python 3.13+ expertise system covering modern Python development, async programming, type hints, performance optimization, and cloud deployment. PROACTIVELY activate for: (1) ANY Python task, (2) Python 3.13+ features (free-threading, JIT), (3) asyncio and concurrent programming, (4) Type hints and mypy/pyright, (5) Package management (uv, pip, poetry), (6) Project structure (src layout, pyproject.toml), (7) FastAPI and web development, (8) Pydantic data validation, (9) Testing (pytest, coverage), (10) Cloudflare Workers/Containers Python, (11) GitHub Actions Python workflows, (12) Performance optimization and profiling, (13) Security best practices (OWASP), (14) Ruff linting and formatting. Provides: Python 3.13 free-threading and JIT, asyncio patterns, comprehensive type hints, uv package management, FastAPI production patterns, Pydantic vs dataclass guidance, pytest testing, Cloudflare Python optimization, GitHub Actions caching, memory profiling, security hardening.",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "author": {
         "name": "Josiah Siegel"
       },

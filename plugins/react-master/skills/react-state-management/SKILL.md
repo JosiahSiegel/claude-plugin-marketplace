@@ -814,3 +814,9 @@ const goodState = {
   },
 };
 ```
+
+## Additional References
+
+For detailed patterns and advanced use cases, see:
+
+- `references/zustand-patterns.md` - Advanced Zustand patterns including slices, middleware, and testing

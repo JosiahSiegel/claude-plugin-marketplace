@@ -1,5 +1,7 @@
 ---
+name: Debug FFmpeg
 description: Debug FFmpeg issues - analyze errors, validate files, troubleshoot encoding problems
+argument-hint: [file-or-error-message]
 ---
 
 ## CRITICAL GUIDELINES

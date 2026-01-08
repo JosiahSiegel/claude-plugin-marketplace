@@ -577,3 +577,9 @@ async def homepage(request):
 
 app = Starlette(routes=[Route("/", homepage)])
 ```
+
+## Additional References
+
+For production-ready patterns beyond this guide, see:
+
+- **[Async Patterns Library](references/async-patterns-library.md)** - Token bucket rate limiter, retry with exponential backoff, connection pools, batch processors, event bus, transaction context managers, async cache with TTL, graceful shutdown handlers

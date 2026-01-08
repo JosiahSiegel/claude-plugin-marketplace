@@ -617,3 +617,9 @@ async def test_create_user(client: AsyncClient):
     assert response.status_code == 201
     assert response.json()["email"] == "test@example.com"
 ```
+
+## Additional References
+
+For advanced patterns beyond this guide, see:
+
+- **[Dependency Injection Patterns](references/dependency-injection-patterns.md)** - Type aliases (DbSession, CurrentUser, AdminUser), pagination dependencies, sorting/filtering, service layer patterns, request context, feature flags, rate limiting, caching dependencies

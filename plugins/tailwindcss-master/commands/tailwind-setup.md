@@ -1,5 +1,7 @@
 ---
+name: tailwind-setup
 description: Set up Tailwind CSS v4 with optimal configuration for your project and framework
+argument-hint: "[framework] e.g., 'nextjs', 'vite react', 'vue', 'astro'"
 ---
 
 ## CRITICAL GUIDELINES

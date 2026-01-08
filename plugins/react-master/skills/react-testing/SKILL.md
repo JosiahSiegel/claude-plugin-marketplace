@@ -799,3 +799,9 @@ export function renderWithProviders(
 export * from '@testing-library/react';
 export { renderWithProviders as render };
 ```
+
+## Additional References
+
+For comprehensive testing patterns and recipes, see:
+
+- `references/testing-recipes.md` - Complete testing patterns for forms, async, hooks, mocking, and accessibility

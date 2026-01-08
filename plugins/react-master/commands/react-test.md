@@ -1,5 +1,7 @@
 ---
+name: react-test
 description: Create comprehensive tests for a React component using React Testing Library
+argument-hint: "ComponentName or path/to/Component.tsx"
 ---
 
 # Generate React Component Tests
@@ -7,7 +9,7 @@ description: Create comprehensive tests for a React component using React Testin
 Create comprehensive tests for a React component using React Testing Library.
 
 ## Arguments
-- `$ARGUMENTS` - Component name or file path to test
+- `$ARGUMENTS` - Component name or file path to test (e.g., "UserCard" or "src/components/UserCard.tsx")
 
 ## Instructions
 
@@ -154,4 +156,41 @@ it('increments counter', () => {
 
   expect(result.current.count).toBe(1);
 });
+```
+
+## Query Priority (Best Practices)
+
+1. **Accessible queries (preferred)**
+   - `getByRole` - Most semantic
+   - `getByLabelText` - Form elements
+   - `getByPlaceholderText` - Input placeholders
+   - `getByText` - Non-interactive elements
+   - `getByDisplayValue` - Current input value
+
+2. **Semantic queries**
+   - `getByAltText` - Images
+   - `getByTitle` - Title attribute
+
+3. **Test IDs (last resort)**
+   - `getByTestId` - When no semantic option exists
+
+## Mocking Best Practices
+
+```tsx
+// Mock fetch
+global.fetch = vi.fn().mockResolvedValue({
+  ok: true,
+  json: () => Promise.resolve({ data: 'test' }),
+});
+
+// Mock modules
+vi.mock('@/lib/api', () => ({
+  fetchUsers: vi.fn(),
+}));
+
+// Mock router
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({ push: vi.fn() }),
+  useParams: () => ({ id: '123' }),
+}));
 ```

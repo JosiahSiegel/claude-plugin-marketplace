@@ -1,5 +1,7 @@
 ---
+name: python-test
 description: Run tests with pytest and display coverage report
+argument-hint: "[test-path] [-k pattern] [-x] [--cov] [--parallel]"
 ---
 
 # Run Python Tests

@@ -623,3 +623,9 @@ def parse_json(text: str) -> JsonValue:
     import json
     return json.loads(text)
 ```
+
+## Additional References
+
+For advanced typing patterns beyond this guide, see:
+
+- **[Advanced Typing Patterns](references/advanced-typing-patterns.md)** - Generic repository pattern, discriminated unions, builder pattern with Self, ParamSpec decorators, conditional types with overloads, typed decorator factories, Protocols with class methods, typed context variables, recursive types, typed event systems

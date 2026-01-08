@@ -908,3 +908,9 @@ function Good({ condition }) {
   }
 }
 ```
+
+## Additional References
+
+For production-ready custom hook implementations, see:
+
+- `references/custom-hooks-library.md` - Complete library of reusable custom hooks

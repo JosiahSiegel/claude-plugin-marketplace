@@ -1,5 +1,7 @@
 ---
+name: Transcode Video
 description: Transcode video/audio with FFmpeg using optimal settings for target format, quality, and compatibility
+argument-hint: <input-file> [target-format] [quality]
 ---
 
 ## CRITICAL GUIDELINES

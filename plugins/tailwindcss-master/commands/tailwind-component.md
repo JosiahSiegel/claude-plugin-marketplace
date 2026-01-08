@@ -1,5 +1,7 @@
 ---
+name: tailwind-component
 description: Create reusable Tailwind CSS components with proper patterns
+argument-hint: "<component-type> e.g., 'button', 'card', 'modal', 'form input'"
 ---
 
 ## CRITICAL GUIDELINES

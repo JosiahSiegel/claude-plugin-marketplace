@@ -1,5 +1,7 @@
 ---
+name: Setup Streaming
 description: Set up live streaming with FFmpeg - RTMP, HLS, DASH with optimal encoding settings
+argument-hint: <platform: twitch|youtube|hls|rtmp> [source]
 ---
 
 ## CRITICAL GUIDELINES

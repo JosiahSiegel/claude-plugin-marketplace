@@ -1,5 +1,7 @@
 ---
+name: react-hook
 description: Create a custom React hook following best practices
+argument-hint: "useHookName - description of functionality"
 ---
 
 # Generate React Custom Hook
@@ -7,7 +9,7 @@ description: Create a custom React hook following best practices
 Create a custom React hook following best practices.
 
 ## Arguments
-- `$ARGUMENTS` - Hook name and description (e.g., "useDebounce - debounce a value with delay")
+- `$ARGUMENTS` - Hook name and description (e.g., "useDebounce - debounce a value with delay" or "useLocalStorage - persist state to localStorage")
 
 ## Instructions
 
@@ -32,6 +34,7 @@ Create a custom hook based on the provided name and description:
    - [ ] Memoization where appropriate
    - [ ] Handles edge cases
    - [ ] TypeScript types for all parameters and returns
+   - [ ] SSR-safe (check for `window`/`document`)
 
 4. **File Location**
    - Place in hooks/ directory
@@ -123,3 +126,62 @@ function useMediaQuery(query: string) {
   return matches;
 }
 ```
+
+### Ref-Based Pattern
+```tsx
+function useClickOutside<T extends HTMLElement>(handler: () => void) {
+  const ref = useRef<T>(null);
+
+  useEffect(() => {
+    const listener = (event: MouseEvent | TouchEvent) => {
+      if (!ref.current || ref.current.contains(event.target as Node)) {
+        return;
+      }
+      handler();
+    };
+
+    document.addEventListener('mousedown', listener);
+    document.addEventListener('touchstart', listener);
+
+    return () => {
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
+    };
+  }, [handler]);
+
+  return ref;
+}
+```
+
+### Storage Pattern (SSR-Safe)
+```tsx
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    if (typeof window === 'undefined') {
+      return initialValue;
+    }
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  });
+
+  const setValue = useCallback((value: T | ((prev: T) => T)) => {
+    setStoredValue((prev) => {
+      const newValue = value instanceof Function ? value(prev) : value;
+      window.localStorage.setItem(key, JSON.stringify(newValue));
+      return newValue;
+    });
+  }, [key]);
+
+  return [storedValue, setValue] as const;
+}
+```
+
+## Rules of Hooks Reminder
+
+1. **Only call hooks at the top level** - Never inside loops, conditions, or nested functions
+2. **Only call hooks from React functions** - Function components or custom hooks
+3. **Consistent order** - Hooks must be called in the same order every render

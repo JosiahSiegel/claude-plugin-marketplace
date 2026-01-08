@@ -1,5 +1,7 @@
 ---
+name: Process Audio
 description: Process audio with FFmpeg - extraction, conversion, normalization, and professional audio workflows
+argument-hint: <input-file> [operation: extract|convert|normalize]
 ---
 
 ## CRITICAL GUIDELINES

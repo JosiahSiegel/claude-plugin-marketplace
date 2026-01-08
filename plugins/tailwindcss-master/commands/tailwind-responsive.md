@@ -1,5 +1,7 @@
 ---
+name: tailwind-responsive
 description: Implement responsive designs with breakpoints and mobile-first patterns
+argument-hint: "[layout] e.g., 'card grid', 'sidebar layout', 'hero section'"
 ---
 
 ## CRITICAL GUIDELINES

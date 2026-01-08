@@ -1,5 +1,7 @@
 ---
+name: react-optimize
 description: Analyze and optimize a React component for better performance
+argument-hint: "ComponentName or path/to/Component.tsx"
 ---
 
 # Optimize React Component Performance

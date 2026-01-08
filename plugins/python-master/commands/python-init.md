@@ -1,5 +1,7 @@
 ---
+name: python-init
 description: Initialize a modern Python project with best practices configuration
+argument-hint: "[project-name] [--fastapi|--cli|--lib] [--minimal]"
 ---
 
 # Initialize Python Project

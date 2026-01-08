@@ -39,6 +39,13 @@ Use for **foundational FFmpeg operations**:
 
 **For specialized topics**: hardware encoding → `ffmpeg-hardware-acceleration`, streaming → `ffmpeg-streaming`, Docker → `ffmpeg-docker-containers`
 
+## Progressive Disclosure References
+
+For detailed documentation on FFmpeg 8.0 features, see the `references/` directory:
+- `references/vvc-h266-encoding.md` - Complete VVC/H.266 encoding guide with libvvenc
+- `references/whisper-transcription.md` - Whisper AI filter for speech-to-text and subtitles
+- `references/vulkan-compute-codecs.md` - Vulkan compute-based codecs (FFv1, AV1, VP9, ProRes RAW)
+
 ---
 
 # FFmpeg Fundamentals (2025)

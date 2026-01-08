@@ -1,5 +1,7 @@
 ---
+name: tailwind-debug
 description: Debug Tailwind CSS issues, missing styles, and configuration problems
+argument-hint: "[issue] e.g., 'classes not working', 'dark mode broken', 'build error'"
 ---
 
 ## CRITICAL GUIDELINES

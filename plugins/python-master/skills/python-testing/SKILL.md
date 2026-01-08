@@ -631,3 +631,9 @@ def test_user_can_post_bad():
     post = user.create_post("Hello")
     assert post.author == user
 ```
+
+## Additional References
+
+For production-ready fixture patterns beyond this guide, see:
+
+- **[Pytest Fixtures Cookbook](references/pytest-fixtures-cookbook.md)** - SQLAlchemy async sessions, PostgreSQL with Docker, user factories, generic model factories, authentication fixtures, external API mocks, time freezing, environment fixtures, file fixtures, parametrized fixtures, cleanup patterns, Redis fixtures

@@ -702,3 +702,9 @@ async function handleChart() {
 | Slow state updates | useTransition, useDeferredValue |
 | Image performance | Lazy loading, responsive images |
 | State too high | State colocation |
+
+## Additional References
+
+For comprehensive guides on specific optimization techniques, see:
+
+- `references/virtualization-guide.md` - Complete guide to virtualized lists with react-window, react-virtuoso, and @tanstack/react-virtual
