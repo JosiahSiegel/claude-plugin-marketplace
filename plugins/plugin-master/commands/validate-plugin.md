@@ -1,102 +1,162 @@
 ---
-description: Comprehensive validation of plugin structure, manifests, and configuration against 2025 standards
----
-
-## 🚨 CRITICAL GUIDELINES
-
-### Windows File Path Requirements
-
-**MANDATORY: Always Use Backslashes on Windows for File Paths**
-
-When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
-
-**Examples:**
-- ❌ WRONG: `D:/repos/project/file.tsx`
-- ✅ CORRECT: `D:\repos\project\file.tsx`
-
-This applies to:
-- Edit tool file_path parameter
-- Write tool file_path parameter
-- All file operations on Windows systems
-
-
-### Documentation Guidelines
-
-**NEVER create new documentation files unless explicitly requested by the user.**
-
-- **Priority**: Update existing README.md files rather than creating new documentation
-- **Repository cleanliness**: Keep repository root clean - only README.md unless user requests otherwise
-- **Style**: Documentation should be concise, direct, and professional - avoid AI-generated tone
-- **User preference**: Only create additional .md files when user specifically asks for documentation
-
-
+description: Validate plugin structure, manifests, and configuration against 2025 standards
+argument-hint: "[plugin-path]"
 ---
 
 # Validate Plugin
 
-Systematically validate plugin files against current Claude Code requirements and best practices.
+Systematically validate plugin files against Claude Code requirements and best practices.
 
-## Purpose
+## Process
 
-Pre-publishing validation that checks plugin.json schema, directory structure, component files, and marketplace compatibility. Identifies errors, warnings, and optimization opportunities.
+### Step 1: Locate Plugin
 
-## Instructions
+Use current directory or specified path:
 
-1. **Locate plugin** - Use current directory or specified path
-2. **Validate plugin.json** (2025 standards):
-   - Required field: `name`
-   - Schema validation: `author` as object, `version` as string, `keywords` as array
-   - Recommended fields: description, license, homepage, repository
-   - Check paths use ${CLAUDE_PLUGIN_ROOT} for portability
-   - Verify MCP servers use proper configuration format
-3. **Check directory structure**:
-   - `.claude-plugin/` contains plugin.json (and optionally .mcp.json)
-   - Component directories (commands/, agents/, skills/) at plugin root
-   - Files properly named (kebab-case, .md extensions)
-   - Hook configuration (hooks/hooks.json or inline in plugin.json)
-4. **Validate components** (2025 features):
-   - Commands have frontmatter with description
-   - Agents have proper frontmatter with capabilities
-   - Agent Skills have SKILL.md with name and description
-   - Hooks have valid event types (PreToolUse, PostToolUse, SessionStart, etc.)
-   - MCP servers reference valid commands and args
-5. **Check 2025 best practices**:
-   - Use of Agent Skills for dynamic knowledge loading
-   - Hooks configured for automated workflows
-   - Environment variables properly used (${CLAUDE_PLUGIN_ROOT})
-   - Repository-level configuration support (.claude/settings.json template)
-6. **Check marketplace.json** if present:
-   - Validate owner structure
-   - Check plugin entries have required fields
-   - Verify source paths are correct (relative paths start with ./)
-   - Confirm descriptions and keywords are synchronized
-7. **Report findings** with severity levels and actionable fixes
+```bash
+PLUGIN_PATH="${1:-.}"
+```
 
-## Validation Checklist
+### Step 2: Validate plugin.json
+
+**Check location:**
+- Must be at `.claude-plugin/plugin.json`
+
+**Check required fields:**
+- `name` - Present and kebab-case
+
+**Check field formats:**
+- `author` - Must be object `{ "name": "..." }`, NOT string
+- `version` - Must be string `"1.0.0"`, NOT number
+- `keywords` - Must be array `["word1"]`, NOT string
+
+**Check for deprecated fields:**
+- `agents`, `skills`, `slashCommands` should NOT be in plugin.json
+
+### Step 3: Check Directory Structure
+
+```
+plugin-name/
+├── .claude-plugin/
+│   └── plugin.json          # Required
+├── commands/                 # Optional, auto-discovered
+├── agents/                   # Optional, auto-discovered
+├── skills/                   # Optional, auto-discovered
+│   └── skill-name/
+│       └── SKILL.md
+└── hooks/
+    └── hooks.json           # Optional
+```
+
+### Step 4: Validate Components
+
+**For each command in commands/:**
+- Check frontmatter exists (starts with `---`)
+- Check `description` field present
+
+**For each agent in agents/:**
+- Check frontmatter exists
+- Check required fields: `name`, `description`, `model`, `color`
+- Check `<example>` blocks in description
+
+**For each skill in skills/*/:**
+- Check SKILL.md exists
+- Check frontmatter exists
+- Check `description` field present
+
+**For hooks/hooks.json:**
+- Check valid JSON syntax
+- Check event names are valid
+
+### Step 5: Check marketplace.json (if present)
+
+If `.claude-plugin/marketplace.json` exists at repo root:
+- Check plugin is registered
+- Check source path is correct
+- Check descriptions match
+
+## Validation Report
+
+Generate report with:
+
+```
+================================
+Plugin Validation Report
+================================
+
+Plugin: plugin-name
+Path: /path/to/plugin
+
+✓ plugin.json found
+✓ Valid JSON syntax
+✓ Name: plugin-name
+✓ Author is object format
+✓ Version: 1.0.0
+
+Components:
+✓ 1 agent(s) found
+✓ 2 skill(s) found
+✓ 1 command(s) found
+
+Warnings:
+- Consider adding keywords for discovery
+
+Errors:
+(none)
+
+================================
+PASSED
+================================
+```
+
+## Severity Levels
 
 **Critical (Must Fix):**
-- plugin.json exists and has valid JSON
-- name field present
-- author is object not string
-- version is string not number
-- keywords is array not string
+- plugin.json missing or invalid
+- Missing required fields
+- Wrong field types (author as string, etc.)
 
 **Warnings (Should Fix):**
-- Missing recommended fields (description, license)
-- Inconsistent naming conventions
-- Missing frontmatter in components
+- Missing recommended fields
+- Inconsistent naming
+- Missing frontmatter
 
 **Suggestions (Nice to Have):**
-- Add homepage and repository URLs
-- Expand keywords for better discovery
-- Add examples to README
+- Add more keywords
+- Add examples
+- Improve documentation
 
-## Example Usage
+## Usage
 
-```
+```bash
+# Validate current directory
 /validate-plugin
-/validate-plugin in plugins/my-plugin
-/validate-plugin before publishing
+
+# Validate specific path
+/validate-plugin plugins/my-plugin
+
+# Validate before publishing
+/validate-plugin . && echo "Ready to publish!"
 ```
 
-Returns structured validation report with pass/fail status.
+## Quick Validation Script
+
+Run validation script directly:
+
+```bash
+${CLAUDE_PLUGIN_ROOT}/scripts/validate-plugin.sh [path]
+```
+
+## Checklist
+
+Before publishing:
+
+- [ ] plugin.json has valid syntax
+- [ ] `name` is kebab-case
+- [ ] `author` is an object
+- [ ] `version` is a string
+- [ ] `keywords` is an array
+- [ ] No `agents`/`skills`/`slashCommands` fields
+- [ ] All components have frontmatter
+- [ ] Agent has `<example>` blocks
+- [ ] Registered in marketplace.json (if applicable)

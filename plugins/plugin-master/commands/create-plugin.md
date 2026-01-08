@@ -1,124 +1,143 @@
 ---
 description: Create a comprehensive Claude Code plugin with all necessary components and marketplace structure
----
-
-## 🚨 CRITICAL GUIDELINES
-
-### Windows File Path Requirements
-
-**MANDATORY: Always Use Backslashes on Windows for File Paths**
-
-When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
-
-**Examples:**
-- ❌ WRONG: `D:/repos/project/file.tsx`
-- ✅ CORRECT: `D:\repos\project\file.tsx`
-
-This applies to:
-- Edit tool file_path parameter
-- Write tool file_path parameter
-- All file operations on Windows systems
-
-
-### Documentation Guidelines
-
-**NEVER create new documentation files unless explicitly requested by the user.**
-
-- **Priority**: Update existing README.md files rather than creating new documentation
-- **Repository cleanliness**: Keep repository root clean - only README.md unless user requests otherwise
-- **Style**: Documentation should be concise, direct, and professional - avoid AI-generated tone
-- **User preference**: Only create additional .md files when user specifically asks for documentation
-
-
+argument-hint: "[plugin-name or description]"
 ---
 
 # Create Plugin
 
-Autonomously create production-ready Claude Code plugins with complete structure, documentation, and marketplace packaging.
+Create production-ready Claude Code plugins with complete structure, documentation, and marketplace packaging.
 
-## Purpose
+## Process
 
-Guides Claude through the complete plugin creation workflow: fetching latest docs, generating all files (plugin.json, commands, agents, skills, README), creating marketplace structure, and providing installation instructions.
+### Step 1: Detect Context
 
-## Instructions
+Before creating files:
 
-1. **Fetch latest documentation** from docs.claude.com (plugins-reference, plugin-marketplaces)
-2. **Detect repository context** - Check git config for author info and marketplace.json existence
-3. **Infer requirements** from user request - Only ask questions if genuinely ambiguous
-4. **Create comprehensive structure**:
-   - Plugin manifest with all appropriate metadata fields
-   - Commands, agents, and Agent Skills as needed (2025: Skills are auto-discovered from skills/ directory)
-   - Hooks for automated workflows (PreToolUse, PostToolUse, SessionStart, etc.)
-   - MCP servers for external integrations (inline in plugin.json or .mcp.json)
-   - Complete README with examples and installation instructions
-   - Marketplace structure if not in existing marketplace repo
-5. **Apply 2025 best practices**:
-   - Use Agent Skills for dynamic knowledge loading
-   - Configure hooks for automated validation and testing
-   - Support repository-level plugin configuration via .claude/settings.json
-   - Use ${CLAUDE_PLUGIN_ROOT} environment variable for portable paths
-6. **Validate plugin.json schema** - **CRITICAL RULES**:
-   - ✅ `repository` must be a **string URL**, NOT an object
-   - ✅ `agents` field is **NOT needed** - auto-discovered from `agents/` directory
-   - ✅ `skills` field is **NOT needed** - auto-discovered from `skills/` directory
-   - ✅ `commands` field is **optional** - auto-discovered from `commands/` directory by default
-   - ✅ Only include: name, version, description, author (object), homepage, repository (string), license, keywords (array)
-   - ❌ NEVER include `agents: {...}` or `skills: {...}` in plugin.json - these cause validation errors
-7. **🚨 MANDATORY: Register in marketplace.json** (NON-NEGOTIABLE):
-   - **FIRST**: Check if `.claude-plugin/marketplace.json` exists at repo root
-   - **IF EXISTS**: Read it and add new plugin entry to `plugins` array
-   - **FORMAT**: `{"name": "plugin-name", "source": "./plugins/plugin-name", "description": "...", "version": "1.0.0", "author": {"name": "..."}, "keywords": [...]}`
-   - **SYNCHRONIZE**: Descriptions must match between plugin.json, marketplace.json, and README.md
-   - **⚠️ PLUGIN CREATION IS NOT COMPLETE UNTIL REGISTERED IN MARKETPLACE.JSON ⚠️**
-8. **Update README.md** - Add plugin to appropriate category
-9. **Provide clear instructions** for GitHub-first installation and repository-level configuration
+1. **Check for marketplace repo:**
+   ```bash
+   if [[ -f .claude-plugin/marketplace.json ]]; then
+       # Create in plugins/ subdirectory
+       PLUGIN_DIR="plugins/PLUGIN_NAME"
+   else
+       # Create in current directory
+       PLUGIN_DIR="PLUGIN_NAME"
+   fi
+   ```
 
-## Best Practices
+2. **Get author from git config:**
+   ```bash
+   AUTHOR_NAME=$(git config user.name)
+   AUTHOR_EMAIL=$(git config user.email)
+   ```
 
-### Plugin Design Philosophy (2025)
+### Step 2: Create Structure
 
-**Agent-First, Minimal Commands:**
-- **Primary interface:** Expert agent that users interact with conversationally
-- **Minimal commands:** Only 0-2 slash commands per plugin for specific, high-value workflows
-- **Why:** Users want to invoke domain expertise, not navigate command menus
-- **Commands only for:** Automated workflows, batch operations, or specialized utilities
-- **Agent handles:** Questions, guidance, code generation, troubleshooting, best practices
+Create required directories:
 
-**Agent Naming Standard:**
-- **CRITICAL:** Every plugin must have exactly ONE primary agent named `{domain}-expert`
-- **Pattern:** `docker-master` → agent named `docker-expert`
-- **Pattern:** `terraform-master` → agent named `terraform-expert`
-- **Why:** Predictable names allow Claude to reliably invoke the correct agent
-- **Never:** Use multiple specialized agents or non-standard names
-
-**Examples:**
-- ✅ `dotnet-microservices-master`: 0 commands, 1 agent (`dotnet-microservices-expert`)
-- ✅ `docker-master`: 0 commands, 1 agent (`docker-expert`)
-- ❌ OLD: 10+ commands + multiple agents - overwhelming and unpredictable!
-
-**Default to action, not questions** - infer intent from context
-- Include agent and Agent Skills by default
-- Commands only when genuinely needed for automation
-- Use detected git config values for author fields (never use placeholders)
-- Create in plugins/ subdirectory if marketplace.json exists at repo root
-- **ALWAYS update `.claude-plugin/marketplace.json` when adding plugins to a marketplace repository**
-- Synchronize descriptions and keywords between plugin.json, marketplace.json, and README.md
-- Add hooks for common automation needs (testing, linting, validation)
-- Use ${CLAUDE_PLUGIN_ROOT} for all internal paths (scripts, configs, MCP servers)
-- Include .claude/settings.json template for team distribution
-- Leverage Agent Skills for dynamic, context-efficient knowledge delivery
-- Configure MCP servers inline in plugin.json for simpler distribution
-- Emphasize GitHub marketplace installation for cross-platform reliability (especially Windows/Git Bash)
-- Document shell detection for plugin testing ($MSYSTEM for Git Bash/MinGW)
-- Include path conversion guidance for Git Bash users developing plugins
-- Support repository-level automatic installation for team standardization
-
-## Example Usage
-
-```
-/create-plugin for Git workflow automation
-/create-plugin with deployment commands and rollback features
-/create-plugin that helps with code reviews and security scanning
+```bash
+mkdir -p $PLUGIN_DIR/.claude-plugin
+mkdir -p $PLUGIN_DIR/agents
+mkdir -p $PLUGIN_DIR/skills/domain-knowledge
 ```
 
-The plugin-master skill activates automatically to provide complete templates and current best practices.
+### Step 3: Create Files
+
+**Required files:**
+
+1. **`.claude-plugin/plugin.json`** - Plugin manifest
+2. **`agents/domain-expert.md`** - Primary expert agent
+3. **`README.md`** - Documentation
+
+**Optional files:**
+
+- `skills/domain-knowledge/SKILL.md` - Core knowledge skill
+- `commands/*.md` - Slash commands (0-2 max)
+- `hooks/hooks.json` - Event automation
+- `.mcp.json` - MCP server configuration
+
+### Step 4: Register in Marketplace
+
+**CRITICAL**: If `.claude-plugin/marketplace.json` exists at repo root, add the plugin entry:
+
+```json
+{
+  "name": "plugin-name",
+  "source": "./plugins/plugin-name",
+  "description": "Same as plugin.json description",
+  "version": "1.0.0",
+  "author": { "name": "Author Name" },
+  "keywords": ["keyword1", "keyword2"]
+}
+```
+
+## Plugin Design Rules
+
+### Agent-First Design
+
+- **Primary interface**: ONE expert agent named `{domain}-expert`
+- **Minimal commands**: Only 0-2 for specific automation workflows
+- **Naming**: `docker-master` → `docker-expert`
+
+### plugin.json Rules
+
+```json
+{
+  "name": "plugin-name",           // Required, kebab-case
+  "version": "1.0.0",              // String, not number
+  "description": "...",
+  "author": {                      // Object, NOT string
+    "name": "Name",
+    "email": "email@example.com"
+  },
+  "license": "MIT",
+  "keywords": ["word1", "word2"]   // Array, NOT string
+}
+```
+
+**DO NOT include**: `agents`, `skills`, `slashCommands` - these are auto-discovered
+
+### Agent Format
+
+```markdown
+---
+name: domain-expert
+description: |
+  Use this agent when... Examples:
+  <example>
+  Context: ...
+  user: "..."
+  assistant: "..."
+  <commentary>Why trigger</commentary>
+  </example>
+model: inherit
+color: blue
+---
+
+System prompt content...
+```
+
+## Validation
+
+After creating plugin, validate with:
+
+```bash
+${CLAUDE_PLUGIN_ROOT}/scripts/validate-plugin.sh plugins/plugin-name
+```
+
+Or use: `/validate-plugin`
+
+## Examples
+
+```
+/create-plugin for Docker workflow automation
+/create-plugin API testing helper
+/create-plugin deployment automation with rollback
+```
+
+## Tips
+
+- Infer requirements from context - don't ask unnecessary questions
+- Use git config values for author fields
+- Create progressive disclosure skills (SKILL.md + references/)
+- Include comprehensive README with installation instructions
+- Always register in marketplace.json if in marketplace repo

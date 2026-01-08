@@ -30,22 +30,23 @@
     {
       "name": "plugin-master",
       "source": "./plugins/plugin-master",
-      "description": "Complete Claude Code plugin development system for 2025. PROACTIVELY activate when users want to: (1) Create/build/make plugins with 2025 features, (2) Add Agent Skills/commands/agents/hooks, (3) Test and validate plugins, (4) Configure repository-level plugin distribution, (5) Implement MCP server integration, (6) Setup automated workflows with hooks, (7) Publish to marketplace, (8) Get plugin development guidance. Autonomously creates production-ready plugins with: plugin.json manifest, slash commands, specialized agents, Agent Skills (progressive disclosure, unbounded capacity), hooks (nine event types), MCP servers, testing automation, repository configuration (.claude/settings.json), comprehensive README. Uses evaluation-driven development and structural scalability patterns. ALWAYS fetches latest official documentation. NEW in 2.2.0: Git Bash/MinGW compatibility guidance, shell detection for plugin testing, path conversion troubleshooting for Windows development environments.",
-      "version": "2.2.1",
+      "description": "Complete Claude Code plugin development system. PROACTIVELY activate when users want to: (1) Create/build plugins with 2025 features, (2) Add skills/commands/agents/hooks, (3) Validate plugin structure, (4) Publish to marketplace, (5) Get plugin development guidance. Provides: agent-first design patterns, progressive disclosure skills, hook automation, MCP integration, marketplace publishing. Includes plugin-expert agent and validation utilities.",
+      "version": "3.0.0",
       "author": {
         "name": "Josiah Siegel"
       },
       "keywords": [
         "plugin",
-        "agentskills",
+        "development",
+        "skills",
         "hooks",
         "mcp",
-        "command",
-        "agent",
+        "commands",
+        "agents",
         "marketplace",
-        "publish",
-        "repository",
-        "automation"
+        "validation",
+        "automation",
+        "progressive-disclosure"
       ]
     },
     {
@@ -689,6 +690,38 @@
         "content-repurposing",
         "social-commerce",
         "shoppable-video"
+      ]
+    },
+    {
+      "name": "tsql-master",
+      "source": "./plugins/tsql-master",
+      "description": "Comprehensive T-SQL and SQL Server expertise for query optimization, performance tuning, and Azure SQL Database. PROACTIVELY activate for: (1) T-SQL query optimization and SARGability analysis, (2) SQL Server performance tuning, (3) Index design and strategy, (4) Execution plan analysis, (5) Parameter sniffing solutions, (6) Azure SQL Database optimization, (7) Window functions and advanced patterns, (8) Columnstore and In-Memory OLTP, (9) Query Store and IQP features. Includes: tsql-expert agent, 5 progressive disclosure skills, 3 optimization commands, diagnostic scripts.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "tsql",
+        "sql-server",
+        "azure-sql",
+        "query-optimization",
+        "performance-tuning",
+        "indexing",
+        "execution-plan",
+        "columnstore",
+        "in-memory-oltp",
+        "query-store",
+        "parameter-sniffing",
+        "intelligent-query-processing",
+        "database",
+        "microsoft",
+        "transact-sql",
+        "window-functions",
+        "cte",
+        "json",
+        "sargability",
+        "dmv",
+        "statistics"
       ]
     }
   ]
