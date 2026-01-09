@@ -1,5 +1,12 @@
 ---
 description: Create a Next.js Route Handler with proper HTTP methods and error handling
+argument-hint: "API route path and methods (e.g., 'posts with GET,POST', 'users/[id] with CRUD')"
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
 ---
 
 # Generate Next.js API Route
@@ -104,7 +111,7 @@ export async function POST(request: Request) {
 }
 ```
 
-### Dynamic Route Handler
+### Dynamic Route Handler (Next.js 16 - Async Params)
 ```tsx
 // app/api/posts/[id]/route.ts
 import { NextResponse } from 'next/server';
@@ -202,4 +209,95 @@ export async function GET() {
 
   return NextResponse.json(user);
 }
+```
+
+### Streaming Response
+```tsx
+// app/api/stream/route.ts
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  const encoder = new TextEncoder();
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      for (let i = 0; i < 10; i++) {
+        const data = JSON.stringify({ count: i, timestamp: Date.now() });
+        controller.enqueue(encoder.encode(`data: ${data}\n\n`));
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+      controller.close();
+    },
+  });
+
+  return new NextResponse(stream, {
+    headers: {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+    },
+  });
+}
+```
+
+### Route with Cache Headers
+```tsx
+// app/api/products/route.ts
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  const products = await db.products.findMany();
+
+  return NextResponse.json(products, {
+    headers: {
+      'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+    },
+  });
+}
+```
+
+### File Upload Route
+```tsx
+// app/api/upload/route.ts
+import { NextResponse } from 'next/server';
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
+
+export async function POST(request: Request) {
+  try {
+    const formData = await request.formData();
+    const file = formData.get('file') as File;
+
+    if (!file) {
+      return NextResponse.json(
+        { error: 'No file provided' },
+        { status: 400 }
+      );
+    }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    const filename = `${Date.now()}-${file.name}`;
+    const path = join(process.cwd(), 'public/uploads', filename);
+
+    await writeFile(path, buffer);
+
+    return NextResponse.json({
+      url: `/uploads/${filename}`,
+      filename,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Upload failed' },
+      { status: 500 }
+    );
+  }
+}
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 ```

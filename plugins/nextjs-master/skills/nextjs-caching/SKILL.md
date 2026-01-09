@@ -1,6 +1,6 @@
 ---
 name: nextjs-caching
-description: Complete Next.js caching system. PROACTIVELY activate for: (1) Understanding 4 caching layers (Request Memoization, Data Cache, Full Route Cache, Router Cache), (2) fetch() caching options, (3) Time-based revalidation, (4) On-demand revalidation with revalidatePath/revalidateTag, (5) unstable_cache for non-fetch, (6) Static generation with generateStaticParams, (7) Cache debugging. Provides: Caching strategies, revalidation patterns, ISR setup, cache headers. Ensures optimal performance with correct cache invalidation.
+description: Complete Next.js caching system with 'use cache' directive (Next.js 16). PROACTIVELY activate for: (1) Understanding 4 caching layers (Request Memoization, Data Cache, Full Route Cache, Router Cache), (2) Cache Components with 'use cache' directive, (3) fetch() caching options, (4) cacheLife() and cacheTag() functions, (5) Time-based revalidation, (6) On-demand revalidation with revalidatePath/revalidateTag, (7) Static generation with generateStaticParams, (8) Cache debugging. Provides: 'use cache' patterns, Cache Components, caching strategies, revalidation patterns, ISR setup, cache headers. Ensures optimal performance with correct cache invalidation.
 ---
 
 ## Quick Reference
@@ -11,6 +11,21 @@ description: Complete Next.js caching system. PROACTIVELY activate for: (1) Unde
 | Data Cache | Server | Persistent | Store fetch results |
 | Full Route Cache | Server | Persistent | Pre-rendered HTML/RSC |
 | Router Cache | Client | Session | Client-side navigation |
+
+### Next.js 16: 'use cache' Directive
+
+| Directive | Scope | Use Case |
+|-----------|-------|----------|
+| `'use cache'` | Default cache | General caching |
+| `'use cache: remote'` | CDN/Edge cache | Static shared content |
+| `'use cache: private'` | Per-user cache | User-specific data |
+
+| Cache Function | Code | Purpose |
+|----------------|------|---------|
+| `cacheLife('hours')` | Duration | Set cache lifetime |
+| `cacheTag('posts')` | Tagging | Enable targeted revalidation |
+
+### Fetch Options
 
 | Fetch Option | Code | Effect |
 |--------------|------|--------|

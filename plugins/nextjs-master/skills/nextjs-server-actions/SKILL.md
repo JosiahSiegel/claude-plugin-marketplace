@@ -1,6 +1,6 @@
 ---
 name: nextjs-server-actions
-description: Complete Next.js Server Actions system. PROACTIVELY activate for: (1) Defining Server Actions with 'use server', (2) Form handling with actions, (3) useActionState for form state, (4) useFormStatus for pending states, (5) Optimistic updates with useOptimistic, (6) Validation with Zod, (7) Authorization in actions, (8) File uploads, (9) Revalidation after mutations. Provides: Action patterns, form integration, validation, optimistic UI, error handling. Ensures secure server mutations with proper validation and UX.
+description: Complete Next.js Server Actions system (Next.js 15.5/16). PROACTIVELY activate for: (1) Defining Server Actions with 'use server', (2) Form handling with actions, (3) useActionState for form state, (4) useFormStatus for pending states, (5) Optimistic updates with useOptimistic, (6) Validation with Zod and next-safe-action, (7) Authorization in actions, (8) File uploads, (9) Revalidation after mutations, (10) Type-safe actions with next-safe-action library. Provides: Action patterns, form integration, validation, optimistic UI, error handling, next-safe-action integration. Ensures secure server mutations with proper validation and UX.
 ---
 
 ## Quick Reference

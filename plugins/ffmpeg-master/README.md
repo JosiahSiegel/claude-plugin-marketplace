@@ -1,6 +1,6 @@
-# FFmpeg Master Plugin
+# FFmpeg Master Plugin v2.1.0
 
-Master FFmpeg across all platforms with expert knowledge of encoding, streaming, hardware acceleration, containers, and production workflows.
+Master FFmpeg across all platforms with expert knowledge of encoding, streaming, hardware acceleration, containers, production workflows, and **advanced creative effects**.
 
 ## Overview
 
@@ -14,6 +14,8 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 - **`/ffmpeg-stream`** - Set up live streaming with RTMP, HLS, DASH, and platform-specific configurations
 - **`/ffmpeg-audio`** - Process audio with extraction, conversion, normalization, and professional workflows
 - **`/ffmpeg-debug`** - Debug FFmpeg issues, validate files, and troubleshoot encoding problems
+- **`/ffmpeg-effects`** - Apply creative video effects (glitch, datamosh, VHS, chromatic aberration, distortion)
+- **`/ffmpeg-color`** - Apply color grading, LUTs, chromakey (green screen), and cinematic color effects
 
 ### Agents
 
@@ -23,6 +25,9 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
   - Hardware acceleration (NVENC, QSV, AMF, VAAPI, Vulkan)
   - Streaming protocols (RTMP, HLS, DASH, SRT, WebRTC)
   - Production workflows and optimization
+  - **Color grading**: LUTs, curves, color balance, chromakey, green screen removal
+  - **Glitch/Distortion**: Datamosh, VHS effects, chromatic aberration, displacement
+  - **Karaoke/Animated text**: ASS karaoke timing, scrolling credits, kinetic typography
 
 ### Skills
 
@@ -39,6 +44,9 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 - **ffmpeg-waveforms-visualization** - Audio waveforms, spectrum analyzers, showwaves, showspectrum filters
 - **ffmpeg-transitions-effects** - Video transitions (xfade), fades, dissolves, wipes, slides, creative effects
 - **ffmpeg-shapes-graphics** - Drawing shapes, drawbox, drawtext, overlays, geometric patterns, graphics
+- **ffmpeg-color-grading-chromakey** - Professional color grading, LUTs, curves, chromakey, green screen removal, cinematic looks
+- **ffmpeg-glitch-distortion-effects** - Datamosh, VHS simulation, chromatic aberration, wave distortion, motion trails
+- **ffmpeg-karaoke-animated-text** - ASS karaoke with word-by-word highlighting, scrolling credits, kinetic typography
 
 ## Installation
 
@@ -361,6 +369,60 @@ ffmpeg -i video.mp4 \
   output.mp4
 ```
 
+### Example: Green Screen Composite
+
+```bash
+# Remove green screen and composite over background
+ffmpeg -i foreground.mp4 -i background.mp4 \
+  -filter_complex "[0:v]chromakey=0x00FF00:0.3:0.1[fg];[1:v][fg]overlay" \
+  -c:v libx264 -crf 18 output.mp4
+```
+
+### Example: Cinematic Color Grading
+
+```bash
+# Apply teal and orange blockbuster look
+ffmpeg -i input.mp4 \
+  -vf "curves=b='0/0.1 0.5/0.4 1/0.8':r='0/0 0.5/0.6 1/1',eq=saturation=1.2:contrast=1.1" \
+  output.mp4
+```
+
+### Example: Datamosh Glitch Effect
+
+```bash
+# Create pixel-bleeding datamosh effect
+ffmpeg -i input.mp4 \
+  -vf "minterpolate='mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1'" \
+  -c:v libx264 -crf 18 glitch.mp4
+```
+
+### Example: VHS Retro Effect
+
+```bash
+# Simulate VHS tape with noise, color shift, and scanlines
+ffmpeg -i input.mp4 \
+  -vf "noise=c0s=15:c0f=t,eq=saturation=1.4,chromashift=cbh=3:crh=-3,curves=preset=vintage" \
+  vhs_output.mp4
+```
+
+### Example: ASS Karaoke Subtitles
+
+```bash
+# Burn karaoke subtitles with word-by-word highlighting
+ffmpeg -i music_video.mp4 \
+  -vf "ass=karaoke.ass" \
+  -c:v libx264 -crf 18 output.mp4
+```
+
+### Example: Scrolling End Credits
+
+```bash
+# Create scrolling credits overlay
+ffmpeg -i video.mp4 \
+  -vf "drawtext=textfile=credits.txt:fontsize=32:fontcolor=white:x=(w-tw)/2:y=h-100*t" \
+  credits_output.mp4
+```
+
 ### Example: Modal.com Batch Processing
 
 ```python
@@ -390,6 +452,27 @@ def transcode(video_bytes: bytes) -> bytes:
 
 # Process 100 videos in parallel across 100 containers
 results = list(transcode.map(video_list))
+```
+
+### Utility Scripts
+
+The plugin includes ready-to-use shell scripts for common advanced operations:
+
+- **`apply-glitch-effects.sh`** - Apply datamosh, VHS, chromatic, trails, wave, or pixelate effects with intensity control (1-10)
+- **`apply-color-grade.sh`** - Apply cinematic, vintage, noir, warm, cool, bleach, instagram, or matrix color presets
+- **`generate-karaoke.sh`** - Convert timestamped lyrics to ASS karaoke format, apply to video, or generate templates
+
+**Usage Examples:**
+```bash
+# Apply VHS effect at intensity 7
+./scripts/apply-glitch-effects.sh vhs input.mp4 output.mp4 7
+
+# Apply cinematic color grade
+./scripts/apply-color-grade.sh cinematic input.mp4 graded.mp4
+
+# Create karaoke from lyrics file
+./scripts/generate-karaoke.sh create lyrics.txt karaoke.ass neon
+./scripts/generate-karaoke.sh apply video.mp4 karaoke.ass output.mp4
 ```
 
 ## Requirements
@@ -445,3 +528,24 @@ For issues or questions:
 ---
 
 **Master video and audio processing with confidence.** This plugin ensures you follow 2025 best practices, optimize for your use case, and handle platform-specific challenges effectively.
+
+---
+
+## What's New in v2.1.0
+
+### New Skills
+- **ffmpeg-color-grading-chromakey** - Professional color grading with LUTs, curves, chromakey, green screen removal, and cinematic film emulation presets (Kodak Portra, Fuji, teal/orange)
+- **ffmpeg-glitch-distortion-effects** - Creative glitch art including datamosh via minterpolate, VHS simulation, chromatic aberration, wave distortion, motion trails with lagfun
+- **ffmpeg-karaoke-animated-text** - Complete karaoke system with ASS timing tags (\k), scrolling credits, typewriter effects, bouncing text, kinetic typography
+
+### New Commands
+- **`/ffmpeg-effects`** - Quick access to glitch, datamosh, VHS, chromatic aberration, and distortion effects
+- **`/ffmpeg-color`** - Quick access to LUT application, chromakey, cinematic color grading
+
+### New Scripts
+- **apply-glitch-effects.sh** - 7 effect types with intensity control
+- **apply-color-grade.sh** - 8 color presets with intensity control
+- **generate-karaoke.sh** - ASS karaoke generation from timestamped lyrics
+
+### Enhanced Agent
+- FFmpeg Expert agent now includes 3 new detailed examples for green screen compositing, music video glitch effects, and karaoke subtitle creation

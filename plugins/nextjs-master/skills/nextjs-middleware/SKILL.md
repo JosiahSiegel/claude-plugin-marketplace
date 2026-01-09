@@ -1,6 +1,6 @@
 ---
 name: nextjs-middleware
-description: Complete Next.js Middleware system. PROACTIVELY activate for: (1) Creating middleware.ts, (2) Matcher configuration, (3) Authentication protection, (4) Role-based access control, (5) Redirects and rewrites, (6) Internationalization (i18n), (7) Security headers (CSP, CORS), (8) Geolocation routing, (9) Bot detection, (10) Rate limiting patterns. Provides: Middleware patterns, matcher syntax, auth guards, header manipulation, cookie handling. Ensures Edge-optimized request handling with proper security.
+description: Complete Next.js Middleware system (Next.js 15.5/16). PROACTIVELY activate for: (1) Creating middleware.ts (Edge) or proxy.ts (Node.js), (2) Matcher configuration, (3) Authentication protection, (4) Role-based access control, (5) Redirects and rewrites, (6) Internationalization (i18n), (7) Security headers (CSP, CORS), (8) Geolocation routing, (9) Bot detection, (10) Rate limiting patterns, (11) Node.js Middleware with proxy.ts (Next.js 16). Provides: Edge middleware patterns, Node.js proxy patterns, matcher syntax, auth guards, header manipulation, cookie handling, database access in proxy.ts. Ensures optimized request handling with proper security.
 ---
 
 ## Quick Reference

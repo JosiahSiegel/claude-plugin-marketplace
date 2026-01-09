@@ -1,6 +1,6 @@
 ---
 name: nextjs-deployment
-description: Complete Next.js deployment system. PROACTIVELY activate for: (1) Vercel deployment and configuration, (2) Self-hosted Node.js deployment, (3) Docker containerization, (4) Static export with output:'export', (5) Edge Runtime configuration, (6) Environment variables, (7) CI/CD with GitHub Actions, (8) Health checks and monitoring, (9) Production optimization. Provides: Dockerfile, docker-compose, PM2 config, vercel.json, GitHub Actions workflows. Ensures production-ready deployment with proper configuration.
+description: Complete Next.js deployment system (Next.js 15.5/16). PROACTIVELY activate for: (1) Vercel deployment and configuration, (2) Self-hosted Node.js deployment, (3) Docker containerization, (4) Static export with output:'export', (5) Edge Runtime configuration, (6) Environment variables, (7) CI/CD with GitHub Actions, (8) Health checks and monitoring, (9) Production optimization, (10) Turbopack production builds (Next.js 16). Provides: Dockerfile, docker-compose, PM2 config, vercel.json, GitHub Actions workflows, Turbopack config. Ensures production-ready deployment with proper configuration.
 ---
 
 ## Quick Reference

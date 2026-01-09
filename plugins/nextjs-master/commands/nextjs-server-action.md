@@ -1,5 +1,12 @@
 ---
 description: Create a Next.js Server Action with validation and proper error handling
+argument-hint: "Action name and purpose (e.g., 'createPost with validation', 'deleteUser with auth')"
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
 ---
 
 # Generate Next.js Server Action
@@ -92,6 +99,62 @@ export async function createPost(
   revalidatePath('/posts');
   redirect('/posts');
 }
+```
+
+### Type-Safe Action with next-safe-action (Recommended 2025+)
+```tsx
+// lib/safe-action.ts
+import { createSafeActionClient } from 'next-safe-action';
+import { auth } from '@/auth';
+
+export const actionClient = createSafeActionClient({
+  handleServerError: (e) => {
+    console.error('Action error:', e);
+    return 'Something went wrong';
+  },
+});
+
+export const authActionClient = actionClient.use(async ({ next }) => {
+  const session = await auth();
+  if (!session?.user) {
+    throw new Error('Unauthorized');
+  }
+  return next({ ctx: { user: session.user } });
+});
+```
+
+```tsx
+// app/posts/actions.ts
+'use server';
+
+import { z } from 'zod';
+import { authActionClient } from '@/lib/safe-action';
+import { revalidatePath } from 'next/cache';
+
+const createPostSchema = z.object({
+  title: z.string().min(1, 'Title required').max(200),
+  content: z.string().min(1, 'Content required'),
+  published: z.boolean().default(false),
+});
+
+export const createPost = authActionClient
+  .schema(createPostSchema)
+  .action(async ({ parsedInput, ctx }) => {
+    const { title, content, published } = parsedInput;
+    const { user } = ctx;
+
+    const post = await db.posts.create({
+      data: {
+        title,
+        content,
+        published,
+        authorId: user.id,
+      },
+    });
+
+    revalidatePath('/posts');
+    return { success: true, postId: post.id };
+  });
 ```
 
 ### Action with Authentication
@@ -203,6 +266,47 @@ export default function NewPostPage() {
 
       <button type="submit" disabled={isPending}>
         {isPending ? 'Creating...' : 'Create Post'}
+      </button>
+    </form>
+  );
+}
+```
+
+### Using with next-safe-action Hook
+```tsx
+// components/CreatePostForm.tsx
+'use client';
+
+import { useAction } from 'next-safe-action/hooks';
+import { createPost } from '@/app/posts/actions';
+
+export function CreatePostForm() {
+  const { execute, result, isExecuting } = useAction(createPost, {
+    onSuccess: ({ data }) => {
+      toast.success(`Post created: ${data?.postId}`);
+    },
+    onError: ({ error }) => {
+      toast.error(error.serverError || 'Failed to create post');
+    },
+  });
+
+  return (
+    <form action={(formData) => {
+      execute({
+        title: formData.get('title') as string,
+        content: formData.get('content') as string,
+        published: formData.get('published') === 'on',
+      });
+    }}>
+      <input name="title" required />
+      {result.validationErrors?.title && (
+        <span className="error">{result.validationErrors.title[0]}</span>
+      )}
+
+      <textarea name="content" required />
+
+      <button type="submit" disabled={isExecuting}>
+        {isExecuting ? 'Creating...' : 'Create Post'}
       </button>
     </form>
   );

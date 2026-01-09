@@ -1,5 +1,12 @@
 ---
-description: Create Next.js middleware for authentication, redirects, or headers
+description: Create Next.js middleware or proxy for authentication, redirects, or headers
+argument-hint: "Middleware purpose (e.g., 'auth for dashboard', 'i18n', 'rate-limiting')"
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
 ---
 
 # Generate Next.js Middleware
@@ -19,7 +26,7 @@ Create middleware based on the provided purpose:
    - Determine required logic
 
 2. **Implementation**
-   - Create middleware.ts in project root
+   - Create middleware.ts (Edge) or proxy.ts (Node.js - Next.js 16)
    - Configure matcher for target routes
    - Implement required logic
 
@@ -28,10 +35,21 @@ Create middleware based on the provided purpose:
    - Internationalization
    - Redirects/rewrites
    - Custom headers
+   - Rate limiting
+
+## Middleware vs Proxy (Next.js 16)
+
+| Use Case | File | Runtime |
+|----------|------|---------|
+| Simple redirects/rewrites | middleware.ts | Edge |
+| Basic auth checks | middleware.ts | Edge |
+| Database queries | proxy.ts | Node.js |
+| Full JWT verification | proxy.ts | Node.js |
+| Complex business logic | proxy.ts | Node.js |
 
 ## Example Output
 
-### Authentication Middleware
+### Authentication Middleware (Edge)
 ```tsx
 // middleware.ts
 import { NextResponse } from 'next/server';
@@ -84,6 +102,62 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: ['/((?!_next/static|_next/image|favicon.ico|public).*)'],
+};
+```
+
+### Node.js Proxy with Database Access (Next.js 16)
+```tsx
+// proxy.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { verify } from 'jsonwebtoken';
+import { db } from './lib/db';
+
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Skip public paths
+  if (pathname.startsWith('/api/public') || pathname === '/login') {
+    return NextResponse.next();
+  }
+
+  const token = request.cookies.get('auth-token')?.value;
+
+  if (!token) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  try {
+    const decoded = verify(token, process.env.JWT_SECRET!) as { userId: string };
+
+    // Query database for user (only possible in proxy.ts, not middleware.ts)
+    const user = await db.user.findUnique({
+      where: { id: decoded.userId },
+      select: { id: true, role: true, isActive: true },
+    });
+
+    if (!user || !user.isActive) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+
+    // Admin routes check
+    if (pathname.startsWith('/admin') && user.role !== 'admin') {
+      return NextResponse.redirect(new URL('/unauthorized', request.url));
+    }
+
+    // Add user context to headers
+    const response = NextResponse.next();
+    response.headers.set('x-user-id', user.id);
+    response.headers.set('x-user-role', user.role);
+    return response;
+
+  } catch (error) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 };
 ```
 
@@ -225,5 +299,35 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: '/api/:path*',
+};
+```
+
+### Geolocation-Based Routing
+```tsx
+// middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+const EU_COUNTRIES = ['DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'AT', 'PL'];
+
+export function middleware(request: NextRequest) {
+  const country = request.geo?.country || 'US';
+
+  // Redirect EU users to EU-specific pages
+  if (EU_COUNTRIES.includes(country)) {
+    if (request.nextUrl.pathname === '/pricing') {
+      return NextResponse.rewrite(new URL('/pricing/eu', request.url));
+    }
+
+    if (request.nextUrl.pathname === '/privacy') {
+      return NextResponse.rewrite(new URL('/privacy/gdpr', request.url));
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/pricing', '/privacy'],
 };
 ```

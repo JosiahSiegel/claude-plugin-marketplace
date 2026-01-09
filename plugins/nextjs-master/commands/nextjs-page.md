@@ -1,5 +1,12 @@
 ---
 description: Create a new Next.js App Router page with proper structure
+argument-hint: "Page path (e.g., 'dashboard/settings', 'posts/[slug]', 'products/[[...category]]')"
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
 ---
 
 # Generate Next.js Page
@@ -31,7 +38,7 @@ Create a Next.js page based on the provided path and specifications:
    - Use async function for data fetching
 
 4. **Implementation Checklist**
-   - [ ] Proper TypeScript types for params/searchParams
+   - [ ] Proper TypeScript types for params/searchParams (Promise in Next.js 16)
    - [ ] generateMetadata for SEO
    - [ ] generateStaticParams if applicable
    - [ ] Loading and error states
@@ -59,7 +66,7 @@ export default function AboutPage() {
 }
 ```
 
-### Dynamic Page with Data Fetching
+### Dynamic Page with Data Fetching (Next.js 16)
 ```tsx
 // app/posts/[slug]/page.tsx
 import { notFound } from 'next/navigation';
@@ -67,6 +74,7 @@ import type { Metadata } from 'next';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -84,8 +92,10 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export default async function PostPage({ params }: PageProps) {
+export default async function PostPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
+  const { page } = await searchParams;
+
   const post = await getPost(slug);
 
   if (!post) {
@@ -131,6 +141,36 @@ export default function Error({
     <div>
       <h2>Something went wrong!</h2>
       <button onClick={() => reset()}>Try again</button>
+    </div>
+  );
+}
+```
+
+### Cached Page with use cache (Next.js 16)
+```tsx
+// app/products/page.tsx
+'use cache'
+
+import { cacheLife, cacheTag } from 'next/cache';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Products',
+  description: 'Browse our products',
+};
+
+export default async function ProductsPage() {
+  cacheLife('hours');
+  cacheTag('products');
+
+  const products = await db.products.findMany({
+    orderBy: { createdAt: 'desc' },
+  });
+
+  return (
+    <div>
+      <h1>Products</h1>
+      <ProductGrid products={products} />
     </div>
   );
 }
