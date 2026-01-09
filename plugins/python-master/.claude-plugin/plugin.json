@@ -1,7 +1,7 @@
 {
   "name": "python-master",
   "version": "2.0.0",
-  "description": "Comprehensive Python 3.13+ expertise system covering modern Python development, async programming, type hints, performance optimization, and cloud deployment. PROACTIVELY activate for: (1) ANY Python task, (2) Python 3.13+ features (free-threading, JIT), (3) asyncio and concurrent programming, (4) Type hints and mypy/pyright, (5) Package management (uv, pip, poetry), (6) Project structure (src layout, pyproject.toml), (7) FastAPI and web development, (8) Pydantic data validation, (9) Testing (pytest, coverage), (10) Cloudflare Workers/Containers Python, (11) GitHub Actions Python workflows, (12) Performance optimization and profiling, (13) Security best practices (OWASP), (14) Ruff linting and formatting. Provides: Python 3.13 free-threading and JIT, asyncio patterns, comprehensive type hints, uv package management, FastAPI production patterns, Pydantic vs dataclass guidance, pytest testing, Cloudflare Python optimization, GitHub Actions caching, memory profiling, security hardening.",
+  "description": "Comprehensive Python 3.13+ expertise system covering modern Python development, async programming, type hints, performance optimization, Modal.com serverless, and cloud deployment. PROACTIVELY activate for: (1) ANY Python task, (2) Python 3.13+ features (free-threading, JIT), (3) asyncio and concurrent programming, (4) Type hints and mypy/pyright, (5) Package management (uv, pip, poetry), (6) Project structure (src layout, pyproject.toml), (7) FastAPI and web development, (8) Pydantic data validation, (9) Testing (pytest, coverage), (10) Cloudflare Workers/Containers Python, (11) GitHub Actions Python workflows, (12) Performance optimization and profiling, (13) Security best practices (OWASP), (14) Ruff linting and formatting, (15) Modal.com serverless functions and GPU workloads, (16) Modal scheduled tasks and cron jobs, (17) Modal parallel processing with map/starmap. Provides: Python 3.13 free-threading and JIT, asyncio patterns, comprehensive type hints, uv package management, FastAPI production patterns, Pydantic vs dataclass guidance, pytest testing, Cloudflare Python optimization, GitHub Actions caching, memory profiling, security hardening, Modal.com type-safe functions and ML inference patterns.",
   "author": {
     "name": "Josiah Siegel",
     "email": "JosiahSiegel@users.noreply.github.com"
@@ -29,6 +29,13 @@
     "typing",
     "async",
     "free-threading",
-    "jit"
+    "jit",
+    "modal",
+    "modal-com",
+    "serverless",
+    "gpu",
+    "ml-inference",
+    "scheduled-tasks",
+    "parallel-processing"
   ]
 }
