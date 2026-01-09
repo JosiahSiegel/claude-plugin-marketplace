@@ -1,5 +1,7 @@
 ---
-description: Generate AI images using fal.ai models like FLUX, Stable Diffusion, and more
+name: Generate Image
+description: Generate AI images using fal.ai models like FLUX.2, GPT-Image 1, Recraft, and more
+argument-hint: <prompt> [--model flux|gpt-image|recraft|sdxl]
 ---
 
 # Generate Image with fal.ai

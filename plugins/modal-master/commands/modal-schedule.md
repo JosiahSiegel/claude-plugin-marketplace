@@ -1,5 +1,7 @@
 ---
+name: Setup Schedule
 description: Set up scheduled and cron functions with timezone support
+argument-hint: "<cron-expression|period> [timezone]"
 ---
 
 # Modal Schedule Command

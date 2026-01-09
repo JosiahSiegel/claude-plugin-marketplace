@@ -1,5 +1,7 @@
 ---
+name: Debug Integration
 description: Diagnose and fix common issues with fal.ai integrations including authentication, API errors, and timeouts
+argument-hint: [error-type: auth|rate-limit|timeout|validation|upload|websocket]
 ---
 
 # Debug fal.ai Integration Issues

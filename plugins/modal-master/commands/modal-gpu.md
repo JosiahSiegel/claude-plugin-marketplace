@@ -1,5 +1,7 @@
 ---
+name: Configure GPU
 description: Configure GPU functions with optimal settings, fallbacks, and cost optimization
+argument-hint: "<gpu-type: T4|L4|A10G|L40S|A100|H100|H200|B200> [workload: inference|training]"
 ---
 
 # Modal GPU Command

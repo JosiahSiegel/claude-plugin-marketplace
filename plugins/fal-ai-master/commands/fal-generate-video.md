@@ -1,5 +1,7 @@
 ---
-description: Generate AI videos using fal.ai models like Kling, Sora, LTX, and more
+name: Generate Video
+description: Generate AI videos using fal.ai models like Veo 3, Sora 2, Kling 2.6, and more
+argument-hint: <prompt> [--model veo|sora|kling|ltx] [--duration 5|10|20]
 ---
 
 # Generate Video with fal.ai

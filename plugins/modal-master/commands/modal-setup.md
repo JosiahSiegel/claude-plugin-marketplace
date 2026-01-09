@@ -1,5 +1,7 @@
 ---
+name: Setup Project
 description: Initialize a Modal project with proper structure, configuration, and best practices
+argument-hint: "[project-type: api|batch|ml|scheduled]"
 ---
 
 # Modal Setup Command

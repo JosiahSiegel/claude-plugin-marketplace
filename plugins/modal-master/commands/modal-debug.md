@@ -1,5 +1,7 @@
 ---
+name: Debug App
 description: Debug Modal issues including container failures, GPU errors, and deployment problems
+argument-hint: "[app-name-or-issue]"
 ---
 
 # Modal Debug Command

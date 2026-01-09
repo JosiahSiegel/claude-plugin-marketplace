@@ -1,5 +1,7 @@
 ---
+name: Deploy Model
 description: Deploy custom ML models to fal.ai's serverless infrastructure with automatic scaling and GPU support
+argument-hint: <app-file.py> [--gpu T4|A10G|A100|H100|H200|B200]
 ---
 
 # Deploy Custom Model to fal Serverless

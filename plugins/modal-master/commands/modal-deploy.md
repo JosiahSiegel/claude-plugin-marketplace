@@ -1,5 +1,7 @@
 ---
+name: Deploy App
 description: Deploy a Modal application with environment configuration and CI/CD setup
+argument-hint: "<app-file> [--env staging|prod]"
 ---
 
 # Modal Deploy Command

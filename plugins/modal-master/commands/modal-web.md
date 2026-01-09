@@ -1,5 +1,7 @@
 ---
+name: Create Endpoint
 description: Create web endpoints using FastAPI, ASGI, WSGI, or custom web servers
+argument-hint: "<endpoint-type: fastapi|asgi|wsgi|server> [route]"
 ---
 
 # Modal Web Command
