@@ -1,6 +1,6 @@
-# FFmpeg Master Plugin v2.1.0
+# FFmpeg Master Plugin v3.0.0
 
-Master FFmpeg across all platforms with expert knowledge of encoding, streaming, hardware acceleration, containers, production workflows, and **advanced creative effects**.
+Master FFmpeg across all platforms with expert knowledge of encoding, streaming, hardware acceleration, containers, production workflows, **advanced creative effects**, and **VIRAL VIDEO CREATION** for TikTok, YouTube Shorts, Instagram Reels, and more.
 
 ## Overview
 
@@ -10,6 +10,12 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 
 ### Commands
 
+#### Viral Video Commands (NEW in v3.0)
+- **`/ffmpeg-viral-tiktok`** - Create TikTok-optimized viral video (9:16, auto-captions, hooks, platform encoding)
+- **`/ffmpeg-viral-shorts`** - Create YouTube Shorts-optimized video (9:16, retention optimization, thumbnails)
+- **`/ffmpeg-batch-social`** - Export to all platforms simultaneously (TikTok, Shorts, Reels, Twitter, Snapchat)
+
+#### Core Commands
 - **`/ffmpeg-transcode`** - Transcode video/audio with optimal settings for target format, quality, and compatibility
 - **`/ffmpeg-stream`** - Set up live streaming with RTMP, HLS, DASH, and platform-specific configurations
 - **`/ffmpeg-audio`** - Process audio with extraction, conversion, normalization, and professional workflows
@@ -31,6 +37,12 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 
 ### Skills
 
+#### Viral Video Skills (NEW in v3.0)
+- **viral-video-platform-specs** - Complete platform upload specs for TikTok, YouTube Shorts, Instagram Reels, Twitter, Snapchat
+- **viral-video-hook-templates** - 10 proven viral hook patterns with FFmpeg implementations
+- **viral-video-animated-captions** - CapCut-style animated word-level captions (pop, sweep, karaoke, bounce)
+
+#### Core Skills
 - **ffmpeg-fundamentals-2025** - FFmpeg 7.1/8.0 features, command syntax, codecs, and essential operations
 - **ffmpeg-hardware-acceleration** - NVIDIA NVENC, Intel QSV, AMD AMF, VAAPI, Vulkan Video guides
 - **ffmpeg-docker-containers** - Docker images, GPU support, Kubernetes patterns
@@ -246,6 +258,73 @@ The latest stable release from the 8.0 "Huffman" branch (cut from master 2025-08
 | veryslow | 0.1x | Highest | Archival |
 
 ## Examples
+
+### Example: TikTok-Ready Viral Video (NEW)
+
+```bash
+# Convert any video to TikTok format with captions and hook
+/ffmpeg-viral-tiktok
+
+# Result:
+ffmpeg -i input.mp4 \
+  -filter_complex "
+    [0:v]scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:black[v1];
+    [v1]drawtext=text='WAIT FOR IT...':fontsize=64:fontcolor=yellow:borderw=4:bordercolor=black:x=(w-tw)/2:y=h*0.12:enable='between(t,0,2.5)'[v2];
+    [0:a]loudnorm=I=-16:TP=-1.5:LRA=11[a]
+  " \
+  -map "[v2]" -map "[a]" \
+  -c:v libx264 -preset fast -crf 23 \
+  -c:a aac -b:a 128k -ar 44100 \
+  -pix_fmt yuv420p \
+  -movflags +faststart \
+  -t 60 \
+  output_tiktok.mp4
+```
+
+### Example: Batch Export for All Platforms (NEW)
+
+```bash
+# Export to TikTok, Shorts, Reels, and Twitter simultaneously
+/ffmpeg-batch-social
+
+# Creates:
+# - video_tiktok.mp4 (60s max, 128kbps audio)
+# - video_shorts.mp4 (59s max, 192kbps audio)
+# - video_reels.mp4 (90s max, 30fps)
+# - video_twitter.mp4 (140s max)
+# - Thumbnails for each
+```
+
+### Example: CapCut-Style Animated Captions (NEW)
+
+```bash
+# Generate word-by-word animated captions
+# 1. Generate transcript
+ffmpeg -i input.mp4 -vn \
+  -af "whisper=model=ggml-base.bin:language=auto:destination=transcript.json:format=json" \
+  -f null -
+
+# 2. Convert to animated ASS (using provided Python script)
+python json_to_ass.py transcript.json captions.ass pop
+
+# 3. Burn animated captions
+ffmpeg -i input.mp4 \
+  -vf "ass=captions.ass" \
+  -c:v libx264 -preset fast -crf 23 \
+  -c:a copy \
+  output_with_animated_captions.mp4
+```
+
+### Example: Viral Hook with Pattern Interrupt (NEW)
+
+```bash
+# Add zoom punch + text hook in first 2 seconds
+ffmpeg -i input.mp4 \
+  -vf "zoompan=z='if(lt(t,1),1.3-0.3*t,1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920,drawtext=text='STOP SCROLLING':fontsize=72:fontcolor=red:borderw=5:bordercolor=white:x=(w-tw)/2:y=h*0.12:enable='between(t,0,2)'" \
+  -c:v libx264 -preset fast -crf 23 \
+  -c:a copy \
+  output_with_hook.mp4
+```
 
 ### Example: Web-Ready MP4
 
@@ -528,6 +607,48 @@ For issues or questions:
 ---
 
 **Master video and audio processing with confidence.** This plugin ensures you follow 2025 best practices, optimize for your use case, and handle platform-specific challenges effectively.
+
+---
+
+## What's New in v3.0.0
+
+### VIRAL VIDEO CREATION (Major Feature)
+
+**The FFmpeg Master plugin now helps you create viral videos for TikTok, YouTube Shorts, Instagram Reels, and more!**
+
+#### New Viral Video Commands
+- **`/ffmpeg-viral-tiktok`** - One-command TikTok optimization (9:16, captions, hooks, platform encoding)
+- **`/ffmpeg-viral-shorts`** - YouTube Shorts with retention optimization and thumbnail extraction
+- **`/ffmpeg-batch-social`** - Export to ALL platforms simultaneously with platform-specific encoding
+
+#### New Viral Video Skills
+- **viral-video-platform-specs** - Complete 2025-2026 specs for TikTok, YouTube Shorts, Instagram Reels, Facebook Reels, Twitter/X, Snapchat Spotlight, Pinterest Idea Pins
+- **viral-video-hook-templates** - 10 research-backed viral hook patterns with FFmpeg implementations:
+  1. Pattern Interrupt (glitch, zoom punch, flash)
+  2. Curiosity Gap ("You won't believe...")
+  3. Direct Challenge ("Stop scrolling if...")
+  4. Transformation Tease (before/after)
+  5. Bold Claim ("This changed everything")
+  6. Counter-Intuitive (myth vs reality)
+  7. Social Proof (statistics, authority)
+  8. Time-Sensitive Urgency (FOMO triggers)
+  9. Storytelling Hook (narrative engagement)
+  10. Question Hook (activates problem-solving)
+- **viral-video-animated-captions** - CapCut-style word-level animations:
+  - Word Pop (bounce in one at a time)
+  - Highlight Sweep (color sweeps across words)
+  - Karaoke (words light up with audio timing)
+  - Typewriter (characters appear sequentially)
+  - Scale Pulse (words pulse larger on appear)
+
+#### Viral Video Features
+- **Platform-Specific Presets** - Correct encoding for each platform's algorithm
+- **9:16 Vertical Conversion** - Multiple options (crop, letterbox, blur background, split screen)
+- **Auto-Caption Generation** - Whisper AI integration with styled burn-in
+- **Hook Optimization** - First 1-3 second attention-grabbing techniques
+- **Retention Boosters** - Subtle zoom, progress bars, pattern interrupts
+- **Batch Processing** - Weekly content calendar generation
+- **Multi-Platform Export** - Single video → 6 platform versions + thumbnails
 
 ---
 

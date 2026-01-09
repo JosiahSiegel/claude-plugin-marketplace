@@ -71,7 +71,65 @@ Dialogue: 0,0:00:05.00,0:00:09.00,Karaoke,,0,0,0,,{\k50}How {\k50}I {\k50}wonder
 | `\kf` or `\K` | Smooth fill (fade) | `{\kf100}Word` |
 | `\ko` | Outline highlight | `{\ko100}Word` |
 
-Duration is in centiseconds (100 = 1 second).
+Duration is in **centiseconds** (100 = 1 second).
+
+---
+
+## CRITICAL: ASS Time Unit Reference
+
+**ASS uses TWO DIFFERENT time unit systems - this is a common source of bugs!**
+
+### Karaoke Tags = CENTISECONDS (1/100 second)
+
+| Tag | Unit | Example | Duration |
+|-----|------|---------|----------|
+| `\k` | centiseconds | `{\k50}` | 0.5 seconds |
+| `\kf` | centiseconds | `{\kf100}` | 1.0 second |
+| `\ko` | centiseconds | `{\ko25}` | 0.25 seconds |
+
+**Conversion**: seconds × 100 = centiseconds
+
+### Animation Tags = MILLISECONDS (1/1000 second)
+
+| Tag | Unit | Example | Duration |
+|-----|------|---------|----------|
+| `\t(t1,t2,...)` | milliseconds | `\t(0,500,...)` | 0-500ms animation |
+| `\fad(in,out)` | milliseconds | `\fad(200,300)` | 200ms in, 300ms out |
+| `\move(x1,y1,x2,y2,t1,t2)` | milliseconds | `\move(0,0,100,100,0,1000)` | 1 second move |
+
+**Conversion**: seconds × 1000 = milliseconds
+
+### FFmpeg drawtext = SECONDS (with decimals)
+
+| Expression | Unit | Example |
+|------------|------|---------|
+| `t` | seconds | `t=2.5` means 2.5 seconds |
+| `enable='between(t,0,3)'` | seconds | 0-3 seconds |
+| `alpha='min(1,t/2)'` | seconds | fade over 2 seconds |
+
+### Quick Conversion Table
+
+| Seconds | Centiseconds (karaoke) | Milliseconds (animation) |
+|---------|------------------------|--------------------------|
+| 0.1s | 10 | 100 |
+| 0.25s | 25 | 250 |
+| 0.5s | 50 | 500 |
+| 1.0s | 100 | 1000 |
+| 2.0s | 200 | 2000 |
+
+### Common Mistake Example
+
+```ass
+; WRONG - mixing units!
+Dialogue: 0,0:00:00.00,0:00:02.00,Style,,0,0,0,,{\k100\t(0,100,...)}Word
+; {\k100} = 1 second (centiseconds)
+; \t(0,100,...) = 0-100ms = 0.1 seconds (milliseconds) - NOT THE SAME!
+
+; CORRECT - consistent timing
+Dialogue: 0,0:00:00.00,0:00:02.00,Style,,0,0,0,,{\k100\t(0,1000,...)}Word
+; {\k100} = 1 second
+; \t(0,1000,...) = 1 second - NOW THEY MATCH!
+```
 
 ### Apply Karaoke ASS to Video
 
