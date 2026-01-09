@@ -1,3 +1,15 @@
+---
+name: opentofu-guide
+description: Comprehensive OpenTofu expertise including migration from Terraform, state encryption, OpenTofu 1.10/1.11 features (OCI registry, native S3 locking, ephemeral resources, enabled meta-argument), and CI/CD integration. Covers when to use OpenTofu vs Terraform with decision matrix.
+---
+
+<!--
+Progressive Disclosure References:
+- references/opentofu-1.10-features.md - OCI registry, native S3 locking, deprecation warnings
+- references/opentofu-1.11-features.md - Ephemeral resources, enabled meta-argument
+- references/state-encryption.md - Complete state encryption guide with KMS integration
+-->
+
 ## 🚨 CRITICAL GUIDELINES
 
 ### Windows File Path Requirements

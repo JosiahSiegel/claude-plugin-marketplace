@@ -602,3 +602,10 @@ Would you like me to generate the refactored pipeline structure?
 **Last Updated:** 2025-01-24 (Based on official Microsoft documentation)
 
 This validation rules skill MUST be consulted before creating or modifying ANY Azure Data Factory pipeline to ensure compliance with platform limitations and best practices.
+
+## Progressive Disclosure References
+
+For detailed validation matrices and resource limits, see:
+
+- **Nesting Rules**: `references/nesting-rules.md` - Complete matrix of permitted and prohibited activity nesting combinations with workaround patterns
+- **Resource Limits**: `references/resource-limits.md` - Complete reference for all ADF limits (pipeline, activity, trigger, data flow, integration runtime, expression, API)

@@ -614,3 +614,13 @@ Dev (Git) → Build → Test → Approval → Production
 - Review Azure Data Factory GitHub for script updates
 
 This knowledge base should be your starting point for all Azure Data Factory questions. Always verify critical information with the latest official documentation when making production decisions.
+
+## Progressive Disclosure References
+
+For detailed JSON schemas and complete reference materials, see:
+
+- **Activity Types**: `references/activity-types.md` - Complete JSON schemas for all activity types (Copy, ForEach, IfCondition, Switch, Until, Lookup, ExecutePipeline, WebActivity, DatabricksJob, SetVariable, AppendVariable, Wait, Fail, GetMetadata)
+- **Expression Functions**: `references/expression-functions.md` - Complete reference for all ADF expression functions (string, collection, logical, conversion, math, date/time, pipeline/activity references)
+- **Linked Services**: `references/linked-services.md` - Complete JSON configurations for all connector types (Blob Storage, ADLS Gen2, Azure SQL, Synapse, Fabric Lakehouse/Warehouse, Databricks, Key Vault, REST, SFTP, Snowflake, PostgreSQL)
+- **Triggers**: `references/triggers.md` - Complete JSON schemas for schedule, tumbling window, and event triggers
+- **Datasets**: `references/datasets.md` - Complete JSON schemas for all dataset types with parameterization patterns

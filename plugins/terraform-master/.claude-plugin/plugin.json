@@ -1,7 +1,7 @@
 {
   "name": "terraform-master",
-  "version": "1.7.1",
-  "description": "Complete Terraform and OpenTofu expertise system for all cloud providers with 2025 features. PROACTIVELY activate for: (1) ANY Terraform/OpenTofu task, (2) Git Bash/MINGW path conversion issues on Windows, (3) Policy-as-code with Sentinel/OPA/Checkov (NIST SP 800-53 Rev 5, 350+ policies), (4) Private module registry and no-code provisioning, (5) OpenTofu 1.10/1.11 (OCI registry, ephemeral resources, enabled meta-argument), (6) Terraform 1.14 (actions blocks, query command), (7) Testing with terraform test framework (1.6+) and Terratest, (8) Terraform Stacks (GA) with Linked Stacks, (9) AWS Provider 6.0 GA breaking changes, (10) Module lifecycle management (revoke compromised modules), (11) Multi-environment architecture and state management, (12) Cross-platform Terraform scripts with shell detection. Provides: Git Bash Windows compatibility guidance, shell detection patterns, cross-platform path handling, policy-as-code governance (Sentinel/OPA/Checkov), private registry setup, no-code provisioning patterns, OpenTofu 1.10/1.11 features (native S3 locking, ephemeral resources), Terraform 1.14 actions/query, comprehensive testing (unit/integration/TDD), module governance, version-aware code generation, AWS 6.0 migration guidance, Trivy security scanning, CLI mastery, and 2025 industry best practices across Windows (PowerShell/Git Bash), Linux, and macOS. Ensures enterprise-ready, compliant, scalable, governed infrastructure with policy enforcement and self-service capabilities.",
+  "version": "2.0.0",
+  "description": "Complete Terraform and OpenTofu expertise system for all cloud providers with 2025 features. PROACTIVELY activate for: (1) ANY Terraform/OpenTofu task, (2) Terraform 1.10 ephemeral values and 1.11 write-only arguments, (3) AzureRM Provider 4.x (provider-defined functions, 1,101+ resources), (4) AWS Provider 6.0 GA breaking changes and migration, (5) OpenTofu 1.10/1.11 (OCI registry, state encryption, native S3 locking), (6) Ephemeral resources (azurerm_key_vault_secret, aws_secretsmanager_secret_version), (7) Policy-as-code with Sentinel/OPA/Checkov (NIST SP 800-53 Rev 5), (8) Terraform Stacks (GA) with Linked Stacks, (9) Testing with terraform test framework and Terratest, (10) Git Bash/MINGW path conversion issues on Windows, (11) Private module registry and no-code provisioning, (12) Cross-platform scripts with shell detection. Provides: Terraform 1.10/1.11 ephemeral and write-only patterns, AzureRM 4.x provider functions (normalize_resource_id, parse_resource_id), AWS 6.0 migration guidance, comprehensive ephemeral resource examples, Git Bash Windows compatibility, policy-as-code governance, OpenTofu state encryption, native S3 locking without DynamoDB, version-aware code generation, Trivy security scanning, cost estimation with Infracost, CLI mastery, and 2025 industry best practices across Windows (PowerShell/Git Bash), Linux, and macOS. Ensures enterprise-ready, compliant, scalable, governed infrastructure with policy enforcement and self-service capabilities.",
   "author": {
     "name": "Josiah Siegel",
     "email": "JosiahSiegel@users.noreply.github.com"
@@ -9,13 +9,24 @@
   "license": "MIT",
   "keywords": [
     "terraform",
+    "terraform-1-10",
+    "terraform-1-11",
     "opentofu",
+    "opentofu-1-10",
+    "opentofu-1-11",
     "infrastructure",
     "iac",
     "azure",
+    "azurerm",
+    "azurerm-4",
     "aws",
+    "aws-provider-6",
     "gcp",
     "cloud",
+    "ephemeral-values",
+    "ephemeral-resources",
+    "write-only-arguments",
+    "state-encryption",
     "devops",
     "cicd",
     "automation",
@@ -28,11 +39,12 @@
     "import",
     "state-management",
     "cli",
-    "chdir",
     "policy",
     "sentinel",
     "opa",
     "checkov",
+    "trivy",
+    "infracost",
     "registry",
     "no-code",
     "governance",
@@ -41,6 +53,7 @@
     "mingw",
     "windows",
     "cross-platform",
-    "path-conversion"
+    "stacks",
+    "2025"
   ]
 }

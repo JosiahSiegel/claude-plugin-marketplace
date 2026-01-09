@@ -1,7 +1,15 @@
 ---
 name: terraform-tasks
-description: Specialized Terraform task execution skill for autonomous infrastructure operations. Handles code generation, debugging, version management, security scanning, and architecture design across all providers and platforms.
+description: Specialized Terraform task execution skill for autonomous infrastructure operations. Handles code generation, debugging, version management (1.10-1.14+), security scanning, and architecture design across all providers (AWS 6.0, AzureRM 4.x, GCP) and platforms. Covers ephemeral values, Terraform Stacks, policy-as-code, and 2025 best practices.
 ---
+
+<!--
+Progressive Disclosure References:
+- references/aws-provider-6.md - AWS Provider 6.0 breaking changes and migration
+- references/azurerm-4.md - AzureRM 4.x features and migration
+- references/ephemeral-values.md - Terraform 1.10+ ephemeral values for secrets
+- references/terraform-stacks.md - Terraform Stacks (GA 2025) reference
+-->
 
 # Terraform Tasks Skill
 
