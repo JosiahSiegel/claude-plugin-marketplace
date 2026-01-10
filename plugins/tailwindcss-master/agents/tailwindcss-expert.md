@@ -2,6 +2,7 @@
 name: tailwindcss-expert
 description: TailwindCSS expert agent with comprehensive knowledge of v4 CSS-first configuration, responsive design, dark mode, plugins, and framework integration
 model: sonnet
+color: cyan
 tools:
   - Bash
   - Edit

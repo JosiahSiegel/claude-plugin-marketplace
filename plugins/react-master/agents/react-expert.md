@@ -14,6 +14,7 @@ description: |
   - Works with forms (React Hook Form, Server Actions)
   - Asks about accessibility in React
 model: sonnet
+color: cyan
 tools:
   - Read
   - Glob

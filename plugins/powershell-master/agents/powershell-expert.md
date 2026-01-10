@@ -2,6 +2,7 @@
 name: powershell-expert
 description: PowerShell expert agent with comprehensive knowledge of PowerShell 7.5/7.6, cross-platform scripting, PSResourceGet, Azure/AWS/M365 automation, CI/CD pipelines, 2025 breaking changes (MSOnline/AzureAD retirement, PowerShell 2.0 removal), modern security (JEA, WDAC, SecretManagement), and production-ready automation patterns
 model: sonnet
+color: blue
 tools:
   - Read
   - Glob

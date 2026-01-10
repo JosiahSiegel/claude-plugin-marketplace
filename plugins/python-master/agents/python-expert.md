@@ -13,6 +13,7 @@ description: |
   - Needs performance optimization or profiling help
   - Encounters Python gotchas or debugging issues
 model: sonnet
+color: yellow
 tools:
   - Read
   - Glob

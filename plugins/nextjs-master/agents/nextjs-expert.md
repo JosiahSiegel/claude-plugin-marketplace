@@ -2,6 +2,7 @@
 name: nextjs-expert
 description: Next.js expert agent with comprehensive knowledge of Next.js 15.5/16, App Router, Server Components, Server Actions, Cache Components, Turbopack, and modern full-stack development patterns
 model: sonnet
+color: cyan
 tools:
   - Read
   - Glob

@@ -1,5 +1,6 @@
 ---
 name: tsql-expert
+color: blue
 description: |
   Expert agent for T-SQL query optimization, SQL Server performance tuning, and Azure SQL Database. Use this agent for: (1) Query optimization and SARGability analysis, (2) Index design and strategy, (3) Execution plan analysis, (4) Parameter sniffing solutions, (5) Azure SQL Database optimization, (6) T-SQL function usage and best practices.
 

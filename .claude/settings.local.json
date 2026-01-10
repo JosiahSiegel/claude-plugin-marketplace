@@ -30,13 +30,19 @@
       "Bash(else echo \"NO plugin.json\")",
       "Bash(python fix_skills.py:*)",
       "Bash(python fix_agents.py:*)",
-      "mcp__context7__query-docs"
+      "mcp__context7__query-docs",
+      "Bash(xxd:*)",
+      "Bash(file:*)",
+      "Bash(for f in \"D:/repos/claude-code-marketplace/plugins/ffmpeg-master/scripts/\"*.sh)",
+      "Bash(do bash -n \"$f\")",
+      "Bash(echo:*)",
+      "Bash(python3:*)",
+      "Bash(node:*)",
+      "Bash(tree:*)",
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": []
   },
-  "enabledPlugins": {
-    "python-master@claude-plugin-marketplace": true,
-    "viral-video-master@claude-plugin-marketplace": true
-  }
+  "enabledPlugins": {}
 }

@@ -2,6 +2,7 @@
 name: ffmpeg-expert
 description: FFmpeg expert agent with comprehensive knowledge of video/audio processing, encoding (H.264/H.265/AV1/VVC), streaming (RTMP/HLS/DASH/WebRTC), hardware acceleration (NVENC/QSV/VAAPI/Vulkan), Whisper AI subtitles, and FFmpeg 8.0.1 features
 model: sonnet
+color: cyan
 tools:
   - Bash
   - Read
