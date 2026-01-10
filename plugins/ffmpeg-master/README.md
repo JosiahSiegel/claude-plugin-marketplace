@@ -1,4 +1,4 @@
-# FFmpeg Master Plugin v3.0.0
+# FFmpeg Master Plugin v3.1.0
 
 Master FFmpeg across all platforms with expert knowledge of encoding, streaming, hardware acceleration, containers, production workflows, **advanced creative effects**, and **VIRAL VIDEO CREATION** for TikTok, YouTube Shorts, Instagram Reels, and more.
 
@@ -59,6 +59,7 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 - **ffmpeg-color-grading-chromakey** - Professional color grading, LUTs, curves, chromakey, green screen removal, cinematic looks
 - **ffmpeg-glitch-distortion-effects** - Datamosh, VHS simulation, chromatic aberration, wave distortion, motion trails
 - **ffmpeg-karaoke-animated-text** - ASS karaoke with word-by-word highlighting, scrolling credits, kinetic typography
+- **ffmpeg-opencv-integration** - FFmpeg + OpenCV + Python integration guide (NEW in v3.1)
 
 ## Installation
 
@@ -533,6 +534,100 @@ def transcode(video_bytes: bytes) -> bytes:
 results = list(transcode.map(video_list))
 ```
 
+### Example: FFmpeg + OpenCV Pipeline (NEW in v3.1)
+
+```python
+import subprocess
+import numpy as np
+import cv2
+
+def ffmpeg_to_opencv_pipe(input_path: str, width: int, height: int):
+    """Read video with FFmpeg, process frames with OpenCV."""
+    # CRITICAL: Use bgr24 for OpenCV (OpenCV uses BGR, not RGB!)
+    cmd = [
+        'ffmpeg', '-i', input_path,
+        '-f', 'rawvideo', '-pix_fmt', 'bgr24',
+        '-s', f'{width}x{height}', '-'
+    ]
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    frame_size = width * height * 3
+
+    while True:
+        raw_frame = process.stdout.read(frame_size)
+        if len(raw_frame) != frame_size:
+            break
+        # Convert to NumPy array (already BGR for OpenCV)
+        frame = np.frombuffer(raw_frame, dtype=np.uint8).reshape(height, width, 3)
+        # GOTCHA: OpenCV uses img[y, x] not img[x, y]!
+        edges = cv2.Canny(frame, 100, 200)
+        yield edges
+    process.wait()
+
+# Usage
+for edge_frame in ffmpeg_to_opencv_pipe("input.mp4", 1920, 1080):
+    cv2.imshow("Edges", edge_frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+```
+
+### Example: GPU Video I/O with ffmpegcv (NEW in v3.1)
+
+```python
+import ffmpegcv
+import cv2
+
+# GPU-accelerated reading (NVDEC) and writing (NVENC)
+cap = ffmpegcv.VideoCapture("input.mp4", gpu=0)  # GPU 0
+writer = ffmpegcv.VideoWriter("output.mp4", codec="h264_nvenc", fps=30, frameSize=(1920, 1080))
+
+while True:
+    ret, frame = cap.read()  # Returns BGR like OpenCV!
+    if not ret:
+        break
+    # OpenCV processing
+    processed = cv2.GaussianBlur(frame, (5, 5), 0)
+    writer.write(processed)
+
+cap.release()
+writer.release()
+```
+
+### Example: FFmpeg + OpenCV + Modal Parallel Processing (NEW in v3.1)
+
+```python
+import modal
+
+app = modal.App("ffmpeg-opencv-pipeline")
+
+image = (
+    modal.Image.debian_slim()
+    .apt_install("ffmpeg", "libsm6", "libxext6", "libgl1")
+    .pip_install("opencv-python-headless", "numpy")
+)
+
+@app.function(image=image)
+def process_frame(frame_data: tuple[int, bytes]) -> tuple[int, bytes]:
+    """Process single frame with OpenCV."""
+    import cv2
+    import numpy as np
+
+    frame_idx, frame_bytes = frame_data
+    nparr = np.frombuffer(frame_bytes, np.uint8)
+    frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)  # BGR
+
+    # Heavy OpenCV processing
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    edges = cv2.Canny(gray, 50, 150)
+    result = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
+
+    _, encoded = cv2.imencode('.png', result)
+    return frame_idx, encoded.tobytes()
+
+# Process 1000 frames in parallel across 100+ containers!
+inputs = [(i, frame_bytes) for i, frame_bytes in enumerate(frames)]
+results = list(process_frame.map(inputs))
+```
+
 ### Utility Scripts
 
 The plugin includes ready-to-use shell scripts for common advanced operations:
@@ -607,6 +702,37 @@ For issues or questions:
 ---
 
 **Master video and audio processing with confidence.** This plugin ensures you follow 2025 best practices, optimize for your use case, and handle platform-specific challenges effectively.
+
+---
+
+## What's New in v3.1.0
+
+### FFmpeg + OpenCV Integration (New Skill)
+
+**Complete guide to combining FFmpeg and OpenCV for video processing pipelines!**
+
+#### New Skill: ffmpeg-opencv-integration
+- **BGR/RGB Color Format Gotchas** - OpenCV uses BGR, FFmpeg uses RGB by default
+- **Frame Dimension Order** - `img[y, x]` not `img[x, y]` (the #2 source of bugs!)
+- **Audio Stream Loss** - Video filters drop audio in ffmpeg-python
+- **Memory Management** - Proper VideoCapture cleanup and generators
+
+#### Library Selection Guide
+| Task | Best Library | Why |
+|------|--------------|-----|
+| Simple video read | `cv2.VideoCapture` | Built-in, easy API |
+| GPU video I/O | **ffmpegcv** | NVDEC/NVENC, OpenCV-compatible |
+| Multi-threaded streaming | **VidGear** | RTSP/RTMP, camera capture |
+| ML batch loading | **Decord** | 2x faster than OpenCV |
+| Frame-level precision | **PyAV** | Direct libav access |
+| Complex filters | ffmpeg subprocess | Full FFmpeg power |
+
+#### Patterns Included
+- FFmpeg → OpenCV pipe (decode with FFmpeg, process with OpenCV)
+- OpenCV → FFmpeg pipe (process with OpenCV, encode with FFmpeg)
+- Bidirectional pipeline (FFmpeg ↔ OpenCV ↔ FFmpeg)
+- Modal.com parallel frame processing with map()
+- GPU-accelerated pipeline with ffmpegcv on Modal
 
 ---
 

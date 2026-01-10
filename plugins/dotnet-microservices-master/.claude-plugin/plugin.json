@@ -1,6 +1,6 @@
 {
   "name": "dotnet-microservices-master",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Expert agent on .NET microservices architecture, containerization, Docker, DDD, CQRS, and cloud-native patterns based on Microsoft's official guide",
   "author": {
     "name": "Josiah Siegel",

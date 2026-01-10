@@ -945,6 +945,17 @@ def debug_transcode(video_bytes: bytes):
 9. **Use fast presets for testing** - Switch to slower for production
 10. **Verify GPU capabilities** - NVENC may not be available
 
+## Related Skills
+
+- **ffmpeg-opencv-integration** - For FFmpeg + OpenCV combined pipelines, including:
+  - BGR/RGB color format conversion (OpenCV=BGR, FFmpeg=RGB)
+  - Frame coordinate gotchas (img[y,x] not img[x,y])
+  - ffmpegcv for GPU-accelerated video I/O (NVDEC/NVENC)
+  - VidGear for multi-threaded streaming
+  - Decord for ML batch video loading (2x faster than OpenCV)
+  - PyAV for frame-level precision
+  - Parallel frame processing patterns with Modal map()
+
 ## References
 
 - [Modal Documentation](https://modal.com/docs)
