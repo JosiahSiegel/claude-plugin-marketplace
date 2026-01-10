@@ -131,6 +131,357 @@ Dialogue: 0,0:00:00.00,0:00:02.00,Style,,0,0,0,,{\k100\t(0,1000,...)}Word
 ; \t(0,1000,...) = 1 second - NOW THEY MATCH!
 ```
 
+---
+
+## Advanced Karaoke Timing Parameters (2026 Research)
+
+### Optimal Karaoke Timing by Song Tempo
+
+| BPM Range | Syllable Duration | Tag Value | Notes |
+|-----------|-------------------|-----------|-------|
+| 60-80 (Slow ballad) | 600-800ms | `\kf60-80` | Long, emotional |
+| 80-100 (Moderate) | 400-600ms | `\kf40-60` | Standard pop |
+| 100-120 (Upbeat) | 300-500ms | `\kf30-50` | Most common |
+| 120-140 (Fast) | 250-400ms | `\kf25-40` | Energetic |
+| 140+ (Rapid) | 200-300ms | `\kf20-30` | Rap, EDM |
+
+### Karaoke Tag Selection Guide
+
+Based on syllable/word duration and desired effect:
+
+#### `\k` (Instant Fill) - Best For:
+- **Very short syllables:** <120 centiseconds (1.2s)
+- **Rap/hip-hop:** Fast lyric delivery
+- **Staccato rhythm:** Percussive, sharp delivery
+
+```ass
+; Rap example (fast succession):
+{\k25}Yo {\k20}this {\k15}is {\k30}rapid {\k25}fire {\k35}flow
+```
+
+#### `\kf` (Progressive Fill) - Best For:
+- **Long syllables:** >120 centiseconds (1.2s)
+- **Ballads:** Drawn-out emotional delivery
+- **Smooth transitions:** Clean visual sweep
+
+```ass
+; Ballad example (sustained notes):
+{\kf150}Loooooove {\kf120}yoooou {\kf180}foreeeever
+```
+
+**Recommended:** Use `\kf` for any syllable >100 centiseconds for smoothest visual effect.
+
+#### `\ko` (Outline Reveal) - Best For:
+- **High contrast:** Text that needs to "pop"
+- **Neon/glow styles:** Outline-heavy fonts
+- **Special emphasis:** Chorus, key phrases
+
+```ass
+; Neon karaoke style:
+[V4+ Styles]
+Style: NeonKaraoke,Arial,80,&H00000000,&H0000FF00,&H0000FF00,&H00000000,1,0,0,0,100,100,0,0,3,6,0,2,10,10,50,1
+
+[Events]
+Dialogue: 0,0:00:01.00,0:00:05.00,NeonKaraoke,,0,0,0,,{\ko50}Electric {\ko60}neon {\ko40}glow
+```
+
+### Multi-Color Karaoke Transitions
+
+Create dynamic color changes during karaoke fill:
+
+```ass
+; Gradient karaoke: Yellow → Orange → Red
+[V4+ Styles]
+Style: GradientKaraoke,Impact,80,&H0000FFFF,&H000000FF,&H00000000,&H00000000,1,0,0,0,100,100,0,0,1,5,0,2,10,10,50,1
+;                                   Primary^      Secondary^
+;                                   Yellow(start) Red(filled)
+
+; Add intermediate color transition with \t tags:
+[Events]
+Dialogue: 0,0:00:01.00,0:00:05.00,GradientKaraoke,,0,0,0,,{\kf80\t(0,400,\2c&H0000A5FF&)}Word1 {\kf100\t(0,500,\2c&H0000A5FF&)}Word2
+;                                                                   ↑ Orange midpoint
+```
+
+**Color progression formula:**
+```
+Start: &H0000FFFF (Yellow)
+Mid:   &H0000A5FF (Orange) - 50% through karaoke fill
+End:   &H000000FF (Red)
+```
+
+### Per-Character Karaoke (Fine-Grained Control)
+
+For very precise timing (character-by-character):
+
+```ass
+; Each character gets individual timing (manual, tedious)
+{\k10}H{\k8}e{\k12}l{\k10}l{\k15}o {\k20}w{\k18}o{\k15}r{\k12}l{\k10}d
+
+; Best practice: Use tools like Aegisub Karaoke Timer
+; Manual character timing only for special effects
+```
+
+**When to use character-level karaoke:**
+- Slow-motion word reveal
+- Dramatic emphasis
+- Non-linear character highlighting (e.g., every other letter)
+
+---
+
+## Advanced Text Animation Formulas (FFmpeg Drawtext)
+
+### Spring Physics Implementation
+
+Create natural bounce effects with exponential decay:
+
+```bash
+# Vertical spring bounce (decaying oscillation)
+# Formula: y_offset = amplitude * e^(-decay*t) * sin(frequency*t)
+-vf "drawtext=text='BOUNCE':fontsize=80:fontcolor=white:\
+     x=(w-tw)/2:\
+     y='(h-th)/2-30*exp(-t*2.5)*sin(t*15)'"
+
+# Breakdown:
+# -30*exp(-t*2.5) = amplitude decays from 30px to 0
+# sin(t*15) = oscillates at 15 rad/s (≈2.4 Hz)
+# Combines: bounces 2-3 times over ~1 second, settling at center
+```
+
+**Parameter tuning:**
+- **Decay rate** (2.5): Higher = faster settling (3-4 for quick, 1-2 for slow)
+- **Frequency** (15): Higher = more bounces (10-12 slow, 15-20 fast)
+- **Amplitude** (30): Bounce height in pixels
+
+### Elastic Overshoot Effect
+
+Simulate elastic material with multiple overshoots:
+
+```bash
+# Elastic scale effect (rubber band)
+# Overshoots target size multiple times before settling
+-vf "drawtext=text='ELASTIC':fontsize='72*(1+0.4*exp(-t*3)*sin(t*20))':\
+     fontcolor=yellow:x=(w-tw)/2:y=(h-th)/2"
+
+# Scale oscillates: 72px → 101px → 65px → 80px → 70px → 72px (settled)
+# Mathematical basis: e^(-3t) * sin(20t) creates damped oscillation
+```
+
+**Elastic parameters:**
+- **Base fontsize:** 72 (target)
+- **Overshoot:** 0.4 (40% maximum deviation) → 72 * 1.4 = 101px peak
+- **Decay:** 3 (settles in ~1.5 seconds)
+- **Frequency:** 20 (multiple small bounces)
+
+### Bezier Curve Approximation (Ease-In-Out)
+
+FFmpeg doesn't support bezier directly, but we can approximate with piecewise functions:
+
+```bash
+# Ease-out approximation (fast start, slow end)
+# Cubic bezier (0, 0, 0.2, 1) approximation
+-vf "drawtext=text='EASE OUT':\
+     alpha='if(lt(t,0.5),1-exp(-t*6),1)':\
+     fontsize=80:fontcolor=white:x=(w-tw)/2:y=(h-th)/2:\
+     enable='lt(t,1)'"
+
+# Ease-in approximation (slow start, fast end)
+# Cubic bezier (0.8, 0, 1, 1) approximation
+-vf "drawtext=text='EASE IN':\
+     alpha='if(lt(t,0.5),exp(-(1-t)*6),0)':\
+     fontsize=80:fontcolor=white:x=(w-tw)/2:y=(h-th)/2:\
+     enable='between(t,1,2)'"
+
+# Ease-in-out (S-curve) using sigmoid approximation
+-vf "drawtext=text='SMOOTH':\
+     alpha='1/(1+exp(-10*(t-0.5)))':\
+     fontsize=80:fontcolor=white:x=(w-tw)/2:y=(h-th)/2:\
+     enable='lt(t,1)'"
+```
+
+**Mathematical reasoning:**
+- **Exponential ease:** `1 - e^(-kt)` creates natural deceleration
+- **Sigmoid curve:** `1/(1+e^(-k(t-0.5)))` creates smooth S-curve (ease-in-out)
+- **k parameter:** Controls transition sharpness (6-10 for subtle, 15-20 for pronounced)
+
+### Wobble/Wiggle Effects
+
+Create organic, unpredictable motion:
+
+```bash
+# Dual-frequency wobble (complex motion)
+# Combines two sine waves at different frequencies for organic feel
+-vf "drawtext=text='WOBBLE':fontsize=80:fontcolor=white:\
+     x='(w-tw)/2+8*sin(t*7)+4*sin(t*17)':\
+     y='(h-th)/2+6*cos(t*7)+3*cos(t*13)'"
+
+# Breakdown:
+# Primary wobble: 8*sin(t*7) = 8px amplitude, 7 rad/s (1.1 Hz)
+# Secondary wobble: 4*sin(t*17) = 4px amplitude, 17 rad/s (2.7 Hz)
+# Result: Complex, organic motion pattern
+
+# Drunk/unstable effect (low frequency, large amplitude)
+-vf "drawtext=text='UNSTABLE':fontsize=80:fontcolor=white:\
+     x='(w-tw)/2+20*sin(t*2.5)+10*sin(t*6.3)':\
+     y='(h-th)/2+15*cos(t*3.1)+8*cos(t*7.2)'"
+```
+
+**Wobble design principles:**
+- Use **two frequencies** (primary + secondary) for natural randomness
+- **Prime number ratios** (e.g., 7 and 17) prevent pattern repetition
+- **Amplitude ratio 2:1** (primary twice the secondary) for balanced motion
+
+### Pulse with Variable Intensity
+
+Create heartbeat or alarm-style pulsing:
+
+```bash
+# Heartbeat pulse (two quick beats, pause)
+# Pattern: THUMP-thump ... pause ... THUMP-thump
+-vf "drawtext=text='♥ HEARTBEAT ♥':\
+     fontsize='80+25*max(0,sin(t*15)*exp(-mod(t,1.2)*10))':\
+     fontcolor=red:x=(w-tw)/2:y=(h-th)/2"
+
+# Breakdown:
+# sin(t*15) = rapid oscillation
+# exp(-mod(t,1.2)*10) = decay envelope every 1.2 seconds
+# max(0, ...) = only positive pulses
+# Result: Pulse decays quickly, resets every 1.2s
+
+# Alarm pulse (constant urgent rhythm)
+-vf "drawtext=text='⚠ ALERT ⚠':\
+     fontsize='80+20*abs(sin(t*8))':\
+     fontcolor=yellow:x=(w-tw)/2:y=(h-th)/2"
+
+# abs(sin(t*8)) creates continuous pulsing at 8 rad/s (1.3 Hz)
+```
+
+### Text Reveal Animations (Wipe Effects)
+
+#### Horizontal Wipe (Left to Right)
+
+```bash
+# Clip text progressively from left
+# Uses drawbox mask to reveal text over time
+-filter_complex "\
+  [0:v]drawtext=text='REVEALED':fontsize=100:fontcolor=white:\
+       x=(w-tw)/2:y=(h-th)/2[txt];\
+  [txt]drawbox=x=0:y=0:w='min(w,t*500)':h=h:c=black@0:t=fill:replace=1[v]" \
+  -map "[v]"
+
+# Breakdown:
+# w='min(w,t*500)' = width grows at 500 pixels/second
+# Creates left-to-right reveal effect
+```
+
+#### Vertical Wipe (Bottom to Top)
+
+```bash
+# Text rises from bottom
+-vf "drawtext=text='RISING':fontsize=100:fontcolor=white:\
+     x=(w-tw)/2:\
+     y='if(lt(t,1),h-t*h,0)'"
+
+# y position: starts at h (bottom), moves to 0 (top) over 1 second
+```
+
+### Countdown Timer Variations
+
+#### Animated Countdown with Anticipation
+
+```bash
+# Countdown that pulses on each second change
+-vf "drawtext=text='%{eif\\:10-floor(t)\\:d}':\
+     fontsize='200+50*abs(sin(floor(t)*50))*exp(-(t-floor(t))*8)':\
+     fontcolor=white:x=(w-tw)/2:y=(h-th)/2"
+
+# Breakdown:
+# %{eif\\:10-floor(t)\\:d} = countdown number (10, 9, 8, ...)
+# abs(sin(floor(t)*50)) = trigger pulse on integer seconds
+# exp(-(t-floor(t))*8) = decay within each second
+# Result: Number "pops" at each second change
+```
+
+#### Split-Flap Display (Mechanical)
+
+```bash
+# Simulates old-school flip counter with vertical offset
+-vf "drawtext=text='%{eif\\:10-floor(t)\\:d}':\
+     fontsize=200:fontcolor=white:\
+     x=(w-tw)/2:\
+     y='(h-th)/2-(t-floor(t))*100*step(t-floor(t))'"
+
+# y offset creates "flipping" motion at second boundaries
+```
+
+---
+
+## Optimal Animation Timing by Content Type
+
+### Music Video Karaoke
+
+| Genre | Syllable Timing | Animation Style | Color Scheme |
+|-------|----------------|-----------------|--------------|
+| **Ballad** | 100-200 centiseconds | `\kf` smooth fill | White → Soft Blue |
+| **Pop** | 40-80 centiseconds | `\kf` with bounce | White → Bright Pink |
+| **Rap** | 15-40 centiseconds | `\k` instant | White → Red |
+| **Rock** | 50-100 centiseconds | `\k` with shake | White → Orange |
+| **EDM** | 30-60 centiseconds | `\ko` outline | Neon colors |
+
+### Educational Content
+
+```bash
+# Slow, clear typewriter for learning
+# 80ms per character = comfortable reading pace
+-vf "drawtext=textfile=lesson.txt:\
+     fontsize=48:fontcolor=white:\
+     x=50:y=100:\
+     enable='gte(n,eif(n/24,80))'"
+# Each character appears every 80/24 ≈ 3.3 frames at 24fps
+```
+
+### Scrolling Credits Optimization
+
+```bash
+# Professional credits scroll
+# Speed: 60-80 pixels/second for comfortable reading
+-vf "drawtext=textfile=credits.txt:\
+     fontsize=42:fontcolor=white:\
+     x=(w-tw)/2:\
+     y='h-60*t':\
+     line_spacing=25"
+
+# Calculation:
+# 60 px/s at 42px font = ~1.4 lines/second
+# For 50 lines: 50/1.4 = ~36 seconds total duration
+```
+
+**Credits readability formula:**
+```
+scroll_speed = font_size * 1.2 to 1.5  (pixels/second)
+total_duration = (line_count * line_height) / scroll_speed
+
+Example:
+font_size = 42px
+line_height = 42 + 25 (spacing) = 67px
+scroll_speed = 42 * 1.4 = 59 px/s
+50 lines = 50 * 67 = 3350 pixels
+duration = 3350 / 59 = 56.8 seconds
+```
+
+---
+
+## Sources
+
+Enhanced with research from:
+- [FFmpeg Drawtext Animation Exploration](https://www.braydenblackwell.com/blog/ffmpeg-text-rendering)
+- [ASS Karaoke Tags Documentation](https://docs.karaokes.moe/contrib-guide/create-karaoke/karaoke/)
+- [Advanced Aegisub Karaoke](https://docs.karaokes.moe/contrib-guide/create-karaoke/karaoke-advanced/)
+- [Spring Physics for Animations](https://www.kvin.me/posts/effortless-ui-spring-animations)
+- [Easing Functions Mathematical Reference](https://easings.net/)
+- [FFmpeg Expression Evaluation](https://ffmpeg.org/ffmpeg-utils.html#Expression-Evaluation)
+
+---
+
 ### Apply Karaoke ASS to Video
 
 ```bash

@@ -582,9 +582,351 @@ ffmpeg -itsoffset 0.5 -i captions.ass shifted.ass
 
 ---
 
+## Advanced Animation Parameters for Viral Content
+
+### Spring Physics Formulas for Bounce Animations
+
+Spring physics create natural, organic motion that feels more engaging than linear animations.
+
+#### Core Spring Formula
+
+```
+Position = equilibrium + amplitude * e^(-damping*t) * sin(frequency*t)
+```
+
+#### Practical Spring Parameters
+
+| Parameter | Value Range | Effect | Recommended |
+|-----------|-------------|--------|-------------|
+| **Damping** | 0.5-5.0 | How quickly bounce settles | 2.5-3.5 for captions |
+| **Frequency** | 5-20 rad/s | Bounce speed | 12-15 for punchy feel |
+| **Amplitude** | 10-50 pixels | Bounce height | 20-30 for text |
+
+#### Spring Bounce Examples
+
+```ass
+; Subtle spring bounce (0.4s total)
+; Scale: 50% → 115% → 95% → 100% (overshoot then settle)
+{\fscx50\fscy50\t(0,120,\fscx115\fscy115)\t(120,240,\fscx95\fscy95)\t(240,400,\fscx100\fscy100)}Word
+
+; Aggressive spring bounce (0.6s total)
+; Scale: 40% → 130% → 90% → 105% → 100% (multiple oscillations)
+{\fscx40\fscy40\t(0,100,\fscx130\fscy130)\t(100,250,\fscx90\fscy90)\t(250,450,\fscx105\fscy105)\t(450,600,\fscx100\fscy100)}IMPACT
+
+; Position spring bounce (from below)
+{\move(540,1300,540,960,0,150)\t(0,150,\fscy115)\t(150,300,\fscy95)\t(300,450,\fscy100)}Bounce
+```
+
+#### Mathematical Reasoning
+
+The overshoot (115% → 95%) simulates spring physics where momentum carries the object past equilibrium before settling. The exponential decay factor `e^(-damping*t)` ensures the oscillation amplitude decreases over time, creating a natural settling effect.
+
+**Damping ratio formula:**
+- ζ = damping / (2 * sqrt(stiffness * mass))
+- Under-damped (0 < ζ < 1): Bouncy, overshoots (viral content)
+- Critically damped (ζ = 1): No overshoot, fastest settle (professional)
+- Over-damped (ζ > 1): Slow, sluggish (avoid)
+
+### Easing Functions for Natural Motion
+
+#### Cubic Bezier Curve Approximations
+
+ASS doesn't support cubic-bezier directly, but we can approximate with multi-stage `\t()` transforms:
+
+**Ease-Out (Deceleration - elements appearing):**
+```ass
+; Approximates cubic-bezier(0, 0, 0.2, 1)
+; Fast start (70% in first 40%), slow finish
+{\fscx50\fscy50\t(0,120,\fscx85\fscy85)\t(120,200,\fscx95\fscy95)\t(200,300,\fscx100\fscy100)}EaseOut
+```
+
+**Ease-In (Acceleration - elements disappearing):**
+```ass
+; Approximates cubic-bezier(0.8, 0, 1, 1)
+; Slow start, fast finish
+{\fscx100\fscy100\t(0,100,\fscx95\fscy95)\t(100,180,\fscx85\fscy85)\t(180,300,\fscx50\fscy50)}EaseIn
+```
+
+**Ease-In-Out (Smooth both ends):**
+```ass
+; Approximates cubic-bezier(0.4, 0, 0.2, 1) - Material Design standard
+{\fscx50\fscy50\t(0,80,\fscx70\fscy70)\t(80,220,\fscx90\fscy90)\t(220,300,\fscx100\fscy100)}EaseInOut
+```
+
+#### Elastic Easing (Rubber Band Effect)
+
+```ass
+; Elastic overshoot - great for emphasis
+; Formula: sin((t*10 - 0.75)*PI) * e^(-t*5)
+{\fscx50\fscy50\t(0,80,\fscx140\fscy140)\t(80,180,\fscx85\fscy85)\t(180,320,\fscx110\fscy110)\t(320,500,\fscx100\fscy100)}ELASTIC
+```
+
+Mathematical basis: `sin((x*10 - 0.75)*(2*PI/3)) * pow(2, -10*x)` where x = normalized time (0-1)
+
+### Optimal Timing Parameters by Platform (2026 Research)
+
+Based on 2026 viral content analysis and WCAG accessibility guidelines:
+
+#### TikTok Timing Profile
+
+| Parameter | Value | Reasoning |
+|-----------|-------|-----------|
+| Caption appear speed | 80-150ms | Fast platform, snappy expectations |
+| Word dwell time | 250-400ms | Minimum: 250ms, longer for emphasis |
+| Bounce duration | 180-300ms | Quick, energetic feel |
+| Shake amplitude | 3-8 pixels | Readable but noticeable |
+| Max words/screen | 3-5 words | Mobile-first, quick reading |
+| Animation delay between words | 50-100ms | Rapid succession |
+
+#### YouTube Shorts Timing Profile
+
+| Parameter | Value | Reasoning |
+|-----------|-------|-----------|
+| Caption appear speed | 150-250ms | Slightly more polished than TikTok |
+| Word dwell time | 400-600ms | Better readability on larger screens |
+| Bounce duration | 250-400ms | Smooth, professional feel |
+| Shake amplitude | 2-5 pixels | Subtle, not distracting |
+| Max words/screen | 4-6 words | Comfortable reading chunk |
+| Animation delay between words | 80-150ms | Measured pacing |
+
+#### Instagram Reels Timing Profile
+
+| Parameter | Value | Reasoning |
+|-----------|-------|-----------|
+| Caption appear speed | 150-250ms | Aesthetic, stylish timing |
+| Word dwell time | 300-500ms | Visual-first platform |
+| Bounce duration | 200-350ms | Trendy, polished |
+| Shake amplitude | 4-10 pixels | More dramatic for aesthetics |
+| Max words/screen | 3-5 words | Short, impactful phrases |
+| Animation delay between words | 100-180ms | Rhythmic pacing |
+
+### Shake/Tremor Effects with Readability Limits
+
+#### Maximum Readable Shake Amplitudes
+
+Research shows text readability degrades rapidly with excessive motion:
+
+| Font Size | Max Horizontal Shake | Max Vertical Shake | Frequency Limit |
+|-----------|---------------------|-------------------|-----------------|
+| 64-72px | 8-10 pixels | 6-8 pixels | 8-12 Hz |
+| 76-84px | 10-15 pixels | 8-12 pixels | 8-12 Hz |
+| 88-96px | 15-20 pixels | 12-16 pixels | 6-10 Hz |
+
+**Rule of thumb:** Shake amplitude should not exceed 15% of font size for readability.
+
+#### Shake Animation Examples
+
+```ass
+; Subtle shake (emphasis without distraction)
+; Horizontal: ±5px, 12Hz oscillation, 0.3s duration
+{\pos(540,960)\t(0,50,\pos(545,960))\t(50,100,\pos(535,960))\t(100,150,\pos(543,960))\t(150,200,\pos(537,960))\t(200,250,\pos(541,960))\t(250,300,\pos(540,960))}Text
+
+; Impact shake (decay pattern)
+; Amplitude decreases: 10px → 6px → 3px → 0px
+{\pos(540,960)\t(0,60,\pos(550,960))\t(60,120,\pos(534,960))\t(120,200,\pos(543,960))\t(200,300,\pos(540,960))}BOOM
+```
+
+**FFmpeg drawtext shake (continuous):**
+```bash
+# Subtle shake: x offset = 5 * sin(t*40) (40 rad/s ≈ 6.4 Hz)
+-vf "drawtext=text='LIVE':fontsize=80:fontcolor=red:\
+     x='(w-tw)/2+5*sin(t*40)':\
+     y='(h-th)/2+3*sin(t*40+1.57)'"
+
+# Decaying shake (impact effect): amplitude decreases exponentially
+-vf "drawtext=text='BOOM':fontsize=120:fontcolor=white:\
+     x='(w-tw)/2+15*exp(-t*3)*sin(t*50)':\
+     y='(h-th)/2+10*exp(-t*3)*cos(t*50)'"
+```
+
+### Pulse/Breathing Effects
+
+#### Scale Pulse (Heartbeat Effect)
+
+```ass
+; Continuous pulse: 100% ↔ 105% every 1 second
+; Use with looping for sustained emphasis
+{\t(0,500,\fscx105\fscy105)\t(500,1000,\fscx100\fscy100)}Word
+```
+
+**FFmpeg drawtext pulse:**
+```bash
+# Sine wave pulse: fontsize oscillates 72 ± 8 pixels at 2 Hz
+-vf "drawtext=text='SUBSCRIBE':fontsize='72+8*sin(t*12.56)':\
+     fontcolor=yellow:x=(w-tw)/2:y=h-150"
+# 12.56 rad/s = 2π rad/cycle × 2 cycles/s = 2 Hz
+```
+
+Mathematical reasoning: `sin(2πf*t)` where f = frequency in Hz
+- 1 Hz (slow): `sin(6.28*t)` = `sin(t*6.28)`
+- 2 Hz (medium): `sin(12.56*t)` = `sin(t*12.56)`
+- 3 Hz (fast): `sin(18.85*t)` = `sin(t*18.85)`
+
+### Per-Character vs Per-Word Timing
+
+#### Character-Level Animation (Typewriter)
+
+Optimal timing: **30-80ms per character** for comfortable reading
+
+```python
+# Typewriter timing formula
+chars_per_second = 1000 / ms_per_char
+# 50ms per char = 20 chars/second (comfortable)
+# 30ms per char = 33 chars/second (fast, energetic)
+# 80ms per char = 12.5 chars/second (dramatic, slow)
+```
+
+**ASS character reveal (manual):**
+```ass
+; Each character appears with 50ms delay
+Dialogue: 0,0:00:00.00,0:00:00.05,Style,,0,0,0,,H
+Dialogue: 0,0:00:00.05,0:00:00.10,Style,,0,0,0,,He
+Dialogue: 0,0:00:00.10,0:00:00.15,Style,,0,0,0,,Hel
+Dialogue: 0,0:00:00.15,0:00:00.20,Style,,0,0,0,,Hell
+Dialogue: 0,0:00:00.20,0:00:01.00,Style,,0,0,0,,Hello
+```
+
+#### Word-Level Animation (CapCut Style)
+
+Optimal timing: **200-400ms per word** with **50-150ms gap** between words
+
+```python
+# Word animation timing formula
+def word_timing(word_count, platform='tiktok'):
+    timings = {
+        'tiktok': {'appear': 120, 'dwell': 300, 'gap': 80},
+        'youtube': {'appear': 180, 'dwell': 450, 'gap': 120},
+        'instagram': {'appear': 150, 'dwell': 350, 'gap': 100}
+    }
+    t = timings[platform]
+
+    total_duration = 0
+    for i in range(word_count):
+        total_duration += t['appear'] + t['dwell'] + t['gap']
+
+    return total_duration  # in milliseconds
+```
+
+### Accessibility Considerations
+
+#### WCAG 2.2 Animation Guidelines
+
+1. **Maximum flash frequency:** 3 flashes per second (avoid seizures)
+   - Do NOT use animations faster than 333ms cycle time
+
+2. **Motion reduction:** Provide `prefers-reduced-motion` alternative
+   - For web: CSS `@media (prefers-reduced-motion: reduce)`
+   - For video: Export both animated and static caption versions
+
+3. **Minimum caption duration:** 1.5 seconds (WCAG Level AA)
+   - Even fast platforms should respect this for accessibility
+
+4. **Maximum reading speed:** 200 WPM (3.3 words/second)
+   - Formula: `duration >= (word_count / 3.3) + animation_time`
+
+#### Safe Animation Parameters
+
+| Animation Type | Safe Range | Accessibility Limit | Notes |
+|----------------|------------|---------------------|-------|
+| Shake amplitude | 0-15px | 10px max | Higher risks illegibility |
+| Shake frequency | 2-10 Hz | 8 Hz max | Above 10 Hz may trigger seizures |
+| Pulse magnitude | 100-110% | 108% max | Excessive scale distracts |
+| Flash duration | 100-300ms | Must be < 333ms | 3 flash/sec limit |
+
+### Mathematical Formulas Reference
+
+#### Oscillation Functions
+
+**Sine wave (smooth oscillation):**
+```
+y = amplitude * sin(frequency * t + phase)
+```
+
+Example: `5*sin(t*12)` = 5 pixel amplitude, 12 rad/s ≈ 1.9 Hz
+
+**Cosine wave (90° phase shift from sine):**
+```
+y = amplitude * cos(frequency * t)
+```
+
+Use cosine for perpendicular motion (e.g., circular paths)
+
+**Exponential decay (settling):**
+```
+y = initial * e^(-decay_rate * t)
+```
+
+Example: `10*exp(-t*3)` = 10 pixels decaying with rate 3/sec
+
+**Damped oscillation (spring bounce):**
+```
+y = amplitude * e^(-damping*t) * sin(frequency*t)
+```
+
+Example: `20*exp(-t*2.5)*sin(t*12)` = spring with damping 2.5, frequency 12 rad/s
+
+#### Bezier Curve Approximation
+
+Cubic bezier `(p0, p1, p2, p3)` can be approximated with 3-stage linear transitions:
+
+**Standard ease-out (0, 0, 0.2, 1):**
+- Stage 1 (0-40%): 50% of total change
+- Stage 2 (40-70%): 35% of total change
+- Stage 3 (70-100%): 15% of total change
+
+**Standard ease-in (0.8, 0, 1, 1):**
+- Stage 1 (0-30%): 15% of total change
+- Stage 2 (30-60%): 35% of total change
+- Stage 3 (60-100%): 50% of total change
+
+### Platform Caption Accessibility Summary (2026)
+
+Based on research from OpusClip, Instagram, and YouTube best practices:
+
+#### Critical Requirements
+
+1. **Silent viewing optimization:** 85% of social video watched without sound
+2. **Contrast ratio:** Minimum 4.5:1 (WCAG Level AA)
+3. **Font choice:** Sans-serif (Arial, Helvetica, Montserrat)
+4. **Burned-in preferred:** Platform auto-captions often inaccurate
+5. **Word-level timing:** Higher engagement than full-sentence captions
+
+#### Recommended Safe Zone (Mobile)
+
+```
+Top margin: 150-200px (avoid notch, status bar)
+Bottom margin: 200-300px (avoid UI, captions, CTA)
+Side margins: 40-60px (safe for all aspect ratios)
+```
+
+**ASS safe zone positioning:**
+```ass
+; 1080x1920 vertical video safe zone
+Style: SafeZone,Arial Black,80,&H00FFFFFF,&H0000FFFF,&H00000000,&H40000000,1,0,0,0,100,100,0,0,1,5,0,2,50,50,280,1
+;                                                                                           ↑  ↑   ↑
+;                                                                                        Left Right Bottom
+;                                                                                        50px 50px 280px
+```
+
+---
+
+## Sources
+
+This skill was enhanced with research from:
+- [Instagram Reels Caption Best Practices 2026](https://www.opus.pro/blog/instagram-reels-caption-subtitle-best-practices)
+- [YouTube Shorts Caption Best Practices 2026](https://www.opus.pro/blog/youtube-shorts-caption-subtitle-best-practices)
+- [Short-Form Video Mastery Guide 2026](https://almcorp.com/blog/short-form-video-mastery-tiktok-reels-youtube-shorts-2026/)
+- [FFmpeg Drawtext Animation Exploration](https://www.braydenblackwell.com/blog/ffmpeg-text-rendering)
+- [Spring Physics for UI Animations](https://www.kvin.me/posts/effortless-ui-spring-animations)
+- [ASS Karaoke Documentation](https://docs.karaokes.moe/contrib-guide/create-karaoke/karaoke/)
+- [WCAG Animation Accessibility](https://www.a11y-collective.com/blog/wcag-animation/)
+
+---
+
 ## Related Skills
 
 - `ffmpeg-captions-subtitles` - Full caption system
 - `ffmpeg-karaoke-animated-text` - Advanced karaoke effects
+- `ffmpeg-animation-timing-reference` - Timing formulas and parameters
 - `viral-video-platform-specs` - Platform requirements
 - `viral-video-hook-templates` - Hook patterns

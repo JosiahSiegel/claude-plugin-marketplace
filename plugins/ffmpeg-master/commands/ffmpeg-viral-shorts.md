@@ -269,21 +269,29 @@ ffmpeg -i input.mp4 \
   output_shorts_final.mp4
 ```
 
-## YouTube Shorts Technical Requirements
+## YouTube Shorts Technical Requirements (2025-2026)
 
-| Specification | Requirement |
-|---------------|-------------|
-| **Aspect Ratio** | 9:16 (vertical) |
-| **Resolution** | 1080x1920 (recommended), min 1920px on short side |
-| **Video Codec** | H.264, VP9, HEVC |
-| **Audio Codec** | AAC, Opus |
-| **Frame Rate** | 24-60 fps (30 recommended) |
-| **Max File Size** | 256 GB (practical: <500MB) |
-| **Max Duration** | 60 seconds (hard limit) |
-| **Optimal Duration** | 50-60 seconds (algorithm favored) |
-| **Min Duration** | ~15 seconds recommended |
-| **Pixel Format** | yuv420p (or yuv420p10le for HDR) |
-| **Audio Sample Rate** | 48000 Hz preferred |
+| Specification | Requirement | Optimal Value |
+|---------------|-------------|---------------|
+| **Aspect Ratio** | 9:16 (vertical) | Required for Shorts shelf |
+| **Resolution** | 1080x1920 (recommended) | 1080x1920 (limited to 1080p playback) |
+| **Video Codec** | H.264, VP9, HEVC | H.264 (compatibility), VP9 (quality) |
+| **Audio Codec** | AAC, Opus | AAC-LC (most compatible) |
+| **Audio Bitrate** | 192-384 kbps | 192 kbps minimum, 384 kbps YouTube recommendation |
+| **Audio Loudness** | -13 to -15 LUFS | -14 LUFS (YouTube normalizes to this) |
+| **True Peak** | -1 to -3 dB | -1.5 dBTP recommended |
+| **Frame Rate** | 24-60 fps | 30 fps (upload at source frame rate) |
+| **Bitrate (1080p30)** | 8 Mbps | 8 Mbps (YouTube official) |
+| **Bitrate (1080p60)** | 12 Mbps | 12 Mbps |
+| **CRF (H.264)** | 18-23 | CRF 20 (high quality), CRF 22 (standard) |
+| **Preset** | slow, medium, fast | slow (best quality for uploads) |
+| **Max File Size** | 256 GB | Practical: 20-100 MB for Shorts |
+| **Max Duration** | 60 seconds (HARD LIMIT) | Strict enforcement |
+| **Optimal Duration** | 50-60 seconds | Maximizes watch time metric |
+| **Min Duration** | ~15 seconds recommended | Shorter = harder to rank |
+| **Pixel Format** | yuv420p (SDR) | yuv420p10le for HDR |
+| **Color Space** | Rec.709 (SDR) | Rec.2100 for HDR only |
+| **Audio Sample Rate** | 48000 Hz preferred | YouTube production standard |
 
 ## Algorithm Optimization Tips
 
@@ -305,11 +313,33 @@ ffmpeg -i input.mp4 \
   -c:a copy \
   output_with_progress.mp4
 
-# Subtle continuous zoom (psychological engagement)
+# Subtle continuous zoom - 0.15%/sec for YouTube (larger screens need more movement)
+# YouTube Shorts viewers often watch on TVs, requiring 1.5x TikTok's zoom rate
 ffmpeg -i input.mp4 \
-  -vf "zoompan=z='1+0.0008*t':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920" \
+  -vf "zoompan=z='1+0.0015*t':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920" \
   -c:v libx264 -preset fast -crf 22 \
   output_slow_zoom.mp4
+```
+
+### Audio Optimization (2025-2026 Research)
+
+**YouTube Shorts Audio Targets**:
+- **Loudness**: -13 to -15 LUFS (YouTube normalizes to -14 LUFS)
+- **True Peak**: -1 to -3 dBTP (recommended: -1.5 dBTP)
+- **Strategy**: Upload at -14 LUFS for minimal platform processing
+
+```bash
+# Normalize audio for YouTube Shorts - -14 LUFS target
+ffmpeg -i input.mp4 \
+  -af "loudnorm=I=-14:TP=-1.5:LRA=11" \
+  -c:v copy \
+  output_normalized_shorts.mp4
+
+# Voice clarity with YouTube-optimized loudness
+ffmpeg -i input.mp4 \
+  -af "highpass=f=80,lowpass=f=12000,compand=attacks=0:points=-80/-900|-45/-15|-27/-9|0/-7|20/-7:gain=3,loudnorm=I=-14:TP=-1.5" \
+  -c:v copy \
+  output_voice_optimized.mp4
 ```
 
 ### End Screen Call-to-Action

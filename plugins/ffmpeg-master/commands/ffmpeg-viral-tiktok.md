@@ -135,9 +135,10 @@ ffmpeg -i input.mp4 \
 #### Visual Hook Effects
 
 ```bash
-# Zoom pulse effect in first 2 seconds
+# Zoom pulse effect - 60fps for smooth motion, optimized timing for 1.3s attention window
+# 12% amplitude at ~1.3Hz (sin(t*8) = 8 rad/s) creates highly visible pulsing on mobile
 ffmpeg -i input.mp4 \
-  -vf "zoompan=z='if(lt(t,2),1+0.1*sin(t*6),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920" \
+  -vf "fps=60,zoompan=z='if(lt(t,1.5),1+0.12*sin(t*8),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920" \
   -c:v libx264 -preset fast -crf 23 \
   -c:a aac -b:a 128k \
   output_hook_zoom.mp4
@@ -184,19 +185,24 @@ ffmpeg -i input.mp4 \
   output_tiktok_final.mp4
 ```
 
-## TikTok Technical Requirements
+## TikTok Technical Requirements (2025-2026)
 
-| Specification | Requirement |
-|---------------|-------------|
-| **Aspect Ratio** | 9:16 (vertical) |
-| **Resolution** | 1080x1920 (recommended) |
-| **Video Codec** | H.264 |
-| **Audio Codec** | AAC |
-| **Frame Rate** | 24-60 fps (30 recommended) |
-| **Max File Size** | 287 MB (iOS), 72 MB (Android web) |
-| **Max Duration** | 10 minutes |
-| **Optimal Duration** | 15-60 seconds |
-| **Pixel Format** | yuv420p |
+| Specification | Requirement | Optimal Value |
+|---------------|-------------|---------------|
+| **Aspect Ratio** | 9:16 (vertical) | Required |
+| **Resolution** | 1080x1920 (recommended) | 1080x1920 (TikTok compresses 4K) |
+| **Video Codec** | H.264 (required) | H.264 High Profile, Level 4.1 |
+| **Audio Codec** | AAC | AAC-LC, 192 kbps |
+| **Audio Loudness** | -10 to -12 LUFS | -11 LUFS (mobile-optimized) |
+| **True Peak** | -1.5 dBTP max | Prevents distortion |
+| **Frame Rate** | 24-60 fps | 30 fps (60 fps for sports/action only) |
+| **Bitrate (30fps)** | 6-8.5 Mbps | 7 Mbps VBR optimal |
+| **CRF** | 21-23 | CRF 22 (best balance) |
+| **Keyframe Interval** | 2-3 seconds | Every 60-90 frames at 30fps |
+| **Max File Size** | 287 MB (iOS), 72 MB (Android web) | Target: <100 MB |
+| **Max Duration** | 10 minutes | Optimal: 21-34 seconds |
+| **Optimal Duration** | 21-34 seconds | Highest completion rate |
+| **Pixel Format** | yuv420p | Required, Rec.709 |
 
 ## Viral Optimization Tips
 
@@ -211,9 +217,10 @@ ffmpeg -i input.mp4 \
 ### Retention Boosters
 
 ```bash
-# Add subtle zoom throughout video (keeps viewer engaged)
+# Add subtle zoom throughout video - 0.2%/sec is minimum perceptible on mobile
+# Keeps viewers engaged with subconscious motion without being distracting
 ffmpeg -i input.mp4 \
-  -vf "zoompan=z='1+0.001*t':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920" \
+  -vf "zoompan=z='1+0.002*t':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920" \
   -c:v libx264 -preset fast -crf 23 \
   output_slow_zoom.mp4
 
@@ -224,20 +231,32 @@ ffmpeg -i input.mp4 \
   output_subtle_shake.mp4
 ```
 
-### Audio Optimization
+### Audio Optimization (2025-2026 Research)
+
+**TikTok Audio Targets**:
+- **Loudness**: -10 to -12 LUFS (louder wins on mobile speakers)
+- **True Peak**: -1.5 dBTP maximum (prevent distortion)
+- **Strategy**: Upload hotter than platform target for better mobile experience
 
 ```bash
-# Normalize audio for consistent playback
+# Normalize audio for TikTok - optimized for mobile playback
+# -11 LUFS target: louder than YouTube (-14) but prevents over-compression
 ffmpeg -i input.mp4 \
-  -af "loudnorm=I=-16:TP=-1.5:LRA=11" \
+  -af "loudnorm=I=-11:TP=-1.5:LRA=11" \
   -c:v copy \
-  output_normalized.mp4
+  output_normalized_tiktok.mp4
 
-# Boost voice clarity
+# Boost voice clarity with compression
 ffmpeg -i input.mp4 \
-  -af "highpass=f=100,lowpass=f=8000,compand=attacks=0:points=-80/-900|-45/-15|-27/-9|0/-7|20/-7:gain=5" \
+  -af "highpass=f=100,lowpass=f=8000,compand=attacks=0:points=-80/-900|-45/-15|-27/-9|0/-7|20/-7:gain=5,loudnorm=I=-11:TP=-1.5" \
   -c:v copy \
   output_voice_boost.mp4
+
+# Bass boost for music content
+ffmpeg -i input.mp4 \
+  -af "bass=g=6:f=100,loudnorm=I=-11:TP=-1.5:LRA=11" \
+  -c:v copy \
+  output_bass_boost.mp4
 ```
 
 ## Batch Processing

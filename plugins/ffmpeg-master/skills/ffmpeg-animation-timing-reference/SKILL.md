@@ -106,6 +106,46 @@ ffmpeg -i input.mp4 -vf "zoompan=z='1.2':d=120:s=1080x1920" output.mp4
 # Formula: frames = seconds × fps
 ```
 
+### Viral Video Timing Optimizations (2025-2026)
+
+Based on the **1.3-second attention threshold** research, hook animations must be fast and dramatic:
+
+| Effect Type | FPS | Effect Duration | Frame Count | `d=` Parameter |
+|-------------|-----|-----------------|-------------|----------------|
+| Hook zoom punch | 60 | 0.4-0.5s | 24-30 frames | `d=1` (use time conditional) |
+| Hook flash | 60 | 0.2-0.3s | 12-18 frames | `d=1` (use time conditional) |
+| Continuous zoom | 30 | Entire video | N/A | `d=1` (recalc per frame) |
+| Text animations | 60 | 0.3-0.5s | 18-30 frames | `d=1` (use time conditional) |
+
+**Important:** Always use `d=1` for continuous per-frame processing. Limit effect duration using time conditionals like `if(lt(t,0.5),effect,1)` rather than setting `d=` to a frame count (which would freeze the video after that many frames).
+
+**Critical Rule:** Hook animations MUST complete within **0.5 seconds** to fit in the 1.3-second attention window with room for text/content.
+
+### Optimal Zoom Parameters by Platform
+
+| Platform | Hook Zoom | Hook Duration | Continuous Zoom | Recommended FPS |
+|----------|-----------|---------------|-----------------|-----------------|
+| **TikTok** | 1.5x (50%) | 0.4-0.5s | +0.2%/sec | 60fps for hooks |
+| **YouTube Shorts** | 1.5x (50%) | 0.5-0.6s | +0.15%/sec | 60fps throughout |
+| **Instagram Reels** | 1.4x (40%) | 0.5-0.6s | +0.18%/sec | 60fps for hooks |
+
+### Optimized Hook Effect Formulas
+
+```bash
+# 1.5x zoom punch over 0.5s at 60fps (RECOMMENDED):
+# Always use d=1 for continuous processing; time conditional limits effect duration
+fps=60,zoompan=z='if(lt(t,0.5),1.5-t,1)':d=1:s=1080x1920
+
+# 8% zoom pulse at ~2Hz for 1.5s (sin(t*12) = 12 rad/s = 1.91 Hz):
+fps=60,zoompan=z='if(lt(t,1.5),1+0.08*sin(t*12),1)':d=1:s=1080x1920
+
+# Subtle continuous zoom for TikTok (0.2%/sec - minimum perceptible):
+zoompan=z='1+0.002*t':d=1:s=1080x1920
+
+# Subtle continuous zoom for YouTube Shorts (0.15%/sec - larger screens):
+zoompan=z='1+0.0015*t':d=1:s=1080x1920
+```
+
 ---
 
 # Section 2: ASS/SSA Subtitle Timing
@@ -453,6 +493,625 @@ print(calculate_caption_duration("Check out this incredible transformation")) # 
 | Emphasis/attention | `1+0.2*sin(t*6)` | Continuous |
 | Bounce entrance | `exp(-t*3)*sin(t*15)` | 400-600ms |
 | Smooth transition | Linear (no easing) | Any |
+
+---
+
+# Section 10: Mathematical Animation Formula Reference
+
+## Complete Easing Function Formulas
+
+Based on standard animation libraries (CSS, anime.js, React Spring) and adapted for FFmpeg.
+
+### Linear (No Easing)
+
+```
+f(t) = t
+```
+
+**FFmpeg:** `alpha='t'` or `x='t*100'`
+
+Use for: Constant speed motion, mechanical effects
+
+### Quadratic Easing
+
+**Ease In (Acceleration):**
+```
+f(t) = t²
+```
+
+**FFmpeg:** `alpha='t*t'`
+
+**Ease Out (Deceleration):**
+```
+f(t) = 1 - (1-t)²
+```
+
+**FFmpeg:** `alpha='1-(1-t)*(1-t)'`
+
+**Ease In-Out:**
+```
+f(t) = if(t < 0.5, 2*t², 1 - 2*(1-t)²)
+```
+
+**FFmpeg:** `alpha='if(lt(t,0.5),2*t*t,1-2*(1-t)*(1-t))'`
+
+### Cubic Easing
+
+**Ease In:**
+```
+f(t) = t³
+```
+
+**FFmpeg:** `alpha='t*t*t'`
+
+**Ease Out:**
+```
+f(t) = 1 - (1-t)³
+```
+
+**FFmpeg:** `alpha='1-(1-t)*(1-t)*(1-t)'`
+
+**Ease In-Out (Material Design Default):**
+```
+f(t) = if(t < 0.5, 4*t³, 1 - 4*(1-t)³)
+```
+
+**FFmpeg:** `alpha='if(lt(t,0.5),4*t*t*t,1-4*(1-t)*(1-t)*(1-t))'`
+
+### Exponential Easing
+
+**Ease In:**
+```
+f(t) = 2^(10*(t-1))
+```
+
+**FFmpeg:** `alpha='exp(10*(t-1)*0.693)'`
+(Note: `2^x = e^(x*ln(2))` where `ln(2) ≈ 0.693`)
+
+**Ease Out (Recommended for text appearing):**
+```
+f(t) = 1 - 2^(-10*t)
+```
+
+**FFmpeg:** `alpha='1-exp(-10*t*0.693)'`
+
+### Sine Easing (Smooth, Gentle)
+
+**Ease In:**
+```
+f(t) = 1 - cos(t*π/2)
+```
+
+**FFmpeg:** `alpha='1-cos(t*1.571)'`
+(Note: `π/2 ≈ 1.571`)
+
+**Ease Out:**
+```
+f(t) = sin(t*π/2)
+```
+
+**FFmpeg:** `alpha='sin(t*1.571)'`
+
+**Ease In-Out:**
+```
+f(t) = -(cos(π*t) - 1)/2
+```
+
+**FFmpeg:** `alpha='-(cos(3.1416*t)-1)/2'`
+
+### Circular Easing (Sharp Curve)
+
+**Ease In:**
+```
+f(t) = 1 - sqrt(1 - t²)
+```
+
+**FFmpeg:** `alpha='1-sqrt(1-t*t)'`
+
+**Ease Out:**
+```
+f(t) = sqrt(1 - (1-t)²)
+```
+
+**FFmpeg:** `alpha='sqrt(1-(1-t)*(1-t))'`
+
+### Elastic Easing (Overshoot with Oscillation)
+
+**Ease Out (Most Common):**
+```
+f(t) = 2^(-10*t) * sin((t*10 - 0.75)*2π/3) + 1
+```
+
+**FFmpeg approximation:**
+```bash
+alpha='exp(-10*t*0.693)*sin((t*10-0.75)*2.094)+1'
+```
+(Note: `2π/3 ≈ 2.094`)
+
+**Ease In:**
+```
+f(t) = -2^(10*(t-1)) * sin((t*10 - 10.75)*2π/3)
+```
+
+**FFmpeg:**
+```bash
+alpha='-exp(10*(t-1)*0.693)*sin((t*10-10.75)*2.094)'
+```
+
+### Bounce Easing (Multiple Bounces)
+
+**Ease Out (Complex, piecewise):**
+
+For FFmpeg, simplified bounce approximation:
+```bash
+# Single bounce (easier implementation):
+alpha='if(lt(t,0.4),
+         7.5625*t*t,
+         if(lt(t,0.8),
+            7.5625*(t-0.6)*(t-0.6)+0.75,
+            7.5625*(t-0.9)*(t-0.9)+0.9375))'
+```
+
+**Simplified damped oscillation bounce:**
+```bash
+# More natural, continuous bounce:
+alpha='1-abs(cos(t*4.5*3.1416))*exp(-t*6)'
+```
+
+### Back Easing (Overshoot)
+
+**Ease Out (Slight overshoot then settle):**
+```
+f(t) = 1 + c3 * (t-1)³ + c1 * (t-1)²
+where c1 = 1.70158, c3 = c1 + 1
+```
+
+**FFmpeg approximation:**
+```bash
+# Simplified overshoot (10% beyond target):
+alpha='if(lt(t,0.7),t*1.3,1+(1-t)*0.3)'
+```
+
+---
+
+## Spring Physics Mathematical Reference
+
+### Standard Spring System (Mass-Spring-Damper)
+
+**Differential equation:**
+```
+m * x''(t) + c * x'(t) + k * x(t) = 0
+
+Where:
+m = mass
+c = damping coefficient
+k = spring stiffness (Hooke's constant)
+x(t) = position at time t
+x'(t) = velocity
+x''(t) = acceleration
+```
+
+### Key Parameters
+
+**Natural frequency:**
+```
+ω_n = sqrt(k/m)
+```
+
+**Damping ratio:**
+```
+ζ = c / (2 * sqrt(k * m))
+```
+
+### Damping Cases
+
+**Under-damped (0 < ζ < 1) - Bouncy, overshoots:**
+```
+x(t) = e^(-ζ*ω_n*t) * [A*cos(ω_d*t) + B*sin(ω_d*t)]
+
+Where:
+ω_d = ω_n * sqrt(1 - ζ²)  (damped frequency)
+```
+
+**Critically damped (ζ = 1) - No overshoot, fastest settle:**
+```
+x(t) = (A + B*t) * e^(-ω_n*t)
+```
+
+**Over-damped (ζ > 1) - Slow, sluggish:**
+```
+x(t) = A*e^(r1*t) + B*e^(r2*t)
+Where r1, r2 are real roots
+```
+
+### Simplified Spring for UI Animation
+
+**Two-parameter approach (bounce + duration):**
+
+```python
+# Convert bounce and duration to spring parameters
+mass = 1  # Normalized
+stiffness = (2*π / duration)²
+
+if bounce >= 0:
+    damping = (1 - bounce) * 4*π / duration
+else:
+    damping = 4*π / (duration * (1 + bounce))
+```
+
+**Bounce parameter mapping:**
+- `bounce = 0`: Critically damped (no overshoot)
+- `0 < bounce < 1`: Under-damped (1 = undamped oscillation)
+- `bounce < 0`: Over-damped (negative = slower settling)
+
+### FFmpeg Spring Implementation
+
+**Basic under-damped spring (stiffness=100, damping=10, mass=1):**
+
+```bash
+# Calculate natural frequency and damping ratio:
+# ω_n = sqrt(100/1) = 10
+# ζ = 10 / (2*sqrt(100*1)) = 10/20 = 0.5 (under-damped)
+# ω_d = 10 * sqrt(1 - 0.5²) = 10 * 0.866 = 8.66
+
+# Position formula:
+-vf "drawtext=text='SPRING':\
+     y='(h-th)/2-50*exp(-5*t)*cos(8.66*t)':\
+     fontsize=80:fontcolor=white:x=(w-tw)/2"
+
+# Breakdown:
+# -50 = initial displacement (50px below center)
+# exp(-5*t) = exponential decay (damping term: ζ*ω_n = 0.5*10 = 5)
+# cos(8.66*t) = oscillation at damped frequency
+```
+
+**Tunable spring parameters for FFmpeg:**
+
+```bash
+# Low bounce (ζ=0.8, quick settle):
+y='(h-th)/2+amplitude*exp(-8*t)*sin(10*t)'
+
+# Medium bounce (ζ=0.5, balanced):
+y='(h-th)/2+amplitude*exp(-5*t)*sin(12*t)'
+
+# High bounce (ζ=0.3, very bouncy):
+y='(h-th)/2+amplitude*exp(-3*t)*sin(14*t)'
+
+# Critical damping (ζ=1, no overshoot):
+y='(h-th)/2+amplitude*exp(-10*t)*(1+10*t)'
+```
+
+---
+
+## Oscillation and Wave Formulas
+
+### Basic Trigonometric Functions
+
+**Sine wave (smooth oscillation):**
+```
+y = A * sin(ω*t + φ)
+
+Where:
+A = amplitude (peak height)
+ω = angular frequency (rad/s)
+t = time (seconds)
+φ = phase offset (radians)
+```
+
+**Frequency conversion:**
+```
+ω = 2πf
+where f = frequency in Hz (cycles/second)
+
+Examples:
+1 Hz = 6.28 rad/s (ω = 2π * 1)
+2 Hz = 12.56 rad/s (ω = 2π * 2)
+3 Hz = 18.85 rad/s (ω = 2π * 3)
+```
+
+**FFmpeg examples:**
+```bash
+# 2 Hz oscillation (2 cycles/second):
+y='50*sin(12.56*t)'
+
+# 1 Hz with phase offset (starts at peak):
+y='50*sin(6.28*t+1.571)'  # φ = π/2 = 1.571
+
+# Cosine (90° phase shifted sine):
+y='50*cos(6.28*t)'  # equivalent to sin(t + π/2)
+```
+
+### Amplitude Modulation (AM)
+
+**Variable amplitude sine wave:**
+```
+y = A(t) * sin(ω*t)
+```
+
+**FFmpeg decaying oscillation:**
+```bash
+# Exponential amplitude decay:
+y='50*exp(-2*t)*sin(10*t)'
+
+# Linear amplitude decay:
+y='50*max(0,1-t)*sin(10*t)'
+
+# Pulsing amplitude (low frequency modulates high frequency):
+y='(30+20*sin(2*t))*sin(20*t)'
+#    ↑ envelope     ↑ carrier wave
+```
+
+### Frequency Modulation (FM)
+
+**Variable frequency sine wave:**
+```
+y = A * sin(ω(t)*t)
+```
+
+**FFmpeg examples:**
+```bash
+# Accelerating oscillation (siren effect):
+y='50*sin(5*t*t)'  # frequency increases linearly
+
+# Decelerating oscillation:
+y='50*sin(20*t-5*t*t)'  # frequency decreases
+
+# Vibrato (musical wobble):
+y='50*sin(10*t+2*sin(3*t))'
+#          ↑ base  ↑ vibrato modulation
+```
+
+### Lissajous Curves (2D Parametric Motion)
+
+**Circular motion:**
+```
+x = r * cos(ω*t)
+y = r * sin(ω*t)
+```
+
+**FFmpeg circular orbit:**
+```bash
+-vf "drawtext=text='○':\
+     x='(w/2)+200*cos(2*t)':\
+     y='(h/2)+200*sin(2*t)':\
+     fontsize=40:fontcolor=white"
+```
+
+**Elliptical motion:**
+```bash
+# a=200 (horizontal radius), b=100 (vertical radius)
+x='(w/2)+200*cos(2*t)'
+y='(h/2)+100*sin(2*t)'
+```
+
+**Figure-8 motion (Lissajous 1:2 ratio):**
+```bash
+x='(w/2)+150*sin(1*t)'
+y='(h/2)+150*sin(2*t)'
+```
+
+---
+
+## Noise and Randomness Functions
+
+### Pseudo-Random with Sine
+
+FFmpeg doesn't have true random(), but we can approximate:
+
+```bash
+# Pseudo-random using high-frequency sine:
+'10*sin(t*137.5)'  # 137.5 is irrational, appears random
+
+# Multi-layered pseudo-random:
+'5*sin(t*137.5)+3*sin(t*241.3)+2*sin(t*89.7)'
+```
+
+### Perlin-like Noise (Smooth Random)
+
+```bash
+# Smooth noise using multiple sine waves:
+noise = 'sin(t*2.3)+0.5*sin(t*5.1)+0.25*sin(t*11.7)'
+
+# Normalized to 0-1 range:
+normalized_noise = '(sin(t*2.3)+0.5*sin(t*5.1)+0.25*sin(t*11.7)+1.75)/3.5'
+```
+
+### Jitter/Shake Effects
+
+**Continuous shake:**
+```bash
+# High frequency, small amplitude:
+x='(w-tw)/2+5*sin(t*50)'
+y='(h-th)/2+5*cos(t*47)'  # Different freq for 2D randomness
+```
+
+**Decaying shake (impact):**
+```bash
+# Shake that settles over time:
+x='(w-tw)/2+10*exp(-t*3)*sin(t*50)'
+y='(h-th)/2+10*exp(-t*3)*cos(t*47)'
+```
+
+**Triggered shake (specific moments):**
+```bash
+# Shake only between t=2s and t=2.5s:
+x='(w-tw)/2+if(between(t,2,2.5),15*sin(t*60),0)'
+```
+
+---
+
+## Practical Animation Cookbook
+
+### Fade Transitions
+
+**Fade in (0 to 1 over duration):**
+```bash
+# Linear: alpha='min(1,t/duration)'
+alpha='min(1,t/0.5)'  # 0.5s fade in
+
+# Ease out: alpha='1-exp(-k*t)'
+alpha='1-exp(-5*t)'  # Smooth fade in
+
+# Cubic: alpha='min(1,t/duration)^3'
+alpha='min(1,(t/0.5)*(t/0.5)*(t/0.5))'
+```
+
+**Fade out (1 to 0):**
+```bash
+# Assuming video duration = 10s, fade out in last 2s:
+alpha='if(gt(t,8),1-(t-8)/2,1)'
+
+# Exponential fade out:
+alpha='if(gt(t,8),exp(-(t-8)*3),1)'
+```
+
+**Fade in and out:**
+```bash
+# Fade in 0-1s, hold 1-9s, fade out 9-10s:
+alpha='if(lt(t,1),t,if(gt(t,9),10-t,1))'
+```
+
+### Scale Animations
+
+**Pop in (scale 0 to 100%):**
+```bash
+# FFmpeg drawtext (no scale support, use ASS instead)
+
+# ASS:
+{\fscx0\fscy0\t(0,300,\fscx100\fscy100)}Text
+```
+
+**Pulse (continuous breathing):**
+```bash
+# ASS:
+fontsize='72+8*sin(t*6.28)'  # 1 Hz pulse, ±8px
+
+# ASS pulse with hold:
+{\t(0,300,\fscx110\fscy110)\t(300,600,\fscx100\fscy100)}
+```
+
+**Bounce scale:**
+```bash
+# ASS overshoot bounce:
+{\fscx50\fscy50\t(0,150,\fscx115\fscy115)\t(150,300,\fscx95\fscy95)\t(300,450,\fscx100\fscy100)}
+```
+
+### Position Animations
+
+**Slide in from right:**
+```bash
+x='if(lt(t,1),w-(w-target_x)*t,target_x)'
+# Example: target_x = (w-tw)/2 (center)
+x='if(lt(t,1),w-((w-(w-tw)/2)*t),(w-tw)/2)'
+```
+
+**Slide in with ease-out:**
+```bash
+x='if(lt(t,1),w-((w-(w-tw)/2)*(1-exp(-5*t))),(w-tw)/2)'
+```
+
+**Bounce in from bottom:**
+```bash
+# ASS:
+{\move(540,1920,540,960,0,400)\t(0,150,\fscy115)\t(150,300,\fscy95)\t(300,400,\fscy100)}
+```
+
+**Circular path:**
+```bash
+x='(w/2)+radius*cos(speed*t)'
+y='(h/2)+radius*sin(speed*t)'
+```
+
+### Rotation Animations
+
+**FFmpeg drawtext doesn't support rotation. Use ASS:**
+
+```ass
+; Continuous spin (360° over 2 seconds):
+{\t(0,2000,\frz360)}Text
+
+; Wobble rotation:
+{\t(0,200,\frz15)\t(200,400,\frz-10)\t(400,600,\frz5)\t(600,800,\frz0)}
+```
+
+---
+
+## Timing Psychology and Perception
+
+### Human Perception Thresholds
+
+| Threshold | Duration | Perception | Use Case |
+|-----------|----------|------------|----------|
+| **Flicker fusion** | 16-20ms | Below this: perceived as continuous | 60fps = 16.67ms/frame |
+| **Preattentive** | 20-50ms | Detected but not consciously processed | Subliminal cues |
+| **Attention capture** | 50-100ms | Minimum for conscious recognition | Flash effects |
+| **Pattern interrupt** | 100-200ms | Breaks expectation, grabs attention | Hook effects |
+| **Comfortable transition** | 200-400ms | Natural UI timing | Standard animations |
+| **Deliberate motion** | 400-800ms | Noticeable, purposeful | Dramatic emphasis |
+| **Sustained attention** | 800ms-2s | Holds focus | Title cards, captions |
+| **Cognitive processing** | 2-5s | Complex information | Infographic reveals |
+
+### Animation Duration Guidelines by Distance
+
+**Relationship between distance and duration for perceived constant speed:**
+
+```
+duration = sqrt(distance) * k
+
+Where:
+distance = pixels traveled
+k = speed constant (typically 5-15)
+
+Example:
+100px move: duration = sqrt(100) * 10 = 100ms
+400px move: duration = sqrt(400) * 10 = 200ms
+(Appears same speed despite 4x distance)
+```
+
+**FFmpeg implementation:**
+```bash
+# Move text 500px in 224ms (sqrt(500)*10):
+-vf "drawtext=text='MOVE':\
+     x='if(lt(t,0.224),(w-500)+500*t/0.224,w)':\
+     y=(h-th)/2:fontsize=80:fontcolor=white"
+```
+
+### Biological Rhythms
+
+**Natural timing that feels "right":**
+
+| Rhythm | Rate | Use Case |
+|--------|------|----------|
+| **Resting heartbeat** | 60-80 BPM (1-1.3 Hz) | Calm, meditative pulse |
+| **Walking pace** | 100-120 BPM (1.7-2 Hz) | Comfortable, steady rhythm |
+| **Excited/anxious** | 120-160 BPM (2-2.7 Hz) | Energetic, urgent feeling |
+| **Breathing** | 12-20/min (0.2-0.33 Hz) | Slow, natural oscillation |
+
+**FFmpeg examples:**
+```bash
+# Heartbeat pulse (70 BPM = 1.17 Hz):
+fontsize='72+6*max(0,sin(t*7.33))'
+
+# Walking pace pulse (110 BPM = 1.83 Hz):
+fontsize='72+4*abs(sin(t*11.5))'
+
+# Breathing (15 breaths/min = 0.25 Hz):
+fontsize='72+10*sin(t*1.57)'
+```
+
+---
+
+## Sources
+
+This comprehensive timing reference compiled from:
+- [FFmpeg Expression Evaluation Documentation](https://ffmpeg.org/ffmpeg-utils.html#Expression-Evaluation)
+- [Spring Physics for UI Animations](https://www.kvin.me/posts/effortless-ui-spring-animations)
+- [Easing Functions Mathematical Reference](https://easings.net/)
+- [Material Design Motion Guidelines](https://m3.material.io/styles/motion/overview)
+- [React Spring Physics Documentation](https://www.react-spring.dev/docs/advanced/spring-configs)
+- [ASS Subtitle Format Specification](https://aegisub.org/docs/latest/ass_tags/)
+- [WCAG 2.2 Animation Accessibility](https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions)
+- [Human Perception Studies - Accessible Animations](https://www.a11y-collective.com/blog/wcag-animation/)
 
 ---
 
