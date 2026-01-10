@@ -1,4 +1,4 @@
-# FFmpeg Master Plugin v3.1.0
+# FFmpeg Master Plugin v3.2.0
 
 Master FFmpeg across all platforms with expert knowledge of encoding, streaming, hardware acceleration, containers, production workflows, **advanced creative effects**, and **VIRAL VIDEO CREATION** for TikTok, YouTube Shorts, Instagram Reels, and more.
 
@@ -22,6 +22,7 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 - **`/ffmpeg-debug`** - Debug FFmpeg issues, validate files, and troubleshoot encoding problems
 - **`/ffmpeg-effects`** - Apply creative video effects (glitch, datamosh, VHS, chromatic aberration, distortion)
 - **`/ffmpeg-color`** - Apply color grading, LUTs, chromakey (green screen), and cinematic color effects
+- **`/ffmpeg-kinetic`** - Create kinetic captions with word-grow, bounce, pop, elastic, and karaoke effects (NEW in v3.2)
 
 ### Agents
 
@@ -41,6 +42,7 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 - **viral-video-platform-specs** - Complete platform upload specs for TikTok, YouTube Shorts, Instagram Reels, Twitter, Snapchat
 - **viral-video-hook-templates** - 10 proven viral hook patterns with FFmpeg implementations
 - **viral-video-animated-captions** - CapCut-style animated word-level captions (pop, sweep, karaoke, bounce)
+- **ffmpeg-kinetic-captions** - Advanced kinetic caption techniques with word-grow karaoke, spring physics, elastic bounce, platform-specific timing (NEW in v3.2)
 
 #### Core Skills
 - **ffmpeg-fundamentals-2025** - FFmpeg 7.1/8.0 features, command syntax, codecs, and essential operations
@@ -702,6 +704,43 @@ For issues or questions:
 ---
 
 **Master video and audio processing with confidence.** This plugin ensures you follow 2025 best practices, optimize for your use case, and handle platform-specific challenges effectively.
+
+---
+
+## What's New in v3.2.0
+
+### Kinetic Captions (New Skill & Command)
+
+**Professional kinetic caption animations for viral videos!**
+
+#### New Command: `/ffmpeg-kinetic`
+Create animated kinetic captions with:
+- **Word Pop** - Words pop in from small to normal with overshoot (CapCut-style)
+- **Word Grow** - Words smoothly scale up when highlighted (karaoke)
+- **Bounce** - Elastic bounce with multiple oscillations
+- **Elastic** - Spring physics with natural damping
+- **Karaoke-Grow** - Combined karaoke fill + grow animation
+
+#### New Skill: ffmpeg-kinetic-captions
+Comprehensive guide covering:
+- **ASS/SSA Timing Units** - Critical: `\k` uses centiseconds, `\t` uses milliseconds
+- **Spring Physics** - Natural bouncy motion with damping formulas
+- **Platform-Specific Timing** - TikTok (fast), YouTube (medium), Instagram (stylish)
+- **Color Transitions** - Highlight colors on grow effects
+- **Python Generator** - Automated kinetic ASS generation
+
+#### Example: Word-Grow Karaoke Effect
+```ass
+{\k80\t(0,200,\fscx115\fscy115)\t(200,400,\fscx100\fscy100)}Word
+```
+- `\k80` = highlight for 0.8 seconds (centiseconds)
+- `\t(0,200,...)` = grow animation over 200ms (milliseconds)
+
+#### Updated Script: generate-karaoke.sh
+```bash
+# Create kinetic captions with bounce effect for TikTok
+./scripts/generate-karaoke.sh kinetic lyrics.txt output.ass bounce tiktok
+```
 
 ---
 
