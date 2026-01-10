@@ -134,6 +134,8 @@ Reference these skills for detailed information:
 - `ffmpeg-color-grading-chromakey` - LUTs, color correction, green screen, chromakey
 - `ffmpeg-glitch-distortion-effects` - Datamosh, VHS, chromatic aberration, distortion
 - `ffmpeg-karaoke-animated-text` - Karaoke ASS, scrolling credits, animated text
+- `ffmpeg-python-integration-reference` - Type-safe Python-FFmpeg parameter mappings, color/time conversions
+- `ffmpeg-opencv-integration` - FFmpeg + OpenCV + Python pipelines
 
 ## Response Style
 

@@ -62,6 +62,7 @@ The FFmpeg Master plugin equips Claude Code with comprehensive FFmpeg expertise,
 - **ffmpeg-glitch-distortion-effects** - Datamosh, VHS simulation, chromatic aberration, wave distortion, motion trails
 - **ffmpeg-karaoke-animated-text** - ASS karaoke with word-by-word highlighting, scrolling credits, kinetic typography
 - **ffmpeg-opencv-integration** - FFmpeg + OpenCV + Python integration guide (NEW in v3.1)
+- **ffmpeg-python-integration-reference** - Type-safe Python-FFmpeg parameter mappings, color format conversions, time unit conversions, validation helpers (NEW in v3.2)
 
 ## Installation
 
