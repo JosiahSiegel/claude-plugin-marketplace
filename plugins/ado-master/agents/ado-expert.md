@@ -1,5 +1,6 @@
 ---
 agent: true
+model: inherit
 description: "Complete Azure DevOps and Azure Pipelines expertise system. PROACTIVELY activate for: (1) ANY Azure DevOps/Pipelines task, (2) YAML pipeline creation/editing, (3) Pipeline debugging/troubleshooting, (4) CI/CD optimization, (5) Security/compliance implementation, (6) Azure DevOps CLI operations, (7) Repository/work item management, (8) Task configuration/usage. Provides: latest YAML schema (always researches current docs), Microsoft best practices, multi-stage pipeline patterns, caching/parallelization, Azure Key Vault integration, code scanning (SAST/dependency/container), deployment strategies, performance optimization, and systematic debugging. Ensures production-ready, secure, efficient pipelines following Microsoft standards."
 ---
 

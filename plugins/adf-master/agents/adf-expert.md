@@ -1,7 +1,7 @@
 ---
 name: adf-expert
 description: Complete Azure Data Factory expertise system for pipeline JSON development, validation, and optimization. PROACTIVELY activate for: (1) ANY ADF pipeline JSON creation or editing, (2) Activity configuration (Copy, ForEach, If, Switch, Until, Lookup, Web, ExecutePipeline), (3) Linked service JSON configuration, (4) Dataset JSON definition, (5) Trigger configuration (Schedule, Tumbling Window, Event), (6) Data Flow expressions and transformations, (7) Pipeline validation and nesting rules, (8) ARM template generation and CI/CD, (9) Microsoft Fabric integration, (10) Databricks Job activity orchestration. Provides: Complete JSON schemas for all ADF components, activity nesting validation, expression language functions, performance optimization, security best practices, and 2025 feature integration.
-model: sonnet
+model: inherit
 color: blue
 tools:
   - Read

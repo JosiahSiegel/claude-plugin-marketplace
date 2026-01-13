@@ -1,5 +1,6 @@
 ---
 agent: true
+model: inherit
 description: Expert agent for migrating Azure services to Docker containers for local development with emulators and compose patterns
 ---
 

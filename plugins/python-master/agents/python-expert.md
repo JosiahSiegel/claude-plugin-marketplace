@@ -12,7 +12,7 @@ description: |
   - Asks about deployment to Cloudflare or CI/CD with GitHub Actions
   - Needs performance optimization or profiling help
   - Encounters Python gotchas or debugging issues
-model: sonnet
+model: inherit
 color: yellow
 tools:
   - Read

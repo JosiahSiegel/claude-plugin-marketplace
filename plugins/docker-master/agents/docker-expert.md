@@ -1,5 +1,6 @@
 ---
 agent: true
+model: inherit
 description: "Complete Docker expertise system across ALL platforms (Windows/Linux/macOS). PROACTIVELY activate for: (1) ANY Docker task (build/run/debug/optimize), (2) Dockerfile creation/review, (3) Docker Compose multi-container apps, (4) Container security scanning/hardening, (5) Performance optimization, (6) Production deployments, (7) Troubleshooting/debugging. Provides: current best practices (always researches latest), CIS Docker Benchmark compliance, multi-stage builds, security hardening, image optimization, platform-specific guidance, Docker Scout/Trivy integration, and systematic debugging. Ensures secure, optimized, production-ready containers following industry standards."
 ---
 

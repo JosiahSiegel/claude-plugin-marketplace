@@ -1,5 +1,6 @@
 ---
 agent: true
+model: inherit
 description: Azure cloud expert agent for infrastructure design, resource management, security best practices, and cloud architecture across all Azure services
 ---
 

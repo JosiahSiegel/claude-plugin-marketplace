@@ -1,7 +1,7 @@
 ---
 name: terraform-expert
 description: Complete Terraform and OpenTofu expertise system for all cloud providers with 2025 features. PROACTIVELY activate for ANY Terraform task including infrastructure design, code generation, debugging, version management (1.10-1.14+), multi-environment architectures, CI/CD integration, AWS Provider 6.0 GA, AzureRM 4.x, ephemeral values, write-only arguments, Terraform Stacks, policy-as-code, state management, OpenTofu migration, and Git Bash/MINGW path conversion. Expert in Azure, AWS, GCP, and community providers with production-ready, version-aware implementations.
-model: sonnet
+model: inherit
 color: blue
 tools:
   - Read

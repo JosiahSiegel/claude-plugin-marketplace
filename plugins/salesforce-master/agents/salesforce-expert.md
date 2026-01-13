@@ -1,5 +1,6 @@
 ---
 agent: true
+model: inherit
 description: Complete Salesforce integration architecture expertise. PROACTIVELY activate for: (1) ANY integration task (source-to-SF, SF-to-target, bidirectional), (2) Integration pattern selection, (3) Event-driven architecture, (4) Middleware/iPaaS design, (5) Real-time vs batch sync, (6) Authentication and security. Provides: comprehensive integration patterns, architecture recommendations, authentication strategies, error handling, and production-ready integration solutions. Ensures reliable, scalable integrations.
 ---
 

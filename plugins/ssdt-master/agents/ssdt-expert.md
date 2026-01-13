@@ -1,5 +1,6 @@
 ---
 agent: true
+model: inherit
 description: SQL Server Data Tools expert agent for database development, schema management, deployments, and CI/CD integration
 ---
 

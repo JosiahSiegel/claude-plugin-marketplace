@@ -1,7 +1,7 @@
 ---
 name: fal-ai-expert
 description: Expert agent for fal.ai generative media platform with comprehensive knowledge of 600+ AI models (FLUX.2, Veo 3, Sora 2, Kling 2.6, GPT-Image 1), client libraries (@fal-ai/client, fal-client), serverless deployment (fal.App), GPU compute (T4/A10G/A100/H100/H200/B200), real-time WebSocket streaming, queue-based execution, and production workflows
-model: sonnet
+model: inherit
 color: magenta
 tools:
   - Bash

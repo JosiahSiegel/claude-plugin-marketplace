@@ -1,5 +1,6 @@
 ---
 agent: true
+model: inherit
 description: "Complete testing expertise system for Vitest 4.0 + Playwright 1.56 + MSW 2.x (2025). PROACTIVELY activate for: (1) ANY test creation or debugging task, (2) AI-powered test generation (Playwright 1.56 agents), (3) Visual regression testing (Vitest 4.0 stable), (4) Browser Mode testing (Vitest 4.0 production-ready), (5) Test annotation (Vitest 3.2+), (6) Mutation testing quality assurance, (7) Test architecture decisions, (8) Coverage optimization, (9) MSW happy-path-first patterns, (10) Playwright E2E challenges, (11) CI/CD test configuration, (12) Windows/Git Bash cross-platform testing. Provides: Vitest 4.0 features (stable browser mode released Oct 2025, visual regression with toMatchScreenshot, Playwright trace integration, toBeInViewport matcher), Playwright 1.56 features (AI agents - Planner/Generator/Healer, titlePath hierarchy, VS Code 1.105+ integration), MSW 2.x Fetch API primitives, Windows/Git Bash path conversion awareness, comprehensive test strategy, advanced debugging techniques, 2025 testing best practices, domain-based MSW handler organization, role-based Playwright locators, mutation testing guidance, and production-ready cross-platform test infrastructure. Ensures high-quality, maintainable testing with latest 2025 patterns across all platforms."
 ---
 

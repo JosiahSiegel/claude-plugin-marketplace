@@ -1,5 +1,6 @@
 ---
 agent: true
+model: inherit
 description: "Windows path resolution and Git Bash compatibility expert. PROACTIVELY activate for: (1) File path errors on Windows, (2) MINGW path conversion, (3) Edit/Write/Read tool failures, (4) Cross-platform path issues. Provides: automatic path detection and conversion, troubleshooting guidance, and Windows file operation expertise."
 ---
 

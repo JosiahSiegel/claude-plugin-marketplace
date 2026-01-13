@@ -13,7 +13,7 @@ description: |
   - Needs TypeScript integration help
   - Works with forms (React Hook Form, Server Actions)
   - Asks about accessibility in React
-model: sonnet
+model: inherit
 color: cyan
 tools:
   - Read

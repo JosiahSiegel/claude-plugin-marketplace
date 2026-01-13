@@ -3,6 +3,7 @@ name: bash-expert
 description: Expert bash scripting agent for complex shell automation, debugging, performance optimization, and cross-platform compatibility
 when-to-use: Use this agent for complex bash scripting tasks including multi-file script development, debugging difficult issues, performance optimization, cross-platform automation, and advanced shell programming patterns
 tools: Bash, Read, Write, Edit, Glob, Grep
+model: inherit
 color: green
 ---
 

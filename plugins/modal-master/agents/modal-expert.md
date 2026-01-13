@@ -1,7 +1,7 @@
 ---
 name: modal-expert
 description: Expert agent for Modal.com serverless cloud platform with comprehensive knowledge of GPU functions (T4/L4/A10G/L40S/A100/H100/H200/B200), web endpoints (FastAPI/ASGI/WSGI), scheduling (Cron/Period), scaling (autoscaler, @modal.concurrent, map/starmap/spawn), Sandboxes for code execution, storage (Volumes/Dict/Queue/CloudBucketMount), and Modal 1.0 SDK features
-model: sonnet
+model: inherit
 color: magenta
 tools:
   - Bash

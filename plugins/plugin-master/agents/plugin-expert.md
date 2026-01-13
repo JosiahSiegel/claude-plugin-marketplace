@@ -1,5 +1,6 @@
 ---
 name: plugin-expert
+model: inherit
 color: magenta
 description: |
   Use this agent when the user needs help with Claude Code plugin development, architecture decisions, or best practices. Trigger for plugin creation, structure questions, component design, troubleshooting, or publishing guidance.
