@@ -1,6 +1,6 @@
 {
   "name": "tsql-master",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Comprehensive T-SQL and SQL Server expertise for query optimization, performance tuning, and Azure SQL Database. PROACTIVELY activate for: (1) T-SQL query optimization and SARGability analysis, (2) SQL Server performance tuning, (3) Index design and strategy, (4) Execution plan analysis, (5) Parameter sniffing solutions, (6) Azure SQL Database optimization, (7) Window functions and advanced patterns, (8) Columnstore and In-Memory OLTP, (9) Query Store and IQP features. Includes: tsql-expert agent, 5 progressive disclosure skills, 3 optimization commands, diagnostic scripts.",
   "author": {
     "name": "Josiah Siegel",
