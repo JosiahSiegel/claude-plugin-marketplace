@@ -1,13 +1,27 @@
 ---
 name: tailwindcss-fundamentals-v4
-description: Tailwind CSS v4 fundamentals covering installation, CSS-first configuration, and the new Rust-based engine
+description: Tailwind CSS v4 fundamentals covering installation, CSS-first configuration, design systems, and 2025/2026 best practices
 ---
 
-# Tailwind CSS v4 Fundamentals (2025)
+# Tailwind CSS v4 Fundamentals (2025/2026)
 
 ## Overview
 
 Tailwind CSS v4.0 was released January 22, 2025, featuring a complete rewrite with a Rust-based engine, CSS-first configuration, and significant performance improvements.
+
+### Key Changes from v3
+
+| Feature | v3 | v4 |
+|---------|----|----|
+| Configuration | JavaScript (tailwind.config.js) | CSS-first (@theme directive) |
+| Engine | Node.js | Rust (10x faster) |
+| Color format | hex/rgb | OKLCH (perceptually uniform) |
+| Plugins | JS files | @plugin directive |
+| Custom utilities | JS config | @utility directive |
+| PostCSS imports | postcss-import | Built-in |
+| Autoprefixer | Required | Built-in |
+| CSS nesting | postcss-nested | Built-in |
+| Content detection | Explicit config | Automatic |
 
 ## Installation
 
@@ -396,45 +410,105 @@ Generated CSS variables include prefix:
 }
 ```
 
-## Best Practices
+## Best Practices (2025/2026)
 
-### 1. Use CSS Variables Consistently
+### 1. Use OKLCH Colors for Design Systems
+
+OKLCH provides perceptually uniform colors, better gradients, and wide gamut support:
 
 ```css
 @theme {
-  --color-brand: oklch(0.6 0.2 250);
-}
+  /* OKLCH format: oklch(lightness chroma hue) */
+  /* Lightness: 0-1, Chroma: 0-0.4, Hue: 0-360 */
 
-/* In custom CSS */
-.custom-element {
-  border-color: var(--color-brand);
+  /* Primary palette - adjust L for shades */
+  --color-primary-50: oklch(0.97 0.02 250);
+  --color-primary-100: oklch(0.93 0.04 250);
+  --color-primary-500: oklch(0.55 0.2 250);  /* Base */
+  --color-primary-600: oklch(0.48 0.2 250);
+  --color-primary-900: oklch(0.27 0.12 250);
+
+  /* Semantic colors */
+  --color-success: oklch(0.6 0.15 145);
+  --color-warning: oklch(0.75 0.15 65);
+  --color-error: oklch(0.55 0.2 25);
 }
 ```
 
-### 2. Organize Theme by Category
+### 2. Implement Fluid Typography
+
+Smooth scaling without breakpoint jumps:
 
 ```css
 @theme {
-  /* Colors first */
+  /* Fluid type scale using clamp() */
+  /* clamp(min, preferred, max) */
+  --text-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --text-fluid-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --text-fluid-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --text-fluid-xl: clamp(1.25rem, 1rem + 1.25vw, 1.5rem);
+  --text-fluid-2xl: clamp(1.5rem, 1.1rem + 2vw, 2rem);
+  --text-fluid-3xl: clamp(1.875rem, 1.2rem + 3.375vw, 2.5rem);
+  --text-fluid-4xl: clamp(2.25rem, 1rem + 6.25vw, 3.5rem);
+}
+```
+
+**Important**: Always combine `vw` with `rem` for accessibility (respects zoom).
+
+### 3. Fluid Spacing System
+
+```css
+@theme {
+  /* Fluid spacing that scales with viewport */
+  --spacing-fluid-sm: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+  --spacing-fluid-md: clamp(1rem, 0.75rem + 1.25vw, 2rem);
+  --spacing-fluid-lg: clamp(2rem, 1rem + 3vw, 4rem);
+  --spacing-fluid-section: clamp(4rem, 2rem + 8vw, 8rem);
+}
+```
+
+### 4. Organize Theme by Category
+
+```css
+@theme {
+  /* === Colors === */
   --color-primary: oklch(0.6 0.2 250);
   --color-secondary: oklch(0.7 0.15 180);
+  --color-success: oklch(0.6 0.15 145);
+  --color-error: oklch(0.55 0.2 25);
 
-  /* Then typography */
-  --font-sans: Inter, sans-serif;
-  --font-mono: "Fira Code", monospace;
+  /* === Typography === */
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Then spacing */
+  /* === Fluid Typography === */
+  --text-fluid-base: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  --text-fluid-lg: clamp(1.25rem, 1rem + 1.25vw, 2rem);
+
+  /* === Spacing === */
   --spacing-page: 2rem;
+  --spacing-fluid-section: clamp(4rem, 2rem + 8vw, 8rem);
 
-  /* Then other tokens */
-  --radius-default: 0.5rem;
+  /* === Border Radius === */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* === Shadows === */
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px oklch(0 0 0 / 0.07);
+
+  /* === Easing === */
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 }
 ```
 
-### 3. Keep @utility Definitions Simple
+### 5. Keep @utility Definitions Simple
 
 ```css
-/* Good - single purpose */
+/* Good - single purpose utilities */
 @utility truncate-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -442,10 +516,58 @@ Generated CSS variables include prefix:
   overflow: hidden;
 }
 
-/* Avoid - too complex */
-@utility card-fancy {
-  /* Too many properties - use a component instead */
+@utility text-balance {
+  text-wrap: balance;
 }
+
+@utility content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Safe area utilities for notched devices */
+@utility safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@utility safe-area-pt {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Avoid - too complex, use components instead */
+@utility card-fancy {
+  /* Too many properties - use @layer components */
+}
+```
+
+### 6. Mobile-First Class Ordering
+
+Always structure responsive classes progressively:
+
+```html
+<!-- Base (mobile) -> sm -> md -> lg -> xl -> 2xl -->
+<div class="
+  text-sm md:text-base lg:text-lg
+  p-4 md:p-6 lg:p-8
+  grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+">
+  Content
+</div>
+```
+
+### 7. Accessible Interactive Elements
+
+```html
+<!-- Touch-friendly button (44px minimum - WCAG 2.2) -->
+<button class="
+  min-h-11 min-w-11 px-4 py-2.5
+  bg-primary-600 hover:bg-primary-700 text-white
+  rounded-lg font-medium
+  focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
+  transition-colors motion-reduce:transition-none
+">
+  Button Text
+</button>
 ```
 
 ## Common Migration Issues

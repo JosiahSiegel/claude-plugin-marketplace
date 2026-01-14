@@ -1,9 +1,19 @@
 ---
 name: tailwindcss-accessibility
-description: Tailwind CSS accessibility patterns including focus management and ARIA support
+description: Tailwind CSS accessibility patterns including WCAG 2.2 compliance, touch targets, focus management, and ARIA support
 ---
 
-# Tailwind CSS Accessibility Patterns
+# Tailwind CSS Accessibility Patterns (WCAG 2.2 - 2025/2026)
+
+## WCAG 2.2 Overview (Current Standard)
+
+WCAG 2.2 was released October 2023 and is the current W3C standard. Key additions relevant to Tailwind:
+
+- **2.5.8 Target Size (Level AA)**: 24x24 CSS pixels minimum, 44x44 recommended
+- **2.4.11 Focus Not Obscured**: Focus indicators must be visible
+- **2.4.13 Focus Appearance**: Enhanced focus indicator requirements
+- **3.3.7 Redundant Entry**: Don't require re-entering information
+- **3.2.6 Consistent Help**: Help mechanisms in consistent locations
 
 ## Focus Management
 
@@ -515,45 +525,99 @@ description: Tailwind CSS accessibility patterns including focus management and 
 </div>
 ```
 
-## Touch Targets
+## Touch Targets (WCAG 2.2 - Critical for 2025/2026)
+
+### WCAG 2.2 Target Size Requirements
+
+| Level | Requirement | Tailwind Class |
+|-------|-------------|----------------|
+| **AA (2.5.8)** | 24x24 CSS pixels minimum | `min-h-6 min-w-6` |
+| **Recommended** | 44x44 CSS pixels | `min-h-11 min-w-11` |
+| **AAA (2.5.5)** | 44x44 CSS pixels | `min-h-11 min-w-11` |
+| **Optimal** | 48x48 CSS pixels | `min-h-12 min-w-12` |
+
+Platform guidelines comparison:
+- **Apple iOS**: 44x44 points minimum
+- **Google Android**: 48x48 dp minimum
+- **Microsoft Fluent**: 44x44 pixels minimum
 
 ### Minimum Touch Target Size
 
 ```html
-<!-- Minimum 44x44px for touch targets -->
-<button class="min-h-[44px] min-w-[44px] p-2">
-  <svg class="h-6 w-6">...</svg>
+<!-- WCAG 2.2 Level AA minimum (24px) -->
+<button class="min-h-6 min-w-6 p-1">
+  <svg class="h-4 w-4">...</svg>
 </button>
 
-<!-- Extend touch target beyond visible element -->
-<a href="#" class="relative inline-block">
-  Small Link
-  <span class="absolute -inset-2" aria-hidden="true"></span>
-</a>
-
-<!-- Icon button with adequate touch target -->
-<button class="relative p-2 -m-2">
-  <svg class="h-5 w-5" aria-hidden="true">...</svg>
+<!-- Recommended size (44px) - preferred for mobile -->
+<button class="min-h-11 min-w-11 p-2.5">
+  <svg class="h-6 w-6" aria-hidden="true">...</svg>
   <span class="sr-only">Action</span>
 </button>
+
+<!-- Optimal for primary actions (48px) -->
+<button class="min-h-12 min-w-12 px-6 py-3 text-base font-medium">
+  Primary Action
+</button>
+```
+
+### Extend Touch Target Beyond Visible Element
+
+```html
+<!-- Small visible link with extended tap area -->
+<a href="#" class="relative inline-block text-sm">
+  Small Link Text
+  <span class="absolute -inset-3" aria-hidden="true"></span>
+</a>
+
+<!-- Icon button with extended target -->
+<button class="relative p-2 -m-2 rounded-lg hover:bg-gray-100">
+  <svg class="h-5 w-5" aria-hidden="true">...</svg>
+  <span class="sr-only">Close menu</span>
+</button>
+
+<!-- Card with full-surface tap target -->
+<article class="relative p-4 rounded-lg border hover:shadow-md">
+  <h3>Card Title</h3>
+  <p>Description text</p>
+  <a href="/details" class="after:absolute after:inset-0">
+    <span class="sr-only">View details</span>
+  </a>
+</article>
 ```
 
 ### Spacing Between Interactive Elements
 
+WCAG 2.2 requires 24px spacing OR targets must be 24px minimum:
+
 ```html
-<!-- Adequate spacing between touch targets -->
-<div class="flex gap-4">
-  <button class="min-h-[44px] px-4">Button 1</button>
-  <button class="min-h-[44px] px-4">Button 2</button>
+<!-- Adequate spacing between touch targets (12px gap minimum) -->
+<div class="flex gap-3">
+  <button class="min-h-11 px-4 py-2">Button 1</button>
+  <button class="min-h-11 px-4 py-2">Button 2</button>
 </div>
 
-<!-- Stacked links with spacing -->
+<!-- Stacked links with adequate height and spacing -->
 <nav class="flex flex-col">
-  <a href="#" class="py-3 px-4">Link 1</a>
-  <a href="#" class="py-3 px-4">Link 2</a>
-  <a href="#" class="py-3 px-4">Link 3</a>
+  <a href="#" class="py-3 px-4 min-h-11 border-b border-gray-100">Link 1</a>
+  <a href="#" class="py-3 px-4 min-h-11 border-b border-gray-100">Link 2</a>
+  <a href="#" class="py-3 px-4 min-h-11">Link 3</a>
 </nav>
+
+<!-- Button group with safe spacing -->
+<div class="flex flex-wrap gap-3">
+  <button class="min-h-11 px-4 py-2 border rounded-lg">Cancel</button>
+  <button class="min-h-11 px-4 py-2 bg-blue-600 text-white rounded-lg">Confirm</button>
+</div>
 ```
+
+### Touch Target Exceptions (WCAG 2.2)
+
+Targets can be smaller than 24x24 if:
+- Inline text links within sentences
+- Browser-provided controls (scrollbars)
+- Size is essential to information
+- A larger equivalent target exists on same page
 
 ## Text Accessibility
 
@@ -665,14 +729,52 @@ test('component is accessible', async () => {
 });
 ```
 
-## Best Practices Summary
+## Best Practices Summary (WCAG 2.2 - 2025/2026)
 
-| Pattern | Implementation |
-|---------|---------------|
-| Focus visible | `focus-visible:ring-2` |
-| Screen reader only | `sr-only` |
-| Skip links | `sr-only focus:not-sr-only` |
-| Reduced motion | `motion-reduce:animate-none` |
-| Touch targets | `min-h-[44px] min-w-[44px]` |
-| Text contrast | Test with WCAG tools |
-| Form errors | `aria-invalid` + `role="alert"` |
+| Pattern | Implementation | WCAG Level |
+|---------|---------------|------------|
+| Focus visible | `focus-visible:ring-2 focus-visible:ring-offset-2` | 2.4.7 (AA) |
+| Screen reader only | `sr-only` | 1.3.1 (A) |
+| Skip links | `sr-only focus:not-sr-only focus:absolute` | 2.4.1 (A) |
+| Reduced motion | `motion-reduce:animate-none motion-reduce:transition-none` | 2.3.3 (AAA) |
+| Touch targets (min) | `min-h-6 min-w-6` (24px) | 2.5.8 (AA) |
+| Touch targets (rec) | `min-h-11 min-w-11` (44px) | 2.5.5 (AAA) |
+| Touch spacing | `gap-3` (12px minimum between targets) | 2.5.8 (AA) |
+| Text contrast | 4.5:1 for normal, 3:1 for large text | 1.4.3 (AA) |
+| Form errors | `aria-invalid="true"` + `role="alert"` | 3.3.1 (A) |
+| Focus not obscured | Avoid `z-index` covering focused elements | 2.4.11 (AA) |
+
+### Quick Reference: Touch-Friendly Component
+
+```html
+<!-- Accessible, touch-friendly button component -->
+<button
+  type="button"
+  class="
+    /* Touch target size (44px minimum) */
+    min-h-11 min-w-11 px-4 py-2.5
+
+    /* Typography */
+    text-sm md:text-base font-medium
+
+    /* Colors with sufficient contrast */
+    bg-blue-600 text-white
+    hover:bg-blue-700
+
+    /* Focus indicator (visible, not obscured) */
+    focus:outline-none
+    focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
+
+    /* Shape */
+    rounded-lg
+
+    /* Disabled state */
+    disabled:opacity-50 disabled:cursor-not-allowed
+
+    /* Respect motion preferences */
+    transition-colors motion-reduce:transition-none
+  "
+>
+  Button Text
+</button>
+```

@@ -1,6 +1,8 @@
-# Advanced Responsive Patterns
+# Advanced Responsive Patterns (2025/2026)
 
-## Container Queries
+## Container Queries - The 2025 Game-Changer
+
+Container queries allow components to respond to their parent container's size rather than the viewport. This is essential for reusable component design in modern applications.
 
 ### Setup
 
@@ -324,3 +326,160 @@
   Works in high contrast mode
 </button>
 ```
+
+## Safe Area Handling (Notched Devices)
+
+For devices with notches (iPhone X+, modern Android), respect safe areas:
+
+### Custom Safe Area Utilities
+
+```css
+@utility safe-area-pt {
+  padding-top: env(safe-area-inset-top);
+}
+
+@utility safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@utility safe-area-pl {
+  padding-left: env(safe-area-inset-left);
+}
+
+@utility safe-area-pr {
+  padding-right: env(safe-area-inset-right);
+}
+
+@utility safe-area-p {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+```
+
+### Usage
+
+```html
+<!-- Header respects top notch -->
+<header class="sticky top-0 safe-area-pt bg-white border-b">
+  <nav class="h-14 flex items-center px-4">Navigation</nav>
+</header>
+
+<!-- Bottom navigation respects home indicator -->
+<nav class="fixed bottom-0 inset-x-0 safe-area-pb bg-white border-t">
+  <div class="flex justify-around py-2">Bottom nav</div>
+</nav>
+
+<!-- Full-screen app shell -->
+<div class="min-h-screen safe-area-p">
+  App content
+</div>
+```
+
+## Performance Optimizations for Responsive Design
+
+### Content Visibility for Off-Screen Content
+
+```css
+@utility content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+```
+
+```html
+<section class="content-auto">
+  <!-- Content below fold - rendering deferred until needed -->
+  Large section content
+</section>
+```
+
+### Lazy Loading
+
+```html
+<!-- Native lazy loading for images -->
+<img
+  src="image.jpg"
+  alt="Description"
+  loading="lazy"
+  decoding="async"
+  class="w-full h-auto"
+/>
+
+<!-- Lazy load iframes -->
+<iframe
+  src="embed.html"
+  loading="lazy"
+  class="w-full aspect-video"
+></iframe>
+```
+
+### Reduced Data Mode
+
+```css
+@custom-variant prefers-reduced-data (media(prefers-reduced-data: reduce));
+```
+
+```html
+<!-- Show simpler content on slow/metered connections -->
+<div class="block prefers-reduced-data:hidden">
+  <video autoplay muted loop>Full video</video>
+</div>
+<div class="hidden prefers-reduced-data:block">
+  <img src="poster.jpg" alt="Video poster" />
+</div>
+```
+
+## 2025/2026 CSS Features
+
+### View Transitions (Progressive Enhancement)
+
+```css
+@utility view-transition-name-* {
+  view-transition-name: --value(ident);
+}
+```
+
+```html
+<div class="view-transition-name-card">
+  Animates during page transitions
+</div>
+```
+
+### Subgrid for Aligned Nested Grids
+
+```html
+<div class="grid grid-cols-3 gap-4">
+  <div class="col-span-2 grid grid-cols-subgrid">
+    <!-- Child grid aligns with parent columns -->
+    <div>Aligned 1</div>
+    <div>Aligned 2</div>
+  </div>
+</div>
+```
+
+### :has() Selector for Parent Selection
+
+```css
+/* Style parent based on child state */
+.card:has(input:focus) {
+  @apply ring-2 ring-blue-500;
+}
+
+/* Show sibling when checkbox checked */
+.toggle:has(input:checked) + .content {
+  @apply block;
+}
+```
+
+## Best Practices Summary
+
+| Pattern | Implementation | Use Case |
+|---------|---------------|----------|
+| Viewport queries | `md:`, `lg:` prefixes | Page layouts |
+| Container queries | `@md:`, `@lg:` prefixes | Reusable components |
+| Fluid typography | `clamp()` in @theme | Smooth scaling |
+| Touch targets | `min-h-11 min-w-11` | Mobile interactions |
+| Safe areas | `env(safe-area-inset-*)` | Notched devices |
+| Reduced motion | `motion-reduce:` prefix | Accessibility |
+| Lazy loading | `loading="lazy"` | Performance |
+| Content visibility | `content-visibility: auto` | Render optimization |

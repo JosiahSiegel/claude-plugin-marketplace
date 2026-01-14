@@ -1,7 +1,7 @@
 {
   "name": "tailwindcss-master",
-  "version": "2.0.2",
-  "description": "Complete Tailwind CSS v4 expertise system with 2025 best practices. PROACTIVELY activate for: (1) ANY Tailwind CSS task, (2) Tailwind v4 CSS-first configuration (@theme, @utility, @custom-variant), (3) Responsive design and dark mode implementation, (4) Performance optimization and JIT, (5) Plugin integration (@tailwindcss/typography, @tailwindcss/forms), (6) Framework integration (React, Vue, Next.js, Vite), (7) Migration from v3 to v4, (8) Custom utility and component creation, (9) Debugging and troubleshooting, (10) Production build optimization. Provides: Tailwind v4.1 complete features, CSS-first @theme configuration, @utility and @custom-variant directives, PostCSS and Vite plugin setup, responsive breakpoints, dark mode patterns (media/selector strategies), typography and forms plugins, animation/transition utilities, framework-specific integration patterns, performance optimization (tree-shaking, JIT), debugging techniques, VS Code extension setup, Prettier plugin configuration, and production-ready 2025 patterns. Ensures modern, performant, maintainable Tailwind CSS implementations.",
+  "version": "2.1.0",
+  "description": "Complete Tailwind CSS v4 expertise system with 2025/2026 best practices. PROACTIVELY activate for: (1) ANY Tailwind CSS task, (2) Tailwind v4 CSS-first configuration (@theme, @utility, @custom-variant), (3) Mobile-first responsive design and container queries, (4) Dark mode implementation, (5) WCAG 2.2 accessibility (44px touch targets, focus states), (6) Performance optimization and Core Web Vitals, (7) Plugin integration (@tailwindcss/typography, @tailwindcss/forms, container-queries), (8) Framework integration (React, Vue, Next.js, Vite), (9) Migration from v3 to v4, (10) Custom utility and component creation. Provides: Mobile-first design patterns, fluid typography (CSS clamp), container queries, WCAG 2.2 touch targets, OKLCH color systems, CSS-first @theme configuration, @utility and @custom-variant directives, responsive breakpoints, dark mode patterns, typography and forms plugins, animation utilities with reduced motion support, framework-specific integration, performance optimization, and production-ready 2025/2026 patterns. Ensures modern, accessible, performant Tailwind CSS implementations.",
   "author": {
     "name": "Josiah Siegel",
     "email": "JosiahSiegel@users.noreply.github.com"
@@ -15,6 +15,7 @@
     "css",
     "utility-first",
     "responsive",
+    "mobile-first",
     "dark-mode",
     "v4",
     "theme",
@@ -31,8 +32,12 @@
     "performance",
     "container-queries",
     "accessibility",
+    "wcag",
+    "touch-targets",
+    "fluid-typography",
     "oklch",
     "design-system",
-    "2025"
+    "2025",
+    "2026"
   ]
 }
