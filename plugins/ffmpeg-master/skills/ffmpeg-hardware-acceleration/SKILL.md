@@ -153,6 +153,86 @@ ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i input.mp4 \
   -c:v h264_nvenc output.mp4
 ```
 
+### CUDA Filters Reference (FFmpeg 8.0+)
+
+| Filter | Description | Key Parameters |
+|--------|-------------|----------------|
+| `scale_cuda` | GPU video scaling | `w`, `h`, `format`, `interp_algo` |
+| `scale_npp` | NPP-based scaling (higher quality) | `w`, `h`, `interp_algo` |
+| `overlay_cuda` | GPU overlay/compositing | `x`, `y`, `eof_action` |
+| `pad_cuda` | GPU padding (8.0+) | `w`, `h`, `x`, `y`, `color` |
+| `chromakey_cuda` | GPU chroma keying | `color`, `similarity`, `blend` |
+| `colorspace_cuda` | Color space conversion | `all`, `space`, `trc`, `primaries` |
+| `bilateral_cuda` | Bilateral filter | `sigmaS`, `sigmaR`, `window_size` |
+| `bwdif_cuda` | Deinterlacing | `mode`, `parity`, `deint` |
+| `hwupload_cuda` | Upload to GPU | - |
+| `hwdownload` | Download from GPU | - |
+
+### scale_npp (NVIDIA Performance Primitives)
+
+For higher-quality scaling, use scale_npp with optimized interpolation algorithms:
+
+```bash
+# High-quality downscaling with super-sampling
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda \
+  -i input.mp4 \
+  -vf "scale_npp=1280:720:interp_algo=super" \
+  -c:v h264_nvenc output.mp4
+
+# Lanczos interpolation for upscaling
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda \
+  -i input.mp4 \
+  -vf "scale_npp=1920:1080:interp_algo=lanczos" \
+  -c:v h264_nvenc output.mp4
+```
+
+**scale_npp Interpolation Algorithms:**
+
+| Algorithm | Quality | Speed | Best For |
+|-----------|---------|-------|----------|
+| `nn` | Low | Fastest | Pixel art, nearest neighbor |
+| `linear` | Medium | Fast | General use |
+| `cubic` | Good | Medium | Smooth scaling |
+| `lanczos` | High | Slow | High quality upscaling |
+| `super` | Best | Slowest | Downscaling |
+
+### GPU Chromakey (Green Screen)
+
+```bash
+# Green screen removal on GPU
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i greenscreen.mp4 \
+  -hwaccel cuda -hwaccel_output_format cuda -i background.mp4 \
+  -filter_complex "[0:v]chromakey_cuda=0x00FF00:0.3:0.1[fg];[1:v][fg]overlay_cuda" \
+  -c:v h264_nvenc output.mp4
+```
+
+### Hybrid GPU + CPU Filter Pipelines
+
+When mixing CPU and GPU filters, use `hwupload_cuda` and `hwdownload`:
+
+```bash
+# CPU decode -> CPU filter -> GPU encode
+ffmpeg -i input.mp4 \
+  -vf "fade=in:0:30,hwupload_cuda" \
+  -c:v h264_nvenc output.mp4
+
+# GPU decode -> CPU filter (drawtext) -> GPU encode
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda \
+  -i input.mp4 \
+  -vf "hwdownload,format=nv12,drawtext=text='Hello':fontsize=48,hwupload_cuda" \
+  -c:v h264_nvenc output.mp4
+
+# Complete hybrid pipeline: GPU scale -> CPU text -> GPU encode
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i input.mp4 \
+  -filter_complex "\
+    [0:v]scale_cuda=1920:1080[scaled];\
+    [scaled]hwdownload,format=nv12[cpu];\
+    [cpu]drawtext=text='Watermark':fontsize=48:x=10:y=10[text];\
+    [text]hwupload_cuda[gpu]" \
+  -map "[gpu]" \
+  -c:v h264_nvenc output.mp4
+```
+
 ### NVENC Quality Optimization
 
 ```bash
@@ -205,6 +285,150 @@ ffmpeg -i input.mp4 \
   -g 250 \
   -c:a copy \
   output.mp4
+```
+
+## GPU Memory Management
+
+### Critical Concepts
+
+PCIe transfers between CPU and GPU memory are the primary bottleneck. Keeping frames in GPU memory throughout the pipeline is critical for performance.
+
+**Memory Flow Patterns:**
+
+```
+Pattern 1: Full GPU Pipeline (OPTIMAL)
+Input File -> GPU Decode -> GPU Filter -> GPU Encode -> Output File
+                    |          |           |
+                    v          v           v
+                  [GPU Memory - No PCIe Transfer]
+
+Pattern 2: CPU Filter Insertion (SUBOPTIMAL)
+Input -> GPU Decode -> hwdownload -> CPU Filter -> hwupload -> GPU Encode -> Output
+                           |                           |
+                           v                           v
+                     [PCIe Transfer]             [PCIe Transfer]
+
+Pattern 3: Software Decode + GPU Encode
+Input -> CPU Decode -> hwupload -> GPU Encode -> Output
+                          |
+                          v
+                    [PCIe Transfer]
+```
+
+### Command Patterns Comparison
+
+```bash
+# OPTIMAL: Full GPU pipeline - no CPU-GPU transfers
+ffmpeg -y -vsync 0 \
+  -hwaccel cuda \
+  -hwaccel_output_format cuda \
+  -i input.mp4 \
+  -vf scale_cuda=1280:720 \
+  -c:v h264_nvenc \
+  output.mp4
+
+# SUBOPTIMAL: GPU decode, CPU filter, GPU encode - 2 transfers
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda \
+  -i input.mp4 \
+  -vf "hwdownload,format=nv12,drawtext=text='Hello',hwupload_cuda" \
+  -c:v h264_nvenc output.mp4
+
+# AVOID: Missing -hwaccel_output_format - frame copies to CPU after decode
+ffmpeg -hwaccel cuda -i input.mp4 \
+  -vf scale=1280:720 \
+  -c:v h264_nvenc output.mp4
+```
+
+**Why `-hwaccel_output_format cuda` matters:** Without it, decoded frames transfer from GPU to CPU via PCIe, get processed, then transfer back to GPU for encoding. This can reduce throughput by up to 50%.
+
+### Memory Monitoring
+
+```bash
+# NVIDIA GPU memory and utilization
+nvidia-smi dmon -s m
+
+# Watch GPU utilization in real-time
+watch -n 1 nvidia-smi
+
+# Intel GPU monitoring
+intel_gpu_top
+```
+
+### Best Practices
+
+1. **Use `-hwaccel_output_format`** to keep decoded frames in GPU memory
+2. **Use GPU filters when available** (scale_cuda, overlay_cuda, pad_cuda)
+3. **Batch similar operations** to minimize filter graph complexity
+4. **Monitor GPU memory** for high-resolution content
+5. **Use `-vsync 0`** to prevent frame duplication overhead
+
+## Multi-GPU Encoding
+
+### NVIDIA Multi-GPU
+
+```bash
+# Specify GPU by index (parallel processing on different GPUs)
+ffmpeg -hwaccel cuda \
+  -hwaccel_device 0 \
+  -hwaccel_output_format cuda \
+  -i input1.mp4 \
+  -c:v h264_nvenc output1.mp4 &
+
+ffmpeg -hwaccel cuda \
+  -hwaccel_device 1 \
+  -hwaccel_output_format cuda \
+  -i input2.mp4 \
+  -c:v h264_nvenc output2.mp4 &
+
+wait
+
+# Initialize specific CUDA device for filters
+ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i input.mp4 \
+  -init_hw_device cuda=gpu1:1 \
+  -filter_complex "[0:v]scale_cuda=1280:720[scaled]" \
+  -map "[scaled]" \
+  -c:v h264_nvenc output.mp4
+```
+
+### 1:N Encoding (Single Input, Multiple Outputs)
+
+More efficient than separate processes - shares CUDA context:
+
+```bash
+# Single input to multiple resolutions (ABR ladder)
+ffmpeg -y -vsync 0 \
+  -hwaccel cuda \
+  -hwaccel_output_format cuda \
+  -i input.mp4 \
+  -filter_complex "[0:v]split=3[v1][v2][v3];\
+    [v1]scale_cuda=1920:1080[hd];\
+    [v2]scale_cuda=1280:720[sd];\
+    [v3]scale_cuda=640:360[mobile]" \
+  -map "[hd]" -c:v h264_nvenc -b:v 5M output_1080p.mp4 \
+  -map "[sd]" -c:v h264_nvenc -b:v 2M output_720p.mp4 \
+  -map "[mobile]" -c:v h264_nvenc -b:v 500k output_360p.mp4
+```
+
+### Parallel Encoding Strategy
+
+For maximum throughput:
+1. Run 4+ parallel FFmpeg sessions
+2. Use inputs with 15+ seconds to amortize initialization
+3. Measure aggregate FPS across all sessions
+
+```bash
+# Environment variables for faster initialization
+export CUDA_VISIBLE_DEVICES=0
+export CUDA_DEVICE_MAX_CONNECTIONS=2
+
+# Parallel encoding script
+for i in {1..4}; do
+  ffmpeg -hwaccel cuda -hwaccel_output_format cuda \
+    -i input_$i.mp4 \
+    -c:v h264_nvenc \
+    output_$i.mp4 &
+done
+wait
 ```
 
 ## Intel Quick Sync Video (QSV)
@@ -267,6 +491,50 @@ ffmpeg -hwaccel qsv \
   -preset medium \
   -b:v 5M \
   output.mp4
+```
+
+### QSV Quality Settings
+
+```bash
+# Constant quality (recommended)
+ffmpeg -hwaccel qsv -hwaccel_output_format qsv \
+  -i input.mp4 \
+  -c:v hevc_qsv \
+  -preset slow \
+  -global_quality 22 \
+  -look_ahead 1 \
+  output.mp4
+
+# VBR with lookahead
+ffmpeg -hwaccel qsv -hwaccel_output_format qsv \
+  -i input.mp4 \
+  -c:v h264_qsv \
+  -preset medium \
+  -b:v 5M \
+  -maxrate 7M \
+  -bufsize 10M \
+  -look_ahead 1 \
+  -look_ahead_depth 40 \
+  output.mp4
+```
+
+**QSV Quality Parameters:**
+
+| Parameter | Description | Range |
+|-----------|-------------|-------|
+| `-global_quality` | Quality level (like CRF) | 1-51 (lower = better) |
+| `-preset` | Encoding speed/quality | `veryfast`, `faster`, `fast`, `medium`, `slow`, `slower`, `veryslow` |
+| `-look_ahead` | Enable lookahead | 0 or 1 |
+| `-look_ahead_depth` | Lookahead frames | 10-100 |
+
+### Multi-GPU QSV (Linux)
+
+```bash
+# Select specific GPU by render device
+ffmpeg -init_hw_device qsv=hw:/dev/dri/renderD129 \
+  -filter_hw_device hw \
+  -i input.mp4 \
+  -c:v h264_qsv output.mp4
 ```
 
 ### QSV with Scaling
@@ -609,6 +877,407 @@ ffmpeg -init_hw_device vulkan \
 The next minor update will add:
 - ProRes (encode and decode)
 - VC-2 (encode and decode)
+
+## Vulkan Filters (FFmpeg 8.0+)
+
+Vulkan filters provide cross-platform GPU acceleration for video processing.
+
+### Vulkan Filter Reference
+
+| Filter | Description | Key Parameters |
+|--------|-------------|----------------|
+| `scale_vulkan` | GPU scaling | `w`, `h`, `scaler` |
+| `overlay_vulkan` | Compositing | `x`, `y` |
+| `transpose_vulkan` | Rotate/transpose | `dir`, `passthrough` |
+| `flip_vulkan` | Horizontal flip | - |
+| `avgblur_vulkan` | Box blur | `sizeX`, `sizeY` |
+| `gblur_vulkan` | Gaussian blur | `sigma`, `sigmaV`, `planes` |
+| `chromaber_vulkan` | Chromatic aberration | `dist_x`, `dist_y` |
+| `nlmeans_vulkan` | NLMeans denoising | `s`, `p`, `r` |
+| `bwdif_vulkan` | Deinterlacing | `mode`, `parity`, `deint` |
+| `xfade_vulkan` | Transitions | `transition`, `duration`, `offset` |
+| `libplacebo` | Libplacebo processing | `w`, `h`, `colorspace` |
+
+### Vulkan Scaling
+
+```bash
+# Basic Vulkan scaling
+ffmpeg -init_hw_device vulkan=vk \
+  -filter_hw_device vk \
+  -i input.mp4 \
+  -vf "hwupload,scale_vulkan=1920:1080,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Full Vulkan pipeline with scaling
+ffmpeg -init_hw_device vulkan=vk \
+  -filter_hw_device vk \
+  -hwaccel vulkan -hwaccel_output_format vulkan \
+  -i input.mp4 \
+  -vf "scale_vulkan=1280:720" \
+  -c:v h264_vulkan output.mp4
+
+# Vulkan scaling with specific scaler
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -vf "hwupload,scale_vulkan=w=1920:h=1080:scaler=lanczos,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### Vulkan Compositing (overlay_vulkan)
+
+```bash
+# Picture-in-picture with Vulkan
+ffmpeg -init_hw_device vulkan=vk \
+  -filter_hw_device vk \
+  -i main.mp4 -i overlay.mp4 \
+  -filter_complex "\
+    [0:v]hwupload[main];\
+    [1:v]hwupload,scale_vulkan=320:180[pip];\
+    [main][pip]overlay_vulkan=x=10:y=10[out];\
+    [out]hwdownload,format=yuv420p" \
+  -map "[out]" output.mp4
+
+# Full Vulkan overlay pipeline
+ffmpeg -init_hw_device vulkan=vk \
+  -filter_hw_device vk \
+  -hwaccel vulkan -hwaccel_output_format vulkan -i main.mp4 \
+  -hwaccel vulkan -hwaccel_output_format vulkan -i overlay.mp4 \
+  -filter_complex "[0:v][1:v]overlay_vulkan=x=W-w-10:y=10" \
+  -c:v h264_vulkan output.mp4
+```
+
+### Vulkan Rotation and Transpose
+
+```bash
+# Transpose (rotate 90° clockwise)
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -vf "hwupload,transpose_vulkan=dir=clock,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Horizontal flip
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -vf "hwupload,flip_vulkan,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+**transpose_vulkan directions:**
+| dir | Rotation |
+|-----|----------|
+| `cclock_flip` | 90° counter-clockwise + vertical flip |
+| `clock` | 90° clockwise |
+| `cclock` | 90° counter-clockwise |
+| `clock_flip` | 90° clockwise + vertical flip |
+
+### Vulkan Blur Effects
+
+```bash
+# Gaussian blur
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -vf "hwupload,gblur_vulkan=sigma=5,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Box blur (averaging)
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -vf "hwupload,avgblur_vulkan=sizeX=5:sizeY=5,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### Vulkan Chromatic Aberration
+
+```bash
+# Add chromatic aberration effect
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -vf "hwupload,chromaber_vulkan=dist_x=-0.002:dist_y=0.002,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### Vulkan Denoising (nlmeans_vulkan)
+
+```bash
+# Non-local means denoising on GPU
+ffmpeg -init_hw_device vulkan \
+  -i noisy.mp4 \
+  -vf "hwupload,nlmeans_vulkan=s=3:p=7:r=15,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Full Vulkan denoising pipeline
+ffmpeg -init_hw_device vulkan=vk \
+  -filter_hw_device vk \
+  -hwaccel vulkan -hwaccel_output_format vulkan \
+  -i noisy.mp4 \
+  -vf "nlmeans_vulkan=s=4" \
+  -c:v h264_vulkan output.mp4
+```
+
+### Vulkan Deinterlacing (bwdif_vulkan)
+
+```bash
+# Bob-Weaver deinterlacing
+ffmpeg -init_hw_device vulkan \
+  -i interlaced.mp4 \
+  -vf "hwupload,bwdif_vulkan=mode=send_frame,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Full Vulkan deinterlace pipeline
+ffmpeg -init_hw_device vulkan=vk \
+  -filter_hw_device vk \
+  -hwaccel vulkan -hwaccel_output_format vulkan \
+  -i interlaced.mp4 \
+  -vf "bwdif_vulkan=1" \
+  -c:v h264_vulkan output.mp4
+```
+
+### Vulkan Transitions (xfade_vulkan)
+
+```bash
+# GPU-accelerated crossfade between two clips
+ffmpeg -init_hw_device vulkan=vk \
+  -filter_hw_device vk \
+  -i clip1.mp4 -i clip2.mp4 \
+  -filter_complex "\
+    [0:v]hwupload[v1];\
+    [1:v]hwupload[v2];\
+    [v1][v2]xfade_vulkan=transition=fade:duration=1:offset=4[out];\
+    [out]hwdownload,format=yuv420p" \
+  -map "[out]" output.mp4
+```
+
+**xfade_vulkan transitions:** `fade`, `dissolve`, `wipeleft`, `wiperight`, `wipeup`, `wipedown`, `slideleft`, `slideright`, `slideup`, `slidedown`, and more.
+
+### Libplacebo Processing (Advanced)
+
+Libplacebo provides advanced color management and processing:
+
+```bash
+# HDR tonemapping with libplacebo
+ffmpeg -init_hw_device vulkan \
+  -i hdr_input.mp4 \
+  -vf "hwupload,libplacebo=tonemapping=hable:colorspace=bt709:color_primaries=bt709:color_trc=bt709,hwdownload,format=yuv420p" \
+  sdr_output.mp4
+
+# Scaling with libplacebo (high quality)
+ffmpeg -init_hw_device vulkan \
+  -i input.mp4 \
+  -vf "hwupload,libplacebo=w=3840:h=2160:upscaler=ewa_lanczos,hwdownload,format=yuv420p10le" \
+  output.mp4
+```
+
+## OpenCL Filters
+
+OpenCL provides GPU acceleration that works across vendors (NVIDIA, AMD, Intel).
+
+### OpenCL Filter Reference
+
+| Filter | Description | Key Parameters |
+|--------|-------------|----------------|
+| `scale_opencl` | GPU scaling | `w`, `h` |
+| `overlay_opencl` | Compositing | `x`, `y` |
+| `pad_opencl` | Padding | `w`, `h`, `x`, `y`, `color` |
+| `colorkey_opencl` | Chroma keying | `color`, `similarity`, `blend` |
+| `unsharp_opencl` | Sharpening | `lx`, `ly`, `la`, `cx`, `cy`, `ca` |
+| `nlmeans_opencl` | NLMeans denoising | `s`, `p`, `r` |
+| `deshake_opencl` | Stabilization | `tripod`, `smooth`, `filename` |
+| `tonemap_opencl` | HDR tonemapping | `tonemap`, `transfer`, `matrix` |
+| `avgblur_opencl` | Box blur | `sizeX`, `sizeY` |
+| `convolution_opencl` | Custom kernel | `0m`, `1m`, etc. |
+
+### OpenCL Initialization
+
+```bash
+# List OpenCL devices
+ffmpeg -init_hw_device opencl=gpu:0.0 -filter_hw_device gpu -f lavfi -i nullsrc -vf "hwupload,avgblur_opencl=2" -t 1 -f null -
+
+# Basic OpenCL filter pattern
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i input.mp4 \
+  -vf "hwupload,<filter_opencl>,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### OpenCL Scaling
+
+```bash
+# GPU scaling with OpenCL
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i input.mp4 \
+  -vf "hwupload,scale_opencl=1920:1080,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### OpenCL Compositing
+
+```bash
+# Picture-in-picture with OpenCL
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i main.mp4 -i overlay.mp4 \
+  -filter_complex "\
+    [0:v]hwupload[main];\
+    [1:v]hwupload,scale_opencl=320:180[pip];\
+    [main][pip]overlay_opencl=x=10:y=10[out];\
+    [out]hwdownload,format=yuv420p" \
+  -map "[out]" output.mp4
+```
+
+### OpenCL Chroma Keying (colorkey_opencl)
+
+```bash
+# Green screen removal with OpenCL
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i greenscreen.mp4 -i background.mp4 \
+  -filter_complex "\
+    [0:v]hwupload,colorkey_opencl=0x00FF00:0.3:0.1[fg];\
+    [1:v]hwupload[bg];\
+    [bg][fg]overlay_opencl[out];\
+    [out]hwdownload,format=yuv420p" \
+  -map "[out]" output.mp4
+```
+
+### OpenCL Denoising (nlmeans_opencl)
+
+```bash
+# Non-local means denoising on GPU
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i noisy.mp4 \
+  -vf "hwupload,nlmeans_opencl=s=3:p=7:r=15,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Strong denoising
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i noisy.mp4 \
+  -vf "hwupload,nlmeans_opencl=s=5:p=7:r=21,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### OpenCL Stabilization (deshake_opencl)
+
+```bash
+# GPU-accelerated video stabilization
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i shaky.mp4 \
+  -vf "hwupload,deshake_opencl,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Tripod mode (camera stays in one place)
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i shaky.mp4 \
+  -vf "hwupload,deshake_opencl=tripod=1,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### OpenCL Sharpening (unsharp_opencl)
+
+```bash
+# Basic sharpening
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i input.mp4 \
+  -vf "hwupload,unsharp_opencl=lx=5:ly=5:la=1.0,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Subtle sharpening for HD video
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i input.mp4 \
+  -vf "hwupload,unsharp_opencl=lx=3:ly=3:la=0.5,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### OpenCL HDR Tonemapping (tonemap_opencl)
+
+```bash
+# HDR to SDR conversion with GPU
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i hdr_input.mp4 \
+  -vf "hwupload,tonemap_opencl=tonemap=hable:transfer=bt709:matrix=bt709:primaries=bt709,hwdownload,format=yuv420p" \
+  sdr_output.mp4
+
+# Reinhard tonemapping
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i hdr_input.mp4 \
+  -vf "hwupload,tonemap_opencl=tonemap=reinhard:param=0.5,hwdownload,format=yuv420p" \
+  sdr_output.mp4
+```
+
+**tonemap_opencl algorithms:**
+| Algorithm | Description |
+|-----------|-------------|
+| `none` | No tonemapping |
+| `clip` | Simple clipping |
+| `linear` | Linear scaling |
+| `gamma` | Gamma-based |
+| `reinhard` | Reinhard operator |
+| `hable` | Hable/Filmic (most popular) |
+| `mobius` | Mobius (preserves blacks) |
+| `bt2390` | ITU-R BT.2390 (broadcast standard) |
+
+### OpenCL Blur
+
+```bash
+# Box blur
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i input.mp4 \
+  -vf "hwupload,avgblur_opencl=sizeX=5:sizeY=5,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+### OpenCL Custom Convolution
+
+```bash
+# Edge detection kernel
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i input.mp4 \
+  -vf "hwupload,convolution_opencl=0m='-1 -1 -1 -1 8 -1 -1 -1 -1':0rdiv=1:0bias=128,hwdownload,format=yuv420p" \
+  output.mp4
+
+# Sharpen kernel
+ffmpeg -init_hw_device opencl=gpu \
+  -filter_hw_device gpu \
+  -i input.mp4 \
+  -vf "hwupload,convolution_opencl=0m='0 -1 0 -1 5 -1 0 -1 0':0rdiv=1:0bias=0,hwdownload,format=yuv420p" \
+  output.mp4
+```
+
+## GPU Filter Comparison
+
+### Cross-Platform Filter Availability
+
+| Filter Type | CUDA | Vulkan | OpenCL | VAAPI | QSV |
+|-------------|------|--------|--------|-------|-----|
+| Scaling | ✅ `scale_cuda` | ✅ `scale_vulkan` | ✅ `scale_opencl` | ✅ `scale_vaapi` | ✅ `vpp_qsv` |
+| Overlay | ✅ `overlay_cuda` | ✅ `overlay_vulkan` | ✅ `overlay_opencl` | - | - |
+| Denoising | ✅ `bilateral_cuda` | ✅ `nlmeans_vulkan` | ✅ `nlmeans_opencl` | - | - |
+| Deinterlace | ✅ `bwdif_cuda` | ✅ `bwdif_vulkan` | - | ✅ `deinterlace_vaapi` | ✅ `vpp_qsv` |
+| Chromakey | ✅ `chromakey_cuda` | - | ✅ `colorkey_opencl` | - | - |
+| Tonemapping | - | ✅ `libplacebo` | ✅ `tonemap_opencl` | ✅ `tonemap_vaapi` | - |
+| Stabilization | - | - | ✅ `deshake_opencl` | - | - |
+| Padding | ✅ `pad_cuda` | - | ✅ `pad_opencl` | - | - |
+
+### Performance Comparison
+
+| API | Platform Support | Filter Variety | Performance |
+|-----|------------------|----------------|-------------|
+| CUDA | NVIDIA only | Excellent | Best on NVIDIA |
+| Vulkan | Cross-platform | Good (growing) | Very good |
+| OpenCL | Cross-platform | Good | Good |
+| VAAPI | Linux only | Limited | Good on Linux |
+| QSV | Intel only | Limited | Good on Intel |
 
 ## Docker with Hardware Acceleration
 
