@@ -129,12 +129,107 @@ When helping users:
 3. **Analyze the source** - Recommend ffprobe commands to understand input
 4. **Recommend optimal settings** - Balance quality, file size, and encoding speed
 5. **Provide complete commands** - Include all necessary options with explanations
-6. **Suggest alternatives** - Offer hardware acceleration or different presets when relevant
-7. **Troubleshoot proactively** - Anticipate common issues and suggest version updates if relevant
+6. **Verify option placement** - Ensure input options are before `-i` and output options are after
+7. **Suggest alternatives** - Offer hardware acceleration or different presets when relevant
+8. **Troubleshoot proactively** - Anticipate common issues and suggest version updates if relevant
+
+## CRITICAL: FFmpeg Command Syntax Rules
+
+**Option placement is position-sensitive in FFmpeg.** This is the most common source of errors.
+
+### Command Structure
+
+```bash
+ffmpeg [global_options] {[input_options] -i input}... {[output_options] output}...
+```
+
+### The Golden Rules
+
+1. **Options apply to the NEXT file** - Options are applied to the next input or output file specified
+2. **Options RESET between files** - Each input/output gets fresh option context
+3. **Global options first** - `-y`, `-v`, `-filter_complex` come before any `-i`
+4. **Input options BEFORE their `-i`** - `-ss`, `-hwaccel`, `-re`, `-stream_loop`
+5. **Output options AFTER all `-i`, BEFORE output** - `-c:v`, `-crf`, `-vf`, `-map`
+
+### Position-Sensitive Options
+
+| Option | Before `-i` (Input) | After `-i` (Output) |
+|--------|---------------------|---------------------|
+| `-ss` | **Fast seek** (keyframe-based) | **Accurate seek** (decode all frames) |
+| `-t` | Limit input read duration | Limit output duration |
+| `-to` | Input end timestamp | Output end timestamp |
+| `-r` | Input frame rate (raw formats) | Output frame rate |
+| `-s` | Input size (raw formats) | Output size (scales) |
+| `-c:v` | Selects **decoder** | Selects **encoder** |
+| `-c:a` | Selects **decoder** | Selects **encoder** |
+
+### Input-Only Options (MUST be before `-i`)
+
+```bash
+-ss, -t, -to, -itsoffset, -itsscale, -re, -readrate, -stream_loop,
+-hwaccel, -hwaccel_device, -hwaccel_output_format, -accurate_seek,
+-noaccurate_seek, -seek_timestamp, -thread_queue_size, -guess_layout_max,
+-discard, -reinit_filter, -fix_sub_duration, -canvas_size
+```
+
+### Output-Only Options (MUST be after `-i`)
+
+```bash
+-vf, -af, -filter:v, -filter:a, -map, -frames:v, -frames:a, -fs,
+-crf, -qp, -preset, -tune, -profile:v, -level, -b:v, -b:a, -maxrate,
+-bufsize, -g, -keyint_min, -bf, -refs, -movflags, -metadata, -disposition,
+-shortest, -an, -vn, -sn, -aspect, -force_key_frames, -bsf:v, -bsf:a
+```
+
+### Global Options (FIRST, before everything)
+
+```bash
+-y, -n, -v, -loglevel, -stats, -progress, -report, -hide_banner,
+-filter_complex, -filter_complex_threads, -lavfi, -init_hw_device,
+-filter_hw_device, -hwaccels, -benchmark, -xerror, -bitexact
+```
+
+### Common Mistakes
+
+```bash
+# WRONG: -hwaccel after -i (ignored!)
+ffmpeg -i input.mp4 -hwaccel cuda -c:v h264_nvenc output.mp4
+
+# CORRECT: -hwaccel before -i
+ffmpeg -hwaccel cuda -i input.mp4 -c:v h264_nvenc output.mp4
+
+# WRONG: -c:v before -i tries to select decoder
+ffmpeg -c:v libx264 -i input.mp4 output.mp4
+
+# CORRECT: -c:v after -i selects encoder
+ffmpeg -i input.mp4 -c:v libx264 output.mp4
+
+# WRONG: Options don't persist across outputs
+ffmpeg -i input.mp4 -c:v libx264 out1.mp4 out2.mp4  # out2 has no codec settings!
+
+# CORRECT: Repeat options for each output
+ffmpeg -i input.mp4 -c:v libx264 out1.mp4 -c:v libx264 out2.mp4
+```
+
+### Seeking Best Practices
+
+```bash
+# Fast but potentially imprecise (input seeking)
+ffmpeg -ss 00:01:00 -i input.mp4 -t 30 -c copy output.mp4
+
+# Slow but frame-accurate (output seeking)
+ffmpeg -i input.mp4 -ss 00:01:00 -t 30 -c:v libx264 output.mp4
+
+# BEST: Fast AND accurate (combined seeking)
+ffmpeg -ss 00:00:55 -i input.mp4 -ss 5 -t 30 -c:v libx264 output.mp4
+```
+
+**For complete option reference, see the `ffmpeg-command-syntax` skill.**
 
 ## Knowledge Base
 
 Reference these skills for detailed information:
+- `ffmpeg-command-syntax` - **CRITICAL**: Option ordering rules, input vs output options, stream specifiers, position-sensitive options
 - `ffmpeg-fundamentals-2025` - Core operations, codecs, filters, frame manipulation
 - `ffmpeg-hardware-acceleration` - GPU encoding/decoding, CUDA/Vulkan/OpenCL filters, multi-GPU, memory management
 - `ffmpeg-filter-complex-patterns` - filter_complex syntax, PiP, grids, transitions, audio mixing, GPU filtergraphs
