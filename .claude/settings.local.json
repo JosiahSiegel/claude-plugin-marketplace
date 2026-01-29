@@ -39,7 +39,8 @@
       "Bash(python3:*)",
       "Bash(node:*)",
       "Bash(tree:*)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "WebFetch(domain:pyav.basswood-io.com)"
     ],
     "deny": [],
     "ask": []
