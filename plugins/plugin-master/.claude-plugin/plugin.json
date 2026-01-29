@@ -1,6 +1,6 @@
 {
   "name": "plugin-master",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Complete Claude Code plugin development system. PROACTIVELY activate when users want to: (1) Create/build plugins with 2025 features, (2) Add skills/commands/agents/hooks, (3) Validate plugin structure, (4) Publish to marketplace, (5) Get plugin development guidance. Provides: agent-first design patterns, progressive disclosure skills, hook automation, MCP integration, marketplace publishing. Includes plugin-expert agent and validation utilities.",
   "author": {
     "name": "Josiah Siegel",

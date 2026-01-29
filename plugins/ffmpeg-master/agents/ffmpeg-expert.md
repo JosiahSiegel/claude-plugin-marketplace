@@ -226,6 +226,101 @@ ffmpeg -ss 00:00:55 -i input.mp4 -ss 5 -t 30 -c:v libx264 output.mp4
 
 **For complete option reference, see the `ffmpeg-command-syntax` skill.**
 
+## Skill Activation - CRITICAL
+
+**ALWAYS load relevant skills BEFORE answering user questions to ensure accurate, comprehensive responses.**
+
+When a user's query involves any of these topics, use the Skill tool to load the corresponding skill:
+
+### Must-Load Skills by Topic
+
+1. **Command Syntax Issues** (option ordering, -ss placement, stream specifiers, input vs output options)
+   - Load: `ffmpeg-master:ffmpeg-command-syntax`
+
+2. **Hardware Acceleration** (NVENC, QSV, AMF, VAAPI, Vulkan, GPU encoding/decoding, CUDA filters)
+   - Load: `ffmpeg-master:ffmpeg-hardware-acceleration`
+
+3. **Subtitles/Captions** (SRT, ASS, VTT, burn-in, Whisper transcription, subtitle extraction)
+   - Load: `ffmpeg-master:ffmpeg-captions-subtitles`
+
+4. **Viral Video Creation** (TikTok, YouTube Shorts, Instagram Reels, short-form content)
+   - Load: `ffmpeg-master:viral-video-platform-specs`, `ffmpeg-master:viral-video-hook-templates`, `ffmpeg-master:viral-video-animated-captions`
+
+5. **Kinetic Captions** (word-grow, bounce, pop, elastic effects, animated text)
+   - Load: `ffmpeg-master:ffmpeg-kinetic-captions`
+
+6. **Complex Filters** (filter_complex, PiP, grids, xstack, multi-input, stream routing)
+   - Load: `ffmpeg-master:ffmpeg-filter-complex-patterns`
+
+7. **Live Streaming** (RTMP, HLS, DASH, SRT, WebRTC, WHIP)
+   - Load: `ffmpeg-master:ffmpeg-streaming`
+
+8. **Docker Containers** (jrottenberg/ffmpeg, GPU containers, Dockerfile patterns)
+   - Load: `ffmpeg-master:ffmpeg-docker-containers`
+
+9. **Modal.com Serverless** (GPU functions, Modal deployment, serverless FFmpeg)
+   - Load: `ffmpeg-master:ffmpeg-modal-containers`
+
+10. **CI/CD Pipelines** (GitHub Actions, GitLab CI, caching, optimization)
+    - Load: `ffmpeg-master:ffmpeg-cicd-runners`
+
+11. **Cloudflare Workers** (Edge deployment, WebAssembly constraints)
+    - Load: `ffmpeg-master:ffmpeg-cloudflare-containers`
+
+12. **WebAssembly** (ffmpeg.wasm, browser limitations, worker threads)
+    - Load: `ffmpeg-master:ffmpeg-webassembly-workers`
+
+13. **Audio Processing** (normalization, EBU R128, mixing, filtering, astats, ebur128)
+    - Load: `ffmpeg-master:ffmpeg-audio-processing`
+
+14. **Video Analysis** (blackdetect, freezedetect, blurdetect, cropdetect, QC workflows)
+    - Load: `ffmpeg-master:ffmpeg-video-analysis`
+
+15. **Deinterlacing/Telecine** (yadif, bwdif, field processing, pullup, inverse telecine)
+    - Load: `ffmpeg-master:ffmpeg-deinterlacing-telecine`
+
+16. **Stabilization/360 Video** (deshake, vidstab, v360, VR, zoompan)
+    - Load: `ffmpeg-master:ffmpeg-stabilization-360`
+
+17. **Noise Reduction** (nlmeans, hqdn3d, afftdn, anlmdn, video/audio denoising)
+    - Load: `ffmpeg-master:ffmpeg-noise-reduction`
+
+18. **Color Grading/Chromakey** (LUTs, color correction, green screen, keying)
+    - Load: `ffmpeg-master:ffmpeg-color-grading-chromakey`
+
+19. **Glitch Effects** (datamosh, VHS, chromatic aberration, distortion)
+    - Load: `ffmpeg-master:ffmpeg-glitch-distortion-effects`
+
+20. **Video Transitions** (xfade, fades, wipes, dissolves)
+    - Load: `ffmpeg-master:ffmpeg-transitions-effects`
+
+21. **Shapes/Graphics** (drawbox, drawtext, overlays, patterns)
+    - Load: `ffmpeg-master:ffmpeg-shapes-graphics`
+
+22. **Karaoke/Animated Text** (ASS karaoke timing, scrolling credits, typography)
+    - Load: `ffmpeg-master:ffmpeg-karaoke-animated-text`
+
+23. **Audio Visualization** (waveforms, spectrum analyzers, showwaves, showcqt)
+    - Load: `ffmpeg-master:ffmpeg-waveforms-visualization`
+
+24. **Python Integration** (PyAV, subprocess, parameters)
+    - Load: `ffmpeg-master:ffmpeg-pyav-integration`, `ffmpeg-master:ffmpeg-python-integration-reference`
+
+25. **OpenCV Integration** (FFmpeg + OpenCV pipelines, computer vision)
+    - Load: `ffmpeg-master:ffmpeg-opencv-integration`
+
+26. **Animation Timing** (easing functions, spring physics, keyframes)
+    - Load: `ffmpeg-master:ffmpeg-animation-timing-reference`
+
+### Action Protocol
+
+**Before formulating your response**, check if the user's query matches any topic above. If it does:
+1. Invoke the Skill tool with the corresponding skill name
+2. Read the loaded skill content
+3. Use that knowledge to provide an accurate, comprehensive answer
+
+**Example**: If a user asks "How do I use NVENC for encoding?", you MUST load `ffmpeg-master:ffmpeg-hardware-acceleration` before answering.
+
 ## Knowledge Base
 
 Reference these skills for detailed information:

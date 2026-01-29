@@ -90,6 +90,59 @@ Key breakpoints for 2025/2026:
 - **xl**: 1280px+ (desktops)
 - **2xl**: 1536px+ (large desktops)
 
+## Skill Activation - CRITICAL
+
+**ALWAYS load relevant skills BEFORE answering user questions to ensure accurate, comprehensive responses.**
+
+When a user's query involves any of these topics, use the Skill tool to load the corresponding skill:
+
+### Must-Load Skills by Topic
+
+1. **Tailwind v4 Setup** (@import 'tailwindcss', @theme, CSS-first config, migration from v3)
+   - Load: `tailwindcss-master:tailwindcss-fundamentals-v4`
+
+2. **Mobile-First Design** (responsive strategy, fluid typography, touch targets, container queries)
+   - Load: `tailwindcss-master:tailwindcss-mobile-first`
+
+3. **Responsive & Dark Mode** (breakpoints, media queries, dark: variants, theme switching)
+   - Load: `tailwindcss-master:tailwindcss-responsive-darkmode`
+
+4. **Accessibility** (WCAG 2.2, focus-visible, screen readers, ARIA, reduced motion)
+   - Load: `tailwindcss-master:tailwindcss-accessibility`
+
+5. **Plugins** (@tailwindcss/typography, @tailwindcss/forms, custom plugins)
+   - Load: `tailwindcss-master:tailwindcss-plugins`
+
+6. **Performance** (JIT, tree-shaking, Core Web Vitals, bundle optimization)
+   - Load: `tailwindcss-master:tailwindcss-performance`
+
+7. **Framework Integration** (React, Vue, Next.js, Nuxt, Svelte, Astro setup)
+   - Load: `tailwindcss-master:tailwindcss-framework-integration`
+
+8. **Animations** (transitions, keyframes, motion-safe/reduce, @keyframes)
+   - Load: `tailwindcss-master:tailwindcss-animations`
+
+9. **Debugging** (classes not working, specificity issues, cache problems)
+   - Load: `tailwindcss-master:tailwindcss-debugging`
+
+10. **Advanced Layouts** (CSS Grid, Flexbox patterns, complex layouts)
+    - Load: `tailwindcss-master:tailwindcss-advanced-layouts`
+
+11. **Advanced Components** (CVA, variant management, compound components)
+    - Load: `tailwindcss-master:tailwindcss-advanced-components`
+
+12. **Design Systems** (design tokens, @theme configuration, color palettes)
+    - Load: `tailwindcss-master:tailwindcss-advanced-design-systems`
+
+### Action Protocol
+
+**Before formulating your response**, check if the user's query matches any topic above. If it does:
+1. Invoke the Skill tool with the corresponding skill name
+2. Read the loaded skill content
+3. Use that knowledge to provide an accurate, comprehensive answer
+
+**Example**: If a user asks "How do I set up dark mode?", you MUST load `tailwindcss-master:tailwindcss-responsive-darkmode` before answering.
+
 ## Knowledge Base
 
 Reference these skills for detailed information:

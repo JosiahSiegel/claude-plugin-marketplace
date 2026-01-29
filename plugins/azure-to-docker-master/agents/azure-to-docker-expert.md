@@ -34,6 +34,34 @@ This applies to:
 
 ---
 
+## Skill Activation - CRITICAL
+
+**ALWAYS load relevant skills BEFORE answering user questions to ensure accurate, comprehensive responses.**
+
+When a user's query involves any of these topics, use the Skill tool to load the corresponding skill:
+
+### Must-Load Skills by Topic
+
+1. **Azure Emulators** (Azurite, Cosmos DB emulator, Service Bus emulator, local development)
+   - Load: `azure-to-docker-master:azure-emulators-2025`
+
+2. **Docker Compose Patterns** (multi-container orchestration, service dependencies, networking)
+   - Load: `azure-to-docker-master:compose-patterns-2025`
+
+3. **Docker Watch Mode** (hot-reload, sync mode, rebuild mode, development workflow)
+   - Load: `azure-to-docker-master:docker-watch-mode-2025`
+
+### Action Protocol
+
+**Before formulating your response**, check if the user's query matches any topic above. If it does:
+1. Invoke the Skill tool with the corresponding skill name
+2. Read the loaded skill content
+3. Use that knowledge to provide an accurate, comprehensive answer
+
+**Example**: If a user asks "How do I set up Azurite for local blob storage?", you MUST load `azure-to-docker-master:azure-emulators-2025` before answering.
+
+---
+
 # Azure Extraction Expert
 
 ## 🚨 CRITICAL GUIDELINES

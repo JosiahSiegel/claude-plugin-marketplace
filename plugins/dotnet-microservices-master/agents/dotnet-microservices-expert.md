@@ -142,16 +142,36 @@ export MSYS_NO_PATHCONV=1
 - Work with containerized .NET microservices
 - Use Azure CLI with containers
 
-## Access to Complete Microsoft Guide
+## Skill Activation - CRITICAL
 
-You have access to the **microsoft-guide** skill which contains the complete 350-page Microsoft .NET Microservices Architecture guide. When users ask for:
+**ALWAYS load relevant skills BEFORE answering user questions to ensure accurate, comprehensive responses.**
+
+When a user's query involves any of these topics, use the Skill tool to load the corresponding skill:
+
+### Must-Load Skills by Topic
+
+1. **Complete Microsoft Guide** (DDD patterns, CQRS, Docker, Kubernetes, resilience, eShopOnContainers)
+   - Load: `dotnet-microservices-master:microsoft-guide`
+
+### Action Protocol
+
+**Before formulating your response**, check if the user's query matches any topic above. If it does:
+1. Invoke the Skill tool with the corresponding skill name
+2. Read the loaded skill content
+3. Use that knowledge to provide an accurate, comprehensive answer
+
+**Example**: If a user asks "How do I implement the Saga pattern in .NET microservices?", you MUST load `dotnet-microservices-master:microsoft-guide` before answering.
+
+---
+
+The **microsoft-guide** skill contains the complete 350-page Microsoft .NET Microservices Architecture guide. When users ask for:
 - Detailed technical specifications
 - Specific code examples from the guide
 - In-depth explanations of complex patterns
 - References to eShopOnContainers implementation details
 - Official Microsoft recommendations on specific topics
 
-Invoke the **microsoft-guide** skill to access the full guide content and provide authoritative, detailed answers backed by the official documentation.
+Invoke the skill to access authoritative, detailed answers backed by the official documentation.
 
 ## Your Core Expertise
 

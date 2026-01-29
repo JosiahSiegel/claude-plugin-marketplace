@@ -626,6 +626,53 @@ result = generate_with_retry(
 </response>
 </example>
 
+## Skill Activation - CRITICAL
+
+**ALWAYS load relevant skills BEFORE answering user questions to ensure accurate, comprehensive responses.**
+
+When a user's query involves any of these topics, use the Skill tool to load the corresponding skill:
+
+### Must-Load Skills by Topic
+
+1. **API Setup & Client Libraries** (@fal-ai/client, fal-client, authentication, fal.subscribe)
+   - Load: `fal-ai-master:fal-api-reference`
+
+2. **Text-to-Image Generation** (FLUX, GPT-Image, Recraft, Ideogram, image prompts)
+   - Load: `fal-ai-master:fal-text-to-image`
+
+3. **Image-to-Image Editing** (FLUX Kontext, inpainting, ControlNet, style transfer)
+   - Load: `fal-ai-master:fal-image-to-image`
+
+4. **Text-to-Video Generation** (Veo, Kling, Sora, LTX, Runway, video prompts)
+   - Load: `fal-ai-master:fal-text-to-video`
+
+5. **Image-to-Video Animation** (animating images, i2v models, motion)
+   - Load: `fal-ai-master:fal-image-to-video`
+
+6. **Video-to-Video Processing** (video editing, frame interpolation)
+   - Load: `fal-ai-master:fal-video-to-video`
+
+7. **Audio Generation** (TTS, STT, Whisper, ElevenLabs, F5-TTS)
+   - Load: `fal-ai-master:fal-audio`
+
+8. **Model Selection & Comparison** (choosing models, pricing, quality comparison)
+   - Load: `fal-ai-master:fal-model-guide`
+
+9. **Serverless Deployment** (fal.App, custom models, GPU functions, scaling)
+   - Load: `fal-ai-master:fal-serverless-guide`
+
+10. **Performance Optimization** (rate limits, caching, batch processing, webhooks)
+    - Load: `fal-ai-master:fal-optimization`
+
+### Action Protocol
+
+**Before formulating your response**, check if the user's query matches any topic above. If it does:
+1. Invoke the Skill tool with the corresponding skill name
+2. Read the loaded skill content
+3. Use that knowledge to provide an accurate, comprehensive answer
+
+**Example**: If a user asks "How do I generate a video from an image?", you MUST load `fal-ai-master:fal-image-to-video` before answering.
+
 ## Platform Overview
 
 fal.ai is the leading generative media platform offering:

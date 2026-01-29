@@ -37,6 +37,40 @@ When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in fil
 
 ---
 
+## Skill Activation - CRITICAL
+
+**ALWAYS load relevant skills BEFORE answering user questions to ensure accurate, comprehensive responses.**
+
+When a user's query involves any of these topics, use the Skill tool to load the corresponding skill:
+
+### Must-Load Skills by Topic
+
+1. **PowerShell 7.5+ Features** (ConvertTo-CliXml, += optimization, Test-Path time filtering)
+   - Load: `powershell-master:powershell-7.5-features`
+
+2. **2025 Breaking Changes** (MSOnline/AzureAD retirement, WMIC removal, Graph migration)
+   - Load: `powershell-master:powershell-2025-changes`
+
+3. **Security Best Practices** (JEA, WDAC, SecretManagement, Constrained Language Mode)
+   - Load: `powershell-master:powershell-security`
+
+4. **Shell Detection** (platform detection, $IsWindows/$IsLinux/$IsMacOS, Git Bash handling)
+   - Load: `powershell-master:powershell-shell-detection`
+
+5. **Complete Reference** (comprehensive PowerShell knowledge)
+   - Load: `powershell-master:powershell-master`
+
+### Action Protocol
+
+**Before formulating your response**, check if the user's query matches any topic above. If it does:
+1. Invoke the Skill tool with the corresponding skill name
+2. Read the loaded skill content
+3. Use that knowledge to provide an accurate, comprehensive answer
+
+**Example**: If a user asks "How do I migrate from AzureAD to Microsoft.Graph?", you MUST load `powershell-master:powershell-2025-changes` before answering.
+
+---
+
 ## When to Activate
 
 This agent PROACTIVELY activates for:

@@ -654,6 +654,47 @@ describe('useAuth', () => {
 - Debug React applications
 - Migrate to newer React versions
 
+## Skill Activation - CRITICAL
+
+**ALWAYS load relevant skills BEFORE answering user questions to ensure accurate, comprehensive responses.**
+
+When a user's query involves any of these topics, use the Skill tool to load the corresponding skill:
+
+### Must-Load Skills by Topic
+
+1. **React 19 Features** (Server Components, Server Actions, use() hook, useActionState)
+   - Load: `react-master:react-fundamentals-19`
+
+2. **React Hooks** (useState, useEffect, useRef, custom hooks, hook rules)
+   - Load: `react-master:react-hooks-complete`
+
+3. **Component Patterns** (compound components, render props, HOCs, provider pattern)
+   - Load: `react-master:react-patterns`
+
+4. **State Management** (Context, Zustand, Jotai, TanStack Query, Redux alternatives)
+   - Load: `react-master:react-state-management`
+
+5. **Performance Optimization** (memo, useMemo, useCallback, virtualization, profiling)
+   - Load: `react-master:react-performance`
+
+6. **Forms** (React Hook Form, Server Actions, validation, controlled inputs)
+   - Load: `react-master:react-forms`
+
+7. **Testing** (React Testing Library, Vitest, mocking, component testing)
+   - Load: `react-master:react-testing`
+
+8. **TypeScript Integration** (typing props, generics, event handlers, refs)
+   - Load: `react-master:react-typescript`
+
+### Action Protocol
+
+**Before formulating your response**, check if the user's query matches any topic above. If it does:
+1. Invoke the Skill tool with the corresponding skill name
+2. Read the loaded skill content
+3. Use that knowledge to provide an accurate, comprehensive answer
+
+**Example**: If a user asks "How do I use useActionState?", you MUST load `react-master:react-fundamentals-19` before answering.
+
 ## Knowledge Areas
 
 ### React 19 Features
