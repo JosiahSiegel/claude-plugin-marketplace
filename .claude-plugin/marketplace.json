@@ -827,6 +827,56 @@
         "dmv",
         "statistics"
       ]
+    },
+    {
+      "name": "cloudflare-master",
+      "source": "./plugins/cloudflare-master",
+      "description": "Expert Cloudflare platform system with comprehensive 2025-2026 knowledge covering Workers, Pages, AI Workers, storage (R2/D1/KV/Durable Objects/Queues), Hyperdrive, Zero Trust, MCP servers, and CI/CD. PROACTIVELY activate for: (1) ANY Cloudflare task, (2) Workers development (JavaScript/TypeScript/Python/WASM), (3) Wrangler CLI and configuration, (4) AI Workers (TTS with Aura/MeloTTS, STT with Whisper, LLM inference, vision, embeddings), (5) R2 object storage optimization, (6) D1 SQLite database patterns, (7) KV storage and caching, (8) Durable Objects for stateful coordination, (9) Queues for async processing, (10) Hyperdrive database connection pooling, (11) Zero Trust (Tunnels, WARP, Access policies), (12) MCP server development (Streamable HTTP transport), (13) Cron triggers and scheduled Workers, (14) Workflows for durable execution, (15) Vectorize for RAG patterns, (16) CI/CD with GitHub Actions and Workers Builds, (17) Observability (Workers Logs, OpenTelemetry), (18) Load balancing and health checks, (19) Cost optimization and performance tuning. Provides: comprehensive Wrangler CLI reference, complete wrangler.jsonc configuration, storage service deep dives, AI model catalog with usage examples, Zero Trust setup guides, MCP development patterns, CI/CD integration, debugging workflows, and production-ready 2025-2026 patterns.",
+      "version": "1.1.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "cloudflare",
+        "workers",
+        "pages",
+        "r2",
+        "d1",
+        "kv",
+        "durable-objects",
+        "queues",
+        "workflows",
+        "hyperdrive",
+        "ai-workers",
+        "workers-ai",
+        "tts",
+        "stt",
+        "whisper",
+        "llm",
+        "embeddings",
+        "vectorize",
+        "zero-trust",
+        "tunnel",
+        "warp",
+        "access",
+        "mcp",
+        "mcp-server",
+        "wrangler",
+        "cron",
+        "scheduled",
+        "cicd",
+        "github-actions",
+        "observability",
+        "load-balancing",
+        "edge",
+        "serverless",
+        "typescript",
+        "javascript",
+        "python",
+        "wasm",
+        "2025",
+        "2026"
+      ]
     }
   ]
 }
