@@ -802,6 +802,129 @@ MarginV=250'"
 
 ---
 
+## Mobile Browser Playback Compatibility
+
+While platform upload specs focus on what TikTok/YouTube/Instagram accept, **mobile browser playback** has its own requirements. Videos embedded in web apps, PWAs, or mobile browsers must meet stricter codec constraints than native app uploads.
+
+### H.264 Profile and Level Requirements
+
+| Profile & Level | Device Support | Use Case |
+|-----------------|---------------|----------|
+| **Baseline Profile Level 3.0** | All devices since 2010, oldest Android 4.x | Maximum compatibility, lowest quality |
+| **Main Profile Level 3.1** | Android 5+, iPhone 5+, all modern devices | Good balance for older device support |
+| **High Profile Level 4.0** | Android 6+, iPhone 6+, all 2015+ devices | **Recommended default** for web playback |
+| **High Profile Level 4.1** | Android 7+, iPhone 6s+, all 2016+ devices | Safe maximum for mobile, Blu-ray standard |
+| **High Profile Level 5.1** | Desktop only, some flagship phones | 4K content, NOT safe for general mobile |
+| **High 4:4:4 Predictive** | Desktop software decoders only | **NEVER use** --- fails on all mobile |
+
+**Recommendation**: Use **High Profile Level 4.0** for web-embedded video. It provides 15-25% bitrate savings over Baseline while maintaining near-universal mobile support on devices from 2015 onward.
+
+### The Faststart Requirement Explained
+
+The `moov` atom is MP4's metadata container that tells the player where each frame is located, what codecs are used, and the video's structure. By default, FFmpeg writes it at the **end** of the file:
+
+```
+Default MP4:  [ftyp] [mdat (video data)] [moov (metadata)]
+                                          ^ Player must download entire file
+                                            before knowing how to play it
+
+Faststart:    [ftyp] [moov (metadata)] [mdat (video data)]
+                     ^ Player reads metadata first, starts playing immediately
+```
+
+On mobile networks (3G/4G/5G), without faststart:
+- Video appears to hang while the full file downloads
+- Users on slow connections see a black screen for seconds
+- Safari may refuse to play the video entirely
+- Progressive download is impossible
+
+**Always use `-movflags +faststart`** for any video that will be played in a browser or streamed over HTTP.
+
+### Pixel Format Requirements
+
+Mobile hardware video decoders only support `yuv420p` (4:2:0 chroma subsampling, 8-bit). Other formats will either:
+- Fall back to slow software decoding (causing stuttering and battery drain)
+- Display corrupted colors (green/purple tint)
+- Fail to play entirely
+
+```bash
+# Check if a video uses a mobile-safe pixel format
+ffprobe -v error -select_streams v:0 -show_entries stream=pix_fmt -of csv=p=0 INPUT
+
+# SAFE:    yuv420p
+# UNSAFE:  yuv422p, yuv444p, yuv420p10le (10-bit), gbrp, rgb24
+```
+
+### Universal Mobile-Safe FFmpeg Preset
+
+This preset guarantees playback on virtually all mobile browsers from 2015 onward:
+
+```bash
+# Universal mobile-safe encoding preset
+ffmpeg -i input.mp4 \
+  -c:v libx264 \
+  -profile:v high -level 4.0 \
+  -preset medium -crf 23 \
+  -pix_fmt yuv420p \
+  -c:a aac -profile:a aac_low \
+  -b:a 128k -ar 44100 -ac 2 \
+  -movflags +faststart \
+  -max_muxing_queue_size 1024 \
+  output_mobile_safe.mp4
+```
+
+For **maximum compatibility** (including Android 4.x and old WebViews):
+
+```bash
+# Maximum compatibility preset (older devices)
+ffmpeg -i input.mp4 \
+  -c:v libx264 \
+  -profile:v main -level 3.1 \
+  -preset medium -crf 23 \
+  -pix_fmt yuv420p \
+  -c:a aac -profile:a aac_low \
+  -b:a 96k -ar 44100 -ac 2 \
+  -vf "scale='min(1280,iw)':-2" \
+  -movflags +faststart \
+  output_max_compat.mp4
+```
+
+### Mobile Codec Support Matrix
+
+| Feature | iOS Safari | Android Chrome | Samsung Internet | Firefox Android |
+|---------|-----------|---------------|-----------------|----------------|
+| **H.264 Baseline** | All versions | All versions | All versions | All versions |
+| **H.264 Main** | All versions | All versions | All versions | All versions |
+| **H.264 High** | All versions | 4.4+ | All versions | All versions |
+| **H.264 Level 4.1** | All versions | 5.0+ | All versions | All versions |
+| **HEVC/H.265** | iOS 11+ (hardware) | Chrome 107+ (hardware only) | Varies (hardware) | Not supported |
+| **VP9** | iOS 16.4+ | All versions | All versions | All versions |
+| **AV1** | iPhone 15 Pro+ | Hardware-dependent | Hardware-dependent | Android 10+ |
+| **AAC-LC** | All versions | All versions | All versions | All versions |
+| **HE-AAC v2** | All versions | Most versions | Most versions | Partial |
+| **Opus (WebM)** | iOS 15+ | All versions | All versions | All versions |
+| **Opus (MP4)** | Not supported | Chrome 100+ | Limited | Limited |
+| **yuv420p** | Required | Required | Required | Required |
+| **yuv422p/yuv444p** | Not supported | Not supported | Not supported | Software only |
+| **10-bit (yuv420p10le)** | iPhone 8+ (HEVC only) | Limited | Limited | Software only |
+| **faststart (moov atom)** | Required for streaming | Required for streaming | Required for streaming | Required for streaming |
+| **Autoplay (muted)** | Requires `playsinline` | Allowed | Allowed | Allowed |
+| **Autoplay (unmuted)** | Blocked | Blocked | Blocked | Blocked |
+
+### Common Mobile Gotchas
+
+1. **HEVC/H.265 is NOT universal**: Only iOS Safari and some Android Chrome (with hardware decoder) support it. Firefox Android does not support HEVC at all. Always provide an H.264 fallback.
+
+2. **10-bit color fails on most mobile**: Videos encoded with `yuv420p10le` (common in HDR content) will not play on most mobile browsers. Convert to 8-bit `yuv420p` for web delivery.
+
+3. **Opus in MP4 containers**: While Opus is efficient, it is poorly supported in MP4 containers on mobile. Use AAC-LC for MP4, or use Opus only in WebM containers.
+
+4. **Safari requires playsinline**: Without the `playsinline` attribute in the HTML `<video>` tag, iOS Safari forces fullscreen playback. This is an HTML attribute, not an encoding issue, but it is the most common "why won't my video play inline on iPhone" complaint.
+
+5. **Audio-only autoplay is blocked**: All mobile browsers block autoplay of videos with audible audio. Videos must be `muted` to autoplay. This cannot be worked around with encoding --- it is a browser policy.
+
+---
+
 ## Related Skills
 
 - `ffmpeg-viral-tiktok` - TikTok-specific viral optimization

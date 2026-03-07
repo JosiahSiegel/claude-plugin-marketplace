@@ -703,6 +703,403 @@ async function handleChart() {
 | Image performance | Lazy loading, responsive images |
 | State too high | State colocation |
 
+## Media Element Performance
+
+Video and audio elements require special attention in React because the browser's media pipeline is **stateful and expensive to initialize**. Unlike most DOM elements, a `<video>` element manages hardware decoder instances, buffered data, and playback state. When React unmounts and remounts a video element, the browser must tear down the entire decoder pipeline and restart it from scratch --- a process called **decoder churn**.
+
+### Why Video Re-renders Are Costly
+
+On mobile devices, decoder churn is especially destructive:
+
+| Impact | Desktop | Mobile |
+|--------|---------|--------|
+| Decoder initialization | ~50ms | ~200-500ms |
+| Simultaneous decoders | 8-16 | 3-4 (hardware limited) |
+| Battery drain per restart | Negligible | Measurable |
+| Visual glitch | Brief flash | Black frame + delay |
+
+When a parent component re-renders and causes a `<video>` element to remount, the browser:
+1. Destroys the existing hardware decoder instance
+2. Releases all buffered video data
+3. Allocates a new decoder (may fail if device limit reached)
+4. Re-fetches and re-buffers the video stream
+5. Restarts playback from the beginning (or seeks back)
+
+### Preventing Video Remounting with Stable Keys
+
+The most common cause of video remounting is **unstable keys** or **conditional rendering** that changes the component tree structure:
+
+```tsx
+// BAD - video remounts every time filter changes
+function VideoFeed({ videos, filter }: Props) {
+  const filtered = videos.filter(v => v.category === filter);
+
+  return (
+    <div>
+      {filtered.map((video, index) => (
+        // Using index as key means elements shift and remount
+        <video key={index} src={video.src} />
+      ))}
+    </div>
+  );
+}
+
+// GOOD - stable keys prevent remounting
+function VideoFeed({ videos, filter }: Props) {
+  const filtered = videos.filter(v => v.category === filter);
+
+  return (
+    <div>
+      {filtered.map((video) => (
+        // Stable ID keeps the same DOM element across re-renders
+        <video key={video.id} src={video.src} />
+      ))}
+    </div>
+  );
+}
+```
+
+### Ref-Based Video Element Management
+
+Use `useRef` to interact with video elements imperatively, avoiding state-driven patterns that trigger re-renders:
+
+```tsx
+import { useRef, useCallback, memo } from 'react';
+
+const VideoPlayer = memo(function VideoPlayer({
+  src,
+  poster,
+}: {
+  src: string;
+  poster?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Imperative control avoids re-renders
+  const play = useCallback(() => {
+    videoRef.current?.play();
+  }, []);
+
+  const pause = useCallback(() => {
+    videoRef.current?.pause();
+  }, []);
+
+  const seek = useCallback((time: number) => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = time;
+    }
+  }, []);
+
+  return (
+    <div>
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        playsInline
+        preload="metadata"
+        onPlay={() => {/* update UI without re-rendering video */}}
+        onPause={() => {/* update UI without re-rendering video */}}
+      />
+      <button onClick={play}>Play</button>
+      <button onClick={pause}>Pause</button>
+    </div>
+  );
+});
+```
+
+### Memoizing Video Components
+
+Wrap video components with `React.memo` and memoize all non-primitive props to prevent unnecessary re-renders:
+
+```tsx
+import { memo, useMemo, useCallback } from 'react';
+
+interface VideoCardProps {
+  id: string;
+  src: string;
+  title: string;
+  onPlay: (id: string) => void;
+  onTimeUpdate: (id: string, time: number) => void;
+}
+
+const VideoCard = memo(function VideoCard({
+  id,
+  src,
+  title,
+  onPlay,
+  onTimeUpdate,
+}: VideoCardProps) {
+  // Stable source object prevents <source> element remount
+  const sourceProps = useMemo(
+    () => ({ src, type: 'video/mp4' }),
+    [src]
+  );
+
+  const handlePlay = useCallback(() => onPlay(id), [onPlay, id]);
+
+  const handleTimeUpdate = useCallback(
+    (e: React.SyntheticEvent<HTMLVideoElement>) => {
+      onTimeUpdate(id, e.currentTarget.currentTime);
+    },
+    [onTimeUpdate, id]
+  );
+
+  return (
+    <div>
+      <h3>{title}</h3>
+      <video
+        playsInline
+        preload="metadata"
+        onPlay={handlePlay}
+        onTimeUpdate={handleTimeUpdate}
+      >
+        <source src={sourceProps.src} type={sourceProps.type} />
+      </video>
+    </div>
+  );
+});
+
+// Parent component with stable callbacks
+function VideoList({ videos }: { videos: Video[] }) {
+  const handlePlay = useCallback((id: string) => {
+    console.log('Playing:', id);
+  }, []);
+
+  const handleTimeUpdate = useCallback((id: string, time: number) => {
+    // Update progress without triggering re-render of video components
+    progressRef.current.set(id, time);
+  }, []);
+
+  const progressRef = useRef(new Map<string, number>());
+
+  return (
+    <div>
+      {videos.map((video) => (
+        <VideoCard
+          key={video.id}
+          id={video.id}
+          src={video.src}
+          title={video.title}
+          onPlay={handlePlay}
+          onTimeUpdate={handleTimeUpdate}
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+### Portal Lifecycle and Video Elements
+
+React portals can cause unexpected video remounting when the portal's parent moves in the DOM tree. The portal content unmounts and remounts, destroying the video decoder:
+
+```tsx
+import { useState, useRef, useEffect, createPortal } from 'react';
+
+// BAD - video remounts when switching between inline and modal
+function VideoWithModal({ src }: { src: string }) {
+  const [isModal, setIsModal] = useState(false);
+
+  if (isModal) {
+    return createPortal(
+      <div className="modal">
+        {/* This creates a NEW video element, losing playback state */}
+        <video src={src} playsInline />
+        <button onClick={() => setIsModal(false)}>Close</button>
+      </div>,
+      document.body
+    );
+  }
+
+  return (
+    <div>
+      <video src={src} playsInline />
+      <button onClick={() => setIsModal(true)}>Expand</button>
+    </div>
+  );
+}
+
+// GOOD - move the DOM node instead of recreating it
+function VideoWithModal({ src }: { src: string }) {
+  const [isModal, setIsModal] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const inlineContainerRef = useRef<HTMLDivElement>(null);
+  const modalContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Move the existing video DOM node instead of recreating it
+    const target = isModal
+      ? modalContainerRef.current
+      : inlineContainerRef.current;
+    target?.appendChild(video);
+  }, [isModal]);
+
+  return (
+    <>
+      {/* Video element created once, moved between containers */}
+      <video
+        ref={videoRef}
+        src={src}
+        playsInline
+        style={{ display: 'none' }}
+      />
+
+      <div ref={inlineContainerRef}>
+        {!isModal && (
+          <button onClick={() => setIsModal(true)}>Expand</button>
+        )}
+      </div>
+
+      {isModal &&
+        createPortal(
+          <div className="modal">
+            <div ref={modalContainerRef} />
+            <button onClick={() => setIsModal(false)}>Close</button>
+          </div>,
+          document.body
+        )}
+    </>
+  );
+}
+```
+
+### Intersection Observer for Lazy Video Loading
+
+On mobile, loading all videos simultaneously wastes bandwidth, drains battery, and can exhaust the device's limited hardware decoder slots. Use Intersection Observer to load and play videos only when visible:
+
+```tsx
+import { useRef, useEffect, useState, memo } from 'react';
+
+const LazyVideo = memo(function LazyVideo({
+  src,
+  poster,
+  preloadMargin = '200px',
+}: {
+  src: string;
+  poster?: string;
+  preloadMargin?: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Optionally auto-play when visible
+          videoRef.current?.play().catch(() => {
+            // Autoplay blocked by browser policy - this is expected
+          });
+        } else {
+          // Pause when scrolled out of view to save resources
+          videoRef.current?.pause();
+        }
+      },
+      {
+        rootMargin: preloadMargin, // Start loading before fully visible
+        threshold: 0.25,
+      }
+    );
+
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, [preloadMargin]);
+
+  return (
+    <div ref={containerRef} style={{ aspectRatio: '16/9' }}>
+      <video
+        ref={videoRef}
+        // Only set src when near viewport to prevent premature loading
+        src={isVisible ? src : undefined}
+        poster={poster}
+        playsInline
+        muted
+        loop
+        preload={isVisible ? 'auto' : 'none'}
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+    </div>
+  );
+});
+
+// Usage in a feed - only visible videos consume decoder slots
+function VideoFeed({ videos }: { videos: VideoItem[] }) {
+  return (
+    <div>
+      {videos.map((video) => (
+        <LazyVideo
+          key={video.id}
+          src={video.src}
+          poster={video.poster}
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+### Mobile-Specific Video Attributes
+
+Always include these attributes for proper mobile video behavior:
+
+```tsx
+<video
+  ref={videoRef}
+  src={src}
+  playsInline          // REQUIRED: prevents iOS Safari fullscreen takeover
+  muted                // Required for autoplay on all mobile browsers
+  preload="metadata"   // Load dimensions/duration only, not full video
+  poster={posterUrl}   // Show image while video loads (saves bandwidth)
+  disablePictureInPicture  // Prevent PiP on mobile if unwanted
+  controlsList="nodownload nofullscreen noremoteplayback"
+/>
+```
+
+### Multiple Simultaneous Video Decoders
+
+Mobile devices typically support only 3-4 simultaneous hardware video decoders. Exceeding this limit causes videos to fall back to software decoding (slow, battery-draining) or fail entirely:
+
+```tsx
+import { useRef, useCallback } from 'react';
+
+// Limit active video decoders across the application
+const MAX_ACTIVE_VIDEOS = 3;
+
+function useVideoDecoderPool() {
+  const activeVideos = useRef<Set<HTMLVideoElement>>(new Set());
+
+  const activate = useCallback((video: HTMLVideoElement) => {
+    if (activeVideos.current.size >= MAX_ACTIVE_VIDEOS) {
+      // Pause the oldest active video to free a decoder slot
+      const oldest = activeVideos.current.values().next().value;
+      if (oldest) {
+        oldest.pause();
+        oldest.removeAttribute('src');
+        oldest.load(); // Release the decoder
+        activeVideos.current.delete(oldest);
+      }
+    }
+    activeVideos.current.add(video);
+  }, []);
+
+  const deactivate = useCallback((video: HTMLVideoElement) => {
+    activeVideos.current.delete(video);
+  }, []);
+
+  return { activate, deactivate };
+}
+```
+
 ## Additional References
 
 For comprehensive guides on specific optimization techniques, see:

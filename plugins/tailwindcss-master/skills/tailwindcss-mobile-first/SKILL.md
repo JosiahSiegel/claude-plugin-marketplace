@@ -752,6 +752,216 @@ Container queries enable **component-level responsiveness**, independent of view
 - [ ] Tables have mobile alternatives
 - [ ] Performance under 3s LCP on 3G
 
+## Responsive Video Containers
+
+### Aspect Ratio Utilities for Video
+
+Use Tailwind's `aspect-*` utilities to maintain correct video proportions across all screen sizes, preventing Cumulative Layout Shift (CLS):
+
+```html
+<!-- Standard 16:9 video container -->
+<div class="aspect-video overflow-hidden rounded-lg bg-black">
+  <video class="w-full h-full object-cover" playsinline preload="metadata">
+    <source src="video.mp4" type="video/mp4" />
+  </video>
+</div>
+
+<!-- Vertical video (9:16) for mobile-first social content -->
+<div class="aspect-[9/16] overflow-hidden rounded-lg bg-black max-w-sm mx-auto">
+  <video class="w-full h-full object-cover" playsinline muted loop>
+    <source src="reel.mp4" type="video/mp4" />
+  </video>
+</div>
+
+<!-- Square video (1:1) common for social feeds -->
+<div class="aspect-square overflow-hidden rounded-lg bg-black">
+  <video class="w-full h-full object-cover" playsinline preload="metadata">
+    <source src="square.mp4" type="video/mp4" />
+  </video>
+</div>
+
+<!-- Responsive aspect ratio - vertical on mobile, widescreen on desktop -->
+<div class="aspect-[9/16] sm:aspect-video overflow-hidden rounded-lg bg-black">
+  <video class="w-full h-full object-contain" playsinline preload="metadata">
+    <source src="video.mp4" type="video/mp4" />
+  </video>
+</div>
+```
+
+### Preventing CLS with Video Placeholders
+
+Videos without defined dimensions cause layout shift when they load. Use aspect ratio containers to reserve space:
+
+```html
+<!-- CLS-safe video with poster and skeleton loader -->
+<div class="relative aspect-video overflow-hidden rounded-lg bg-gray-900">
+  <!-- Skeleton placeholder while video loads -->
+  <div class="absolute inset-0 animate-pulse bg-gray-800" aria-hidden="true"></div>
+
+  <video
+    class="absolute inset-0 w-full h-full object-cover"
+    poster="/thumbnails/video-poster.jpg"
+    playsinline
+    preload="metadata"
+  >
+    <source src="video.mp4" type="video/mp4" />
+  </video>
+</div>
+
+<!-- Responsive grid of video thumbnails with zero CLS -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div class="aspect-video overflow-hidden rounded-lg bg-gray-900">
+    <video class="w-full h-full object-cover" poster="/thumb1.jpg" preload="none" playsinline></video>
+  </div>
+  <div class="aspect-video overflow-hidden rounded-lg bg-gray-900">
+    <video class="w-full h-full object-cover" poster="/thumb2.jpg" preload="none" playsinline></video>
+  </div>
+  <div class="aspect-video overflow-hidden rounded-lg bg-gray-900">
+    <video class="w-full h-full object-cover" poster="/thumb3.jpg" preload="none" playsinline></video>
+  </div>
+</div>
+```
+
+### Full-Bleed Video on Mobile, Constrained on Desktop
+
+```html
+<!-- Full-width on mobile, centered with max-width on desktop -->
+<div class="w-full lg:max-w-4xl lg:mx-auto">
+  <div class="aspect-video overflow-hidden lg:rounded-xl bg-black">
+    <video class="w-full h-full object-cover" playsinline preload="metadata">
+      <source src="hero.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+
+<!-- Full-bleed hero video background -->
+<section class="relative w-full h-screen overflow-hidden">
+  <video
+    class="absolute inset-0 w-full h-full object-cover"
+    autoplay muted loop playsinline
+    preload="auto"
+  >
+    <source src="hero-bg.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Content overlay with safe padding -->
+  <div class="relative z-10 flex items-center justify-center h-full px-4 sm:px-8">
+    <div class="text-center text-white max-w-2xl">
+      <h1 class="text-3xl sm:text-4xl lg:text-6xl font-bold">Hero Title</h1>
+      <p class="mt-4 text-lg sm:text-xl">Subtitle text</p>
+    </div>
+  </div>
+
+  <!-- Dark overlay for text readability -->
+  <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+</section>
+```
+
+### Safe Zone Overlays for Video UI
+
+Video player controls and UI elements need touch-friendly sizing and proper placement:
+
+```html
+<!-- Custom video player with touch-safe controls -->
+<div class="@container relative aspect-video overflow-hidden rounded-lg bg-black group">
+  <video class="w-full h-full object-cover" playsinline preload="metadata">
+    <source src="video.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Play/Pause overlay - centered, touch-friendly -->
+  <button class="
+    absolute inset-0 flex items-center justify-center
+    bg-black/0 group-hover:bg-black/20 transition-colors
+  ">
+    <span class="
+      w-16 h-16 sm:w-20 sm:h-20
+      flex items-center justify-center
+      rounded-full bg-white/90
+      shadow-lg
+    ">
+      <svg class="w-8 h-8 sm:w-10 sm:h-10 text-gray-900 ml-1" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </span>
+  </button>
+
+  <!-- Bottom controls bar - respects touch targets -->
+  <div class="
+    absolute bottom-0 inset-x-0
+    bg-gradient-to-t from-black/80 to-transparent
+    p-3 sm:p-4
+    flex items-center gap-3
+    opacity-0 group-hover:opacity-100 transition-opacity
+  ">
+    <!-- Progress bar - tall enough for touch -->
+    <div class="flex-1 h-1 bg-white/30 rounded-full cursor-pointer">
+      <div class="h-full w-1/3 bg-white rounded-full relative">
+        <span class="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full -mr-2"></span>
+      </div>
+    </div>
+
+    <!-- Time display -->
+    <span class="text-white text-xs sm:text-sm tabular-nums shrink-0">1:23 / 4:56</span>
+
+    <!-- Fullscreen button - touch-friendly minimum size -->
+    <button class="min-h-11 min-w-11 flex items-center justify-center text-white">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+      </svg>
+    </button>
+  </div>
+</div>
+```
+
+### Container Queries for Adaptive Video Players
+
+Video player components that adapt their layout based on container size --- useful when the same player appears in a sidebar, main content area, or modal:
+
+```html
+<!-- Video player that adapts to its container -->
+<div class="@container">
+  <div class="
+    flex flex-col @lg:flex-row
+    gap-4 @lg:gap-6
+    bg-gray-950 rounded-xl overflow-hidden
+  ">
+    <!-- Video area -->
+    <div class="
+      w-full @lg:flex-1
+      aspect-video
+      overflow-hidden
+    ">
+      <video class="w-full h-full object-cover" playsinline preload="metadata">
+        <source src="video.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Info panel - below video on narrow, beside on wide -->
+    <div class="
+      p-4 @lg:p-6
+      @lg:w-80 @lg:overflow-y-auto
+      text-white
+    ">
+      <h3 class="text-base @lg:text-lg font-semibold">Video Title</h3>
+      <p class="text-sm text-gray-400 mt-2 line-clamp-2 @lg:line-clamp-none">
+        Video description that shows more text when the container is wider...
+      </p>
+
+      <!-- Related videos - hidden in narrow containers -->
+      <div class="hidden @xl:block mt-6 space-y-3">
+        <h4 class="text-sm font-medium text-gray-300">Related</h4>
+        <div class="space-y-2">
+          <div class="flex gap-3">
+            <div class="w-28 aspect-video bg-gray-800 rounded shrink-0"></div>
+            <div class="text-xs text-gray-400">Related Video 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
 ## Best Practices Summary
 
 | Practice | Implementation |

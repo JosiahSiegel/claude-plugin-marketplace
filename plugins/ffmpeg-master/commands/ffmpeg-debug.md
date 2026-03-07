@@ -137,6 +137,143 @@ ffmpeg -f lavfi -i testsrc=size=1280x720:rate=30 -t 10 test.mp4
 ffmpeg -benchmark -i INPUT -c:v libx264 -f null -
 ```
 
+### 7. Mobile Playback Debugging
+
+Diagnose "video plays on desktop but not mobile" issues.
+
+#### Check Codec Profile and Level
+```bash
+# Show video stream profile and level
+ffprobe -v error -select_streams v:0 \
+  -show_entries stream=codec_name,profile,level,pix_fmt,width,height \
+  -of default=noprint_wrappers=1 INPUT
+
+# Common output for mobile-incompatible video:
+# profile=High 4:4:4 Predictive  <- FAILS on mobile
+# level=51                        <- Too high for most mobile
+# pix_fmt=yuv444p                 <- Not supported on mobile
+```
+
+#### Mobile Compatibility Checklist
+```bash
+# Run this diagnostic script to check mobile compatibility
+check_mobile_compat() {
+    local file="$1"
+    echo "=== Mobile Compatibility Check: $file ==="
+
+    # Get stream info
+    PROFILE=$(ffprobe -v error -select_streams v:0 -show_entries stream=profile -of csv=p=0 "$file")
+    LEVEL=$(ffprobe -v error -select_streams v:0 -show_entries stream=level -of csv=p=0 "$file")
+    PIX_FMT=$(ffprobe -v error -select_streams v:0 -show_entries stream=pix_fmt -of csv=p=0 "$file")
+    CODEC=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of csv=p=0 "$file")
+    AUDIO_CODEC=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of csv=p=0 "$file")
+
+    echo "Video Codec: $CODEC"
+    echo "Profile: $PROFILE"
+    echo "Level: $LEVEL"
+    echo "Pixel Format: $PIX_FMT"
+    echo "Audio Codec: $AUDIO_CODEC"
+
+    # Check for common mobile issues
+    [[ "$PIX_FMT" != "yuv420p" ]] && echo "WARNING: Pixel format $PIX_FMT not supported on mobile (need yuv420p)"
+    [[ "$LEVEL" -gt 41 ]] && echo "WARNING: Level $LEVEL may not play on older mobile devices (max 4.1 recommended)"
+    [[ "$CODEC" == "hevc" ]] && echo "WARNING: HEVC/H.265 not universally supported on Android browsers"
+    [[ "$AUDIO_CODEC" != "aac" ]] && echo "WARNING: Audio codec $AUDIO_CODEC may not be supported (use AAC)"
+
+    # Check moov atom placement
+    echo ""
+    echo "Checking moov atom placement..."
+    ffprobe -v trace "$file" 2>&1 | grep -E "moov|mdat" | head -4
+    echo "(moov should appear BEFORE mdat for mobile streaming)"
+}
+
+check_mobile_compat INPUT
+```
+
+#### Common Mobile Incompatibilities
+
+| Issue | Symptom | Diagnosis | Fix |
+|-------|---------|-----------|-----|
+| H.264 High profile on old Android | Black screen, no playback | `profile=High`, `level=51` | Re-encode with `-profile:v main -level 4.0` |
+| Missing faststart | Long delay before playback | moov after mdat in trace | Add `-movflags +faststart` |
+| Wrong pixel format | Green/purple video or no playback | `pix_fmt=yuv444p` or `yuv422p` | Add `-pix_fmt yuv420p` |
+| HEVC on Android Chrome | Audio plays, no video | `codec_name=hevc` | Re-encode with `-c:v libx264` |
+| High AAC profile | No audio on some devices | HE-AAC v2 | Use `-c:a aac -profile:a aac_low` |
+| No moov atom | Video won't start on mobile data | moov at end of file | Run `-movflags +faststart` |
+
+#### Verify Moov Atom Placement
+```bash
+# Check if moov atom is at the start (required for mobile streaming)
+ffprobe -v trace INPUT 2>&1 | grep -E "type:'(moov|mdat)'" | head -4
+
+# If moov appears AFTER mdat, fix it without re-encoding:
+ffmpeg -i INPUT -c copy -movflags +faststart OUTPUT.mp4
+```
+
+#### iOS Safari-Specific Issues
+```bash
+# iOS Safari requires:
+# 1. playsinline attribute in HTML (not an FFmpeg issue)
+# 2. H.264 Baseline/Main/High profile (no High 4:4:4 Predictive)
+# 3. yuv420p pixel format
+# 4. AAC audio (not Opus, Vorbis, or AC-3)
+# 5. Muted video for autoplay
+
+# Fix video for iOS Safari compatibility
+ffmpeg -i INPUT \
+  -c:v libx264 -profile:v high -level 4.0 \
+  -pix_fmt yuv420p \
+  -c:a aac -b:a 128k -ar 44100 \
+  -movflags +faststart \
+  OUTPUT_ios.mp4
+```
+
+#### Android WebView Codec Limitations
+```bash
+# Android WebView has more limited codec support than Chrome
+# Safe encoding for Android WebView:
+ffmpeg -i INPUT \
+  -c:v libx264 -profile:v main -level 3.1 \
+  -pix_fmt yuv420p \
+  -c:a aac -profile:a aac_low -b:a 128k -ar 44100 -ac 2 \
+  -movflags +faststart \
+  OUTPUT_android.mp4
+```
+
+#### Audio Codec Issues on Mobile
+```bash
+# Check audio codec compatibility
+ffprobe -v error -select_streams a:0 \
+  -show_entries stream=codec_name,profile,sample_rate,channels \
+  -of default=noprint_wrappers=1 INPUT
+
+# Mobile-safe audio codecs: AAC-LC only
+# These may fail on some mobile browsers:
+#   - HE-AAC v2 (aac with profile=HE-AACv2)
+#   - Opus (in MP4 container)
+#   - AC-3 / E-AC-3
+#   - Vorbis (in MP4 container)
+
+# Fix audio for universal mobile playback
+ffmpeg -i INPUT -c:v copy \
+  -c:a aac -profile:a aac_low -b:a 128k -ar 44100 -ac 2 \
+  OUTPUT_fixed_audio.mp4
+```
+
+#### Test with Reduced Bandwidth
+```bash
+# Simulate mobile network conditions by limiting bitrate
+# This helps identify buffering/loading issues on slow connections
+ffmpeg -i INPUT \
+  -c:v libx264 -preset fast -crf 28 \
+  -maxrate 1500k -bufsize 3000k \
+  -c:a aac -b:a 64k -ar 44100 \
+  -vf "scale=-2:720" \
+  -pix_fmt yuv420p \
+  -movflags +faststart \
+  OUTPUT_low_bandwidth.mp4
+```
+
 ## Output
 
 Provide:

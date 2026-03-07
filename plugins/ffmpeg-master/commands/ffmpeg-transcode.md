@@ -117,7 +117,66 @@ ffmpeg -hwaccel cuda -hwaccel_output_format cuda \
 -vf "scale='min(1920,iw)':'min(1080,ih)':force_original_aspect_ratio=decrease"
 ```
 
-### 7. Verify Output
+### 7. Mobile-Compatible Encoding
+
+#### Universal Mobile Preset
+```bash
+# Plays on all mobile browsers from 2015 onward
+# H.264 High Profile Level 4.0, AAC-LC, yuv420p, faststart
+ffmpeg -i INPUT \
+  -c:v libx264 -profile:v high -level 4.0 \
+  -preset medium -crf 23 \
+  -pix_fmt yuv420p \
+  -c:a aac -profile:a aac_low -b:a 128k -ar 44100 -ac 2 \
+  -movflags +faststart \
+  OUTPUT_mobile.mp4
+```
+
+#### iOS Safari-Safe Preset
+```bash
+# Ensures compatibility with iOS Safari inline playback
+# Note: HTML must include playsinline and muted attributes for autoplay
+ffmpeg -i INPUT \
+  -c:v libx264 -profile:v high -level 4.0 \
+  -preset medium -crf 22 \
+  -pix_fmt yuv420p \
+  -c:a aac -profile:a aac_low -b:a 128k -ar 44100 -ac 2 \
+  -movflags +faststart \
+  -tag:v avc1 \
+  OUTPUT_ios.mp4
+```
+
+#### Low-Bandwidth Mobile Preset
+```bash
+# Optimized for 3G/4G: 720p, lower bitrate, fast loading
+ffmpeg -i INPUT \
+  -vf "scale=-2:720" \
+  -c:v libx264 -profile:v main -level 3.1 \
+  -preset fast -crf 28 \
+  -maxrate 1500k -bufsize 3000k \
+  -pix_fmt yuv420p \
+  -c:a aac -b:a 64k -ar 44100 -ac 1 \
+  -movflags +faststart \
+  OUTPUT_low_bandwidth.mp4
+```
+
+#### Fix Desktop Video for Mobile Playback
+```bash
+# Quick fix: re-encode desktop video that won't play on mobile
+# Common issues: wrong profile, missing faststart, wrong pixel format
+ffmpeg -i DESKTOP_VIDEO.mp4 \
+  -c:v libx264 -profile:v high -level 4.0 \
+  -preset fast -crf 23 \
+  -pix_fmt yuv420p \
+  -c:a aac -profile:a aac_low -b:a 128k -ar 44100 -ac 2 \
+  -movflags +faststart \
+  MOBILE_FIXED.mp4
+
+# If only faststart is missing (no re-encode needed):
+ffmpeg -i DESKTOP_VIDEO.mp4 -c copy -movflags +faststart MOBILE_FIXED.mp4
+```
+
+### 8. Verify Output
 
 ```bash
 # Compare before/after

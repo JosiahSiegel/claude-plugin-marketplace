@@ -30,6 +30,18 @@ Analyze and optimize the specified React component:
    - Large component bundles (code splitting opportunities)
    - Missing keys or unstable keys in lists
 
+   - Video/media element re-render issues (see below)
+
+   **Video/Media Element Checks**:
+   - `<video>` elements using unstable keys (e.g., array index) causing decoder churn on re-render
+   - Video elements managed via state instead of refs --- use `useRef` to control play/pause/seek imperatively
+   - Missing `React.memo` on video player components, causing remount on parent re-renders
+   - Inline event handler creation on video elements (e.g., `onTimeUpdate={() => ...}`) --- use `useCallback` for `onPlay`, `onPause`, `onEnded`, `onTimeUpdate`, `onLoadedMetadata`
+   - Video source objects recreated on every render --- memoize with `useMemo`
+   - Multiple simultaneous video elements exceeding mobile hardware decoder limits (3-4 max)
+   - Missing `playsInline` attribute for iOS Safari compatibility
+   - Videos loading outside viewport --- use Intersection Observer for lazy loading
+
 3. **Optimization Techniques**
    - Add React.memo for components that render often with same props
    - Use useMemo for expensive computations
