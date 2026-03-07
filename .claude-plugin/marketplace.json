@@ -31,7 +31,7 @@
       "name": "plugin-master",
       "source": "./plugins/plugin-master",
       "description": "Complete Claude Code plugin development system. PROACTIVELY activate when users want to: (1) Create/build plugins with 2025 features, (2) Add skills/commands/agents/hooks, (3) Validate plugin structure, (4) Publish to marketplace, (5) Get plugin development guidance. Provides: agent-first design patterns, progressive disclosure skills, hook automation, MCP integration, marketplace publishing. Includes plugin-expert agent and validation utilities.",
-      "version": "3.0.3",
+      "version": "3.1.0",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -539,7 +539,7 @@
       "name": "tailwindcss-master",
       "source": "./plugins/tailwindcss-master",
       "description": "Complete Tailwind CSS v4 expertise system with 2025 best practices. PROACTIVELY activate for: (1) ANY Tailwind CSS task, (2) Tailwind v4 CSS-first configuration (@theme, @utility, @custom-variant), (3) Responsive design and dark mode implementation, (4) Performance optimization and JIT, (5) Plugin integration (@tailwindcss/typography, @tailwindcss/forms), (6) Framework integration (React, Vue, Next.js, Vite), (7) Migration from v3 to v4, (8) Custom utility and component creation, (9) Debugging and troubleshooting, (10) Production build optimization. Provides: Tailwind v4.1 complete features, CSS-first @theme configuration, @utility and @custom-variant directives, PostCSS and Vite plugin setup, responsive breakpoints, dark mode patterns (media/selector strategies), typography and forms plugins, animation/transition utilities, framework-specific integration patterns, performance optimization (tree-shaking, JIT), debugging techniques, VS Code extension setup, Prettier plugin configuration, and production-ready 2025 patterns. Ensures modern, performant, maintainable Tailwind CSS implementations.",
-      "version": "2.1.1",
+      "version": "2.1.2",
       "author": {
         "name": "Josiah Siegel"
       },
