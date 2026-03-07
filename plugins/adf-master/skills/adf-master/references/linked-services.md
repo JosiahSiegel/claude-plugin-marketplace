@@ -466,7 +466,7 @@ ADF managed identity needs `Get` permission on secrets.
 
 ---
 
-## ServiceNow V2 (2025)
+## ServiceNow V2
 
 ```json
 {
@@ -570,7 +570,7 @@ ADF managed identity needs `Get` permission on secrets.
 
 ## Azure File Storage
 
-### Managed Identity (2025)
+### Managed Identity
 ```json
 {
   "name": "LS_AzureFiles_MI",
@@ -584,6 +584,50 @@ ADF managed identity needs `Get` permission on secrets.
   }
 }
 ```
+
+---
+
+## Azure Machine Learning
+
+### Managed Identity
+```json
+{
+  "name": "LS_AzureML_MI",
+  "properties": {
+    "type": "AzureMLService",
+    "typeProperties": {
+      "subscriptionId": "<subscription-id>",
+      "resourceGroupName": "<resource-group>",
+      "mlWorkspaceName": "<ml-workspace-name>",
+      "authentication": "MSI"
+    }
+  }
+}
+```
+
+### Service Principal
+```json
+{
+  "name": "LS_AzureML_SP",
+  "properties": {
+    "type": "AzureMLService",
+    "typeProperties": {
+      "subscriptionId": "<subscription-id>",
+      "resourceGroupName": "<resource-group>",
+      "mlWorkspaceName": "<ml-workspace-name>",
+      "servicePrincipalId": "<app-id>",
+      "servicePrincipalKey": {
+        "type": "AzureKeyVaultSecret",
+        "store": { "referenceName": "LS_KeyVault", "type": "LinkedServiceReference" },
+        "secretName": "azureml-sp-key"
+      },
+      "tenant": "<tenant-id>"
+    }
+  }
+}
+```
+
+**Azure ML SDK v1 support ends June 2026.** Migrate existing `AzureMLExecutePipeline` usage to batch endpoints via WebActivity. See skill `adf-master:adf-ml-analytics` for migration patterns.
 
 ---
 
