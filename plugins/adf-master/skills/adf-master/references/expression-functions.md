@@ -263,9 +263,9 @@ Random number (32-bit signed integer).
 
 ### utcnow
 ```
-@utcnow()                                → '2025-01-15T14:30:45.1234567Z'
-@utcnow('yyyy-MM-dd')                    → '2025-01-15'
-@utcnow('yyyyMMddHHmmss')                → '20250115143045'
+@utcnow()                                → '2026-03-07T14:30:45.1234567Z'
+@utcnow('yyyy-MM-dd')                    → '2026-03-07'
+@utcnow('yyyyMMddHHmmss')                → '20260307143045'
 ```
 
 ### adddays / addhours / addminutes / addseconds
@@ -290,14 +290,14 @@ Random number (32-bit signed integer).
 **Format Specifiers:**
 | Specifier | Output | Example |
 |-----------|--------|---------|
-| yyyy | 4-digit year | 2025 |
-| yy | 2-digit year | 25 |
-| MM | 2-digit month | 01 |
-| M | Month (no leading zero) | 1 |
-| MMMM | Full month name | January |
-| dd | 2-digit day | 15 |
-| d | Day (no leading zero) | 15 |
-| dddd | Full day name | Wednesday |
+| yyyy | 4-digit year | 2026 |
+| yy | 2-digit year | 26 |
+| MM | 2-digit month | 03 |
+| M | Month (no leading zero) | 3 |
+| MMMM | Full month name | March |
+| dd | 2-digit day | 07 |
+| d | Day (no leading zero) | 7 |
+| dddd | Full day name | Saturday |
 | HH | 24-hour (00-23) | 14 |
 | hh | 12-hour (01-12) | 02 |
 | mm | Minutes | 30 |
@@ -314,15 +314,15 @@ Random number (32-bit signed integer).
 
 ### dayOfMonth / dayOfWeek / dayOfYear
 ```
-@dayOfMonth(utcnow())                    → 15
-@dayOfWeek(utcnow())                     → 3 (0=Sunday)
-@dayOfYear(utcnow())                     → 15
+@dayOfMonth(utcnow())                    → 7
+@dayOfWeek(utcnow())                     → 6 (0=Sunday)
+@dayOfYear(utcnow())                     → 66
 ```
 
 ### month / year
 ```
-@month(utcnow())                         → 1
-@year(utcnow())                          → 2025
+@month(utcnow())                         → 3
+@year(utcnow())                          → 2026
 ```
 
 ### ticks
@@ -334,7 +334,7 @@ Converts to ticks (100-nanosecond intervals since 1/1/0001).
 ### convertFromUtc / convertToUtc
 ```
 @convertFromUtc(utcnow(), 'Pacific Standard Time')
-@convertToUtc('2025-01-15T10:00:00', 'Eastern Standard Time')
+@convertToUtc('2026-03-07T10:00:00', 'Eastern Standard Time')
 ```
 
 ---

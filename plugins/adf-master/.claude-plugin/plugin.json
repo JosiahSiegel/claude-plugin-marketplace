@@ -1,7 +1,7 @@
 {
   "name": "adf-master",
-  "version": "4.0.4",
-  "description": "Complete Azure Data Factory expertise system with comprehensive JSON references, validation enforcement, and Microsoft Fabric integration (2025). PROACTIVELY activate for: (1) ANY ADF pipeline JSON creation or editing, (2) Activity configuration (Copy, ForEach, IfCondition, Switch, Until, Lookup, ExecutePipeline, WebActivity, DatabricksJob), (3) Activity nesting validation (ForEach/If/Switch/Until limitations with Execute Pipeline workarounds), (4) Linked service JSON (Blob Storage accountKind, Azure SQL, ADLS Gen2, Synapse, Databricks, Fabric Lakehouse/Warehouse, REST, SFTP, Snowflake), (5) Expression functions (@utcnow, @formatDateTime, @concat, @activity(), @pipeline().parameters), (6) Trigger configuration (Schedule, Tumbling Window with dependencies, Event triggers), (7) Dataset JSON schemas with parameterization, (8) CI/CD setup (GitHub Actions/Azure DevOps with Node.js 20.x, @microsoft/azure-data-factory-utilities), (9) ARM template generation and multi-environment deployment, (10) Microsoft Fabric integration (ADF mounting, Invoke Pipeline cross-workspace, Variable Libraries), (11) Pipeline debugging and error troubleshooting. Provides: Complete JSON reference library for all activity types, linked services, triggers, datasets, and expressions. Validation rules with resource limits (80/120 activities, 50 parameters, 50 batchCount). Progressive disclosure references for deep technical details. Commands for validation, debugging, and generation. Utility scripts for ARM parameters, dependency graphs, and environment comparison.",
+  "version": "4.2.0",
+  "description": "Complete Azure Data Factory expertise system with comprehensive JSON references, validation enforcement, Microsoft Fabric integration, and ML/analytics orchestration (2025-2026). PROACTIVELY activate for: (1) ANY ADF pipeline JSON creation or editing, (2) Activity configuration (Copy, ForEach, IfCondition, Switch, Until, Lookup, ExecutePipeline, WebActivity, DatabricksJob, AzureMLExecutePipeline), (3) Activity nesting validation (ForEach/If/Switch/Until limitations with Execute Pipeline workarounds), (4) Linked service JSON (Blob Storage accountKind, Azure SQL, ADLS Gen2, Synapse, Databricks, Fabric Lakehouse/Warehouse, Azure ML, REST, SFTP, Snowflake), (5) Expression functions (@utcnow, @formatDateTime, @concat, @activity(), @pipeline().parameters), (6) Trigger configuration (Schedule, Tumbling Window with dependencies, Event triggers), (7) Dataset JSON schemas with parameterization, (8) CI/CD setup (GitHub Actions/Azure DevOps with Node.js 20.x, @microsoft/azure-data-factory-utilities), (9) ARM template generation and multi-environment deployment, (10) Microsoft Fabric integration (ADF mounting, Invoke Pipeline cross-workspace, Variable Libraries), (11) Machine learning orchestration (Azure ML pipelines, batch endpoints, Azure AI Services, Databricks ML/MLflow, feature engineering with Data Flows), (12) Azure SQL to Storage archival patterns for analysis, (13) Pipeline debugging and error troubleshooting. Provides: Complete JSON reference library for all activity types, linked services, triggers, datasets, and expressions. ML pipeline patterns for training, scoring, and data archival. Validation rules with resource limits (80/120 activities, 50 parameters, 50 batchCount). Progressive disclosure references for deep technical details. Commands for validation, debugging, and generation. Utility scripts for ARM parameters, dependency graphs, and environment comparison.",
   "author": {
     "name": "Josiah Siegel",
     "email": "JosiahSiegel@users.noreply.github.com"
@@ -52,7 +52,19 @@
     "snowflake",
     "rest-api",
     "sftp",
-    "2025"
+    "machine-learning",
+    "azure-ml",
+    "batch-endpoints",
+    "azure-ai-services",
+    "mlflow",
+    "feature-engineering",
+    "data-archival",
+    "anomaly-detection",
+    "sentiment-analysis",
+    "ml-scoring",
+    "training-pipeline",
+    "2025",
+    "2026"
   ],
   "license": "MIT"
 }

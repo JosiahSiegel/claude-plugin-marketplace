@@ -149,4 +149,4 @@ Generate complete JSON with:
 2. **SQL + Managed Identity**: Must create contained database user
 3. **REST + OAuth**: Need both `tokenEndpoint` and `resource`
 4. **SFTP**: Consider `skipHostKeyValidation` for dev environments only
-5. **Databricks**: Use Job activity (2025) not Notebook for new implementations
+5. **Databricks**: Use Job activity not Notebook for new implementations

@@ -287,7 +287,7 @@ This applies to:
 
 **🚨 CRITICAL: For Databricks Job activity, DO NOT specify cluster properties in the linked service. The job configuration in Databricks workspace controls compute resources.**
 
-## 🆕 2025 New Connectors and Enhancements
+## Connectors and Enhancements (2025+)
 
 ### ServiceNow V2 Connector (RECOMMENDED - V1 End of Support)
 
@@ -427,9 +427,9 @@ Improved performance and features:
 }
 ```
 
-### Microsoft Fabric Warehouse Connector (NEW 2025)
+### Microsoft Fabric Warehouse Connector
 
-**🆕 Native support for Microsoft Fabric Warehouse (Q3 2024+)**
+**Native support for Microsoft Fabric Warehouse (GA since Q3 2024)**
 
 **Supported Activities:**
 - ✅ Copy Activity (source and sink)
@@ -563,11 +563,11 @@ Improved performance:
 }
 ```
 
-## Managed Identity for Azure Storage (2025)
+## Managed Identity for Azure Storage
 
 ### Azure Table Storage
 
-Now supports system-assigned and user-assigned managed identity:
+Supports system-assigned and user-assigned managed identity:
 
 ```json
 {
@@ -575,7 +575,7 @@ Now supports system-assigned and user-assigned managed identity:
   "type": "AzureTableStorage",
   "typeProperties": {
     "serviceEndpoint": "https://mystorageaccount.table.core.windows.net",
-    "authenticationType": "ManagedIdentity"  // New in 2025
+    "authenticationType": "ManagedIdentity"
     // Or user-assigned:
     // "credential": {
     //   "referenceName": "UserAssignedManagedIdentity"
@@ -586,7 +586,7 @@ Now supports system-assigned and user-assigned managed identity:
 
 ### Azure Files
 
-Now supports managed identity authentication:
+Supports managed identity authentication:
 
 ```json
 {
@@ -595,7 +595,7 @@ Now supports managed identity authentication:
   "typeProperties": {
     "fileShare": "myshare",
     "accountName": "mystorageaccount",
-    "authenticationType": "ManagedIdentity"  // New in 2025
+    "authenticationType": "ManagedIdentity"
   }
 }
 ```
@@ -642,7 +642,7 @@ Spark 3.3 now powers Mapping Data Flows:
 
 ## Azure DevOps Server 2022 Support
 
-Git integration now supports on-premises Azure DevOps Server 2022:
+Git integration supports on-premises Azure DevOps Server 2022:
 
 ```json
 {
@@ -677,7 +677,7 @@ Git integration now supports on-premises Azure DevOps Server 2022:
 }
 ```
 
-**User-Assigned Managed Identity (NEW 2025):**
+**User-Assigned Managed Identity:**
 ```json
 {
   "type": "AzureBlobStorage",
@@ -698,9 +698,9 @@ Git integration now supports on-premises Azure DevOps Server 2022:
 - ✅ Granular permission management
 - ✅ Identity lifecycle independent of data factory
 
-**Credential Consolidation (NEW 2025):**
+**Credential Consolidation:**
 
-ADF now supports a centralized **Credentials** feature:
+ADF supports a centralized **Credentials** feature:
 ```json
 {
   "name": "ManagedIdentityCredential",
@@ -720,14 +720,14 @@ ADF now supports a centralized **Credentials** feature:
 - ✅ Centralized permission management
 - ✅ Easier audit and compliance tracking
 
-### MFA Enforcement Compatibility (October 2025)
+### MFA Enforcement (Enforced Since October 2025)
 
-**🚨 IMPORTANT: Azure requires MFA for all users by October 2025**
+**Azure MFA is now mandatory for all interactive user logins (enforced October 2025).**
 
 **Impact on ADF:**
 - ✅ **Managed identities are UNAFFECTED** - No MFA required for service accounts
 - ✅ Continue using system-assigned and user-assigned identities without changes
-- ❌ **Interactive user logins affected** - Personal Azure AD accounts need MFA
+- ✅ **Interactive user logins require MFA** - All personal Microsoft Entra ID accounts
 - ✅ **Service principals with certificate auth** - Recommended alternative to secrets
 
 **Best Practice:**
@@ -786,7 +786,7 @@ ALTER ROLE db_datawriter ADD MEMBER [datafactory-name];
    - ✅ Prefer system-assigned for simple scenarios
    - ✅ Use user-assigned for shared identity needs
    - ✅ Leverage Credentials feature for consolidation
-   - ✅ MFA-compliant for October 2025 enforcement
+   - ✅ MFA-compliant (enforced since October 2025)
    - ❌ Avoid access keys and connection strings
    - ✅ Store any remaining secrets in Key Vault
 

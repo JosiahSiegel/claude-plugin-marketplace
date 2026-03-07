@@ -1,6 +1,6 @@
 # adf-master
 
-Complete Azure Data Factory expertise system for ALL platforms, deployment methods, and Microsoft Fabric integration (2025).
+Complete Azure Data Factory expertise system for ALL platforms, deployment methods, Microsoft Fabric integration, and ML/analytics orchestration (2025-2026).
 
 ## Overview
 
@@ -14,15 +14,15 @@ The **adf-master** plugin provides comprehensive Azure Data Factory expertise, c
 - **Advanced workflow features** - Run As, Task Values, If/Else tasks, AI/BI tasks, Repair Runs
 - **Correct activity type** - `DatabricksJob` (fixed from incorrect `DatabricksSparkJob`)
 
-### 🆕 New 2025 Connectors
+### Connectors
 - **ServiceNow V2** - V1 is End of Support, migration required
 - **Microsoft Fabric Warehouse** - Native integration with Fabric data platform
 - **Enhanced connectors** - PostgreSQL, Snowflake with improved performance
 
-### 🔐 2025 Security & Authentication
+### 🔐 Security & Authentication
 - **User-assigned managed identity** support for cross-factory scenarios
 - **Credentials consolidation** - Centralized Microsoft Entra ID credential management
-- **MFA enforcement ready** - October 2025 compliance built-in
+- **MFA enforced** - Since October 2025
 - **Principle of least privilege** - Updated RBAC patterns
 
 ### 📦 Modern CI/CD Patterns
@@ -40,7 +40,7 @@ The **adf-master** plugin provides comprehensive Azure Data Factory expertise, c
 - **Execute Pipeline workarounds** - Provides valid alternatives for complex nesting scenarios
 - **Popular connector mastery** - Deep knowledge of Azure Blob Storage, SQL Database requirements and pitfalls
 
-- **Microsoft Fabric Integration (2025)**: ADF mounting, cross-workspace orchestration, OneLake connectivity, Variable Libraries
+- **Microsoft Fabric Integration**: ADF mounting, cross-workspace orchestration, OneLake connectivity, Variable Libraries
 
 ### 🚀 CI/CD Automation
 - **Modern Automated CI/CD** using `@microsoft/azure-data-factory-utilities` v1.0.3+
@@ -563,7 +563,7 @@ npm run build validate ./adf-resources /subscriptions/.../myFactory
 
 ### 3.2.0 (January 2025) **[2025 FABRIC INTEGRATION UPDATE]**
 - **🆕 NEW COMMAND: /adf-master:adf-fabric-integration**
-  - ADF mounting in Fabric workspaces (GA June 2025 feature)
+  - ADF mounting in Fabric workspaces (GA)
   - Cross-workspace pipeline orchestration (Invoke Pipeline activity)
   - OneLake connectivity with Lakehouse and Warehouse connectors
   - Variable Libraries for environment-specific CI/CD

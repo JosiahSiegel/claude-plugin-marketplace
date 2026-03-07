@@ -549,7 +549,7 @@ OneLake shortcuts allow you to reference data in Azure Data Lake Gen2 without ph
 
 ### Pattern 3: Cross-Platform Pipeline with Invoke Pipeline
 
-**NEW 2025: Invoke Pipeline Activity for Cross-Platform Calls**
+**Invoke Pipeline Activity for Cross-Platform Calls**
 
 ```json
 {

@@ -37,15 +37,15 @@ This applies to:
 
 This skill provides comprehensive reference information about Azure Data Factory, including official documentation sources, CI/CD deployment methods, and troubleshooting resources. Use this to access detailed ADF knowledge on-demand.
 
-## 🚨 CRITICAL 2025 UPDATE: Deprecated Features
+## Deprecated Features
 
 ### Apache Airflow Workflow Orchestration Manager - DEPRECATED
 
-**Status:** Available only for existing customers as of early 2025
-**Retirement Date:** Not yet announced, but feature is officially deprecated
-**Impact:** New customers cannot provision Apache Airflow in Azure Data Factory
+**Status:** Deprecated since early 2025. Available only for existing customers.
+**Retirement Date:** Not yet announced, but no new deployments permitted.
+**Impact:** New customers cannot provision Apache Airflow in Azure Data Factory.
 
-**Official Deprecation Notice:**
+**Deprecation Details:**
 - Apache Airflow Workflow Orchestration Manager is deprecated with no retirement date set
 - Only existing deployments can continue using this feature
 - No new Airflow integrations can be created in ADF
@@ -61,20 +61,20 @@ This skill provides comprehensive reference information about Azure Data Factory
 - Limited adoption and maintenance burden for standalone Airflow feature in ADF
 
 **Action Required:**
-- If using Airflow in ADF: Plan migration within 12-18 months
-- For new projects: Do NOT use Airflow in ADF - use Fabric or native ADF patterns
+- If using Airflow in ADF: Migrate to Fabric Data Factory, standalone Airflow, or native ADF patterns
+- For new projects: Do NOT use Airflow in ADF
 - Monitor Microsoft announcements for official retirement timeline
 
 **Reference:**
 - Microsoft Roadmap: https://www.directionsonmicrosoft.com/roadmaps/ref/azure-data-factory-roadmap/
 
-## 🆕 2025 Feature Updates
+## Feature Updates (2025-2026)
 
-### Microsoft Fabric Integration (GA June 2025)
+### Microsoft Fabric Integration (GA)
 
 **ADF Mounting in Fabric:**
 - Bring existing ADF pipelines into Fabric workspaces without rebuilding
-- General Availability as of June 2025
+- Generally Available since June 2025
 - Seamless integration enables hybrid ADF + Fabric workflows
 
 **Cross-Workspace Pipeline Orchestration:**
@@ -622,3 +622,6 @@ For detailed JSON schemas and complete reference materials, see:
 - **Linked Services**: `references/linked-services.md` - Complete JSON configurations for all connector types (Blob Storage, ADLS Gen2, Azure SQL, Synapse, Fabric Lakehouse/Warehouse, Databricks, Key Vault, REST, SFTP, Snowflake, PostgreSQL)
 - **Triggers**: `references/triggers.md` - Complete JSON schemas for schedule, tumbling window, and event triggers
 - **Datasets**: `references/datasets.md` - Complete JSON schemas for all dataset types with parameterization patterns
+
+For machine learning and analytics patterns, see the dedicated skill:
+- **ML & Analytics**: `adf-master:adf-ml-analytics` - Azure ML pipelines, batch endpoints, Azure AI Services, Databricks ML/MLflow, SQL-to-Storage archival, feature engineering with Data Flows

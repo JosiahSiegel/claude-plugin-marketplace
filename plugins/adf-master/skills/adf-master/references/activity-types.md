@@ -478,7 +478,7 @@ Calls REST endpoints for integration.
 
 ---
 
-## Databricks Job Activity (2025)
+## Databricks Job Activity
 
 Orchestrates Databricks Workflow Jobs.
 
@@ -616,3 +616,80 @@ Retrieves metadata about datasets or files.
 - `childItems`, `itemName`, `itemType`
 - `lastModified`, `created`, `size`
 - `exists`, `columnCount`, `structure`
+
+---
+
+## Azure ML Execute Pipeline Activity
+
+Executes an Azure Machine Learning published pipeline. **SDK v1 support ends June 2026.** Migrate to batch endpoints via WebActivity.
+
+```json
+{
+  "name": "RunMLPipeline",
+  "type": "AzureMLExecutePipeline",
+  "dependsOn": [],
+  "policy": {
+    "timeout": "1.00:00:00",
+    "retry": 1,
+    "retryIntervalInSeconds": 60
+  },
+  "typeProperties": {
+    "mlPipelineId": "<published-pipeline-id>",
+    "experimentName": "my-experiment",
+    "mlPipelineParameters": {
+      "param1": "@pipeline().parameters.Value1"
+    },
+    "continueOnStepFailure": false
+  },
+  "linkedServiceName": {
+    "referenceName": "LS_AzureML",
+    "type": "LinkedServiceReference"
+  }
+}
+```
+
+**Output:**
+- `@activity('RunMLPipeline').output.mlPipelineRunId`
+- `@activity('RunMLPipeline').output.status`
+
+---
+
+## Execute Data Flow Activity
+
+Runs a Mapping Data Flow for Spark-based transformations.
+
+```json
+{
+  "name": "RunDataFlow",
+  "type": "ExecuteDataFlow",
+  "dependsOn": [],
+  "policy": {
+    "timeout": "1.00:00:00",
+    "retry": 0
+  },
+  "typeProperties": {
+    "dataFlow": {
+      "referenceName": "DF_Transform",
+      "type": "DataFlowReference",
+      "parameters": {
+        "Param1": "'value1'"
+      }
+    },
+    "compute": {
+      "coreCount": 8,
+      "computeType": "General"
+    },
+    "staging": {
+      "linkedService": {
+        "referenceName": "LS_AzureBlobStorage",
+        "type": "LinkedServiceReference"
+      },
+      "folderPath": "staging/dataflows"
+    },
+    "traceLevel": "Fine"
+  }
+}
+```
+
+**Compute Types:** `General`, `MemoryOptimized`, `ComputeOptimized`
+**Core Counts:** 8, 16, 32, 48, 80, 144, 272

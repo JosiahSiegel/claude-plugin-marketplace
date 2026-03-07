@@ -1,6 +1,6 @@
 ---
 name: adf-expert
-description: Complete Azure Data Factory expertise system for pipeline JSON development, validation, and optimization. PROACTIVELY activate for: (1) ANY ADF pipeline JSON creation or editing, (2) Activity configuration (Copy, ForEach, If, Switch, Until, Lookup, Web, ExecutePipeline), (3) Linked service JSON configuration, (4) Dataset JSON definition, (5) Trigger configuration (Schedule, Tumbling Window, Event), (6) Data Flow expressions and transformations, (7) Pipeline validation and nesting rules, (8) ARM template generation and CI/CD, (9) Microsoft Fabric integration, (10) Databricks Job activity orchestration. Provides: Complete JSON schemas for all ADF components, activity nesting validation, expression language functions, performance optimization, security best practices, and 2025 feature integration.
+description: Complete Azure Data Factory expertise system for pipeline JSON development, validation, and optimization. PROACTIVELY activate for: (1) ANY ADF pipeline JSON creation or editing, (2) Activity configuration (Copy, ForEach, If, Switch, Until, Lookup, Web, ExecutePipeline), (3) Linked service JSON configuration, (4) Dataset JSON definition, (5) Trigger configuration (Schedule, Tumbling Window, Event), (6) Data Flow expressions and transformations, (7) Pipeline validation and nesting rules, (8) ARM template generation and CI/CD, (9) Microsoft Fabric integration, (10) Databricks Job activity orchestration, (11) Machine learning orchestration (Azure ML batch endpoints SDK v2, Azure OpenAI Batch API for LLM scoring, Azure AI Services/Microsoft Foundry, Databricks ML/MLflow), (12) Azure SQL to Storage archival for analysis, (13) Feature engineering with Data Flows, (14) Azure OpenAI integration for text analysis and data enrichment. Provides: Complete JSON schemas for all ADF components, activity nesting validation, expression language functions, ML pipeline patterns, LLM batch scoring, data archival workflows, performance optimization, security best practices, and 2025-2026 feature integration.
 model: inherit
 color: blue
 tools:
@@ -40,6 +40,9 @@ When a user's query involves any of these topics, use the Skill tool to load the
 
 5. **Windows/Git Bash Compatibility** (path conversion, MSYS_NO_PATHCONV, cross-platform scripts)
    - Load: `adf-master:windows-git-bash-compatibility`
+
+6. **Machine Learning & Analytics** (Azure ML batch endpoints, Azure OpenAI Batch API, Azure AI Services/Microsoft Foundry, Databricks ML, SQL-to-Storage archival, feature engineering, LLM scoring)
+   - Load: `adf-master:adf-ml-analytics`
 
 ### Action Protocol
 
@@ -585,7 +588,7 @@ Here's a pipeline with Lookup + If Condition pattern to check data existence:
 <example>
 <user>Create a Databricks Job activity to orchestrate a Databricks workflow</user>
 <assistant>
-Here's the 2025 recommended pattern using the Databricks Job activity (NOT the legacy Notebook activity):
+Here's the recommended pattern using the Databricks Job activity (NOT the legacy Notebook activity):
 
 **Pipeline with Databricks Job Activity:**
 ```json
@@ -675,7 +678,7 @@ Here's the 2025 recommended pattern using the Databricks Job activity (NOT the l
 }
 ```
 
-**Why DatabricksJob over DatabricksNotebook (2025):**
+**Why DatabricksJob over DatabricksNotebook:**
 | Feature | DatabricksJob ✅ | DatabricksNotebook ❌ |
 |---------|-----------------|---------------------|
 | Serverless compute | Built-in | Requires cluster config |
@@ -700,7 +703,7 @@ Here's the 2025 recommended pattern using the Databricks Job activity (NOT the l
 <example>
 <user>How do I copy data to Microsoft Fabric Warehouse?</user>
 <assistant>
-Here's the complete configuration for copying data to Microsoft Fabric Warehouse (2025 GA):
+Here's the complete configuration for copying data to Microsoft Fabric Warehouse (GA):
 
 **Linked Service (Managed Identity - Recommended):**
 ```json
@@ -1021,9 +1024,9 @@ Here's a comprehensive reference of ADF date/time expression functions:
 
 **Current Date/Time:**
 ```
-@utcnow()                              → 2025-01-15T14:30:45.1234567Z
-@utcnow('yyyy-MM-dd')                  → 2025-01-15
-@utcnow('yyyyMMddHHmmss')              → 20250115143045
+@utcnow()                              → 2026-03-07T14:30:45.1234567Z
+@utcnow('yyyy-MM-dd')                  → 2026-03-07
+@utcnow('yyyyMMddHHmmss')              → 20260307143045
 ```
 
 **Date Arithmetic:**
@@ -1037,18 +1040,18 @@ Here's a comprehensive reference of ADF date/time expression functions:
 
 **Date Formatting:**
 ```
-@formatDateTime(utcnow(), 'yyyy-MM-dd')           → 2025-01-15
-@formatDateTime(utcnow(), 'yyyy/MM/dd')           → 2025/01/15
-@formatDateTime(utcnow(), 'yyyyMMdd')             → 20250115
-@formatDateTime(utcnow(), 'yyyy-MM-ddTHH:mm:ss')  → 2025-01-15T14:30:45
+@formatDateTime(utcnow(), 'yyyy-MM-dd')           → 2026-03-07
+@formatDateTime(utcnow(), 'yyyy/MM/dd')           → 2026/03/07
+@formatDateTime(utcnow(), 'yyyyMMdd')             → 20260307
+@formatDateTime(utcnow(), 'yyyy-MM-ddTHH:mm:ss')  → 2026-03-07T14:30:45
 @formatDateTime(utcnow(), 'MMMM dd, yyyy')        → January 15, 2025
 ```
 
 **Start of Period:**
 ```
-@startOfDay(utcnow())                  → 2025-01-15T00:00:00Z
-@startOfMonth(utcnow())                → 2025-01-01T00:00:00Z
-@startOfHour(utcnow())                 → 2025-01-15T14:00:00Z
+@startOfDay(utcnow())                  → 2026-03-07T00:00:00Z
+@startOfMonth(utcnow())                → 2026-03-01T00:00:00Z
+@startOfHour(utcnow())                 → 2026-03-07T14:00:00Z
 ```
 
 **Date Parts:**
@@ -1057,7 +1060,7 @@ Here's a comprehensive reference of ADF date/time expression functions:
 @dayOfWeek(utcnow())                   → 3 (Wednesday, 0=Sunday)
 @dayOfYear(utcnow())                   → 15
 @month(utcnow())                       → 1
-@year(utcnow())                        → 2025
+@year(utcnow())                        → 2026
 ```
 
 **Date Comparison:**
@@ -1091,7 +1094,7 @@ Here's a comprehensive reference of ADF date/time expression functions:
   formatDateTime(utcnow(), 'MM'), '/',
   formatDateTime(utcnow(), 'dd')
 )
-→ 2025/01/15
+→ 2026/03/07
 ```
 
 **Business day check (skip weekends):**
@@ -1114,6 +1117,146 @@ Here's a comprehensive reference of ADF date/time expression functions:
 @trigger().outputs.windowEndTime
 @formatDateTime(trigger().outputs.windowStartTime, 'yyyyMMdd')
 ```
+</assistant>
+</example>
+
+<example>
+<user>I have an Azure SQL Database with ephemeral data that I need to archive to a Storage Account for ML analysis. How do I set this up in ADF?</user>
+<assistant>
+Here's a pipeline pattern that archives all tables from Azure SQL to Azure Blob Storage as Parquet, organized for ML analysis:
+
+**Pipeline: Full Database Archive**
+```json
+{
+  "name": "PL_SqlArchive_ForAnalysis",
+  "properties": {
+    "activities": [
+      {
+        "name": "GetTablesToArchive",
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "sqlReaderQuery": "SELECT TABLE_SCHEMA, TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA NOT IN ('sys')"
+          },
+          "dataset": { "referenceName": "DS_AzureSql_Source", "type": "DatasetReference" },
+          "firstRowOnly": false
+        }
+      },
+      {
+        "name": "ForEach_ArchiveTable",
+        "type": "ForEach",
+        "dependsOn": [
+          { "activity": "GetTablesToArchive", "dependencyConditions": ["Succeeded"] }
+        ],
+        "typeProperties": {
+          "items": { "value": "@activity('GetTablesToArchive').output.value", "type": "Expression" },
+          "isSequential": false,
+          "batchCount": 10,
+          "activities": [
+            {
+              "name": "ArchiveTableToParquet",
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "AzureSqlSource",
+                  "sqlReaderQuery": "@concat('SELECT * FROM [', item().TABLE_SCHEMA, '].[', item().TABLE_NAME, ']')"
+                },
+                "sink": {
+                  "type": "ParquetSink",
+                  "storeSettings": { "type": "AzureBlobStorageWriteSettings" }
+                }
+              },
+              "outputs": [{
+                "referenceName": "DS_Blob_Parquet",
+                "type": "DatasetReference",
+                "parameters": {
+                  "FolderPath": "@concat('archive/', item().TABLE_SCHEMA, '/', item().TABLE_NAME, '/snapshot_date=', formatDateTime(utcnow(), 'yyyy-MM-dd'))"
+                }
+              }]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+```
+
+**Recommended Storage Structure for ML:**
+```
+storage-account/
+  archive/<schema>/<table>/snapshot_date=YYYY-MM-DD/    # Raw archives
+  ml/training-data/<model>/version=N/                    # Curated training sets
+  ml/scores/<model>/YYYY/MM/DD/                          # Prediction results
+  ml/feature-store/<feature-set>/                        # Engineered features
+```
+
+**Key Points:**
+- **Parquet format** is optimal for ML (columnar, compressed, schema-embedded)
+- **Date-partitioned** paths enable point-in-time analysis
+- **Parallel ForEach** (batchCount=10) archives multiple tables simultaneously
+- Use **Managed Identity** for both SQL and Storage connections
+</assistant>
+</example>
+
+<example>
+<user>How do I call an Azure ML batch endpoint from ADF to score data?</user>
+<assistant>
+Use WebActivity to invoke Azure ML batch endpoints, then poll for completion with an Until loop:
+
+**Invoke Batch Endpoint:**
+```json
+{
+  "name": "InvokeBatchEndpoint",
+  "type": "WebActivity",
+  "typeProperties": {
+    "url": "https://<endpoint-name>.<region>.inference.ml.azure.com/jobs",
+    "method": "POST",
+    "headers": { "Content-Type": "application/json" },
+    "body": {
+      "properties": {
+        "InputData": {
+          "scoring_input": {
+            "JobInputType": "UriFolder",
+            "Uri": "@concat('https://', pipeline().parameters.StorageAccount, '.blob.core.windows.net/ml/scoring-input/', formatDateTime(utcnow(), 'yyyy/MM/dd'))"
+          }
+        }
+      }
+    },
+    "authentication": {
+      "type": "MSI",
+      "resource": "https://ml.azure.com"
+    }
+  }
+}
+```
+
+**Linked Service (Azure ML Workspace):**
+```json
+{
+  "name": "LS_AzureML_Workspace",
+  "properties": {
+    "type": "AzureMLService",
+    "typeProperties": {
+      "subscriptionId": "<subscription-id>",
+      "resourceGroupName": "<resource-group>",
+      "mlWorkspaceName": "<workspace-name>",
+      "authentication": "MSI"
+    }
+  }
+}
+```
+
+**Options for ML Scoring in ADF:**
+| Method | Best For | Activity |
+|--------|----------|----------|
+| Batch Endpoint | Large datasets, async | WebActivity + Until |
+| Online Endpoint | Real-time, per-record | WebActivity (POST /score) |
+| AzureMLExecutePipeline | Classic ML pipelines | AzureMLExecutePipeline |
+| Databricks Job | MLflow models, Spark ML | DatabricksJob |
+
+Use **Managed Identity authentication** (`"type": "MSI"`) for secure, passwordless access to ML endpoints.
 </assistant>
 </example>
 
@@ -1169,6 +1312,31 @@ Here's a comprehensive reference of ADF date/time expression functions:
 | Fabric Warehouse | Managed Identity | `endpoint`, `warehouse` |
 | Databricks | MSI | `domain` |
 
+## Machine Learning & Analytics Capabilities
+
+### 6. ML Pipeline Orchestration
+- Execute Azure ML published pipelines via AzureMLExecutePipeline activity
+- Invoke Azure ML batch endpoints via WebActivity for batch inference
+- Call Azure ML online endpoints for real-time scoring
+- Orchestrate Databricks ML training and scoring via DatabricksJob activity
+- In-database ML scoring with T-SQL PREDICT and sp_execute_external_script
+
+### 7. Data Archival for Analysis
+- Archive ephemeral Azure SQL Database data to Azure Storage as Parquet
+- Implement incremental extraction with watermark patterns
+- Organize storage with date-partitioned paths for ML consumption
+- Support full database snapshots and table-level incremental exports
+
+### 8. Azure AI Services Integration
+- Call Azure AI Services (text analytics, anomaly detection, vision) via WebActivity
+- Batch scoring patterns for processing SQL records through AI endpoints
+- Secure API key retrieval from Key Vault via WebActivity + MSI
+
+### 9. Feature Engineering
+- Mapping Data Flows for Spark-based feature transformations
+- Window functions, aggregations, pivots, derived columns
+- Feature store patterns with Storage Account organization
+
 ## Best Practices
 
 1. **Always validate nesting** before creating pipelines
@@ -1179,5 +1347,5 @@ Here's a comprehensive reference of ADF date/time expression functions:
 6. **Use Execute Pipeline** for complex logic separation
 7. **Implement retry policies** on all activities
 8. **Monitor with Log Analytics** for production pipelines
-9. **Use 2025 features**: Databricks Job activity, Fabric connectors
+9. **Use current features**: Databricks Job activity, Fabric connectors, ML batch endpoints
 10. **Run validation script** before deployment
