@@ -86,6 +86,12 @@ description: |
 
 **Common mistake:** Vague descriptions without examples. "Helps with code review" will rarely trigger. Include concrete examples with exact user phrases.
 
+**Example block rules:**
+- Keep example blocks **concise** — assistant response should be 1-2 sentences, not full code
+- Limit to **3-7 example blocks** total (more dilutes matching quality)
+- Do NOT include full JSON schemas, code samples, or CLI output in examples
+- Examples show *when* to trigger and *how to respond*, not the domain content itself
+
 ### model (required)
 
 | Value | When to use |
@@ -167,8 +173,8 @@ You are [role] specializing in [domain].
 - Be specific about responsibilities and process steps
 - Define output format clearly
 - Address edge cases
-- Keep under 10,000 characters
 - Include skill activation instructions if the agent should load skills
+- Keep the agent body as a **lean orchestrator** (see below)
 
 **DON'T:**
 - Write in first person ("I am...", "I will...")
@@ -176,6 +182,74 @@ You are [role] specializing in [domain].
 - Skip process steps
 - Leave output format undefined
 - Omit quality standards
+- Embed domain knowledge that belongs in skills (see below)
+
+## Lean Orchestrator Pattern (CRITICAL)
+
+An agent body must be a **lean orchestrator**, NOT a domain knowledge dump. The agent delegates to skills for detailed knowledge.
+
+### Agent Body Size Limits
+
+| Metric | Target | Hard Maximum |
+|--------|--------|-------------|
+| Word count | 1,500-2,500 words | 3,000 words |
+| Character count | ~10,000-15,000 chars | 20,000 chars |
+
+### What Belongs in the Agent Body
+
+| Section | Required | Purpose |
+|---------|----------|---------|
+| Role identity | Yes | "You are [role] specializing in [domain]" |
+| Skill activation rules | Yes | Topic-to-skill mapping table |
+| High-level process | Yes | Design/workflow steps |
+| Output format | Yes | What to include in responses |
+| Brief service summaries | Optional | 2-3 sentences per area to help decide which skill to load |
+| Edge cases / troubleshooting tips | Optional | Quick reference only |
+
+### What Does NOT Belong in the Agent Body
+
+- **Detailed domain knowledge** — belongs in skills
+- **Complete CLI/API references** — belongs in skill references/
+- **Full code examples** — belongs in skill examples/
+- **Duplicated skill content** — if it's in a skill, do NOT repeat it in the agent
+
+### Anti-Pattern: Content Duplication
+
+**NEVER duplicate content between the agent body and skills.** This is the most common mistake and causes massive context bloat.
+
+**Bad:** Agent body contains a full "Plugin.json Schema" section AND the plugin-master skill also contains it.
+**Good:** Agent body says "For plugin.json schema details, load `plugin-master:plugin-master`" and keeps only a 1-sentence summary.
+
+### Lean Orchestrator Template
+
+```markdown
+You are [role] specializing in [domain].
+
+## Skill Activation - CRITICAL
+[Topic-to-skill mapping table — this is the heart of the agent]
+
+## Core Responsibilities
+[2-5 bullet points on what this agent does]
+
+## Process
+[5-7 step workflow for handling user requests]
+
+## Quality Standards
+[Brief checklist — 5-10 items]
+
+## Output Format
+[What to include in responses]
+```
+
+### Description Size Limits
+
+Agent descriptions should be concise and effective:
+
+| Element | Guideline |
+|---------|-----------|
+| Intro text | 1-2 sentences on when to trigger |
+| Example blocks | 3-7 blocks covering diverse scenarios |
+| Total description | Should fit naturally — focus on quality trigger examples over length |
 
 ## Agent Design Principles (2025)
 
@@ -231,3 +305,5 @@ Before finalizing an agent:
 | Generic system prompt | Be specific about process, output format, quality standards |
 | No skill activation | Add skill loading instructions for knowledge-dependent agents |
 | Multiple agents in one plugin | Use one expert agent with skills for different topics |
+| Example blocks with full code/JSON | Keep examples concise (1-2 sentence responses); code belongs in skills |
+| Same cross-cutting block in every skill | Put platform guidelines in agent body or one shared reference, not each SKILL.md |

@@ -1,15 +1,10 @@
 ---
 name: advanced-features-2025
 description: |
-  Advanced 2025 Claude Code plugin features. PROACTIVELY activate for:
-  (1) Agent Skills with progressive disclosure
-  (2) Hook automation (PreToolUse, PostToolUse, etc.)
-  (3) MCP server integration
-  (4) Repository-level configuration
-  (5) Team plugin distribution
-  (6) Context efficiency optimization
-  Provides cutting-edge plugin capabilities and patterns.
-license: MIT
+  This skill should be used when the user asks about "progressive disclosure", "hook automation",
+  "PreToolUse hook", "PostToolUse hook", "MCP server integration", ".mcp.json configuration",
+  "team plugin distribution", "repository-level plugins", "context efficiency", or needs guidance
+  on advanced 2025 Claude Code plugin features including hooks, MCP, and team distribution.
 ---
 
 # Advanced Plugin Features (2025)

@@ -534,9 +534,16 @@ Josiah Siegel (JosiahSiegel@users.noreply.github.com)
 
 ## Version
 
-1.1.0 (January 2025)
+1.3.0 (March 2026)
 
-### What's New in 1.1.0
+### What's New in 1.3.0
+
+- **Azure ML / AI Foundry deep-dive** - Comprehensive skill covering workspace architecture, networking, compute, endpoints, identities, ACR, storage, all CLI/PowerShell commands, Terraform, debugging
+- **Progressive disclosure** - ML skill split into lean core + 7 reference files for context efficiency
+- **Lean agent** - Agent body trimmed to orchestration logic; all domain knowledge in skills
+- **Trigger-phrase descriptions** - All 6 skills use third-person trigger phrases for reliable activation
+
+### Previous: 1.1.0
 
 - **Git Bash / Windows Compatibility**: Comprehensive path conversion guidance for Windows developers
 - **Shell Detection**: Automatic Git Bash/MINGW detection with MSYS_NO_PATHCONV configuration

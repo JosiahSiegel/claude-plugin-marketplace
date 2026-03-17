@@ -1,15 +1,10 @@
 ---
 name: plugin-master
 description: |
-  Complete Claude Code plugin development system. PROACTIVELY activate when users want to:
-  (1) Create/build/make plugins with 2025 features
-  (2) Add skills/commands/agents to plugins
-  (3) Package existing code as plugins
-  (4) Publish plugins to marketplace
-  (5) Validate plugin structure
-  (6) Get plugin development guidance
-  Autonomously creates production-ready plugins with proper structure and best practices.
-license: MIT
+  This skill should be used when the user asks to "create a plugin", "build a plugin",
+  "scaffold a plugin", "add commands to a plugin", "add agents to a plugin", "add skills to a plugin",
+  "package code as a plugin", "publish to marketplace", "validate plugin structure",
+  or needs guidance on plugin architecture, directory layout, or plugin.json configuration.
 ---
 
 # Plugin Development Guide

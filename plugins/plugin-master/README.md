@@ -128,17 +128,17 @@ Before publishing:
 ./scripts/validate-skill.sh skills/plugin-master/
 ```
 
-## What's New in 3.0.0
+## What's New in 3.2.0
 
-- **Restructured agent** - Renamed to `plugin-expert` with proper format
-- **Progressive disclosure** - Skills split into SKILL.md + references/
-- **Validation scripts** - New utilities for validating plugins, agents, skills
-- **Improved commands** - Better structured with clear process steps
-- **Modern patterns** - Follows official plugin-dev patterns
+- **Lean orchestrator pattern** - Agent body trimmed to orchestration logic; domain knowledge in skills only
+- **Mandatory size limits** - Enforced limits for descriptions (~500 chars), SKILL.md (3,000 words max), agent bodies (3,000 words max)
+- **Progressive disclosure enforcement** - Skills over 2,000 words must use references/ directory
+- **Description standards** - All skills use third-person trigger phrases
+- **Anti-duplication rules** - Agent bodies must not duplicate skill content
 
 ## Technical Details
 
-- **Version:** 3.0.0
+- **Version:** 3.2.0
 - **Author:** Josiah Siegel
 - **License:** MIT
 - **Repository:** https://github.com/JosiahSiegel/claude-plugin-marketplace

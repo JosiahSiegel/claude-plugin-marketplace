@@ -1,6 +1,9 @@
 ---
 name: windows-git-bash-compatibility
-description: Windows and Git Bash compatibility guidance for Azure Data Factory development and CI/CD
+description: |
+  This skill should be used when the user asks about "MSYS_NO_PATHCONV",
+  "Git Bash path conversion", "Windows shell compatibility", or needs guidance
+  on running ADF npm builds, PowerShell scripts, or Azure CLI from Git Bash.
 ---
 
 # Windows & Git Bash Compatibility for Azure Data Factory

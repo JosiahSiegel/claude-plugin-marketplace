@@ -1,6 +1,10 @@
 ---
 name: aks-automatic-2025
-description: Azure Kubernetes Service Automatic mode GA 2025 features including Karpenter, auto-scaling, and zero operational overhead
+description: |
+  This skill should be used when the user asks about "AKS Automatic", "managed Kubernetes",
+  "Karpenter autoscaling", "AKS zero operational overhead", "AKS 2025", "AKS billing model",
+  "NodePool CRD", "HPA VPA KEDA on AKS", "AKS workload identity", or needs guidance on
+  Azure Kubernetes Service Automatic mode GA 2025 features.
 ---
 
 # AKS Automatic - 2025 GA Features

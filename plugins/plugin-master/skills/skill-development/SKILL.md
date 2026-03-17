@@ -56,6 +56,7 @@ description: |
 - Include **specific trigger phrases** users would actually say
 - Be **concrete**: "create a hook", "add a PreToolUse hook" (NOT "helps with hooks")
 - List multiple trigger phrases to maximize activation
+- **Keep under 500 characters** — rely on keywords in plugin.json for breadth
 
 **Good example:**
 ```yaml
@@ -214,7 +215,11 @@ After using the skill on real tasks:
 | Second person ("You should...") | Imperative form ("Configure the server...") |
 | Missing resource references | Add "Additional Resources" section listing references/ and examples/ |
 | Duplicated content across files | Put info in SKILL.md OR references/, never both |
+| Same block copied into multiple SKILL.md files | Cross-cutting content (platform guidelines, etc.) belongs in the agent body or one shared reference — NEVER copied into each skill |
 | Wrong person in description | Third person: "This skill should be used when..." |
+| Description too long (>500 chars) | Condense description; use plugin.json keywords for breadth |
+| Agent body duplicates skill content | Agent is a lean orchestrator — domain knowledge belongs in skills only |
+| Skill body too large (>3,000 words) | Split into core SKILL.md + references/ files |
 
 ## Auto-Discovery
 

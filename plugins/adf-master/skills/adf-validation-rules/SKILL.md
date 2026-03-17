@@ -1,36 +1,9 @@
 ---
 name: adf-validation-rules
-description: Comprehensive Azure Data Factory validation rules, activity nesting limitations, linked service requirements, and edge-case handling guidance
----
-
-## 🚨 CRITICAL GUIDELINES
-
-### Windows File Path Requirements
-
-**MANDATORY: Always Use Backslashes on Windows for File Paths**
-
-When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
-
-**Examples:**
-- ❌ WRONG: `D:/repos/project/file.tsx`
-- ✅ CORRECT: `D:\repos\project\file.tsx`
-
-This applies to:
-- Edit tool file_path parameter
-- Write tool file_path parameter
-- All file operations on Windows systems
-
-
-### Documentation Guidelines
-
-**NEVER create new documentation files unless explicitly requested by the user.**
-
-- **Priority**: Update existing README.md files rather than creating new documentation
-- **Repository cleanliness**: Keep repository root clean - only README.md unless user requests otherwise
-- **Style**: Documentation should be concise, direct, and professional - avoid AI-generated tone
-- **User preference**: Only create additional .md files when user specifically asks for documentation
-
-
+description: |
+  This skill should be used when the user asks about "ADF activity nesting rules",
+  "ForEach limitations", "pipeline validation", "linked service authentication",
+  or needs guidance on ADF resource limits, Set Variable restrictions, or Data Flow constraints.
 ---
 
 # Azure Data Factory Validation Rules and Limitations

@@ -31,7 +31,7 @@
       "name": "plugin-master",
       "source": "./plugins/plugin-master",
       "description": "Complete Claude Code plugin development system. PROACTIVELY activate when users want to: (1) Create/build plugins with 2025 features, (2) Add skills/commands/agents/hooks, (3) Validate plugin structure, (4) Publish to marketplace, (5) Get plugin development guidance. Provides: agent-first design patterns, progressive disclosure skills, hook automation, MCP integration, marketplace publishing. Includes plugin-expert agent and validation utilities.",
-      "version": "3.1.0",
+      "version": "3.2.1",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -259,8 +259,8 @@
     {
       "name": "adf-master",
       "source": "./plugins/adf-master",
-      "description": "Complete Azure Data Factory expertise system with comprehensive JSON references, validation enforcement, Microsoft Fabric integration, and ML/analytics orchestration (2025-2026). PROACTIVELY activate for: (1) ANY ADF pipeline JSON creation or editing, (2) Activity configuration (Copy, ForEach, IfCondition, Switch, Until, Lookup, ExecutePipeline, WebActivity, DatabricksJob, AzureMLExecutePipeline), (3) Activity nesting validation (ForEach/If/Switch/Until limitations with Execute Pipeline workarounds), (4) Linked service JSON (Blob Storage accountKind, Azure SQL, ADLS Gen2, Synapse, Databricks, Fabric Lakehouse/Warehouse, Azure ML, REST, SFTP, Snowflake), (5) Expression functions (@utcnow, @formatDateTime, @concat, @activity(), @pipeline().parameters), (6) Trigger configuration (Schedule, Tumbling Window with dependencies, Event triggers), (7) Dataset JSON schemas with parameterization, (8) CI/CD setup (GitHub Actions/Azure DevOps with Node.js 20.x, @microsoft/azure-data-factory-utilities), (9) ARM template generation and multi-environment deployment, (10) Microsoft Fabric integration (ADF mounting, Invoke Pipeline cross-workspace, Variable Libraries), (11) Machine learning orchestration (Azure ML pipelines, batch endpoints, Azure AI Services, Databricks ML/MLflow, feature engineering with Data Flows), (12) Azure SQL to Storage archival patterns for analysis, (13) Pipeline debugging and error troubleshooting. Provides: Complete JSON reference library for all activity types, linked services, triggers, datasets, and expressions. ML pipeline patterns for training, scoring, and data archival. Validation rules with resource limits (80/120 activities, 50 parameters, 50 batchCount). Progressive disclosure references for deep technical details. Commands for validation, debugging, and generation. Utility scripts for ARM parameters, dependency graphs, and environment comparison.",
-      "version": "4.2.0",
+      "description": "Complete Azure Data Factory expertise for pipeline JSON development, validation, and optimization (2025-2026). This plugin should be used for ADF pipeline creation, activity configuration, linked services, datasets, triggers, expressions, CI/CD, Microsoft Fabric integration, Databricks orchestration, ML pipeline patterns, and debugging.",
+      "version": "4.3.0",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -367,8 +367,8 @@
     {
       "name": "azure-master",
       "source": "./plugins/azure-master",
-      "description": "Complete Azure cloud expertise system with 2025-2026 features including AKS Automatic, Container Apps GPU, Deployment Stacks, Azure Machine Learning, and Azure AI Foundry. PROACTIVELY activate for: (1) ANY Azure resource provisioning or management, (2) AKS Automatic with Karpenter autoscaling, (3) Container Apps with serverless GPU and Dapr integration, (4) Azure OpenAI GPT-5 and reasoning models (o4-mini, o3), (5) Deployment Stacks for infrastructure lifecycle management, (6) Bicep v0.37+ with externalInput() and custom extensions, (7) Azure CLI 2.79+ with latest breaking changes, (8) SRE Agent integration for monitoring and incident response, (9) Azure AI Foundry model deployment, fine-tuning, prompt flow, and AI agents, (10) Azure Machine Learning: workspaces, compute, data assets, MLtables, training pipelines, AutoML, model registration, managed/batch/serverless endpoints, distributed training, sweep jobs, (11) MLOps with CI/CD and GitHub Actions, (12) Responsible AI, model monitoring, content safety, (13) Security, networking, and cost optimization. Provides: AKS Automatic GA features, Container Apps GPU workloads, Deployment Stacks best practices, latest Azure OpenAI models, Bicep 2025 patterns, Azure CLI expertise, comprehensive service configurations (compute, networking, storage, databases, AI/ML), Well-Architected Framework guidance, high availability patterns, security hardening, cost optimization strategies, production-ready configurations, end-to-end ML pipelines from data to deployment, fine-tuning foundation models, prompt flow development, AI agent creation, common errors and troubleshooting, and research/assistance resources. Ensures enterprise-ready, secure, scalable Azure infrastructure following Microsoft 2025-2026 standards.",
-      "version": "1.2.0",
+      "description": "Complete Azure cloud expertise covering 2025-2026 features. This plugin should be used for ANY Azure resource provisioning, AKS Automatic, Container Apps GPU, Azure OpenAI (GPT-5, reasoning models), Deployment Stacks, Azure ML workspaces, AI Foundry, compute clusters, endpoints, Terraform, networking, private endpoints, managed identities, debugging, and cost optimization.",
+      "version": "1.3.0",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -398,7 +398,16 @@
         "fine-tuning",
         "prompt-flow",
         "responsible-ai",
-        "model-deployment"
+        "model-deployment",
+        "private-endpoints",
+        "managed-identity",
+        "compute-cluster",
+        "terraform",
+        "powershell",
+        "acr",
+        "gpu",
+        "debugging",
+        "troubleshooting"
       ]
     },
     {

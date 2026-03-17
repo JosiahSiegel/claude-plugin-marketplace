@@ -1,6 +1,10 @@
 ---
 name: container-apps-gpu-2025
-description: Azure Container Apps GPU support 2025 features including serverless GPU, Dapr integration, and scale-to-zero
+description: |
+  This skill should be used when the user asks about "Container Apps GPU", "serverless GPU",
+  "Container Apps Dapr", "Container Apps scale-to-zero", "Container Apps AI workloads",
+  "Container Apps jobs", "Container Apps Foundry Models", or needs guidance on Azure Container Apps
+  with GPU support and serverless capabilities (2025 GA features).
 ---
 
 # Azure Container Apps GPU Support - 2025 Features

@@ -1,6 +1,10 @@
 ---
 name: azure-openai-2025
-description: Azure OpenAI Service 2025 models including GPT-5, GPT-4.1, reasoning models, and Azure AI Foundry integration
+description: |
+  This skill should be used when the user asks about "Azure OpenAI", "GPT-5", "GPT-4.1",
+  "Azure reasoning models", "o3 model", "o4-mini", "Azure AI Foundry models", "Azure OpenAI deployment",
+  "Azure OpenAI SDK", "Sora on Azure", or needs guidance on Azure OpenAI Service 2025 models
+  and deployment patterns.
 ---
 
 # Azure OpenAI Service - 2025 Models and Features

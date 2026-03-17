@@ -96,266 +96,25 @@ The **adf-master** plugin provides comprehensive Azure Data Factory expertise, c
 
 ## Commands
 
-### `/adf-master:adf-cicd-setup`
-Interactive setup for Azure Data Factory CI/CD with GitHub Actions or Azure DevOps.
-
-**What it does:**
-- Assesses your current environment and requirements
-- Generates complete CI/CD pipelines (build and deploy)
-- Configures GitHub Actions workflows or Azure DevOps YAML pipelines
-- Sets up PrePostDeploymentScript.Ver2 integration
-- Guides you through secrets and variables configuration
-- Provides testing and validation steps
-
-**When to use:**
-- Setting up CI/CD for the first time
-- Migrating from traditional to modern CI/CD
-- Adding new environments (test, production)
-- Troubleshooting existing CI/CD pipelines
-
-**Example usage:**
-```
-User: "Set up CI/CD for my Azure Data Factory using GitHub Actions"
-
-Claude: I'll guide you through setting up modern automated CI/CD for Azure Data Factory using GitHub Actions...
-[Provides complete workflow templates, secret configuration guide, and testing steps]
-```
-
 ### `/adf-master:adf-validate`
-Validate existing Azure Data Factory pipelines against activity nesting rules, resource limits, and best practices.
+Validate existing ADF pipeline JSON against activity nesting rules, resource limits, and best practices.
 
-**What it does:**
-- **VALIDATES existing pipeline JSON** without modifying it
-- **CHECKS activity nesting** against permitted/prohibited combinations
-- **VERIFIES resource limits** (activities, parameters, ForEach batching)
-- **AUDITS linked services** for required properties
-- **GENERATES comprehensive validation report** with issues and fixes
-- **PROVIDES actionable recommendations** for each violation
+### `/adf-master:adf-create-pipeline`
+Create ADF pipelines with strict validation enforcement — rejects prohibited nesting patterns and suggests Execute Pipeline workarounds.
 
-**When to use:**
-- Validating existing pipeline JSON before deployment
-- Auditing pipelines for compliance with ADF limitations
-- Troubleshooting why a pipeline design might fail
-- Code review of ADF pipelines
-- Pre-deployment validation checks
+### `/adf-master:adf-debug`
+Debug ADF pipeline failures with systematic analysis, error pattern matching, and Log Analytics queries.
 
-**Example usage:**
-```
-User: "Validate this pipeline JSON for any issues"
+### `/adf-master:adf-expression`
+Help with ADF expression language — functions, system variables, activity outputs, and dynamic content.
 
-Claude: Let me validate your pipeline against ADF limitations...
-[Provides detailed validation report with critical issues, warnings, and recommendations]
-```
+### `/adf-master:adf-linked-service`
+Create and configure ADF linked service JSON with proper authentication and required properties.
 
-### `/adf-master:adf-pipeline-create`
-Create Azure Data Factory pipelines following Microsoft best practices **with STRICT validation enforcement**.
+## Agent
 
-**What it does:**
-- **VALIDATES activity nesting** against ADF limitations BEFORE creation
-- **REJECTS prohibited patterns** (ForEach in If, nested ForEach, etc.)
-- **SUGGESTS Execute Pipeline workarounds** for complex nesting needs
-- Designs pipeline architecture based on requirements
-- Implements proper parameterization
-- Adds error handling and retry logic
-- Optimizes for performance
-- Includes monitoring and logging
-- **Provides ONLY valid, production-ready pipeline JSON**
-
-**New Validation Features:**
-- ✅ Activity nesting validation (ForEach, If, Switch, Until)
-- ✅ Resource limit checks (activity count < 80, ForEach batchCount ≤ 50)
-- ✅ Linked service property validation (accountKind, authentication requirements)
-- ✅ Automatic detection of Set Variable in parallel ForEach
-- ✅ Comprehensive validation checklist before finalization
-
-**When to use:**
-- Creating new pipelines from scratch
-- Implementing common patterns (incremental load, SCD, metadata-driven)
-- Need validation that pipeline structure is valid
-- Want production-ready code with best practices
-- Complex nesting requirements (automatically uses Execute Pipeline pattern)
-
-**Example usage:**
-```
-User: "Create a pipeline with ForEach loop inside an If condition"
-
-Claude: ❌ INVALID: If activities CANNOT contain ForEach activities.
-
-✅ SOLUTION: Execute Pipeline pattern
-[Provides parent pipeline with If calling Execute Pipeline, and child pipeline with ForEach]
-This complies with ADF limitations while maintaining your logic.
-```
-
-### `/adf-master:adf-pipeline-debug`
-Debug Azure Data Factory pipeline failures with systematic analysis.
-
-**What it does:**
-- Analyzes error messages and patterns
-- Uses ADF monitoring tools for investigation
-- Provides step-by-step debugging approach
-- Offers solutions for common failure scenarios
-- Generates Log Analytics queries for analysis
-- Implements custom logging patterns
-
-**When to use:**
-- Pipeline is failing and you need to diagnose why
-- Works in debug mode but fails when triggered
-- Intermittent failures
-- Performance degradation issues
-- Need to set up better monitoring
-
-**Example usage:**
-```
-User: "My copy activity is failing with 'OperationTimedOut' error"
-
-Claude: Let's troubleshoot this timeout issue systematically...
-[Analyzes timeout causes, suggests increasing timeout, optimizing source query, and checking network connectivity]
-```
-
-### `/adf-master:adf-arm-template`
-Generate, validate, and deploy Azure Data Factory ARM templates using npm utilities.
-
-**What it does:**
-- Validates ADF resources before deployment
-- Generates ARM templates using npm or UI
-- Creates environment-specific parameter files
-- Deploys using PowerShell or Azure CLI
-- Integrates PrePostDeploymentScript
-- Provides what-if analysis
-
-**When to use:**
-- Generating ARM templates for deployment
-- Validating resources before publishing
-- Creating parameter files for multiple environments
-- Deploying to test or production
-- Troubleshooting template deployment issues
-
-**Example usage:**
-```
-User: "Generate and deploy ARM templates to my test environment"
-
-Claude: I'll help you generate and deploy ARM templates...
-[Provides npm commands for generation, parameter file creation, and PowerShell deployment script]
-```
-
-### `/adf-master:adf-troubleshoot`
-Troubleshoot common Azure Data Factory CI/CD and runtime issues.
-
-**What it does:**
-- Diagnoses CI/CD build and deployment failures
-- Troubleshoots npm validation errors
-- Resolves ARM deployment issues
-- Debugs PrePostDeploymentScript errors
-- Fixes authentication and permission problems
-- Analyzes performance issues
-
-**When to use:**
-- CI/CD pipeline is failing
-- ARM template deployment errors
-- GitHub Actions or Azure DevOps issues
-- PrePostDeploymentScript errors
-- Authentication failures
-- Need Log Analytics queries for investigation
-
-**Example usage:**
-```
-User: "My Azure DevOps pipeline is failing with 'Template parameters are not valid'"
-
-Claude: This error typically occurs when a trigger was deleted in dev but the parameter still exists...
-[Provides detailed troubleshooting steps and solutions]
-```
-
-### `/adf-master:adf-optimize`
-Optimize Azure Data Factory pipelines for performance, cost, and efficiency.
-
-**What it does:**
-- Analyzes current performance metrics
-- Optimizes copy activities (DIUs, staging, partitioning)
-- Tunes data flow performance
-- Reduces costs with incremental loads
-- Right-sizes compute resources
-- Provides baseline comparisons and ROI calculations
-
-**When to use:**
-- Pipelines are slow or timing out
-- High Azure costs
-- Need to improve performance
-- Want to implement incremental loads
-- Optimizing for specific data volumes
-
-**Example usage:**
-```
-User: "My data flow is taking hours to complete and costing too much"
-
-Claude: Let's optimize your data flow performance and cost...
-[Analyzes compute sizing, partitioning strategy, and provides cost reduction recommendations]
-```
-
-## Agents
-
-### `adf-expert` **[ENHANCED with Validation]**
-Complete Azure Data Factory expertise across all operations **with STRICT validation enforcement**.
-
-**Expertise:**
-- **VALIDATION-FIRST** pipeline design and architecture
-- **Activity nesting rules enforcement** (ForEach, If, Switch, Until)
-- **Linked service configuration validation** (Blob Storage, SQL Database, etc.)
-- Data transformation patterns
-- Integration patterns (source-to-sink, real-time vs batch)
-- Performance optimization
-- Security and compliance
-- All ADF components (linked services, datasets, activities, triggers, IRs)
-
-**New Validation Capabilities:**
-- ⚠️ **Immediately rejects** prohibited activity nesting combinations
-- ⚠️ **Verifies** linked service properties match authentication requirements
-- ⚠️ **Enforces** resource limits (activities, ForEach batching, Lookup size)
-- ✅ **Suggests** Execute Pipeline workarounds for complex nesting
-- ✅ **Validates** against common pitfalls (missing accountKind, expired SAS tokens, etc.)
-
-**When activated:**
-- Automatically when you work on ADF pipelines
-- When you need design guidance with validation
-- For complex transformation logic
-- When implementing best practices
-- **When creating ANY pipeline with control flow activities**
-
-**Example:**
-```
-User: "Create nested ForEach loops to process files"
-
-adf-expert: ❌ INVALID NESTING DETECTED
-ForEach activities support only ONE level of nesting. Cannot nest ForEach within ForEach.
-
-✅ SOLUTION: Execute Pipeline Pattern
-[Provides validated solution with parent ForEach calling Execute Pipeline to child pipeline with inner ForEach]
-```
-
-### `adf-cicd-expert`
-Complete Azure Data Factory CI/CD expertise.
-
-**Expertise:**
-- Modern automated CI/CD (@microsoft/azure-data-factory-utilities)
-- Traditional manual CI/CD methods
-- GitHub Actions workflows
-- Azure DevOps pipelines
-- ARM template deployment
-- PrePostDeploymentScript
-- Multi-environment strategies
-
-**When activated:**
-- Automatically when working on CI/CD setup
-- For deployment automation
-- When troubleshooting build/deploy failures
-- For multi-environment configuration
-
-**Example:**
-```
-User: "Set up automated deployment from GitHub to multiple environments"
-
-adf-cicd-expert: I'll create a complete GitHub Actions workflow for multi-environment deployment...
-[Provides build workflow, deployment workflow, environment configuration, and secret setup]
-```
+### `adf-expert`
+Lean orchestrator agent that loads skills on demand. Covers all ADF operations with validation enforcement, ML orchestration, Fabric integration, and Databricks patterns.
 
 ## Skills
 
@@ -403,40 +162,30 @@ This skill is automatically consulted by agents and commands to ENFORCE Azure Da
 
 ## Use Cases
 
-### Setting Up CI/CD for the First Time
-```bash
-# Use the interactive setup command
-/adf-master:adf-cicd-setup
-```
-**Result:** Complete CI/CD pipelines generated for your platform (GitHub or Azure DevOps), with all configuration steps documented.
-
 ### Creating a New Pipeline
 ```bash
-# Use the pipeline creation command
-/adf-master:adf-pipeline-create
+/adf-master:adf-create-pipeline
 ```
-**Result:** Production-ready pipeline with parameterization, error handling, logging, and best practices.
+
+### Validating Existing Pipelines
+```bash
+/adf-master:adf-validate
+```
 
 ### Debugging a Failed Pipeline
 ```bash
-# Use the debugging command
-/adf-master:adf-pipeline-debug
+/adf-master:adf-debug
 ```
-**Result:** Systematic diagnosis of the failure with specific solutions and monitoring recommendations.
 
-### Optimizing Performance
+### Working with Expressions
 ```bash
-# Use the optimization command
-/adf-master:adf-optimize
+/adf-master:adf-expression
 ```
-**Result:** Performance improvements with measurable metrics and cost reduction strategies.
 
-### Deploying to New Environment
+### Configuring Linked Services
 ```bash
-# Use the ARM template command
-/adf-master:adf-arm-template
+/adf-master:adf-linked-service
 ```
-**Result:** Generated templates, parameter files, and deployment scripts for your target environment.
 
 ## Best Practices
 
@@ -492,7 +241,7 @@ All guidance is based on:
 
 If you encounter issues or have questions:
 
-1. **Use the troubleshooting command:** `/adf-master:adf-troubleshoot`
+1. **Use the debug command:** `/adf-master:adf-debug`
 2. **Check official documentation:** Microsoft Learn links in skill
 3. **Community support:**
    - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/tags/130/azure-data-factory
@@ -686,14 +435,11 @@ MIT License - See LICENSE file for details.
 **Ready to master Azure Data Factory? Install the plugin and start with:**
 
 ```bash
-# Interactive CI/CD setup
-/adf-master:adf-cicd-setup
+# Create a pipeline with validation
+/adf-master:adf-create-pipeline
 
-# Or create your first optimized pipeline
-/adf-master:adf-pipeline-create
+# Validate existing pipeline JSON
+/adf-master:adf-validate
 
-# Or get help with any ADF task
-# The agents activate automatically!
+# Or just ask the adf-expert agent directly!
 ```
-
-**Happy data engineering! 🚀**

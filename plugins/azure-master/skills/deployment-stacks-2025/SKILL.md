@@ -1,6 +1,10 @@
 ---
 name: deployment-stacks-2025
-description: Azure Deployment Stacks GA 2025 features for unified resource management, deny settings, and lifecycle management
+description: |
+  This skill should be used when the user asks about "Deployment Stacks", "Azure Blueprints replacement",
+  "deny settings", "DenyDelete", "DenyWriteAndDelete", "ActionOnUnmanage", "Bicep deployment stacks",
+  "unified resource management", or needs guidance on Azure Deployment Stacks GA features
+  for lifecycle management and resource protection.
 ---
 
 # Azure Deployment Stacks - 2025 GA Features
