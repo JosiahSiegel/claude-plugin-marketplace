@@ -33,14 +33,12 @@
       "mcp__context7__query-docs",
       "Bash(xxd:*)",
       "Bash(file:*)",
-      "Bash(for f in \"D:/repos/claude-code-marketplace/plugins/ffmpeg-master/scripts/\"*.sh)",
       "Bash(do bash -n \"$f\")",
       "Bash(echo:*)",
       "Bash(python3:*)",
       "Bash(node:*)",
       "Bash(tree:*)",
-      "Bash(awk:*)",
-      "WebFetch(domain:pyav.basswood-io.com)"
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": []

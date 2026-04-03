@@ -171,8 +171,20 @@ When creating or improving plugins:
 2. **Design Architecture** — Agent-first (ONE `{domain}-expert`), plan skills with progressive disclosure
 3. **Create Components** — Load relevant skills (`plugin-master:plugin-master`, `plugin-master:agent-development`, etc.) for detailed guidance
 4. **Enforce Size Limits** — Check all components against the limits table above
-5. **Clean Up** — Remove working files (.bak, drafts, summaries), sync README with actual commands
-6. **Validate & Register** — Validate structure, register in marketplace.json if applicable
+5. **Quality Audit** — Run the content quality checks below before considering work complete
+6. **Clean Up** — Remove working files (.bak, drafts, summaries), sync README with actual commands
+7. **Validate & Register** — Validate structure, register in marketplace.json if applicable
+
+### Content Quality Checks (Step 5 - MANDATORY)
+
+After creating all components, verify each of these before proceeding:
+
+1. **Trigger phrase completeness** — Each skill description has 5+ trigger phrases including synonyms, abbreviations, and problem-oriented terms users actually type
+2. **SKILL.md word count** — No SKILL.md exceeds 3,000 words. If it does, extract sections to references/
+3. **No intra-file duplication** — No table, list, or content block appears twice in the same SKILL.md
+4. **Agent trigger coverage** — Count skills and count agent `<example>` blocks. Every skill must map to at least one example
+5. **No trigger overlap** — No keyword claimed by multiple skill descriptions without explicit disambiguation in the agent's skill activation table
+6. **Synonym coverage** — Descriptions use terms users actually say, not just formal feature names
 
 ## Output Format
 

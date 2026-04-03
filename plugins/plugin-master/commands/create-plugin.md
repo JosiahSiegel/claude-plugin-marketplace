@@ -118,13 +118,24 @@ System prompt content...
 
 ## Validation
 
-After creating plugin, validate with:
+After creating plugin, validate structure with:
 
 ```bash
 ${CLAUDE_PLUGIN_ROOT}/scripts/validate-plugin.sh plugins/plugin-name
 ```
 
 Or use: `/validate-plugin`
+
+### Post-Creation Quality Checks
+
+After structural validation, verify content quality:
+
+1. **Skill trigger phrases** — Each skill description has 5+ phrases including synonyms and informal terms
+2. **SKILL.md size** — No SKILL.md over 3,000 words (extract to references/ if needed)
+3. **No duplicate content** — No repeated tables or blocks within any SKILL.md
+4. **Agent example coverage** — Every skill has at least one agent `<example>` block routing to it
+5. **No trigger overlap** — No ambiguous keyword shared between skill descriptions without disambiguation
+6. **Synonym audit** — Descriptions include how users actually phrase requests, not just formal feature names
 
 ## Examples
 
