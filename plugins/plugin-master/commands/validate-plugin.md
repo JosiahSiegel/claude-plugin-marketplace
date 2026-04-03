@@ -160,3 +160,24 @@ Before publishing:
 - [ ] All components have frontmatter
 - [ ] Agent has `<example>` blocks
 - [ ] Registered in marketplace.json (if applicable)
+
+### Quality Checks (Step 6)
+
+After structural validation passes, perform these content quality checks:
+
+**Skill descriptions:**
+- [ ] Each skill description has at least 5 distinct trigger phrases
+- [ ] Descriptions include common synonyms and informal terms (not just formal feature names)
+- [ ] Descriptions include problem-oriented phrases (e.g., "slow report" not just "performance tuning")
+
+**SKILL.md size and duplication:**
+- [ ] No SKILL.md exceeds 3,000 words — extract long sections to references/
+- [ ] No duplicate tables, lists, or content blocks within any single SKILL.md
+- [ ] No content duplicated between SKILL.md and its references/ files
+
+**Agent trigger coverage:**
+- [ ] Count skills and count agent `<example>` blocks — every skill must have at least one example that routes to it
+- [ ] No trigger phrase overlap: no keyword claimed by multiple skill descriptions without disambiguation in the agent's skill activation table
+
+**Synonym coverage:**
+- [ ] Skill descriptions account for how users actually phrase requests (informal terms, abbreviations, problem descriptions)

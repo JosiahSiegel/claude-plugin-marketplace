@@ -74,10 +74,15 @@ if echo "$FRONTMATTER" | grep -qE "^description:"; then
 
     # Check description quality
     DESC=$(echo "$FRONTMATTER" | sed -n '/^description:/,/^[a-z]*:/p' | head -n -1)
-    if echo "$DESC" | grep -qE "\([0-9]\)"; then
-        success "Description has numbered use cases"
+
+    # Count quoted trigger phrases in description
+    TRIGGER_COUNT=$(echo "$DESC" | grep -oE '"[^"]+"' | wc -l | tr -d ' ')
+    if [[ $TRIGGER_COUNT -ge 5 ]]; then
+        success "Description has $TRIGGER_COUNT trigger phrases (minimum 5)"
+    elif [[ $TRIGGER_COUNT -ge 1 ]]; then
+        warning "Description has only $TRIGGER_COUNT trigger phrases (recommended: 5+, include synonyms and informal terms)"
     else
-        warning "Consider adding numbered use cases to description"
+        warning "No quoted trigger phrases found in description (recommended: 5+ specific phrases)"
     fi
 else
     error "Missing required 'description' field"
@@ -87,8 +92,17 @@ fi
 CONTENT=$(cat "$SKILL_FILE")
 LINE_COUNT=$(wc -l < "$SKILL_FILE")
 CHAR_COUNT=${#CONTENT}
+# Word count excluding frontmatter
+BODY_CONTENT=$(sed -n '/^---$/,/^---$/d;p' "$SKILL_FILE")
+WORD_COUNT=$(echo "$BODY_CONTENT" | wc -w | tr -d ' ')
 
-success "SKILL.md: $LINE_COUNT lines, $CHAR_COUNT characters"
+success "SKILL.md: $LINE_COUNT lines, $CHAR_COUNT characters, ~$WORD_COUNT words"
+
+if [[ $WORD_COUNT -gt 3000 ]]; then
+    error "SKILL.md body exceeds 3,000 words ($WORD_COUNT) - extract sections to references/"
+elif [[ $WORD_COUNT -gt 2000 ]]; then
+    warning "SKILL.md body exceeds 2,000 words ($WORD_COUNT) - consider moving detailed content to references/"
+fi
 
 if [[ $LINE_COUNT -gt 500 ]]; then
     warning "SKILL.md has $LINE_COUNT lines - consider using progressive disclosure"

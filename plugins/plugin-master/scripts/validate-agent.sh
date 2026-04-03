@@ -122,6 +122,19 @@ else
     esac
 fi
 
+# Check example-to-skill coverage
+PLUGIN_DIR=$(dirname "$(dirname "$AGENT_FILE")")
+if [[ -d "$PLUGIN_DIR/skills" ]]; then
+    SKILL_COUNT=$(find "$PLUGIN_DIR/skills" -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
+    if [[ $SKILL_COUNT -gt 0 ]]; then
+        if [[ $EXAMPLE_COUNT -lt $SKILL_COUNT ]]; then
+            warning "Agent has $EXAMPLE_COUNT examples but $SKILL_COUNT skills - some skills may lack trigger coverage"
+        else
+            success "Example count ($EXAMPLE_COUNT) covers skill count ($SKILL_COUNT)"
+        fi
+    fi
+fi
+
 # Check system prompt (body content)
 BODY=$(sed -n '/^---$/,/^---$/d;p' "$AGENT_FILE" | tail -n +2)
 BODY_LENGTH=${#BODY}

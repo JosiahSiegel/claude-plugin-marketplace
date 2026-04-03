@@ -56,7 +56,16 @@ description: |
 - Include **specific trigger phrases** users would actually say
 - Be **concrete**: "create a hook", "add a PreToolUse hook" (NOT "helps with hooks")
 - List multiple trigger phrases to maximize activation
+- **Include common synonyms** — users say "slow DAX" not "DAX performance optimization", "semantic model" not "data model", "slow query" not "query performance tuning"
 - **Keep under 500 characters** — rely on keywords in plugin.json for breadth
+
+**Trigger phrase completeness checklist:**
+Before finalizing a skill description, verify it covers:
+1. The skill's primary domain terms (e.g., "Power Query M" for an ETL skill)
+2. Common synonyms and informal phrases users actually type (e.g., "slow report", "merge queries", "pivot/unpivot")
+3. Action verbs for tasks the skill handles (e.g., "optimize", "debug", "migrate", "configure")
+4. Abbreviations and acronyms users may use (e.g., "PQ" for Power Query, "DAX" for Data Analysis Expressions)
+5. Problem-oriented phrases (e.g., "report is slow" not just "performance optimization")
 
 **Good example:**
 ```yaml
@@ -121,9 +130,21 @@ You can use the grep tool to search.
 | Target | Words |
 |--------|-------|
 | Ideal | 1,500-2,000 |
-| Maximum | 3,000 (without references/) or 5,000 (absolute max) |
+| Maximum | 3,000 (absolute hard limit) |
 
 **If SKILL.md exceeds 2,000 words**, move detailed content to `references/` files.
+
+**Size enforcement process:**
+1. After writing SKILL.md, count words (exclude frontmatter). Use `wc -w` or estimate ~5 words per line.
+2. If over 2,000 words, identify sections that are reference material (detailed tables, exhaustive lists, server-specific configs, troubleshooting matrices) and extract them to `references/`.
+3. If over 3,000 words after extraction, the skill is too broad — split into two skills or move more content to references.
+4. **Never leave a section in SKILL.md just because it was written there first.** Always evaluate whether each section earns its place in the core file.
+
+### Body - Avoiding Duplicate Content
+
+**Within a single SKILL.md**, never repeat the same table, list, or block of content. Before adding any table or reference block, search the file for similar content already present.
+
+**Across SKILL.md and references/**, information lives in one place only. If a detailed table is in `references/patterns.md`, SKILL.md should contain only a brief summary and a pointer to the reference file — not a copy of the table.
 
 ## Resource Types
 
@@ -189,11 +210,14 @@ Only create directories you actually need.
 
 - [ ] SKILL.md has valid YAML frontmatter with `name` and `description`
 - [ ] Description uses third person ("This skill should be used when...")
-- [ ] Description includes specific trigger phrases
+- [ ] Description includes specific trigger phrases (minimum 5 distinct phrases)
+- [ ] Description includes common synonyms and informal terms users actually type
+- [ ] Description includes problem-oriented phrases, not just feature names
 - [ ] Body uses imperative/infinitive form (not second person)
-- [ ] Body is lean (1,500-2,000 words; detailed content in references/)
-- [ ] All referenced files actually exist
+- [ ] Body is under 3,000 words (ideally 1,500-2,000; detailed content in references/)
+- [ ] No duplicate tables, lists, or content blocks within the same SKILL.md
 - [ ] No duplicated information between SKILL.md and references/
+- [ ] All referenced files actually exist
 - [ ] Examples are complete and working
 - [ ] Scripts are executable
 
@@ -211,6 +235,8 @@ After using the skill on real tasks:
 | Mistake | Fix |
 |---------|-----|
 | Weak trigger description ("Provides guidance") | Add specific phrases: "create X", "configure Y" |
+| Missing synonyms in description | Add informal terms users actually type: "slow report" not just "performance optimization" |
+| Duplicate table/block within same SKILL.md | Search the file before adding any table — never repeat the same content block |
 | Everything in one SKILL.md (8,000 words) | Move details to references/, keep SKILL.md under 2,000 |
 | Second person ("You should...") | Imperative form ("Configure the server...") |
 | Missing resource references | Add "Additional Resources" section listing references/ and examples/ |

@@ -92,6 +92,9 @@ description: |
 - Do NOT include full JSON schemas, code samples, or CLI output in examples
 - Examples show *when* to trigger and *how to respond*, not the domain content itself
 
+**Skill coverage requirement (CRITICAL):**
+When the agent delegates to skills, every skill MUST have at least one `<example>` block that would route to it. Count skills, count examples, and verify full coverage. If the plugin has 9 skills and only 7 trigger examples, 2 skills will have reduced activation reliability. Add examples until every skill has explicit coverage. When there are more skills than the 7-example limit allows, combine related skills into shared examples that mention both domains.
+
 ### model (required)
 
 | Value | When to use |
@@ -273,12 +276,24 @@ Expert agents should load relevant skills before answering. Include skill activa
 When the user asks about [topic], load `plugin-name:skill-name` before responding.
 ```
 
+### Preventing Trigger Phrase Overlap Between Skills
+
+When a plugin has multiple skills, their trigger phrases and description terms must not create ambiguity. If two skills both claim the same keyword (e.g., both "programmatic-development" and "tmdl-mastery" claim "TMDL"), the agent cannot reliably route requests.
+
+**Disambiguation rules:**
+1. **Audit trigger terms across all skills** — list every trigger phrase from every skill description side by side. Flag any term that appears in more than one skill.
+2. **Assign exclusive ownership** — each ambiguous term must belong to exactly one skill. The other skill should use a more specific phrase (e.g., "TMDL file editing" vs. "programmatic deployment using TMDL").
+3. **Add disambiguation hints to the agent's skill activation table** — for terms that could route to multiple skills, add a clarifying note: "TMDL editing/syntax → tmdl-mastery; TMDL in deployment pipelines → programmatic-development".
+4. **Test with ambiguous queries** — after writing descriptions, mentally test phrases like "help me with TMDL" and verify the routing is unambiguous.
+
 ## Validation Checklist
 
 Before finalizing an agent:
 
 - [ ] Name: 3-50 chars, lowercase, hyphens, starts/ends alphanumeric
 - [ ] Description: includes triggering conditions and 2-4 `<example>` blocks
+- [ ] **Every skill has trigger coverage**: count skills and verify each has at least one example that routes to it
+- [ ] **No trigger phrase overlap**: no ambiguous keyword claimed by multiple skills without disambiguation
 - [ ] Model: set to `inherit` (unless specific need)
 - [ ] Color: appropriate for agent function
 - [ ] Tools: restricted to minimum needed (or omitted for full access)
@@ -300,6 +315,8 @@ Before finalizing an agent:
 | Mistake | Fix |
 |---------|-----|
 | Vague description without examples | Add 2-4 `<example>` blocks with concrete user phrases |
+| Skills without trigger examples | Every skill must have at least one example that routes to it — count and verify |
+| Trigger phrase overlap between skills | Audit all skill descriptions for shared keywords; assign exclusive ownership or add disambiguation |
 | `model: sonnet` when `inherit` works | Use `inherit` unless agent needs specific capability |
 | Too many tools granted | Restrict to minimum needed tools |
 | Generic system prompt | Be specific about process, output format, quality standards |
