@@ -18,7 +18,24 @@ description: |
 
 ## Overview
 
-Complete TMDL reference covering language syntax, folder structure, object types, expressions, serialization API, CI/CD integration, and deployment patterns. TMDL is the human-readable, source-control-friendly format for defining Power BI and Analysis Services semantic models at compatibility level 1200+. GA since 2025 and supported in Power BI Desktop, Fabric, Azure Analysis Services, and SQL Server 2025 Analysis Services.
+Complete TMDL reference covering language syntax, folder structure, object types, expressions, serialization API, CI/CD integration, and deployment patterns. TMDL is the human-readable, source-control-friendly format for defining Power BI and Analysis Services semantic models at compatibility level 1200+.
+
+## 2026 Status Snapshot
+
+| Aspect | Status (as of April 2026) |
+|--------|---------------------------|
+| TMDL language GA | GA since August 2024 -- no longer preview |
+| TMDL view in Power BI Desktop | GA -- includes semantic highlighting, autocomplete, code actions, diff preview, compatibility-level upgrade prompts |
+| TMDL as default PBIP semantic-model format | Default -- `model.bim` is the legacy BIM format; new PBIP projects write `definition/*.tmdl` files |
+| Fabric Git integration | Exports semantic models as **TMDL** (not TMSL/BIM) |
+| TMSL / BIM | **Not deprecated** -- still supported for XMLA scripting commands and tools that require JSON. Use TMDL for source control, TMSL for XMLA `createOrReplace` command scripting |
+| Compatibility level | 1550+ recommended; 1601+ required for some newer properties (e.g., `formatStringDefinition`, calculation group multi/empty selection expressions) |
+| Tabular Editor 2 (free) | TMDL read/write support (2.17+) |
+| Tabular Editor 3 (paid) | Full TMDL IDE with DAX debugger and diagram view |
+| VS Code TMDL extensions | Microsoft `analysis-services.TMDL` and the richer community `CPIM.TMDL-language-support` (DAX + M semantic highlighting, code actions, formatting, breadcrumb navigation) |
+| Report Server | **No TMDL support** -- continues to use legacy PBIX binary format |
+
+**Bottom line:** For any new Power BI / Fabric semantic model under source control, use TMDL. Retain TMSL only for XMLA command scripting scenarios or tools that still require `model.bim`.
 
 ## TMDL vs TMSL vs BIM
 
@@ -254,9 +271,84 @@ string tmdl = TmdlSerializer.SerializeObject(table.Measures["Total Sales"]);
 
 **Error types:** `TmdlFormatException` (invalid syntax) and `TmdlSerializationException` (valid syntax but invalid TOM metadata). Both include `Document`, `Line`, and `LineText` properties.
 
+## Self-Validation
+
+**Before deploying any TMDL you've generated**, run the four-layer validation pipeline from the **`powerbi-master:validation-testing`** skill:
+
+1. **Syntax** -- `TmdlSerializer.DeserializeDatabaseFromFolder` catches `TmdlFormatException` (bad indentation, invalid keywords)
+2. **Metadata** -- the same call catches `TmdlSerializationException` (invalid property combinations) and `model.Validate()` catches dangling references
+3. **Best practice** -- Tabular Editor 2 CLI `-A` switch or `semantic-link-labs.run_model_bpa` runs the standard Microsoft BPA rule set
+4. **Lineage** -- `model.Validate().Errors` plus custom Tabular Editor C# scripts catch sortByColumn / measure-references-column issues
+
+The validation-testing skill provides ready-to-run recipes (C#, Python, GitHub Actions YAML) for each layer. **Always validate before recommending a deploy.**
+
+## TMDL View in Power BI Desktop (2026)
+
+The TMDL view is an integrated code editor inside Power BI Desktop for scripting semantic-model changes. As of the 2026 release wave its feature set includes:
+
+- **Semantic highlighting, autocomplete (Ctrl+Space), tooltips on hover, and code actions** (generate lineage tags, correct property misspellings)
+- **Code formatting** via Shift+Alt+F or ribbon Format button (including "Format Selection" from the context menu)
+- **Error diagnostics** with a dedicated Problems pane
+- **Preview diff** -- side-by-side or inline TMDL diff of the model before and after executing the script, navigable via toolbar (previewing runs only valid TMDL)
+- **Compatibility level upgrade prompt** -- if the script uses a property above the current model compatibility level (e.g., 1550 -> 1601 for `formatStringDefinition`), Desktop prompts to upgrade automatically
+- **Multi-tab scripts**, saved into `TMDLScripts/` folder in PBIP projects (one file per tab)
+- **Drag objects** from the Data pane onto the editor to script them as `createOrReplace`; multi-select with Ctrl before dragging
+- **Right-click > Script TMDL** to a new tab or clipboard
+- **Apply** button applies metadata-only changes (no data refresh); renaming a column via TMDL decouples it from `sourceColumn` (Power Query editor still shows the source name)
+- **Bulk rename via regex find-and-replace** -- common pattern for prefix removal (`fact_`, `dim_`) or case changes
+
+**Limitation:** Desktop does not hot-reload TMDL files changed externally. After editing `.tmdl` files in VS Code, restart Power BI Desktop to pick up the changes.
+
+## Semantic Link Labs (Python TOM from Fabric Notebooks)
+
+For scripting semantic models from Python without a .NET toolchain, use `semantic-link-labs` (PyPI: `semantic-link-labs`) inside a Fabric notebook. It provides a Pythonic wrapper over TOM:
+
+```python
+%pip install semantic-link-labs -q
+
+import sempy_labs as labs
+from sempy_labs.tom import connect_semantic_model
+
+with connect_semantic_model(dataset="SalesModel", workspace="Sales-Dev", readonly=False) as tom:
+    # Add a measure
+    tom.add_measure(
+        table_name="Sales",
+        measure_name="Sales Amount",
+        expression="SUM(Sales[Amount])",
+        format_string="$ #,##0.00",
+        display_folder="Revenue",
+    )
+
+    # Add an incremental refresh policy
+    tom.add_incremental_refresh_policy(
+        table_name="Sales",
+        column_name="OrderDate",
+        start_date="2020-01-01T00:00:00",
+        end_date="2025-12-31T00:00:00",
+        incremental_granularity="Day",
+        incremental_periods=30,
+        rolling_window_granularity="Month",
+        rolling_window_periods=36,
+    )
+
+    # tom.save_changes() is called automatically on context exit
+```
+
+See `references/tmdl-programmatic-python.md` for a full cookbook.
+
 ## Additional Resources
 
 ### Reference Files
 - **`references/tmdl-syntax-reference.md`** -- Complete TMDL syntax and grammar reference with all object types, properties, and expression rules
 - **`references/tmdl-examples-cookbook.md`** -- Copy-pasteable TMDL examples for every object type: tables, columns, measures, partitions, relationships, roles, perspectives, cultures, calculation groups, hierarchies, KPIs, annotations, and field parameters
 - **`references/tmdl-cicd-patterns.md`** -- CI/CD pipelines, Git integration, deployment patterns, Tabular Editor CLI, Azure DevOps and GitHub Actions workflows, and merge conflict strategies
+- **`references/tmdl-programmatic-python.md`** -- semantic-link-labs / SemPy TOM scripting from Fabric Python notebooks: measures, calc groups, incremental refresh, RLS, Direct Lake, BPA, and model export patterns
+
+### Related Skills
+- **`powerbi-master:validation-testing`** -- Validate TMDL artifacts before deployment: TmdlSerializer parser, TOM Validate, BPA via Tabular Editor CLI / semantic-link-labs, custom C# rule scripts
+
+### Official Microsoft Learn References (2026)
+- [Announcing general availability of TMDL](https://powerbi.microsoft.com/en-us/blog/announcing-general-availability-of-tabular-model-definition-language-tmdl/) -- TMDL GA announcement
+- [Use the TMDL view in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-tmdl-view) -- Feature walkthrough with scenarios
+- [Power BI Desktop project semantic model folder](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-dataset) -- TMDL inside PBIP
+- [TMDL scripts reference (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-scripts) -- `createOrReplace` command documentation
