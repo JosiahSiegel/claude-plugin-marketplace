@@ -1,6 +1,6 @@
 ---
 name: ssdt-cicd-best-practices-2025
-description: Modern CI/CD best practices for SQL Server database development with tSQLt, state-based deployment, and 2025 patterns
+description: Modern SSDT CI/CD best practices for SQL Server database development (2025). PROACTIVELY activate for: (1) SSDT CI/CD pipeline design, (2) state-based deployment with DACPACs, (3) tSQLt unit testing integration, (4) database build validation in CI, (5) drift detection via SqlPackage Extract + Compare, (6) Azure DevOps and GitHub Actions templates for SSDT, (7) publish profile management per environment, (8) pre/post deploy scripts with idempotent MERGE, (9) DACPAC versioning and artifacts, (10) handling reference databases. Provides: end-to-end pipeline YAML for ADO and GHA, tSQLt setup, drift-detection scripts, and a publish-profile pattern for dev/test/prod.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

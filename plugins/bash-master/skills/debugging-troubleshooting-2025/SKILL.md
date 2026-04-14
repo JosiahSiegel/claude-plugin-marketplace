@@ -1,6 +1,6 @@
 ---
 name: debugging-troubleshooting-2025
-description: Comprehensive bash script debugging and troubleshooting techniques for 2025
+description: Comprehensive bash script debugging and troubleshooting techniques for 2025. PROACTIVELY activate for: (1) debugging a misbehaving bash script, (2) using set -x, set -e, set -u, set -o pipefail (strict mode), (3) customizing PS4 for richer trace output, (4) trap DEBUG, ERR, and EXIT for diagnostics, (5) bashdb and other interactive debuggers, (6) profiling slow scripts (timing, BASH_REMATCH overhead), (7) reproducing CI-only failures locally, (8) resolving unbound variable or command not found errors, (9) understanding subshell vs current-shell variable scope. Provides: strict-mode template, PS4 patterns, trap recipes for instrumentation, profiling techniques, and a step-by-step debugging playbook.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

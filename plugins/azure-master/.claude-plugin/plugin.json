@@ -1,6 +1,6 @@
 {
   "name": "azure-master",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Complete Azure cloud expertise covering 2025-2026 features. This plugin should be used for ANY Azure resource provisioning, AKS Automatic, Container Apps GPU, Azure OpenAI (GPT-5, reasoning models), Deployment Stacks, Azure ML workspaces, AI Foundry, compute clusters, endpoints, Terraform, networking, private endpoints, managed identities, debugging, and cost optimization.",
   "author": {
     "name": "Josiah Siegel",

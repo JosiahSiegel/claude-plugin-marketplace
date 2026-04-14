@@ -1,6 +1,6 @@
 ---
 name: powershell-2025-changes
-description: Critical PowerShell changes, deprecations, and migrations for 2025
+description: Critical PowerShell changes, deprecations, and migrations for 2025. PROACTIVELY activate for: (1) PowerShell 7.5 GA changes, (2) PowerShell 7.6 preview features, (3) Windows PowerShell 5.1 deprecation timeline, (4) PSReadLine 2.4+ updates, (5) Az PowerShell 14.x breaking changes, (6) Microsoft.Graph migration from AzureAD/MSOnline modules, (7) PSResourceGet replacing PowerShellGet 2.x, (8) DSC v3 and migration from DSC v1/v2, (9) ExecutionPolicy and constrained language mode updates, (10) .NET 9/.NET 10 integration impact. Provides: deprecation timeline, breaking-change checklist, migration scripts (AzureAD to Microsoft.Graph), and PSResourceGet upgrade steps.
 ---
 
 # PowerShell 2025 Breaking Changes & Migrations

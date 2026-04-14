@@ -1,13 +1,6 @@
 ---
 name: unity-modding
-description: |
-  This skill should be used when the user asks about "modding support",
-  "mod loading", "mod API", "Asset Bundles", "Addressables for mods",
-  "Lua scripting Unity", "MoonSharp", "Harmony patching", "IL injection",
-  "Steam Workshop integration", "mod manager", "plugin architecture game",
-  "user-generated content", "UGC", "custom content loading",
-  "runtime asset loading", "mod SDK", "modding framework",
-  or needs help designing extensible game architectures for community mods.
+description: Unity game modding architecture and mod-loading systems. PROACTIVELY activate for: (1) adding modding support to a Unity game, (2) Asset Bundles for mods, (3) Addressables for mod content, (4) Lua scripting via MoonSharp, (5) Harmony patching for runtime IL injection, (6) Steam Workshop integration, (7) mod manager UI, (8) plugin architecture for user-generated content (UGC), (9) custom content loading at runtime, (10) sandboxing and security for untrusted mods. Provides: AssetBundle vs Addressables tradeoffs, MoonSharp setup, Harmony patch patterns, Steam Workshop SDK integration, mod manager templates, and security guidelines.
 ---
 
 # Unity Modding Architecture

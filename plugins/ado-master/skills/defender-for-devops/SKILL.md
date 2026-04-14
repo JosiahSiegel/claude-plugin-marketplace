@@ -1,6 +1,6 @@
 ---
 name: defender-for-devops
-description: Microsoft Defender for DevOps integration with Azure Pipelines (2025)
+description: Microsoft Defender for DevOps integration with Azure Pipelines. PROACTIVELY activate for: (1) adding security scanning to a pipeline, (2) Microsoft Security DevOps task (MSDO), (3) SAST tools (CredScan, ESLint, BinSkim, Bandit, Semgrep), (4) dependency scanning (Dependency-Check, Snyk), (5) container image scanning (Trivy, Defender for Containers), (6) IaC scanning (Checkov, Terrascan), (7) secret scanning, (8) SARIF results upload, (9) Defender for Cloud connector setup, (10) compliance reporting and policy gates. Provides: MSDO task YAML, scanner enable/disable matrix, SARIF integration, Defender connector setup steps, and a quality-gate template.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

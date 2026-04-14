@@ -1,6 +1,6 @@
 {
   "name": "unity-master",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Complete Unity game development expertise. Covers C# scripting, MonoBehaviour lifecycle, UI systems (UGUI, UI Toolkit), physics, animation, networking (Netcode, Mirror, Photon), modding support, ECS/DOTS, shader development (ShaderLab, HLSL, Shader Graph), editor scripting, performance optimization, build pipelines, and Unity Gaming Services integration.",
   "author": {
     "name": "Josiah Siegel",

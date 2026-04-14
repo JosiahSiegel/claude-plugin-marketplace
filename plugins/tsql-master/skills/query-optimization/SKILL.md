@@ -1,7 +1,6 @@
 ---
 name: query-optimization
-description: |
-  T-SQL query optimization techniques for SQL Server and Azure SQL Database. Use this skill when: (1) User needs to optimize slow queries, (2) User asks about SARGability or index seeks, (3) User needs help with query hints, (4) User has parameter sniffing issues, (5) User needs to understand execution plans, (6) User asks about statistics and cardinality estimation.
+description: T-SQL query optimization for SQL Server and Azure SQL Database. PROACTIVELY activate for: (1) optimizing slow queries, (2) SARGability and index-seek vs scan, (3) query hints (OPTION RECOMPILE, FORCESEEK, MAXDOP, OPTIMIZE FOR), (4) parameter sniffing problems and remediation, (5) reading and interpreting execution plans, (6) statistics, cardinality estimation, and the new CE, (7) tempdb spills and memory grants, (8) wait-stats analysis, (9) query store baseline and regression detection, (10) sp_BlitzCache / sp_WhoIsActive workflows. Provides: SARGability rewrite catalog, parameter-sniffing fixes, execution-plan reading guide, query-store usage, and copy-pasteable diagnostic queries.
 ---
 
 # Query Optimization

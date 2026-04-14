@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-animations
-description: Tailwind CSS animations and transitions including built-in utilities and custom animation patterns
+description: Tailwind CSS animations and transitions including built-in utilities and custom keyframes. PROACTIVELY activate for: (1) animate-* utilities (spin, ping, pulse, bounce), (2) custom @keyframes via @theme animate, (3) transition utilities (transition, duration, ease), (4) transforms (scale, rotate, translate) with transition, (5) prefers-reduced-motion: reduce, (6) Framer Motion / Motion One integration with Tailwind, (7) CSS scroll-driven animations (animation-timeline), (8) view transitions API with Tailwind, (9) hover, focus, group-hover transitions, (10) staggered list animations. Provides: animation utility reference, custom keyframe examples, reduced-motion pattern, Framer Motion integration, and scroll-driven animation recipes.
 ---
 
 # Tailwind CSS Animations & Transitions

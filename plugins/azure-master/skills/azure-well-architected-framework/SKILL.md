@@ -1,10 +1,6 @@
 ---
 name: azure-well-architected-framework
-description: |
-  This skill should be used when the user asks about "Well-Architected Framework", "Azure reliability",
-  "Azure security best practices", "Azure cost optimization", "Azure performance efficiency",
-  "operational excellence", "cloud architecture review", "Azure design principles",
-  or needs guidance on building robust, secure, cost-effective Azure solutions.
+description: Azure Well-Architected Framework (WAF) for cloud architecture review. PROACTIVELY activate for: (1) Azure architecture review or design, (2) Reliability pillar (availability zones, geo-replication, backup/restore, RPO/RTO), (3) Security pillar (Zero Trust, encryption at rest/in transit, identity, network segmentation), (4) Cost Optimization pillar (rightsizing, reserved instances, savings plans, FinOps), (5) Operational Excellence pillar (IaC, observability, automation), (6) Performance Efficiency pillar (caching, autoscaling, async patterns), (7) Sustainability pillar, (8) WAF Reviews via the WAF Assessment Tool, (9) Microsoft Cloud Adoption Framework (CAF) alignment. Provides: pillar-by-pillar checklist, WAF assessment workflow, common antipatterns by pillar, and Azure Advisor mapping.
 ---
 
 # Azure Well-Architected Framework

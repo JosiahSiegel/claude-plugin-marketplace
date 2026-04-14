@@ -1,14 +1,6 @@
 ---
 name: rest-api-automation
-description: |
-  This skill should be used when the user asks about "Power BI REST API",
-  "Power BI API", "embed token", "service principal Power BI",
-  "Power BI authentication", "dataset refresh API", "push dataset",
-  "admin API", "Power BI Embedded", "JavaScript SDK", "embed report",
-  "export to file API", "Power BI automation", "app registration",
-  "Power BI API endpoint", "Power BI PowerShell", "MicrosoftPowerBIMgmt",
-  "refresh dataset programmatically", "scanner API", "export report API",
-  "clone report API", "workspace REST API", or "admin API".
+description: Power BI REST API and Fabric REST API automation. PROACTIVELY activate for: (1) calling Power BI REST APIs, (2) embed-token generation (App Owns Data, User Owns Data), (3) service-principal authentication for Power BI, (4) dataset refresh API and refresh status polling, (5) push datasets and streaming, (6) Admin API (workspace/dataset enumeration), (7) Power BI Embedded and the JavaScript SDK (powerbi-client), (8) export-to-file API (PDF/PPTX/PNG), (9) Power BI automation via PowerShell (MicrosoftPowerBIMgmt), (10) Scanner API for tenant inventory, (11) app registration in Microsoft Entra ID. Provides: REST endpoint reference, OAuth/MSAL token recipes, embed-token patterns, refresh automation scripts, JavaScript SDK examples, and PowerShell module recipes.
 ---
 
 # Power BI REST API and Automation

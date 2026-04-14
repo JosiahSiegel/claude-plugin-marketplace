@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-plugins
-description: Tailwind CSS plugins including official plugins and custom plugin development
+description: Tailwind CSS plugins — official plugins and custom plugin development. PROACTIVELY activate for: (1) @tailwindcss/typography (prose), (2) @tailwindcss/forms, (3) @tailwindcss/aspect-ratio (now built-in), (4) @tailwindcss/container-queries, (5) writing custom plugins via plugin() API, (6) addUtilities, addComponents, addVariant from plugin API, (7) third-party plugins (tailwindcss-animate, tailwind-merge), (8) in-CSS @utility and @variant in v4 (often replaces JS plugins), (9) plugin migration from v3 JS API to v4 CSS API. Provides: official plugin install/setup, plugin API reference, custom plugin examples, and v3-to-v4 plugin migration guide.
 ---
 
 # Tailwind CSS Plugins

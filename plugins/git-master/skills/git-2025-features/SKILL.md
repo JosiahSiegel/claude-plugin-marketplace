@@ -1,6 +1,6 @@
 ---
 name: git-2025-features
-description: Git 2.49+ features including reftables, sparse-checkout, partial clone, git-backfill, and worktrees
+description: Git 2.49+ features and modern Git workflows (2025-2026). PROACTIVELY activate for: (1) Git 2.49+ features (reftables, sparse-checkout, partial clone, worktrees), (2) git-backfill for partial clones, (3) reftables migration (file backend to reftable backend), (4) sparse-checkout for monorepos, (5) git worktrees for parallel development, (6) partial clone (--filter=blob:none), (7) commit graph and bitmap optimizations, (8) trunk-based development workflows, (9) Git LFS, (10) modern alternatives to legacy commands. Provides: feature reference, version-detection snippets, sparse-checkout configuration, worktree workflow patterns, and migration guidance from older Git versions.
 ---
 
 **📌 NOTE:** For detailed Git 2.49+ features (git-backfill, path-walk API, zlib-ng), see git-2-49-features.md skill.

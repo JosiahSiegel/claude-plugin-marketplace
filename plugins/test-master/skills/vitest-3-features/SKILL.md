@@ -1,6 +1,6 @@
 ---
 name: vitest-3-features
-description: Vitest 3 Features skill
+description: Vitest 3 features and migration from Vitest 2 (2025). PROACTIVELY activate for: (1) Vitest 3 stable features, (2) workspace mode for monorepos, (3) test annotations and reporter API, (4) projects configuration, (5) browser mode in Vitest 3, (6) inline snapshots and toMatchInlineSnapshot, (7) typecheck mode (vitest typecheck), (8) watch mode UI improvements, (9) custom reporters, (10) migration from Jest and from Vitest 2.x. Provides: Vitest 3 changelog, workspace setup, projects config templates, browser-mode setup, and migration patterns from Jest and Vitest 2.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

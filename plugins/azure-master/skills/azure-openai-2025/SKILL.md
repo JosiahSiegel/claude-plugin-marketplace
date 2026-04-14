@@ -1,10 +1,6 @@
 ---
 name: azure-openai-2025
-description: |
-  This skill should be used when the user asks about "Azure OpenAI", "GPT-5", "GPT-4.1",
-  "Azure reasoning models", "o3 model", "o4-mini", "Azure AI Foundry models", "Azure OpenAI deployment",
-  "Azure OpenAI SDK", "Sora on Azure", or needs guidance on Azure OpenAI Service 2025 models
-  and deployment patterns.
+description: Azure OpenAI Service and Azure AI Foundry models (2025-2026). PROACTIVELY activate for: (1) deploying Azure OpenAI models (GPT-5, GPT-4.1, GPT-4o), (2) Azure reasoning models (o3, o4-mini), (3) Azure AI Foundry model catalog selection, (4) Azure OpenAI SDK usage (Python, .NET, JavaScript), (5) Sora on Azure for video generation, (6) deployment SKUs (Standard, Provisioned Throughput Units, Global Standard, DataZone), (7) regional availability and quota management, (8) content filters and safety policies, (9) on-your-data scenarios with retrieval, (10) embedding models and vector search. Provides: model selection matrix, SKU/quota guidance, SDK setup recipes, content-filter configuration, and on-your-data patterns.
 ---
 
 # Azure OpenAI Service - 2025 Models and Features

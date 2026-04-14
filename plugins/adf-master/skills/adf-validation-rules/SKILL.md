@@ -1,9 +1,6 @@
 ---
 name: adf-validation-rules
-description: |
-  This skill should be used when the user asks about "ADF activity nesting rules",
-  "ForEach limitations", "pipeline validation", "linked service authentication",
-  or needs guidance on ADF resource limits, Set Variable restrictions, or Data Flow constraints.
+description: ADF activity nesting rules, limits, and validation gotchas. PROACTIVELY activate for: (1) ADF activity nesting rules (ForEach inside If, Switch, Until), (2) ForEach limitations (no nested ForEach, item limits), (3) pipeline validation errors and ARM-template build failures, (4) linked service authentication issues, (5) Set Variable restrictions in ForEach, (6) Data Flow constraints (transformation limits, source/sink rules), (7) parameter and variable scope, (8) max activities per pipeline, (9) pipeline concurrency limits. Provides: nesting rule matrix, activity limit reference, validation error catalog, and refactoring patterns for unsupported nesting.
 ---
 
 # Azure Data Factory Validation Rules and Limitations

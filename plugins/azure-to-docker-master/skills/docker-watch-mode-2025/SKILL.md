@@ -1,6 +1,6 @@
 ---
 name: docker-watch-mode-2025
-description: Docker Compose Watch mode for automatic hot reload during local development with sync, rebuild, and restart actions
+description: Docker Compose Watch mode for hot reload during local development (2025 GA). PROACTIVELY activate for: (1) docker compose watch setup, (2) watch action types (sync, rebuild, sync+restart, sync+exec), (3) configuring path filters and ignore patterns, (4) hot-reload for Node/Python/Go/Rust apps in Compose, (5) sync-only vs rebuild trade-offs, (6) using watch with profiles, (7) debugging watch mode (verbose logs), (8) integrating watch with bind mounts, (9) Compose watch vs nodemon/air/cargo-watch. Provides: watch action reference, per-language hot-reload examples, path filter patterns, and troubleshooting steps.
 ---
 
 # Docker Compose Watch Mode (2025 GA)

@@ -1,3 +1,8 @@
+---
+name: python-video-pipeline
+description: Expert guide to building end-to-end Python video processing pipelines by combining FFmpeg, OpenCV, PyAV, ffmpegcv, Decord, VidGear, and Modal.com for scalable GPU-accelerated workflows. PROACTIVELY activate for: (1) integrating FFmpeg + OpenCV in the same pipeline (decode, process, re-encode), (2) avoiding color-format mismatches (BGR vs RGB across OpenCV, PIL, PyAV, FFmpeg), (3) frame dimension ordering (HWC vs CHW) between OpenCV and ML frameworks, (4) preventing audio stream loss in video filter chains, (5) memory management for long/large videos (streaming vs in-memory), (6) choosing between ffmpegcv, Decord, VidGear, or PyAV for performance, (7) GPU-accelerated decode/encode on Modal.com, (8) parallel frame processing and chunk-based processing of large files on Modal, (9) video transcoding pipelines on serverless, (10) HLS streaming generation on Modal, (11) end-to-end upload → process → transcode → HLS workflows, (12) batch sizing for GPU memory, efficient pixel formats, and stream processing for very large videos. Provides: library selection matrix, pattern-based integration recipes, Modal.com deployment examples, performance tuning for GPU pipelines, and complete production-ready example workflows.
+---
+
 # Python Video Processing Pipeline Skill
 
 Comprehensive guide to building video processing pipelines combining FFmpeg, OpenCV, and Modal.com for scalable, GPU-accelerated workflows.

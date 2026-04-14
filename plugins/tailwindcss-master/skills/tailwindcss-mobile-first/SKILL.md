@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-mobile-first
-description: Comprehensive mobile-first responsive design patterns with 2025/2026 best practices for Tailwind CSS v4
+description: Mobile-first responsive design patterns with Tailwind CSS v4 (2025-2026). PROACTIVELY activate for: (1) mobile-first design with Tailwind breakpoints (sm:, md:, lg:, xl:, 2xl:), (2) responsive utility ordering (default = mobile, then breakpoints), (3) responsive typography (text-base sm:text-lg lg:text-xl), (4) responsive grids and flexbox, (5) hide/show across breakpoints (hidden md:block), (6) max-* breakpoints for desktop-down overrides, (7) container queries (@container) for component-level responsiveness, (8) safe-area insets and notch handling, (9) landscape vs portrait orientation, (10) touch vs hover (hover: with @media). Provides: breakpoint reference, mobile-first patterns, container-query examples, safe-area recipes, and touch/hover handling.
 ---
 
 # Mobile-First Responsive Design (2025/2026)

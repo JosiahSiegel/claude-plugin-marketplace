@@ -1,6 +1,6 @@
 ---
 name: data-cloud-2025
-description: Salesforce Data Cloud integration patterns and architecture (2025)
+description: Salesforce Data Cloud integration patterns and architecture (2025). PROACTIVELY activate for: (1) Data Cloud setup and ingestion, (2) Data Streams (cloud, mobile, web SDK, ingestion API), (3) data model objects (DMO) and source objects (DSO), (4) identity resolution and unified profiles, (5) calculated insights and segmentation, (6) activations to Marketing Cloud, advertising platforms, Salesforce CRM, (7) Bring Your Own Lake (BYOL) with Snowflake, BigQuery, Databricks, (8) zero-copy data sharing, (9) Data Cloud + Agentforce grounding, (10) consent management and compliance. Provides: data-stream selection matrix, identity resolution rules, segmentation patterns, BYOL configuration, and activation playbook.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

@@ -1,9 +1,6 @@
 ---
 name: windows-git-bash-compatibility
-description: |
-  This skill should be used when the user asks about "MSYS_NO_PATHCONV",
-  "Git Bash path conversion", "Windows shell compatibility", or needs guidance
-  on running ADF npm builds, PowerShell scripts, or Azure CLI from Git Bash.
+description: Windows and Git Bash compatibility for ADF tooling. PROACTIVELY activate for: (1) MSYS_NO_PATHCONV usage with ADF CLI tools, (2) Git Bash path conversion when running ADF npm builds, (3) PowerShell scripts called from Git Bash for ADF, (4) Azure CLI from Git Bash on Windows for ADF deployments, (5) ARM template export issues on Windows, (6) ADF utilities npm package on Windows, (7) line-ending issues in JSON pipeline definitions. Provides: MSYS env-var recipes, npm-on-Windows fixes, PowerShell-from-bash patterns, and Azure CLI auth on Git Bash.
 ---
 
 # Windows & Git Bash Compatibility for Azure Data Factory

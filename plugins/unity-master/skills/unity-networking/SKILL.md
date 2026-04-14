@@ -1,15 +1,6 @@
 ---
 name: unity-networking
-description: |
-  This skill should be used when the user asks about "Unity multiplayer",
-  "Netcode for GameObjects", "NGO", "Mirror networking", "Photon PUN",
-  "Photon Fusion", "Fish-Net", "RPC", "ClientRpc", "ServerRpc",
-  "NetworkVariable", "network synchronization", "lobby system",
-  "matchmaking", "dedicated server", "relay server", "server authoritative",
-  "client prediction", "lag compensation", "REST API Unity",
-  "WebSocket Unity", "Unity Gaming Services", "UGS", "Firebase Unity",
-  "PlayFab", "player authentication", "cloud save", "leaderboard",
-  or needs networking and backend integration help for Unity games.
+description: Unity multiplayer networking with NGO, Mirror, Photon, and Fish-Net. PROACTIVELY activate for: (1) building Unity multiplayer games, (2) Netcode for GameObjects (NGO) setup and patterns, (3) Mirror networking, (4) Photon PUN and Photon Fusion, (5) Fish-Net networking, (6) RPCs (ClientRpc, ServerRpc), (7) NetworkVariable and network synchronization, (8) lobby and matchmaking systems, (9) dedicated server hosting and Relay, (10) server-authoritative architecture, (11) lag compensation and prediction. Provides: networking-stack comparison, NGO templates, RPC patterns, NetworkVariable usage, lobby/matchmaking setup, and authoritative-server design.
 ---
 
 # Unity Networking and Multiplayer

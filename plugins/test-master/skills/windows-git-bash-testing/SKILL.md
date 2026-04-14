@@ -1,6 +1,6 @@
 ---
 name: windows-git-bash-testing
-description: Windows and Git Bash testing compatibility guide for Vitest, Playwright, and MSW with path conversion patterns
+description: Windows and Git Bash testing compatibility for Vitest, Playwright, and MSW. PROACTIVELY activate for: (1) Vitest tests failing on Windows but passing on Linux, (2) Playwright on Windows with Git Bash quirks, (3) MSW intercept issues across shells, (4) path normalization in test fixtures, (5) browser binaries on Windows (Playwright install), (6) line-ending issues in test snapshots (CRLF vs LF), (7) cross-platform test scripts in package.json, (8) shell detection in pretest/posttest hooks, (9) CI-on-Windows debugging. Provides: cross-platform package.json scripts, snapshot normalization, Playwright Windows install, MSW shell-aware setup, and CI Windows debugging recipes.
 ---
 
 # Windows and Git Bash Testing Compatibility Guide

@@ -1,3 +1,8 @@
+---
+name: python-ffmpeg
+description: Expert guide to using FFmpeg from Python for video and audio processing, encoding, streaming, and media manipulation. PROACTIVELY activate for: (1) Python + FFmpeg integration via ffmpeg-python, PyAV, subprocess, or moviepy, (2) video encoding tasks (H.264, H.265/HEVC, VP9/WebM, AV1), (3) hardware-accelerated encoding (NVIDIA NVENC, Intel QSV, AMD AMF, VAAPI), (4) audio extraction, conversion, and filter chains, (5) video filters (scaling, cropping, rotation, text and image overlays, color adjustments), (6) trimming and concatenation workflows, (7) HLS, DASH, or RTMP streaming generation, (8) metadata probing with ffprobe and ffmpeg.probe, (9) thumbnail generation (single and sprite sheets), (10) frame-accurate processing via PyAV, (11) debugging common FFmpeg bugs (audio stream loss after video filters, subprocess deadlocks, Windows path handling, -y overwrite prompts), (12) video-to-GIF, speed change, picture-in-picture, and blur/quality detection patterns. Provides: library selection guidance, installation steps, copy-pasteable encoding recipes, hardware-acceleration flag reference, robust error handling, subprocess best practices, and performance tuning tips for production Python + FFmpeg pipelines.
+---
+
 # Python FFmpeg Skill
 
 Comprehensive guide to using FFmpeg with Python for video/audio processing, encoding, streaming, and media manipulation.

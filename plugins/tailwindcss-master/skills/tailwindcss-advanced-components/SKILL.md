@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-advanced-components
-description: Tailwind CSS advanced component patterns with CVA integration and variant management
+description: Tailwind CSS advanced component patterns with CVA (class-variance-authority) and variant management. PROACTIVELY activate for: (1) building reusable component variants with CVA, (2) compound variants for complex states, (3) tailwind-merge for safe class composition, (4) clsx/cn utility for conditional classes, (5) Headless UI / Radix UI primitives styled with Tailwind, (6) shadcn/ui patterns, (7) component slot patterns (asChild), (8) polymorphic components, (9) prop-driven design tokens. Provides: CVA setup recipes, cn utility implementation, compound-variant patterns, shadcn/ui-style component templates, and asChild slot examples.
 ---
 
 # Tailwind CSS Advanced Component Patterns

@@ -1,6 +1,6 @@
 ---
 name: github-ai-features-2025
-description: GitHub AI-powered security and automation features for 2025
+description: GitHub AI-powered security and automation features (2025-2026). PROACTIVELY activate for: (1) GitHub Copilot in PRs (Copilot code review, Copilot autofix), (2) GitHub Advanced Security (CodeQL, secret scanning, dependency review), (3) Copilot Workspace, (4) GitHub Models (gh models eval, prompt evaluations), (5) GitHub Copilot CLI 2.x, (6) AI-assisted issue triage, (7) Copilot extensions and skillsets, (8) Copilot Enterprise context (knowledge bases), (9) automated dependency updates (Dependabot AI grouping), (10) Spark for app generation. Provides: feature catalog, Copilot CLI command reference, gh models eval examples, GHAS configuration, and Copilot Workspace usage.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

@@ -1,6 +1,6 @@
 ---
 name: git-security-2025
-description: Git security best practices for 2025 including signed commits, zero-trust workflows, secret scanning, and verification
+description: Git security best practices for 2025-2026 (signed commits, zero-trust, secret scanning). PROACTIVELY activate for: (1) configuring signed commits (GPG, SSH, S/MIME), (2) verifying commit signatures, (3) zero-trust Git workflows, (4) secret scanning (GitHub Advanced Security, gitleaks, trufflehog), (5) preventing secret leaks via pre-commit hooks, (6) protected branches and required reviewers, (7) CODEOWNERS for sensitive paths, (8) Sigstore-style attestations, (9) detecting and remediating leaked credentials, (10) supply-chain security (provenance, SBOM, SLSA). Provides: signed commit setup, secret-scanning integration, pre-commit hook templates, branch protection patterns, and incident-response checklist for credential exposure.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

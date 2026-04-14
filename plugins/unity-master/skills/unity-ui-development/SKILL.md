@@ -1,12 +1,6 @@
 ---
 name: unity-ui-development
-description: |
-  This skill should be used when the user asks about "Unity UI", "UGUI",
-  "Canvas", "RectTransform", "UI Toolkit", "USS", "UXML", "VisualElement",
-  "EventSystem", "Button click", "scroll view", "dropdown", "inventory UI",
-  "health bar", "HUD", "menu system", "TextMeshPro", "anchors",
-  "responsive UI", "UI layout", "runtime UI", "world space canvas",
-  "UI binding", "UI Builder", or needs help building Unity user interfaces.
+description: Unity UI development with UGUI and UI Toolkit. PROACTIVELY activate for: (1) building Unity user interfaces, (2) UGUI (Canvas, RectTransform, anchors), (3) UI Toolkit (USS, UXML, VisualElement), (4) EventSystem and input handling, (5) common UI components (buttons, scroll views, dropdowns), (6) inventory UIs, HUDs, health bars, menu systems, (7) TextMeshPro setup and rich text, (8) responsive UI (anchors, layout groups), (9) runtime UI generation, (10) world-space canvases for in-game UI. Provides: UGUI vs UI Toolkit comparison, RectTransform patterns, USS/UXML examples, layout group recipes, and TextMeshPro templates.
 ---
 
 # Unity UI Development

@@ -1,17 +1,6 @@
 ---
 name: azure-ml-foundry-workspace
-description: |
-  This skill should be used when the user asks about "Azure Machine Learning workspace", "Azure AI Foundry",
-  "ML workspace networking", "ML private endpoints", "ML compute clusters", "ML compute instances",
-  "ML endpoint deployment", "managed online endpoints", "batch endpoints", "Kubernetes endpoints",
-  "ML managed identities", "ML ACR integration", "ML storage accounts", "az ml CLI commands",
-  "PowerShell Az.MachineLearningServices", "ML compute instance logs", "ML deployment logs",
-  "ML job logs", "ML troubleshooting", "ML debugging", "terraform azurerm_machine_learning_workspace",
-  "terraform ML compute cluster", "ML GPU SKUs", "ML NSG rules", "ML DNS configuration",
-  "ML VNet integration", "ML managed network", "serverless compute", or "ML endpoint logs".
-  Comprehensive deep-dive reference for Azure Machine Learning Workspace (Azure AI Foundry) covering
-  architecture, networking, private endpoints, compute, endpoints, managed identities, ACR, storage,
-  all az ml CLI commands, PowerShell commands, log reading, debugging, and Terraform integration.
+description: Azure Machine Learning Workspace and Azure AI Foundry deep dive. PROACTIVELY activate for: (1) creating and configuring Azure ML workspaces, (2) Azure AI Foundry hubs and projects, (3) ML workspace networking (managed VNet, private endpoints, DNS), (4) ML compute clusters and compute instances, (5) managed online endpoints, batch endpoints, Kubernetes endpoints, (6) managed identities for ML resources, (7) ACR integration for custom environments, (8) storage account configuration, (9) az ml CLI v2 commands, (10) PowerShell Az.MachineLearningServices, (11) reading ML compute and deployment logs, (12) GPU SKU selection (ND/NC series, H100/H200/A100). Provides: workspace setup playbook, network-isolation patterns, endpoint deployment templates, az ml CLI cheat sheet, and log diagnosis workflow.
 ---
 
 # Azure Machine Learning Workspace / Azure AI Foundry - Complete Deep-Dive Reference

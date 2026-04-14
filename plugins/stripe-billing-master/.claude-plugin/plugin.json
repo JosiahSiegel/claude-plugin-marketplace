@@ -1,0 +1,35 @@
+{
+  "name": "stripe-billing-master",
+  "version": "1.0.0",
+  "description": "Expert Stripe billing system for money-safe webhook handlers, refund/dispute lifecycle, credit audit trails, and idempotency on server-side event processing. PROACTIVELY activate for: (1) ANY Stripe webhook handler (charge.*, invoice.*, customer.subscription.*, charge.dispute.*), (2) Credit/balance mutations that must be audit-logged, (3) Refund delta computation from previous_attributes.amount_refunded, (4) Dispute state machine (past_due hold / restore), (5) Idempotency key strategy (Idempotency-Key header > body > server UUID), (6) Stripe list-API pagination with starting_after cursor, (7) Plan resolution from Stripe price IDs with safety fallback, (8) Postgres text_pattern_ops indexes for LIKE-prefix lookups, (9) Exhaustive switch/branch on Stripe enums via satisfies Record<Union, T>, (10) Daily credit-balance reconciliation crons, (11) Credit-pack vs subscription refund differentiation, (12) Money-safe email descriptions that never claim 'free' on safety-fallback paths. Provides: full webhook idempotency checklist, refund-delta priority order, dispute-hold durable checkpoint pattern, credit_transactions audit-row invariants, allowlist default-deny for external enums, and reconciliation cron design. Complements (does NOT replace) the official stripe plugin's test-cards / explain-error / stripe-best-practices skills.",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/stripe-billing-master",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "stripe",
+    "billing",
+    "webhooks",
+    "idempotency",
+    "refunds",
+    "disputes",
+    "chargebacks",
+    "credit-ledger",
+    "audit-trail",
+    "reconciliation",
+    "previous-attributes",
+    "starting-after",
+    "pagination",
+    "plan-resolution",
+    "price-ids",
+    "satisfies-record",
+    "exhaustiveness",
+    "text-pattern-ops",
+    "postgres-indexes",
+    "allowlist-default-deny",
+    "money-safety"
+  ]
+}

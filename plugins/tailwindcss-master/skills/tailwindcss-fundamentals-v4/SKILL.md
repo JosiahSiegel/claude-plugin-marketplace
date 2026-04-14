@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-fundamentals-v4
-description: Tailwind CSS v4 fundamentals covering installation, CSS-first configuration, design systems, and 2025/2026 best practices
+description: Tailwind CSS v4 fundamentals — installation, CSS-first configuration, and 2025-2026 best practices. PROACTIVELY activate for: (1) installing Tailwind v4 (Vite plugin, PostCSS, CLI), (2) CSS-first configuration with @theme, (3) @import "tailwindcss" syntax, (4) v3-to-v4 migration, (5) new utilities introduced in v4 (text-shadow, mask-*, container queries), (6) Lightning CSS engine, (7) zero-config content detection, (8) Oxide engine performance, (9) @utility for custom utilities, (10) @variant for custom variants. Provides: v4 install guide, @theme reference, v3-to-v4 migration checklist, new utility catalog, and @utility/@variant examples.
 ---
 
 # Tailwind CSS v4 Fundamentals (2025/2026)

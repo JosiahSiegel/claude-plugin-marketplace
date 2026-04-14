@@ -1,6 +1,6 @@
 ---
 name: cloudflare-knowledge
-description: Comprehensive Cloudflare platform knowledge covering Workers, storage (R2/D1/KV/Durable Objects/Queues), AI Workers, Hyperdrive, Zero Trust, MCP servers, Workflows, and all platform features
+description: Cloudflare platform knowledge — Workers, Pages, R2, D1, KV, Durable Objects, AI, and Zero Trust. PROACTIVELY activate for: (1) Cloudflare Workers (handlers, bindings, wrangler), (2) Cloudflare Pages and Pages Functions, (3) R2 object storage, (4) D1 SQL database, (5) Workers KV and Durable Objects, (6) Workers AI inference (LLMs, embeddings, image gen), (7) Vectorize (vector database), (8) Queues and Email Workers, (9) Zero Trust (Access, Tunnel/cloudflared, Gateway), (10) DNS, WAF, Rate Limiting, Page Rules. Provides: wrangler.toml templates, binding patterns, R2/D1/KV usage, Workers AI examples, and Zero Trust config.
 ---
 
 # Cloudflare Knowledge Skill

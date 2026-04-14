@@ -1,6 +1,6 @@
 ---
 name: flow-orchestrator-2025
-description: Salesforce Flow Orchestrator multi-user automation best practices (2025)
+description: Salesforce Flow Orchestrator for multi-user, multi-step business processes (2025). PROACTIVELY activate for: (1) building Flow Orchestrations (autolaunched and screen flows), (2) work assignment to users, queues, or roles, (3) interactive vs background steps, (4) approval-style workflows in Flow, (5) parallel and sequential stages, (6) Flow Orchestrator events (StageCompleted, OrchestrationCanceled), (7) error handling and resume patterns, (8) testing orchestrations, (9) migrating from legacy Process Builder/Workflow Rules, (10) Flow Orchestrator vs Approval Process tradeoffs. Provides: orchestration design patterns, stage/step templates, error-handling recipes, and migration guidance.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

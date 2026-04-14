@@ -1,15 +1,6 @@
 ---
 name: dax-mastery
-description: |
-  This skill should be used when the user asks about "DAX formula", "DAX measure",
-  "calculated column", "CALCULATE", "filter context", "row context", "context transition",
-  "time intelligence", "SAMEPERIODLASTYEAR", "DATEADD", "YTD", "MTD", "TOTALYTD",
-  "DAX patterns", "DAX optimization", "SUMX", "FILTER", "ALL", "REMOVEFILTERS",
-  "variables in DAX", "VAR RETURN", "calculation groups", "field parameters",
-  "DAX user-defined functions", "UDF", "visual calculations", "window functions",
-  "WINDOW", "INDEX", "OFFSET", "ORDERBY", "PARTITIONBY", "MATCHBY",
-  "INFO functions", "dynamic format strings", "TOTALWTD", "calendar-based time intelligence",
-  "TABLEOF", "NAMEOF", or "DAX anti-patterns".
+description: DAX (Data Analysis Expressions) mastery for Power BI semantic models. PROACTIVELY activate for: (1) writing DAX measures or calculated columns, (2) CALCULATE, FILTER, ALL, REMOVEFILTERS context-modification functions, (3) understanding filter context vs row context vs context transition, (4) time intelligence (SAMEPERIODLASTYEAR, DATEADD, YTD/MTD, TOTALYTD, DATESBETWEEN), (5) iterators (SUMX, AVERAGEX, FILTER), (6) variables (VAR/RETURN) and DAX optimization, (7) calculation groups, field parameters, and visual calculations, (8) WINDOW/INDEX/OFFSET/ORDERBY/PARTITIONBY/MATCHBY (window functions), (9) DAX user-defined functions (UDF), (10) DAX patterns for ratios, running totals, ranking. Provides: measure templates, time-intelligence patterns, optimization techniques (variables, FILTER vs CALCULATETABLE), context-transition explainers, and reference for window functions and calculation groups.
 ---
 
 # DAX (Data Analysis Expressions) Mastery

@@ -1,14 +1,6 @@
 ---
 name: fabric-integration
-description: |
-  This skill should be used when the user asks about "Microsoft Fabric",
-  "Direct Lake", "Direct Lake mode", "OneLake", "lakehouse Power BI",
-  "Fabric warehouse", "Dataflow Gen2", "Fabric notebooks",
-  "Fabric workspace", "Fabric capacity", "delta tables Power BI",
-  "lakehouse connectivity", "Power BI in Fabric", "Fabric semantic model",
-  "medallion architecture", "Semantic Link", "sempy", "V-Order",
-  "Eventstream", "KQL Database", "Data Activator",
-  or "composite model Direct Lake".
+description: Microsoft Fabric integration with Power BI semantic models. PROACTIVELY activate for: (1) Microsoft Fabric platform tasks, (2) Direct Lake mode and OneLake connectivity, (3) Fabric lakehouse, warehouse, KQL Database, Eventstream, Data Activator, (4) Dataflow Gen2 ETL, (5) Fabric notebooks (PySpark, Spark SQL, semantic-link), (6) Fabric workspace and capacity (F-SKU) management, (7) delta tables and V-Order optimization, (8) medallion architecture (bronze/silver/gold), (9) Semantic Link / sempy / semantic-link-labs Python workflows, (10) Direct Lake fallback rules and mixed mode. Provides: Direct Lake setup, Fabric capacity sizing, lakehouse-to-semantic-model patterns, sempy/semantic-link-labs recipes, and end-to-end medallion architecture templates.
 ---
 
 # Microsoft Fabric Integration

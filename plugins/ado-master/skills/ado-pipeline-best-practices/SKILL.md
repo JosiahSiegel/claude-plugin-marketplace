@@ -1,6 +1,6 @@
 ---
 name: ado-pipeline-best-practices
-description: Azure DevOps pipeline best practices, patterns, and industry standards
+description: Azure DevOps pipeline best practices, patterns, and industry standards. PROACTIVELY activate for: (1) authoring or reviewing Azure DevOps YAML pipelines, (2) multi-stage pipeline patterns (build, test, deploy), (3) reusable templates (steps, jobs, stages), (4) pipeline caching (Cache@2 task), (5) parallel jobs and matrix strategies, (6) deployment strategies (rolling, blue-green, canary), (7) approvals and environments, (8) variable groups, secret variables, Key Vault linkage, (9) service connections (Azure RM, GitHub, container registries), (10) pipeline versioning and pinning task major versions. Provides: YAML pattern catalog, template library structure, caching recipes, deployment strategy templates, and a pipeline-quality checklist.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

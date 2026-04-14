@@ -1,6 +1,6 @@
 ---
 name: process-substitution-fifos
-description: Process substitution, named pipes (FIFOs), and advanced IPC patterns for efficient bash data streaming (2025)
+description: Process substitution, named pipes (FIFOs), and advanced IPC patterns for efficient bash data streaming (2025). PROACTIVELY activate for: (1) using process substitution with <(cmd) and >(cmd), (2) creating named pipes (mkfifo) for inter-process streaming, (3) avoiding intermediate temp files in pipelines, (4) tee-ing into multiple consumers, (5) feeding diff/comm with command output, (6) building shell-only producers and consumers, (7) reading from a FIFO with timeout, (8) signal-safe FIFO cleanup. Provides: process substitution patterns, mkfifo recipes, multi-consumer tee patterns, and signal-safe cleanup with trap.
 ---
 
 ## CRITICAL GUIDELINES

@@ -1,16 +1,6 @@
 ---
 name: unity-shaders-rendering
-description: |
-  This skill should be used when the user asks about "shader", "Shader Graph",
-  "HLSL", "ShaderLab", "custom shader", "material", "URP shader",
-  "HDRP shader", "Built-in shader", "render pipeline", "URP", "HDRP",
-  "Scriptable Render Pipeline", "SRP", "lighting", "baked lighting",
-  "realtime lighting", "lightmap", "Global Illumination", "GI",
-  "reflection probe", "light probe", "VFX Graph", "particle system",
-  "visual effect", "post-processing", "bloom", "SSAO", "fog",
-  "dissolve effect", "outline shader", "toon shading", "water shader",
-  "transparency", "render feature", "render pass",
-  or needs help with rendering, visual effects, or shader development in Unity.
+description: Unity shaders, materials, and rendering pipelines (URP/HDRP/Built-in). PROACTIVELY activate for: (1) writing shaders in Shader Graph, HLSL, or ShaderLab, (2) URP and HDRP shader authoring, (3) custom render pipeline work (SRP), (4) lighting setup (baked vs realtime, lightmaps, Global Illumination), (5) post-processing stacks, (6) reflection probes and light probes, (7) custom render features and full-screen passes, (8) shader stripping and variant management, (9) compute shaders, (10) ray tracing in HDRP. Provides: Shader Graph templates, HLSL snippets, URP/HDRP differences, lighting setup recipes, render-feature examples, and shader-variant guidance.
 ---
 
 # Unity Shaders and Rendering

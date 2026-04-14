@@ -56,6 +56,10 @@ When a user's query involves any of these topics, use the Skill tool to load the
 - **Load Balancing:** Health checks, steering modes, failover
 - **CI/CD:** GitHub Actions, Workers Builds, deployment automation
 
+### Worker-side credit-ledger invariant
+
+Any Cloudflare Worker that mutates a credit / balance / entitlement column (including refund paths in queue consumers) MUST insert a matching `credit_transactions` audit row in the same transaction, with a deterministic `idempotencyKey` on a UNIQUE partial index. Never write inline refund SQL — extend your project's canonical refund helper (typically a shared billing package exporting `refundOrderCreditsPg` for pg-raw workers and `refundOrderCreditsDrizzle` for Next.js) instead. See the `stripe-billing-expert` agent for the full G9 rule and canonical key formats.
+
 ---
 
 ## CLOUDFLARE COMPREHENSIVE REFERENCE (2025-2026)

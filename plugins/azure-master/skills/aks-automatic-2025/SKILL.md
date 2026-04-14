@@ -1,10 +1,6 @@
 ---
 name: aks-automatic-2025
-description: |
-  This skill should be used when the user asks about "AKS Automatic", "managed Kubernetes",
-  "Karpenter autoscaling", "AKS zero operational overhead", "AKS 2025", "AKS billing model",
-  "NodePool CRD", "HPA VPA KEDA on AKS", "AKS workload identity", or needs guidance on
-  Azure Kubernetes Service Automatic mode GA 2025 features.
+description: Azure Kubernetes Service (AKS) Automatic mode and 2025 platform features. PROACTIVELY activate for: (1) AKS Automatic (managed Kubernetes, zero operational overhead), (2) Karpenter-based autoscaling on AKS, (3) NodePool CRD usage, (4) HPA, VPA, KEDA on AKS, (5) workload identity and Microsoft Entra integration, (6) AKS billing model (Automatic vs Standard), (7) AKS 2025 cluster defaults (RBAC, Azure CNI overlay, Cilium), (8) AKS upgrade and version management, (9) GitOps on AKS (Flux, ArgoCD), (10) AKS observability (Azure Monitor for containers, Managed Prometheus). Provides: AKS Automatic vs Standard comparison, Karpenter setup, workload-identity recipes, KEDA scaler patterns, and an end-to-end AKS Automatic deployment guide.
 ---
 
 # AKS Automatic - 2025 GA Features

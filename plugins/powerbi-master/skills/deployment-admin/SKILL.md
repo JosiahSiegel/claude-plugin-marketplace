@@ -1,12 +1,6 @@
 ---
 name: deployment-admin
-description: |
-  This skill should be used when the user asks about "Power BI deployment pipeline",
-  "CI/CD for Power BI", "GitHub Actions Power BI", "Azure DevOps Power BI",
-  "workspace management", "row-level security", "RLS", "object-level security",
-  "OLS", "capacity management", "Premium", "PPU", "Fabric SKU",
-  "tenant settings", "governance", "Power BI Report Server",
-  "service principal setup", or "Power BI administration".
+description: Power BI deployment, CI/CD, governance, and administration. PROACTIVELY activate for: (1) Power BI deployment pipelines (Service deployment pipelines, fabric-cicd, custom workflows), (2) CI/CD for Power BI via GitHub Actions or Azure DevOps, (3) workspace management and roles, (4) row-level security (RLS) and object-level security (OLS), (5) capacity management (Premium, PPU, Fabric SKUs F2-F2048), (6) tenant settings and governance, (7) Power BI Report Server deployments, (8) service principal setup for automation, (9) data-gateway management. Provides: deployment-pipeline templates, GitHub Actions and Azure DevOps YAML, RLS/OLS implementation patterns, capacity sizing guidance, and service-principal auth recipes.
 ---
 
 # Deployment and Administration

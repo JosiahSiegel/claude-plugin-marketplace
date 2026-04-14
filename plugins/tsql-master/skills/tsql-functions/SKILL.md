@@ -1,7 +1,6 @@
 ---
 name: tsql-functions
-description: |
-  Complete T-SQL function reference for SQL Server and Azure SQL Database. Use this skill when: (1) User asks about T-SQL string, date, math, or conversion functions, (2) User needs help with window/ranking functions, (3) User works with JSON or XML in T-SQL, (4) User asks about aggregate functions or GROUP BY, (5) User needs system or metadata functions.
+description: Complete T-SQL function reference for SQL Server and Azure SQL Database. PROACTIVELY activate for: (1) string functions (CONCAT_WS, STRING_SPLIT, STRING_AGG, TRIM, REPLACE, LEFT/RIGHT/SUBSTRING), (2) date/time functions (DATEADD, DATEDIFF, FORMAT, DATETRUNC, AT TIME ZONE), (3) math and conversion functions (CAST, CONVERT, TRY_CAST, ROUND, FLOOR, CEILING), (4) window/ranking functions (ROW_NUMBER, RANK, LEAD/LAG, FIRST_VALUE, LAST_VALUE, NTILE), (5) JSON functions (JSON_VALUE, JSON_QUERY, JSON_MODIFY, OPENJSON), (6) XML functions (FOR XML, .nodes, .value), (7) aggregate functions and GROUP BY extensions, (8) system and metadata functions (sys.* views, OBJECT_ID, OBJECT_NAME). Provides: function catalog grouped by category, version-availability matrix (SQL 2016+/2019+/2022+), and worked examples for each function family.
 ---
 
 # T-SQL Functions Reference

@@ -1,6 +1,6 @@
 ---
 name: shellcheck-cicd-2025
-description: ShellCheck validation as non-negotiable 2025 workflow practice
+description: ShellCheck validation as a non-negotiable 2025 workflow practice. PROACTIVELY activate for: (1) running ShellCheck on bash scripts, (2) interpreting and fixing ShellCheck warnings (SC2086, SC2068, SC2155, SC2295, SC2327, SC2328, SC2294), (3) integrating ShellCheck into CI (GitHub Actions, Azure DevOps, pre-commit), (4) per-line and per-file disable directives (when justified), (5) shellcheck-rc and project configuration, (6) ShellCheck v0.11.0 new checks, (7) suppressing false positives correctly. Provides: ShellCheck install/CI setup, common warning catalog with fixes, CI workflow templates, and a quality gate pattern that fails builds on regressions.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

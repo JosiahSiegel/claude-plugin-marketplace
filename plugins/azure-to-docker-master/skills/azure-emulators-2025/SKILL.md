@@ -1,6 +1,6 @@
 ---
 name: azure-emulators-2025
-description: Azure service emulators for local development including Azurite, Cosmos DB, and Event Hub Docker containers
+description: Azure service emulators for local development in Docker (2025). PROACTIVELY activate for: (1) Azurite for Storage (Blob, Queue, Table) emulation, (2) Cosmos DB Linux Emulator container, (3) Event Hubs emulator, (4) Service Bus emulator, (5) Azure Functions Core Tools image, (6) Azure SQL Edge container, (7) Azure App Configuration emulator, (8) connection-string conventions for emulators, (9) seeding emulators with fixtures, (10) running integration tests against emulators in CI. Provides: emulator selection matrix, docker-compose templates, well-known dev connection strings, seed-data patterns, and CI integration recipes.
 ---
 
 # Azure Service Emulators for Local Development (2025)

@@ -1,6 +1,6 @@
 ---
 name: sprint-254-features
-description: Azure DevOps Sprint 254-262 new features and enhancements (2025)
+description: Azure DevOps Sprint 254-262 new features and enhancements (2025). PROACTIVELY activate for: (1) checking what is new in recent Azure DevOps sprints, (2) using new pipeline tasks introduced in Sprint 254+, (3) Azure Boards updates (delivery plans, query enhancements), (4) Azure Repos updates (branch policies, advanced security), (5) Azure Pipelines updates (1ES hosted pools, agent retirement), (6) Azure Artifacts updates (upstream sources, retention), (7) deprecation notices (TFVC, classic pipelines), (8) GitHub Advanced Security for ADO. Provides: sprint-by-sprint changelog, new feature reference, deprecation timeline, and migration notes.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

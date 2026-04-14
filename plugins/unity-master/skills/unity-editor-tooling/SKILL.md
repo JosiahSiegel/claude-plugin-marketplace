@@ -1,16 +1,6 @@
 ---
 name: unity-editor-tooling
-description: |
-  This skill should be used when the user asks about "custom inspector",
-  "EditorWindow", "PropertyDrawer", "editor scripting", "Unity Editor tool",
-  "ScriptedImporter", "custom asset importer", "build pipeline",
-  "build script", "platform switching", "CI/CD Unity", "GameCI",
-  "GitHub Actions Unity", "Unity Build Automation", "Assembly Definition",
-  "asmdef", "Package Manager", "custom package", "UPM",
-  "Unity Test Framework", "Play Mode test", "Edit Mode test",
-  "NUnit Unity", ".gitignore Unity", "YAML merge", "smart merge",
-  "Terrain", "ProBuilder", "version control Unity",
-  or needs help with editor extensions, build automation, testing, or tooling.
+description: Unity Editor tooling, build automation, and asset pipeline customization. PROACTIVELY activate for: (1) writing custom Editor scripts, (2) custom inspectors and PropertyDrawer attributes, (3) EditorWindow creation, (4) ScriptedImporter for custom asset types, (5) build pipeline scripting (BuildPipeline.BuildPlayer, IBuildPostprocessor), (6) platform-switching automation, (7) CI/CD for Unity (GameCI, GitHub Actions, Unity Build Automation), (8) Assembly Definition (.asmdef) organization, (9) preprocessor symbols and platform defines, (10) Editor-only code with #if UNITY_EDITOR. Provides: custom inspector templates, EditorWindow examples, build script patterns, GameCI setup, .asmdef best practices, and CI YAML for Unity builds.
 ---
 
 # Unity Editor Scripting and Tooling

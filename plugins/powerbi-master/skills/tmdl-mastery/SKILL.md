@@ -1,17 +1,6 @@
 ---
 name: tmdl-mastery
-description: |
-  This skill should be used when the user asks about "TMDL", "Tabular Model Definition Language",
-  "TMDL syntax", "TMDL file structure", "TMDL folder", "TMDL serialization", "TmdlSerializer",
-  "TMDL view in Power BI Desktop", "TMDL vs TMSL", "TMDL vs BIM", "model.tmdl", "database.tmdl",
-  "relationships.tmdl", "TMDL expressions", "TMDL tables folder", "TMDL roles", "TMDL perspectives",
-  "TMDL cultures", "TMDL translations", "TMDL annotations", "TMDL calculation groups",
-  "TMDL CI/CD", "TMDL Git integration", "TMDL deployment", "createOrReplace TMDL",
-  "TMDL scripts", "TMDL partitions", "TMDL hierarchies", "TMDL ref keyword",
-  "convert BIM to TMDL", "TMDL format Power BI project", "PBIP TMDL",
-  "semantic model source control", "TMDL indentation", "TMDL object declaration",
-  "TMDL extended properties", "TMDL field parameters", "TMDL KPI",
-  "TMDL VS Code extension", or "Tabular Editor TMDL".
+description: TMDL (Tabular Model Definition Language) mastery for Power BI semantic models. PROACTIVELY activate for: (1) writing or editing TMDL files, (2) TMDL syntax (model.tmdl, database.tmdl, relationships.tmdl, table folders), (3) TMDL serialization (TmdlSerializer, folder-based vs single-file), (4) TMDL view in Power BI Desktop, (5) TMDL vs TMSL vs BIM format selection, (6) TMDL expressions, calculation groups, perspectives, cultures, translations, annotations, (7) TMDL roles and security, (8) TMDL ref keyword and createOrReplace scripts, (9) TMDL CI/CD integration (Git, deployment), (10) TMDL hierarchies and partitions. Provides: TMDL syntax reference, folder-layout templates, serialization patterns, ref/createOrReplace recipes, and Git integration setup.
 ---
 
 # TMDL (Tabular Model Definition Language) Mastery

@@ -1,7 +1,6 @@
 ---
 name: azure-sql-optimization
-description: |
-  Azure SQL Database optimization and platform-specific features. Use this skill when: (1) User asks about Azure SQL Database optimization, (2) User needs DTU/vCore guidance, (3) User wants to use automatic tuning, (4) User asks about Hyperscale or serverless, (5) User needs Azure SQL performance monitoring.
+description: Azure SQL Database optimization and platform-specific features. PROACTIVELY activate for: (1) Azure SQL Database optimization, (2) DTU vs vCore selection and right-sizing, (3) automatic tuning (force last good plan, create/drop index), (4) Hyperscale tier and read replicas, (5) Serverless tier and auto-pause, (6) Azure SQL performance monitoring (Query Performance Insight, Intelligent Insights), (7) elastic pools, (8) Always Encrypted with secure enclaves, (9) Managed Instance vs Azure SQL DB tradeoffs, (10) failover groups and geo-replication. Provides: tier-selection matrix, automatic-tuning enablement steps, Hyperscale architecture overview, monitoring queries, and elastic pool sizing guidance.
 ---
 
 # Azure SQL Database Optimization
@@ -263,4 +262,3 @@ WHERE end_time >= DATEADD(day, -7, GETUTCDATE());
 - Storage: Per-hour billing for used space
 - Read replicas: Additional compute cost
 - Memory not automatically released (monitor and scale appropriately)
-

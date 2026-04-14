@@ -1,6 +1,6 @@
 ---
 name: docker-security-guide
-description: Comprehensive Docker security guidelines and threat mitigation strategies
+description: Comprehensive Docker security guidelines and threat mitigation. PROACTIVELY activate for: (1) container security review, (2) running as non-root user, (3) read-only root filesystems and tmpfs mounts, (4) capability dropping (--cap-drop ALL), (5) seccomp and AppArmor profiles, (6) image vulnerability scanning (Docker Scout, Trivy, Grype), (7) supply-chain security (signed images, SBOM, provenance), (8) secrets management (Docker secrets, BuildKit --secret, external vaults), (9) network segmentation (user-defined networks, no --net=host), (10) CIS Docker Benchmark compliance. Provides: hardening checklist, scan-tool integration recipes, CIS benchmark mapping, secret handling patterns, and capability-drop reference.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

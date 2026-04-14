@@ -1,6 +1,6 @@
 ---
 name: modern-automation-patterns
-description: Modern DevOps and CI/CD automation patterns with containers and cloud (2025)
+description: Modern DevOps and CI/CD bash automation patterns with containers and cloud (2025). PROACTIVELY activate for: (1) writing CI/CD scripts (GitHub Actions, GitLab CI, Azure DevOps), (2) container-aware shell scripting (detecting containers, Kubernetes pods), (3) cloud provider helpers (AWS CLI, Azure CLI, gcloud), (4) blue-green and canary deployments via bash, (5) writing idempotent rollback scripts, (6) integrating with Docker/Compose from bash, (7) cross-environment variable management, (8) build matrix orchestration. Provides: copy-pasteable CI snippets, container detection helpers, cloud CLI wrappers, deployment orchestration patterns, and idempotent rollback templates.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

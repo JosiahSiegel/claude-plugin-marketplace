@@ -1,6 +1,6 @@
 ---
 name: sql-server-2025
-description: SQL Server 2025 and SqlPackage 170.2.70 (October 2025) - Vector databases, AI integration, and latest features
+description: SQL Server 2025 and SqlPackage 170.2.70 (October 2025) — vector databases, AI integration, and modern features. PROACTIVELY activate for: (1) SQL Server 2025 features, (2) vector type and vector indexes for AI, (3) Vector functions (VECTOR_DISTANCE, etc.), (4) AI integration (Azure OpenAI, embeddings, RAG), (5) JSON type and JSON_ARRAYAGG, (6) parameter sensitivity plan optimization, (7) SqlPackage 170.2.70 new features and switches, (8) Always Encrypted with secure enclaves on 2025, (9) ledger tables, (10) Azure Arc-enabled SQL Server. Provides: SQL 2025 changelog, vector type usage, AI integration patterns, SqlPackage 170.2.70 reference, and migration guidance.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

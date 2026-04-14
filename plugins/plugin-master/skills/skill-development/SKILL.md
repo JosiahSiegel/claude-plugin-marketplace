@@ -1,10 +1,6 @@
 ---
 name: skill-development
-description: |
-  This skill should be used when the user asks to "create a skill", "add a skill to a plugin",
-  "write SKILL.md", "organize skill content", "improve skill description", "set up progressive disclosure",
-  "add references to a skill", "write skill frontmatter", or needs guidance on skill structure,
-  progressive disclosure, writing style, or skill development best practices for Claude Code plugins.
+description: Canonical guide to authoring SKILL.md files for Claude Code plugin skills. PROACTIVELY activate for: (1) creating a new skill, (2) adding a skill to a plugin, (3) writing SKILL.md frontmatter (name, description with PROACTIVELY/Provides enumeration), (4) fixing skills that never trigger, (5) organizing skill content (core vs references vs examples vs scripts vs assets), (6) improving a weak skill description, (7) setting up progressive disclosure (3-level loading), (8) splitting oversized SKILL.md (>2000 words) into references, (9) writing skill body in imperative voice, (10) diagnosing and fixing zero-frontmatter SKILL.md files, (11) moving cross-cutting boilerplate (Windows paths, docs policy) out of YAML descriptions. Provides: canonical skill frontmatter template, broken-pattern catalog, progressive-disclosure layout, trigger-phrase completeness checklist, size guidelines and enforcement process, and a validation checklist covering every known mistake that breaks skill triggering.
 ---
 
 # Skill Development for Claude Code Plugins
@@ -41,46 +37,69 @@ skill-name/
 
 ### Frontmatter (Required)
 
+This is the canonical shape every new skill MUST follow. Deviating is the #1 cause of skills that never trigger.
+
+```yaml
+---
+name: skill-name                                  # REQUIRED: kebab-case, matches directory name
+description: One-sentence summary of what the skill covers. PROACTIVELY activate for: (1) concrete named trigger, (2) concrete named trigger, ..., (N) concrete named trigger. Provides: comma-separated capability nouns (concrete, not abstract).
+---
+```
+
+Or, if the description is multi-line (only needed for very long descriptions — prefer single-line when practical):
+
 ```yaml
 ---
 name: skill-name
 description: |
-  This skill should be used when the user asks to "specific phrase 1",
-  "specific phrase 2", "specific phrase 3". Include exact phrases users
-  would say that should trigger this skill.
+  One-sentence summary. PROACTIVELY activate for: (1) trigger, (2) trigger, ..., (N) trigger. Provides: capability list.
 ---
 ```
 
-**Description rules:**
-- Use **third person**: "This skill should be used when..." (NOT "Use this skill when...")
-- Include **specific trigger phrases** users would actually say
-- Be **concrete**: "create a hook", "add a PreToolUse hook" (NOT "helps with hooks")
-- List multiple trigger phrases to maximize activation
-- **Include common synonyms** — users say "slow DAX" not "DAX performance optimization", "semantic model" not "data model", "slow query" not "query performance tuning"
-- **Keep under 500 characters** — rely on keywords in plugin.json for breadth
+### Hard rules for the frontmatter
 
-**Trigger phrase completeness checklist:**
-Before finalizing a skill description, verify it covers:
-1. The skill's primary domain terms (e.g., "Power Query M" for an ETL skill)
-2. Common synonyms and informal phrases users actually type (e.g., "slow report", "merge queries", "pivot/unpivot")
-3. Action verbs for tasks the skill handles (e.g., "optimize", "debug", "migrate", "configure")
-4. Abbreviations and acronyms users may use (e.g., "PQ" for Power Query, "DAX" for Data Analysis Expressions)
-5. Problem-oriented phrases (e.g., "report is slow" not just "performance optimization")
+1. **`name:` is required** and must match the enclosing directory name exactly (`skills/skill-name/SKILL.md` → `name: skill-name`).
+2. **`description:` is required** and MUST contain BOTH the `PROACTIVELY activate for: (1)... (N)...` enumeration AND a `Provides: ...` capability list.
+3. **A SKILL.md with NO frontmatter at all is broken.** It will never trigger, will not appear in skill discovery, and should be treated as a P0 bug. If you open a SKILL.md and the first line is not `---`, fix the frontmatter before doing anything else.
+4. **Enumerate concrete, named triggers — not abstract capabilities.** "PROACTIVELY activate for: (1) creating Azure Functions, (2) binding config" is good. "Use this skill when working with Azure" is NOT.
+5. **Describe WHEN to use, not WHAT it does.** The description drives routing, so it must read as a trigger list from the user's point of view. Put the capability summary in `Provides: ...` at the end.
+6. **Keep descriptions single-line YAML-safe.** If you use `|` block scalar, do not embed unescaped colons or other YAML-confusing characters in the middle of lines.
+7. **Target under ~800 characters for the description.** Longer descriptions dilute matching. If you genuinely need more triggers, prefer splitting into two skills over a bloated description.
+8. **Do NOT put cross-cutting boilerplate (Windows paths, docs policy) inside the YAML description.** Put it in the markdown body.
 
-**Good example:**
+### Canonical "good" description
+
 ```yaml
+description: Expert guide to Terraform AzureRM provider for Azure infrastructure. PROACTIVELY activate for: (1) authoring AzureRM resource blocks, (2) state management (remote backends, state locking), (3) module design and composition, (4) variable and output patterns, (5) provider version pinning, (6) debugging plan/apply errors, (7) importing existing Azure resources, (8) CI/CD for Terraform (Azure DevOps, GitHub Actions). Provides: AzureRM provider patterns, state backend templates, module scaffolding, debugging playbook, and import recipes.
+```
+
+### Broken descriptions (each of these fails to route reliably)
+
+```yaml
+# BROKEN: no frontmatter at all
+# (file starts with `# Skill Title` — will not appear in discovery)
+
+# BROKEN: wrong shape, no enumeration
+description: Use this skill when working with Terraform.
+
+# BROKEN: abstract capability, no triggers
+description: Provides Terraform expertise and guidance.
+
+# BROKEN: WHAT-it-does instead of WHEN-to-use
+description: This skill contains Terraform AzureRM provider documentation.
+
+# BROKEN: second person (wrong voice)
+description: You should load this skill when the user mentions Terraform.
+
+# BROKEN: missing Provides list
+description: PROACTIVELY activate for: (1) Terraform tasks. (No Provides section means the capability summary is lost.)
+
+# BROKEN: cross-cutting Windows boilerplate inside YAML
 description: |
-  This skill should be used when the user asks to "create a hook",
-  "add a PreToolUse hook", "validate tool use", or mentions hook events
-  (PreToolUse, PostToolUse, Stop). Provides hook development guidance.
+  Terraform expert. MANDATORY: Always Use Backslashes on Windows for File Paths...
+  (This is routing-match pollution. Move Windows rules to the body.)
 ```
 
-**Bad examples:**
-```yaml
-description: Use this skill when working with hooks.    # Wrong person, vague
-description: Provides hook guidance.                     # No trigger phrases
-description: Load when user needs hook help.             # Not third person
-```
 
 ### Body - Writing Style
 

@@ -1,6 +1,6 @@
 ---
 name: docker-2025-features
-description: Latest Docker 2025 features including AI Assistant, Enhanced Container Isolation, and Moby 25
+description: Latest Docker features (2025-2026) including Docker AI, Enhanced Container Isolation, BuildKit improvements, and Moby. PROACTIVELY activate for: (1) Docker AI / Ask Gordon assistant, (2) Enhanced Container Isolation (ECI) for hardened runtime, (3) Moby 25+ engine features, (4) BuildKit advancements (cache mounts, secrets, SBOM, provenance), (5) Docker Compose v2 features (watch mode, profiles, includes), (6) Docker Desktop new settings (Resource Saver, Synchronized File Shares, virtiofs), (7) Docker Build Cloud, (8) Docker Scout for vulnerability scanning, (9) WSL2 backend updates, (10) ContainerD integration. Provides: feature reference, version-detection snippets, BuildKit cache/secret recipes, Compose v2 watch examples, and migration notes.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

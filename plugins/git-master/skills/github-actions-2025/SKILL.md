@@ -1,6 +1,6 @@
 ---
 name: github-actions-2025
-description: GitHub Actions 2025 features including 1 vCPU runners, immutable releases, and Node24 migration
+description: GitHub Actions 2025-2026 features and modernization. PROACTIVELY activate for: (1) 1 vCPU Linux runners (October 2025 public preview), (2) immutable releases for hardened distribution, (3) Node24 migration from Node20, (4) reusable workflows and composite actions, (5) workflow_dispatch with rich inputs, (6) artifact attestations and provenance, (7) ARC (Actions Runner Controller) for self-hosted Kubernetes, (8) larger runners and macOS Apple Silicon runners, (9) deployment environments and protection rules, (10) OIDC federation to AWS/Azure/GCP. Provides: workflow templates, runner-selection matrix, OIDC setup recipes, attestation patterns, and Node24 migration steps.
 ---
 
 # GitHub Actions 2025 Features

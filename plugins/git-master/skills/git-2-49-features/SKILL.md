@@ -1,6 +1,6 @@
 ---
 name: git-2-49-features
-description: Git 2.49+ features including git-backfill, path-walk API, and performance improvements
+description: Git 2.49 specific features and performance improvements. PROACTIVELY activate for: (1) git-backfill command (new in 2.49) for partial clones, (2) path-walk API improvements, (3) zlib-ng integration for faster compression, (4) reftables backend stabilization, (5) revision-walk performance, (6) bundle URI improvements, (7) sparse-checkout enhancements in 2.49, (8) git maintenance defaults in 2.49, (9) credential helper updates. Provides: 2.49 changelog summary, git-backfill recipes, performance comparison vs 2.48, and migration notes for users upgrading from 2.40+.
 ---
 
 # Git 2.49+ Features (2025)

@@ -1,6 +1,6 @@
 ---
 name: windows-git-bash-paths
-description: Windows and Git Bash path handling for SSDT, SqlPackage, and DACPAC files with shell detection
+description: Windows and Git Bash path handling for SSDT, SqlPackage, and DACPAC files. PROACTIVELY activate for: (1) SqlPackage failing on Git Bash with path errors, (2) DACPAC file path conversion (MSYS, MINGW), (3) shell detection (PowerShell vs Git Bash) for SSDT scripts, (4) MSYS_NO_PATHCONV usage, (5) Windows-style backslash paths in publish profiles, (6) running dotnet build of .sqlproj from Git Bash, (7) cross-platform pipeline compatibility, (8) line-ending issues in SQL files. Provides: SqlPackage path-conversion recipes, shell-detection helpers, dotnet build patterns from bash, and CRLF/LF normalization steps.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

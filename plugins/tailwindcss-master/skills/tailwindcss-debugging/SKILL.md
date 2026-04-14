@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-debugging
-description: Tailwind CSS debugging and troubleshooting guide for common issues and solutions
+description: Tailwind CSS debugging and troubleshooting common issues. PROACTIVELY activate for: (1) classes not applying / no styles in browser, (2) JIT mode not picking up dynamic class names (string concatenation), (3) v3-to-v4 migration errors, (4) PostCSS configuration issues, (5) IntelliSense not autocompleting in VS Code, (6) production build missing classes (purge/content config), (7) CSS variable conflicts, (8) specificity issues with @layer, (9) prefix conflicts with other CSS frameworks, (10) HMR not updating styles. Provides: troubleshooting decision tree, dynamic-class allowlist patterns, content-config templates, IntelliSense setup, and PostCSS debugging steps.
 ---
 
 # Tailwind CSS Debugging & Troubleshooting

@@ -1,6 +1,6 @@
 ---
 name: hyperforce-2025
-description: Salesforce Hyperforce public cloud infrastructure and architecture (2025)
+description: Salesforce Hyperforce public cloud infrastructure and architecture (2025). PROACTIVELY activate for: (1) understanding Hyperforce architecture (multi-region, public cloud), (2) Hyperforce migration planning, (3) data residency and regional deployments, (4) Hyperforce security model (BYOK, Shield encryption), (5) network architecture (PrivateLink, public IP allowlists), (6) Hyperforce vs first-generation infrastructure differences, (7) backup and disaster recovery on Hyperforce, (8) Hyperforce performance and SLA, (9) compliance certifications (HIPAA, FedRAMP, GDPR). Provides: Hyperforce overview, migration checklist, network architecture patterns, BYOK setup, and DR/backup configuration.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

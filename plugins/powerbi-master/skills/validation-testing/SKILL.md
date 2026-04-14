@@ -1,21 +1,6 @@
 ---
 name: validation-testing
-description: |
-  This skill should be used when the user asks about "validate TMDL", "validate PBIR",
-  "check TMDL syntax", "check PBIR schema", "lint TMDL", "lint PBIR",
-  "TmdlSerializer error", "TmdlFormatException", "TmdlSerializationException",
-  "Best Practice Analyzer", "BPA rules", "BPA CLI", "Tabular Editor BPA",
-  "PBI-Inspector", "PBI-InspectorV2", "Fab Inspector", "PBIR JSON schema",
-  "PBIR schema validation", "validate semantic model before deploy",
-  "pre-deployment validation", "fabric-cicd parameter.yml validation",
-  "verify semantic model", "verify report", "model validation", "report validation",
-  "DAX syntax check", "M syntax check", "DaxFormatter", "lineage check",
-  "validate measures", "check bookmarks", "circular reference",
-  "CI gate Power BI", "fail PR on BPA", "rules.json BPA",
-  "validate TMDL folder", "validate PBIR folder", "validate PBIP",
-  "agent self-validation TMDL", "self-check generated PBIR",
-  "validate before fabric-cicd deploy", "load model without deploy",
-  "headless validation Power BI", or "agent quality gate semantic model".
+description: TMDL and PBIR validation, linting, and pre-deployment testing. PROACTIVELY activate for: (1) validating TMDL syntax before deploy, (2) validating PBIR schema, (3) catching TmdlFormatException / TmdlSerializationException early, (4) Best Practice Analyzer (BPA) rules and BPA CLI, (5) Tabular Editor BPA scripting, (6) PBI-Inspector / PBI-InspectorV2 / Fab Inspector, (7) PBIR JSON schema validation, (8) pre-deployment validation in CI, (9) fabric-cicd parameter.yml validation, (10) catching breaking changes between TMDL versions. Provides: BPA rule library, validation CLI commands, CI integration for validation, error catalog (TmdlFormatException, etc.), and a pre-deploy validation playbook.
 ---
 
 # Power BI Validation and Self-Testing

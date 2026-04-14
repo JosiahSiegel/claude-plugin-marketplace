@@ -1,9 +1,6 @@
 ---
 name: adf-master
-description: |
-  This skill should be used when the user asks about "Azure Data Factory CI/CD",
-  "ADF ARM template deployment", "ADF npm build validation", "PrePostDeploymentScript",
-  or needs guidance on ADF pipelines, triggers, GitHub Actions, or Azure DevOps integration.
+description: Azure Data Factory (ADF) CI/CD, deployment, and pipeline development. PROACTIVELY activate for: (1) ADF CI/CD setup (npm validation, ARM template export), (2) ADF ARM template deployment, (3) ADF npm build validation in CI, (4) PrePostDeploymentScript for trigger and resource cleanup, (5) ADF GitHub Actions workflows, (6) ADF Azure DevOps pipelines, (7) ADF Git integration (collaboration vs publish branch), (8) parameterizing linked services and datasets across environments, (9) ADF triggers (schedule, tumbling window, event), (10) deployment slots and blue-green for ADF. Provides: complete CI/CD YAML for GitHub Actions and Azure DevOps, PrePostDeploymentScript reference, parameterization patterns, and trigger management recipes.
 ---
 
 # Azure Data Factory Master Knowledge Base

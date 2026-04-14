@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-accessibility
-description: Tailwind CSS accessibility patterns including WCAG 2.2 compliance, touch targets, focus management, and ARIA support
+description: Tailwind CSS accessibility patterns including WCAG 2.2 compliance, touch targets, focus management, and ARIA. PROACTIVELY activate for: (1) building accessible UI with Tailwind, (2) WCAG 2.2 compliance (Level A, AA, AAA), (3) focus rings and focus-visible styling, (4) minimum touch-target sizes (24x24/44x44), (5) color contrast and text legibility, (6) screen-reader-only utilities (sr-only, not-sr-only), (7) prefers-reduced-motion handling, (8) ARIA attribute styling (data-state, aria-* selectors), (9) keyboard navigation patterns, (10) accessible forms (label association, error announcements). Provides: WCAG 2.2 checklist, focus-management utilities, touch-target sizing recipes, sr-only patterns, and accessible component templates.
 ---
 
 # Tailwind CSS Accessibility Patterns (WCAG 2.2 - 2025/2026)

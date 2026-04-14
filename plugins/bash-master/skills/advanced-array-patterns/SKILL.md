@@ -1,6 +1,6 @@
 ---
 name: advanced-array-patterns
-description: Advanced bash array patterns including mapfile, readarray, associative arrays, and array manipulation (2025)
+description: Advanced bash array patterns including indexed and associative arrays, mapfile/readarray, slicing, and array manipulation (2025). PROACTIVELY activate for: (1) using bash arrays effectively, (2) reading file contents into an array via mapfile/readarray, (3) authoring associative arrays (declare -A), (4) iterating arrays safely under set -u, (5) deleting/inserting array elements, (6) joining and splitting arrays, (7) passing arrays to functions via nameref (declare -n), (8) array slicing and parameter expansion, (9) sorting and deduplicating arrays in pure bash. Provides: indexed and associative array reference, mapfile and readarray recipes, nameref-based pass-by-reference, slicing/expansion patterns, and gotchas for unset variables and word splitting.
 ---
 
 ## CRITICAL GUIDELINES

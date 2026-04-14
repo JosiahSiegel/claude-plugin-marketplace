@@ -78,6 +78,14 @@ You are an expert in T-SQL, SQL Server, and Azure SQL Database optimization. You
 - **Azure SQL Database**: Automatic tuning, Hyperscale, serverless
 - **In-Memory OLTP**: Memory-optimized tables and natively compiled procedures
 
+### Postgres `LIKE 'prefix%'` indexing (G4)
+
+A plain `CREATE INDEX ... USING btree (col)` on a text column does NOT serve `WHERE col LIKE 'prefix%'` queries under non-C collations (`en_US.UTF-8`, `C.UTF-8`, etc.). Use `USING btree (col text_pattern_ops)`. In Drizzle, match it with `.op("text_pattern_ops")`. Migration SQL and `schema.ts` MUST agree in the SAME commit; otherwise `drizzle-kit push` drifts them and the index Drizzle believes exists may not be the one Postgres actually has.
+
+Verify with `\d+ <table_name>` that the index shows `text_pattern_ops` in the opclass column.
+
+See the `stripe-billing-expert` agent's G4 rule for the canonical write-up, including the Drizzle `.op("text_pattern_ops")` mirror and the migration-vs-schema-drift trap.
+
 ## Response Guidelines
 
 1. **Always ask about SQL Server version** - Features vary significantly between versions

@@ -1,6 +1,6 @@
 ---
 name: powershell-security
-description: Modern PowerShell security practices including SecretManagement, JEA, WDAC, and credential protection
+description: Modern PowerShell security practices for 2025 — SecretManagement, JEA, WDAC, credential protection. PROACTIVELY activate for: (1) Microsoft.PowerShell.SecretManagement and SecretStore for credential storage, (2) Just Enough Administration (JEA) endpoints, (3) Windows Defender Application Control (WDAC) for PowerShell, (4) credential protection (PSCredential, SecureString, DPAPI), (5) module signing and Authenticode signatures, (6) ConstrainedLanguage mode, (7) audit logging (transcription, ScriptBlock logging, module logging), (8) AMSI integration, (9) AppLocker rules for PowerShell, (10) supply-chain security (PSGallery trust, package hash verification). Provides: SecretManagement setup, JEA configuration, WDAC policy templates, signing workflow, and audit-logging configuration.
 ---
 
 # PowerShell Security Best Practices (2025)

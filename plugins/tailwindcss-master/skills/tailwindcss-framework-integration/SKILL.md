@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-framework-integration
-description: Tailwind CSS integration guide for React, Vue, Next.js, and other frameworks
+description: Tailwind CSS integration with React, Vue, Next.js, Svelte, Angular, and other frameworks. PROACTIVELY activate for: (1) Tailwind in React (Vite, CRA), (2) Tailwind in Next.js (App Router, Pages Router), (3) Tailwind in Vue 3 / Nuxt, (4) Tailwind in SvelteKit, (5) Tailwind in Angular, (6) Tailwind in Astro, (7) Tailwind in Remix / React Router 7, (8) PostCSS vs CLI vs Vite plugin setup, (9) class merging utilities (tailwind-merge) per framework, (10) SSR-safe class composition. Provides: per-framework setup steps, content config per framework, dark-mode setup, and class-merging recipes.
 ---
 
 # Tailwind CSS Framework Integration

@@ -1,6 +1,6 @@
 ---
 name: docker-best-practices
-description: Comprehensive Docker best practices for images, containers, and production deployments
+description: Comprehensive Docker best practices for images, containers, and production deployments. PROACTIVELY activate for: (1) writing production-ready Dockerfiles, (2) multi-stage builds for lean images, (3) base image selection (distroless, alpine, scratch, slim), (4) layer caching and ordering, (5) .dockerignore hygiene, (6) HEALTHCHECK and graceful shutdown, (7) non-root user and least-privilege patterns, (8) ENV vs ARG and secret handling, (9) tag/digest pinning and reproducibility, (10) Compose for local development. Provides: Dockerfile templates by language, image-size optimization checklist, .dockerignore template, HEALTHCHECK patterns, and Compose dev-stack examples.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

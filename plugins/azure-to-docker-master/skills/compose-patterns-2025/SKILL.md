@@ -1,6 +1,6 @@
 ---
 name: compose-patterns-2025
-description: Docker Compose production patterns 2025 including multi-environment strategies, health checks, and modern compose features
+description: Docker Compose production patterns for 2025 (multi-environment, health checks, modern features). PROACTIVELY activate for: (1) production Docker Compose patterns, (2) multi-environment strategies (compose.override.yml, compose.production.yml), (3) HEALTHCHECK and depends_on with conditions (service_healthy, service_started), (4) Compose v2 features (profiles, includes, watch), (5) secrets and configs (Compose secrets), (6) network segmentation in Compose, (7) resource limits (deploy.resources), (8) restart policies, (9) Compose for swarm vs standalone, (10) migrating from v3 to current Compose Spec. Provides: production compose templates, multi-env override patterns, healthcheck recipes, secrets handling, and Compose Spec migration.
 ---
 
 # Docker Compose Patterns for Production (2025)

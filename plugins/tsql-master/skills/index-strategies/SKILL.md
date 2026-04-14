@@ -1,7 +1,6 @@
 ---
 name: index-strategies
-description: |
-  SQL Server index design and optimization strategies. Use this skill when: (1) User needs help designing indexes, (2) User asks about clustered vs nonclustered indexes, (3) User wants to optimize columnstore indexes, (4) User needs filtered or covering indexes, (5) User asks about index maintenance and fragmentation.
+description: SQL Server index design and optimization strategies. PROACTIVELY activate for: (1) designing indexes for new tables, (2) clustered vs nonclustered index selection, (3) columnstore index optimization (clustered, nonclustered), (4) filtered indexes for partial coverage, (5) covering indexes (INCLUDE columns), (6) index maintenance and fragmentation analysis, (7) missing-index DMV interpretation, (8) duplicate or unused index detection, (9) page split and fill-factor tuning, (10) index compression (row, page, columnstore archival). Provides: index-design playbook, columnstore vs rowstore decision tree, fragmentation queries, missing-index harvest script, and maintenance job templates.
 ---
 
 # Index Strategies
@@ -254,4 +253,3 @@ JOIN sys.dm_db_missing_index_details mid
     ON mig.index_handle = mid.index_handle
 ORDER BY migs.avg_user_impact DESC;
 ```
-

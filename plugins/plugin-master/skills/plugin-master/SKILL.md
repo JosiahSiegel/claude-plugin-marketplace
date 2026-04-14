@@ -1,10 +1,6 @@
 ---
 name: plugin-master
-description: |
-  This skill should be used when the user asks to "create a plugin", "build a plugin",
-  "scaffold a plugin", "add commands to a plugin", "add agents to a plugin", "add skills to a plugin",
-  "package code as a plugin", "publish to marketplace", "validate plugin structure",
-  or needs guidance on plugin architecture, directory layout, or plugin.json configuration.
+description: Complete guide to Claude Code plugin development — architecture, directory layout, components, and marketplace publishing. PROACTIVELY activate for: (1) creating a plugin from scratch, (2) building a new plugin, (3) scaffolding a plugin (structure, plugin.json, directory layout), (4) adding commands/agents/skills/hooks/MCP servers to an existing plugin, (5) packaging code as a plugin, (6) publishing to a marketplace, (7) validating plugin structure, (8) marketplace.json registration, (9) cross-platform compatibility (CLAUDE_PLUGIN_ROOT, Windows/macOS/Linux), (10) versioning and metadata sync between marketplace.json and plugin.json. Provides: complete plugin.json schema, directory-layout reference, component-creation workflows, marketplace registration steps, and integration patterns for the agent-development, skill-development, hook-development, advanced-features-2025, and triggering-reliability skills.
 ---
 
 # Plugin Development Guide

@@ -1,6 +1,6 @@
 ---
 name: security-first-2025
-description: Security-first bash scripting patterns for 2025 (mandatory validation, zero-trust)
+description: Security-first bash scripting patterns for 2025 (mandatory validation, zero-trust). PROACTIVELY activate for: (1) reviewing or writing security-sensitive bash scripts, (2) preventing command injection via input validation, (3) safely handling untrusted input (URLs, filenames, env vars), (4) protecting HISTFILE and avoiding secret leakage, (5) safe temporary file creation (mktemp), (6) absolute paths and PATH hardening, (7) avoiding eval and dynamic command construction, (8) signal handling for cleanup, (9) ShellCheck SC2068 / SC2086 compliance. Provides: mandatory-validation patterns, secret-handling rules, mktemp recipes, signal-safe cleanup, and a security review checklist.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

@@ -1,6 +1,6 @@
 ---
 name: lightning-2025-features
-description: Salesforce Lightning Web Components Winter '26 and 2025 features
+description: Salesforce Lightning Web Components and platform features (Winter '26 / 2025). PROACTIVELY activate for: (1) authoring Lightning Web Components (LWC), (2) Wire service and @wire decorator, (3) Apex from LWC (imperative, @wire), (4) Lightning Data Service and recordEditForm/recordViewForm, (5) Lightning Design System (SLDS) styling, (6) Salesforce Mobile App development, (7) LWC events (composed, bubbles, custom events), (8) LWC testing with Jest and sfdx-lwc-jest, (9) Winter '26 platform features (new APIs, deprecations), (10) LWC + Experience Cloud customization. Provides: LWC component templates, @wire patterns, SLDS class reference, Jest test recipes, and Winter '26 changelog.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

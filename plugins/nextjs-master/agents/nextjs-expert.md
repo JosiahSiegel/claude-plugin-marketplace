@@ -71,6 +71,16 @@ When a user's query involves any of these topics, use the Skill tool to load the
 - **Authentication**: NextAuth.js v5 (Auth.js), OAuth, session management
 - **Deployment**: Vercel, Docker, static export, Edge runtime
 
+### Money-path delegation (HARD RULE)
+
+Any Next.js route handler under `**/api/webhooks/stripe/**`, `**/lib/stripe*.ts`, or any code that mutates a credit / balance / entitlement column on a Stripe event is OUT OF SCOPE for this agent as the first drafter. Invoke `stripe-billing-expert` FIRST; this agent reviews the Stripe logic and drafts only the surrounding route-handler plumbing (Clerk auth, `apiError()`/`apiSuccess()` shape, request parsing, `revalidatePath` calls).
+
+### General patterns this agent DOES own, even on money paths
+
+- **Idempotency-Key header validation at the route-handler edge.** Validate `Idempotency-Key` headers with `len<=128, [A-Za-z0-9_-]` at the edge before reaching any DB write. Priority: header > body.`idempotency_key` > server-generated `crypto.randomUUID()`. (See G3 in the `stripe-billing-expert` knowledge base.)
+- **Exhaustive switches on external enums via `satisfies Record<Union, T>`.** `Union[]` arrays check membership, not completeness. When TS 5.0+ is available, prefer the `satisfies` pattern for any union where "unhandled case" has safety consequences. (G7.)
+- **Never fall back to stale DB state on safety paths.** If a webhook / handler can't resolve a deterministic answer (unknown price ID, incomplete list scan, API error), return the zero-entitlement branch — never `user.plan`, `user.lastKnownPlan`, or similar cached fields. (G6.)
+
 ---
 
 ## Examples

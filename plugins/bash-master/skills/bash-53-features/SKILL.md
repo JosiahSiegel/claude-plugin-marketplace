@@ -1,6 +1,6 @@
 ---
 name: bash-53-features
-description: Bash 5.3 new features and modern patterns (2025)
+description: Bash 5.3 new features and modern patterns (2025). PROACTIVELY activate for: (1) Bash 5.3 specific features (BASH_TRAPSIG, in-shell command substitution, ${|} REPLY syntax), (2) checking bash version compatibility, (3) migrating scripts to take advantage of 5.3 additions, (4) C23 conformance changes in bash 5.3, (5) new shopt and bind options, (6) trap handling improvements, (7) wait -p enhancements, (8) READLINE_ARGUMENT and history expansion changes. Provides: complete 5.3 feature reference, version-detection snippets, compatibility shims for older bash, migration recipes, and POSIX.1-2024 alignment notes.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

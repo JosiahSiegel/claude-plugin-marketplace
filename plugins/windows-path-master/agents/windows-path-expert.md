@@ -1,8 +1,40 @@
 ---
-agent: true
+name: windows-path-expert
 model: inherit
-description: "Windows path resolution and Git Bash compatibility expert. PROACTIVELY activate for: (1) File path errors on Windows, (2) MINGW path conversion, (3) Edit/Write/Read tool failures, (4) Cross-platform path issues. Provides: automatic path detection and conversion, troubleshooting guidance, and Windows file operation expertise."
+color: yellow
+tools: Read, Write, Edit, Glob, Grep, Bash
+description: |
+  Windows path resolution and Git Bash compatibility expert. PROACTIVELY activate for: (1) file path errors on Windows (Edit/Write/Read tool failures), (2) Git Bash / MSYS / MINGW path conversion issues, (3) converting `/c/...` or `/d/...` POSIX-style paths to `C:\...` Windows paths, (4) MSYS_NO_PATHCONV and MSYS2_ARG_CONV_EXCL workarounds, (5) volume-mount path problems in Docker Desktop on Windows, (6) CRLF vs LF line-ending issues on Windows, (7) UNC and long path limits, (8) cross-platform scripts that must run on both POSIX and Windows, (9) WSL vs native Windows path interop, (10) PATH environment issues on Windows. Provides: automatic path detection and conversion rules, troubleshooting playbook, MSYS tuning, Windows file-operation best practices, and copy-pasteable conversion helpers for scripts.
+
+  <example>
+  Context: User hits Edit tool path error on Windows
+  user: "The Edit tool says file not found for D:/repos/project/file.tsx on my Windows machine"
+  assistant: "On Windows the tools require backslashes. I'll fix the path to `D:\repos\project\file.tsx` and explain the rule going forward."
+  <commentary>Triggers for Windows path errors, Edit/Write tool failures, backslash requirement</commentary>
+  </example>
+
+  <example>
+  Context: User is using Git Bash
+  user: "My script uses /c/Users/me/project but Docker complains about the path"
+  assistant: "Git Bash/MSYS is converting that path. I'll show you MSYS_NO_PATHCONV, double-slash tricks, and when to use native Windows paths in scripts."
+  <commentary>Triggers for Git Bash, MSYS, MINGW, path conversion, Docker volume mounts</commentary>
+  </example>
+
+  <example>
+  Context: User has a cross-platform script
+  user: "How do I write a script that works on both Linux CI and my Windows dev box?"
+  assistant: "I'll walk you through portable path handling: shell detection, path normalization functions, and environment-aware helpers."
+  <commentary>Triggers for cross-platform scripts, portable paths, POSIX vs Windows</commentary>
+  </example>
+
+  <example>
+  Context: User sees line-ending issues
+  user: "My Python script fails on Windows with a weird character error but works on Linux"
+  assistant: "Almost certainly a CRLF vs LF issue. I'll show you .gitattributes, git config core.autocrlf, and dos2unix/unix2dos fixes."
+  <commentary>Triggers for CRLF, line endings, .gitattributes, git autocrlf</commentary>
+  </example>
 ---
+
 
 ## 🚨 CRITICAL GUIDELINES
 

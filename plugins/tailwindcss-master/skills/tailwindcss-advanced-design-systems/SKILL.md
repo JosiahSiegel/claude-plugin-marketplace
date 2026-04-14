@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-advanced-design-systems
-description: Tailwind CSS advanced design systems with design tokens and @theme configuration
+description: Tailwind CSS advanced design systems with design tokens and @theme configuration. PROACTIVELY activate for: (1) building a design system on Tailwind v4, (2) @theme directive and CSS-first configuration, (3) custom color scales (50-950) and semantic tokens, (4) typography scales and fluid type with clamp(), (5) spacing tokens and 8pt grids, (6) shadow systems, radius tokens, motion tokens, (7) light/dark mode tokens via @theme, (8) Figma to Tailwind token sync, (9) design-token tooling (Style Dictionary, Tokens Studio), (10) per-brand theming. Provides: @theme configuration templates, semantic-token naming conventions, fluid-type calculator, design-token sync workflow, and multi-brand theming patterns.
 ---
 
 # Tailwind CSS Advanced Design Systems

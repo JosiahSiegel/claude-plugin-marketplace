@@ -1,15 +1,6 @@
 ---
 name: power-query-m
-description: |
-  This skill should be used when the user asks about "Power Query", "M language",
-  "M code", "query folding", "data transformation", "custom connector",
-  "Power Query parameters", "dynamic source", "query optimization",
-  "Table.TransformColumns", "List.Generate", "error handling in M",
-  "Power Query performance", "mashup engine", "advanced editor",
-  "ETL", "merge queries", "append tables", "pivot columns", "unpivot",
-  "remove duplicates", "split column", "combine files", "folder source",
-  "Power Query Online", "Dataflow Gen2 M code", "refresh optimization",
-  or "data transformation".
+description: Power Query M language for ETL, transformations, and connector authoring. PROACTIVELY activate for: (1) writing Power Query M code, (2) query folding and Native Query verification, (3) data transformations (merge, append, pivot, unpivot, split column), (4) custom connector development, (5) Power Query parameters and dynamic source patterns, (6) performance optimization (folding, query reduction, partition strategy), (7) Table.TransformColumns, List.Generate, Record.Field functions, (8) error handling in M (try/otherwise, error records), (9) mashup engine internals, (10) ETL pipelines from folder/SharePoint/database sources. Provides: M language reference, query-folding diagnosis, transformation recipes, dynamic source patterns, error-handling templates, and performance tuning techniques.
 ---
 
 # Power Query (M Language)

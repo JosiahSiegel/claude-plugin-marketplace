@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-responsive-darkmode
-description: Tailwind CSS responsive design and dark mode implementation patterns for 2025/2026
+description: Tailwind CSS responsive design and dark mode patterns (2025-2026). PROACTIVELY activate for: (1) dark mode setup (class-based vs media-query, dark: variant), (2) toggling dark mode at runtime (data-theme, html.dark), (3) prefers-color-scheme handling, (4) per-component dark variants, (5) responsive design with dark mode (combining sm:dark:bg-*), (6) system / light / dark / high-contrast theming, (7) CSS color-scheme property, (8) avoiding flash of unstyled content (FOUC) in dark mode, (9) dark-mode color tokens via @theme. Provides: dark-mode toggle implementation, FOUC prevention pattern, color-token templates, and system-preference detection.
 ---
 
 # Tailwind CSS Responsive Design & Dark Mode (2025/2026)

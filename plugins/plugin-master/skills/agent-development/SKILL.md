@@ -1,10 +1,6 @@
 ---
 name: agent-development
-description: |
-  This skill should be used when the user asks to "create an agent", "add an agent to a plugin",
-  "write agent frontmatter", "design a system prompt", "configure agent triggering", "restrict agent tools",
-  "choose agent model", or needs guidance on agent file structure, description examples, triggering conditions,
-  system prompt design, or agent development best practices for Claude Code plugins.
+description: Canonical guide to authoring Claude Code agent frontmatter and system prompts. PROACTIVELY activate for: (1) creating a new agent, (2) adding an agent to a plugin, (3) writing agent frontmatter, (4) designing an agent system prompt, (5) configuring agent triggering (<example> blocks, PROACTIVELY activate for patterns), (6) restricting agent tools (principle of least privilege), (7) choosing agent model (inherit vs sonnet/opus/haiku), (8) migrating deprecated agent: true flag to name: field, (9) diagnosing "agent never triggers" problems, (10) moving Windows/docs boilerplate out of YAML descriptions, (11) validating every skill has agent trigger coverage. Provides: canonical agent frontmatter template, required/recommended/deprecated fields, <example> block structure, lean-orchestrator body pattern, trigger-phrase disambiguation, and a validation checklist that catches the most common triggering mistakes before ship.
 ---
 
 # Agent Development for Claude Code Plugins
@@ -13,33 +9,70 @@ description: |
 
 Agents are autonomous subprocesses that handle complex, multi-step tasks independently. Each agent is a markdown file in the `agents/` directory with YAML frontmatter defining its configuration and a markdown body serving as its system prompt.
 
-## Agent File Format
+## Canonical agent frontmatter template (MANDATORY shape)
 
-```markdown
+This is the template every new agent MUST follow. Deviating from this shape is the #1 cause of agents that never trigger.
+
+```yaml
 ---
-name: agent-identifier
+name: my-agent                                    # REQUIRED: kebab-case, 3-50 chars, alphanumeric start/end
+model: inherit                                    # REQUIRED: always `inherit` unless you have a hard reason
+color: blue                                       # RECOMMENDED: one of blue/cyan/green/yellow/magenta/red
+tools: Read, Write, Edit, Glob, Grep, Bash        # RECOMMENDED: minimal set; omit for full access
 description: |
-  Use this agent when [triggering conditions].
+  One-sentence summary of what the agent does. PROACTIVELY activate for: (1) concrete trigger, (2) concrete trigger, ..., (N) concrete trigger. Provides: comma-separated capability nouns.
 
   <example>
-  Context: [Situation]
-  user: "[User request]"
-  assistant: "[How to respond and invoke agent]"
-  <commentary>
-  [Why this agent should trigger]
-  </commentary>
+  Context: Realistic situation where the agent should fire
+  user: "A realistic user quote — the kind of thing someone would actually type"
+  assistant: "Short 1-2 sentence response. Mention loading a specific skill if relevant."
+  <commentary>Triggers for specific-keyword-1, specific-keyword-2, specific-keyword-3</commentary>
   </example>
 
-model: inherit
-color: blue
-tools:
-  - Read
-  - Write
-  - Grep
+  <example>
+  Context: Another realistic situation covering a different capability
+  user: "..."
+  assistant: "..."
+  <commentary>Triggers for ...</commentary>
+  </example>
+
+  <example>
+  Context: A debugging / troubleshooting scenario
+  user: "..."
+  assistant: "..."
+  <commentary>Triggers for ...</commentary>
+  </example>
+
+  <example>
+  Context: A "when to pick this vs. that" scenario
+  user: "..."
+  assistant: "..."
+  <commentary>Triggers for ...</commentary>
+  </example>
 ---
 
-System prompt body in second person ("You are...")
+You are [role] specializing in [domain]. [Lean orchestrator body — see "Lean Orchestrator Pattern" below.]
 ```
+
+### Hard rules for the frontmatter
+
+1. **`name:` is required.** Do NOT use the deprecated `agent: true` flag — that pattern is legacy and results in an unnamed agent that cannot be referenced or routed to reliably. If you find `agent: true` in an existing file, replace it with `name: <kebab-name-from-filename>`.
+2. **`model: inherit` is required.** Never hard-code a model unless the agent has a documented capability requirement.
+3. **`description:` MUST include the enumerated `PROACTIVELY activate for: (1)... (2)... (N)...` pattern AND a `Provides: ...` capability list.** A description that only says "Use this agent for help with X" will not route reliably.
+4. **`description:` MUST include at least 4 `<example>` blocks** (5-7 preferred for agents that back multiple skills). Every skill the agent delegates to MUST have at least one example that would route to it.
+5. **Use `description: |` (YAML block scalar)** whenever the description spans multiple lines or contains `<example>` blocks. A folded scalar (`>`) or implicit flow scalar will mangle the examples.
+6. **Do NOT put cross-cutting boilerplate (Windows path rules, documentation policy, etc.) inside the YAML `description:` block.** That text is used for routing-match, and boilerplate that appears in many agents poisons the signal. Put it in the markdown body under a clearly named `## Windows file path requirements` section (or similar) instead.
+
+### Deprecated / broken patterns to migrate
+
+| Broken pattern | What it does | Fix |
+|---|---|---|
+| `agent: true` (no `name:`) | Agent cannot be named/routed reliably | Replace with `name: <kebab-name>` |
+| `description:` without `<example>` blocks | Agent rarely triggers | Add 4-6 `<example>` blocks covering each skill |
+| `description:` with "Use this agent for X" prose only | Vague routing, poor trigger | Rewrite with `PROACTIVELY activate for: (1)...` enumeration |
+| Windows boilerplate inside YAML `description:` | Pollutes routing signal | Move to `## Windows file path requirements` in body |
+| `model:` missing or hard-coded (e.g. `model: sonnet`) | Fails to inherit session model | Set `model: inherit` |
+| Single `<example>` block with full code in `assistant:` | Dilutes matching, bloats description | Keep assistant replies to 1-2 sentences; put code in skills |
 
 ## Frontmatter Fields Reference
 

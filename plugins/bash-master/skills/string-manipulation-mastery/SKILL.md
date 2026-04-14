@@ -1,6 +1,6 @@
 ---
 name: string-manipulation-mastery
-description: Advanced bash string manipulation including parameter expansion, pattern matching, regex, and text processing (2025)
+description: Advanced bash string manipulation including parameter expansion, pattern matching, regex, and text processing (2025). PROACTIVELY activate for: (1) parameter expansion (prefix/suffix removal, search/replace, substring), (2) regex matching with [[ =~ ]] and BASH_REMATCH, (3) case modification (uppercase/lowercase), (4) substring extraction without sed/awk, (5) splitting strings into arrays via IFS, (6) escaping for safe interpolation, (7) URL encoding and decoding in pure bash, (8) trimming whitespace, (9) avoiding subshell overhead in tight loops. Provides: parameter-expansion cheat sheet, regex patterns with BASH_REMATCH examples, case-conversion recipes, and IFS-based splitting/joining patterns.
 ---
 
 ## CRITICAL GUIDELINES

@@ -1,6 +1,6 @@
 ---
 name: microsoft-guide
-description: Complete Microsoft .NET Microservices Architecture guide (v7.0) - 350 pages of comprehensive reference material
+description: Microsoft .NET Microservices Architecture Guide reference. PROACTIVELY activate for: (1) reading or applying patterns from Microsoft .NET Microservices Architecture for Containerized .NET Applications, (2) eShopOnContainers reference architecture, (3) DDD and bounded contexts, (4) integration events (RabbitMQ, Azure Service Bus), (5) API gateway patterns (Ocelot, YARP), (6) resilience patterns (Polly), (7) data patterns (CQRS, event sourcing), (8) testing strategies in microservices, (9) deployment to Kubernetes/AKS/Container Apps. Provides: chapter-by-chapter summary, code patterns from eShopOnContainers, decision matrices for sync vs async integration, and links into specific guide sections.
 ---
 
 # Microsoft .NET Microservices Architecture Guide (v7.0)

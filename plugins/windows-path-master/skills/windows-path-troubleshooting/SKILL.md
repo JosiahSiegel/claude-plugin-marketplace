@@ -1,6 +1,6 @@
 ---
 name: windows-path-troubleshooting
-description: "Complete Windows file path troubleshooting knowledge for Claude Code on Git Bash and Windows environments. PROACTIVELY activate for: (1) File path errors on Windows, (2) Backslash vs forward slash issues, (3) Edit/Write/Read tool failures, (4) MINGW path resolution, (5) Cross-platform path conversion."
+description: Complete Windows file path troubleshooting knowledge for Claude Code on Git Bash and Windows environments. PROACTIVELY activate for: (1) file path errors on Windows, (2) backslash vs forward slash issues, (3) Edit/Write/Read tool failures, (4) MINGW path resolution, (5) cross-platform path conversion, (6) MSYS_NO_PATHCONV usage, (7) double-slash escape patterns (//c/foo), (8) UNC and long path limits, (9) WSL vs native Windows interop. Provides: path-conversion rules, troubleshooting flowchart, MSYS env-var recipes, double-slash escape patterns, and Windows file-operation best practices.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

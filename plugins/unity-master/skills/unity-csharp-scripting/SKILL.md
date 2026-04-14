@@ -1,14 +1,6 @@
 ---
 name: unity-csharp-scripting
-description: |
-  This skill should be used when the user asks about "C# scripting in Unity",
-  "MonoBehaviour lifecycle", "coroutine", "async await Unity", "delegates events",
-  "ScriptableObject", "serialization", "GetComponent", "physics script",
-  "Rigidbody code", "raycast", "collision detection", "trigger enter",
-  "animation script", "Animator controller code", "NavMesh agent",
-  "audio source script", "object pooling pattern", "singleton Unity",
-  "Assembly Definition", "Unity design pattern", "ECS entities code",
-  "Jobs system", "Burst compiler", or needs C# coding guidance for Unity.
+description: C# scripting in Unity for gameplay, behavior, and engine integration. PROACTIVELY activate for: (1) writing Unity C# scripts, (2) MonoBehaviour lifecycle (Awake/OnEnable/Start/Update/FixedUpdate/LateUpdate), (3) coroutines and async/await in Unity, (4) delegates, events, Action/Func patterns, (5) ScriptableObject creation and serialization, (6) GetComponent / TryGetComponent and component caching, (7) physics scripting (Rigidbody, raycast, collision/trigger callbacks), (8) animation scripting (Animator parameters, state machines, IK), (9) NavMesh and NavMeshAgent scripting, (10) input handling (Input System package), (11) custom serialization and SerializeField. Provides: lifecycle reference, coroutine vs async patterns, ScriptableObject templates, Rigidbody/collision recipes, NavMesh examples, and Input System setup.
 ---
 
 # Unity C# Scripting Patterns

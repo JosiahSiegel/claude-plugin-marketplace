@@ -1,6 +1,6 @@
 ---
 name: powershell-shell-detection
-description: Shell detection and cross-shell compatibility guidance for PowerShell vs Git Bash/MSYS2 on Windows
+description: PowerShell vs Git Bash/MSYS2 shell detection and cross-shell compatibility on Windows. PROACTIVELY activate for: (1) detecting whether script runs under PowerShell, pwsh, Git Bash, or cmd, (2) shell-specific path handling, (3) MSYS_NO_PATHCONV when calling Windows binaries from Git Bash, (4) PowerShell from Git Bash and vice versa, (5) line-ending differences (CRLF vs LF), (6) environment variable differences (env: VAR vs VAR vs percent VAR percent), (7) calling PowerShell scripts (.ps1) from bash and bash scripts from PowerShell, (8) profile loading differences. Provides: shell-detection one-liners, path-conversion helpers, env-var portability patterns, and cross-shell invocation recipes.
 ---
 
 # PowerShell Shell Detection & Cross-Shell Compatibility

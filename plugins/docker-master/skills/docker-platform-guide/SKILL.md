@@ -1,6 +1,6 @@
 ---
 name: docker-platform-guide
-description: Platform-specific Docker considerations for Windows, Linux, and macOS
+description: Platform-specific Docker considerations for Windows, Linux, and macOS. PROACTIVELY activate for: (1) Docker Desktop on Windows (WSL2 vs Hyper-V backends), (2) Docker Desktop on macOS (Apple Silicon, Rosetta, virtiofs), (3) native Docker Engine on Linux, (4) rootless Docker setup, (5) cross-platform image building (--platform, buildx, multi-arch manifests), (6) ARM64 vs x86_64 image selection, (7) volume performance differences (bind mount vs named volume across platforms), (8) Docker Desktop resource tuning per OS. Provides: per-platform setup steps, multi-arch build recipes, rootless setup, performance-tuning checklist, and known platform-specific gotchas.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

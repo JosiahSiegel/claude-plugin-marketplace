@@ -1,6 +1,6 @@
 ---
 name: tailwindcss-performance
-description: Tailwind CSS performance optimization including v4 improvements and best practices
+description: Tailwind CSS performance optimization including v4 improvements. PROACTIVELY activate for: (1) Tailwind v4 Oxide engine performance, (2) Lightning CSS minification, (3) reducing CSS bundle size, (4) content config tuning to avoid scanning unused files, (5) safelist for dynamic classes (without bloating), (6) production builds with @apply minimization, (7) critical CSS extraction, (8) HTTP caching of generated CSS, (9) avoiding @apply overuse (utility-first preferred), (10) PurgeCSS / content-detection edge cases. Provides: performance tuning checklist, Oxide engine notes, content config patterns, safelist guidance, and critical-CSS workflow.
 ---
 
 # Tailwind CSS Performance Optimization

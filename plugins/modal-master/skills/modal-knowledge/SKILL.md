@@ -1,6 +1,6 @@
 ---
 name: modal-knowledge
-description: Comprehensive Modal.com platform knowledge covering all features, pricing, and best practices
+description: Modal.com serverless compute platform knowledge. PROACTIVELY activate for: (1) Modal app/function definitions (modal.App, @app.function, @app.cls), (2) running ML/AI workloads serverlessly, (3) GPU configuration (T4, L4, A10G, A100, H100, H200), (4) Modal volumes and shared state, (5) Modal Image builder (apt, pip, run_commands), (6) Modal secrets and environment management, (7) web endpoints (FastAPI, asgi_app, wsgi_app), (8) cron schedules and continuous deployments, (9) Modal sandboxes, (10) cost optimization on Modal (autoscaling, spot, idle timeout), (11) Modal CLI (modal deploy, modal run, modal serve). Provides: app templates, GPU sizing matrix, Image builder recipes, secret patterns, web endpoint examples, and cost-optimization guidance.
 ---
 
 # Modal Knowledge Skill

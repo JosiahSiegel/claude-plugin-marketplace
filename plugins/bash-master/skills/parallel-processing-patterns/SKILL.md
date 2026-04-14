@@ -1,6 +1,6 @@
 ---
 name: parallel-processing-patterns
-description: Parallel and concurrent processing patterns in bash including GNU Parallel, xargs, job pools, and async patterns (2025)
+description: Parallel and concurrent processing patterns in bash including GNU Parallel, xargs -P, job pools, and async patterns (2025). PROACTIVELY activate for: (1) running tasks in parallel from bash, (2) xargs -P for parallel command execution, (3) GNU parallel for complex distribution, (4) background jobs with & and wait, (5) implementing a concurrency cap (job pool of N workers), (6) collecting exit codes from parallel children, (7) preventing race conditions in shared output files, (8) parallel file processing across many cores. Provides: xargs -P recipes, GNU parallel quick reference, job-pool implementations in pure bash, exit-code aggregation patterns, and FIFO-based work queues.
 ---
 
 ## CRITICAL GUIDELINES

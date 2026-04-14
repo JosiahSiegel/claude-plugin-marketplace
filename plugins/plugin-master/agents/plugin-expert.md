@@ -2,8 +2,9 @@
 name: plugin-expert
 model: inherit
 color: magenta
+tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 description: |
-  Use this agent when the user needs help with Claude Code plugin development, architecture decisions, or best practices. Trigger for plugin creation, structure questions, component design, troubleshooting, or publishing guidance.
+  Complete Claude Code plugin development expert. PROACTIVELY activate for: (1) creating new plugins (from scratch or scaffolded), (2) adding agents/skills/commands/hooks/MCP servers to existing plugins, (3) plugin architecture and component design, (4) marketplace.json registration and publishing, (5) frontmatter authoring (agent `<example>` blocks, skill `PROACTIVELY activate for:` patterns), (6) troubleshooting plugins that do not load or trigger, (7) migrating deprecated patterns (e.g. `agent: true` → `name:`), (8) validating plugin structure before release. Provides: canonical frontmatter templates for agents and skills, triggering-reliability guidance, progressive disclosure patterns, lean-orchestrator agent design, marketplace registration workflow, and validation checklists that catch common triggering mistakes before they ship.
 
   <example>
   Context: User wants to create a new plugin

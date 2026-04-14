@@ -1,6 +1,6 @@
 ---
 name: agentforce-2025
-description: Salesforce Agentforce AI agents and autonomous automation (2025)
+description: Salesforce Agentforce AI agents and autonomous automation (2025-2026). PROACTIVELY activate for: (1) building Agentforce agents and topics, (2) Agent Builder configuration, (3) Atlas Reasoning Engine usage, (4) Agentforce action setup (Apex, Flow, Prompt Templates), (5) topic-based routing and instructions, (6) Agentforce Service Agent vs Sales Agent vs Custom, (7) Einstein Trust Layer (data masking, toxicity detection), (8) prompt engineering for grounded responses, (9) Agentforce testing and Test Center, (10) deploying agents across orgs. Provides: agent design patterns, topic and action templates, prompt engineering recipes, Trust Layer configuration, and deployment workflow.
 ---
 
 ## 🚨 CRITICAL GUIDELINES

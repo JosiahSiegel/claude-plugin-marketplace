@@ -1,15 +1,6 @@
 ---
 name: programmatic-development
-description: |
-  This skill should be used when the user asks about "create Power BI report programmatically",
-  "PBIR format", "PBIR enhanced report format", "PBIR-Legacy vs PBIR", "PBIP developer mode",
-  "Power BI project files", "TOM SDK", "Tabular Object Model", ".NET SDK for Power BI",
-  "TMSL", "TMDL", "Tabular Editor scripting", "pbi-tools", "fabric-cicd", "Fabric CLI deploy",
-  "fab deploy", "semantic-link-labs", "sempy", "Semantic Link", "generate pbix",
-  "code-first Power BI", "semantic model from code", "ALM Toolkit", "Power BI external tools",
-  "PBIP deployment", "parameter.yml",
-  "TMDL basics (for detailed TMDL, load tmdl-mastery)",
-  or "programmatic report generation".
+description: Programmatic Power BI development with PBIR, PBIP, TMDL, TOM, and fabric-cicd. PROACTIVELY activate for: (1) creating Power BI reports programmatically (PBIR enhanced report format), (2) PBIR vs PBIR-Legacy selection (2026 default), (3) PBIP developer mode and Power BI project files, (4) Tabular Object Model (TOM) / .NET SDK scripting, (5) Tabular Editor scripting (C# scripts, advanced scripting), (6) pbi-tools workflows, (7) fabric-cicd Python deployments (FabricWorkspace, publish_all_items), (8) Fabric CLI (fab deploy), (9) Semantic Link / sempy / semantic-link-labs, (10) generating PBIX programmatically, (11) parameter.yml for environment-specific deployments, (12) ALM Toolkit. Provides: PBIR/PBIP project templates, fabric-cicd deploy.py, Tabular Editor scripting recipes, parameter.yml patterns, and end-to-end programmatic workflows.
 ---
 
 # Programmatic Power BI Development
