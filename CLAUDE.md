@@ -29,6 +29,10 @@ The script maintains consistency between:
 
 See `scripts/CLAUDE.md` for complete documentation.
 
+### Intentional deviation from official Claude Code guidance
+
+Official Claude Code docs recommend setting `version` in `plugin.json` OR in the marketplace entry — not both. This repo intentionally sets it in both locations and enforces byte-identical sync via `scripts/version_ops.py`. The duplication is acceptable because: (1) sync is mechanical, never manual; (2) an explicit version in each marketplace entry makes plugin discovery and changelog inspection easier without cloning every plugin source. The rule is absolute: **never hand-edit versions — always use `version_ops.py`**.
+
 ## Agent Model Configuration
 
 All agents should use `model: inherit` to adopt the parent session's model:

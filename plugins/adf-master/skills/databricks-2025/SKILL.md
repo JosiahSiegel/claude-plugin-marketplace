@@ -1,6 +1,9 @@
 ---
 name: databricks-2025
-description: ADF + Databricks 2025 integration patterns. PROACTIVELY activate for: (1) Databricks Job activity in ADF, (2) DatabricksJob (preview) vs DatabricksNotebook activity, (3) ServiceNow V2 connector, (4) ADF managed identity authentication for Databricks, (5) Databricks serverless linked services, (6) Snowflake V2 connector, (7) Databricks job parameters and outputs, (8) MFA enforcement and authentication updates, (9) Unity Catalog integration, (10) Delta Live Tables orchestration from ADF. Provides: Databricks linked service templates (PAT, MSI, serverless), DatabricksJob activity examples, parameter passing recipes, and authentication migration guidance.
+description: |
+  ADF + Databricks 2025 integration patterns.
+  PROACTIVELY activate for: (1) Databricks Job activity in ADF, (2) DatabricksJob (preview) vs DatabricksNotebook activity, (3) ServiceNow V2 connector, (4) ADF managed identity authentication for Databricks, (5) Databricks serverless linked services, (6) Snowflake V2 connector, (7) Databricks job parameters and outputs, (8) MFA enforcement and authentication updates, (9) Unity Catalog integration, (10) Delta Live Tables orchestration from ADF.
+  Provides: Databricks linked service templates (PAT, MSI, serverless), DatabricksJob activity examples, parameter passing recipes, and authentication migration guidance.
 ---
 
 # Azure Data Factory Databricks Integration 2025

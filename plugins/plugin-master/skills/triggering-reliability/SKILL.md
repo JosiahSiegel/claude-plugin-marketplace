@@ -1,6 +1,9 @@
 ---
 name: triggering-reliability
-description: Catalog of common mistakes that break Claude Code agent and skill triggering, with concrete fixes. PROACTIVELY activate for: (1) plugins that installed but never trigger, (2) agents that fail to route for obvious queries, (3) skills not appearing in discovery, (4) auditing a plugin's triggering quality before release, (5) migrating deprecated agent true flag, (6) diagnosing zero-frontmatter SKILL.md files, (7) cleaning Windows/docs boilerplate out of YAML descriptions, (8) rewriting abstract descriptions that describe capability instead of when-to-use, (9) adding missing example blocks to agents, (10) spotting descriptions that lack PROACTIVELY activate for / Provides enumeration, (11) pre-release triggering audit. Provides: anti-pattern catalog, root-cause analysis for each mistake, before-and-after examples, repeatable audit process, and a greppable validation checklist.
+description: |
+  Catalog of common mistakes that break Claude Code agent and skill triggering.
+  PROACTIVELY activate for: (1) plugins installed but never trigger, (2) agents failing to route, (3) skills not appearing in discovery, (4) pre-release triggering audit, (5) migrating deprecated agent true flag, (6) zero-frontmatter SKILL.md files, (7) boilerplate in YAML descriptions, (8) abstract descriptions, (9) missing agent <example> blocks, (10) missing PROACTIVELY or Provides sections.
+  Provides: anti-patterns, fixes, before/after examples, and audit checklist.
 ---
 
 # Common mistakes that break triggering
@@ -174,15 +177,17 @@ Assign exclusive ownership of each ambiguous keyword. The other skill should use
 
 ### Symptom
 
-Description is 2000+ characters with 20+ enumerated triggers.
+Description is over 1024 characters, or pushes past 1000 with diluted trigger phrases competing with each other.
 
 ### Root cause
 
-Very long descriptions dilute matching quality and often indicate the skill is doing too much. Trigger phrases start competing with each other.
+Three distinct caps apply to descriptions (see "Description length limits" below). Crossing the 1024-char API spec ceiling means the skill may be rejected by authoring tools or have its tail truncated. Even below the ceiling, descriptions over ~1000 chars typically indicate the skill is doing too much.
 
 ### Fix
 
-- Target under 800 characters per skill description.
+- Target 400-1000 characters per skill or agent description.
+- Hard ceiling: 1024 characters (Claude Code API spec).
+- Front-load trigger keywords — the front of the description always survives any truncation.
 - If you genuinely have 15+ triggers, split the skill into two focused skills.
 - Collapse near-duplicate triggers into a single item.
 
@@ -249,3 +254,67 @@ grep -l "PROACTIVELY activate for:" plugins/*/skills/*/SKILL.md | wc -l
 6. **P2** - trigger-phrase overlap audit and disambiguation.
 
 Fix in priority order - do not spend time on P2 while P0 bugs exist.
+
+## Severity table for validation reports
+
+Use these tiers when reporting validation findings on a plugin:
+
+| Tier | Meaning | Examples |
+|---|---|---|
+| **P0 - critical, must fix before ship** | Plugin will not load or component will not appear in discovery | plugin.json missing or invalid JSON; required field missing; wrong field type (`author` as string, `version` as number, `keywords` as string); skill with no YAML frontmatter; agent using deprecated `agent: true`; Windows/docs boilerplate inside YAML `description` (actively poisons routing) |
+| **P1 - major, should fix before ship** | Plugin loads but triggers unreliably | Agent missing `<example>` blocks; skill description missing `PROACTIVELY activate for:` / `Provides:` enumeration; description describes WHAT instead of WHEN; skill or agent description over 1024 characters (per Claude Code API spec hard ceiling — see "Description length limits" below) |
+| **P2 - polish** | Cosmetic or efficiency improvements | Missing `model: inherit`, `color:`, or `tools:` (defaults apply); description over the 400-700 char target (still well under the 1024 hard ceiling); trigger-phrase overlap between sibling skills; SKILL.md body over 3,000 words |
+
+## Description length limits (Claude Code, current as of 2026)
+
+Three distinct caps apply to skill and agent descriptions. Authors must respect all three.
+
+| Cap | Value | What it means |
+|---|---|---|
+| **API spec hard ceiling** | 1024 chars per `description` field | Maximum allowed by the skill metadata spec. Authoring tools (e.g. the official `skill-creator` plugin's `quick_validate.py`) reject anything over this. Treat as a hard ceiling. |
+| **Listing-cap for matching** | 1536 chars per entry (combined `description` + `when_to_use`) | What Claude actually sees when matching a query against installed skills. Raised from 250 → 1536 in Claude Code v2.1.105. Beyond this, the rest of the description is invisible to the router. |
+| **Aggregate budget** | ~1% of model context window (~15-20k chars on Sonnet-class models) | Total budget across ALL installed skills' descriptions. When exceeded (v2.1.129+), descriptions of least-recently-used skills are dropped from the listing rather than truncating individual descriptions. |
+
+**Authoring targets:**
+
+- **Target: ~400-1000 chars per description.** Below 400 is usually too thin to provide good routing signal; above 1000 risks the API spec ceiling and dilutes matching for sibling skills.
+- **Hard ceiling: 1024 chars.** Never exceed this. If you genuinely need more triggers, split the skill.
+- **Front-load trigger keywords.** If aggregate-budget truncation kicks in for any reason (older clients, very large skill collections), the front of your description is what survives.
+- **Dense plugins legitimately need more trigger surface.** A plugin covering many sub-workflows can sit in the 500-1000 range without harm. The old "soft 500" target was based on a since-superseded 250-char listing cap and is no longer the right ceiling.
+
+## Canonical pre-publish checklist
+
+Before publishing any plugin, every item below must be true:
+
+- [ ] `plugin.json` exists at `.claude-plugin/plugin.json` and is valid JSON
+- [ ] `name` is kebab-case
+- [ ] `author` is an object `{ "name": "..." }` — not a string
+- [ ] `version` is a string `"1.0.0"` — not a number
+- [ ] `keywords` is an array — not a string
+- [ ] No `agents` / `skills` / `slashCommands` fields in `plugin.json` (auto-discovered)
+- [ ] Every agent file starts with `---` (YAML frontmatter present)
+- [ ] Every agent has a `name:` field (not the deprecated `agent: true` flag)
+- [ ] Every agent has `model: inherit`
+- [ ] Every agent has at least one `<example>` block (4-6 preferred)
+- [ ] Every agent has a `color:` field
+- [ ] Every agent has `tools:` (minimal set) or omits the field for full tool access
+- [ ] Every `SKILL.md` starts with `---` (NOT `# Title`)
+- [ ] Every skill `description:` contains `PROACTIVELY activate for:` enumeration
+- [ ] Every skill `description:` contains `Provides:` capability list
+- [ ] Every skill `description:` is under 1024 characters (target 400-1000)
+- [ ] No Windows / docs / cross-cutting boilerplate inside any YAML `description:` field
+- [ ] If a `marketplace.json` exists at repo root, the plugin is registered there with matching `description` and `keywords`
+
+## One-line greps for the canonical checks
+
+Run these from a plugin directory. Any output is a finding.
+
+```
+grep -L "^---" skills/*/SKILL.md                                            # zero-frontmatter skills (P0)
+grep -l "^agent: true" agents/*.md                                          # deprecated agents (P0)
+grep -L "<example>" agents/*.md                                             # agents with no example blocks (P1)
+grep -L "PROACTIVELY activate for:" skills/*/SKILL.md                       # skills missing trigger enumeration (P1)
+grep -L "Provides:" skills/*/SKILL.md                                       # skills missing capability list (P1)
+grep -L "^model: inherit" agents/*.md                                       # agents not inheriting model (P2)
+grep -l "MANDATORY: Always Use Backslashes" agents/*.md skills/*/SKILL.md   # Windows boilerplate in YAML (P0)
+```

@@ -1,0 +1,25 @@
+{
+  "name": "modal-storage",
+  "version": "1.0.0",
+  "description": "Modal.com persistence and shared state primitives. PROACTIVELY activate for Modal Volumes, vol.commit, Dict, Queue, CloudBucketMount, S3/GCS bucket mounts, secrets for storage credentials, dataset/model cache persistence, distributed job queues, shared state coordination, and storage performance or consistency troubleshooting.",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/modal-storage",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "modal",
+    "storage",
+    "volumes",
+    "dict",
+    "queue",
+    "cloudbucketmount",
+    "s3",
+    "gcs",
+    "secrets",
+    "persistence",
+    "shared-state"
+  ]
+}

@@ -1,6 +1,9 @@
 ---
 name: agent-development
-description: Canonical guide to authoring Claude Code agent frontmatter and system prompts. PROACTIVELY activate for: (1) creating a new agent, (2) adding an agent to a plugin, (3) writing agent frontmatter, (4) designing an agent system prompt, (5) configuring agent triggering (<example> blocks, PROACTIVELY activate for patterns), (6) restricting agent tools (principle of least privilege), (7) choosing agent model (inherit vs sonnet/opus/haiku), (8) migrating deprecated agent: true flag to name: field, (9) diagnosing "agent never triggers" problems, (10) moving Windows/docs boilerplate out of YAML descriptions, (11) validating every skill has agent trigger coverage. Provides: canonical agent frontmatter template, required/recommended/deprecated fields, <example> block structure, lean-orchestrator body pattern, trigger-phrase disambiguation, and a validation checklist that catches the most common triggering mistakes before ship.
+description: |
+  Canonical guide to authoring Claude Code agent frontmatter and system prompts.
+  PROACTIVELY activate for: (1) creating a new agent, (2) adding an agent to a plugin, (3) writing agent frontmatter, (4) designing a system prompt, (5) configuring <example> trigger blocks, (6) restricting tools, (7) setting model inherit, (8) migrating deprecated agent true flag, (9) fixing "agent never triggers", (10) ensuring skills have agent trigger coverage.
+  Provides: agent templates, lean-orchestrator pattern, and validation checklist.
 ---
 
 # Agent Development for Claude Code Plugins

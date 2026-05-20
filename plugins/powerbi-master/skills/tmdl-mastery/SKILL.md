@@ -1,6 +1,9 @@
 ---
 name: tmdl-mastery
-description: TMDL (Tabular Model Definition Language) mastery for Power BI semantic models. PROACTIVELY activate for: (1) writing or editing TMDL files, (2) TMDL syntax (model.tmdl, database.tmdl, relationships.tmdl, table folders), (3) TMDL serialization (TmdlSerializer, folder-based vs single-file), (4) TMDL view in Power BI Desktop, (5) TMDL vs TMSL vs BIM format selection, (6) TMDL expressions, calculation groups, perspectives, cultures, translations, annotations, (7) TMDL roles and security, (8) TMDL ref keyword and createOrReplace scripts, (9) TMDL CI/CD integration (Git, deployment), (10) TMDL hierarchies and partitions. Provides: TMDL syntax reference, folder-layout templates, serialization patterns, ref/createOrReplace recipes, and Git integration setup.
+description: |
+  TMDL (Tabular Model Definition Language) mastery for Power BI semantic models.
+  PROACTIVELY activate for: (1) writing or editing TMDL files, (2) TMDL syntax (model.tmdl, database.tmdl, relationships.tmdl, table folders), (3) TMDL serialization (TmdlSerializer, folder-based vs single-file), (4) TMDL view in Power BI Desktop, (5) TMDL vs TMSL vs BIM format selection, (6) TMDL expressions, calculation groups, perspectives, cultures, translations, annotations, (7) TMDL roles and security, (8) TMDL ref keyword and createOrReplace scripts, (9) TMDL CI/CD integration (Git, deployment), (10) TMDL hierarchies and partitions.
+  Provides: TMDL syntax reference, folder-layout templates, serialization patterns, ref/createOrReplace recipes, and Git integration setup.
 ---
 
 # TMDL (Tabular Model Definition Language) Mastery

@@ -1,6 +1,9 @@
 ---
 name: adr-drafting
-description: This skill should be used when the user is ready to actually draft an Architecture Decision Record (ADR) and wants a co-thinking partner that pushes back on weak reasoning instead of auto-generating filler. PROACTIVELY activate on phrases like "draft the ADR," "write up the decision," "let's co-think this ADR," "challenge my reasoning," "I have a decision, help me record it," "ADR for X," "MADR for X," "Y-statement for X," "we decided to use X — write it down," "co-draft," "ADR drafting," "scripted push-back." Runs a strict seven-phase flow (Understand, Context, Options, Decide, Draft, Self-Critique, Save). Asks one question per turn. Refuses to draft while any MUST from discovery is OPEN. Forces the architect to articulate 2-3 failure modes before accepting the decision. Self-critiques the draft line-by-line against the shared "ADR is NOT" checklist before the architect ever sees it. Use this skill instead of generating a raw ADR template — the diagnostic and the push-back are the value.
+description: |
+  This skill should be used when a decision is ready to become an ADR and the user wants co-thinking rather than template filler.
+  PROACTIVELY activate on "draft the ADR", "write up the decision", "co-think this ADR", "challenge my reasoning", "ADR for X", "MADR for X", "Y-statement for X", "we decided to use X", "co-draft", "ADR drafting", or "scripted push-back."
+  Provides: seven-phase ADR drafting, one-question turns, failure-mode pressure test, and self-critique against the ADR-is-NOT checklist.
 ---
 
 # adr-drafting

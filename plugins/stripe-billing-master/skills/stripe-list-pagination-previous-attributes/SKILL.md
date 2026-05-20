@@ -1,6 +1,9 @@
 ---
 name: stripe-list-pagination-previous-attributes
-description: Stripe list-API pagination and event.data.previous_attributes semantics. PROACTIVELY activate for: (1) invoice.lines.data / charge.refunds.data / subscription.items.data embedded pagination, (2) starting_after cursor when falling through to list APIs, (3) has_more flag checking, (4) event.data.previous_attributes field semantics (which fields changed between old and new state), (5) Cumulative vs per-event Stripe fields (charge.amount_refunded is cumulative), (6) Delta computation patterns, (7) Plan resolution from invoice line items with pagination, (8) Safety fallback on pagination exhaustion (G6 — {plan:'free',credits:0}), (9) API error handling mid-scan. Provides: full pagination scan pattern, previous_attributes delta helper, plan resolver with paginated line-item scan.
+description: |
+  Stripe list-API pagination and event.data.previous_attributes semantics.
+  PROACTIVELY activate for: (1) invoice.lines.data / charge.refunds.data / subscription.items.data embedded pagination, (2) starting_after cursor when falling through to list APIs, (3) has_more flag checking, (4) event.data.previous_attributes field semantics (which fields changed between old and new state), (5) Cumulative vs per-event Stripe fields (charge.amount_refunded is cumulative), (6) Delta computation patterns, (7) Plan resolution from invoice line items with pagination, (8) Safety fallback on pagination exhaustion (G6 — {plan:'free',credits:0}), (9) API error handling mid-scan.
+  Provides: full pagination scan pattern, previous_attributes delta helper, plan resolver with paginated line-item scan.
 ---
 
 ## Quick Reference

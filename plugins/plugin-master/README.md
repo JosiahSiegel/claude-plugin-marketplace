@@ -16,7 +16,7 @@ Complete Claude Code plugin development system with 2025 best practices.
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-plugin-marketplace
-/plugin install plugin-master@JosiahSiegel
+/plugin install plugin-master@claude-plugin-marketplace
 ```
 
 ### Local Installation
@@ -47,8 +47,12 @@ Just ask about plugin development:
 
 | Skill | Purpose |
 |-------|---------|
-| `plugin-master` | Core plugin development guide |
-| `advanced-features-2025` | Hooks, MCP, progressive disclosure |
+| `plugin-master` | Core plugin development guide — layout, manifest, marketplace registration |
+| `advanced-features-2025` | Hooks, MCP, progressive disclosure, team distribution |
+| `agent-development` | Agent frontmatter, `<example>` blocks, system prompts, tool restriction |
+| `skill-development` | SKILL.md authoring, progressive disclosure, references/ vs examples/ |
+| `hook-development` | Prompt-based and command hooks, events, matchers, security |
+| `triggering-reliability` | Anti-pattern catalog, severity tiers (P0/P1/P2), canonical checklist, description-length caps |
 
 ### Commands
 
@@ -128,17 +132,16 @@ Before publishing:
 ./scripts/validate-skill.sh skills/plugin-master/
 ```
 
-## What's New in 3.2.0
+## What's New
 
-- **Lean orchestrator pattern** - Agent body trimmed to orchestration logic; domain knowledge in skills only
-- **Mandatory size limits** - Enforced limits for descriptions (~500 chars), SKILL.md (3,000 words max), agent bodies (3,000 words max)
-- **Progressive disclosure enforcement** - Skills over 2,000 words must use references/ directory
-- **Description standards** - All skills use third-person trigger phrases
-- **Anti-duplication rules** - Agent bodies must not duplicate skill content
+- **Thin-router commands** - `/create-plugin` and `/validate-plugin` are now lean routers (~40 lines each) that delegate to the `plugin-expert` agent and named skills. No duplicated content between commands and skills.
+- **Corrected description limits** - Size limits updated to match Claude Code's actual API spec (1024-char hard ceiling per description) and listing cap (1536 chars, raised from 250 in v2.1.105). Target is now 400-1000 chars, not the obsolete ~500-char "soft target."
+- **Severity table & canonical checklist** - `triggering-reliability` skill now owns the P0/P1/P2 severity tiers and the canonical pre-publish checklist; commands point users at the skill rather than duplicating it.
+- **Lean orchestrator pattern** - Agent body stays an orchestrator; all domain knowledge lives in skills.
+- **Progressive disclosure enforcement** - Skills over 2,000 words split into SKILL.md + references/.
 
 ## Technical Details
 
-- **Version:** 3.2.0
 - **Author:** Josiah Siegel
 - **License:** MIT
 - **Repository:** https://github.com/JosiahSiegel/claude-plugin-marketplace

@@ -1,6 +1,9 @@
 ---
 name: unity-networking
-description: Unity multiplayer networking with NGO, Mirror, Photon, and Fish-Net. PROACTIVELY activate for: (1) building Unity multiplayer games, (2) Netcode for GameObjects (NGO) setup and patterns, (3) Mirror networking, (4) Photon PUN and Photon Fusion, (5) Fish-Net networking, (6) RPCs (ClientRpc, ServerRpc), (7) NetworkVariable and network synchronization, (8) lobby and matchmaking systems, (9) dedicated server hosting and Relay, (10) server-authoritative architecture, (11) lag compensation and prediction. Provides: networking-stack comparison, NGO templates, RPC patterns, NetworkVariable usage, lobby/matchmaking setup, and authoritative-server design.
+description: |
+  Unity multiplayer networking with NGO, Mirror, Photon, and Fish-Net.
+  PROACTIVELY activate for: (1) building Unity multiplayer games, (2) Netcode for GameObjects (NGO) setup and patterns, (3) Mirror networking, (4) Photon PUN and Photon Fusion, (5) Fish-Net networking, (6) RPCs (ClientRpc, ServerRpc), (7) NetworkVariable and network synchronization, (8) lobby and matchmaking systems, (9) dedicated server hosting and Relay, (10) server-authoritative architecture, (11) lag compensation and prediction.
+  Provides: networking-stack comparison, NGO templates, RPC patterns, NetworkVariable usage, lobby/matchmaking setup, and authoritative-server design.
 ---
 
 # Unity Networking and Multiplayer

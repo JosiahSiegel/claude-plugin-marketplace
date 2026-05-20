@@ -20,11 +20,11 @@ This plugin provides a specialized AI agent that acts as your personal .NET micr
 ### Via Marketplace (Recommended)
 
 ```bash
-# Add the marketplace (replace with your GitHub username/repo)
-/plugin marketplace add YOUR_USERNAME/YOUR_REPO
+# Add the marketplace
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 
 # Install the plugin
-/plugin install dotnet-microservices-expert@YOUR_USERNAME
+/plugin install dotnet-microservices-master@claude-plugin-marketplace
 ```
 
 ### Local Installation (Mac/Linux)

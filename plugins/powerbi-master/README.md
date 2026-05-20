@@ -32,7 +32,7 @@ Complete Power BI expertise plugin for Claude Code, covering everything from DAX
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-plugin-marketplace
-/plugin install powerbi-master@JosiahSiegel
+/plugin install powerbi-master@claude-plugin-marketplace
 ```
 
 ## Usage Examples

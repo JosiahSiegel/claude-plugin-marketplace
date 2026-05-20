@@ -1,6 +1,9 @@
 ---
 name: powerbi-core
-description: Core Power BI data modeling, source connectivity, and platform fundamentals. PROACTIVELY activate for: (1) Power BI data modeling and star-schema design, (2) relationships (active/inactive, bidirectional, USERELATIONSHIP), (3) data-source selection (DirectQuery vs Import vs Direct Lake vs composite), (4) incremental refresh setup, (5) gateway configuration (on-prem and VNet gateways), (6) streaming datasets and push-data scenarios, (7) Dataflow Gen2 basics, (8) Power BI common gotchas and pitfalls (bidirectional filtering, AutoExist, blank-row), (9) workspace identity and OAuth2 / service-principal auth, (10) semantic model architecture review. Provides: star-schema templates, mode-selection matrix, incremental refresh recipe, gateway setup steps, and a common-gotchas reference.
+description: |
+  Core Power BI data modeling, source connectivity, and platform fundamentals.
+  PROACTIVELY activate for: (1) Power BI data modeling and star-schema design, (2) relationships (active/inactive, bidirectional, USERELATIONSHIP), (3) data-source selection (DirectQuery vs Import vs Direct Lake vs composite), (4) incremental refresh setup, (5) gateway configuration (on-prem and VNet gateways), (6) streaming datasets and push-data scenarios, (7) Dataflow Gen2 basics, (8) Power BI common gotchas and pitfalls (bidirectional filtering, AutoExist, blank-row), (9) workspace identity and OAuth2 / service-principal auth, (10) semantic model architecture review.
+  Provides: star-schema templates, mode-selection matrix, incremental refresh recipe, gateway setup steps, and a common-gotchas reference.
 ---
 
 # Power BI Core Concepts and Data Modeling

@@ -4,70 +4,7 @@ model: inherit
 color: magenta
 tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 description: |
-  Complete Claude Code plugin development expert. PROACTIVELY activate for: (1) creating new plugins (from scratch or scaffolded), (2) adding agents/skills/commands/hooks/MCP servers to existing plugins, (3) plugin architecture and component design, (4) marketplace.json registration and publishing, (5) frontmatter authoring (agent `<example>` blocks, skill `PROACTIVELY activate for:` patterns), (6) troubleshooting plugins that do not load or trigger, (7) migrating deprecated patterns (e.g. `agent: true` → `name:`), (8) validating plugin structure before release. Provides: canonical frontmatter templates for agents and skills, triggering-reliability guidance, progressive disclosure patterns, lean-orchestrator agent design, marketplace registration workflow, and validation checklists that catch common triggering mistakes before they ship.
-
-  <example>
-  Context: User wants to create a new plugin
-  user: "Create a plugin for Docker workflow automation"
-  assistant: "I'll use the plugin-expert agent to design and create a comprehensive Docker plugin with proper architecture."
-  <commentary>
-  User requesting new plugin creation - trigger plugin-expert for architecture and implementation.
-  </commentary>
-  </example>
-
-  <example>
-  Context: User needs help with plugin structure
-  user: "How should I organize my plugin that has multiple agents and skills?"
-  assistant: "I'll use the plugin-expert agent to provide guidance on plugin architecture and component organization."
-  <commentary>
-  Plugin structure question - trigger plugin-expert for best practices guidance.
-  </commentary>
-  </example>
-
-  <example>
-  Context: User has a plugin issue
-  user: "My plugin commands aren't showing up in Claude Code"
-  assistant: "I'll use the plugin-expert agent to diagnose and fix your plugin loading issues."
-  <commentary>
-  Plugin troubleshooting - trigger plugin-expert for diagnostic assistance.
-  </commentary>
-  </example>
-
-  <example>
-  Context: User wants to publish plugin
-  user: "How do I publish my plugin to a marketplace?"
-  assistant: "I'll use the plugin-expert agent to guide you through marketplace publishing."
-  <commentary>
-  Publishing question - trigger plugin-expert for marketplace guidance.
-  </commentary>
-  </example>
-
-  <example>
-  Context: User wants to create an agent for their plugin
-  user: "How do I write an agent that triggers automatically?"
-  assistant: "I'll use the plugin-expert agent to help design your agent's frontmatter, triggering examples, and system prompt."
-  <commentary>
-  Agent development question - trigger plugin-expert for component creation guidance.
-  </commentary>
-  </example>
-
-  <example>
-  Context: User wants to add hooks to their plugin
-  user: "I want to validate file writes before they happen"
-  assistant: "I'll use the plugin-expert agent to set up a PreToolUse hook for file write validation."
-  <commentary>
-  Hook development request - trigger plugin-expert for hook configuration.
-  </commentary>
-  </example>
-
-  <example>
-  Context: User needs help creating a skill
-  user: "How do I create a skill with progressive disclosure?"
-  assistant: "I'll use the plugin-expert agent to guide skill creation with proper SKILL.md structure and references."
-  <commentary>
-  Skill development question - trigger plugin-expert for skill architecture.
-  </commentary>
-  </example>
+  Claude Code plugin development expert. PROACTIVELY activate for: creating plugins (scratch or scaffolded), adding agents/skills/commands/hooks/MCP servers, plugin architecture and component design, marketplace.json registration and publishing, frontmatter authoring (agent description, skill `PROACTIVELY activate for:`, trigger phrases), troubleshooting plugins that do not load or trigger, debugging skill routing and agent invocation, migrating deprecated patterns (`agent: true` -> `name:`, legacy hooks), validating plugin structure, splitting bloated SKILL.md via progressive disclosure, enforcing the 1024-char description ceiling, lean-orchestrator agent refactors, hook events and matchers (PreToolUse, PostToolUse, UserPromptSubmit), MCP server wiring, slash command authoring. Provides: canonical frontmatter templates, triggering-reliability guidance, marketplace registration workflow, and validation checklists.
 
 ---
 
@@ -126,15 +63,23 @@ When creating ANY plugin in a marketplace repository:
 
 ### Size Limits (MANDATORY)
 
-These limits prevent context bloat and must be enforced on ALL created plugins:
+These limits prevent context bloat and must be enforced on ALL created plugins. Description ceilings reflect the actual Claude Code caps (see `triggering-reliability` skill — "Description length limits" section):
 
-| Component | Limit | Action if exceeded |
-|-----------|-------|-------------------|
-| Plugin.json description | ~500 characters | Condense; rely on keywords for breadth |
-| Skill description | ~500 characters | Use third person + specific trigger phrases |
-| SKILL.md body | 1,500-2,000 words (3,000 max) | Split into SKILL.md + references/ |
-| Agent body | 1,500-2,500 words (3,000 max) | Use lean orchestrator pattern — delegate to skills |
-| references/ files | 2,000-5,000+ words each | Acceptable; this is where detailed content belongs |
+| Component | Target | Hard ceiling | Action if exceeded |
+|-----------|--------|--------------|-------------------|
+| Plugin.json description | 400-1000 characters | 1024 chars (API spec) | Condense; rely on keywords for breadth; split plugin if it covers multiple distinct workflows |
+| Skill description | 400-1000 characters | 1024 chars (API spec) | Front-load triggers; collapse near-duplicates; split skill if 15+ triggers genuinely needed |
+| Agent description | 400-1000 characters | 1024 chars (API spec) | Same as skill |
+| SKILL.md body | 1,500-2,000 words | 3,000 words | Split into SKILL.md + references/ |
+| Agent body | 1,500-2,500 words | 3,000 words | Use lean orchestrator pattern — delegate to skills |
+| references/ files | 2,000-5,000+ words each | none | Acceptable; this is where detailed content belongs |
+
+**Description-length caps explained briefly** (full detail in `triggering-reliability` skill):
+- **1024 chars** — Claude Code API spec hard ceiling per description. Never exceed.
+- **1536 chars** — current listing cap (combined description + when_to_use, v2.1.105+). What Claude actually sees when routing queries.
+- **~1% of context window** — aggregate budget across all installed skills' descriptions; v2.1.129+ drops least-used skills when over budget rather than truncating.
+
+The old 500-char "soft target" was based on a since-superseded 250-char listing cap. Dense plugins that legitimately span multiple sub-workflows can sit in the 500-1000 range without harm. Front-load triggers in all descriptions.
 
 ### Lean Orchestrator Pattern for Agents (MANDATORY)
 
@@ -155,7 +100,7 @@ When a SKILL.md exceeds ~2,000 words, split it:
 
 - **Skills**: Third person — "This skill should be used when the user asks to..." with specific trigger phrases
 - **Agents**: "Use this agent when..." with 3-7 `<example>` blocks
-- **Plugin.json**: Under 500 characters; use keywords array for breadth
+- **Plugin.json**: Target 400-1000 characters (hard ceiling 1024); use keywords array for breadth beyond that
 
 ### Housekeeping (MANDATORY)
 

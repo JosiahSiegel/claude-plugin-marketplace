@@ -9,8 +9,8 @@
     {
       "name": "context-master",
       "source": "./plugins/context-master",
-      "description": "Universal context management and planning system. PROACTIVELY activate for: (1) ANY complex task requiring planning, (2) Multi-file projects/websites/apps, (3) Architecture decisions, (4) Research tasks, (5) Refactoring, (6) Long coding sessions, (7) Tasks with 3+ sequential steps. Provides: optimal file creation order, context-efficient workflows, extended thinking delegation (23x context efficiency), Claude Sonnet 4.5 token budgeting, recursive delegation patterns, clear-and-verify production workflows, passive deep analysis architecture, progressive task decomposition, and prevents redundant work. Saves 62% context on average.",
-      "version": "2.2.3",
+      "description": "Universal context management and planning. PROACTIVELY activate for: (1) complex multi-file tasks, (2) architecture decisions, (3) research, (4) refactoring, (5) long sessions, (6) any task with 3+ sequential steps. Provides: optimal file-creation order, extended-thinking delegation (23x context efficiency), token budgeting, recursive delegation, clear-and-verify workflows, progressive task decomposition. Saves 62% context on average.",
+      "version": "2.2.4",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -31,7 +31,7 @@
       "name": "plugin-master",
       "source": "./plugins/plugin-master",
       "description": "Complete Claude Code plugin development system. PROACTIVELY activate when users want to: (1) Create/build plugins with 2025 features, (2) Add skills/commands/agents/hooks, (3) Validate plugin structure, (4) Publish to marketplace, (5) Get plugin development guidance. Provides: agent-first design patterns, progressive disclosure skills, hook automation, MCP integration, marketplace publishing. Includes plugin-expert agent and validation utilities.",
-      "version": "3.2.2",
+      "version": "3.3.1",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -52,8 +52,8 @@
     {
       "name": "bash-master",
       "source": "./plugins/bash-master",
-      "description": "Expert bash/shell scripting system across ALL platforms with Bash 5.3 and 2025 security-first practices. PROACTIVELY activate for: (1) ANY bash/shell script task, (2) Bash 5.3 features (${ } in-shell substitution, ${| } REPLY syntax, BASH_TRAPSIG), (3) Security-first patterns (60%+ exploits from poor validation, HISTFILE protection, absolute paths), (4) ShellCheck v0.11.0 validation (non-negotiable, POSIX.1-2024), (5) Modern automation (containers/CI/CD/cloud), (6) Scripts under 50 lines (Google Style), (7) Comprehensive debugging (tracing, profiling, breakpoints), (8) Git hooks and pipeline integration, (9) Container-aware scripting, (10) DevOps/deployment automation. Provides: Bash 5.3 complete features (BASH_TRAPSIG, C23 conformance), ShellCheck v0.11.0 (SC2327/SC2328/SC2294/SC2295), security-first mandatory validation patterns, debugging/troubleshooting techniques, container/Kubernetes detection, cloud provider helpers (AWS/Azure), CI/CD platform integration (GitHub Actions/Azure DevOps), parallel processing patterns, blue-green/canary deployments, Google Shell Style Guide compliance, cross-platform compatibility (Linux/macOS/Windows/containers), POSIX.1-2024 compliance, and production-ready 2025 patterns. Ensures secure, optimized, cloud-native scripts following latest 2025 standards.",
-      "version": "2.0.4",
+      "description": "Expert bash/shell scripting across all platforms with Bash 5.3 and 2025 security-first practices. PROACTIVELY activate for: (1) any bash/shell task, (2) Bash 5.3 features (in-shell substitution, BASH_TRAPSIG), (3) security-first patterns (input validation, HISTFILE), (4) ShellCheck v0.11 validation, (5) CI/CD and container-aware scripting, (6) debugging and profiling. Provides: Bash 5.3 reference, ShellCheck rules, Google Shell Style, POSIX.1-2024 compliance, cross-platform patterns, and cloud/CI helpers.",
+      "version": "2.0.6",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -80,8 +80,8 @@
     {
       "name": "git-master",
       "source": "./plugins/git-master",
-      "description": "Complete Git expertise for ALL operations with 2025 features (Git 2.49+, GitHub CLI 2.x). PROACTIVELY activate for: (1) ANY Git task, (2) Git 2.49+ features (git-backfill, path-walk API, reftables, sparse-checkout, worktrees), (3) Security (signed commits, zero-trust, secret scanning, CodeQL), (4) Trunk-Based Development, (5) GitHub CLI 2.x (Copilot CLI, model evaluations), (6) GitHub Actions 2025 (1 vCPU runners, immutable releases), (7) Modern workflows (monorepo, parallel development), (8) History rewriting/recovery. Provides: Git 2.49 git-backfill for partial clones, path-walk API, reftables migration, sparse-checkout (90% space reduction), worktrees, GitHub Copilot CLI, gh models eval, zero-trust security, signed commits (GPG/SSH), GitHub Actions 2025 features, automatic backups, safety guardrails, reflog recovery.",
-      "version": "1.5.4",
+      "description": "Complete Git expertise with 2025 features (Git 2.49+, GitHub CLI 2.x). PROACTIVELY activate for: (1) any Git task, (2) Git 2.49+ features (git-backfill, path-walk, reftables, sparse-checkout, worktrees), (3) signed commits and zero-trust security, (4) Trunk-Based Development, (5) GitHub CLI 2.x and Copilot CLI, (6) GitHub Actions 2025 patterns, (7) monorepo workflows, (8) history rewriting and recovery. Provides: command reference, safety guardrails, reflog recovery.",
+      "version": "1.5.5",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -115,8 +115,8 @@
     {
       "name": "docker-master",
       "source": "./plugins/docker-master",
-      "description": "Complete Docker expertise system across ALL platforms (Windows/Linux/macOS) with 2025 AI-powered features. PROACTIVELY activate for: (1) ANY Docker task (build/run/debug/optimize/registry/network), (2) Docker AI Assistant (Project Gordon) usage, (3) Dockerfile creation/review, (4) Docker Engine 28 features (image mounts, debug endpoints), (5) Docker Desktop 4.47+ (MCP Catalog, Model Runner, silent updates), (6) Docker Compose v2.40.3+ multi-container apps, (7) Compose Bridge (Kubernetes conversion), (8) Container security with Enhanced Container Isolation (ECI), (9) SBOM generation and supply chain protection, (10) Micro-distro base images (Wolfi/Chainguard), (11) Container registry operations, (12) Advanced networking. Provides: Docker AI (Project Gordon), Enhanced Container Isolation (ECI), Engine 28 features (--mount type=image), Desktop 4.47+ capabilities, Model Runner improvements, Compose v2.40.3+ updates, Compose Bridge, registry management, network deep-dive, 2025 best practices with micro-distros, SBOM generation, BuildKit attestation warnings (unsigned), CIS Docker Benchmark v1.7.0, multi-stage builds, security hardening, image optimization, platform-specific guidance, Docker Scout/Trivy integration, and systematic debugging.",
-      "version": "1.5.5",
+      "description": "Complete Docker expertise across Windows/Linux/macOS with 2025 AI-powered features. PROACTIVELY activate for: (1) any Docker task (build/run/debug/optimize), (2) Docker AI (Project Gordon), (3) Dockerfile authoring and review, (4) Engine 28 / Desktop 4.47+ features, (5) Compose v2.40+ and Compose Bridge, (6) Enhanced Container Isolation, (7) SBOM and supply-chain hardening, (8) micro-distro images (Wolfi/Chainguard), (9) registry and networking. Provides: 2025 best practices, multi-stage builds, security hardening, debugging.",
+      "version": "1.5.7",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -141,7 +141,7 @@
       "name": "doc-master",
       "source": "./plugins/doc-master",
       "description": "Documentation diagnostic, Markdown style, and ADR expert. Diagnostic-first: refuses to write ADRs for non-decisions and routes the rest to the right home (RFC / Diátaxis / runbook / code comment). Co-drafts ADRs with zero-hallucination discovery, scripted push-back, line-by-line audit of legacy ADRs, and canonical-C4 LikeC4 diagrams. Two-pass Markdown lint over any .md file: canonical syntax (Markdown Guide) plus opinionated style (Google Markdown style guide), per-finding with rule citations.",
-      "version": "1.2.0",
+      "version": "1.2.2",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -178,8 +178,8 @@
     {
       "name": "ado-master",
       "source": "./plugins/ado-master",
-      "description": "Complete Azure DevOps and Azure Pipelines expertise system with Sprint 254-262 features (2025). PROACTIVELY activate for: (1) ANY Azure DevOps/Pipelines task, (2) YAML pipeline creation/editing, (3) Workload identity federation (OIDC) passwordless authentication, (4) Pipeline performance analytics and monitoring, (5) Pipeline debugging/troubleshooting, (6) CI/CD optimization, (7) Security/compliance implementation, (8) Azure DevOps CLI operations, (9) Template management, (10) Microsoft Security DevOps integration. Provides: workload identity setup and migration, pipeline performance analytics and cost tracking, latest YAML schema (always researches current docs), Microsoft best practices, multi-stage pipeline patterns, caching/parallelization, Azure Key Vault integration, code scanning (SAST/dependency/container/IaC/secrets), deployment strategies, performance optimization, and systematic debugging.",
-      "version": "1.5.5",
+      "description": "Complete Azure DevOps and Azure Pipelines expertise with Sprint 254-262 features (2025). PROACTIVELY activate for: (1) any Azure DevOps/Pipelines task, (2) YAML pipeline authoring, (3) workload identity federation (OIDC), (4) performance analytics, (5) debugging, (6) CI/CD optimization, (7) security and compliance, (8) Azure DevOps CLI, (9) template management, (10) Microsoft Security DevOps. Provides: workload-identity setup, multi-stage patterns, caching/parallelization, Key Vault integration, code scanning.",
+      "version": "1.5.7",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -204,8 +204,8 @@
     {
       "name": "test-master",
       "source": "./plugins/test-master",
-      "description": "Complete Vitest 4.0 Playwright 1.55 MSW 2.x testing system. PROACTIVELY activate for: (1) ANY testing task (unit/integration/E2E/visual), (2) Test creation and scaffolding, (3) AI-powered test generation (Playwright agents), (4) Test debugging and failure analysis, (5) Coverage analysis and optimization, (6) Visual regression testing, (7) MSW mock management, (8) Test configuration (Vitest/Playwright), (9) CI/CD test setup, (10) Multi-project test architecture. Provides: Vitest 4.0 stable browser mode, visual regression testing, Playwright 1.55 AI test agents, intelligent test running, auto-scaffolding with boilerplate, MSW 2.11+ handler generation, coverage gap analysis, Playwright trace debugging with titlePath, advanced snapshot management, parallel execution optimization, and comprehensive test infrastructure setup. Ensures production-ready testing with latest 2025 patterns across all modern JavaScript projects.",
-      "version": "1.6.5",
+      "description": "Complete Vitest 4.0, Playwright 1.55, and MSW 2.x testing system. PROACTIVELY activate for: (1) any testing task (unit/integration/E2E/visual), (2) test scaffolding, (3) AI-powered test generation, (4) debugging and failure analysis, (5) coverage optimization, (6) visual regression, (7) MSW mock management, (8) Vitest/Playwright config, (9) CI test setup, (10) multi-project architecture. Provides: browser-mode patterns, trace debugging, snapshot management, parallel execution tuning.",
+      "version": "1.6.7",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -225,8 +225,8 @@
     {
       "name": "powershell-master",
       "source": "./plugins/powershell-master",
-      "description": "Complete PowerShell expertise system across ALL platforms (Windows/Linux/macOS). PROACTIVELY activate for: (1) ANY PowerShell task (scripts/modules/cmdlets), (2) CI/CD automation (GitHub Actions/Azure DevOps/Bitbucket), (3) Cross-platform scripting, (4) Module discovery and management (PSGallery), (5) Azure/AWS/Microsoft 365 automation, (6) Script debugging and optimization, (7) Best practices and security. Provides: PowerShell 7+ features, popular module expertise (Az, Microsoft.Graph, PnP, AWS Tools), PSGallery integration, platform-specific guidance, CI/CD pipeline patterns, cmdlet syntax mastery, and production-ready scripting patterns.",
-      "version": "2.0.4",
+      "description": "Complete PowerShell expertise across Windows/Linux/macOS. PROACTIVELY activate for: (1) any PowerShell task (scripts/modules/cmdlets), (2) CI/CD automation (GitHub Actions, Azure DevOps), (3) cross-platform scripting, (4) module management (PSGallery), (5) Azure/AWS/M365 automation, (6) debugging and optimization, (7) security best practices. Provides: PowerShell 7+ features, Az/Microsoft.Graph/PnP/AWS Tools patterns, PSGallery integration, CI/CD pipeline templates.",
+      "version": "2.0.5",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -246,8 +246,8 @@
     {
       "name": "terraform-master",
       "source": "./plugins/terraform-master",
-      "description": "Complete Terraform expertise system for all cloud providers (Azure, AWS, Google Cloud) and platforms. PROACTIVELY activate for: (1) ANY Terraform task (init/plan/apply/validate), (2) Infrastructure-as-code design, (3) Resource import and state management, (4) Multi-environment architectures, (5) CI/CD pipeline integration, (6) Security scanning and best practices, (7) Version-aware code generation, (8) CLI mastery with -chdir and all flags. Provides: comprehensive provider knowledge (AzureRM/AWS/GCP/community), version-aware implementations, state operations (mv/rm/import), bulk import strategies (Terraformer/aztfexport), security scanning (tfsec/Checkov), enterprise architecture patterns, complete CLI reference, and platform-specific guidance (Windows/Linux/macOS).",
-      "version": "2.0.3",
+      "description": "Complete Terraform expertise for Azure, AWS, and Google Cloud. PROACTIVELY activate for: (1) any Terraform task (init/plan/apply/validate), (2) IaC design, (3) resource import and state management, (4) multi-environment architectures, (5) CI/CD integration, (6) security scanning, (7) version-aware code generation, (8) CLI mastery. Provides: provider knowledge (AzureRM/AWS/GCP), state operations, bulk import (Terraformer/aztfexport), tfsec/Checkov, enterprise patterns, full CLI reference.",
+      "version": "2.0.4",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -272,8 +272,8 @@
     {
       "name": "ssdt-master",
       "source": "./plugins/ssdt-master",
-      "description": "Complete SQL Server Data Tools (SSDT) expertise system across ALL platforms. PROACTIVELY activate for: (1) ANY SSDT task (database projects/SqlPackage/schema compare), (2) SDK-style and legacy database project creation/migration, (3) DACPAC/BACPAC build and deployment operations, (4) SqlPackage command-line operations (publish/extract/export/import), (5) Schema and data comparison workflows, (6) Database refactoring operations (rename/schema changes/data transformations), (7) MSBuild integration and CI/CD pipeline setup, (8) Visual Studio database project troubleshooting, (9) Cross-platform CLI tools (dotnet/sqlpackage), (10) Deployment script generation and validation. Provides: comprehensive SqlPackage reference with all actions and parameters, SDK-style project structure expertise, legacy project migration patterns, schema compare functionality, deployment option mastery, refactoring best practices, CI/CD integration patterns (GitHub Actions/Azure DevOps), MSBuild property configuration, and version-specific guidance. Ensures production-ready, secure, efficient database development following Microsoft SQL Server best practices.",
-      "version": "1.6.5",
+      "description": "Complete SQL Server Data Tools (SSDT) expertise across all platforms. PROACTIVELY activate for: (1) any SSDT task (database projects/SqlPackage/schema compare), (2) SDK-style and legacy project creation/migration, (3) DACPAC/BACPAC build and deploy, (4) SqlPackage CLI operations, (5) schema and data comparison, (6) refactoring, (7) MSBuild and CI/CD, (8) deployment script generation. Provides: full SqlPackage parameter reference, SDK-style project structure, deployment options, GitHub Actions/Azure DevOps patterns.",
+      "version": "1.6.7",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -298,7 +298,7 @@
       "name": "adf-master",
       "source": "./plugins/adf-master",
       "description": "Complete Azure Data Factory expertise for pipeline JSON development, validation, and optimization (2025-2026). This plugin should be used for ADF pipeline creation, activity configuration, linked services, datasets, triggers, expressions, CI/CD, Microsoft Fabric integration, Databricks orchestration, ML pipeline patterns, and debugging.",
-      "version": "4.3.1",
+      "version": "4.3.3",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -364,8 +364,8 @@
     {
       "name": "salesforce-master",
       "source": "./plugins/salesforce-master",
-      "description": "Complete Salesforce expertise system across ALL platforms and integration scenarios. PROACTIVELY activate for: (1) ANY Salesforce task (API/data/Apex/Lightning/Flow), (2) SOQL/SOSL query design and optimization, (3) REST/SOAP API integration and authentication, (4) Apex development (classes/triggers/batch/scheduled) with Spring '25 features, (5) Lightning Web Components with lightning/graphql module and Aura development, (6) Data model design and schema management (objects/fields/relationships), (7) Integration patterns (source-to-Salesforce, Salesforce-to-target), (8) Deployment and metadata management (change sets/SFDX/CLI), (9) Security model implementation (profiles/permissions/sharing), (10) Flow/Process Builder/Flow Orchestrator automation, (11) Agentforce 2.0 AI agents and autonomous automation, (12) Data Cloud Vector Database with semantic search, (13) Hyperforce public cloud architecture. Provides: comprehensive SFDC object schema knowledge (standard/custom objects, all fields, relationships), complete API reference (REST/SOAP/Bulk/Streaming) for API 63.0/64.0, Apex language mastery with Compression and FormulaEval namespaces (Spring '25 GA), Lightning platform expertise with Winter '26 GraphQL updates and SLDS 2.0 dark mode, SOQL/SOSL optimization, authentication methods (OAuth/JWT/Session), limits and best practices, governor limits handling, integration patterns (ETL/real-time/batch/Data Cloud), metadata API operations, SFDX CLI commands, version-specific guidance, platform event architecture, Agentforce 2.0 development with LLM Open Connector, Data Cloud Vector Database for unstructured data and hybrid search, Flow Orchestrator multi-user workflows, and Hyperforce cloud-native architecture. Ensures production-ready, scalable, secure Salesforce solutions following Spring '25/Summer '25 best practices and Well-Architected Framework.",
-      "version": "2.2.5",
+      "description": "Complete Salesforce expertise across all integration scenarios. PROACTIVELY activate for: (1) any Salesforce task (API/data/Apex/Lightning/Flow), (2) SOQL/SOSL design and optimization, (3) REST/SOAP/Bulk API and auth (OAuth/JWT), (4) Apex with Spring '25 features, (5) Lightning Web Components and Aura, (6) data model design, (7) integration patterns, (8) deployment (SFDX/CLI/change sets), (9) security model, (10) Flow Orchestrator, (11) Agentforce 2.0, (12) Data Cloud Vector Database, (13) Hyperforce. Provides: full schema knowledge, API 63/64 reference, governor limits, ETL/real-time/batch patterns.",
+      "version": "2.2.7",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -406,7 +406,7 @@
       "name": "azure-master",
       "source": "./plugins/azure-master",
       "description": "Complete Azure cloud expertise covering 2025-2026 features. This plugin should be used for ANY Azure resource provisioning, AKS Automatic, Container Apps GPU, Azure OpenAI (GPT-5, reasoning models), Deployment Stacks, Azure ML workspaces, AI Foundry, compute clusters, endpoints, Terraform, networking, private endpoints, managed identities, debugging, and cost optimization.",
-      "version": "1.3.1",
+      "version": "1.3.3",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -451,8 +451,8 @@
     {
       "name": "azure-to-docker-master",
       "source": "./plugins/azure-to-docker-master",
-      "description": "Complete Azure-to-Docker migration system for local development with 2025 features. PROACTIVELY activate for: (1) ANY Azure-to-Docker migration task, (2) Azure infrastructure extraction and Docker Compose generation, (3) Azure service emulator setup (Azurite 2025-11-05 API, SQL Server 2025 latest, Cosmos DB vnext Linux, Service Bus official emulator), (4) Local development with Docker Compose Watch mode (hot reload), (5) Database export from Azure SQL/PostgreSQL/MySQL to Docker, (6) Dockerfile generation from Azure App Service configurations, (7) Multi-container orchestration with proper networking and dependencies, (8) Production-ready Docker Compose with health checks and runtime secrets, (9) Azure service mapping (App Service/SQL/Storage/Redis/Cosmos/Service Bus), (10) Development-to-production parity with Azure emulators. Provides: Azure resource extraction and analysis, complete Docker Compose generation with 2025 best practices, Azure emulator configuration (Azurite with latest API, SQL Server 2025 with Vector Search, Cosmos DB vnext Linux-based, official Service Bus emulator), Docker Compose Watch mode for hot reload, database export automation, App Service to Dockerfile conversion, service dependency mapping, network isolation patterns, volume management strategies, environment variable templating, health check implementation, resource limit configuration, security hardening (non-root users, read-only filesystems, capability drops, runtime-only secrets), development override patterns with watch mode, and Azure-to-Docker best practices. Ensures production-ready local development environments that mirror Azure infrastructure with instant hot reload capabilities.",
-      "version": "1.1.5",
+      "description": "Complete Azure-to-Docker migration for local development with 2025 emulators. PROACTIVELY activate for: (1) any Azure-to-Docker migration, (2) Azure infra extraction and Compose generation, (3) emulator setup (Azurite, SQL Server 2025, Cosmos DB vnext, Service Bus), (4) Compose Watch hot reload, (5) database export from Azure SQL/Postgres/MySQL, (6) Dockerfile generation from App Service, (7) multi-container orchestration, (8) health checks and runtime secrets, (9) service mapping (App Service/SQL/Storage/Redis/Cosmos), (10) dev-to-prod parity.",
+      "version": "1.1.7",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -478,8 +478,8 @@
     {
       "name": "windows-path-master",
       "source": "./plugins/windows-path-master",
-      "description": "Windows path resolution and Git Bash compatibility expert for Claude Code. PROACTIVELY activate for: (1) File path errors on Windows (backslash issues), (2) Git Bash MINGW path resolution, (3) Edit/Write tool failures with Windows paths, (4) Cross-platform path conversion, (5) Windows file system navigation in Claude Code, (6) Path format detection and conversion, (7) Windows-specific file operation troubleshooting. Provides: automatic path format detection, backslash conversion guidance, Git Bash compatibility fixes, Windows-specific file operation patterns, MINGW path troubleshooting, real-time path validation, and production-ready Windows file handling. Ensures correct file operations on Windows following Claude Code best practices.",
-      "version": "1.0.4",
+      "description": "Windows path resolution and Git Bash compatibility expert for Claude Code. PROACTIVELY activate for: (1) file path errors on Windows (backslash issues), (2) Git Bash MINGW path resolution, (3) Edit/Write tool failures with Windows paths, (4) cross-platform path conversion, (5) Windows file system navigation, (6) path format detection and conversion, (7) Windows-specific file operation troubleshooting. Provides: automatic format detection, backslash conversion, MINGW fixes, real-time validation.",
+      "version": "1.0.6",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -499,8 +499,8 @@
     {
       "name": "dotnet-microservices-master",
       "source": "./plugins/dotnet-microservices-master",
-      "description": "Expert agent on .NET microservices architecture, containerization, Docker, DDD, CQRS, and cloud-native patterns based on Microsoft's official guide. PROACTIVELY activate for: (1) ANY .NET microservices architecture task, (2) Docker containerization for .NET applications, (3) Domain-Driven Design (DDD) tactical and strategic patterns, (4) CQRS and Event Sourcing implementation, (5) Microservices communication patterns (sync/async), (6) API Gateway design with Ocelot, (7) Event-driven architecture with message brokers, (8) Resilience patterns (Circuit Breaker, Retry, Bulkhead) with Polly, (9) Entity Framework Core and Dapper for CQRS, (10) Kubernetes and Azure deployment strategies, (11) eShopOnContainers reference application guidance. Provides: comprehensive Microsoft .NET Microservices Architecture guide (v7.0), 350-page reference material via Agent Skill, Docker and container fundamentals, .NET 7+ best practices, microservices design patterns, DDD aggregate and repository patterns, CQRS read/write model separation, integration events and event bus patterns, security with IdentityServer and OAuth 2.0, health checks and monitoring, production-ready architecture guidance. Ensures scalable, resilient, maintainable microservices systems using .NET and Docker following Microsoft official guidance.",
-      "version": "1.0.5",
+      "description": "Expert .NET microservices architecture, containerization, DDD, CQRS, and cloud-native patterns based on Microsoft's official guide. PROACTIVELY activate for: (1) any .NET microservices task, (2) Docker containerization, (3) Domain-Driven Design (tactical and strategic), (4) CQRS and Event Sourcing, (5) sync/async communication, (6) API Gateway with Ocelot, (7) event-driven messaging, (8) resilience with Polly, (9) EF Core and Dapper, (10) Kubernetes and Azure deployment, (11) eShopOnContainers guidance. Provides: Microsoft .NET Microservices guide v7.0, .NET 7+ patterns, IdentityServer/OAuth, health checks.",
+      "version": "1.0.7",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -525,8 +525,8 @@
     {
       "name": "ffmpeg-master",
       "source": "./plugins/ffmpeg-master",
-      "description": "Complete FFmpeg expertise system with comprehensive coverage of FFmpeg 8.0.1 (2025-11-20) features, PyAV Python bindings (FFmpeg 8.0+ compatible), hardware acceleration (NVIDIA NVENC, Intel QSV, AMD AMF, VAAPI, Vulkan), Docker/container usage, Modal.com serverless containers (CPU/GPU), Cloudflare Workers/WebAssembly (ffmpeg.wasm), CI/CD runner optimization (GitHub Actions), live streaming (RTMP/HLS/DASH/SRT/WebRTC/WHIP), audio processing and normalization, encoding optimization (CRF, presets, quality tuning), FFmpeg + OpenCV integration, and common gotchas/troubleshooting. PROACTIVELY activate for: (1) ANY FFmpeg task (encoding, transcoding, streaming, filtering), (2) Video format conversion (MP4, WebM, MKV, AVI), (3) Hardware acceleration setup (NVENC, CUDA, QSV, VAAPI, AMF, Vulkan), (4) Docker container FFmpeg usage (jrottenberg/ffmpeg, linuxserver/ffmpeg), (5) Modal.com serverless video processing (GPU/CPU containers, parallel processing, volumes), (6) Browser/WebAssembly FFmpeg (ffmpeg.wasm), (7) Cloudflare Workers video processing, (8) GitHub Actions/CI pipeline video processing, (9) Live streaming setup (RTMP ingest, HLS/DASH/WHIP/WebRTC delivery), (10) Audio encoding/normalization (AAC, MP3, loudnorm, EBU R128), (11) Quality optimization (CRF, bitrate, presets), (12) FFmpeg debugging and error resolution, (13) VVC/H.266, AV1, HEVC encoding, (14) Filter graphs and complex filtergraphs, (15) Batch processing and automation, (16) Whisper AI subtitle generation, (17) PyAV installation on Ubuntu 20.04/22.04/24.04/Windows/macOS, (18) Building PyAV against custom FFmpeg, (19) PyAV av.open, VideoFrame, AudioFrame patterns, (20) PyAV filter graphs and encoding/decoding, (21) FFmpeg to OpenCV frame handoff. Provides: PyAV integration skill (installation guides for all Ubuntu versions, custom FFmpeg builds, FFmpeg 8.0+ compatibility matrix, av.open patterns, VideoFrame/AudioFrame NumPy conversion, filter graphs, encoding/decoding, seeking, RTSP streaming, memory management, thread safety, error handling), FFmpeg 8.0.1 patch release features, FFmpeg 8.0 Huffman features (Whisper AI filter, Vulkan compute codecs for FFv1/ProRes RAW/AV1/VP9, APV codec, VVC VA-API/QSV decoding, WHIP muxer for WebRTC, colordetect/pad_cuda/scale_d3d11 filters, ProRes RAW decoder, RealVideo 6.0, G.728), FFmpeg 7.1 LTS features (VVC decoder, MV-HEVC for Apple Vision Pro, xHE-AAC, Vulkan H.264/H.265), hardware acceleration guides, Docker best practices, Modal.com parallel processing patterns, WebAssembly limitations and workarounds, CI/CD optimization strategies, streaming protocol guidance, audio processing workflows, encoding presets and recommendations, systematic debugging approaches, FFmpeg + OpenCV integration patterns, and production-ready 2025-2026 configurations for all platforms.",
-      "version": "3.6.0",
+      "description": "Meta-bundle for the FFmpeg plugin suite. Installing this plugin auto-installs focused sub-plugins for core encoding, creative effects, runtime platforms, Python integrations, and social video workflows. Use sub-plugins directly for tighter trigger surfaces, or install this bundle for the full FFmpeg suite.",
+      "version": "4.0.0",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -534,78 +534,25 @@
         "ffmpeg",
         "video",
         "audio",
+        "media",
         "encoding",
-        "transcoding",
         "streaming",
-        "rtmp",
-        "hls",
-        "dash",
-        "nvenc",
-        "cuda",
-        "qsv",
-        "vaapi",
-        "hardware-acceleration",
-        "docker",
-        "modal",
-        "modal-com",
-        "serverless",
-        "parallel-processing",
-        "gpu-containers",
-        "webassembly",
-        "wasm",
-        "cloudflare-workers",
-        "github-actions",
-        "cicd",
-        "h264",
-        "h265",
-        "hevc",
-        "av1",
-        "vvc",
-        "aac",
-        "mp3",
-        "normalization",
-        "loudnorm",
-        "subtitles",
-        "captions",
-        "srt",
-        "ass",
-        "vtt",
-        "waveform",
-        "visualization",
-        "spectrum",
-        "transitions",
-        "xfade",
-        "effects",
-        "shapes",
-        "drawbox",
-        "drawtext",
-        "overlay",
-        "graphics",
-        "whisper",
-        "speech-to-text",
-        "vulkan",
-        "apv",
-        "whip",
-        "webrtc",
-        "prores-raw",
-        "pyav",
-        "pyav-ffmpeg",
-        "av-open",
-        "videoframe",
-        "audioframe",
-        "python-ffmpeg",
-        "opencv",
-        "bgr-rgb",
-        "frame-processing",
-        "2025",
-        "2026"
+        "plugins",
+        "bundle"
+      ],
+      "dependencies": [
+        "ffmpeg-core",
+        "ffmpeg-effects",
+        "ffmpeg-platforms",
+        "ffmpeg-python",
+        "ffmpeg-social-video"
       ]
     },
     {
       "name": "tailwindcss-master",
       "source": "./plugins/tailwindcss-master",
-      "description": "Complete Tailwind CSS v4 expertise system with 2025 best practices. PROACTIVELY activate for: (1) ANY Tailwind CSS task, (2) Tailwind v4 CSS-first configuration (@theme, @utility, @custom-variant), (3) Responsive design and dark mode implementation, (4) Performance optimization and JIT, (5) Plugin integration (@tailwindcss/typography, @tailwindcss/forms), (6) Framework integration (React, Vue, Next.js, Vite), (7) Migration from v3 to v4, (8) Custom utility and component creation, (9) Debugging and troubleshooting, (10) Production build optimization. Provides: Tailwind v4.1 complete features, CSS-first @theme configuration, @utility and @custom-variant directives, PostCSS and Vite plugin setup, responsive breakpoints, dark mode patterns (media/selector strategies), typography and forms plugins, animation/transition utilities, framework-specific integration patterns, performance optimization (tree-shaking, JIT), debugging techniques, VS Code extension setup, Prettier plugin configuration, and production-ready 2025 patterns. Ensures modern, performant, maintainable Tailwind CSS implementations.",
-      "version": "2.2.1",
+      "description": "Complete Tailwind CSS v4 expertise with 2025 best practices. PROACTIVELY activate for: (1) any Tailwind task, (2) v4 CSS-first config (@theme, @utility, @custom-variant), (3) responsive design and dark mode, (4) performance and JIT, (5) plugins (typography, forms), (6) framework integration (React/Vue/Next/Vite), (7) v3-to-v4 migration, (8) custom utility creation, (9) debugging, (10) production build optimization. Provides: v4.1 features, PostCSS and Vite setup, dark-mode strategies, animation utilities, VS Code/Prettier config.",
+      "version": "2.2.2",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -639,8 +586,8 @@
     {
       "name": "react-master",
       "source": "./plugins/react-master",
-      "description": "Comprehensive React 19 expertise system covering Server Components, Client Components, hooks, state management, patterns, and testing. PROACTIVELY activate for: (1) ANY React task, (2) React 19 Server/Client Components, (3) Server Actions with 'use server', (4) React hooks (useState, useEffect, useRef, useMemo, useCallback, useTransition, useDeferredValue, useActionState, useOptimistic, useFormStatus), (5) State management (Context, Zustand, Jotai, TanStack Query, SWR), (6) Component patterns (compound, render props, HOC, custom hooks), (7) TypeScript with React, (8) Form handling (React Hook Form, Zod), (9) Performance optimization (React.memo, code splitting, virtualization), (10) Testing with Vitest/Jest and React Testing Library. Provides: React 19 complete features, use() hook for promises, Server Components architecture, Client Component patterns, all hooks with TypeScript, state management solutions, component patterns, forms and validation, performance optimization techniques, comprehensive testing patterns.",
-      "version": "2.1.0",
+      "description": "Comprehensive React 19 expertise covering Server Components, Client Components, hooks, state, and testing. PROACTIVELY activate for: (1) any React task, (2) React 19 Server/Client Components, (3) Server Actions, (4) hooks (useState/Effect/Ref/Memo/Callback/Transition/DeferredValue/ActionState/Optimistic/FormStatus), (5) state management (Context/Zustand/Jotai/TanStack Query/SWR), (6) component patterns, (7) TypeScript with React, (8) forms (React Hook Form, Zod), (9) performance optimization, (10) testing with Vitest/Jest + RTL. Provides: use() hook, Server/Client patterns, hooks with TS.",
+      "version": "2.1.1",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -670,8 +617,8 @@
     {
       "name": "nextjs-master",
       "source": "./plugins/nextjs-master",
-      "description": "Comprehensive Next.js 15 expertise system covering App Router, Server Components, Server Actions, caching, middleware, authentication, and deployment. PROACTIVELY activate for: (1) ANY Next.js task, (2) App Router (layouts, pages, loading, error), (3) Server Components and Client Components, (4) Server Actions for mutations, (5) Data fetching and caching strategies, (6) Route Handlers (API routes), (7) Middleware for auth/i18n/redirects, (8) Dynamic and parallel routes, (9) Authentication with NextAuth.js, (10) Deployment (Vercel, Docker, static export). Provides: Next.js 15 complete features, App Router file conventions, Server/Client Component patterns, Server Actions with useActionState, caching (Data Cache, Full Route Cache, Router Cache), revalidatePath/revalidateTag, middleware patterns, advanced routing (parallel, intercepting), NextAuth.js authentication, deployment strategies.",
-      "version": "2.0.5",
+      "description": "Comprehensive Next.js 15 expertise covering App Router, Server Components, Server Actions, caching, middleware, and deployment. PROACTIVELY activate for: (1) any Next.js task, (2) App Router (layouts/pages/loading/error), (3) Server and Client Components, (4) Server Actions, (5) data fetching and caching, (6) Route Handlers, (7) middleware (auth/i18n/redirects), (8) dynamic and parallel routes, (9) NextAuth.js, (10) deployment (Vercel/Docker/static). Provides: file conventions, useActionState patterns, cache invalidation (revalidatePath/Tag).",
+      "version": "2.0.6",
       "author": {
         "name": "Claude Marketplace"
       },
@@ -701,8 +648,8 @@
     {
       "name": "python-master",
       "source": "./plugins/python-master",
-      "description": "Comprehensive Python 3.13+ expertise system covering modern Python development, async programming, type hints, performance optimization, and cloud deployment. PROACTIVELY activate for: (1) ANY Python task, (2) Python 3.13+ features (free-threading, JIT), (3) asyncio and concurrent programming, (4) Type hints and mypy/pyright, (5) Package management (uv, pip, poetry), (6) Project structure (src layout, pyproject.toml), (7) FastAPI and web development, (8) Pydantic data validation, (9) Testing (pytest, coverage), (10) Cloudflare Workers/Containers Python, (11) GitHub Actions Python workflows, (12) Performance optimization and profiling, (13) Security best practices (OWASP), (14) Ruff linting and formatting. Provides: Python 3.13 free-threading and JIT, asyncio patterns, comprehensive type hints, uv package management, FastAPI production patterns, Pydantic vs dataclass guidance, pytest testing, Cloudflare Python optimization, GitHub Actions caching, memory profiling, security hardening.",
-      "version": "2.3.4",
+      "description": "Comprehensive Python 3.13+ expertise covering modern Python, async, types, performance, and cloud deployment. PROACTIVELY activate for: (1) any Python task, (2) 3.13+ features (free-threading, JIT), (3) asyncio and concurrency, (4) type hints with mypy/pyright, (5) package management (uv/pip/poetry), (6) project layout, (7) FastAPI, (8) Pydantic, (9) pytest, (10) Cloudflare Workers/Containers Python, (11) GitHub Actions workflows, (12) profiling, (13) OWASP security, (14) Ruff linting. Provides: production patterns, memory profiling, dataclass vs Pydantic guidance.",
+      "version": "2.3.5",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -732,8 +679,8 @@
     {
       "name": "fal-ai-master",
       "source": "./plugins/fal-ai-master",
-      "description": "Expert fal.ai generative media platform system with 600+ AI models (FLUX.2, GPT-Image 1.5, Veo 3.1, Sora 2, Kling 2.6, Recraft V3), client libraries (@fal-ai/client, fal-client), and serverless deployment. PROACTIVELY activate for: (1) ANY fal.ai task, (2) Image generation (FLUX.2, GPT-Image 1/1.5, SDXL, Recraft V3), (3) FLUX Kontext instruction-based image editing, (4) Video generation (Veo 3/3.1, Sora 2/Pro, Kling 2.6 Pro, LTX-2, Runway Gen-3), (5) Native audio in video (Veo 3, Kling 2.6), (6) Image-to-video animation pipelines, (7) Real-time WebSocket streaming (@fal.realtime.connect), (8) Queue-based execution (fal.subscribe, fal.queue), (9) Serverless deployment (fal.App, machine_type, keep_alive, min/max_concurrency), (10) GPU compute (T4/A10G/A100/H100/H200/B200), (11) JavaScript/TypeScript integration (@fal-ai/client), (12) Python integration (fal-client, fal_client.subscribe), (13) Storage (fal.Volume, fal.storage.upload), (14) Cost optimization and 2025 pricing ($0.025/image to $0.45/sec video). Provides: Complete model catalog, client library patterns, real-time streaming, webhook notifications, rate limiting strategies, error handling, and production deployment patterns.",
-      "version": "2.0.3",
+      "description": "Expert fal.ai generative media platform with 600+ AI models (FLUX.2, GPT-Image 1.5, Veo 3.1, Sora 2, Kling 2.6, Recraft V3), client libraries, and serverless deployment. PROACTIVELY activate for: (1) any fal.ai task, (2) image generation, (3) FLUX Kontext editing, (4) video generation, (5) native audio in video, (6) image-to-video pipelines, (7) real-time WebSocket streaming, (8) queue-based execution, (9) serverless deployment (fal.App), (10) GPU compute (T4-B200), (11) JS/TS and Python integration, (12) storage and volumes, (13) cost optimization. Provides: model catalog, client patterns, webhooks, rate limiting.",
+      "version": "2.0.4",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -778,47 +725,33 @@
     {
       "name": "modal-master",
       "source": "./plugins/modal-master",
-      "description": "Expert Modal.com serverless cloud platform system with comprehensive Modal 1.0 SDK (May 2025) features, GPU functions (T4/L4/A10G/L40S/A100/H100/H200/B200), autoscaler configuration, @modal.concurrent/@modal.batched decorators, Sandboxes for isolated code execution, CloudBucketMount for S3/GCS, and production deployment patterns. PROACTIVELY activate for: (1) ANY Modal.com task, (2) GPU configuration with fallbacks and multi-GPU, (3) Autoscaler settings (min/max/buffer containers, scaledown_window), (4) Web endpoints (FastAPI, ASGI, WSGI, custom servers), (5) @modal.concurrent for request concurrency, (6) @modal.batched for dynamic batching, (7) Sandboxes for untrusted code execution, (8) Scheduling (Cron with timezone, Period), (9) Storage (Volumes with commit(), Dict with TTL, Queue, CloudBucketMount), (10) Parallel processing (.map(), .starmap(), .spawn(), .for_each()), (11) Container lifecycle (@modal.enter, @modal.method, @modal.exit), (12) Image building (uv_pip_install, run_function for model downloads), (13) Secrets and environment management, (14) Deployment and CI/CD with GitHub Actions, (15) Cost optimization and 2025 pricing. Provides: Modal 1.0 stable API patterns, GPU selection guide with per-second pricing, autoscaler tuning strategies, concurrency and batching for ML inference, Sandbox security patterns, CloudBucketMount for external data, complete CLI reference, debugging workflows, and production-ready configurations.",
-      "version": "3.0.4",
+      "description": "Meta-bundle for the Modal.com plugin suite. Installing this plugin auto-installs focused sub-plugins for compute/GPU workloads, storage primitives, web endpoints and scheduling, and Sandboxes. Use sub-plugins directly for tighter trigger surfaces, or install this bundle for the full Modal suite.",
+      "version": "4.0.0",
       "author": {
         "name": "Josiah Siegel"
       },
       "keywords": [
         "modal",
-        "modal.com",
+        "modal-com",
         "serverless",
         "gpu",
-        "cloud",
         "python",
-        "ml",
-        "ai",
-        "deployment",
-        "containers",
-        "fastapi",
-        "scheduling",
-        "cron",
-        "inference",
-        "training",
-        "vllm",
-        "llm",
-        "h100",
-        "a100",
-        "web-endpoints",
-        "parallel",
-        "batch-processing",
-        "autoscaler",
-        "concurrent",
-        "batched",
-        "sandboxes",
-        "cloudbucketmount",
-        "modal-1-0"
+        "cloud",
+        "plugins",
+        "bundle"
+      ],
+      "dependencies": [
+        "modal-compute",
+        "modal-storage",
+        "modal-web-scheduling",
+        "modal-sandboxes"
       ]
     },
     {
       "name": "viral-video-master",
       "source": "./plugins/viral-video-master",
-      "description": "Complete viral video optimization system with comprehensive 2025-2026 research-backed strategies for maximizing video virality across all platforms. PROACTIVELY activate for: (1) ANY viral video strategy (TikTok, YouTube, Instagram, Facebook), (2) Short-form content optimization (Reels, Shorts, TikTok), (3) Long-form YouTube optimization, (4) Video hook and opening optimization (1.3-second attention capture), (5) Caption and subtitle strategy (80% engagement boost), (6) Thumbnail design and CTR optimization, (7) Hashtag and SEO strategy, (8) Posting schedule optimization, (9) Content repurposing strategies, (10) Audience retention improvement, (11) Trending audio and sound selection, (12) Video editing pacing and transitions, (13) Call-to-action optimization (380% conversion increase), (14) UGC and authenticity strategies, (15) Platform algorithm understanding (TikTok, YouTube, Instagram 2025-2026), (16) Faceless content creation (340% subscriber growth), (17) Community engagement and growth, (18) Shoppable video and social commerce (TikTok Shop $26.2B GMV), (19) Collaboration and cross-promotion, (20) Analytics and metrics interpretation. Provides: Research-backed viral video formulas, platform-specific optimization guides, hook templates with psychological triggers, retention strategies, trending content patterns, algorithm insights (YouTube March 2025 view counting, Instagram Sends Per Reach, TikTok cold start), production best practices, utility scripts for content calendars and metrics analysis, and comprehensive 2025-2026 patterns.",
-      "version": "2.0.2",
+      "description": "Complete viral video optimization with 2025-2026 research-backed strategies. PROACTIVELY activate for: (1) any viral video strategy (TikTok/YouTube/Instagram/Facebook), (2) short-form optimization (Reels/Shorts/TikTok), (3) long-form YouTube, (4) hook optimization (1.3-second capture), (5) captions and subtitles, (6) thumbnails and CTR, (7) hashtags and SEO, (8) posting schedule, (9) repurposing, (10) retention, (11) trending audio, (12) editing pacing, (13) CTAs, (14) UGC, (15) algorithm understanding, (16) faceless content, (17) community growth, (18) shoppable video, (19) collaboration, (20) analytics.",
+      "version": "2.0.3",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -865,8 +798,8 @@
     {
       "name": "tsql-master",
       "source": "./plugins/tsql-master",
-      "description": "Comprehensive T-SQL and SQL Server expertise for query optimization, performance tuning, and Azure SQL Database. PROACTIVELY activate for: (1) T-SQL query optimization and SARGability analysis, (2) SQL Server performance tuning, (3) Index design and strategy, (4) Execution plan analysis, (5) Parameter sniffing solutions, (6) Azure SQL Database optimization, (7) Window functions and advanced patterns, (8) Columnstore and In-Memory OLTP, (9) Query Store and IQP features. Includes: tsql-expert agent, 5 progressive disclosure skills, 3 optimization commands, diagnostic scripts.",
-      "version": "2.0.6",
+      "description": "Comprehensive T-SQL and SQL Server expertise for query optimization, performance tuning, and Azure SQL Database. PROACTIVELY activate for: (1) T-SQL query optimization and SARGability, (2) SQL Server performance tuning, (3) index design, (4) execution plan analysis, (5) parameter sniffing fixes, (6) Azure SQL Database tuning, (7) window functions and advanced patterns, (8) columnstore and In-Memory OLTP, (9) Query Store and IQP features. Includes: tsql-expert agent, 5 progressive disclosure skills, 3 optimization commands, diagnostic scripts.",
+      "version": "2.0.8",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -897,8 +830,8 @@
     {
       "name": "cloudflare-master",
       "source": "./plugins/cloudflare-master",
-      "description": "Expert Cloudflare platform system with comprehensive 2025-2026 knowledge covering Workers, Pages, AI Workers, storage (R2/D1/KV/Durable Objects/Queues), Hyperdrive, Zero Trust, MCP servers, and CI/CD. PROACTIVELY activate for: (1) ANY Cloudflare task, (2) Workers development (JavaScript/TypeScript/Python/WASM), (3) Wrangler CLI and configuration, (4) AI Workers (TTS with Aura/MeloTTS, STT with Whisper, LLM inference, vision, embeddings), (5) R2 object storage optimization, (6) D1 SQLite database patterns, (7) KV storage and caching, (8) Durable Objects for stateful coordination, (9) Queues for async processing, (10) Hyperdrive database connection pooling, (11) Zero Trust (Tunnels, WARP, Access policies), (12) MCP server development (Streamable HTTP transport), (13) Cron triggers and scheduled Workers, (14) Workflows for durable execution, (15) Vectorize for RAG patterns, (16) CI/CD with GitHub Actions and Workers Builds, (17) Observability (Workers Logs, OpenTelemetry), (18) Load balancing and health checks, (19) Cost optimization and performance tuning. Provides: comprehensive Wrangler CLI reference, complete wrangler.jsonc configuration, storage service deep dives, AI model catalog with usage examples, Zero Trust setup guides, MCP development patterns, CI/CD integration, debugging workflows, and production-ready 2025-2026 patterns.",
-      "version": "1.1.3",
+      "description": "Expert Cloudflare platform covering Workers, Pages, AI Workers, storage (R2/D1/KV/Durable Objects/Queues), Hyperdrive, Zero Trust, MCP, and CI/CD (2025-2026). PROACTIVELY activate for: (1) any Cloudflare task, (2) Workers (JS/TS/Python/WASM), (3) Wrangler CLI, (4) AI Workers (Aura/MeloTTS, Whisper, LLM, vision, embeddings), (5) R2/D1/KV/Durable Objects/Queues, (6) Hyperdrive pooling, (7) Zero Trust (Tunnels/WARP/Access), (8) MCP servers, (9) Cron and Workflows, (10) Vectorize/RAG, (11) CI/CD, (12) observability, (13) cost optimization.",
+      "version": "1.1.4",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -948,7 +881,7 @@
       "name": "unity-master",
       "source": "./plugins/unity-master",
       "description": "Complete Unity game development expertise. Covers C# scripting, MonoBehaviour lifecycle, UI systems (UGUI, UI Toolkit), physics, animation, networking (Netcode, Mirror, Photon), modding support (Addressables, Lua/MoonSharp, Harmony), ECS/DOTS, shader development (ShaderLab, HLSL, Shader Graph), URP/HDRP rendering pipelines, editor scripting, performance optimization, build pipelines, XR/VR/AR, and Unity Gaming Services integration.",
-      "version": "1.0.1",
+      "version": "1.0.3",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -1011,8 +944,8 @@
     {
       "name": "powerbi-master",
       "source": "./plugins/powerbi-master",
-      "description": "Complete Power BI expertise for 2026: DAX, TMDL (GA) authoring, PBIR enhanced report format (2026 default), PBIP projects, Power Query M, TOM/.NET SDK, Tabular Editor, Semantic Link / semantic-link-labs, fabric-cicd and Fabric CLI deployment, REST APIs, CI/CD with GitHub Actions and Azure DevOps, Fabric Git integration, Direct Lake, performance tuning, RLS/OLS, embedded analytics, and self-validation of generated TMDL/PBIR artifacts (TmdlSerializer, BPA, PBI-InspectorV2, JSON schemas). Covers data modeling through enterprise governance.",
-      "version": "0.5.1",
+      "description": "Complete Power BI expertise for 2026: DAX, TMDL (GA) authoring, PBIR enhanced report format (2026 default), PBIP projects, Power Query M, TOM/.NET SDK, Tabular Editor, Semantic Link / semantic-link-labs, fabric-cicd and Fabric CLI deployment, REST APIs, CI/CD with GitHub Actions and Azure DevOps, Fabric Git integration, Direct Lake, performance tuning, RLS/OLS, embedded analytics, and self-validation of generated TMDL/PBIR artifacts (TmdlSerializer, BPA, PBI-InspectorV2). Covers data modeling through enterprise governance.",
+      "version": "0.5.3",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -1102,8 +1035,8 @@
     {
       "name": "stripe-billing-master",
       "source": "./plugins/stripe-billing-master",
-      "description": "Expert Stripe billing system for money-safe webhook handlers, refund/dispute lifecycle, credit audit trails, and idempotency on server-side event processing. PROACTIVELY activate for: (1) ANY Stripe webhook handler (charge.*, invoice.*, customer.subscription.*, charge.dispute.*), (2) Credit/balance mutations that must be audit-logged, (3) Refund delta computation from previous_attributes.amount_refunded, (4) Dispute state machine (past_due hold / restore), (5) Idempotency key strategy (Idempotency-Key header > body > server UUID), (6) Stripe list-API pagination with starting_after cursor, (7) Plan resolution from Stripe price IDs with safety fallback, (8) Postgres text_pattern_ops indexes for LIKE-prefix lookups, (9) Exhaustive switch/branch on Stripe enums via satisfies Record<Union, T>, (10) Daily credit-balance reconciliation crons, (11) Credit-pack vs subscription refund differentiation, (12) Money-safe email descriptions that never claim 'free' on safety-fallback paths. Provides: full webhook idempotency checklist, refund-delta priority order, dispute-hold durable checkpoint pattern, credit_transactions audit-row invariants, allowlist default-deny for external enums, and reconciliation cron design. Complements (does NOT replace) the official stripe plugin's test-cards / explain-error / stripe-best-practices skills.",
-      "version": "1.0.0",
+      "description": "Expert Stripe billing for money-safe webhook handlers, refund/dispute lifecycles, credit audit trails, and idempotency. PROACTIVELY activate for: (1) any Stripe webhook handler (charge.*, invoice.*, customer.subscription.*, charge.dispute.*), (2) credit/balance mutations needing audit logs, (3) refund delta computation from previous_attributes, (4) dispute state machine (past_due hold/restore), (5) idempotency key strategy, (6) list-API pagination with starting_after, (7) plan resolution from price IDs with safety fallback, (8) Postgres text_pattern_ops indexes, (9) exhaustive enum switches, (10) credit reconciliation crons. Complements the official stripe plugin.",
+      "version": "1.0.2",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -1129,6 +1062,214 @@
         "postgres-indexes",
         "allowlist-default-deny",
         "money-safety"
+      ]
+    },
+    {
+      "name": "ffmpeg-core",
+      "source": "./plugins/ffmpeg-core",
+      "description": "Core FFmpeg encoding, transcoding, diagnostics, audio, subtitles, analysis, restoration, codec selection, and hardware acceleration. PROACTIVELY activate for FFmpeg command syntax, H.264/H.265/AV1/VVC encoding, NVENC/QSV/VAAPI/Vulkan, loudnorm/audio work, subtitle burn-in/extraction, ffprobe analysis, deinterlacing, denoise, stabilization, and quality troubleshooting.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "ffmpeg",
+        "encoding",
+        "transcoding",
+        "codecs",
+        "audio",
+        "subtitles",
+        "hardware-acceleration",
+        "nvenc",
+        "qsv",
+        "vaapi",
+        "vulkan",
+        "ffprobe",
+        "diagnostics"
+      ]
+    },
+    {
+      "name": "ffmpeg-effects",
+      "source": "./plugins/ffmpeg-effects",
+      "description": "Creative FFmpeg filtergraph effects for motion graphics and visual treatments. PROACTIVELY activate for transitions, xfade, color grading, chromakey/green screen, drawbox/drawtext overlays, shapes, lower thirds, glitch/datamosh/VHS looks, karaoke lyrics, kinetic captions, animated text, waveform/spectrum visualization, and animation timing.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "ffmpeg",
+        "filters",
+        "filtergraph",
+        "effects",
+        "transitions",
+        "color-grading",
+        "chromakey",
+        "drawtext",
+        "overlays",
+        "kinetic-captions",
+        "karaoke",
+        "waveform",
+        "glitch"
+      ]
+    },
+    {
+      "name": "ffmpeg-platforms",
+      "source": "./plugins/ffmpeg-platforms",
+      "description": "FFmpeg deployment, live delivery, and platform runtime patterns. PROACTIVELY activate for RTMP/HLS/DASH/SRT/WebRTC/WHIP streaming, Dockerized FFmpeg, GPU containers, Modal.com serverless video jobs, Cloudflare Containers or Workers, ffmpeg.wasm browser pipelines, CI/CD runners, and production media automation.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "ffmpeg",
+        "streaming",
+        "rtmp",
+        "hls",
+        "dash",
+        "srt",
+        "webrtc",
+        "whip",
+        "docker",
+        "modal",
+        "cloudflare",
+        "wasm",
+        "cicd"
+      ]
+    },
+    {
+      "name": "ffmpeg-python",
+      "source": "./plugins/ffmpeg-python",
+      "description": "Python FFmpeg integration for frame pipelines, PyAV/libav bindings, OpenCV handoff, and validation helpers. PROACTIVELY activate for PyAV install/API usage, av.open, VideoFrame/AudioFrame, ffmpeg-python parameter mapping, subprocess command generation, rawvideo pipes, BGR/RGB bugs, OpenCV/cv2 processing, ffmpegcv, VidGear, Decord, and ML video pipelines.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "ffmpeg",
+        "python",
+        "pyav",
+        "opencv",
+        "cv2",
+        "ffmpeg-python",
+        "subprocess",
+        "rawvideo",
+        "bgr-rgb",
+        "videoframe",
+        "audioframe",
+        "ffmpegcv",
+        "vidgear",
+        "decord"
+      ]
+    },
+    {
+      "name": "ffmpeg-social-video",
+      "source": "./plugins/ffmpeg-social-video",
+      "description": "FFmpeg workflows for short-form social and viral video production. PROACTIVELY activate for TikTok, YouTube Shorts, Instagram/Facebook Reels, vertical 9:16 conversion, platform export specs, multi-platform batch exports, hook overlays, retention boosters, CapCut-style animated captions, auto-captions, and social video encoding presets.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "ffmpeg",
+        "social-video",
+        "viral-video",
+        "tiktok",
+        "youtube-shorts",
+        "instagram-reels",
+        "vertical-video",
+        "9-16",
+        "captions",
+        "hooks",
+        "retention",
+        "batch-export"
+      ]
+    },
+    {
+      "name": "modal-compute",
+      "source": "./plugins/modal-compute",
+      "description": "Modal.com serverless compute, GPU, autoscaling, batching, lifecycle, image build, deployment, cost, and debugging expertise. PROACTIVELY activate for Modal app/function definitions, @app.function, @app.cls, GPU choice and fallbacks, T4/A10G/A100/H100/H200/B200, @modal.concurrent, @modal.batched, map/spawn, cold starts, uv_pip_install, CI/CD deploys, and Modal troubleshooting.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "modal",
+        "modal-com",
+        "serverless",
+        "gpu",
+        "autoscaler",
+        "concurrency",
+        "batched",
+        "map",
+        "spawn",
+        "deployment",
+        "debugging",
+        "cost-optimization"
+      ]
+    },
+    {
+      "name": "modal-storage",
+      "source": "./plugins/modal-storage",
+      "description": "Modal.com persistence and shared state primitives. PROACTIVELY activate for Modal Volumes, vol.commit, Dict, Queue, CloudBucketMount, S3/GCS bucket mounts, secrets for storage credentials, dataset/model cache persistence, distributed job queues, shared state coordination, and storage performance or consistency troubleshooting.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "modal",
+        "storage",
+        "volumes",
+        "dict",
+        "queue",
+        "cloudbucketmount",
+        "s3",
+        "gcs",
+        "secrets",
+        "persistence",
+        "shared-state"
+      ]
+    },
+    {
+      "name": "modal-web-scheduling",
+      "source": "./plugins/modal-web-scheduling",
+      "description": "Modal.com web endpoint and scheduled job patterns. PROACTIVELY activate for FastAPI endpoints, @modal.fastapi_endpoint, ASGI/WSGI apps, webhooks, custom domains, WebSockets, long-running APIs, cron schedules, modal.Cron, modal.Period, scheduled ETL, deployment behavior for schedules, and endpoint debugging.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "modal",
+        "web-endpoints",
+        "fastapi",
+        "asgi",
+        "wsgi",
+        "webhooks",
+        "custom-domains",
+        "websockets",
+        "scheduling",
+        "cron",
+        "periodic-jobs"
+      ]
+    },
+    {
+      "name": "modal-sandboxes",
+      "source": "./plugins/modal-sandboxes",
+      "description": "Modal.com Sandboxes for isolated code execution. PROACTIVELY activate for modal.Sandbox, safe execution of user-submitted code, named sandboxes, PTY/interactive sessions, filesystem snapshots, egress policies, resource limits, cleanup/termination, untrusted workloads, coding playgrounds, and sandbox security review.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "modal",
+        "sandboxes",
+        "code-execution",
+        "isolation",
+        "gvisor",
+        "untrusted-code",
+        "pty",
+        "snapshots",
+        "egress",
+        "security"
       ]
     }
   ]

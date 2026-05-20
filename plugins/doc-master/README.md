@@ -110,7 +110,7 @@ Standard marketplace install:
 
 ```
 /plugin marketplace add JosiahSiegel/claude-plugin-marketplace
-/plugin install doc-master
+/plugin install doc-master@claude-plugin-marketplace
 ```
 
 ## What this plugin does NOT do

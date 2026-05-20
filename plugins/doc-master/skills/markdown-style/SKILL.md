@@ -1,6 +1,9 @@
 ---
 name: markdown-style
-description: This skill should be used when the user wants to review, lint, or fix the formatting and style of a Markdown document — README, how-to, explanation, reference page, RFC, ADR body, runbook, design doc, contributing guide, or any `.md` file. PROACTIVELY activate on phrases like "review this markdown," "lint this doc," "lint this README," "style-check this doc," "fix the formatting on this doc," "review my README," "is this markdown valid?", "is this heading style right?", "what's the heading style here?", "fix the headings," "fix the list indentation," "are these tables OK?", "this doc looks ugly," "clean up the formatting," "ATX vs setext," "should I use a TOC?", "where do reference links go?", "audit my Markdown," "google markdown style," "doc style guide," "markdown style guide," "format this README," "Markdown linter." Owns the two-layer canon: (1) canonical Markdown syntax — what is valid — derived from the Markdown Guide basic syntax (CC BY-SA 4.0); (2) opinionated style — what is good — derived from Google's Markdown style guide (Apache 2.0). Produces a structured, line-referenced review: each finding cites the rule, the source layer, and the corrected form. Use this skill instead of bulk-rewriting a doc — the per-finding output is the value.
+description: |
+  This skill should be used to review, lint, or fix Markdown formatting in READMEs, ADRs, runbooks, how-tos, design docs, or any `.md` file.
+  PROACTIVELY activate on "review this markdown", "lint this doc", "lint this README", "style-check this doc", "fix the formatting", "review my README", "is this markdown valid?", "fix the headings", "fix the list indentation", "ATX vs setext", "should I use a TOC?", "markdown style guide", or "Markdown linter."
+  Provides: two-pass syntax/style review with line-referenced findings.
 ---
 
 # markdown-style

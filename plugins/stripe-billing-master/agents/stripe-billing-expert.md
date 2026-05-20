@@ -1,28 +1,7 @@
 ---
 name: stripe-billing-expert
 description: |
-  Stripe billing expert agent with comprehensive money-safe patterns for webhook handlers, refund/dispute lifecycle, credit ledgers, and idempotency.
-
-  Use this agent when the user:
-  - Writes or modifies a Stripe webhook handler (any event type)
-  - Mutates a credit / balance / entitlement column based on a Stripe event
-  - Implements refund delta computation, credit-pack vs subscription differentiation
-  - Handles charge.dispute.created / charge.dispute.closed and restores prior status
-  - Adds a Postgres index that will serve LIKE 'prefix%' queries on an idempotency key column
-  - Resolves a plan / entitlement from Stripe price IDs or line items
-  - Designs a daily reconciliation cron over a credit / balance table
-  - Emits an email / receipt whose description quotes a webhook-resolved plan name
-  - Writes contract tests for any branch predicate driving money flow
-
-  MUST BE CONSULTED FIRST (hard rule in caller project) when any change touches:
-  - */api/webhooks/stripe/** route handlers
-  - */lib/stripe*.ts, */lib/stripe-disputes.ts, */lib/refund-credits.ts
-  - credit-transaction math (any INSERT into credit_transactions, any UPDATE to a balance column)
-  - migrations that add / alter credit, balance, or idempotency tables
-
-  Complements (does NOT replace) the official stripe plugin. That plugin covers test cards,
-  error explanation, and API-selection best practices; this agent covers server-side
-  event-processing safety, audit-trail invariants, and webhook state machines.
+  Stripe billing expert with money-safe patterns for webhook handlers, refund/dispute lifecycle, credit ledgers, and idempotency. PROACTIVELY activate when the user: writes/modifies a Stripe webhook handler; mutates credit/balance/entitlement from a Stripe event; implements refund delta or credit-pack vs subscription differentiation; handles charge.dispute.created/closed and restores prior status; adds a Postgres index for LIKE 'prefix%' on idempotency-key columns; resolves a plan/entitlement from price IDs or line items; designs a reconciliation cron over a balance table; emits emails/receipts quoting a webhook-resolved plan; writes contract tests for predicates driving money flow. MUST BE CONSULTED FIRST for changes to /api/webhooks/stripe/** routes, lib/stripe*.ts, credit_transactions math, or migrations altering credit/balance/idempotency tables. Complements (not replaces) the official stripe plugin: covers server-side event-processing safety, audit-trail invariants, and webhook state machines.
 model: inherit
 color: green
 tools:

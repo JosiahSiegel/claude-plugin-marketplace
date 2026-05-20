@@ -1,6 +1,9 @@
 ---
 name: index-strategies
-description: SQL Server index design and optimization strategies. PROACTIVELY activate for: (1) designing indexes for new tables, (2) clustered vs nonclustered index selection, (3) columnstore index optimization (clustered, nonclustered), (4) filtered indexes for partial coverage, (5) covering indexes (INCLUDE columns), (6) index maintenance and fragmentation analysis, (7) missing-index DMV interpretation, (8) duplicate or unused index detection, (9) page split and fill-factor tuning, (10) index compression (row, page, columnstore archival). Provides: index-design playbook, columnstore vs rowstore decision tree, fragmentation queries, missing-index harvest script, and maintenance job templates.
+description: |
+  SQL Server index design and optimization strategies.
+  PROACTIVELY activate for: (1) designing indexes for new tables, (2) clustered vs nonclustered index selection, (3) columnstore index optimization (clustered, nonclustered), (4) filtered indexes for partial coverage, (5) covering indexes (INCLUDE columns), (6) index maintenance and fragmentation analysis, (7) missing-index DMV interpretation, (8) duplicate or unused index detection, (9) page split and fill-factor tuning, (10) index compression (row, page, columnstore archival).
+  Provides: index-design playbook, columnstore vs rowstore decision tree, fragmentation queries, missing-index harvest script, and maintenance job templates.
 ---
 
 # Index Strategies

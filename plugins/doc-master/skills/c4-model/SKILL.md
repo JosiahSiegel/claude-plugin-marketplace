@@ -1,11 +1,14 @@
 ---
 name: c4-model
-description: This skill should be used when the user wants to create or update a C4 architecture diagram alongside an ADR, especially using LikeC4. PROACTIVELY activate on phrases like "add a C4 diagram," "create a context diagram," "container view," "LikeC4 model," "draw the architecture," "show me the system shape," "diagram this decision," "architecture diagram for the ADR," "visualize the components," "C4 view," "Simon Brown C4." Generates a canonical-C4 LikeC4 model from architect-confirmed elements and relationships — Context views and Container views (optionally Deployment views). REFUSES Component views, dynamic views, custom element kinds, custom styles, nested systems, and multiple-system-in-focus models. Every relationship requires a one-line description; every element name must match what was confirmed in discovery. Use this skill instead of generating freeform diagrams — the canonical-C4 restrictions are the value.
+description: |
+  This skill should be used to create or update a C4 architecture diagram alongside an ADR, especially in LikeC4.
+  PROACTIVELY activate on "add a C4 diagram", "create a context diagram", "container view", "LikeC4 model", "draw the architecture", "diagram this decision", "architecture diagram for the ADR", "visualize the components", "C4 view", or "Simon Brown C4."
+  Provides: canonical-C4 Context and Container views from confirmed elements, relationship descriptions, and strict refusal of non-canonical diagram types.
 ---
 
 # c4-model
 
-Produces a canonical-C4 LikeC4 model — Context and Container views by default, Deployment optional. Refuses every LikeC4 feature that would push the diagram beyond Simon Brown's canonical C4. Tested against **LikeC4 v1.47, May 2026**; newer releases generally remain compatible — re-validate with `npx likec4 validate` if your installed version differs.
+Produces a canonical-C4 LikeC4 model — Context and Container views by default, Deployment optional. Refuses every LikeC4 feature that would push the diagram beyond Simon Brown's canonical C4. The canonical-C4 features used here are stable across LikeC4 versions; re-validate with `npx likec4 validate` to confirm against your installed version.
 
 ## What this skill makes
 

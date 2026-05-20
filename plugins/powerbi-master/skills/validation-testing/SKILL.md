@@ -1,6 +1,9 @@
 ---
 name: validation-testing
-description: TMDL and PBIR validation, linting, and pre-deployment testing. PROACTIVELY activate for: (1) validating TMDL syntax before deploy, (2) validating PBIR schema, (3) catching TmdlFormatException / TmdlSerializationException early, (4) Best Practice Analyzer (BPA) rules and BPA CLI, (5) Tabular Editor BPA scripting, (6) PBI-Inspector / PBI-InspectorV2 / Fab Inspector, (7) PBIR JSON schema validation, (8) pre-deployment validation in CI, (9) fabric-cicd parameter.yml validation, (10) catching breaking changes between TMDL versions. Provides: BPA rule library, validation CLI commands, CI integration for validation, error catalog (TmdlFormatException, etc.), and a pre-deploy validation playbook.
+description: |
+  TMDL and PBIR validation, linting, and pre-deployment testing.
+  PROACTIVELY activate for: (1) validating TMDL syntax before deploy, (2) validating PBIR schema, (3) catching TmdlFormatException / TmdlSerializationException early, (4) Best Practice Analyzer (BPA) rules and BPA CLI, (5) Tabular Editor BPA scripting, (6) PBI-Inspector / PBI-InspectorV2 / Fab Inspector, (7) PBIR JSON schema validation, (8) pre-deployment validation in CI, (9) fabric-cicd parameter.yml validation, (10) catching breaking changes between TMDL versions.
+  Provides: BPA rule library, validation CLI commands, CI integration for validation, error catalog (TmdlFormatException, etc.), and a pre-deploy validation playbook.
 ---
 
 # Power BI Validation and Self-Testing

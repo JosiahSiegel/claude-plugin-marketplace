@@ -1,6 +1,9 @@
 ---
 name: performance-optimization
-description: Power BI performance optimization for slow reports, models, and queries. PROACTIVELY activate for: (1) report is slow or visuals take forever to load, (2) DAX Studio and VertiPaq Analyzer profiling, (3) Performance Analyzer in Power BI Desktop, (4) optimizing slow DAX measures, (5) slow visuals diagnosis, (6) aggregations and composite-model tuning, (7) query reduction techniques (visual settings, top N), (8) model size reduction (cardinality, calculated columns, summary tables), (9) VertiPaq compression tuning, (10) Direct Lake performance and fallback rules, (11) large-dataset (10GB+) optimization. Provides: profiling workflow with DAX Studio, VertiPaq compression checklist, aggregation-table patterns, model-size reduction techniques, and end-to-end performance investigation playbook.
+description: |
+  Power BI performance optimization for slow reports, models, and queries.
+  PROACTIVELY activate for: (1) report is slow or visuals take forever to load, (2) DAX Studio and VertiPaq Analyzer profiling, (3) Performance Analyzer in Power BI Desktop, (4) optimizing slow DAX measures, (5) slow visuals diagnosis, (6) aggregations and composite-model tuning, (7) query reduction techniques (visual settings, top N), (8) model size reduction (cardinality, calculated columns, summary tables), (9) VertiPaq compression tuning, (10) Direct Lake performance and fallback rules, (11) large-dataset (10GB+) optimization.
+  Provides: profiling workflow with DAX Studio, VertiPaq compression checklist, aggregation-table patterns, model-size reduction techniques, and end-to-end performance investigation playbook.
 ---
 
 # Performance Optimization

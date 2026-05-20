@@ -1,6 +1,9 @@
 ---
 name: adr-discovery
-description: This skill should be used when the user is about to write an Architecture Decision Record (ADR) but the context, components, relationships, or related decisions are not yet pinned down — i.e., before drafting, before deciding, before opening the editor. PROACTIVELY activate when the user says "I want to write an ADR for X" without first establishing what X depends on, what components it touches, what prior ADRs apply, who the deciders are, or which architectural characteristic is under pressure. Also activate on phrases like "gather context for a decision," "set up a decision log from scratch," "we don't know what we have," "discovery for an ADR," "what's the current architecture?", "prep work before an ADR," "ADR intake," "ADR pre-flight." Runs a zero-hallucination Q&A — every fact is human-confirmed before it lands in the discovery brief. Logs unknowns to an open-questions register. The skill REFUSES to advance until the architect has confirmed the domain, the architectural characteristic under pressure, the components in scope (≤5), related ADRs, and a named decision-maker.
+description: |
+  This skill should be used before drafting an ADR when context, components, relationships, deciders, or prior decisions are unclear.
+  PROACTIVELY activate on "I want to write an ADR for X", "gather context for a decision", "discovery for an ADR", "ADR intake", "ADR pre-flight", "prep work before an ADR", "what's the current architecture?", or "set up a decision log."
+  Provides: zero-hallucination Q&A, human-confirmed discovery brief, open-questions register, and five required confirmations before drafting.
 ---
 
 # adr-discovery
@@ -16,7 +19,7 @@ No fact enters the discovery brief until the architect says yes. Code findings, 
 | "Your system uses Postgres and Redis." | "I see `pg` and `ioredis` in `package.json`. Is Postgres your primary store? (yes / no / unsure)" |
 | "Component A talks to component B." | "I see a fetch from A to B in `src/a/client.ts`. Does A depend on B? (yes / no)" |
 
-Every confirmed fact is dated and tagged in the brief: `[CONFIRMED 2026-05-20]`. Unconfirmed code findings get `[FROM CODE, UNCONFIRMED 2026-05-20]` and live in `open-questions.md`, not the brief.
+Every confirmed fact is dated and tagged in the brief: `[CONFIRMED YYYY-MM-DD]`. Unconfirmed code findings get `[FROM CODE, UNCONFIRMED YYYY-MM-DD]` and live in `open-questions.md`, not the brief.
 
 ## Fact states
 

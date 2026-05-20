@@ -1,6 +1,9 @@
 ---
 name: unity-modding
-description: Unity game modding architecture and mod-loading systems. PROACTIVELY activate for: (1) adding modding support to a Unity game, (2) Asset Bundles for mods, (3) Addressables for mod content, (4) Lua scripting via MoonSharp, (5) Harmony patching for runtime IL injection, (6) Steam Workshop integration, (7) mod manager UI, (8) plugin architecture for user-generated content (UGC), (9) custom content loading at runtime, (10) sandboxing and security for untrusted mods. Provides: AssetBundle vs Addressables tradeoffs, MoonSharp setup, Harmony patch patterns, Steam Workshop SDK integration, mod manager templates, and security guidelines.
+description: |
+  Unity game modding architecture and mod-loading systems.
+  PROACTIVELY activate for: (1) adding modding support to a Unity game, (2) Asset Bundles for mods, (3) Addressables for mod content, (4) Lua scripting via MoonSharp, (5) Harmony patching for runtime IL injection, (6) Steam Workshop integration, (7) mod manager UI, (8) plugin architecture for user-generated content (UGC), (9) custom content loading at runtime, (10) sandboxing and security for untrusted mods.
+  Provides: AssetBundle vs Addressables tradeoffs, MoonSharp setup, Harmony patch patterns, Steam Workshop SDK integration, mod manager templates, and security guidelines.
 ---
 
 # Unity Modding Architecture

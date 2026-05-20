@@ -15,7 +15,7 @@ Comprehensive T-SQL and SQL Server expertise for query optimization, performance
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-plugin-marketplace
-/plugin install tsql-master@JosiahSiegel
+/plugin install tsql-master@claude-plugin-marketplace
 ```
 
 ### Local Installation

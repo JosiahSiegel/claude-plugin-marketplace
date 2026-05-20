@@ -1,7 +1,7 @@
 {
   "name": "dotnet-microservices-master",
-  "version": "1.0.5",
-  "description": "Expert agent on .NET microservices architecture, containerization, Docker, DDD, CQRS, and cloud-native patterns based on Microsoft's official guide",
+  "version": "1.0.7",
+  "description": "Expert .NET microservices architecture, containerization, DDD, CQRS, and cloud-native patterns based on Microsoft's official guide. PROACTIVELY activate for: (1) any .NET microservices task, (2) Docker containerization, (3) Domain-Driven Design (tactical and strategic), (4) CQRS and Event Sourcing, (5) sync/async communication, (6) API Gateway with Ocelot, (7) event-driven messaging, (8) resilience with Polly, (9) EF Core and Dapper, (10) Kubernetes and Azure deployment, (11) eShopOnContainers guidance. Provides: Microsoft .NET Microservices guide v7.0, .NET 7+ patterns, IdentityServer/OAuth, health checks.",
   "author": {
     "name": "Josiah Siegel",
     "email": "[email protected]"

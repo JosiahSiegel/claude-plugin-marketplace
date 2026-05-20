@@ -1,6 +1,9 @@
 ---
 name: stripe-webhook-idempotency
-description: Server-side Stripe webhook idempotency patterns. PROACTIVELY activate for: (1) Stripe webhook handler design, (2) Transactional dedup via stripe_processed_events, (3) credit_transactions.idempotency_key UNIQUE partial indexes, (4) Idempotency-Key header priority (header > body > server UUID), (5) Idempotency key format/charset/length validation at the handler edge, (6) FOR UPDATE row locking when a UPDATE depends on a prior SELECT, (7) Webhook signature verification (stripe.webhooks.constructEventAsync, tolerance, raw-body reading), (8) Retry-safe endpoints with randomUUID fallback, (9) Durable checkpoint row ordering (checkpoint FIRST, mutation SECOND). Provides: complete webhook handler skeleton, Idempotency-Key validator, dedup SQL, FOR UPDATE pattern, signature verification example.
+description: |
+  Server-side Stripe webhook idempotency patterns.
+  PROACTIVELY activate for: (1) Stripe webhook handler design, (2) Transactional dedup via stripe_processed_events, (3) credit_transactions.idempotency_key UNIQUE partial indexes, (4) Idempotency-Key header priority (header > body > server UUID), (5) Idempotency key format/charset/length validation at the handler edge, (6) FOR UPDATE row locking when a UPDATE depends on a prior SELECT, (7) Webhook signature verification (stripe.webhooks.constructEventAsync, tolerance, raw-body reading), (8) Retry-safe endpoints with randomUUID fallback, (9) Durable checkpoint row ordering (checkpoint FIRST, mutation SECOND).
+  Provides: complete webhook handler skeleton, Idempotency-Key validator, dedup SQL, FOR UPDATE pattern, signature verification example.
 ---
 
 ## Quick Reference

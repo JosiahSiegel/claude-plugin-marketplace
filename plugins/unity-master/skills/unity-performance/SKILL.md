@@ -1,6 +1,9 @@
 ---
 name: unity-performance
-description: Unity performance optimization for slow games, stutters, and FPS drops. PROACTIVELY activate for: (1) game is slow, stuttering, or has FPS drops, (2) Unity Profiler analysis, (3) Frame Debugger and draw-call investigation, (4) batching (static, dynamic, GPU instancing, SRP Batcher), (5) object pooling to reduce GC pressure, (6) garbage collection spikes and allocation hot paths, (7) memory leaks and Memory Profiler usage, (8) LOD and occlusion culling, (9) texture compression and mipmap settings, (10) build size reduction. Provides: profiling workflow, batching patterns, object-pool implementations, GC reduction techniques, LOD/culling setup, and texture-compression matrix.
+description: |
+  Unity performance optimization for slow games, stutters, and FPS drops.
+  PROACTIVELY activate for: (1) game is slow, stuttering, or has FPS drops, (2) Unity Profiler analysis, (3) Frame Debugger and draw-call investigation, (4) batching (static, dynamic, GPU instancing, SRP Batcher), (5) object pooling to reduce GC pressure, (6) garbage collection spikes and allocation hot paths, (7) memory leaks and Memory Profiler usage, (8) LOD and occlusion culling, (9) texture compression and mipmap settings, (10) build size reduction.
+  Provides: profiling workflow, batching patterns, object-pool implementations, GC reduction techniques, LOD/culling setup, and texture-compression matrix.
 ---
 
 # Unity Performance Optimization

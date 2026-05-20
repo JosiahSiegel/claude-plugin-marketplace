@@ -1,6 +1,9 @@
 ---
 name: skill-development
-description: Canonical guide to authoring SKILL.md files for Claude Code plugin skills. PROACTIVELY activate for: (1) creating a new skill, (2) adding a skill to a plugin, (3) writing SKILL.md frontmatter (name, description with PROACTIVELY/Provides enumeration), (4) fixing skills that never trigger, (5) organizing skill content (core vs references vs examples vs scripts vs assets), (6) improving a weak skill description, (7) setting up progressive disclosure (3-level loading), (8) splitting oversized SKILL.md (>2000 words) into references, (9) writing skill body in imperative voice, (10) diagnosing and fixing zero-frontmatter SKILL.md files, (11) moving cross-cutting boilerplate (Windows paths, docs policy) out of YAML descriptions. Provides: canonical skill frontmatter template, broken-pattern catalog, progressive-disclosure layout, trigger-phrase completeness checklist, size guidelines and enforcement process, and a validation checklist covering every known mistake that breaks skill triggering.
+description: |
+  Canonical guide to authoring SKILL.md files for Claude Code plugin skills.
+  PROACTIVELY activate for: (1) creating a new skill, (2) adding a skill to a plugin, (3) writing SKILL.md frontmatter, (4) fixing skills that never trigger, (5) organizing core vs references vs examples, (6) improving weak skill descriptions, (7) progressive disclosure design, (8) splitting oversized SKILL.md files, (9) imperative body style, (10) zero-frontmatter SKILL.md files, (11) removing boilerplate from YAML descriptions.
+  Provides: skill template, trigger checklist, size rules, and validation process.
 ---
 
 # Skill Development for Claude Code Plugins
@@ -64,7 +67,7 @@ description: |
 4. **Enumerate concrete, named triggers — not abstract capabilities.** "PROACTIVELY activate for: (1) creating Azure Functions, (2) binding config" is good. "Use this skill when working with Azure" is NOT.
 5. **Describe WHEN to use, not WHAT it does.** The description drives routing, so it must read as a trigger list from the user's point of view. Put the capability summary in `Provides: ...` at the end.
 6. **Keep descriptions single-line YAML-safe.** If you use `|` block scalar, do not embed unescaped colons or other YAML-confusing characters in the middle of lines.
-7. **Target under ~800 characters for the description.** Longer descriptions dilute matching. If you genuinely need more triggers, prefer splitting into two skills over a bloated description.
+7. **Target 400-1000 characters for the description; hard ceiling is 1024 characters (Claude Code API spec).** Claude's current listing cap is 1536 chars per entry (raised from 250 in v2.1.105), and the aggregate budget across all installed skills is ~1% of the model context window. Front-load trigger keywords. If you genuinely need more triggers than fit in ~1000 chars, prefer splitting into two skills over a bloated description.
 8. **Do NOT put cross-cutting boilerplate (Windows paths, docs policy) inside the YAML description.** Put it in the markdown body.
 
 ### Canonical "good" description
@@ -262,7 +265,8 @@ After using the skill on real tasks:
 | Duplicated content across files | Put info in SKILL.md OR references/, never both |
 | Same block copied into multiple SKILL.md files | Cross-cutting content (platform guidelines, etc.) belongs in the agent body or one shared reference — NEVER copied into each skill |
 | Wrong person in description | Third person: "This skill should be used when..." |
-| Description too long (>500 chars) | Condense description; use plugin.json keywords for breadth |
+| Description over 1024 chars (API spec ceiling) | Split into two focused skills; do not bloat to fit |
+| Description over 1000 chars but under 1024 (dilutes matching) | Front-load triggers; collapse near-duplicate enumeration items |
 | Agent body duplicates skill content | Agent is a lean orchestrator — domain knowledge belongs in skills only |
 | Skill body too large (>3,000 words) | Split into core SKILL.md + references/ files |
 

@@ -1,6 +1,9 @@
 ---
 name: doc-diagnostic
-description: This skill should be used when the user is debating where a piece of documentation belongs, whether something should be an ADR at all, or how to audit an existing documentation set. PROACTIVELY activate on phrases like "should this be an ADR?", "where should I document X?", "is this architecturally significant?", "ADR vs RFC vs design doc vs runbook", "Diátaxis tutorial / how-to / reference / explanation", "audit our docs folder", "clean up the decision log", "is this doc worth keeping?", "is this an ADR or something else?", "we have too many docs," "doc drift," "doc governance," "decision log canon," "ADR template selection," "Nygard vs MADR vs Y-statement," "ADR failure modes." Owns the alternatives catalog (what each user impulse maps to), the ADR canon (templates / status lifecycle / numbering / required fields), the failure-modes table (drift / ADR-PRD duplication / bundled / premature / template thrash / etc.), and the folder-level audit procedure used by /doc-audit. The diagnostic stance — purpose / audience / owner / update-trigger — is the filter; the canon is the ruleset; the audit procedure is the cleanup tool.
+description: |
+  This skill should be used when deciding whether a doc should exist, where it belongs, or whether something is really an ADR.
+  PROACTIVELY activate on "should this be an ADR?", "where should I document X?", "is this architecturally significant?", "ADR vs RFC vs design doc vs runbook", "Diátaxis", "audit docs folder", "clean up the decision log", "doc drift", "doc governance", "ADR template selection", "Nygard vs MADR vs Y-statement."
+  Provides: doc placement diagnostic, alternatives catalog, ADR canon, and folder audit procedure.
 ---
 
 # doc-diagnostic
