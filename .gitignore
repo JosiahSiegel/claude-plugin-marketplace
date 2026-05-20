@@ -69,3 +69,6 @@ coverage/
 # macOS
 .AppleDouble
 .LSOverride
+
+#**/settings.local.json
+#**/settings.json

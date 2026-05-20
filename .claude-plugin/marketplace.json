@@ -138,6 +138,40 @@
       ]
     },
     {
+      "name": "doc-master",
+      "source": "./plugins/doc-master",
+      "description": "Documentation diagnostic and Architecture Decision Record (ADR) expert. PROACTIVELY activate for: (1) ANY new documentation file being created, (2) requests to 'document a decision' or 'write an ADR', (3) review or audit of existing ADRs / decision logs / design docs, (4) repos with docs/ or architecture/ directories where the user mentions adding governance, (5) detecting documentation drift, (6) cleanup of stale design docs, (7) choosing between ADR vs RFC vs design doc vs runbook vs how-to vs reference vs explanation vs tutorial vs code comment. Provides: the 'is this architecturally significant?' diagnostic, Nygard / MADR (short and long) / Y-statement template selection, canonical ADR status lifecycle (Proposed -> Accepted -> Superseded/Deprecated/Rejected), append-only immutability and supersession discipline, the Diátaxis-aware alternatives catalog (tutorial / how-to / reference / explanation), ADR anti-pattern detection (drift, non-decisions, duplication, missing re-evaluation triggers), and the purpose/owner/audience/update-trigger rule that prevents docs from becoming noise. The plugin's value is avoiding unnecessary docs, not generating them.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "documentation",
+        "adr",
+        "architecture-decision-record",
+        "decision-log",
+        "madr",
+        "nygard",
+        "y-statement",
+        "diataxis",
+        "rfc",
+        "design-doc",
+        "runbook",
+        "readme",
+        "how-to",
+        "tutorial",
+        "reference",
+        "explanation",
+        "supersession",
+        "immutability",
+        "decision-drivers",
+        "architecturally-significant",
+        "doc-audit",
+        "doc-drift",
+        "doc-governance"
+      ]
+    },
+    {
       "name": "ado-master",
       "source": "./plugins/ado-master",
       "description": "Complete Azure DevOps and Azure Pipelines expertise system with Sprint 254-262 features (2025). PROACTIVELY activate for: (1) ANY Azure DevOps/Pipelines task, (2) YAML pipeline creation/editing, (3) Workload identity federation (OIDC) passwordless authentication, (4) Pipeline performance analytics and monitoring, (5) Pipeline debugging/troubleshooting, (6) CI/CD optimization, (7) Security/compliance implementation, (8) Azure DevOps CLI operations, (9) Template management, (10) Microsoft Security DevOps integration. Provides: workload identity setup and migration, pipeline performance analytics and cost tracking, latest YAML schema (always researches current docs), Microsoft best practices, multi-stage pipeline patterns, caching/parallelization, Azure Key Vault integration, code scanning (SAST/dependency/container/IaC/secrets), deployment strategies, performance optimization, and systematic debugging.",
