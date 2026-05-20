@@ -42,7 +42,7 @@ services:
 ```
 
 **Standard Development Connection String:**
-```
+```text
 DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;QueueEndpoint=http://azurite:10001/devstoreaccount1;TableEndpoint=http://azurite:10002/devstoreaccount1;
 ```
 
@@ -149,7 +149,7 @@ volumes:
 ```
 
 **Connection String:**
-```
+```text
 Server=sqlserver;Database=MyApp;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
 ```
 
@@ -220,12 +220,12 @@ services:
 ```
 
 **Emulator Endpoint:**
-```
+```text
 https://localhost:8081
 ```
 
 **Emulator Key (Standard):**
-```
+```text
 C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
 ```
 
@@ -267,7 +267,7 @@ var client = new CosmosClient(endpoint, key);
 **Official Emulator Image:** `mcr.microsoft.com/azure-messaging/servicebus-emulator:latest`
 
 **Connection String:**
-```
+```bash
 Endpoint=sb://host.docker.internal;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;
 ```
 

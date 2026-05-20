@@ -56,7 +56,7 @@ The Atlas Reasoning Engine is the brain of Agentforce, enabling agents to:
 
 ### Agent Components
 
-```
+```text
 ┌─────────────────────────────────────────────────┐
 │              Agentforce Agent                   │
 ├─────────────────────────────────────────────────┤
@@ -164,7 +164,7 @@ public class AgentActions {
 
 Instructions guide the agent's behavior and tone:
 
-```
+```yaml
 You are a helpful customer service agent for Acme Corp.
 
 Personality:
@@ -251,7 +251,7 @@ Deploy agents across multiple channels:
 - Provide troubleshooting steps
 
 **Example Flow**:
-```
+```text
 Customer: "Where is my order #12345?"
 ↓
 Agent: Validates order number
@@ -275,7 +275,7 @@ Agent: "Your order #12345 shipped yesterday and will arrive Thursday.
 - Update lead scores based on engagement
 
 **Example Flow**:
-```
+```text
 Lead: "Tell me about your enterprise plan"
 ↓
 Agent: Retrieves product information
@@ -341,7 +341,7 @@ trigger OrderTrigger on Order (after update) {
 ```
 
 **Agentforce Flow** (subscribed to OrderStatusChangeEvent__e):
-```
+```text
 1. Receive event
 2. Query order and customer details
 3. Determine notification channel (email, SMS, push)
@@ -575,7 +575,7 @@ LIMIT 10
 
 If you have Einstein Copilot (now Agentforce Assistant), migration path:
 
-```
+```text
 Einstein Copilot → Agentforce (Default)
 - Automatically migrated in January 2025
 - Conversational UI remains the same

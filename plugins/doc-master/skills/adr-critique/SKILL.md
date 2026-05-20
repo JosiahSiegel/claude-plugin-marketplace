@@ -50,7 +50,7 @@ If the ADR cites a LikeC4 file, glob `**/*.c4` and read the referenced model.
 
 Walk the ADR top to bottom. For every line that violates a rule, emit **one** flag using this template:
 
-```
+```yaml
 Original: <verbatim line from ADR>
 Violates: <rule number and name from adr-is-not.md, OR "missing-why" / "drift" / "tension">
 Rewrite:  <shorter, stricter replacement — or "delete">

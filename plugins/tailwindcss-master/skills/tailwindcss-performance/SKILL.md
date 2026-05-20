@@ -70,7 +70,7 @@ If automatic detection fails, specify sources explicitly:
 
 Tailwind's build process removes unused CSS:
 
-```
+```text
 Source: All possible utilities (~15MB+)
 ↓
 Scan: Find used class names

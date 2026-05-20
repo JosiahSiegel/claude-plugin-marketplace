@@ -29,7 +29,7 @@ description: |
 
 ### Directory Structure
 
-```
+```text
 plugin-name/
 ├── .claude-plugin/
 │   └── plugin.json          # MUST be inside .claude-plugin/
@@ -134,7 +134,13 @@ mkdir -p $PLUGIN_DIR/skills/domain-knowledge
 3. **skills/domain-knowledge/SKILL.md** - Core knowledge
 4. **README.md** - Documentation
 
-### Step 4: Register in Marketplace
+### Step 4 (conditional): Attribution manifest
+
+If the plugin ships any vendored, derived, or licensed third-party content, create `NOTICES.md` at the plugin root **before** registering in the marketplace. Treat it as a first-class shipping artifact alongside `plugin.json` and `README.md`, not as doc polish. See `references/publishing-guide.md` ("Licensed / Vendored / Derived Content" checklist) for the structural integrity, license-text-preservation, and cross-reference requirements.
+
+If the plugin contains no third-party content, skip this step.
+
+### Step 5: Register in Marketplace
 
 **CRITICAL**: If `.claude-plugin/marketplace.json` exists at repo root, you MUST add the plugin:
 

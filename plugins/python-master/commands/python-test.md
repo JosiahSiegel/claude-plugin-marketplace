@@ -47,7 +47,7 @@ The command displays:
 
 ## Example Output
 
-```
+```text
 tests/test_users.py::test_create_user PASSED
 tests/test_users.py::test_get_user PASSED
 tests/test_users.py::test_delete_user PASSED

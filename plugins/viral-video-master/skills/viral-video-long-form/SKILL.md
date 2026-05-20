@@ -228,7 +228,7 @@ Unlike short-form's 1.3-second rule, long-form allows 5-10 seconds for hooks, bu
 ### Description Optimization
 
 **Structure:**
-```
+```text
 [Hook - First 2-3 lines visible without expansion]
 Primary keyword in first 25 words
 Clear value proposition
@@ -325,7 +325,7 @@ Related video links
 - Show up in Google search
 
 **Format:**
-```
+```text
 0:00 Introduction
 1:23 Chapter Title
 4:56 Another Chapter

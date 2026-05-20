@@ -10,7 +10,7 @@ Import existing infrastructure resources into Terraform management.
 
 ## Usage
 
-```
+```text
 /tf-import aws_vpc.main vpc-12345678
 /tf-import azurerm_resource_group.main /subscriptions/.../resourceGroups/my-rg
 /tf-import --generate-config        # Generate config for imports (1.5+)

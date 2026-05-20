@@ -96,7 +96,7 @@ After executing the query with Server Timings enabled:
 
 **CallbackDataID:** When you see `CallbackDataID()` in an SE query, the Storage Engine is asking the Formula Engine to evaluate an expression for each row. This is extremely slow.
 
-```
+```sql
 // BAD SE query with CallbackDataID
 WITH $Expr0 := (PFCAST([Sales].[Amount] AS INT) + CallbackDataID())
 SELECT $Expr0 FROM [Sales]
@@ -151,7 +151,7 @@ Sort columns by size (descending):
 
 ### Compression Ratio
 
-```
+```text
 Compression Ratio = Data Size / Uncompressed Size
 ```
 

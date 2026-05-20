@@ -7,6 +7,8 @@ The seven-phase ADR drafting flow (Understand → Context → Options → Decide
 - Repository: https://github.com/janmohammadi/deep-adr
 - License: MIT
 
+The full MIT license text appears at the end of this file under "Full license text — deep-adr."
+
 ## Markdown Guide — Basic Syntax (CC BY-SA 4.0)
 
 The `markdown-style` skill's syntax-canon layer (`skills/markdown-style/references/syntax-canon.md`) distills load-bearing rules from the Markdown Guide basic-syntax reference. The skill summarizes rules in its own wording and does not reproduce the source verbatim.
@@ -27,7 +29,7 @@ The `markdown-style` skill's style-overlay layer (`skills/markdown-style/referen
 - License: Apache License 2.0
 - License text: https://www.apache.org/licenses/LICENSE-2.0
 
-## deep-adr MIT License Notice
+## Full license text — deep-adr
 
 Copyright (c) 2026 Reza Janmohammadi
 

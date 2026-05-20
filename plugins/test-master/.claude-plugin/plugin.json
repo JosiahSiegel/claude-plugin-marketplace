@@ -1,6 +1,6 @@
 {
   "name": "test-master",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "Complete Vitest 4.0, Playwright 1.55, and MSW 2.x testing system. PROACTIVELY activate for: (1) any testing task (unit/integration/E2E/visual), (2) test scaffolding, (3) AI-powered test generation, (4) debugging and failure analysis, (5) coverage optimization, (6) visual regression, (7) MSW mock management, (8) Vitest/Playwright config, (9) CI test setup, (10) multi-project architecture. Provides: browser-mode patterns, trace debugging, snapshot management, parallel execution tuning.",
   "author": {
     "name": "Josiah Siegel",

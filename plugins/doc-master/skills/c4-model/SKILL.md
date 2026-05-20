@@ -149,7 +149,7 @@ Run `npx likec4 validate`. If validation fails, surface the error to the archite
 
 Tell the architect how to view the diagram. Do not start a server uninvited.
 
-```
+```bash
 To view: npx likec4 start    # interactive browser at http://localhost:5173
 To serve: npx likec4 serve   # static export
 ```

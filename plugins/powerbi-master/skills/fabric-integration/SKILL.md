@@ -172,7 +172,7 @@ A lakehouse combines data lake flexibility with warehouse SQL capabilities:
 
 ### Lakehouse to Power BI Flow
 
-```
+```text
 [Data Sources] --> [Fabric Notebooks/Pipelines] --> [Lakehouse Delta Tables]
      |                                                       |
      v                                                       v
@@ -243,7 +243,7 @@ Fabric Real-Time Intelligence items now have GA lifecycle management (2025):
 
 ### Eventstream to Power BI Pipeline
 
-```
+```text
 [Event Hubs/Kafka/IoT Hub] --> [Eventstream] --> [KQL Database] --> [Power BI DirectQuery]
                                      |
                                      +--> [Lakehouse] --> [Power BI Direct Lake]

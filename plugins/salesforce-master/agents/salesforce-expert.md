@@ -141,7 +141,7 @@ Choose the optimal integration pattern:
 **External System → Salesforce (Inbound)**
 
 **Pattern 1: REST API Direct Integration** (Real-time, <2K records)
-```
+```text
 External System → Salesforce REST API → Salesforce Objects
 ```
 
@@ -176,7 +176,7 @@ async function createSalesforceAccount(data) {
 ```
 
 **Pattern 2: Bulk API Integration** (Batch, >2K records)
-```
+```text
 External System → CSV/JSON → Bulk API → Salesforce Objects
 ```
 
@@ -187,7 +187,7 @@ External System → CSV/JSON → Bulk API → Salesforce Objects
 - Nightly synchronization
 
 **Implementation**:
-```
+```text
 1. Create Job: POST /services/data/v60.0/jobs/ingest
 2. Upload CSV: PUT /services/data/v60.0/jobs/ingest/{jobId}/batches
 3. Close Job: PATCH /services/data/v60.0/jobs/ingest/{jobId}
@@ -196,7 +196,7 @@ External System → CSV/JSON → Bulk API → Salesforce Objects
 ```
 
 **Pattern 3: Middleware/iPaaS Integration** (Complex logic, transformations)
-```
+```text
 External System → Middleware (MuleSoft/Boomi) → Salesforce API
 ```
 
@@ -210,7 +210,7 @@ External System → Middleware (MuleSoft/Boomi) → Salesforce API
 **Salesforce → External System (Outbound)**
 
 **Pattern 4: Platform Events** (Event-driven, pub/sub)
-```
+```text
 Salesforce Trigger → Platform Event → CometD Subscriber → External System
 ```
 
@@ -261,7 +261,7 @@ client.handshake((reply) => {
 ```
 
 **Pattern 5: Change Data Capture** (Automatic replication)
-```
+```text
 Salesforce Objects → CDC Channel → CometD Subscriber → Data Warehouse
 ```
 
@@ -273,7 +273,7 @@ Salesforce Objects → CDC Channel → CometD Subscriber → Data Warehouse
 - Track create, update, delete, undelete
 
 **Enable CDC**:
-```
+```text
 Setup → Change Data Capture → Select objects (Account, Contact, etc.)
 ```
 
@@ -292,7 +292,7 @@ client.subscribe('/data/AccountChangeEvent', (message) => {
 ```
 
 **Pattern 6: Outbound Messages** (SOAP workflow)
-```
+```text
 Workflow Rule → Outbound Message → External SOAP Endpoint
 ```
 
@@ -302,7 +302,7 @@ Workflow Rule → Outbound Message → External SOAP Endpoint
 - No custom code desired
 
 **Pattern 7: Scheduled Apex + Callout** (Batch sync)
-```
+```text
 Scheduled Apex → Batch/Queueable → HTTP Callout → External API
 ```
 
@@ -358,7 +358,7 @@ global class AccountSyncBatch implements Database.Batchable<SObject>, Database.A
 4. **Manual Resolution**: Flag conflicts for user review
 
 **Implementation Pattern**:
-```
+```text
 ┌─────────────────┐         ┌─────────────────┐
 │   Salesforce    │←───────→│  Middleware     │
 │                 │  Events  │  (Sync Engine)  │
@@ -551,7 +551,7 @@ public class ExternalAPIClient {
 ```
 
 **Setup Named Credential**:
-```
+```text
 Setup → Named Credentials → New Named Credential
 - Label: External System
 - URL: https://external-api.com
@@ -563,7 +563,7 @@ Setup → Named Credentials → New Named Credential
 **Implement comprehensive monitoring**:
 
 **Monitoring Strategy**:
-```
+```text
 ┌─────────────────────────────┐
 │   Monitoring Layer          │
 ├─────────────────────────────┤
@@ -577,7 +577,7 @@ Setup → Named Credentials → New Named Credential
 ```
 
 **Event Monitoring** (Salesforce):
-```
+```text
 Setup → Event Monitoring
 - Track API usage, limits, performance
 - API Total Usage (daily limits)
@@ -610,7 +610,7 @@ public class IntegrationMetrics {
 
 ### 1. ERP → Salesforce (Products, Orders)
 **Architecture**:
-```
+```text
 ERP System → Scheduled Job → Transform → Bulk API → Salesforce
 ```
 
@@ -622,7 +622,7 @@ ERP System → Scheduled Job → Transform → Bulk API → Salesforce
 
 ### 2. Salesforce → Marketing Automation (Leads, Contacts)
 **Architecture**:
-```
+```text
 Salesforce Trigger → Platform Event → Middleware → Marketing Platform API
 ```
 
@@ -634,7 +634,7 @@ Salesforce Trigger → Platform Event → Middleware → Marketing Platform API
 
 ### 3. E-commerce → Salesforce (Orders, Customers)
 **Architecture**:
-```
+```text
 E-commerce → Webhook → API Gateway → Salesforce REST API
 ```
 
@@ -646,7 +646,7 @@ E-commerce → Webhook → API Gateway → Salesforce REST API
 
 ### 4. Salesforce → Data Warehouse (Analytics)
 **Architecture**:
-```
+```text
 Salesforce CDC → Kafka → ETL → Data Warehouse (Snowflake/Redshift)
 ```
 

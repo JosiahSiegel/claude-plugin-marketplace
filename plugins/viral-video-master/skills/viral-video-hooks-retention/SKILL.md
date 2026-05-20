@@ -34,7 +34,7 @@ Complete guide to capturing attention in the first moments and maintaining engag
 
 ### The Hook Success Cascade
 
-```
+```text
 0-1.3 seconds: Scroll stop decision
     |
     v
@@ -218,7 +218,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ## Hook Template Library
 
 ### Curiosity Hooks
-```
+```text
 "Here's why [common belief] is completely wrong..."
 "I discovered something that changed everything about..."
 "Most people don't know this about [topic]..."
@@ -229,7 +229,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Pattern Interrupt Hooks
-```
+```text
 [Start mid-sentence] "...and that's why I stopped doing it"
 [Show end result first without context]
 [Controversial statement] "I quit [popular thing] and here's why"
@@ -238,7 +238,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Open Loop Hooks
-```
+```text
 "By the end of this video, you'll understand why..."
 "What happened next shocked everyone..."
 "The third tip is the one that actually works..."
@@ -248,7 +248,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### FOMO/Urgency Hooks
-```
+```text
 "If you're not doing this, you're losing..."
 "This trend is about to explode..."
 "Before everyone else figures this out..."
@@ -258,7 +258,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Self-Identification Hooks
-```
+```text
 "If you're someone who [struggle], this is for you..."
 "POV: You're a [audience type] who..."
 "Only [niche] people will understand this..."
@@ -268,7 +268,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Story Hooks
-```
+```text
 "I was about to give up when..."
 "Nobody believed me until..."
 "This one decision changed my life..."
@@ -278,7 +278,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Educational Hooks
-```
+```text
 "Here's exactly how to [result] in [timeframe]..."
 "[Number] things I wish I knew before..."
 "The simple trick that [achievement]..."
@@ -406,7 +406,7 @@ Insert pattern interrupts every 30-60 seconds for optimal retention.
 
 **Structure Your Content with Emotional Peaks:**
 
-```
+```yaml
 Start: Curiosity/Anticipation
   |
   v

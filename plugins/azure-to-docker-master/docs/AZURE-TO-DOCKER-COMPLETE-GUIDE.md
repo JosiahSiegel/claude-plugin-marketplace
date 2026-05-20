@@ -148,7 +148,7 @@ docker compose -f docker-compose-generated.yml up -d
 ```
 
 **Output Structure:**
-```
+```text
 my-export/my-rg_20251025_143022/
 ├── README.md
 ├── SERVICE-MAPPING.md

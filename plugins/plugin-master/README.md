@@ -71,7 +71,7 @@ Just ask about plugin development:
 
 ## Plugin Structure
 
-```
+```text
 plugin-name/
 ├── .claude-plugin/
 │   └── plugin.json          # Required manifest

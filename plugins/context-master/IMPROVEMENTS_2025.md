@@ -73,7 +73,7 @@ Original plan was 43% content reduction (1,661 → ~950 lines). Analysis reveals
 
 ## Files Modified
 
-```
+```text
 plugins/context-master/.claude-plugin/plugin.json
 - Version: 2.0.0 → 2.1.0
 - Description: Added Claude Sonnet 4.5, recursive delegation, clear-and-verify patterns
@@ -85,7 +85,7 @@ plugins/context-master/.claude-plugin/plugin.json
 
 ## Files Created
 
-```
+```text
 plugins/context-master/commands/optimize-context.md
 - New command for real-time context analysis
 - 100 lines, production-ready

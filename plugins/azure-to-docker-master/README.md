@@ -101,7 +101,7 @@ Extract Azure infrastructure and generate Docker Compose stack.
 ```
 
 **Example output:**
-```
+```text
 azure-project/
 ├── docker-compose.yml          # Main compose file
 ├── docker-compose.override.yml # Development overrides
@@ -371,27 +371,27 @@ NODE_ENV=development
 ### Connection Strings
 
 **SQL Server:**
-```
+```text
 Server=sqlserver;Database=MyApp;User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;
 ```
 
 **PostgreSQL:**
-```
+```text
 postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/myapp
 ```
 
 **Redis:**
-```
+```text
 redis://:${REDIS_PASSWORD}@redis:6379
 ```
 
 **Azurite (Blob Storage):**
-```
+```text
 DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;
 ```
 
 **Cosmos DB:**
-```
+```text
 AccountEndpoint=https://cosmosdb:8081;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==;
 ```
 

@@ -10,7 +10,7 @@ Validate configuration files for syntax and internal consistency.
 
 ## Usage
 
-```
+```text
 /tf-validate              # Basic validation
 /tf-validate -json       # JSON output for CI/CD
 ```
@@ -55,7 +55,7 @@ Common validation errors:
 ## Output
 
 ### Success
-```
+```text
 Success! The configuration is valid.
 ```
 
@@ -70,7 +70,7 @@ Success! The configuration is valid.
 ```
 
 ### Failure Example
-```
+```text
 Error: Missing required argument
 
   on main.tf line 5, in resource "aws_instance" "web":
@@ -114,7 +114,7 @@ repos:
 ## Common Errors
 
 ### Missing Provider
-```
+```bash
 Error: Missing required provider
 
 This configuration requires provider "aws", but no such provider
@@ -123,7 +123,7 @@ is configured. Please add a provider block.
 **Fix:** Add provider configuration or required_providers block.
 
 ### Invalid Argument
-```
+```text
 Error: Unsupported argument
 
   on main.tf line 10, in resource "aws_instance" "web":
@@ -134,7 +134,7 @@ An argument named "invalid_arg" is not expected here.
 **Fix:** Check provider documentation for valid arguments.
 
 ### Type Mismatch
-```
+```text
 Error: Invalid value for input variable
 
 The given value is not valid for variable "count": a number is required.

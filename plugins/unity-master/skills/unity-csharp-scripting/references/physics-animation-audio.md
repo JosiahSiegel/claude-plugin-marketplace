@@ -28,7 +28,7 @@
 
 Configure collision layers in Edit > Project Settings > Physics:
 
-```
+```text
 Layer 8:  Player
 Layer 9:  Enemy
 Layer 10: Projectile
@@ -122,7 +122,7 @@ bool IsGrounded()
 
 ### Animator Controller Structure
 
-```
+```text
 Animator Controller
 ├── Layers
 │   ├── Base Layer (weight: 1.0)
@@ -225,7 +225,7 @@ void OnAnimatorMove()
 
 ### Audio Hierarchy
 
-```
+```text
 Scene
 ├── AudioListener (on Main Camera)
 ├── Music Manager (DontDestroyOnLoad)
@@ -241,7 +241,7 @@ Scene
 
 ### AudioMixer Setup
 
-```
+```text
 Master Mixer
 ├── Music Group
 │   └── Volume exposed as "MusicVolume"

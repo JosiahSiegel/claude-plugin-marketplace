@@ -1,6 +1,6 @@
 {
   "name": "powershell-master",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Complete PowerShell expertise across Windows/Linux/macOS. PROACTIVELY activate for: (1) any PowerShell task (scripts/modules/cmdlets), (2) CI/CD automation (GitHub Actions, Azure DevOps), (3) cross-platform scripting, (4) module management (PSGallery), (5) Azure/AWS/M365 automation, (6) debugging and optimization, (7) security best practices. Provides: PowerShell 7+ features, Az/Microsoft.Graph/PnP/AWS Tools patterns, PSGallery integration, CI/CD pipeline templates.",
   "author": {
     "name": "Josiah Siegel",

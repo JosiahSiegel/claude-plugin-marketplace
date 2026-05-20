@@ -86,27 +86,27 @@ Specify additional options for customization:
 ## Usage Examples
 
 **Basic CLI tool:**
-```
+```text
 /bash-template cli
 ```
 
 **Full-featured daemon:**
-```
+```text
 /bash-template daemon --full --logging
 ```
 
 **Minimal installer:**
-```
+```text
 /bash-template installer --minimal
 ```
 
 **CI script with Docker:**
-```
+```bash
 /bash-template ci --docker --parallel
 ```
 
 **Library with tests:**
-```
+```text
 /bash-template library my-utils
 ```
 

@@ -10,7 +10,7 @@ Initialize a Terraform working directory with proper backend configuration.
 
 ## Usage
 
-```
+```text
 /tf-init                          # Basic init with upgrade
 /tf-init -reconfigure            # Reconfigure backend
 /tf-init key=prod.tfstate        # Backend config override

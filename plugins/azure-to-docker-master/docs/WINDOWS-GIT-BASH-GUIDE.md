@@ -201,7 +201,7 @@ docker compose run --rm -v ./data:/data webapp process-data
 ### Issue: Paths are Incorrectly Converted
 
 **Symptoms:**
-```
+```text
 Error: /usr/bin/bash: line 1: C:UsersDavid...No such file
 ```
 
@@ -215,7 +215,7 @@ docker compose up
 ### Issue: Volume Mount Not Found
 
 **Symptoms:**
-```
+```text
 Error: Mount denied: Path does not exist
 ```
 
@@ -232,7 +232,7 @@ services:
 ### Issue: Script Fails on Windows
 
 **Symptoms:**
-```
+```text
 ./script.sh: command not found
 ```
 

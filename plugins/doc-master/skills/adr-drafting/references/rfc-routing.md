@@ -35,7 +35,7 @@ The body of an RFC ADR is **the same as an accepted ADR**. The only differences 
 
 ## Status transitions at the deadline
 
-```
+```text
   rfc + objections resolved   --> accepted
   rfc + decider declines      --> rejected
   rfc + deadline passes silently --> NOT auto-accepted

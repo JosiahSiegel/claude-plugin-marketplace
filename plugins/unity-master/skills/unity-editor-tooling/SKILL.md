@@ -220,7 +220,7 @@ Activate a Unity license first using `game-ci/unity-activate`. Use Unity Build A
 
 ## Assembly Definitions
 
-```
+```text
 Project/
 ├── Scripts/
 │   ├── Core/             Core.asmdef          (no references)
@@ -286,7 +286,7 @@ Run tests via Window > General > Test Runner. Edit Mode tests run instantly. Pla
 
 ### Unity .gitignore (Essential Entries)
 
-```
+```text
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -314,7 +314,7 @@ Run tests via Window > General > Test Runner. Edit Mode tests run instantly. Pla
 
 ## Custom Packages (UPM)
 
-```
+```text
 com.company.my-package/
 ├── package.json
 ├── Runtime/

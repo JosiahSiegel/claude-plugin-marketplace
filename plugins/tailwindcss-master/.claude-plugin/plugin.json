@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-master",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Complete Tailwind CSS v4 expertise with 2025 best practices. PROACTIVELY activate for: (1) any Tailwind task, (2) v4 CSS-first config (@theme, @utility, @custom-variant), (3) responsive design and dark mode, (4) performance and JIT, (5) plugins (typography, forms), (6) framework integration (React/Vue/Next/Vite), (7) v3-to-v4 migration, (8) custom utility creation, (9) debugging, (10) production build optimization. Provides: v4.1 features, PostCSS and Vite setup, dark-mode strategies, animation utilities, VS Code/Prettier config.",
   "author": {
     "name": "Josiah Siegel",

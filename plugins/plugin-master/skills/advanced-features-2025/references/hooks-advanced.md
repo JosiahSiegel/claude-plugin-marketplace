@@ -6,7 +6,7 @@ Comprehensive guide to Claude Code hook development.
 
 ### Event Flow
 
-```
+```text
 User Action → Event Triggered → Matchers Evaluated → Hooks Execute → Result Returned
 ```
 

@@ -209,7 +209,7 @@ Autonomous skill for executing complex Terraform operations including infrastruc
 
 ### Example 1: Initialize a New Azure Project
 
-```
+```text
 User: Help me initialize a new Terraform project for Azure
 
 Agent: I'll help you initialize a Terraform project for Azure with best practices.
@@ -223,7 +223,7 @@ First, let me ask a few questions:
 
 ### Example 2: Generate Secure Infrastructure
 
-```
+```text
 User: Create an Azure Storage Account with all security best practices
 
 Agent: [Detects your Terraform/provider versions]
@@ -233,7 +233,7 @@ Agent: [Detects your Terraform/provider versions]
 
 ### Example 3: Debug Issues
 
-```
+```text
 User: My terraform plan is failing with authentication error on Windows
 
 Agent: [Identifies Windows platform and Azure CLI authentication issue]
@@ -243,7 +243,7 @@ Agent: [Identifies Windows platform and Azure CLI authentication issue]
 
 ### Example 4: CI/CD Pipeline
 
-```
+```text
 User: /terraform-master:tf-cicd
 
 Agent: [Generates complete CI/CD pipeline for your platform]
@@ -253,7 +253,7 @@ Agent: [Generates complete CI/CD pipeline for your platform]
 
 ### Example 5: Architecture Review
 
-```
+```text
 User: /terraform-master:tf-architecture
 
 Agent: [Analyzes your current structure]
@@ -263,7 +263,7 @@ Agent: [Analyzes your current structure]
 
 ### Example 6: Import Existing Resources ⭐ NEW
 
-```
+```text
 User: /terraform-master:tf-import
 
 Agent: I'll help you import existing infrastructure into Terraform.
@@ -291,7 +291,7 @@ terraform plan -generate-config-out=generated.tf
 
 ### Example 7: State Management ⭐ NEW
 
-```
+```text
 User: I need to rename a resource and move it to a module
 
 Agent: I'll help you refactor your Terraform structure safely.

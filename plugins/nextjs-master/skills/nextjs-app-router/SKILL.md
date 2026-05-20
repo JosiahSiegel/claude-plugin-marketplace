@@ -48,7 +48,7 @@ Use for **App Router fundamentals**:
 
 ### App Directory
 
-```
+```text
 app/
 ├── layout.tsx              # Root layout (required)
 ├── page.tsx                # Home page (/)

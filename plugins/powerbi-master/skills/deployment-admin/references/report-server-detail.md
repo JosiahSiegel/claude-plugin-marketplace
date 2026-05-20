@@ -51,7 +51,7 @@ Starting with SQL Server 2025, Microsoft consolidates all on-premises reporting 
 ## Report Server REST API
 
 PBIRS exposes a REST API for programmatic management:
-```
+```text
 Base URL: https://reportserver/reports/api/v2.0/
 ```
 
@@ -78,7 +78,7 @@ Base URL: https://reportserver/reports/api/v2.0/
 
 ## Report Server Deployment Architecture
 
-```
+```text
 [Users/Browsers] --> [Load Balancer / NLB]
                          |
              +-----------+-----------+

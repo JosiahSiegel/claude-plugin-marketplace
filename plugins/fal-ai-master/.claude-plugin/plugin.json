@@ -1,6 +1,6 @@
 {
   "name": "fal-ai-master",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Expert fal.ai generative media platform with 600+ AI models (FLUX.2, GPT-Image 1.5, Veo 3.1, Sora 2, Kling 2.6, Recraft V3), client libraries, and serverless deployment. PROACTIVELY activate for: (1) any fal.ai task, (2) image generation, (3) FLUX Kontext editing, (4) video generation, (5) native audio in video, (6) image-to-video pipelines, (7) real-time WebSocket streaming, (8) queue-based execution, (9) serverless deployment (fal.App), (10) GPU compute (T4-B200), (11) JS/TS and Python integration, (12) storage and volumes, (13) cost optimization. Provides: model catalog, client patterns, webhooks, rate limiting.",
   "author": {
     "name": "Josiah Siegel",

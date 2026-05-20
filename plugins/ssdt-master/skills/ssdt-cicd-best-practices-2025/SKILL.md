@@ -242,7 +242,7 @@ TargetConnectionString: "Server=prod;Database=MyDB;User=sa;Password=P@ssw0rd123"
 ### 4. Version Control Everything
 
 **What to Version**:
-```
+```text
 DatabaseProject/
 ├── Tables/
 │   ├── Customer.sql
@@ -264,7 +264,7 @@ DatabaseProject/
 ```
 
 **.gitignore**:
-```
+```text
 # Build outputs
 bin/
 obj/

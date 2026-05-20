@@ -102,7 +102,7 @@ await db.transaction(async (tx) => {
 ### G2 — `previous_attributes.amount_refunded` is the authoritative refund delta
 
 Rule: on `charge.refunded`, derive the per-event refund delta from `event.data.previous_attributes.amount_refunded`:
-```
+```text
 delta = charge.amount_refunded - (event.data.previous_attributes.amount_refunded ?? 0)
 ```
 `charge.amount_refunded` alone is CUMULATIVE — never per-event. Embedded `charge.refunds.data` "latest Refund" and `stripe.refunds.list({charge, limit:1})` are fallbacks when `previous_attributes` is absent.

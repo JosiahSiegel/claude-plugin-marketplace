@@ -58,7 +58,7 @@ Covers every Git command from basic to advanced:
 
 **Example safety protocol for `git reset --hard`:**
 
-```
+```bash
 ⚠️  WARNING: This operation is DESTRUCTIVE and will:
    - Permanently delete uncommitted changes
    - Cannot be undone (except via reflog)
@@ -75,7 +75,7 @@ Are you SURE you want to proceed? (yes/NO): _
 
 **First question on any Git task:**
 
-```
+```text
 Would you like me to:
 1. Create commits automatically with appropriate messages
 2. Stage changes only (you handle commits manually)
@@ -153,7 +153,7 @@ Recover from Git mistakes:
 ### 6. Workflow Strategies
 
 **Git Flow:**
-```
+```text
 main/master (production)
   ├── develop (integration)
   │   ├── feature/user-auth
@@ -164,7 +164,7 @@ main/master (production)
 ```
 
 **GitHub Flow:**
-```
+```text
 main (always deployable)
   ├── feature/add-search
   ├── fix/header-bug
@@ -172,7 +172,7 @@ main (always deployable)
 ```
 
 **Trunk-Based Development:**
-```
+```text
 main (single source of truth)
   ├── short-lived-feature-1 (< 1 day)
   └── short-lived-feature-2 (< 1 day)
@@ -182,7 +182,7 @@ main (single source of truth)
 
 ### Example 1: Safe Force Push
 
-```
+```text
 User: "I need to force push my changes"
 
 Claude: "⚠️ Force push is a dangerous operation. Let me help you do this safely.
@@ -206,7 +206,7 @@ What would you like to do?"
 
 ### Example 2: Recover Deleted Branch
 
-```
+```bash
 User: "I accidentally deleted my feature branch!"
 
 Claude: "Don't worry, we can recover it using reflog. Let me find it:
@@ -222,7 +222,7 @@ Would you like me to run this command? (yes/no)"
 
 ### Example 3: Interactive Rebase
 
-```
+```text
 User: "Help me squash my last 5 commits"
 
 Claude: "I'll help you perform an interactive rebase to squash commits.
@@ -258,7 +258,7 @@ Proceed? (yes/no)"
 
 ### Example 4: Remove Sensitive File
 
-```
+```text
 User: "I accidentally committed my .env file with secrets!"
 
 Claude: "⚠️⚠️⚠️ CRITICAL SECURITY ISSUE ⚠️⚠️⚠️
@@ -314,7 +314,7 @@ Keep those credentials rotated!"
 
 Every risky command gets a warning:
 
-```
+```bash
 ⚠️  WARNING: git reset --hard is DESTRUCTIVE
 ⚠️  DANGER: git push --force will overwrite remote history
 ⚠️⚠️⚠️  EXTREME DANGER: git filter-repo rewrites ALL history
@@ -336,7 +336,7 @@ git branch backup-before-reset-20251023-143022
 
 Dangerous operations require explicit confirmation:
 
-```
+```text
 Are you SURE you want to proceed? (yes/NO): _
 Type 'force push' to confirm: _
 Type 'I UNDERSTAND THE RISKS' to continue: _

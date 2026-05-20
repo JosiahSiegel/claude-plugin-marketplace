@@ -738,7 +738,7 @@ ElevenLabs agents can use Cloudflare Workers AI as the LLM:
 
 #### Cost Decision Tree
 
-```
+```text
 Is English sufficient?
 ├── Yes → Is premium voice quality required?
 │   ├── Yes → Cloudflare Aura-2 ($0.030/1K) - 82% cheaper than ElevenLabs
@@ -1462,7 +1462,7 @@ curl https://api.example.com/health
 ```
 
 **Architecture:**
-```
+```text
 [User] -> [Cloudflare Edge] -> [Tunnel] -> [localhost:3000]
               |
               v

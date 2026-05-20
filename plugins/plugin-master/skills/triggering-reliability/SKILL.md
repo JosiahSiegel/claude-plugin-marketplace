@@ -36,7 +36,7 @@ Skill discovery parses YAML frontmatter for `name:` and `description:`. With no 
 
 Prepend canonical frontmatter with a proper description:
 
-```
+```markdown
 ---
 name: my-skill
 description: One-sentence summary. PROACTIVELY activate for: (1) trigger, (2) trigger, ..., (N) trigger. Provides: capability list.
@@ -48,7 +48,7 @@ description: One-sentence summary. PROACTIVELY activate for: (1) trigger, (2) tr
 
 ### How to find these
 
-```
+```bash
 for f in plugins/*/skills/*/SKILL.md; do
   head -1 "$f" | grep -q "^---" || echo "BROKEN: $f"
 done
@@ -70,7 +70,7 @@ Replace `agent: true` with `name: <kebab-name>` derived from the filename.
 
 ### How to find these
 
-```
+```bash
 grep -rn "^agent: true" plugins/*/agents/*.md
 # Expected output: zero matches
 ```
@@ -81,7 +81,7 @@ grep -rn "^agent: true" plugins/*/agents/*.md
 
 Description reads like a capability statement:
 
-```
+```yaml
 description: Use this agent for help with Azure.
 ```
 
@@ -97,7 +97,7 @@ Rewrite the description with the `PROACTIVELY activate for: (1)... (N)...` enume
 
 ### Symptom
 
-```
+```yaml
 description: This skill contains a comprehensive reference for Terraform AzureRM provider usage.
 ```
 
@@ -129,7 +129,7 @@ Add 4-6 `<example>` blocks. Each block must include Context, user quote, assista
 
 ### Symptom
 
-```
+```yaml
 description: |
   Complete Docker expertise. Use backslashes on Windows for file paths. Never create documentation files unless requested...
 ```
@@ -146,7 +146,7 @@ Move the boilerplate to a dedicated body section under a named heading. The YAML
 
 ### Symptom
 
-```
+```yaml
 # Either missing entirely, or:
 model: sonnet
 ```
@@ -193,56 +193,9 @@ Three distinct caps apply to descriptions (see "Description length limits" below
 
 ## Audit process for an existing plugin
 
-Run these greps from the repo root, in order:
+Run the audit sweeps from the repo root, in priority order (P0 → P2). Every row of output is a triggering bug. Fix earlier items first — they have larger blast radius.
 
-```
-# 1. Find skills with no frontmatter (BROKEN)
-for f in plugins/*/skills/*/SKILL.md; do
-  head -1 "$f" | grep -q "^---" || echo "NO FRONTMATTER: $f"
-done
-
-# 2. Find agents still using deprecated agent: true
-grep -rn "^agent: true" plugins/*/agents/*.md
-
-# 3. Find agents missing example blocks
-for f in plugins/*/agents/*.md; do
-  grep -q "<example>" "$f" || echo "NO EXAMPLES: $f"
-done
-
-# 4. Find skills missing PROACTIVELY activate for:
-for f in plugins/*/skills/*/SKILL.md; do
-  head -20 "$f" | grep -q "PROACTIVELY activate for:" || echo "NO ENUMERATION: $f"
-done
-
-# 5. Find skills missing Provides:
-for f in plugins/*/skills/*/SKILL.md; do
-  head -20 "$f" | grep -q "Provides:" || echo "NO PROVIDES: $f"
-done
-
-# 6. Find agents missing model: inherit
-for f in plugins/*/agents/*.md; do
-  head -20 "$f" | grep -q "^model: inherit" || echo "NO MODEL INHERIT: $f"
-done
-
-# 7. Find Windows boilerplate inside YAML descriptions
-grep -rn "MANDATORY: Always Use Backslashes" plugins/*/agents/*.md plugins/*/skills/*/SKILL.md
-```
-
-Every row of output is a triggering bug. Fix in the order listed - earlier items have larger blast radius.
-
-## Validation: what good looks like
-
-After fixes, all seven greps above should produce zero output (or, for items 4 and 5, the count should trend dramatically toward zero as skills are rewritten).
-
-For a positive signal, confirm:
-
-```
-# Count agents with example blocks (should equal total agent count)
-grep -l "<example>" plugins/*/agents/*.md | wc -l
-
-# Count skills with PROACTIVELY enumeration
-grep -l "PROACTIVELY activate for:" plugins/*/skills/*/SKILL.md | wc -l
-```
+The full bash and PowerShell sweep scripts (7 audit probes plus the positive-signal validation greps) live in `references/audit-greps.md`. The quick one-liners are also reproduced under **One-line greps for the canonical checks** at the bottom of this file.
 
 ## Per-mistake fix priority
 
@@ -267,20 +220,68 @@ Use these tiers when reporting validation findings on a plugin:
 
 ## Description length limits (Claude Code, current as of 2026)
 
-Three distinct caps apply to skill and agent descriptions. Authors must respect all three.
+Three caps apply to every skill/agent description:
 
 | Cap | Value | What it means |
 |---|---|---|
-| **API spec hard ceiling** | 1024 chars per `description` field | Maximum allowed by the skill metadata spec. Authoring tools (e.g. the official `skill-creator` plugin's `quick_validate.py`) reject anything over this. Treat as a hard ceiling. |
-| **Listing-cap for matching** | 1536 chars per entry (combined `description` + `when_to_use`) | What Claude actually sees when matching a query against installed skills. Raised from 250 → 1536 in Claude Code v2.1.105. Beyond this, the rest of the description is invisible to the router. |
-| **Aggregate budget** | ~1% of model context window (~15-20k chars on Sonnet-class models) | Total budget across ALL installed skills' descriptions. When exceeded (v2.1.129+), descriptions of least-recently-used skills are dropped from the listing rather than truncating individual descriptions. |
+| **API spec hard ceiling** | 1024 chars | Hard ceiling per `description` field. Authoring tools reject anything over this. |
+| **Listing-cap for matching** | 1536 chars | Combined `description` + `when_to_use` Claude sees when routing. Raised from 250 in v2.1.105. |
+| **Aggregate budget** | ~1% of context window | Total across ALL installed skills. Over-budget (v2.1.129+) drops least-recently-used skills' descriptions rather than truncating. |
 
-**Authoring targets:**
+**Authoring targets:** target 400-1000 chars; hard ceiling 1024; front-load trigger keywords so the front survives any truncation; if you genuinely need 15+ triggers, split the skill rather than bloating the description.
 
-- **Target: ~400-1000 chars per description.** Below 400 is usually too thin to provide good routing signal; above 1000 risks the API spec ceiling and dilutes matching for sibling skills.
-- **Hard ceiling: 1024 chars.** Never exceed this. If you genuinely need more triggers, split the skill.
-- **Front-load trigger keywords.** If aggregate-budget truncation kicks in for any reason (older clients, very large skill collections), the front of your description is what survives.
-- **Dense plugins legitimately need more trigger surface.** A plugin covering many sub-workflows can sit in the 500-1000 range without harm. The old "soft 500" target was based on a since-superseded 250-char listing cap and is no longer the right ceiling.
+## Precondition: size check before adding content to an existing skill
+
+Before adding ANY new paragraph, table, or section to an existing SKILL.md, run a word-count check. The 3,000-word ceiling is a hard limit, not an aspiration — a SKILL.md that lands at 3,050 words is broken, not "close enough."
+
+On bash/macOS/Linux:
+
+```bash
+wc -w plugins/<plugin>/skills/<skill>/SKILL.md
+```
+
+On PowerShell (Windows):
+
+```powershell
+(Get-Content plugins/<plugin>/skills/<skill>/SKILL.md | Measure-Object -Word).Words
+```
+
+**Decision rule:**
+
+| Current word count | Action before adding content |
+|---|---|
+| < 2,500 words | Safe to add. Proceed. |
+| 2,500-2,799 words | Add cautiously. After the addition, re-count; if over 2,800, start planning the extraction. |
+| 2,800-3,000 words (within 200 of the ceiling) | **Extraction to `references/` is mandatory BEFORE adding.** Identify the largest reference-style section (detailed table, exhaustive checklist, full sweep script) and move it to `references/<topic>.md`, leaving a one-line pointer in SKILL.md. Then add the new content. |
+| > 3,000 words | The skill is already broken. Do not add anything — extract until SKILL.md is back under 2,000 words. |
+
+This precondition prevents the common failure mode where each individual addition looks small but the skill silently crosses the ceiling.
+
+## Mandatory DRY-gate before any content add
+
+Cross-cutting paragraphs, tables, and checklists that get pasted into multiple files are the #1 source of plugin bloat. Before adding any block longer than ~3 lines to a SKILL.md or reference file, run this grep from the plugin root:
+
+```bash
+# Replace FIRST_DISTINCTIVE_LINE with the first distinctive line of the candidate block.
+grep -rn "FIRST_DISTINCTIVE_LINE" skills/ agents/ commands/ README.md
+```
+
+On PowerShell (Windows):
+
+```powershell
+Get-ChildItem -Recurse -Path skills,agents,commands,README.md -Include *.md -ErrorAction SilentlyContinue `
+  | Select-String -Pattern 'FIRST_DISTINCTIVE_LINE'
+```
+
+**Decision rule** (from `skill-development` skill, "≥ 2 verbatim copies = extract" gate):
+
+| grep finds the block in | Action |
+|---|---|
+| 0 other files | Safe to add. Proceed. |
+| 1 other file (this will be the 2nd copy) | **STOP.** Extract to `skills/_shared/<topic>.md` (cross-skill) or `skills/<this-skill>/references/<topic>.md` (single-skill). Replace both call sites with a one-line pointer. |
+| 2+ other files | Treat as a P1 bug. Extract immediately, then audit for further occurrences. |
+
+This gate is mandatory, not advisory. Skipping it is the mechanism that lets identical canonical text drift into two or three files.
 
 ## Canonical pre-publish checklist
 
@@ -303,13 +304,38 @@ Before publishing any plugin, every item below must be true:
 - [ ] Every skill `description:` contains `Provides:` capability list
 - [ ] Every skill `description:` is under 1024 characters (target 400-1000)
 - [ ] No Windows / docs / cross-cutting boilerplate inside any YAML `description:` field
+- [ ] No verbatim duplicate blocks across skills — the mandatory DRY-gate grep (see "Mandatory DRY-gate before any content add" above) has been run for every newly added block and any 2nd-copy hit was extracted to `skills/_shared/` or `references/` before commit
+- [ ] No smart-punctuation inside fenced code blocks — see "Code-sample sanity pass" section below
+- [ ] Every fenced code block has a language tag — see "Code-sample sanity pass" section below
+- [ ] Every executable snippet is dual-form (POSIX + PowerShell) or explicitly platform-tagged — see "Code-sample sanity pass" section below
+- [ ] Every SKILL.md is under the 3,000-word ceiling, and any skill within 200 words of the ceiling has had its largest reference-style sections extracted to `references/` (see "Precondition: size check before adding content to an existing skill" above)
+- [ ] If the plugin ships any vendored, derived, or licensed third-party content, `NOTICES.md` exists at the plugin root, has no duplicate H2 sections for the same upstream, preserves required license text, and is cross-referenced from `README.md` and `plugin.json` where applicable (see `plugin-master` skill, `references/publishing-guide.md` publishing checklist)
 - [ ] If a `marketplace.json` exists at repo root, the plugin is registered there with matching `description` and `keywords`
+
+## Code-sample sanity pass
+
+Two defects routinely slip into fenced code blocks and silently break readers:
+
+1. **Smart punctuation** (curly quotes, em/en dashes, Unicode ellipsis) inside fenced code blocks breaks copy-paste — grep stops matching, JSON fails to parse, shell quoting falls apart. Authors typing in editors with autocorrect on, or pasting from word processors, introduce these without noticing.
+2. **Missing language tags** on fenced code blocks (opening with bare ```` ``` ```` instead of ```` ```bash ```` / ```` ```powershell ```` / ```` ```yaml ````) disable syntax highlighting and, worse, hide the platform assumption. A bash-only snippet that renders as plain text looks identical to a PowerShell snippet — a Windows reader will copy it and watch it fail with no signal as to why.
+
+**Code-sample sanity checklist — run before every ship.** Each unchecked item is a finding to fix manually.
+
+- [ ] No smart-punctuation codepoints (U+2026, U+201C/D, U+2018/9, U+2013/4) inside any fenced code block. Replace with the ASCII equivalent: `...`, `"`, `'`, `-`.
+- [ ] Every fenced code block opens with a language tag (e.g. ```` ```bash ````, ```` ```powershell ````, ```` ```yaml ````, ```` ```json ````, ```` ```python ````, ```` ```markdown ````). Bare ```` ``` ```` openings are a defect.
+- [ ] Every executable snippet is either **dual-form** (shows both POSIX and PowerShell variants) or **explicitly platform-tagged** with a one-line prose marker such as `On bash/macOS/Linux:` or `On PowerShell (Windows):` immediately before the fence, and the fence language tag matches.
+
+This repo's primary shell is PowerShell on Windows, so a bash-only snippet without a platform tag is a defect.
+
+**Sweeps and full character tables:** see `references/code-sample-sanity.md` for the bash and PowerShell sweep scripts (smart-punctuation probe and fence-language-tag probe), the canonical smart-quote → ASCII fix table, and the list of recognised language tags.
 
 ## One-line greps for the canonical checks
 
 Run these from a plugin directory. Any output is a finding.
 
-```
+On bash/macOS/Linux:
+
+```bash
 grep -L "^---" skills/*/SKILL.md                                            # zero-frontmatter skills (P0)
 grep -l "^agent: true" agents/*.md                                          # deprecated agents (P0)
 grep -L "<example>" agents/*.md                                             # agents with no example blocks (P1)
@@ -318,3 +344,5 @@ grep -L "Provides:" skills/*/SKILL.md                                       # sk
 grep -L "^model: inherit" agents/*.md                                       # agents not inheriting model (P2)
 grep -l "MANDATORY: Always Use Backslashes" agents/*.md skills/*/SKILL.md   # Windows boilerplate in YAML (P0)
 ```
+
+On PowerShell (Windows), `references/audit-greps.md` carries the equivalent sweeps (probes 1-7) plus the positive-signal validation queries.

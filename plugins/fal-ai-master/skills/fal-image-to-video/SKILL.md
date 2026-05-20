@@ -370,7 +370,7 @@ const result = await fal.subscribe("fal-ai/cogvideox-5b/image-to-video", {
 
 ### Motion Description Structure
 
-```
+```text
 [Subject action] + [Motion quality] + [Camera movement] + [Atmosphere]
 ```
 

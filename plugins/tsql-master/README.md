@@ -110,7 +110,7 @@ Just ask about T-SQL optimization:
 
 ## Plugin Structure
 
-```
+```text
 tsql-master/
 ├── .claude-plugin/
 │   └── plugin.json

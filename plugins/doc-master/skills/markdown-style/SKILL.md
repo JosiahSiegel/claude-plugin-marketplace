@@ -23,7 +23,7 @@ Run in two passes. Do not interleave them — the architect reads a syntax viola
 
 Walk the file top to bottom. For each construct that violates the syntax canon (setext heading where ATX is expected, unfenced code block, missing blank line around a block element, ordered list using `)` instead of `.`, etc.), emit one finding at a time:
 
-```
+```text
 Line N:
   Original: <verbatim line(s)>
   Layer:    syntax

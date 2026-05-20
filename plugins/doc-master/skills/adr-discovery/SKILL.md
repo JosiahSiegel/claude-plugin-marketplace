@@ -136,7 +136,7 @@ If the architect wants a diagram before drafting, hand off to `c4-model` (canoni
 
 When all five MUSTs are confirmed, write a one-line summary at the bottom of `discovery-brief.md`:
 
-```
+```text
 Discovery complete: 2026-05-20. Hand off to adr-drafting.
 ```
 

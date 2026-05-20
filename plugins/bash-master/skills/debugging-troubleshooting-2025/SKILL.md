@@ -83,7 +83,7 @@ set +x
 ```
 
 **Output:**
-```
+```text
 +(script.sh:10): my_function(): local var=value
 +(script.sh:11): my_function(): echo value
 value

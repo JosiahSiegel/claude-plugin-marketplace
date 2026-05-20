@@ -10,7 +10,7 @@ A finding in this file is a **must-fix** — the construct is either invalid or 
 
 ATX style uses 1–6 `#` characters at the start of a line.
 
-```
+```markdown
 # H1
 ## H2
 ### H3
@@ -31,7 +31,7 @@ Put a blank line before and after every heading. Some processors recover from mi
 
 Setext style underlines text:
 
-```
+```markdown
 Heading level 1
 ===============
 
@@ -89,7 +89,7 @@ For emphasis in the middle of a word (e.g., `Love**is**bold`), use asterisks onl
 
 Prefix the line with `>`:
 
-```
+```markdown
 > A blockquote.
 ```
 
@@ -97,7 +97,7 @@ Prefix the line with `>`:
 
 For multi-paragraph quotes, put `>` on the blank line between paragraphs:
 
-```
+```markdown
 > First paragraph.
 >
 > Second paragraph.
@@ -107,7 +107,7 @@ For multi-paragraph quotes, put `>` on the blank line between paragraphs:
 
 Nest with `>>`:
 
-```
+```markdown
 > Outer.
 >
 >> Inner.
@@ -123,7 +123,7 @@ Blockquotes can contain headings, lists, and emphasis. Put blank lines before an
 
 Ordered list items use a number followed by a period:
 
-```
+```markdown
 1. First
 2. Second
 3. Third
@@ -143,7 +143,7 @@ Use `-`, `*`, or `+`. Pick one per list. Mixing markers within a single list is 
 
 To attach a paragraph, blockquote, image, or nested list to an item, indent the continuation 4 spaces (one tab):
 
-```
+```markdown
 - Item
   - This nested item is two spaces; some processors accept it but it is not portable.
 - Item
@@ -176,7 +176,7 @@ A code block can be indicated by indenting every line at least 4 spaces (one tab
 
 Fenced blocks use three backticks (or three tildes) on their own line, optionally followed by a language tag:
 
-````
+````markdown
 ```python
 def foo():
     pass
@@ -191,7 +191,7 @@ Fenced blocks are an extended-syntax feature — supported by every modern proce
 
 Three or more `---`, `***`, or `___` alone on a line:
 
-```
+```markdown
 ---
 ```
 
@@ -219,7 +219,7 @@ Links can be emphasized: `**[EFF](https://eff.org)**`. They can wrap inline code
 
 Define the link target elsewhere in the document:
 
-```
+```markdown
 This is a [hobbit-hole][1].
 
 [1]: https://en.wikipedia.org/wiki/Hobbit "Hobbit hole"
@@ -241,7 +241,7 @@ URLs with spaces or parentheses break inline link syntax. URL-encode: space -> `
 
 Wrap the image markdown in a link to make the image itself clickable:
 
-```
+```markdown
 [![alt](image.jpg "title")](https://example.com)
 ```
 
@@ -251,7 +251,7 @@ Wrap the image markdown in a link to make the image itself clickable:
 
 Prefix the following with `\` to render them literally rather than as Markdown:
 
-```
+```text
 \  `  *  _  {  }  [  ]  <  >  (  )  #  +  -  .  !  |
 ```
 

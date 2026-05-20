@@ -46,7 +46,7 @@ class BatchedModel:
 4. Your function returns a list of outputs
 5. Modal distributes outputs back to individual callers
 
-```
+```text
 Client 1: predict("a") ──┐
 Client 2: predict("b") ──┼──► batched predict(["a","b","c"]) ──► ["result_a","result_b","result_c"]
 Client 3: predict("c") ──┘                                            │

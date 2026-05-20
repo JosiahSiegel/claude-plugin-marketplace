@@ -32,7 +32,7 @@ Use for **Next.js + Modal integration**:
 
 ## Architecture Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    Next.js (Vercel)                         │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
@@ -1025,7 +1025,7 @@ try {
    ```
 
 2. **Set environment variables in Vercel**
-   ```
+   ```text
    MODAL_API_URL=https://your-workspace--app-api.modal.run
    MODAL_API_KEY=your-secret-key
    WEBHOOK_SECRET=your-webhook-secret

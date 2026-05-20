@@ -51,7 +51,7 @@ Hyperforce is Salesforce's next-generation infrastructure architecture built on 
 **Traditional**: Patch and update existing servers
 **Hyperforce**: Destroy and recreate servers with each deployment
 
-```
+```yaml
 Old Architecture:
 Server → Patch → Patch → Patch → Configuration Drift
 
@@ -70,7 +70,7 @@ Result: Every deployment is identical, reproducible
 ### 2. Multi-Availability Zone Design
 
 **Architecture**:
-```
+```text
 Region: US-East (Virginia)
 ├─ Availability Zone A (Data Center 1)
 │  ├─ App Servers (Kubernetes pods)
@@ -101,7 +101,7 @@ RPO (Recovery Point Objective): <30 seconds
 **Traditional**: Perimeter security (firewall protects everything inside)
 **Hyperforce**: No implicit trust - verify everything, always
 
-```
+```text
 Zero Trust Model:
 ├─ Identity Verification (MFA required for all users by 2025)
 ├─ Device Trust (managed devices only)
@@ -190,7 +190,7 @@ spec:
 
 ### AWS Hyperforce Architecture
 
-```
+```text
 ┌────────────────────────────────────────────────────────┐
 │                  AWS Region (us-east-1)                │
 ├────────────────────────────────────────────────────────┤
@@ -228,7 +228,7 @@ spec:
 
 ### Azure Hyperforce Architecture
 
-```
+```text
 Azure Region (East US)
 ├─ Virtual Network (VNet)
 │  ├─ AKS (Azure Kubernetes Service)
@@ -244,7 +244,7 @@ Azure Region (East US)
 
 ### Google Cloud Hyperforce Architecture
 
-```
+```text
 GCP Region (us-central1)
 ├─ VPC Network
 │  ├─ GKE (Google Kubernetes Engine)
@@ -262,7 +262,7 @@ GCP Region (us-central1)
 ### Geographic Regions (2025)
 
 **Available Hyperforce Regions**:
-```
+```text
 Americas:
 ├─ US East (Virginia) - AWS, Azure
 ├─ US West (Oregon) - AWS
@@ -336,13 +336,13 @@ insert cv;
 ### Latency Reduction
 
 **Old Architecture** (data center-based):
-```
+```text
 User (Germany) → Transatlantic cable → US Data Center → Response
 Latency: 150-200ms
 ```
 
 **Hyperforce**:
-```
+```yaml
 User (Germany) → Frankfurt Hyperforce Region → Response
 Latency: 10-30ms
 
@@ -354,7 +354,7 @@ Result: 5-10x faster for regional users
 **Traditional**: Fixed capacity, must provision for peak load
 **Hyperforce**: Dynamic scaling based on demand
 
-```
+```text
 Business Hours (9 AM - 5 PM):
 ├─ High user load
 ├─ Kubernetes scales up pods: 50 → 150
@@ -388,7 +388,7 @@ Black Friday (peak event):
 
 **Salesforce handles migration** (no customer action required):
 
-```
+```text
 Phase 1: Assessment (Salesforce internal)
 ├─ Analyze org size, customizations
 ├─ Identify any incompatible features
@@ -438,7 +438,7 @@ public class MyController {
 ### Testing Pre-Migration
 
 **Use Sandbox Migration**:
-```
+```text
 1. Salesforce migrates your sandbox first
 2. Test all critical functionality:
    ├─ Custom Apex classes
@@ -474,7 +474,7 @@ System.debug('Is Hyperforce: ' + org.IsHyperforce__c); // true
 ### Private Connectivity
 
 **AWS PrivateLink / Azure Private Link**:
-```
+```yaml
 Traditional: Salesforce API → Public Internet → Your API
 Security: TLS encryption, but still public internet
 
@@ -509,7 +509,7 @@ HttpResponse res = http.send(req);
 ### Monitoring
 
 **CloudWatch / Azure Monitor Integration**:
-```
+```text
 Salesforce publishes metrics to your cloud account:
 ├─ API request volume
 ├─ API response times

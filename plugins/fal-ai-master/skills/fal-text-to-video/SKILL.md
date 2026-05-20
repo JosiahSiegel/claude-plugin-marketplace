@@ -408,7 +408,7 @@ const result = await fal.subscribe("fal-ai/hunyuan-video", {
 
 ### Structure Your Prompts
 
-```
+```text
 [Subject] + [Action] + [Setting] + [Style] + [Camera/Technical]
 ```
 

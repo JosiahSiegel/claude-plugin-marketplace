@@ -27,7 +27,7 @@ Context Master activates automatically for:
 
 For ANY multi-file project, follow these 5 steps:
 
-```
+```text
 1. STOP - Don't create files yet
 2. PLAN - Use /plan-project command
 3. ANNOUNCE - Tell user your file creation order

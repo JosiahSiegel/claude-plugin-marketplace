@@ -70,7 +70,7 @@ Complete guide to working with subtitles, closed captions, and text overlays usi
 
 ### Format Characteristics
 
-```
+```bash
 SRT (SubRip):
 - Simple text-based format
 - Supports basic HTML tags (<b>, <i>, <u>)
@@ -150,7 +150,7 @@ ffmpeg -i video.mp4 \
 
 ### Color Format (ASS)
 
-```
+```text
 ASS uses &HAABBGGRR format (Alpha, Blue, Green, Red):
 - White: &HFFFFFF or &H00FFFFFF
 - Black: &H000000 or &H00000000
@@ -526,7 +526,7 @@ ffmpeg -i video.mp4 -i captions.scc \
 
 ### ASS Alignment Values
 
-```
+```text
 7 (top-left)     8 (top-center)     9 (top-right)
 4 (mid-left)     5 (mid-center)     6 (mid-right)
 1 (bottom-left)  2 (bottom-center)  3 (bottom-right)

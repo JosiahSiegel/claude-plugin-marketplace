@@ -36,7 +36,7 @@ Set up a new Modal project with the following:
 
 ## Project Structure Template
 
-```
+```text
 project/
 ├── modal_app.py          # Main Modal application
 ├── requirements.txt      # Python dependencies

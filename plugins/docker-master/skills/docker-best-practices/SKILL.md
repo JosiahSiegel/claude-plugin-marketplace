@@ -136,7 +136,7 @@ RUN apt-get update && \
 
 Always create `.dockerignore` to exclude unnecessary files:
 
-```
+```bash
 # Version control
 .git
 .gitignore

@@ -1,6 +1,6 @@
 {
   "name": "salesforce-master",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "Complete Salesforce expertise across all integration scenarios. PROACTIVELY activate for: (1) any Salesforce task (API/data/Apex/Lightning/Flow), (2) SOQL/SOSL design and optimization, (3) REST/SOAP/Bulk API and auth (OAuth/JWT), (4) Apex with Spring '25 features, (5) Lightning Web Components and Aura, (6) data model design, (7) integration patterns, (8) deployment (SFDX/CLI/change sets), (9) security model, (10) Flow Orchestrator, (11) Agentforce 2.0, (12) Data Cloud Vector Database, (13) Hyperforce. Provides: full schema knowledge, API 63/64 reference, governor limits, ETL/real-time/batch patterns.",
   "author": {
     "name": "Josiah Siegel",

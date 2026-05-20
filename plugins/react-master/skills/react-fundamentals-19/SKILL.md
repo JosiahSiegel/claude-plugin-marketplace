@@ -590,7 +590,7 @@ function Modal({ children, isOpen }: { children: ReactNode; isOpen: boolean }) {
 
 ### 1. Component Organization
 
-```
+```text
 src/
   components/
     ui/              # Reusable UI components

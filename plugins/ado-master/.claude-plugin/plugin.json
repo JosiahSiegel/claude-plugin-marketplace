@@ -1,6 +1,6 @@
 {
   "name": "ado-master",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "description": "Complete Azure DevOps and Azure Pipelines expertise with Sprint 254-262 features (2025). PROACTIVELY activate for: (1) any Azure DevOps/Pipelines task, (2) YAML pipeline authoring, (3) workload identity federation (OIDC), (4) performance analytics, (5) debugging, (6) CI/CD optimization, (7) security and compliance, (8) Azure DevOps CLI, (9) template management, (10) Microsoft Security DevOps. Provides: workload-identity setup, multi-stage patterns, caching/parallelization, Key Vault integration, code scanning.",
   "author": {
     "name": "Josiah Siegel",

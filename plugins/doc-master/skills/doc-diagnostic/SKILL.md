@@ -56,7 +56,7 @@ Pick once per project, then "stick to what you have decided for." Don't mix temp
 
 ### Canonical status lifecycle
 
-```
+```text
   Proposed  ----accepted---->  Accepted  ----changed---->  Superseded by NNNN
      |                            |
      +--rejected-->  Rejected     +--no-longer-applies-->  Deprecated
@@ -111,7 +111,9 @@ The eleven canonical ADR failure modes — drift, ADR-PRD duplication, bundled d
 
 ## Folder-level audit procedure (used by `/doc-audit`)
 
-When the user asks you to review or clean up an existing doc set, follow the seven-step procedure documented in `references/audit-procedure.md`: Inventory → ADR-canon test → four-question test → drift detection → duplication detection → misclassification detection → numbered KEEP / MERGE / REWRITE / DELETE / MOVE action list.
+When the user asks you to review or clean up an existing doc set, follow the eight-step procedure documented in `references/audit-procedure.md`: Inventory → ADR-canon test → four-question test → drift detection → duplication detection → misclassification detection → backfill-candidate detection (ASR test against shipped-change evidence) → numbered KEEP / MERGE / REWRITE / DELETE / MOVE / **BACKFILL-ADR** action list.
+
+`BACKFILL-ADR` is a candidate, not a draft. The audit only surfaces it; the architect chooses whether to load `adr-backfill` to record it. Evidence must appear in two independent locations before a row is emitted, and `reconstruction-confidence: low` routes to `open-questions.md` rather than the action list.
 
 The procedure file also specifies the hard constraints (no body edits on Accepted ADRs, no bulk renumbering, no auto-generated Owners, no deletion without human sign-off) and the post-approval execution flow. Load it whenever `/doc-audit` runs, or when the user asks to audit, clean up, or review a doc folder.
 

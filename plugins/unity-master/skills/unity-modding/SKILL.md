@@ -153,7 +153,7 @@ end)
 
 ### Architecture
 
-```
+```text
 Game
 ├── ModManager (singleton)
 │   ├── DiscoverMods(modsFolder)     // Scan for mod manifests

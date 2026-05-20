@@ -46,7 +46,7 @@ Active voice. Present tense. Names the choice directly.
 
 Prose paragraphs are a smell. Use `Good, because…` and `Bad, because…` markers. Include follow-up work this decision triggers.
 
-```
+```text
 - Good, because join workloads land on the engine designed for them.
 - Good, because the team's existing SQL experience applies.
 - Bad, because we lose DynamoDB's auto-scaling read pattern; manual capacity planning required.
@@ -73,7 +73,7 @@ Realistic options only. **At the same level of abstraction** — don't compare "
 
 ## Status transitions
 
-```
+```text
   proposed  ----accept----> accepted ----change----> superseded by NNNN
      |                          |
      +--reject--> rejected      +--no longer applies--> deprecated

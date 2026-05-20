@@ -4,7 +4,7 @@ The simplest working Claude Code plugin.
 
 ## Structure
 
-```
+```text
 my-plugin/
 ├── .claude-plugin/
 │   └── plugin.json
@@ -75,7 +75,7 @@ cp -r my-plugin ~/.claude/plugins/local/
 ### From Marketplace
 
 If published to a marketplace:
-```
+```text
 /plugin marketplace add username/marketplace
 /plugin install my-plugin@username
 ```

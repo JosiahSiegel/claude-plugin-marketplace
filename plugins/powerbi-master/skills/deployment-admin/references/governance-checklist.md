@@ -77,7 +77,7 @@ Search-UnifiedAuditLog -StartDate (Get-Date).AddDays(-7) `
 ```
 
 **Power BI Admin API:**
-```
+```text
 GET https://api.powerbi.com/v1.0/myorg/admin/activityevents
     ?startDateTime='2026-01-01T00:00:00Z'
     &endDateTime='2026-01-02T00:00:00Z'

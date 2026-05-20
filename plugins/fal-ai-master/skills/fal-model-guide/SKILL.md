@@ -291,7 +291,7 @@ console.log(result.model_mesh.url);  // GLB/OBJ file
 
 ## Model Selection Decision Tree
 
-```
+```text
 What do you want to create?
 ├── Image
 │   ├── From text only?

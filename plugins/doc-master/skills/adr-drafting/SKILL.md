@@ -105,7 +105,7 @@ Section by section. Confirm each before moving to the next. Hard limits enforced
 
 **The architect does not see the Phase 5 output yet.** Self-critique against `../_shared/adr-is-not.md` first, flagging violations one at a time using this template:
 
-```
+```yaml
 Original: <verbatim line>
 Violates: <which rule from adr-is-not.md>
 Rewrite:  <shorter, stricter replacement>

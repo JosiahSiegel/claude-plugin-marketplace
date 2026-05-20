@@ -58,7 +58,7 @@ Perform comprehensive analysis of bash scripts covering security vulnerabilities
 
 For each script analyzed, provide:
 
-```
+```text
 ## Script: <filename>
 
 ### Security Issues
@@ -130,22 +130,22 @@ When analyzing scripts, systematically check:
 ## Usage Examples
 
 **Analyze single script:**
-```
+```text
 /bash-analyze backup.sh
 ```
 
 **Analyze directory:**
-```
+```text
 /bash-analyze scripts/
 ```
 
 **Focus on security:**
-```
+```text
 /bash-analyze deploy.sh focus on security vulnerabilities
 ```
 
 **Check portability:**
-```
+```text
 /bash-analyze build.sh check POSIX compliance
 ```
 

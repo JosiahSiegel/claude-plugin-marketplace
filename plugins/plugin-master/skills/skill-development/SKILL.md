@@ -20,7 +20,7 @@ Skills use **progressive disclosure** - a three-level loading system that manage
 
 ## Skill Structure
 
-```
+```text
 skill-name/
 ├── SKILL.md              # Required: Core instructions
 ├── references/           # Optional: Detailed documentation
@@ -80,7 +80,7 @@ description: Expert guide to Terraform AzureRM provider for Azure infrastructure
 
 ```yaml
 # BROKEN: no frontmatter at all
-# (file starts with `# Skill Title` — will not appear in discovery)
+# (file starts with `# Skill Title` - will not appear in discovery)
 
 # BROKEN: wrong shape, no enumeration
 description: Use this skill when working with Terraform.
@@ -109,7 +109,7 @@ description: |
 Write the entire skill body using **imperative/infinitive form** (verb-first instructions):
 
 **Correct (imperative):**
-```
+```text
 To create a hook, define the event type.
 Configure the MCP server with authentication.
 Validate settings before use.
@@ -117,7 +117,7 @@ Start by reading the configuration file.
 ```
 
 **Incorrect (second person):**
-```
+```bash
 You should create a hook by defining the event type.
 You need to configure the MCP server.
 You can use the grep tool to search.
@@ -167,6 +167,27 @@ You can use the grep tool to search.
 **Within a single SKILL.md**, never repeat the same table, list, or block of content. Before adding any table or reference block, search the file for similar content already present.
 
 **Across SKILL.md and references/**, information lives in one place only. If a detailed table is in `references/patterns.md`, SKILL.md should contain only a brief summary and a pointer to the reference file — not a copy of the table.
+
+### The "≥ 2 verbatim copies = extract" gate (MANDATORY)
+
+When authoring or revising any skill, before pasting a paragraph, table, checklist, or fenced code block into a SKILL.md or reference file, run this check:
+
+```bash
+# From the plugin root - adjust path to the candidate paragraph's first distinctive line:
+grep -rn "FIRST_DISTINCTIVE_LINE_OF_THE_BLOCK" skills/ agents/ commands/ README.md
+```
+
+**Decision rule** (apply without exception):
+
+| grep finds the block in | Action |
+|---|---|
+| 0 other files | Safe to add. Proceed. |
+| 1 other file (this will be the 2nd copy) | **STOP.** Extract to `skills/_shared/<topic>.md` (cross-skill content) or `skills/<this-skill>/references/<topic>.md` (single-skill detail). Replace both call sites with a one-line pointer. |
+| 2+ other files | Treat as a P1 bug. Extract immediately, then audit for further occurrences. |
+
+This rule applies to canonical procedure paragraphs, checklists, audit tables, and any block that reads "this is the one true definition of X." It does NOT apply to short one-line definitions, frontmatter examples, or generic phrases like "Use this skill when..." — those are too small to extract usefully.
+
+**Why "treat slices independently" is the bug it sounds like:** when revising one file at a time without grepping the rest of the plugin tree, identical canonical text ends up landing in two files. The fix is mechanical: every time you are about to commit a block longer than ~3 lines, grep first.
 
 ## Resource Types
 

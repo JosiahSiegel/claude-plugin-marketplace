@@ -440,7 +440,7 @@ COPY --from=dependencies /app/node_modules ./node_modules
 
 **Mitigation:**
 Create comprehensive `.dockerignore`:
-```
+```bash
 # Secrets
 .env
 .env.local

@@ -6,7 +6,7 @@ Targets LikeC4 v1.47+.
 
 ## File layout
 
-```
+```text
 likec4/
   model.c4         # specification + model
   <system>.c4      # system-scoped extension (optional split)

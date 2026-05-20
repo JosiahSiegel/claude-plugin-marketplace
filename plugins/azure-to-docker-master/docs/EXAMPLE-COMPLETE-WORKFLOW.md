@@ -680,7 +680,7 @@ az storage blob list \
 
 ## Final Project Structure
 
-```
+```text
 ~/ecommerce-local-dev/
 ├── docker-compose.yml              # Main compose file
 ├── .gitignore                      # Sensitive files excluded

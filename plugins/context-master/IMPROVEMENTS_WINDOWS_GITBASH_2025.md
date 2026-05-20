@@ -210,7 +210,7 @@ Documentation Quality:
 
 ## Files Modified
 
-```
+```text
 plugins/context-master/
 - .claude-plugin/plugin.json (version + keywords)
 - README.md (platform support sections)

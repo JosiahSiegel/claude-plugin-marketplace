@@ -1,6 +1,6 @@
 {
   "name": "terraform-master",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Complete Terraform expertise for Azure, AWS, and Google Cloud. PROACTIVELY activate for: (1) any Terraform task (init/plan/apply/validate), (2) IaC design, (3) resource import and state management, (4) multi-environment architectures, (5) CI/CD integration, (6) security scanning, (7) version-aware code generation, (8) CLI mastery. Provides: provider knowledge (AzureRM/AWS/GCP), state operations, bulk import (Terraformer/aztfexport), tfsec/Checkov, enterprise patterns, full CLI reference.",
   "author": {
     "name": "Josiah Siegel",

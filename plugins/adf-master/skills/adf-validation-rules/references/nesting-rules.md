@@ -29,7 +29,7 @@ This matrix shows which activities can be nested inside container activities.
 ## Prohibited Nesting Combinations
 
 ### NEVER Allowed Inside ForEach
-```
+```text
 ForEach → ForEach      ❌ PROHIBITED
 ForEach → IfCondition  ❌ PROHIBITED
 ForEach → Switch       ❌ PROHIBITED
@@ -38,7 +38,7 @@ ForEach → Validation   ❌ PROHIBITED
 ```
 
 ### NEVER Allowed Inside IfCondition
-```
+```text
 IfCondition → ForEach      ❌ PROHIBITED
 IfCondition → IfCondition  ❌ PROHIBITED
 IfCondition → Switch       ❌ PROHIBITED
@@ -47,7 +47,7 @@ IfCondition → Validation   ❌ PROHIBITED
 ```
 
 ### NEVER Allowed Inside Switch
-```
+```text
 Switch → ForEach      ❌ PROHIBITED
 Switch → IfCondition  ❌ PROHIBITED
 Switch → Switch       ❌ PROHIBITED
@@ -56,7 +56,7 @@ Switch → Validation   ❌ PROHIBITED
 ```
 
 ### NEVER Allowed Inside Until
-```
+```text
 Until → ForEach      ❌ PROHIBITED
 Until → IfCondition  ❌ PROHIBITED
 Until → Switch       ❌ PROHIBITED
@@ -270,7 +270,7 @@ While not explicitly limited, deep nesting via Execute Pipeline has practical li
 
 ## Quick Reference Card
 
-```
+```text
 ALLOWED:
 ├── ForEach
 │   ├── Copy           ✓

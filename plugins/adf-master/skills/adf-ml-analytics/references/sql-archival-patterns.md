@@ -382,7 +382,7 @@ For larger-scale ML workloads, use Azure Data Lake Storage Gen2 instead of Blob 
 ```
 
 **ADLS Gen2 path format for Databricks:**
-```
+```text
 abfss://ml@mldatalake.dfs.core.windows.net/training-data/model-name/version=1/
 ```
 
@@ -398,7 +398,7 @@ abfss://ml@mldatalake.dfs.core.windows.net/training-data/model-name/version=1/
 ### Storage Account Organization for ML Analysis
 
 **Recommended folder structure for archived data and ML artifacts:**
-```
+```text
 storage-account/
   archive/                          # Archived SQL data
     <database-name>/

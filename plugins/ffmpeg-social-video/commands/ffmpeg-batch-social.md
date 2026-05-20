@@ -581,7 +581,7 @@ done
 
 After running batch export, you'll have:
 
-```
+```text
 social_exports/
 ├── video_tiktok.mp4        # TikTok optimized (60s max)
 ├── video_tiktok_thumb.jpg  # TikTok thumbnail

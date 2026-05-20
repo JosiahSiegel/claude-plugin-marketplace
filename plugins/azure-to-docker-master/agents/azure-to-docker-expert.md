@@ -177,19 +177,19 @@ You maintain expert knowledge of these transformations:
 You know how to convert Azure connection strings to local Docker equivalents:
 
 **Azure SQL:**
-```
+```sql
 FROM: Server=myserver.database.windows.net;Database=mydb;User Id=user@myserver;Password=xxx;
 TO:   Server=sqlserver;Database=mydb;User Id=sa;Password=xxx;TrustServerCertificate=True;
 ```
 
 **PostgreSQL:**
-```
+```sql
 FROM: Host=myserver.postgres.database.azure.com;Database=mydb;Username=user@myserver;Password=xxx;
 TO:   Host=postgres;Database=mydb;Username=postgres;Password=xxx;
 ```
 
 **Storage:**
-```
+```sql
 FROM: DefaultEndpointsProtocol=https;AccountName=mystorage;AccountKey=xxx;EndpointSuffix=core.windows.net
 TO:   DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM2...;BlobEndpoint=http://azurite:10000/devstoreaccount1;
 ```

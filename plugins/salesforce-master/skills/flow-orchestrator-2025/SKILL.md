@@ -63,7 +63,7 @@ Flow Orchestrator enables you to orchestrate multi-user, multi-step, and multi-s
 
 ## Orchestration Architecture
 
-```
+```text
 Orchestration = Stages → Steps → Background Automations
 
 Stage 1: "HR Review"
@@ -93,7 +93,7 @@ Stage 3: "Manager Onboarding"
 
 ### Step 1: Create Orchestration
 
-```
+```yaml
 Setup → Flows → New Flow → Orchestration
 Name: Employee_Onboarding
 Object: Employee__c (custom object)
@@ -103,7 +103,7 @@ Trigger: Record Created, Status = 'Pending Onboarding'
 ### Step 2: Design Stages
 
 **Stage 1: HR Document Review**
-```
+```text
 Stage Name: HR_Document_Review
 Stage Description: HR verifies employee documentation
 Run Mode: One at a Time (sequential)
@@ -121,7 +121,7 @@ Step 1.2 (Background - Decision):
 ```
 
 **Stage 2: IT Provisioning**
-```
+```text
 Stage Name: IT_Provisioning
 Condition: Runs only if Stage 1 approved
 
@@ -145,7 +145,7 @@ Step 2.3 (Background):
 ```
 
 **Stage 3: Manager Setup**
-```
+```text
 Stage Name: Manager_Setup
 Depends On: Stage 2 complete
 
@@ -163,7 +163,7 @@ Step 3.2 (Background):
 ### Step 3: Implement Fault Paths (Summer '25)
 
 **Fault Path on IT Provisioning Failure**:
-```
+```text
 If Step 2.2 (Create_AD_Account) fails:
 ├─ Retry Step (1 attempt after 10 minutes)
 ├─ If still fails:
@@ -174,7 +174,7 @@ If Step 2.2 (Create_AD_Account) fails:
 ```
 
 **Configuration**:
-```
+```text
 Step 2.2: Create_AD_Account
 ├─ Fault Path Enabled: true
 ├─ Retry Attempts: 1
@@ -195,7 +195,7 @@ Step 2.2: Create_AD_Account
 
 **Use for**: Actions requiring human judgment or input
 
-```
+```text
 Interactive Step Configuration:
 ├─ Screen Flow: Define UI for user input
 ├─ Assigned To: User, Queue, or Role
@@ -206,7 +206,7 @@ Interactive Step Configuration:
 ```
 
 **Example Screen Flow** (HR Review):
-```
+```text
 Screen: Review Documents
 ├─ Display: Employee Name, Position, Documents Uploaded
 ├─ Input: Radio Button (Approve / Reject)
@@ -222,7 +222,7 @@ Output Variables:
 
 **Use for**: Automated actions without user interaction
 
-```
+```text
 Background Step Types:
 ├─ Autolaunched Flow: Call another flow
 ├─ Apex Action: Invoke Apex method
@@ -240,7 +240,7 @@ Background Step Types:
 
 **Use Case**: Skip stages based on criteria
 
-```
+```yaml
 Stage 2: Manager Approval
 Condition: Order_Total__c > 10000
 
@@ -256,7 +256,7 @@ Result:
 
 **Use Case**: Multiple teams work simultaneously
 
-```
+```text
 Stage 3: Parallel Provisioning
 Run Mode: All at Once (parallel)
 
@@ -271,7 +271,7 @@ Stage completes when: All steps complete
 
 **Use Case**: Assign to different users based on record data
 
-```
+```text
 Step Assignment Formula:
 IF(
   {!$Record.Region__c} = 'West',
@@ -288,7 +288,7 @@ IF(
 
 **Use Case**: Escalate if step not completed on time
 
-```
+```text
 Step Due Date: {!$Flow.CurrentDate} + 2 (2 days)
 
 Scheduled Flow: Check_Overdue_Steps
@@ -342,7 +342,7 @@ for (FlowOrchestrationWorkItem item : activeItems) {
 ### Dashboard Metrics
 
 **Key Metrics to Track**:
-```
+```sql
 1. Average Time per Stage
    SELECT StepDefinitionName,
           AVG(LastModifiedDate - CreatedDate) as AvgDuration
@@ -398,7 +398,7 @@ public class OrchestrationMetrics {
 
 ### Pattern: Orchestration + Approval Process
 
-```
+```text
 Stage 2: Manager Approval
 ├─ Step 2.1 (Interactive): Manager reviews
 │  └─ Screen Flow with Approve/Reject buttons
@@ -445,7 +445,7 @@ client.subscribe('/event/OrchestrationStageEvent__e', (message) => {
 ### Pattern: Orchestration + Agentforce
 
 **AI agent handles certain steps**:
-```
+```text
 Stage 2: Document Verification
 ├─ Step 2.1 (Background): AI agent verifies documents
 │  └─ Agentforce Action: Verify_Document_Compliance
@@ -497,7 +497,7 @@ Stage 2: Document Verification
 ### Common Issues
 
 **Issue 1: Work items not appearing for users**
-```
+```yaml
 Causes:
 - User not in assigned queue
 - User lacks permission to object
@@ -510,7 +510,7 @@ Solution:
 ```
 
 **Issue 2: Background step failing silently**
-```
+```yaml
 Causes:
 - Apex error in called flow/action
 - Required field missing
@@ -523,7 +523,7 @@ Solution:
 ```
 
 **Issue 3: Orchestration not triggering**
-```
+```yaml
 Causes:
 - Trigger criteria not met
 - Record not updated properly
@@ -589,7 +589,7 @@ public class OrchestrationDebugger {
 ## Migration from Process Builder
 
 **Process Builder → Flow Orchestrator**:
-```
+```text
 Process Builder supports only simple automation
 Flow Orchestrator adds:
 - Multi-user coordination

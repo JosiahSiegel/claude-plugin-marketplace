@@ -63,7 +63,7 @@ FastAPI is a modern, high-performance web framework for building APIs. Built on 
 
 ### Scalable Structure (Recommended)
 
-```
+```text
 src/
 ├── app/
 │   ├── __init__.py

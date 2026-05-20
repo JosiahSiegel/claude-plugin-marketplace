@@ -63,7 +63,7 @@ Executes an Azure Machine Learning published pipeline from ADF. **SDK v1 support
 - `mlParentRunId`: Links ADF run to ML experiment for lineage tracking
 
 **Activity Outputs:**
-```
+```text
 @activity('RunMLTrainingPipeline').output.mlPipelineRunId
 @activity('RunMLTrainingPipeline').output.status
 ```

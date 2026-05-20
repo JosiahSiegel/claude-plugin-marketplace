@@ -313,7 +313,7 @@ Instead of direct nesting, use the **Execute Pipeline Activity** to call a child
 ### SQL Database Configuration Best Practices
 
 #### Connection String Parameters
-```
+```text
 Server=tcp:<server>.database.windows.net,1433;
 Database=<database>;
 Encrypt=mandatory;          // Options: mandatory, optional, strict
@@ -545,7 +545,7 @@ This command will:
 7. **WARN** about common pitfalls specific to the connector being used
 
 **Example Validation Response:**
-```
+```yaml
 ❌ INVALID PIPELINE STRUCTURE DETECTED:
 
 Issue: ForEach activity contains another ForEach activity

@@ -1,6 +1,6 @@
 {
   "name": "context-master",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Universal context management and planning. PROACTIVELY activate for: (1) complex multi-file tasks, (2) architecture decisions, (3) research, (4) refactoring, (5) long sessions, (6) any task with 3+ sequential steps. Provides: optimal file-creation order, extended-thinking delegation (23x context efficiency), token budgeting, recursive delegation, clear-and-verify workflows, progressive task decomposition. Saves 62% context on average.",
   "author": {
     "name": "Josiah Siegel",

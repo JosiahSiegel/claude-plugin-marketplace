@@ -197,7 +197,7 @@ uv sync --frozen
 
 ### Recommended: src Layout
 
-```
+```text
 my-project/
 ├── src/
 │   └── my_package/
@@ -230,7 +230,7 @@ my-project/
 
 ### Flat Layout (for simpler projects)
 
-```
+```text
 my-project/
 ├── my_package/
 │   ├── __init__.py

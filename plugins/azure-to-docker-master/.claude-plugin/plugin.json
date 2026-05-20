@@ -1,6 +1,6 @@
 {
   "name": "azure-to-docker-master",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Complete Azure-to-Docker migration for local development with 2025 emulators. PROACTIVELY activate for: (1) any Azure-to-Docker migration, (2) Azure infra extraction and Compose generation, (3) emulator setup (Azurite, SQL Server 2025, Cosmos DB vnext, Service Bus), (4) Compose Watch hot reload, (5) database export from Azure SQL/Postgres/MySQL, (6) Dockerfile generation from App Service, (7) multi-container orchestration, (8) health checks and runtime secrets, (9) service mapping (App Service/SQL/Storage/Redis/Cosmos), (10) dev-to-prod parity.",
   "author": {
     "name": "Josiah Siegel",

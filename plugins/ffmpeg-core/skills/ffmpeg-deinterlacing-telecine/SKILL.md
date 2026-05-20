@@ -242,7 +242,7 @@ ffmpeg -hwaccel qsv -hwaccel_output_format qsv \
 ### Understanding Telecine (3:2 Pulldown)
 
 Telecine converts 24fps film to 30fps video by duplicating fields:
-```
+```yaml
 Film:   A  B  C  D
 Video:  AA AB BB BC CC CD DD DA
 ```

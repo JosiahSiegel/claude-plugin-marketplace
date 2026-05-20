@@ -163,7 +163,7 @@ Shader "Custom/SimpleUnlit"
 
 ## Post-Processing (Volume System)
 
-```
+```text
 Setup:
 1. Add a Volume (Global or Local) to the scene
 2. Create a Volume Profile asset

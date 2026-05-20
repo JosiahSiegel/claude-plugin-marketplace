@@ -35,7 +35,7 @@ Git Bash automatically converts paths in specific contexts:
 ### Issue: Path Conversion Failure in Snapshot Operations
 
 **Error Pattern:**
-```
+```text
 /usr/bin/bash: line 1: C:UsersDavid...No such file or directory
 ```
 
@@ -164,7 +164,7 @@ When using `/plan-project` on Windows with Git Bash:
 3. **Verification checks** work cross-platform
 
 Example:
-```
+```text
 Planning (Unix format):
 - styles.css
 - js/app.js
@@ -186,7 +186,7 @@ The `/verify-structure` command:
 - Reports issues using native path format
 
 **Example verification output on Windows:**
-```
+```text
 ✓ File paths verified:
   D:\project\styles.css ✓
   D:\project\index.html → references D:\project\styles.css ✓

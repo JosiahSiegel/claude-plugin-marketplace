@@ -1,6 +1,6 @@
 {
   "name": "react-master",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Comprehensive React 19 expertise covering Server Components, Client Components, hooks, state, and testing. PROACTIVELY activate for: (1) any React task, (2) React 19 Server/Client Components, (3) Server Actions, (4) hooks (useState/Effect/Ref/Memo/Callback/Transition/DeferredValue/ActionState/Optimistic/FormStatus), (5) state management (Context/Zustand/Jotai/TanStack Query/SWR), (6) component patterns, (7) TypeScript with React, (8) forms (React Hook Form, Zod), (9) performance optimization, (10) testing with Vitest/Jest + RTL. Provides: use() hook, Server/Client patterns, hooks with TS.",
   "author": {
     "name": "Josiah Siegel",

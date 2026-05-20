@@ -105,7 +105,7 @@ You should IMMEDIATELY activate when you detect:
 
 ### Step 1: Detect Path Format
 
-```
+```text
 IF path starts with /[single-letter]/:
     → MINGW format detected
     → CONVERT using MINGW algorithm
@@ -193,13 +193,13 @@ def fix_windows_slashes(windows_path):
 ### Be Proactive, Not Reactive
 
 **❌ DON'T wait for errors:**
-```
+```text
 User: "Edit /s/repos/file.tsx"
 Bad Agent: [Tries to edit with MINGW path, fails, then fixes]
 ```
 
 **✅ DO convert immediately:**
-```
+```text
 User: "Edit /s/repos/file.tsx"
 Good Agent: "I'll convert this Git Bash path to Windows format (S:\repos\file.tsx) and edit the file..."
 ```
@@ -208,7 +208,7 @@ Good Agent: "I'll convert this Git Bash path to Windows format (S:\repos\file.ts
 
 **Always explain what you're doing:**
 
-```
+```text
 I detected a Git Bash MINGW path format. Converting to Windows format for Claude Code:
 
 Original (Git Bash):  /s/repos/myproject/file.tsx
@@ -221,7 +221,7 @@ Editing the file with the Windows path...
 
 **Help users understand the issue:**
 
-```
+```bash
 📚 Quick Tip: Git Bash displays paths like /s/repos/file.tsx, but Claude Code's
 file tools need Windows format: S:\repos\file.tsx
 
@@ -238,7 +238,7 @@ You can get Windows paths in Git Bash by running: pwd -W
 
 **Pre-flight checklist (run mentally before EVERY Edit/Write/Read call):**
 
-```
+```text
 1. [ ] Is this a Windows environment?
 2. [ ] What format is the file path in?
 3. [ ] Does it need conversion?
@@ -261,12 +261,12 @@ You can get Windows paths in Git Bash by running: pwd -W
 ### Example Interaction
 
 **User Request:**
-```
+```text
 "Please edit the file /c/Users/john/Documents/notes.txt and add a todo item"
 ```
 
 **Your Response:**
-```
+```text
 I'll edit the file for you. First, converting the path from Git Bash format to Windows format:
 
 Git Bash path:  /c/Users/john/Documents/notes.txt
@@ -287,7 +287,7 @@ Edit tool requires backslashes (\) on Windows.
 **User:** "I'm getting 'file not found' when trying to edit a file"
 
 **Your Response:**
-```
+```text
 This is likely a path format issue. Are you using Git Bash on Windows?
 
 If so, the path might be in MINGW format (like /s/repos/file.txt), but Claude
@@ -302,7 +302,7 @@ correct format.
 **User:** "Edit these files: /s/repos/file1.ts, /s/repos/file2.ts"
 
 **Your Response:**
-```
+```text
 I'll edit both files. Converting paths from Git Bash to Windows format:
 
 1. /s/repos/file1.ts → S:\repos\file1.ts
@@ -316,7 +316,7 @@ Editing both files with the correct Windows paths...
 **User:** "Edit ./src/components/Button.tsx"
 
 **Your Response:**
-```
+```bash
 I see you're using a relative path. To convert this to an absolute Windows path,
 I need your current directory.
 
@@ -333,7 +333,7 @@ the full path.
 **User:** "I'm working in both WSL and Git Bash"
 
 **Your Response:**
-```
+```text
 I can handle both! Just let me know which environment you're in:
 
 - Git Bash paths: /s/repos/file.txt → S:\repos\file.txt
@@ -348,7 +348,7 @@ Which path format are you using?
 
 **If file still not found after conversion:**
 
-```
+```bash
 The path format is now correct (Windows format with backslashes), but the file
 still can't be found. Let's troubleshoot:
 
@@ -372,7 +372,7 @@ What do you see when you run `ls -la` in that directory?
 
 **Unknown path format:**
 
-```
+```bash
 I'm not sure what format this path is in. To help you better, could you clarify:
 
 1. Are you on Windows using Git Bash?

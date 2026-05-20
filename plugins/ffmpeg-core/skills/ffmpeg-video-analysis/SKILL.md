@@ -73,7 +73,7 @@ ffmpeg -i input.mp4 -vf "blackdetect=d=2.0" -f null - 2>&1 | \
 | `pix_th` | Pixel black threshold | 0.10 | 0-1 |
 
 **Output format:**
-```
+```text
 [blackdetect @ 0x...] black_start:10.5 black_end:12.3 black_duration:1.8
 ```
 
@@ -117,7 +117,7 @@ ffmpeg -i input.mp4 -vf "freezedetect=n=0:d=1" -f null -
 | `d` | Minimum freeze duration | 2.0 | > 0 |
 
 **Output format:**
-```
+```text
 [freezedetect @ 0x...] freeze_start: 45.2
 [freezedetect @ 0x...] freeze_duration: 3.5
 [freezedetect @ 0x...] freeze_end: 48.7
@@ -211,7 +211,7 @@ ffmpeg -i input.mp4 -vf "cropdetect=round=2:reset=0" -f null - 2>&1 | grep crop
 | `skip` | Skip initial frames | 0 | >= 0 |
 
 **Output format:**
-```
+```text
 [cropdetect @ 0x...] x1:0 x2:1919 y1:140 y2:939 w:1920 h:800 x:0 y:140 crop=1920:800:0:140
 ```
 
@@ -256,7 +256,7 @@ ffmpeg -i original.mp4 -i encoded.mp4 \
 ```
 
 **Output format:**
-```
+```text
 [Parsed_psnr_0 @ 0x...] PSNR y:45.123 u:48.456 v:49.789 average:46.234 min:35.123 max:inf
 ```
 
@@ -283,7 +283,7 @@ ffmpeg -i original.mp4 -i encoded.mp4 \
 ```
 
 **Output format:**
-```
+```text
 [Parsed_ssim_0 @ 0x...] SSIM Y:0.987 (18.87) U:0.992 (20.97) V:0.993 (21.55) All:0.989 (19.59)
 ```
 
@@ -358,7 +358,7 @@ ffmpeg -i input.mp4 -vf "showinfo" -f null - 2>&1 | grep "pts_time"
 ```
 
 **Output includes:**
-```
+```text
 [Parsed_showinfo_0 @ 0x...] n:   0 pts:      0 pts_time:0       duration:   1001
  duration_time:0.0417083 fmt:yuv420p cl:left sar:1/1 s:1920x1080 i:P iskey:1
  type:I checksum:12345678 plane_checksum:[AAAAAAAA BBBBBBBB CCCCCCCC]

@@ -91,7 +91,7 @@ def half_hourly():
 
 ## Cron Syntax Reference
 
-```
+```text
 ┌───────────── minute (0-59)
 │ ┌───────────── hour (0-23)
 │ │ ┌───────────── day of month (1-31)

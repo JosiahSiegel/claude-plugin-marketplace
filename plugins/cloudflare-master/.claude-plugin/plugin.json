@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-master",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Expert Cloudflare platform covering Workers, Pages, AI Workers, storage (R2/D1/KV/Durable Objects/Queues), Hyperdrive, Zero Trust, MCP, and CI/CD (2025-2026). PROACTIVELY activate for: (1) any Cloudflare task, (2) Workers (JS/TS/Python/WASM), (3) Wrangler CLI, (4) AI Workers (Aura/MeloTTS, Whisper, LLM, vision, embeddings), (5) R2/D1/KV/Durable Objects/Queues, (6) Hyperdrive pooling, (7) Zero Trust (Tunnels/WARP/Access), (8) MCP servers, (9) Cron and Workflows, (10) Vectorize/RAG, (11) CI/CD, (12) observability, (13) cost optimization.",
   "author": {
     "name": "Josiah Siegel",

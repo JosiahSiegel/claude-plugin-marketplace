@@ -534,7 +534,7 @@ warp-cli register
 
 ### Basic Tunnel Setup
 
-```
+```text
 [User]
    |
    v
@@ -547,7 +547,7 @@ warp-cli register
 
 ### Zero Trust Architecture
 
-```
+```text
 [Remote User with WARP]
    |
    v
@@ -563,7 +563,7 @@ warp-cli register
 
 ### Multiple Services
 
-```
+```text
                     [Cloudflare Edge]
                           |
                           v

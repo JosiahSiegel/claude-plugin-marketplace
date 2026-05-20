@@ -50,7 +50,7 @@ The `doc-expert` agent runs a diagnostic *before* it produces anything. It separ
 
 **ADR failure modes the agent will detect and remediate:**
 
-drift, ADRs for non-decisions, ADR–PRD duplication, ADRs nobody reads, missing context, missing re-evaluation triggers, hidden alternatives, bundled decisions, premature ADRs for proposals, template thrash, decision-by-AI without human buy-in.
+drift, ADRs for non-decisions, ADR–PRD duplication, ADRs nobody reads, missing context, missing re-evaluation triggers, hidden alternatives, bundled decisions, premature ADRs for proposals, template thrash, decision-by-AI without human buy-in, **unrecorded past decisions** (surfaced as `BACKFILL-ADR` candidates during a `/doc-audit` and recorded via `adr-backfill` with a mandatory honesty clause).
 
 ## When the agent activates
 
@@ -59,6 +59,7 @@ PROACTIVELY, when the user (or another agent):
 - Asks to "write an ADR," "document a decision," or "record an architectural decision."
 - Is about to create any new doc file under `docs/`, `architecture/`, `adr/`, `decisions/`, `rfcs/`, or `design/`.
 - Wants to review, audit, or clean up an existing decision log or design-doc folder.
+- Suspects a past architectural decision was made but never written up, and wants to surface or record it.
 - Debates "should this be an ADR or something else?"
 - Mentions "supersede," "deprecate," or "revisit" relative to a prior doc.
 - Suspects doc drift, dead docs, or duplicated decision records.
@@ -75,11 +76,11 @@ The most important interception is **before** an ADR gets written for a non-deci
 
 - **`/adr-critique`** — Audit a pre-existing or legacy ADR line by line. Quotes the offending line verbatim, names the rule broken, proposes a shorter rewrite, requires per-line approval. For ADRs that didn't go through the co-thinking flow.
 
-- **`/doc-audit`** — Inventory a doc directory, test every ADR against the canon, test every non-ADR against the four-question check (Purpose / Audience / Owner / Update trigger), detect drift and duplication and misclassification, and produce a KEEP / MERGE / REWRITE / DELETE / MOVE action list. Nothing is deleted without your sign-off.
+- **`/doc-audit`** — Inventory a doc directory, test every ADR against the canon, test every non-ADR against the four-question check (Purpose / Audience / Owner / Update trigger), detect drift, duplication, misclassification, and *unrecorded past decisions* (the ASR test against shipped-change evidence — commits, migrations, removed subsystems, retired vendors). Produces a KEEP / MERGE / REWRITE / DELETE / MOVE / **BACKFILL-ADR** action list. `BACKFILL-ADR` rows are candidates only; the user decides whether to route them to `adr-backfill` for retroactive recording. Nothing is deleted without your sign-off.
 
 - **`/doc-lint`** — Two-pass Markdown lint on any one file. Pass 1 (syntax must-fix) flags non-portable Markdown — setext where ATX is expected, unfenced code blocks, missing blank lines around block elements, mid-word underscore emphasis, etc. Pass 2 (style should-fix) applies the opinionated Google Markdown style overlay — single H1, ATX headings, `[TOC]` on long docs, 80-character lines, informative link text, fenced blocks with language tags. One finding at a time, per-line approval, no bulk rewrites.
 
-Most of the time you don't need a command — just describe the doc situation and the agent will load the right skill (`doc-diagnostic`, `adr-discovery`, `adr-drafting`, `adr-critique`, `c4-model`, or `markdown-style`). The commands give common workflows a one-token entry point.
+Most of the time you don't need a command — just describe the doc situation and the agent will load the right skill (`doc-diagnostic`, `adr-discovery`, `adr-drafting`, `adr-backfill`, `adr-critique`, `c4-model`, or `markdown-style`). The commands give common workflows a one-token entry point. There is intentionally no top-level `/adr-backfill` command — backfill is reached either through a `/doc-audit` `BACKFILL-ADR` row or through direct user phrasing ("we decided years ago and never wrote it down"), to keep backfill from being the easy-default path it should not be.
 
 ## Skills
 
@@ -89,26 +90,55 @@ The deep ADR mechanics live in skills, loaded by the agent when relevant. The ca
 |---|---|
 | **`doc-diagnostic`** | The canon: alternatives catalog, ADR templates / lifecycle / numbering / required fields, failure-modes table, folder-level audit procedure. Loaded when the question is "where does this doc belong?" or "how do I clean up this doc set?" |
 | **`adr-discovery`** | Pre-flight context gathering for an ADR. Produces a `discovery-brief.md` and `open-questions.md` containing only architect-confirmed facts; refuses to advance until five MUSTs are confirmed. |
-| **`adr-drafting`** | Seven-phase co-thinking draft of a new ADR with one question per turn, scripted push-back, and a self-critique pass against the "ADR is NOT" checklist before the architect sees a draft. |
-| **`adr-critique`** | Line-by-line audit of a legacy ADR. Verbatim quotes, per-line approval, no bulk edits. |
+| **`adr-drafting`** | Seven-phase co-thinking draft of a new ADR with one question per turn, scripted push-back, and a self-critique pass against the "ADR is NOT" checklist before the architect sees a draft. Tense: *"we decided / we're deciding."* |
+| **`adr-backfill`** | Retroactive write-up of a past architectural decision that was never recorded — typically surfaced by a `/doc-audit` `BACKFILL-ADR` row. Tense: *"we decided years ago / before my time / never wrote it down."* Looser gates than `adr-drafting` (decider may be `unrecoverable`, alternatives may be partial) but stricter honesty: evidence in two independent locations, a mandatory backfill notice in the body, refusal when reconstruction confidence is `low`. |
+| **`adr-critique`** | Line-by-line audit of a legacy ADR. Verbatim quotes, per-line approval, no bulk edits. Also flags backfill ADRs missing or softening the honesty clause. |
 | **`c4-model`** | Canonical-C4 LikeC4 diagram alongside an ADR — Context + Container views (+ optional Deployment). Refuses Component views and custom kinds. |
 | **`markdown-style`** | Markdown form review on any `.md` file. Two-pass — canonical syntax (Markdown Guide) must-fix first, opinionated style (Google Markdown style guide) should-fix second. Per-finding with line numbers, verbatim quotes, rule citations; never bulk-rewrites. |
 
-A shared **`_shared/adr-is-not.md`** enforces the canonical checklist across the three ADR-flow skills (`adr-discovery`, `adr-drafting`, `adr-critique`) and the `doc-expert` agent: an ADR is not a tutorial, an implementation guide, a marketing doc, a hedge, a generic best-practice citation, an LLM probability summary, a future-proofing essay, corporate passive voice, a design doc, or long. Hard limits: Context ≤ 3 sentences, Decision ≤ 3 sentences, Consequences as bullets.
+A shared **`_shared/adr-is-not.md`** enforces the canonical "must not" checklist across the four ADR-flow skills (`adr-discovery`, `adr-drafting`, `adr-backfill`, `adr-critique`) and the `doc-expert` agent: an ADR is not a tutorial, an implementation guide, a marketing doc, a hedge, a generic best-practice citation, an LLM probability summary, a future-proofing essay, corporate passive voice, a design doc, or long. Hard limits: Context ≤ 3 sentences, Decision ≤ 3 sentences, Consequences as bullets.
+
+A sibling **`_shared/adr-is-backfillable.md`** is the positive-polarity counterpart, used only by `adr-backfill`: the seven-item eligibility self-check that decides whether a past, unrecorded decision is reconstructible to a standard that would justify a backfilled record (observable evidence in the system, ASR-test pass, evidence in two independent locations, measurable architectural-characteristic signal, not already recorded, reconstruction confidence at least `medium`, decider nameable or explicitly `unrecoverable`).
+
+The mandatory backfill **honesty clause** — its verbatim form, required fields, terminal punctuation, and refusal conditions — lives in `skills/adr-backfill/references/honesty-clause.md`. It is the single source of truth: `adr-backfill` writes from it during Phase 3 and `adr-critique` audits against it. Do not restate the clause elsewhere.
 
 ## Typical workflow
 
 - **New decision** — start with `/adr-new` (or describe the situation). The agent runs the diagnostic. If it's not an ADR, you get routed to the right alternative (Diátaxis explanation, RFC, runbook, code comment, etc.). If it is an ADR but discovery is shallow, run `/adr-discover` first; otherwise drafting begins.
 - **Drafting** — once the five MUSTs are confirmed, `adr-drafting` produces the ADR through the seven-phase co-thinking flow.
 - **Diagram (optional)** — after saving, `c4-model` adds canonical Context + Container views alongside the ADR.
-- **Audit existing docs** — `/adr-critique` for one legacy ADR (line-by-line); `/doc-audit` for a whole directory (KEEP / MERGE / REWRITE / DELETE / MOVE).
+- **Audit existing docs** — `/adr-critique` for one legacy ADR (line-by-line); `/doc-audit` for a whole directory (KEEP / MERGE / REWRITE / DELETE / MOVE / BACKFILL-ADR).
+- **Backfill a past decision** — when `/doc-audit` surfaces a `BACKFILL-ADR` candidate (or the user describes a long-ago shipped change with no record), `adr-backfill` retroactively records it. Mandatory honesty clause; evidence in two independent locations; refuses when reconstruction confidence is `low`.
 - **Lint any Markdown file** — `/doc-lint` for two-pass syntax-then-style review of one `.md` file. Works on READMEs, how-tos, runbooks, ADRs (form only — content goes through `/adr-critique`).
+
+```text
+                          New decision                    Past decision, no record
+                              |                                    |
+                       /adr-new (diagnostic)            /doc-audit surfaces BACKFILL-ADR
+                              |                                    |
+                  --------- ADR? ---------                          v
+                  |                     |                     adr-backfill
+                  no                   yes                          |
+                  |                     |              (refuses if confidence: low,
+            doc-diagnostic       discovery shallow?           routes to open-questions.md)
+            (RFC / runbook /            |                          |
+             Diátaxis / etc.)     yes ---+--- no                   |
+                                  |          |                     |
+                            adr-discovery   adr-drafting           |
+                                            (7 phases)             |
+                                                |                  |
+                                                +--> ADR file <----+
+                                                          |
+                                              c4-model (optional)
+                                              adr-critique (audit)
+                                              doc-lint (Markdown form)
+```
 
 ## Installation
 
 Standard marketplace install:
 
-```
+```text
 /plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 /plugin install doc-master@claude-plugin-marketplace
 ```

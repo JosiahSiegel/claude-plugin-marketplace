@@ -4,7 +4,7 @@
 
 The most common data architecture pattern in Fabric for Power BI:
 
-```
+```text
 [Raw Sources] --> [Bronze Lakehouse] --> [Silver Lakehouse] --> [Gold Lakehouse] --> [Semantic Model] --> [Reports]
                   (raw, as-is)          (cleaned, typed)       (business-ready)    (Direct Lake)
 ```
@@ -96,7 +96,7 @@ The semantic model sits on top of the gold layer lakehouse:
 
 For large organizations with multiple domains:
 
-```
+```text
 [Domain: Sales]                    [Domain: Marketing]
   ├── Sales Lakehouse                ├── Marketing Lakehouse
   ├── Sales Semantic Model           ├── Marketing Semantic Model
@@ -117,7 +117,7 @@ For large organizations with multiple domains:
 
 ### Strategy 1: Environment-Based (Small Teams)
 
-```
+```text
 Sales-Dev     (workspace, dev capacity)
 Sales-Test    (workspace, test capacity)
 Sales-Prod    (workspace, prod capacity)
@@ -127,7 +127,7 @@ Connected via deployment pipeline: Dev > Test > Prod.
 
 ### Strategy 2: Domain + Environment (Medium Orgs)
 
-```
+```text
 Sales-Dev, Sales-Test, Sales-Prod
 Marketing-Dev, Marketing-Test, Marketing-Prod
 Finance-Dev, Finance-Test, Finance-Prod
@@ -138,7 +138,7 @@ Each domain has its own pipeline. SharedData contains cross-domain semantic mode
 
 ### Strategy 3: Separate Model and Report Workspaces (Enterprise)
 
-```
+```text
 Sales-DataModel-Prod     (semantic model only)
 Sales-Reports-Prod       (reports using live connection to model)
 Sales-Dashboards-Prod    (dashboards, apps)
@@ -150,7 +150,7 @@ Sales-Reports-Dev        (development reports)
 
 ## End-to-End Fabric Pipeline for Power BI
 
-```
+```text
 1. DATA INGESTION
    ├── Data Pipeline (scheduled, for batch sources)
    ├── Dataflow Gen2 (for sources needing Power Query transforms)
@@ -213,7 +213,7 @@ Sales-Reports-Dev        (development reports)
 
 Fabric feature that triggers actions based on data changes:
 
-```
+```text
 [Semantic Model] --> [Data Activator Reflex] --> [Action]
                                                     ├── Send email
                                                     ├── Teams notification

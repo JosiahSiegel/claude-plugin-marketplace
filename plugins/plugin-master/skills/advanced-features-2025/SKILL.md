@@ -51,7 +51,7 @@ Skills are dynamically loaded based on task context, enabling:
 
 ### Structure
 
-```
+```text
 skills/
 └── skill-name/
     ├── SKILL.md           # Core content

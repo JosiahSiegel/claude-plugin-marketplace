@@ -60,17 +60,17 @@ Autonomously create professional, production-ready bash scripts or review/optimi
 ## Usage
 
 **Create a new script:**
-```
+```text
 /pwsh-script Create a backup script that archives /data to S3 with error handling
 ```
 
 **Review existing script:**
-```
+```text
 /pwsh-script Review backup.sh for security issues and best practices
 ```
 
 **Optimize performance:**
-```
+```text
 /pwsh-script Optimize deploy.sh for better performance
 ```
 

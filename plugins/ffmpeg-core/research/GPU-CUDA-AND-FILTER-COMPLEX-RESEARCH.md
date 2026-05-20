@@ -785,7 +785,7 @@ ffmpeg -init_hw_device vulkan \
 ### Memory Flow Patterns
 
 **Pattern 1: Full GPU Pipeline (Optimal)**
-```
+```text
 Input File -> GPU Decode -> GPU Filter -> GPU Encode -> Output File
                     |          |           |
                     v          v           v
@@ -793,7 +793,7 @@ Input File -> GPU Decode -> GPU Filter -> GPU Encode -> Output File
 ```
 
 **Pattern 2: CPU Filter Insertion (Suboptimal)**
-```
+```text
 Input -> GPU Decode -> hwdownload -> CPU Filter -> hwupload -> GPU Encode -> Output
                            |                           |
                            v                           v
@@ -801,7 +801,7 @@ Input -> GPU Decode -> hwdownload -> CPU Filter -> hwupload -> GPU Encode -> Out
 ```
 
 **Pattern 3: Software Decode + GPU Encode**
-```
+```text
 Input -> CPU Decode -> hwupload -> GPU Encode -> Output
                           |
                           v
@@ -947,7 +947,7 @@ ffmpeg -y -vsync 0 \
 
 ### Basic Syntax
 
-```
+```text
 filter_complex "filterchain1;filterchain2;..."
 ```
 
@@ -958,7 +958,7 @@ Each filterchain consists of:
 
 ### Syntax Components
 
-```
+```text
 [input_label1][input_label2]filter=param1=value1:param2=value2[output_label]
 ```
 

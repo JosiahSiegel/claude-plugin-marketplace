@@ -364,7 +364,7 @@ node --version  # Should be 18+
 ### Error 1: "No such file or directory" in Git Bash
 
 **Symptom:**
-```
+```text
 Error: /usr/bin/bash: line 1: C:UsersUsername...No such file
 ```
 
@@ -385,7 +385,7 @@ npm test  # npm handles path issues automatically
 ### Error 2: Module Import Failures
 
 **Symptom:**
-```
+```bash
 Error: Cannot find module '../src/utils'
 ```
 
@@ -403,7 +403,7 @@ const utils = await import(utilsPath);
 ### Error 3: Playwright Browser Launch Failure
 
 **Symptom:**
-```
+```text
 Error: Failed to launch browser
 ```
 
@@ -422,7 +422,7 @@ npx playwright test
 ### Error 4: Coverage Report Path Issues
 
 **Symptom:**
-```
+```text
 Error: Failed to write coverage to /c/project/coverage
 ```
 

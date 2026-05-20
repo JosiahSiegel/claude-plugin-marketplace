@@ -365,7 +365,7 @@ git secrets --scan-history
 
 **GitHub:**
 
-```
+```text
 Repository → Settings → Branches → Branch protection rules
 ☑ Require signed commits
 ☑ Require linear history
@@ -374,7 +374,7 @@ Repository → Settings → Branches → Branch protection rules
 
 **GitLab:**
 
-```
+```text
 Repository → Settings → Repository → Protected branches
 ☑ Allowed to push: No one
 ☑ Allowed to merge: Maintainers
@@ -383,7 +383,7 @@ Repository → Settings → Repository → Protected branches
 
 **Azure DevOps:**
 
-```
+```text
 Branch Policies → Add policy → Require signed commits
 ```
 

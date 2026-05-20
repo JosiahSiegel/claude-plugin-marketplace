@@ -10,7 +10,7 @@ A GitHub repository containing multiple plugins organized in a standard structur
 
 ### Marketplace Structure
 
-```
+```text
 marketplace-repo/
 ├── .claude-plugin/
 │   └── marketplace.json     # Required: Plugin registry
@@ -155,19 +155,19 @@ git push -u origin main
 
 ### Adding a Marketplace
 
-```
+```text
 /plugin marketplace add username/marketplace-repo
 ```
 
 ### Installing a Plugin
 
-```
+```text
 /plugin install plugin-name@username
 ```
 
 ### Listing Available Plugins
 
-```
+```text
 /plugin list --marketplace username/repo
 ```
 
@@ -199,6 +199,22 @@ Before publishing, verify:
 - [ ] Plugin README has installation instructions
 - [ ] Usage examples provided
 - [ ] Platform-specific notes included
+
+### Licensed / Vendored / Derived Content (MANDATORY when applicable)
+
+If the plugin ships ANY third-party content — vendored docs, derived prompts, ported skill text, embedded example code under another license, anything that originated outside this plugin's own authorship — treat the attribution manifest as a first-class shipping artifact, NOT as doc polish.
+
+- [ ] `NOTICES.md` exists at the plugin root (same level as `README.md`)
+- [ ] Each upstream source has **exactly one** `## <source-name>` heading (no duplicate H2 sections for the same upstream — `grep -c "^## " NOTICES.md | sort | uniq -c` should show no repeats)
+- [ ] Required license text (MIT preamble, Apache NOTICE, CC-BY attribution string, etc.) is preserved verbatim under each section — paraphrasing or truncation is not acceptable
+- [ ] Each section names: upstream project, upstream URL, upstream license SPDX identifier, the specific file(s) in this plugin that derive from it, and the nature of the derivation (verbatim, adapted, fragment quoted)
+- [ ] `README.md` contains a cross-reference: a one-liner under "License" or "Attribution" pointing to `NOTICES.md`
+- [ ] `plugin.json` `license` field is consistent with what `NOTICES.md` permits (e.g., if you incorporate AGPL content, `"license": "MIT"` is wrong)
+- [ ] Cross-reference test passes: `grep -l "NOTICES" README.md plugin.json` returns at least `README.md` when third-party content is present
+
+Why this is a separate gate from regular docs: license-text preservation and accurate attribution are legal-adjacent obligations, not stylistic choices. A duplicate H2 heading for the same upstream is not a typo — it is an attribution defect that obscures the actual provenance chain.
+
+If the plugin ships zero third-party content, `NOTICES.md` is not required and these items are N/A.
 
 ## Common Issues
 

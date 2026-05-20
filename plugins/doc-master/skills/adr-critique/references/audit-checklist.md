@@ -10,10 +10,23 @@ The detailed probe set for `adr-critique` Phases 3 (missing-why), 4 (consistency
 |---|---|
 | `status` set? | Missing or `Proposed` for > 30 days. |
 | `date` ISO 8601? | Missing or in `MM/DD/YYYY` format. |
-| `deciders` named humans? | `"the team"`, `"engineering"`, `"leadership"`, or empty. |
+| `deciders` named humans? | `"the team"`, `"engineering"`, `"leadership"`, or empty. (Exception: backfill ADRs may use the literal `unrecoverable` — see "Backfill ADRs" probe below.) |
 | `supersedes` bidirectional? | This ADR claims `supersedes: X` but X has no `superseded by`. |
 | `relates-to` reasoned? | List of bare IDs with no one-line reason each. |
 | `review-by` concrete? | `"annually"`, `"as needed"`, `"when appropriate"` — fossils. |
+
+### Backfill ADRs
+
+A backfill ADR is detectable by `status: accepted (backfilled YYYY-MM-DD)` (or `status: deprecated (decision reversed since)` with `tags: [backfill]`). These records have a small set of probes of their own — they are subject to all other probes in this file as well.
+
+| Probe | Flag if… |
+|---|---|
+| Honesty clause present? | Body lacks a compliant backfill notice (canonical form: `../../adr-backfill/references/honesty-clause.md`). |
+| Honesty-clause completeness | Clause present but missing a required field (record date, evidence locators, decider) or terminal period. |
+| Evidence locators ≥ 2? | Fewer than two independent locators in the frontmatter `evidence:` list. One commit message alone is not enough. |
+| ASR signal measurable? | `asr-signal` is vague ("felt cleaner," "improved DX") rather than a measurable signal ("removed 14k LOC and one vendor dependency"). |
+| Status / tags consistent? | `status` begins with `accepted (backfilled` or `deprecated (decision reversed` but `tags` does not include `backfill`. |
+| Honesty clause softened? | The clause has been rewritten to hide the backfill nature (e.g., moved to a footnote, paraphrased into past-tense narrative, fields omitted). The clause is non-negotiable; flag and route to redraft via `adr-backfill`. |
 
 ### Context
 
@@ -130,7 +143,7 @@ ADR talks about "the user-service container" but the LikeC4 model defines `user-
 
 End-of-audit summary:
 
-```
+```text
 Audited: <path/to/NNNN-title.md>
 Neighbors read: <list of ADR IDs>
 Flags raised: <N>

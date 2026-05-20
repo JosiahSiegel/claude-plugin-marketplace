@@ -36,7 +36,7 @@
 
 ### Cost Decision Tree
 
-```
+```text
 Is English sufficient?
 ├── Yes → Is premium voice quality required?
 │   ├── Yes → Cloudflare Aura-2 ($0.030/1K)
@@ -166,7 +166,7 @@ Cloudflare charges $0.011 per 1,000 Neurons with 10,000 free daily neurons.
 
 **Savings potential: 50-90%**
 
-```
+```text
 ElevenLabs Multilingual: $0.165/1K chars
 Cloudflare Aura-2:       $0.030/1K chars
 Savings:                 82%
@@ -255,7 +255,7 @@ curl -X GET "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/usage
 
 ### Cost Estimation Formula
 
-```
+```text
 Monthly Cost =
   (Requests × $0.30/million) +
   (AI Neurons × $0.011/1000) +

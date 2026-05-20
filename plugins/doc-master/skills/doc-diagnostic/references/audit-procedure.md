@@ -37,14 +37,37 @@ This reference is the long-form spec. The short pointer in `SKILL.md` and the us
 
 6. **Detect misclassification.** A "decision" doc that's actually a how-to should be moved. A "runbook" that's actually an explanation should be moved. Cite the Diátaxis quadrant for each move (see `references/alternatives-catalog.md`).
 
-7. **Report.** Produce a numbered list of recommended actions:
+7. **Detect backfill candidates** — run the ASR test against shipped-change evidence.
+   - **Surface to walk.** Commit history, migration files, removed subsystems, retired vendors, policy unifications, deprecated modules. For each, ask: *did the team make an architecturally significant decision that was never recorded?*
+   - **ASR test.** Apply the same measurable-effect-on-architecture-or-quality test used during pre-flight discovery. No measurable signal, no row.
+   - **Two-locator rule (false-positive guard).** Evidence must appear in at least two independent locations before a backfill row is emitted. A single commit message alone is not enough. A commit plus a deleted module, or a migration plus a removed dependency in the manifest, is enough.
+   - **No measurable signal?** Do not emit a row. Log it in `open-questions.md` instead, naming what evidence would have to surface to upgrade it.
+
+8. **Report.** Produce a numbered list of recommended actions:
    - `KEEP` — passes the canon and the four-question test as-is.
    - `MERGE` — overlaps with another doc; specify the merge target.
    - `REWRITE` — content is salvageable but violates the canon or fails the four-question test.
    - `DELETE` — fails the four-question test with no salvage path. Requires human approval.
    - `MOVE` — wrong location for its content type. Specify the new path and the Diátaxis quadrant.
+   - `BACKFILL-ADR` — shipped-change evidence reveals a past architectural decision that was never recorded. Surface as a candidate, not a draft. Use the row schema below.
 
    Each entry gets a one-sentence rationale. Do not bulk-delete without human approval.
+
+### BACKFILL-ADR row schema
+
+Each `BACKFILL-ADR` row has exactly five fields:
+
+| Field | Notes |
+|---|---|
+| `decision` | One-line imperative phrase, as if it were the title of the ADR that should have been written (e.g., *"Retire the legacy queueing vendor in favor of an in-house event bus"*). |
+| `evidence-locator` | At least two independent pointers: commit SHA, migration file path, removed module path, vendor record, manifest line removed, infra-as-code resource deleted. One pointer is not enough. |
+| `ASR-test-result` | Which architectural characteristic was affected (latency / cost / availability / security / maintainability / operability / portability / …) **with a measurable signal**. "Felt cleaner" is not a signal; "removed 14k LOC and one vendor dependency" is. |
+| `reconstruction-confidence` | `high` / `medium` / `low`. High = the decision, its forces, and at least one realistic alternative can be reconstructed from evidence. Medium = the decision is clear but forces or alternatives are partial. Low = only the *what* is recoverable, not the *why*. |
+| `suggested-status` | `accepted (retro-recorded)` — the decision is still in force. `deprecated (decision reversed since)` — the change was later undone or superseded by a different shipped change. |
+
+### Backfill confidence rule
+
+If `reconstruction-confidence` is `low`, **do not emit a BACKFILL-ADR row**. The decision is not reconstructible to a standard that would justify a record in the decision log. Emit an `open-questions.md` row instead, naming what evidence would have to surface to upgrade the confidence to `medium` or `high`. Surfacing the gap is more honest than fabricating a rationale at backfill time.
 
 ## Hard constraints
 

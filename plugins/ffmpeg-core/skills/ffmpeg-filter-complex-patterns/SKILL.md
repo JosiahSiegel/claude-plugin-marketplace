@@ -48,7 +48,7 @@ Comprehensive guide to complex filtergraphs, multi-input compositions, and advan
 
 ### Basic Structure
 
-```
+```text
 -filter_complex "filterchain1;filterchain2;..."
 ```
 
@@ -59,7 +59,7 @@ Each filterchain consists of:
 
 ### Complete Syntax
 
-```
+```text
 [input_label1][input_label2]filter=param1=value1:param2=value2[output_label]
 ```
 

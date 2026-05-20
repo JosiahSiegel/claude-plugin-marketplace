@@ -10,7 +10,7 @@ Manage and manipulate Terraform state.
 
 ## Usage
 
-```
+```bash
 /tf-state list                    # List all resources
 /tf-state show aws_vpc.main      # Show resource details
 /tf-state mv old.name new.name   # Move/rename resource

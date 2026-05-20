@@ -32,7 +32,7 @@ Systematic approach to profiling and optimizing Unity games. Covers profiling to
 
 ### Reading the Profiler
 
-```
+```text
 If frame time > 16.6ms (60 FPS target):
   CPU timeline > GPU timeline -> CPU-bound
   GPU timeline > CPU timeline -> GPU-bound
@@ -123,7 +123,7 @@ Pool bullets, particles, enemies, UI elements -- anything instantiated/destroyed
 
 ### LOD (Level of Detail)
 
-```
+```text
 LOD Group Setup:
   LOD 0 (0-30%):  Full-detail mesh (5000 tris)
   LOD 1 (30-60%): Medium mesh (2000 tris)

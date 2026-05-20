@@ -380,7 +380,7 @@ export default {
 ### When Cloudflare AI Workers SAVES Money
 
 #### Scenario 1: High-Volume English TTS
-```
+```yaml
 Use Case: 1M characters/day English TTS for automated phone system
 
 Cloudflare Aura-2:
@@ -398,7 +398,7 @@ SAVINGS: 83-94% by using Cloudflare AI Workers
 ```
 
 #### Scenario 2: Multilingual TTS (Supported Languages)
-```
+```yaml
 Use Case: 100K chars/day in French, Spanish, Chinese, Japanese, Korean
 
 Cloudflare MeloTTS:
@@ -411,7 +411,7 @@ SAVINGS: 99.8% by using Cloudflare AI Workers
 ```
 
 #### Scenario 3: LLM Inference for RAG
-```
+```yaml
 Use Case: Customer support bot, 10M tokens/month input + 2M output
 
 Cloudflare Llama 3.3 70B:
@@ -431,7 +431,7 @@ For quality comparable to GPT-4o, Llama 3.3 70B offers massive savings.
 ```
 
 #### Scenario 4: Speech-to-Text Transcription
-```
+```yaml
 Use Case: Transcribe 500 hours of audio/month
 
 Cloudflare Whisper large-v3-turbo:
@@ -447,7 +447,7 @@ SAVINGS: 13-20% by using Cloudflare AI Workers
 ```
 
 #### Scenario 5: Embeddings at Scale
-```
+```yaml
 Use Case: Embed 100M tokens for search index
 
 Cloudflare BGE-large:
@@ -468,7 +468,7 @@ SAVINGS: 50-92% by using Cloudflare AI Workers
 ### When Third-Party is WORTH the Extra Cost
 
 #### Scenario 1: Premium Voice Quality Requirements
-```
+```text
 Use Case: Audiobook narration, premium customer experience
 
 Why ElevenLabs is worth it:
@@ -486,7 +486,7 @@ When to pay premium:
 ```
 
 #### Scenario 2: Real-Time Voice Agents
-```
+```text
 Use Case: Live conversational AI with <100ms latency
 
 ElevenLabs Turbo v2.5:
@@ -503,7 +503,7 @@ Use Cloudflare for batch processing, ElevenLabs for live.
 ```
 
 #### Scenario 3: Languages Not Supported by Cloudflare
-```
+```text
 Use Case: TTS in Portuguese, Italian, Hindi, Arabic
 
 Cloudflare MeloTTS supports: en, fr, es, zh, ja, ko (6 languages)
@@ -518,7 +518,7 @@ Cost-Effective Path:
 ```
 
 #### Scenario 4: Cutting-Edge Reasoning Models
-```
+```text
 Use Case: Complex mathematical reasoning, code generation
 
 If you need GPT-4o/Claude-level reasoning:
@@ -713,7 +713,7 @@ Daily free allocation examples:
 
 ### Cost Optimization Formula
 
-```
+```text
 Monthly AI Cost =
   (Total Neurons - (10,000 × 30 days)) × $0.011 / 1000
 

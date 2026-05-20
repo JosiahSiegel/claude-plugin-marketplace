@@ -16,7 +16,7 @@ Authoritative reference for every aspect of Azure Machine Learning Workspace (Az
 
 ### Workspace Resource Hierarchy
 
-```
+```text
 Azure Subscription
   └── Resource Group
         ├── Azure ML Workspace (Microsoft.MachineLearningServices/workspaces)

@@ -515,7 +515,7 @@ initTheme();
 
 ### Shared Design Tokens Package
 
-```
+```text
 packages/
   design-tokens/
     tokens.css

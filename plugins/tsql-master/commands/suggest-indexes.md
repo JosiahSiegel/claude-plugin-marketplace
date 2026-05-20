@@ -107,7 +107,7 @@ ORDER BY migs.avg_user_impact DESC;
 
 ## Output Format
 
-```
+```sql
 ================================
 Index Recommendations
 ================================

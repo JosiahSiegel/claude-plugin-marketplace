@@ -89,7 +89,7 @@ Evaluate across these dimensions:
 
 Rate each dimension 1-10 and calculate weighted score:
 
-```
+```text
 Hook Score: __/10 x 0.25 = __
 Retention Score: __/10 x 0.25 = __
 Visual Score: __/10 x 0.20 = __

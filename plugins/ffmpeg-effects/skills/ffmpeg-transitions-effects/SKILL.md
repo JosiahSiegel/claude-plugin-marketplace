@@ -527,7 +527,7 @@ ffmpeg -i clip1.mp4 -i clip2.mp4 \
 ```
 
 **Offset calculation for multiple clips**
-```
+```text
 For clips of duration D with transition T:
 - offset1 = D - T
 - offset2 = 2D - 2T

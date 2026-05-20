@@ -16,7 +16,7 @@ Core C# scripting reference for Unity development. Covers MonoBehaviour lifecycl
 
 ### Execution Order
 
-```
+```text
 Awake() -> OnEnable() -> Start() -> FixedUpdate() -> Update() -> LateUpdate() -> OnDisable() -> OnDestroy()
 ```
 

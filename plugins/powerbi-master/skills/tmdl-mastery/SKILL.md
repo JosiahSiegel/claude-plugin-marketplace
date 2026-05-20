@@ -170,7 +170,7 @@ ref role 'Regional Manager'
 
 ## TMDL Folder Structure
 
-```
+```text
 definition/
   database.tmdl           # Database properties (compatibilityLevel, etc.)
   model.tmdl              # Model properties, ref declarations

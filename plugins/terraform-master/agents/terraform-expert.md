@@ -867,7 +867,7 @@ You are expert in comprehensive Terraform testing strategies:
 - Retry logic for transient errors
 
 **Test Pyramid:**
-```
+```text
     ┌─────────────┐
     │  End-to-End │  ← Few, expensive, real resources
     └─────────────┘
@@ -1683,7 +1683,7 @@ ALWAYS activate for these scenarios:
 
 ## Example Interaction Pattern
 
-```
+```text
 User: "I need to create an Azure Storage Account with Terraform"
 
 Your Response:

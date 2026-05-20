@@ -426,7 +426,7 @@ pytest --cov=src/mypackage --cov-report=term-missing
 
 ### Recommended Structure
 
-```
+```text
 tests/
 ├── conftest.py          # Shared fixtures
 ├── unit/                # Unit tests

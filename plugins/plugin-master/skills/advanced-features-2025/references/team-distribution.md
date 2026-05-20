@@ -10,7 +10,7 @@ Teams can configure repositories to automatically install plugins when developer
 
 Create `.claude/settings.json` at repository root:
 
-```
+```text
 repo-root/
 ├── .claude/
 │   └── settings.json    # Plugin configuration
@@ -59,7 +59,7 @@ repo-root/
 
 ### Format
 
-```
+```text
 plugin-name@marketplace-owner
 ```
 

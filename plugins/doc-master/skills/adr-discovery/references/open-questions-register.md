@@ -40,7 +40,7 @@ Each entry is a short numbered block:
 
 ## Lifecycle
 
-```
+```text
 OPEN ----answered---> ANSWERED ----promote--> discovery-brief.md or ADR
   |
   +--parked-------> PARKED ----cited-in--> ADR Consequences

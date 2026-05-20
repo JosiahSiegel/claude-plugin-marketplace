@@ -180,7 +180,7 @@ Build SQL Server database projects (SDK-style or legacy) following current best 
 - Reports warnings and suggestions
 
 **Example:**
-```
+```text
 User: /ssdt-master:build
 Claude: Found SDK-style project: MyDatabase.sqlproj
         Building with dotnet CLI...
@@ -204,7 +204,7 @@ Publish DACPAC files to SQL Server databases with safety checks.
 - Cross-platform compatible
 
 **Example:**
-```
+```text
 User: /ssdt-master:publish
 Claude: Found DACPAC: bin/Debug/MyDatabase.dacpac
         Target: localhost/MyDatabase
@@ -234,7 +234,7 @@ Extract DACPAC or BACPAC files from SQL Server databases.
 - Cross-platform SqlPackage usage
 
 **Example:**
-```
+```text
 User: /ssdt-master:extract
 Claude: Extract DACPAC (schema only) or BACPAC (schema + data)?
 
@@ -259,7 +259,7 @@ Compare database schemas and generate update scripts.
 - Configurable comparison options
 
 **Example:**
-```
+```text
 User: /ssdt-master:schema-compare
 Claude: Comparing source.dacpac to localhost/TargetDB...
 
@@ -288,7 +288,7 @@ Migrate legacy SQL Server projects to SDK-style format.
 - Compares DACPAC output
 
 **Example:**
-```
+```text
 User: /ssdt-master:migrate-sdk
 Claude: Found legacy project: MyDatabase.sqlproj
         Checking for SQLCLR objects... None found
@@ -318,7 +318,7 @@ Create new SQL Server database projects with proper structure.
 - Ready to build immediately
 
 **Example:**
-```
+```text
 User: /ssdt-master:create-project
 Claude: Project type: SDK-style (recommended) or legacy?
 
@@ -356,7 +356,7 @@ Analyze DACPAC files, projects, and databases for insights.
 - Security audit
 
 **Example:**
-```
+```text
 User: /ssdt-master:analyze
 Claude: Analyzing MyDatabase.dacpac...
 
@@ -396,7 +396,7 @@ Assist with database refactoring operations.
 - Rollback planning
 
 **Example:**
-```
+```text
 User: /ssdt-master:refactor
 Claude: What refactoring do you need?
         1. Rename object
@@ -436,7 +436,7 @@ Generate detailed deployment reports showing exactly what changes would be made 
 - Pre-deployment safety check
 
 **Example:**
-```
+```text
 User: /ssdt-master:deployment-report
 Claude: Generating deployment report for MyDB.dacpac → ProductionDB...
 
@@ -476,7 +476,7 @@ Complete SqlPackage reference with all actions and deployment options.
 - Troubleshooting and error handling
 
 **Example:**
-```
+```text
 User: /ssdt-master:sqlpackage
 Claude: SqlPackage Expert - What do you need help with?
 
@@ -529,7 +529,7 @@ The agent automatically activates for:
 
 ### Example Usage
 
-```
+```text
 User: I need to deploy my database changes to production
 Claude: [ssdt-expert agent activates]
         I'll help deploy safely. First, let me generate a deployment preview...
@@ -552,7 +552,7 @@ Claude: [ssdt-expert agent activates]
 
 ### Building a Database Project
 
-```
+```text
 User: Build my database project
 Claude: [Scans directory for .sqlproj files]
         Found: MyDatabase.sqlproj (SDK-style)
@@ -572,7 +572,7 @@ Claude: [Scans directory for .sqlproj files]
 
 ### Publishing to a Database
 
-```
+```text
 User: Publish to my local database
 Claude: Generating deployment preview...
 
@@ -600,7 +600,7 @@ Claude: Publishing...
 
 ### Schema Comparison
 
-```
+```text
 User: Compare my DACPAC to production
 Claude: Extracting production schema...
         Comparing schemas...
@@ -622,7 +622,7 @@ Claude: Extracting production schema...
 
 ### Creating a New Project
 
-```
+```text
 User: Create a new database project for CustomerDB
 Claude: Creating SDK-style project "CustomerDB"...
 
@@ -648,7 +648,7 @@ Claude: Creating SDK-style project "CustomerDB"...
 
 ### Migrating to SDK-Style
 
-```
+```text
 User: Migrate my old project to SDK-style
 Claude: Analyzing LegacyDatabase.sqlproj...
         Format: Legacy (MSBuild/SSDT)
@@ -781,7 +781,7 @@ sqlpackage /Action:Publish /SourceFile:"MyDB.dacpac" /TargetServerName:"localhos
 
 ### Build Errors
 
-```
+```text
 User: Build is failing with "Cannot resolve reference"
 Claude: Checking database references...
 

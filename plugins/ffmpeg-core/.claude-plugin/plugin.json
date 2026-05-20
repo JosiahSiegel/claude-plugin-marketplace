@@ -1,6 +1,6 @@
 {
   "name": "ffmpeg-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Core FFmpeg encoding, transcoding, diagnostics, audio, subtitles, analysis, restoration, codec selection, and hardware acceleration. PROACTIVELY activate for FFmpeg command syntax, H.264/H.265/AV1/VVC encoding, NVENC/QSV/VAAPI/Vulkan, loudnorm/audio work, subtitle burn-in/extraction, ffprobe analysis, deinterlacing, denoise, stabilization, and quality troubleshooting.",
   "author": {
     "name": "Josiah Siegel",

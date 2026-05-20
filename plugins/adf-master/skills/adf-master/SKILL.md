@@ -109,7 +109,7 @@ description: |
 - Topics: CI/CD, ARM templates, pipeline patterns, data flows, monitoring, troubleshooting
 
 **How to Access:**
-```
+```text
 Use Context7 MCP tool to fetch latest documentation:
 mcp__context7__get-library-docs:
   - context7CompatibleLibraryID: /websites/learn_microsoft_en-us_azure_data-factory
@@ -415,7 +415,7 @@ Store in GitHub secret: `AZURE_CREDENTIALS`
 ### Diagnostic Logs
 
 **Enable Diagnostic Settings:**
-```
+```text
 Azure Portal → Data Factory → Diagnostic settings → Add diagnostic setting
 Send to: Log Analytics workspace
 
@@ -477,7 +477,7 @@ ADFActivityRun
 ### Repository Structure
 
 **Recommended Folder Layout:**
-```
+```text
 repository-root/
 ├── adf-resources/          # ADF JSON files (if using npm approach)
 │   ├── dataset/
@@ -511,7 +511,7 @@ repository-root/
 
 ### Multi-Environment Strategy
 
-```
+```text
 Environment Flow:
 Dev (Git) → Build → Test → Approval → Production
             ↓

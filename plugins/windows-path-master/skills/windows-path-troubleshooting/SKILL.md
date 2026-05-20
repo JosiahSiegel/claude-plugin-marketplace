@@ -57,7 +57,7 @@ This applies to:
 ### Why This Matters
 
 **Common error message when using forward slashes on Windows:**
-```
+```text
 Error: ENOENT: no such file or directory
 ```
 
@@ -72,7 +72,7 @@ Error: ENOENT: no such file or directory
 ### Issue 1: Forward Slashes in Tool Calls
 
 **Symptom:**
-```
+```text
 Edit tool fails with "file not found" or "no such file or directory"
 ```
 
@@ -84,12 +84,12 @@ Using forward slashes copied from Git Bash output:
 ```
 
 **Incorrect usage:**
-```
+```text
 Edit(file_path="/s/repos/myproject/file.tsx")
 ```
 
 **Correct usage:**
-```
+```text
 Edit(file_path="S:\repos\myproject\file.tsx")
 ```
 
@@ -182,7 +182,7 @@ echo %USERPROFILE%
 Paths with spaces break or cause "file not found" errors
 
 **Correct handling:**
-```
+```text
 ✅ CORRECT: Edit(file_path="C:\Program Files\My App\config.json")
 ✅ CORRECT: Edit(file_path="D:\My Documents\project\file.txt")
 ```
@@ -198,17 +198,17 @@ Paths with spaces break or cause "file not found" errors
 Network paths like `\\server\share\file.txt` fail
 
 **Windows UNC format:**
-```
+```text
 \\server\share\folder\file.txt
 ```
 
 **Git Bash representation:**
-```
+```text
 //server/share/folder/file.txt
 ```
 
 **Correct usage in Claude Code:**
-```
+```text
 Edit(file_path="\\\\server\\share\\folder\\file.txt")
 ```
 
@@ -244,7 +244,7 @@ When a user provides a file path, follow this decision tree:
 ### Step 2: Conversion Process
 
 **For MINGW paths (`/x/...`):**
-```
+```text
 Input: /s/repos/myproject/src/components/Button.tsx
 
 Process:
@@ -258,7 +258,7 @@ Output: S:\repos\myproject\src\components\Button.tsx
 ```
 
 **For Windows paths with forward slashes (`X:/...`):**
-```
+```text
 Input: S:/repos/project/file.tsx
 
 Process:
@@ -270,7 +270,7 @@ Output: S:\repos\project\file.tsx
 ```
 
 **For relative paths:**
-```
+```text
 Input: ./src/components/Button.tsx
 Current directory (from user or detection): S:\repos\my-project
 
@@ -305,7 +305,7 @@ When you encounter a file path error on Windows:
 ### Step 3: Request Clarification (If Needed)
 
 **If the path is ambiguous, ask:**
-```
+```bash
 I see you're working on Windows with Git Bash. To ensure I use the correct path format,
 could you run this command and share the output?
 
@@ -317,7 +317,7 @@ This will give me the Windows-formatted path.
 ### Step 4: Convert and Retry
 
 **Conversion template:**
-```
+```text
 I'll convert the path from Git Bash format to Windows format:
 - Git Bash: /s/repos/project/file.tsx
 - Windows: S:\repos\project\file.tsx
@@ -328,7 +328,7 @@ Retrying with the correct Windows path...
 ### Step 5: Verify Success
 
 After conversion, verify the operation succeeded and explain what was fixed:
-```
+```text
 ✅ Successfully edited the file using the Windows path format (S:\repos\...).
 
 Note: On Windows with Git Bash, always use backslashes (\) in file paths for
@@ -367,7 +367,7 @@ When file operations fail on Windows:
 
 **Don't wait for errors** - If you see a path that looks like MINGW format, convert it immediately:
 
-```
+```text
 User provides: /s/repos/project/file.tsx
 You think: "This is MINGW format, I need to convert it to S:\repos\project\file.tsx"
 You do: Convert before calling Edit/Write/Read tool
@@ -389,7 +389,7 @@ Then convert the forward slashes to backslashes.
 ### 3. Communicate Path Format Changes
 
 **Always explain when you convert paths:**
-```
+```text
 I'll convert the Git Bash path to Windows format for the Edit tool:
 - From: /s/repos/project/file.tsx
 - To: S:\repos\project\file.tsx
@@ -400,7 +400,7 @@ This helps users understand the requirement and learn for future interactions.
 ### 4. Validate Before Tool Use
 
 **Before calling Edit/Write/Read tools on Windows:**
-```
+```text
 Pre-flight checklist:
 ✅ Path starts with drive letter and colon (e.g., C:, S:)
 ✅ Path uses backslashes (\) not forward slashes (/)
@@ -500,7 +500,7 @@ Pre-flight checklist:
 
 When explaining path issues to users, use this template:
 
-```
+```bash
 I encountered a path format issue. Here's what happened:
 
 **The Problem:**
@@ -535,7 +535,7 @@ with Claude Code on Windows with Git Bash:
 ### Scenario 2: Symbolic Links
 
 **Windows symbolic links:**
-```
+```text
 mklink /D C:\link C:\target
 ```
 
@@ -547,7 +547,7 @@ mklink /D C:\link C:\target
 ### Scenario 3: Docker Volumes
 
 **Docker volume mounts on Windows:**
-```
+```bash
 docker run -v C:\repos:/app
 ```
 

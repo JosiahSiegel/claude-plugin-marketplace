@@ -73,7 +73,7 @@ Check for these issues:
 
 ### Step 4: Estimated vs Actual Analysis
 
-```
+```yaml
 Estimated Rows: 100
 Actual Rows: 100,000
 
@@ -91,7 +91,7 @@ Solution: UPDATE STATISTICS TableName WITH FULLSCAN
 
 ### Pattern: Scan + Key Lookup
 
-```
+```text
 [Index Scan] --> [Key Lookup] --> [Nested Loop]
 ```
 
@@ -100,7 +100,7 @@ Solution: UPDATE STATISTICS TableName WITH FULLSCAN
 
 ### Pattern: Sort Operator
 
-```
+```text
 [Index Seek] --> [Sort] --> [Top]
 ```
 
@@ -109,7 +109,7 @@ Solution: UPDATE STATISTICS TableName WITH FULLSCAN
 
 ### Pattern: Hash Match Join
 
-```
+```text
 [Table Scan] --> [Hash Match] <-- [Table Scan]
 ```
 
@@ -118,7 +118,7 @@ Solution: UPDATE STATISTICS TableName WITH FULLSCAN
 
 ### Pattern: Parallelism with Repartition
 
-```
+```text
 [Parallelism] --> [Repartition Streams] --> [Hash Match]
 ```
 
@@ -127,7 +127,7 @@ Solution: UPDATE STATISTICS TableName WITH FULLSCAN
 
 ## Output Format
 
-```
+```sql
 ================================
 Execution Plan Analysis
 ================================

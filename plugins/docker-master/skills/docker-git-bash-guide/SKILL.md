@@ -328,7 +328,7 @@ MSYS_NO_PATHCONV=1 docker compose run -v $(pwd)/scripts:/scripts backend bash
 ### Problem: "No such file or directory" errors
 
 **Symptoms:**
-```
+```bash
 Error response from daemon: invalid mount config for type "bind":
 bind source path does not exist: C:\Program Files\Git\c\Users\project
 ```
@@ -369,7 +369,7 @@ docker run -v my-named-volume:/data myimage
 ### Problem: Path with spaces fails
 
 **Symptoms:**
-```
+```text
 Error: invalid reference format
 ```
 

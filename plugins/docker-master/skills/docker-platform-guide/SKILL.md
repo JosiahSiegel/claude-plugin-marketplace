@@ -6,39 +6,20 @@ description: |
   Provides: per-platform setup steps, multi-arch build recipes, rootless setup, performance-tuning checklist, and known platform-specific gotchas.
 ---
 
-## 🚨 CRITICAL GUIDELINES
-
-### Windows File Path Requirements
-
-**MANDATORY: Always Use Backslashes on Windows for File Paths**
-
-When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
-
-**Examples:**
-- ❌ WRONG: `D:/repos/project/file.tsx`
-- ✅ CORRECT: `D:\repos\project\file.tsx`
-
-This applies to:
-- Edit tool file_path parameter
-- Write tool file_path parameter
-- All file operations on Windows systems
-
-
-### Documentation Guidelines
-
-**NEVER create new documentation files unless explicitly requested by the user.**
-
-- **Priority**: Update existing README.md files rather than creating new documentation
-- **Repository cleanliness**: Keep repository root clean - only README.md unless user requests otherwise
-- **Style**: Documentation should be concise, direct, and professional - avoid AI-generated tone
-- **User preference**: Only create additional .md files when user specifically asks for documentation
-
-
----
-
 # Docker Platform-Specific Guide
 
 This skill provides detailed guidance on Docker differences, considerations, and optimizations for Windows, Linux, and macOS platforms.
+
+## Shell and path conventions used in this skill
+
+Docker commands are mostly identical across platforms, but the surrounding shell utilities are not. This guide uses the following conventions:
+
+- **Inside `docker exec` / `docker run` containers** — commands target a Linux shell regardless of host OS (containers run Linux).
+- **On the host (Linux / macOS / WSL2)** — examples use bash with `/dev/null`, `grep`, `sed`, `awk`, package managers (`apt-get`, `brew`).
+- **On the host (Windows native PowerShell)** — substitute: `/dev/null` -> `$null`, `grep pattern` -> `Select-String pattern`, `sed -i 's/a/b/' f` -> `(Get-Content f) -replace 'a','b' | Set-Content f`. Pipe object output rather than text.
+- **Docker Desktop on Windows** uses a WSL2 Linux VM — bash examples work inside WSL distros. PowerShell users can still run the `docker` CLI itself; only the supporting Unix tools need translation.
+
+Path quoting: when bind-mounting Windows paths into Docker Desktop, use forward slashes or escaped backslashes (`-v C:/Users/me/code:/app` or `-v "C:\Users\me\code:/app"`). The PowerShell host path uses Windows separators; the container path is always Linux-style.
 
 ## Linux
 
@@ -228,7 +209,7 @@ service docker start
 ### macOS-Specific Considerations
 
 **Resource Allocation:**
-```
+```text
 Docker Desktop → Preferences → Resources → Advanced
 - CPUs: Allocate based on workload (default: half available)
 - Memory: Allocate generously (default: 2GB, recommend 4-8GB)
@@ -282,7 +263,7 @@ docker run --platform linux/amd64 myimage  # Slower
 ```
 
 **Rosetta 2 Integration:**
-```
+```text
 Docker Desktop → Features in development → Use Rosetta for x86/amd64 emulation
 ```
 Faster AMD64 emulation on Apple Silicon.
@@ -295,7 +276,7 @@ Faster AMD64 emulation on Apple Silicon.
 - ✅ Use Virtualization framework (Apple Silicon)
 
 **Resources:**
-```
+```yaml
 CPUs: 4-6 (for development)
 Memory: 6-8 GB (for development)
 Swap: 1-2 GB
@@ -426,7 +407,7 @@ wsl --install -d Ubuntu
 ```
 
 **Docker Desktop Integration:**
-```
+```text
 Settings → Resources → WSL Integration
 - Enable integration with default distro
 - Select additional distros
@@ -529,7 +510,7 @@ See the `docker-git-bash-guide` skill for comprehensive path conversion document
 ### Windows File Sharing
 
 **Configure Shared Drives:**
-```
+```text
 Docker Desktop → Settings → Resources → File Sharing
 Add: C:\, D:\, etc.
 ```

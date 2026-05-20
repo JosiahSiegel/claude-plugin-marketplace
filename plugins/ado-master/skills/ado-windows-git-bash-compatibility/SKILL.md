@@ -27,7 +27,7 @@ Azure Pipelines frequently run on Windows agents, and teams often use Git Bash f
 - Override available via `System.PreferGitFromPath=true`
 
 **Git Bash Location on Windows Agents:**
-```
+```text
 C:\Program Files (x86)\Git\usr\bin\bash.exe
 C:\Program Files\Git\usr\bin\bash.exe
 ```

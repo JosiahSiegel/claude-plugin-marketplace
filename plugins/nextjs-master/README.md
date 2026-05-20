@@ -26,7 +26,7 @@ Comprehensive Next.js 15 plugin for Claude Code, covering App Router, Server Com
 ## Quick Reference
 
 ### App Router Structure
-```
+```text
 app/
 ├── layout.tsx          # Root layout (required)
 ├── page.tsx            # Home page

@@ -44,7 +44,7 @@ Always put a blank line before and after the heading. This is technically a synt
 
 The recommended document skeleton:
 
-```
+```markdown
 # Document Title
 
 <optional one-line author or owner indication>
@@ -149,7 +149,7 @@ Always use fenced code blocks (` ``` `). Do not use 4-space-indented blocks. Rat
 
 Always declare a language on the fence:
 
-````
+````markdown
 ```python
 …
 ```

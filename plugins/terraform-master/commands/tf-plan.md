@@ -10,7 +10,7 @@ Generate an execution plan showing what Terraform will do.
 
 ## Usage
 
-```
+```text
 /tf-plan                          # Basic plan
 /tf-plan prod.tfvars             # With var file
 /tf-plan -target=module.vpc      # Target specific resource

@@ -143,7 +143,7 @@ export default async function ShopPage({ params }: PageProps) {
 
 ### Organizing Without URL Impact
 
-```
+```text
 app/
 ├── (marketing)/
 │   ├── layout.tsx      # Marketing layout
@@ -208,7 +208,7 @@ export default function AppLayout({
 
 ### Basic Parallel Routes
 
-```
+```text
 app/
 ├── layout.tsx
 ├── page.tsx
@@ -288,7 +288,7 @@ export default function AnalyticsDefault() {
 
 ### Modal Pattern
 
-```
+```text
 app/
 ├── feed/
 │   └── page.tsx              # /feed - main feed
@@ -303,7 +303,7 @@ app/
 
 ### Intercepting Conventions
 
-```
+```text
 (.)  - Match same level
 (..) - Match one level above
 (..)(..) - Match two levels above
@@ -414,7 +414,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
 ## Private Folders
 
-```
+```text
 app/
 ├── _components/         # Private - not a route
 │   ├── Button.tsx

@@ -285,7 +285,7 @@ data_url = fal_client.encode_file("small_image.png")
 
 ### Authentication
 
-```
+```text
 Authorization: Key YOUR_FAL_KEY
 ```
 

@@ -194,13 +194,27 @@ make open-maildev
 
 ### "Port already in use"
 
+On macOS / Linux / WSL / Git Bash:
+
 ```bash
 # Find what's using the port
-netstat -ano | findstr :1433  # Windows
-lsof -i :1433                 # macOS/Linux
+lsof -i :1433
 
 # Change port in .env
 echo "DB_PORT=1434" >> .env
+
+# Restart
+make restart
+```
+
+On Windows PowerShell (when running outside WSL / Git Bash):
+
+```powershell
+# Find what's using the port
+netstat -ano | findstr :1433
+
+# Change port in .env
+Add-Content -Path .env -Value "DB_PORT=1434"
 
 # Restart
 make restart
@@ -257,25 +271,25 @@ cat .env | grep DB_
 
 ### SQL Server
 
-```
+```text
 Server=localhost,1433;Database=ApplicationDB;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;MultipleActiveResultSets=true;
 ```
 
 ### Redis
 
-```
+```text
 localhost:6379
 ```
 
 ### Azure Storage (Azurite)
 
-```
+```text
 DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://localhost:10000/devstoreaccount1;
 ```
 
 ### Cosmos DB
 
-```
+```text
 AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
 ```
 
@@ -331,7 +345,7 @@ REDIS_PORT=6379
 
 ## File Structure After Migration
 
-```
+```text
 azure-migration/
 ├── docker-compose.yml       # Main orchestration
 ├── .env                     # Your configuration

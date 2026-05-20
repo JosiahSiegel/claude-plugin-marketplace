@@ -210,7 +210,7 @@ The .NET Microservices Expert agent:
 
 ## Example Interaction
 
-```
+```text
 You: I need to build an e-commerce platform. Should I use microservices?
 
 Agent: Let me help you think through this decision. First, consider:

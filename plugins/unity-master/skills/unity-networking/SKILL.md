@@ -108,7 +108,7 @@ _health.OnValueChanged += (oldVal, newVal) => healthBar.value = newVal;
 
 ### Server-Authoritative Flow
 
-```
+```text
 Client: Press "Attack" -> Send ServerRpc(targetId)
 Server: Validate range/cooldown -> Apply damage -> Update NetworkVariable
 Server: Send ClientRpc for VFX
@@ -121,7 +121,7 @@ Never trust client data. Validate positions, cooldowns, ammunition, and line-of-
 
 ### Lobby System
 
-```
+```text
 1. Player authenticates (UGS Auth / custom)
 2. Player creates or joins lobby (UGS Lobby / custom)
 3. Lobby fills -> host starts game

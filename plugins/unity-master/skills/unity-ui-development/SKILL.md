@@ -41,7 +41,7 @@ Unity provides two UI systems: UGUI (the established GameObject-based system) an
 
 ### RectTransform Anchoring
 
-```
+```bash
 Anchor presets control how elements resize with parent:
 - Stretch-Stretch: Element fills parent (full-screen backgrounds)
 - Center-Center: Fixed size at center (popup dialogs)
@@ -99,7 +99,7 @@ Always use TextMeshPro (`TMP_Text`, `TextMeshProUGUI`) over legacy `Text`. Impor
 
 ### Architecture
 
-```
+```text
 UI Toolkit Stack:
   UXML  -- Structure (like HTML)
   USS   -- Styling (like CSS)

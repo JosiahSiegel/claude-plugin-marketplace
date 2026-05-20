@@ -54,7 +54,7 @@ In 2025, attention spans have shortened to the point where you have just **1.3 s
 
 ### Hook Success Cascade
 
-```
+```text
 First 1.3 seconds: Scroll stop moment
      |
      v

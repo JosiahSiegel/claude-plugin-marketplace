@@ -20,7 +20,7 @@ When working with .NET projects on Windows, especially with Git Bash, you MUST h
 
 **MANDATORY: Always use backslashes for file operations:**
 
-```
+```text
 ❌ WRONG: S:/repos/MyMicroservice/src/Program.cs
 ✅ CORRECT: S:\repos\MyMicroservice\src\Program.cs
 ```
@@ -85,7 +85,7 @@ When users provide paths in Git Bash format, convert them immediately:
 - Explain the conversion so they understand for future
 
 **When creating .NET microservices projects:**
-```
+```text
 ✅ Correct workflow on Windows:
 1. User: "Create a microservice in /s/repos/MyService"
 2. You: Convert to S:\repos\MyService

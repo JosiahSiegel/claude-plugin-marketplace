@@ -8,7 +8,7 @@ Never struggle with file path errors on Windows again! This plugin automatically
 
 When using Claude Code on Windows with Git Bash, file operations often fail with errors like:
 
-```
+```text
 Error: ENOENT: no such file or directory
 ```
 
@@ -67,14 +67,14 @@ The plugin automatically detects these path formats and converts them:
 ### 2. Proactive Error Prevention
 
 **Before:**
-```
+```text
 User: "Edit /s/repos/project/file.tsx"
 Claude: [Tries to edit, fails with ENOENT error]
 Claude: "Sorry, file not found"
 ```
 
 **After (with windows-path-master):**
-```
+```text
 User: "Edit /s/repos/project/file.tsx"
 Claude: "I'll convert this Git Bash path to Windows format (S:\repos\project\file.tsx) and edit the file..."
 ✅ File edited successfully!
@@ -220,7 +220,7 @@ Comprehensive knowledge base for Windows path issues.
 
 When you provide a file path, the plugin follows this logic:
 
-```
+```text
 1. Detect path format:
    - MINGW format? (/s/, /c/, etc.) → Convert to Windows
    - Windows with /? (S:/, C:/) → Replace / with \
@@ -245,7 +245,7 @@ When you provide a file path, the plugin follows this logic:
 ### Conversion Algorithm
 
 **MINGW to Windows:**
-```
+```text
 Input:  /s/repos/claude-plugin-marketplace/file.tsx
 
 Steps:
@@ -263,13 +263,13 @@ Output: S:\repos\myproject\file.tsx
 ### Scenario 1: "File Not Found" Error
 
 **Problem:**
-```
+```text
 User: "Edit /s/repos/file.txt"
 Error: ENOENT: no such file or directory
 ```
 
 **Solution:**
-```
+```text
 Plugin detects MINGW format
 Converts: /s/repos/file.txt → S:\repos\file.txt
 Retries with Windows path
@@ -279,7 +279,7 @@ Retries with Windows path
 ### Scenario 2: Copying Path from Git Bash
 
 **Problem:**
-```
+```bash
 # In Git Bash:
 pwd
 /s/repos/my-project
@@ -290,7 +290,7 @@ pwd
 ```
 
 **Solution:**
-```
+```text
 Plugin automatically detects MINGW format
 Converts to Windows: S:\repos\my-project
 Claude can now work with the path
@@ -300,14 +300,14 @@ Claude can now work with the path
 ### Scenario 3: Mixed Environment (WSL + Git Bash)
 
 **Problem:**
-```
+```text
 User sometimes uses WSL (/mnt/c/Users/...)
 User sometimes uses Git Bash (/c/Users/...)
 Different path formats cause confusion
 ```
 
 **Solution:**
-```
+```text
 Plugin handles both formats:
 - WSL: /mnt/c/Users/file.txt → C:\Users\file.txt
 - Git Bash: /c/Users/file.txt → C:\Users\file.txt
@@ -325,7 +325,7 @@ Both convert to same Windows format
    ```
 
 2. **Provide absolute paths** when possible (avoid relative paths)
-   ```
+   ```text
    ✅ Good: S:\repos\project\file.txt
    ❌ Avoid: ./file.txt
    ```

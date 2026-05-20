@@ -186,7 +186,7 @@ The agent **proactively activates** when you:
 
 The plugin works best with this recommended structure:
 
-```
+```text
 tests/
 ├── unit/                      # Pure function/module tests
 │   └── *.test.js
