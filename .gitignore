@@ -72,3 +72,4 @@ coverage/
 
 **/settings.local.json
 **/settings.json
+**/worktrees

@@ -1,8 +1,8 @@
 # doc-master
 
-Documentation diagnostic and Architecture Decision Record (ADR) expert.
+Documentation diagnostic, Markdown style, and Architecture Decision Record (ADR) expert.
 
-**The plugin's value is avoiding unnecessary docs, not generating them.**
+**The plugin's value is avoiding unnecessary docs, routing the ones that earn their place to the right home, and keeping the Markdown of the docs that exist clean.**
 
 ## What this plugin is for
 
@@ -14,10 +14,11 @@ Most documentation failures are not "we didn't write enough." They are:
 - Docs nobody owns, nobody reads, and nobody updates.
 - Premature ADRs for in-flight proposals that should have been RFCs.
 
-The `doc-expert` agent runs a diagnostic *before* it produces anything. The diagnostic asks two questions:
+The `doc-expert` agent runs a diagnostic *before* it produces anything. It separates three concerns and routes each to the right skill:
 
-1. Can you state this doc's **purpose, audience, owner, and update trigger** in one sentence each? If not, the doc shouldn't exist yet.
-2. Is the thing being documented **architecturally significant** — measurable effect on architecture or quality, hard to reverse, one decision (not a bundle), made (not a proposal)? If yes, it's an ADR. If no, the agent routes you to the correct alternative.
+1. **Placement** — should this doc exist, and where? Can you state its **purpose, audience, owner, and update trigger** in one sentence each? If yes, is the thing being documented **architecturally significant** — measurable effect on architecture or quality, hard to reverse, one decision (not a bundle), made (not a proposal)? If yes, it's an ADR. If no, the agent routes you to the correct alternative (Diátaxis explanation / how-to / reference / tutorial; RFC; runbook; etc.).
+2. **Form** — is the Markdown clean? Two-pass lint over any `.md` file: canonical syntax (Markdown Guide) first, then opinionated style overlay (Google's Markdown style guide). Per-finding, with line numbers and verbatim quotes — never bulk-rewrites.
+3. **Content** (ADR-specific) — when the doc is an ADR, is the reasoning honest? Co-thinking draft, scripted push-back, line-by-line legacy critique against the "ADR is NOT" checklist.
 
 ## What the agent knows
 
@@ -62,16 +63,46 @@ PROACTIVELY, when the user (or another agent):
 - Mentions "supersede," "deprecate," or "revisit" relative to a prior doc.
 - Suspects doc drift, dead docs, or duplicated decision records.
 - Bootstraps doc governance in a repo without one yet.
+- Wants Markdown form review — "review this README," "lint this doc," "fix the formatting," "what's the heading style here," "is this Markdown valid," "style-check this doc."
 
-The most important interception is **before** an ADR gets written for a non-decision — because once it's in the log, it's noise that takes social effort to remove.
+The most important interception is **before** an ADR gets written for a non-decision — because once it's in the log, it's noise that takes social effort to remove. The second most important is form review on docs that *did* earn their place, so they age well.
 
 ## Commands
 
 - **`/adr-new`** — Run the diagnostic on a proposed decision. If the decision is architecturally significant and made, draft the ADR using the project's existing template, with every required field populated honestly (or marked `TBD — needs <specific info>`). If not, route to the correct alternative form and explain why an ADR would be wrong.
 
+- **`/adr-discover`** — Run the zero-hallucination pre-flight Q&A *before* drafting. Confirms the domain, the architectural characteristic under pressure, the components (≤5), the related ADRs, and the named decider — one fact at a time. Produces `docs/architecture/discovery-brief.md` and `docs/architecture/open-questions.md`. Use when context is fuzzy.
+
+- **`/adr-critique`** — Audit a pre-existing or legacy ADR line by line. Quotes the offending line verbatim, names the rule broken, proposes a shorter rewrite, requires per-line approval. For ADRs that didn't go through the co-thinking flow.
+
 - **`/doc-audit`** — Inventory a doc directory, test every ADR against the canon, test every non-ADR against the four-question check (Purpose / Audience / Owner / Update trigger), detect drift and duplication and misclassification, and produce a KEEP / MERGE / REWRITE / DELETE / MOVE action list. Nothing is deleted without your sign-off.
 
-Most of the time you don't need a command — just describe the doc situation and the agent will run the right procedure. The commands exist to give common workflows a one-token entry point.
+- **`/doc-lint`** — Two-pass Markdown lint on any one file. Pass 1 (syntax must-fix) flags non-portable Markdown — setext where ATX is expected, unfenced code blocks, missing blank lines around block elements, mid-word underscore emphasis, etc. Pass 2 (style should-fix) applies the opinionated Google Markdown style overlay — single H1, ATX headings, `[TOC]` on long docs, 80-character lines, informative link text, fenced blocks with language tags. One finding at a time, per-line approval, no bulk rewrites.
+
+Most of the time you don't need a command — just describe the doc situation and the agent will load the right skill (`doc-diagnostic`, `adr-discovery`, `adr-drafting`, `adr-critique`, `c4-model`, or `markdown-style`). The commands give common workflows a one-token entry point.
+
+## Skills
+
+The deep ADR mechanics live in skills, loaded by the agent when relevant. The canonical trigger list for each skill is the `description:` frontmatter of the skill's `SKILL.md` — the table below gives a one-line prose summary, not a re-enumeration of triggers.
+
+| Skill | What it does |
+|---|---|
+| **`doc-diagnostic`** | The canon: alternatives catalog, ADR templates / lifecycle / numbering / required fields, failure-modes table, folder-level audit procedure. Loaded when the question is "where does this doc belong?" or "how do I clean up this doc set?" |
+| **`adr-discovery`** | Pre-flight context gathering for an ADR. Produces a `discovery-brief.md` and `open-questions.md` containing only architect-confirmed facts; refuses to advance until five MUSTs are confirmed. |
+| **`adr-drafting`** | Seven-phase co-thinking draft of a new ADR with one question per turn, scripted push-back, and a self-critique pass against the "ADR is NOT" checklist before the architect sees a draft. |
+| **`adr-critique`** | Line-by-line audit of a legacy ADR. Verbatim quotes, per-line approval, no bulk edits. |
+| **`c4-model`** | Canonical-C4 LikeC4 diagram alongside an ADR — Context + Container views (+ optional Deployment). Refuses Component views and custom kinds. |
+| **`markdown-style`** | Markdown form review on any `.md` file. Two-pass — canonical syntax (Markdown Guide) must-fix first, opinionated style (Google Markdown style guide) should-fix second. Per-finding with line numbers, verbatim quotes, rule citations; never bulk-rewrites. |
+
+A shared **`_shared/adr-is-not.md`** enforces the canonical checklist across the three ADR-flow skills (`adr-discovery`, `adr-drafting`, `adr-critique`) and the `doc-expert` agent: an ADR is not a tutorial, an implementation guide, a marketing doc, a hedge, a generic best-practice citation, an LLM probability summary, a future-proofing essay, corporate passive voice, a design doc, or long. Hard limits: Context ≤ 3 sentences, Decision ≤ 3 sentences, Consequences as bullets.
+
+## Typical workflow
+
+- **New decision** — start with `/adr-new` (or describe the situation). The agent runs the diagnostic. If it's not an ADR, you get routed to the right alternative (Diátaxis explanation, RFC, runbook, code comment, etc.). If it is an ADR but discovery is shallow, run `/adr-discover` first; otherwise drafting begins.
+- **Drafting** — once the five MUSTs are confirmed, `adr-drafting` produces the ADR through the seven-phase co-thinking flow.
+- **Diagram (optional)** — after saving, `c4-model` adds canonical Context + Container views alongside the ADR.
+- **Audit existing docs** — `/adr-critique` for one legacy ADR (line-by-line); `/doc-audit` for a whole directory (KEEP / MERGE / REWRITE / DELETE / MOVE).
+- **Lint any Markdown file** — `/doc-lint` for two-pass syntax-then-style review of one `.md` file. Works on READMEs, how-tos, runbooks, ADRs (form only — content goes through `/adr-critique`).
 
 ## Installation
 
@@ -86,15 +117,13 @@ Standard marketplace install:
 
 - Write the code or implementation that the decision governs.
 - Maintain product backlog / Jira / Linear tickets — those are work items, not decisions.
-- Enforce style — that's what linters and `CONTRIBUTING.md` are for. The agent will explicitly route you there for style/convention questions.
-- Pick an ADR template if the project already has one — it will adopt the project's choice.
+- Enforce **prose** style — sentence structure, tone, terminology consistency. Markdown form (headings, code fences, lists, link syntax, line length) is in scope via `markdown-style`; prose-level style is not.
+- Enforce **coding** style — that's what linters and `CONTRIBUTING.md` are for. The agent will explicitly route you there for coding-convention questions.
 - Decide for you. The Owners / Deciders field exists because humans decide; the agent drafts.
 
 ## Rationale
 
-ADR practice is now ~15 years old (Nygard 2011) and well-canonicalized — adr.github.io, the community reference repo, MADR, Y-statements, the ThoughtWorks Radar's Adopt-ring endorsement. The remaining failure mode is not "we don't know how to write ADRs"; it is *"we write them for the wrong things, or skip them for the right things, or treat them as living documents and lose the audit trail."* This plugin encodes the diagnostic stance — purpose / audience / owner / update trigger, then "architecturally significant?" — that filters those failures before they reach the decision log.
-
-The plugin contains one agent and two commands, deliberately. Adding skills would push the alternatives catalog and the canon into separate files behind a lookup, which would defeat the diagnostic — the agent needs the whole catalog in scope to route a request in one turn.
+The remaining ADR failure mode is not "we don't know how to write ADRs" — it is "we write them for the wrong things." This plugin's diagnostic filter is the differentiator.
 
 ## Sources
 
@@ -105,6 +134,12 @@ The plugin contains one agent and two commands, deliberately. Adding skills woul
 - Michael Nygard, "Documenting Architecture Decisions" (2011) — the seed template
 - [ThoughtWorks Technology Radar: Lightweight ADRs](https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records) — Adopt-ring, source-control storage
 - [Diátaxis](https://diataxis.fr) — tutorial / how-to / reference / explanation framework for the alternatives catalog
+- [Markdown Guide — Basic Syntax](https://www.markdownguide.org/basic-syntax/) — canonical Markdown syntax reference (CC BY-SA 4.0), distilled into the `markdown-style` skill's syntax-canon layer
+- [Google developer documentation — Markdown style guide](https://google.github.io/styleguide/docguide/style.html) — opinionated Markdown style (Apache 2.0), distilled into the `markdown-style` skill's style-overlay layer
+
+## Acknowledgments
+
+ADR workflow capabilities were informed by the open-source `deep-adr` project. The Markdown style skill distills the canonical Markdown Guide basic syntax (CC BY-SA 4.0) and Google's developer-documentation Markdown style guide (Apache 2.0). See [NOTICES.md](NOTICES.md) for third-party license details.
 
 ## License
 
