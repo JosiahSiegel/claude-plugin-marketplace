@@ -58,7 +58,7 @@ When creating ANY plugin in a marketplace repository:
 
 1. **Check for marketplace.json**: Look for `.claude-plugin/marketplace.json` at repo root
 2. **Register new plugins**: Add entry to `plugins` array with all required fields
-3. **Synchronize metadata**: Description and keywords must match between plugin.json and marketplace.json
+3. **Synchronize metadata**: Description should stay aligned; plugin-owned `plugin.json` keywords are the source of truth and marketplace keyword mirrors must be synced with `scripts/version_ops.py --sync --metadata keywords`
 4. **A plugin is NOT complete until registered in marketplace.json**
 
 ### Size Limits (MANDATORY)

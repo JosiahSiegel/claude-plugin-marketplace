@@ -22,6 +22,13 @@ The script maintains consistency between:
 - `.claude-plugin/marketplace.json` (central registry)
 - `plugins/<name>/.claude-plugin/plugin.json` (individual configs)
 
+For keyword metadata, `plugins/<name>/.claude-plugin/plugin.json` is the source of truth. Marketplace keywords are mirrors for discovery and should be validated or synchronized with:
+
+```bash
+python3 scripts/version_ops.py --validate --metadata keywords
+python3 scripts/version_ops.py --sync --metadata keywords
+```
+
 **Version bump types:**
 - `patch` - Bug fixes, docs, minor tweaks
 - `minor` - New features, skills, agents

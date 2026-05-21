@@ -19,11 +19,11 @@ claude-code-marketplace/
 ├── plugins/
 │   ├── bash-master/
 │   │   └── .claude-plugin/
-│   │       └── plugin.json       # Plugin-specific version
+│   │       └── plugin.json       # Plugin-owned version and keywords
 │   ├── ffmpeg-master/
 │   │   └── .claude-plugin/
 │   │       └── plugin.json
-│   └── ...                       # 25 plugins total
+│   └── ...                       # registered plugins
 └── scripts/
     ├── version_ops.py            # Main Python script
     ├── version-tracker.sh        # Bash wrapper
@@ -156,7 +156,7 @@ python3 scripts/version_ops.py -b patch -p bash-master --dry-run
 
 ### Bump ALL Plugins
 
-Increment version for all 25 plugins at once:
+Increment versions for all registered plugins at once:
 
 ```bash
 # Preview first (recommended)
@@ -175,7 +175,7 @@ python3 scripts/version_ops.py -b major --all    # Breaking changes
 - `minor` - New features, skills, agents (1.0.0 -> 1.1.0)
 - `major` - Breaking changes, rewrites (1.0.0 -> 2.0.0)
 
-## Current Plugins (25 total)
+## Current Plugins
 
 | Plugin | Description |
 |--------|-------------|
@@ -263,10 +263,10 @@ python3 scripts/version_ops.py -b patch --all            # Apply
    - `patch` for bug fixes, documentation updates, minor tweaks
    - `minor` for new skills, agents, or features
    - `major` for breaking changes, major rewrites, API changes
-4. **Never manually edit versions** - Always use this script to maintain consistency
-5. **Preview with --dry-run** - Use dry-run before sync or bump operations to verify
-6. **Use --all for bulk operations** - When updating multiple plugins, use `--all` flag
-7. **Check JSON output** - Use `--json` flag for programmatic parsing of validation results
+5. **Never manually edit versions** - Always use this script to maintain consistency
+6. **Preview with --dry-run** - Use dry-run before sync or bump operations to verify
+7. **Use --all for bulk operations** - When updating multiple plugins, use `--all` flag
+8. **Check JSON output** - Use `--json` flag for programmatic parsing of validation results
 
 ## Examples
 

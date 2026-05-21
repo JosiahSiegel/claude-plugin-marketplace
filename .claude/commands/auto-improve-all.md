@@ -80,13 +80,13 @@ AUTONOMOUS IMPROVEMENT PROCESS:
    Execute your decisions:
    - CREATE new command/skill files for new capabilities
    - EDIT existing files to add features and fix issues
-   - UPDATE version numbers to current 2025 versions
+   - USE `scripts/version_ops.py` for any plugin version bumps
    - REMOVE duplicate content across files
    - REPLACE deprecated features with current alternatives
    - VALIDATE all examples work with current versions
-   - **BUMP version in BOTH plugin.json AND marketplace.json** (MANDATORY - versions MUST match)
-   - **ALIGN versions**: Ensure plugins/[PLUGIN_NAME]/.claude-plugin/plugin.json and .claude-plugin/marketplace.json have IDENTICAL version numbers
-   - **ENSURE PORTABILITY** - Remove all user-specific paths, machine names, personal info
+   - **BUMP versions with `python3 scripts/version_ops.py`** (MANDATORY - never hand-edit version fields)
+   - **ALIGN metadata**: Ensure `python3 scripts/version_ops.py --validate --metadata all` passes; sync marketplace keyword mirrors from plugin-owned plugin.json when needed
+   - **ENSURE PORTABILITY** - Remove all user-specific paths, machine names, personal info, private project references, PRs, commits, companies, and internal paths
 
    Complete everything before returning results.
 
@@ -98,9 +98,9 @@ AUTONOMOUS IMPROVEMENT PROCESS:
    - **Files Enhanced**: Existing files updated with improvements
    - **Bugs Fixed**: Critical issues corrected
    - **Content Optimized**: Deduplication percentage achieved
-   - **Version Bumped**: New version number in BOTH files (plugin.json + marketplace.json) - MUST be identical
-   - **Version Alignment Verified**: plugins/[PLUGIN_NAME]/.claude-plugin/plugin.json matches .claude-plugin/marketplace.json
-   - **Portability Verified**: No user-specific paths or personal information
+   - **Version Bumped**: New version number applied with `scripts/version_ops.py`
+   - **Metadata Alignment Verified**: versions and keyword mirrors validated with `scripts/version_ops.py --validate --metadata all`
+   - **Portability Verified**: No user-specific paths, private project references, or personal information
    - **Production Ready**: Assessment with any remaining gaps
 
 AUTONOMOUS DECISION-MAKING GUIDELINES:
@@ -115,9 +115,9 @@ CRITICAL RULES:
 ✓ MAKE actual changes (do not just identify issues)
 ✓ USE your expert judgment to prioritize improvements
 ✓ WORK within your own context (minimal main context usage)
-✓ **ALWAYS increment version** in plugin.json AND marketplace.json (MANDATORY - MUST match)
-✓ **VERIFY version alignment** - plugins/[PLUGIN_NAME]/.claude-plugin/plugin.json and .claude-plugin/marketplace.json MUST have IDENTICAL versions
-✓ **KEEP CONTENT PORTABLE** - No user paths, machine names, personal info
+✓ **ALWAYS increment versions with `python3 scripts/version_ops.py`** (never hand-edit plugin.json or marketplace.json versions)
+✓ **VERIFY metadata alignment** - run `python3 scripts/version_ops.py --validate --metadata all`; sync marketplace keywords from plugin-owned plugin.json with `--sync --metadata keywords` when needed
+✓ **KEEP CONTENT PORTABLE** - No user paths, machine names, personal info, private project names, PRs, commits, companies, or internal paths
 ✗ DO NOT ask for approval or confirmation
 ✗ DO NOT pause mid-improvement to check in
 ✗ DO NOT create placeholder content
@@ -191,7 +191,7 @@ After running this command, you will have **measurably improved** all plugins:
 3. **50+ Files Enhanced** - Existing content updated with current best practices
 4. **10-15 Bugs Fixed** - Critical issues, outdated info, and deprecated code corrected
 5. **25% Average Optimization** - Redundant content removed, clarity improved
-6. **8-12 Version Bumps** - ALL plugins updated in both plugin.json AND marketplace.json
+6. **8-12 Version Bumps** - ALL version changes applied through `scripts/version_ops.py`
 7. **README.md Synchronized** - Main README reflects all plugin improvements and current descriptions
 8. **100% Portable** - No user-specific paths, machine names, or personal information
 9. **100% Production Ready** - All plugins validated with working examples
@@ -210,9 +210,9 @@ After running this command, you will have **measurably improved** all plugins:
 - **Fixes issues** - Corrects bugs, outdated info, deprecated code
 - **Optimizes content** - Removes duplication, improves clarity
 - **Creates files** - New commands/skills for missing capabilities
-- **Bumps versions** - ALWAYS increments version in plugin.json AND marketplace.json
+- **Bumps versions** - ALWAYS via `scripts/version_ops.py`; never edits version fields by hand
 - **Updates README.md** - Synchronizes main README with all plugin improvements
-- **Ensures portability** - Removes user paths, machine names, personal info
+- **Ensures portability** - Removes user paths, machine names, personal info, private project references
 
 **Performance:**
 - Takes 15-30 minutes for all 12 plugins
@@ -222,10 +222,10 @@ After running this command, you will have **measurably improved** all plugins:
 ## Manual Steps After Completion
 
 1. **Review improvements**: `git diff` to see all enhancements
-2. **Verify versions**: Confirm all plugin.json AND marketplace.json versions incremented
-3. **Validate version alignment**: Ensure plugins/*/\*.claude-plugin/plugin.json versions match .claude-plugin/marketplace.json
+2. **Verify versions**: Confirm `scripts/version_ops.py` performed all version bumps
+3. **Validate metadata alignment**: Run `python3 scripts/version_ops.py --validate --metadata all`
 4. **Verify README.md**: Confirm all plugin descriptions match marketplace.json and all plugins are listed
-5. **Check portability**: Search for any remaining user paths (C:\Users, /home/, D:\repos)
+5. **Check portability**: Search for any remaining user paths (C:\Users, /home/, D:\repos), private project names, PRs, commits, companies, or internal paths
 6. **Test new features**: Validate new commands and examples work
 7. **Commit improvements**: Descriptive message highlighting key additions
 8. **Share updates**: Create PR or announce new capabilities to team
@@ -304,10 +304,11 @@ All plugins now include current 2025 best practices with minimal context usage!
 - Only agent launch and results collection happen in main context
 
 **Version Increments Not Happening:**
-- Verify agent has write permissions to plugin.json and marketplace.json
+- Run `python3 scripts/version_ops.py -b patch -p <plugin-name> --dry-run` to preview the bump
+- Verify the agent has write permissions to plugin.json and marketplace.json
 - Check if version format is correct (semantic versioning: X.Y.Z)
-- Ensure BOTH files are updated (not just one)
-- Validate versions MATCH between plugin.json and marketplace.json (must be identical)
+- Ensure `scripts/version_ops.py`, not manual edits, updates BOTH files
+- Validate metadata with `python3 scripts/version_ops.py --validate --metadata all`
 
 **User-Specific Content Found:**
 - Search for patterns: C:\Users, /home/, D:\repos, @company.com
@@ -317,7 +318,7 @@ All plugins now include current 2025 best practices with minimal context usage!
 **README.md Not Updated:**
 - Verify marketplace.json has all plugin entries with descriptions
 - Check that README.md categories match the organizational structure
-- Ensure Edit tool used with correct file path (D:\repos\claude-plugin-marketplace\README.md or ./README.md)
+- Ensure the correct repository README.md is edited
 - Manually verify all plugin links work (./plugins/PLUGIN_NAME/README.md)
 - Confirm descriptions in README match marketplace.json exactly
 
