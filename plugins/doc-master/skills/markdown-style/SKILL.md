@@ -100,11 +100,19 @@ Full overlay with rationales: `references/style-overlay.md`.
 - **"Where does this doc belong?"** -> `doc-diagnostic` alternatives catalog.
 - **"Is the prose understandable?"** -> out of scope. This skill enforces Markdown form, not prose clarity. Suggest a `doc-diagnostic` Audience check if the prose is unfit for its named audience.
 
+## What this skill does NOT cover
+
+This skill is **Markdown form only.** It covers heading style, list indentation, code-fence language tags, link syntax, line length, and the rest of the Markdown-Guide / Google-style-overlay rule sets. It does **not** cover:
+
+- **Prose-level enforcement** — terminology consistency, inclusive-language substitutions, banned phrases, voice / tense / mood rules. The next layer up for that work is **[Vale](https://vale.sh)** (the prose-linter framework that runs configurable style packs over Markdown, AsciiDoc, reST, HTML, and more). Vale composes well with this skill: doc-master fixes the Markdown form; Vale enforces the prose terminology. doc-master does not bundle Vale or its rule packs.
+- **AsciiDoc / reStructuredText / org-mode / MDX** — this skill is Markdown only. Other lightweight markup languages have their own canonical rules; reach for the matching tool (e.g., `asciidoctor --safe-mode`).
+- **Spelling and grammar** — out of scope. Use a spell checker (`codespell`, `hunspell`, `LanguageTool`) in addition to this skill, not instead.
+
 ## Hard limits
 
 - The skill flags findings — it does not bulk-rewrite. One finding at a time, per-line approval, mirrors `adr-critique`.
 - Syntax findings ("must-fix") take precedence over style findings ("should-fix"). Never re-order.
-- The skill does not invent new rules. Every finding must cite a rule from `references/syntax-canon.md` or `references/style-overlay.md`. If the architect disputes a style finding, default to the architect — the overlay is opinionated.
+- The skill does not invent new rules. Every finding must cite a rule from `references/syntax-canon.md` or `references/style-overlay.md`. If the user disputes a style finding, default to the user — the overlay is opinionated.
 - The skill respects project-local conventions when they conflict with the canon (e.g., a project that has standardized on `_underscore_` emphasis). Note the conflict; defer to the project.
 
 ## Examples
@@ -143,4 +151,4 @@ The two layers in this skill are derived from publicly available style reference
 - **Syntax canon** — distilled from the Markdown Guide basic-syntax reference (https://www.markdownguide.org/basic-syntax/), licensed CC BY-SA 4.0. See `NOTICES.md` at the plugin root.
 - **Style overlay** — distilled from Google's developer documentation Markdown style guide (https://google.github.io/styleguide/docguide/style.html), part of `google/styleguide` (Apache License 2.0). See `NOTICES.md`.
 
-The skill distills load-bearing rules from each source; it does not reproduce either document verbatim. When the architect needs the original text, link out — do not paste long excerpts into this skill.
+The skill distills load-bearing rules from each source; it does not reproduce either document verbatim. When the user needs the original text, link out — do not paste long excerpts into this skill.

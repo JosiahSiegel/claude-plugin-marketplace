@@ -1,6 +1,6 @@
 # An ADR IS NOT — shared checklist
 
-This file is the canonical "what an ADR must not be," referenced by every ADR-related skill in `doc-master` (`adr-discovery`, `adr-drafting`, `adr-critique`, and the `doc-expert` agent). Enforce these rules during drafting, self-critique, and audit.
+This file is the canonical "what an ADR must not be," referenced by every ADR-related skill in `doc-master` (`adr-discovery`, `adr-drafting`, `adr-backfill`, `adr-critique`, and the `doc-expert` agent). Enforce these rules during drafting, self-critique, and audit.
 
 Hard sentence/length limits sit at the bottom and are enforced by `adr-critique`.
 

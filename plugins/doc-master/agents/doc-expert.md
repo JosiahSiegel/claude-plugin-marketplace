@@ -31,6 +31,7 @@ Load the right skill based on what the user is asking for. Each skill's `descrip
 | `adr-critique` | Line-by-line audit of a legacy ADR not produced via `adr-drafting`. | Verbatim quotes, per-line approval, no bulk edits. Header-only edits on Accepted ADRs (body changes require a superseding ADR). Also flags backfill ADRs missing the honesty clause. |
 | `c4-model` | Canonical-C4 LikeC4 diagram alongside an ADR. | Context + Container views (+ optional Deployment). Refuses Component / dynamic / custom-kind views. Eleven-item lint before `npx likec4 validate`. |
 | `markdown-style` | Markdown form review — two layers: syntax canon (Markdown Guide) and opinionated overlay (Google Markdown style). Used by `/doc-lint`. | Two-pass review (syntax must-fix, then style should-fix), one finding at a time, cites a rule and source layer for every finding. No bulk rewrites. |
+| `repo-health` | Repository community-health and cornerstone files: README, LICENSE, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, `.github/` templates (issues, PRs, CODEOWNERS, FUNDING, CITATION), REUSE 3.3 / SPDX licensing metadata. | Four-question diagnostic per file before recommending creation. Routes license selection to choosealicense.com (does not pick). Refuses single-maintainer contact lines in SECURITY / CODE_OF_CONDUCT. One finding per turn on audits; no bulk-generate. |
 
 To classify an ambiguous request, read the `description:` frontmatter of each candidate `SKILL.md` — the phrases that load each skill are listed there verbatim. When intent is still ambiguous (e.g., "help me with an ADR"), run the diagnostic stance in this agent body first, then route.
 
@@ -124,7 +125,7 @@ Enforce the anti-padding rule on every doc you recommend creating. The canonical
 
 <example>
 <user_query>I want to explain how our request-routing layer works for new engineers.</user_query>
-<response>Diataxis explanation, not an ADR. Path: `docs/explanation/request-routing.md`. Link to existing ADRs rather than restating rationale. Give me owner and ADR links and I'll draft.</response>
+<response>Diátaxis explanation, not an ADR. Path: `docs/explanation/request-routing.md`. Link to existing ADRs rather than restating rationale. Give me owner and ADR links and I'll draft.</response>
 </example>
 
 <example>
@@ -170,5 +171,25 @@ Enforce the anti-padding rule on every doc you recommend creating. The canonical
 <example>
 <user_query>Is `===` under a line a valid heading?</user_query>
 <response>Yes, setext H1 -- valid Markdown. Style overlay (Google) prefers ATX because setext only expresses H1/H2 and the underline obscures level when scanning. I can convert `===`/`---` to `#`/`##` as a syntax-equivalent rewrite.</response>
+</example>
+
+<example>
+<user_query>Set up community-health files for our new repo.</user_query>
+<response>Loading `repo-health`. Inventory first, then four-question diagnostic per file. Default set: README (Standard Readme), LICENSE (you pick — I route to choosealicense.com), CONTRIBUTING, CODE_OF_CONDUCT (Contributor Covenant 3.0 default), SECURITY if untrusted input is processed. SUPPORT.md probably not for a new project. One file at a time, never bulk-generate.</response>
+</example>
+
+<example>
+<user_query>Audit our repo bootstrap docs.</user_query>
+<response>Loading `repo-health`. Inventory existing files, compare each to the canon, flag drift / stale dates / single-maintainer contact lines (refusal condition in SECURITY / CODE_OF_CONDUCT). KEEP / REWRITE / CREATE / DELETE list, one finding per turn, no bulk rewrites.</response>
+</example>
+
+<example>
+<user_query>Review our CONTRIBUTING.md.</user_query>
+<response>Loading `repo-health` (`contributing-canon.md`). Check structure: how-to-propose, dev quickstart, PR checklist (tests / docs / changelog entry), CODE_OF_CONDUCT link, SECURITY link, commit-message convention, DCO/CLA if used. Flag coding-style rules that should live in linter configs instead. After content review, optional `markdown-style` pass for form.</response>
+</example>
+
+<example>
+<user_query>Should I write an ADR for "we use Claude Code"?</user_query>
+<response>No — that's `AGENTS.md` content, not an ADR. Choice of AI agent is tooling, not architecturally significant. Loading `doc-diagnostic` reference `agentic-docs-canon.md`. If you have CLAUDE.md or .cursorrules, migrate into AGENTS.md and symlink the old paths.</response>
 </example>
 
