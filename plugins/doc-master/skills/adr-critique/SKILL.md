@@ -79,7 +79,7 @@ See `references/audit-checklist.md` for the full missing-why interrogation.
 Across the ADR and its graph neighbors, look for:
 
 - **Tensions** — two ADRs claim incompatible decisions without one superseding the other. Flag both and ask which supersedes.
-- **Missing relationships** — a later decision claims to replace 0004 but lacks `supersedes: ["0004"]`, related/amended links are not valid YAML lists, or related ADRs are only connected through the decision-log index / related-doc links. Flag for graph-compatible frontmatter fixes and distinct `Related ADRs` / `Related docs` metadata.
+- **Missing relationships** — a later decision claims to replace 0004 but lacks `supersedes: ["0004"]` in its frontmatter; related/amended links are not valid YAML lists; or the only evidence of a relationship lives in a body line such as `Related ADRs: [ADR-0004](0004-foo.md)` or in the decision-log `README.md` index. ADR Explorer-style parsers read frontmatter only — body links and index links do not produce graph edges. Flag every prose-only relationship for promotion into frontmatter (`supersedes` / `amends` / `relates-to`) with zero-padded four-digit string IDs, and keep `Related ADRs:` (human navigation) separate from `Related docs:` (provenance) in the body.
 - **Duplicate authoritative claims** — two ADRs claim authority over the same component/decision. One must defer.
 
 See `references/audit-checklist.md` for the consistency probes.

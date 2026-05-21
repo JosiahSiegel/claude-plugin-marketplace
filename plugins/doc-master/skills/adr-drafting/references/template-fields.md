@@ -10,14 +10,43 @@ The `adr-drafting` skill uses this canonical field set. It is MADR-compatible bu
 | `status` | yes | ADR Explorer-compatible value: `proposed`, `accepted`, `superseded`, or `deprecated`. Do not overload with `rfc`, `rejected`, or backfill text. |
 | `date` | yes | ISO 8601 (`YYYY-MM-DD`). Stamp at acceptance, not first draft. |
 | `deciders` | yes | YAML array of named human(s). "The team" is not a value. |
-| `supersedes` | optional | YAML list of ADR ids this decision replaces (e.g., `["0004"]`). This list creates the graph edge; do not rely on `superseded-by` / `superseded by` alone. |
-| `amends` | optional | YAML list of ADR ids this decision adjusts without replacing. |
-| `relates-to` | optional | YAML list of objects: `{id: "0004", reason: "one-line reason"}`. |
+| `supersedes` | optional | YAML list of ADR ids this decision replaces (e.g., `["0004"]`). This list creates the graph edge; do not rely on `superseded-by` / `superseded by` text on the old ADR alone, and do not rely on prose `Related ADRs:` body lines — explorers read frontmatter only. |
+| `amends` | optional | YAML list of ADR ids this decision adjusts without replacing. Graph-bearing; frontmatter only. |
+| `relates-to` | optional | YAML list of objects: `{id: "0004", reason: "one-line reason"}`. Graph-bearing; frontmatter only. |
 | `tags` | optional | Free-form, lowercase, hyphenated. |
 | `review-by` | recommended | ISO date or named trigger (e.g., `100k DAU`). A fossil trigger ("revisit annually") is worse than no trigger. |
 | `expires` | optional | ISO date for decisions that should stop applying unless renewed. Use only when expiry is real. |
 | `confidence` | recommended | `high`, `medium`, or `low`. Used by the skill to suggest RFC routing. If a numeric score is desired, add separate `confidence-score`. |
 | `rfc-deadline` | conditional | Required when the ADR is serving as an RFC with `status: proposed`. Date the RFC window closes. |
+
+### How ADR Explorer-style parsers read these fields
+
+ADR Explorer-style tools extract relationships from YAML frontmatter only:
+
+- The frontmatter block is parsed with `gray-matter`. The Markdown body is **not** scanned for relationship links.
+- Exactly three keys produce ADR-to-ADR graph edges: `relates-to`, `supersedes`, `amends`. Any other custom key (e.g., `related`, `links`, `see-also`) is ignored unless the team also wires it into their own tooling.
+- ID values are normalized with the regex `/(\d+)/` — the first digit run is captured and zero-padded to four characters. So `8`, `"08"`, `"0008"`, and `"ADR-0008"` all collapse to the node `0008`.
+- Recommendation: write IDs as **zero-padded four-digit strings** (`"0008"`) in every list. Bare integers parse correctly, but quoted four-digit strings sort, diff, and render predictably across tools.
+
+Minimal canonical frontmatter that renders cleanly in a graph view:
+
+```yaml
+---
+title: "Use Postgres for primary store"
+status: accepted
+date: 2026-05-20
+deciders:
+  - Jane Doe
+supersedes:
+  - "0004"
+amends: []
+relates-to:
+  - id: "0011"
+    reason: "shares the tenancy model decided in 0011"
+---
+```
+
+Lines such as `Related ADRs: [ADR-0011](0011-tenancy.md)` in the body are for human readers — they do not appear in the graph.
 
 ## Sections
 
@@ -68,11 +97,11 @@ Realistic options only. **At the same level of abstraction** — don't compare "
 
 ### Notes (optional)
 
-- Direct ADR-to-ADR links, separate from related-document provenance. Prefer distinct labels, for example:
+- Human-readable cross-links only. Prefer distinct labels so a reader can tell intent apart, for example:
   - `Related ADRs: [ADR-0001](0001-dual-runtime.md)`
   - `Related docs: [Architecture](../explanation/architecture.md)`
-- Use graph-compatible frontmatter (`supersedes`, `amends`, `relates-to`) for machine-readable ADR relationships; prose links are for human readers and tools that scan Markdown links.
-- Do not rely on the decision-log `README.md` as the only connection between ADRs. Many ADR explorers draw edges from links inside ADR files to other ADR files and may ignore index hub links.
+- **Do not treat body links as a relationship signal.** ADR Explorer-style parsers ignore the body entirely; only frontmatter `supersedes`, `amends`, and `relates-to` create graph edges. Anything you want a tool to see must be in the frontmatter.
+- Do not rely on the decision-log `README.md` as a connection between ADRs either — index-hub links are also ignored when edges are drawn.
 - `PARKED` open questions cited here, with the reason for parking.
 - Anything that didn't fit but matters for the record. Resist using this section as overflow.
 
@@ -87,7 +116,7 @@ Realistic options only. **At the same level of abstraction** — don't compare "
 - Use `status: proposed` for ADRs serving as RFCs; add `rfc-deadline` instead of inventing `status: rfc`.
 - If a proposal is rejected, either delete it before acceptance or keep it as `status: deprecated` with a clear rejection note; do not use `status: rejected` when ADR Explorer compatibility matters.
 - An accepted ADR's body is **append-only**. Header-only reverse links are allowed for human readers, but ADR Explorer graph rendering depends on the new ADR's `supersedes` list.
-- Supersession is recorded by the new ADR setting `supersedes: ["NNNN"]`. The old ADR may also receive a human-readable `superseded by` header note, but that note is not the graph edge.
+- Supersession is recorded by the new ADR setting `supersedes: ["NNNN"]` in its frontmatter. The old ADR may also receive a human-readable `superseded by` header note, but that note is not the graph edge and is not parsed by ADR Explorer-style tools.
 
 ## Numbering and filenames
 

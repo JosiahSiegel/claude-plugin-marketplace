@@ -28,9 +28,11 @@ The `doc-expert` agent runs a diagnostic *before* it produces anything. It separ
 - Template selection per project context — and the rule to pick one and stick to it.
 - The ADR Explorer-compatible status lifecycle: proposed → accepted → superseded / deprecated.
 - Append-only immutability and supersession instead of editing.
-- Direct ADR-to-ADR relationship links, kept separate from related-document provenance, so ADR explorers can render decision graphs without relying on an index hub.
+- ADR-to-ADR graph edges encoded in **YAML frontmatter only** — the keys `supersedes`, `amends`, and `relates-to`. ADR Explorer-style parsers read frontmatter via `gray-matter` and ignore the Markdown body, so a body line such as `Related ADRs: [ADR-0001](0001-foo.md)` is human navigation, not a graph signal; index-hub links from the decision log's `README.md` are likewise ignored. ID values normalize via `/(\d+)/` and zero-pad to four characters, so `8`, `"08"`, `"0008"`, and `"ADR-0008"` all resolve to the same node — zero-padded four-digit strings (`"0008"`) are recommended for stable display and sorting. `Related ADRs:` and `Related docs:` are still kept distinct in the body for human readers.
 - Numbering discipline (monotonic, zero-padded, never reused), naming (filenames start with the numeric id, then an imperative verb phrase), and RACI ownership (Deciders / Consulted / Informed).
 - The required fields: Title, Status, Date, Owners, Supersedes, Related requirements (ASRs), Related ADRs, Related docs, Context, Decision, Decision drivers, Alternatives, Consequences, Confirmation/Validation, Re-evaluation triggers.
+
+A quick offline validator for this canon ships at [`scripts/validate_adrs.py`](scripts/validate_adrs.py) — a stdlib-only Python script that checks filenames, frontmatter required keys, status lifecycle, ISO dates, deciders, and the graph-bearing `supersedes` / `amends` / `relates-to` fields against ADR Explorer-style parser semantics. See [`scripts/README.md`](scripts/README.md) for CLI usage.
 
 **The alternatives catalog — when NOT to use an ADR:**
 

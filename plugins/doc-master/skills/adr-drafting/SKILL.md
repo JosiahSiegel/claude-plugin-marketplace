@@ -123,7 +123,7 @@ Show the **full final draft** only when all violations are resolved or accepted.
 3. Filename: `NNNN-kebab-imperative-title.md` (must start with the numeric id).
 4. Write the file.
 5. Update the index in the directory's `README.md` (create if absent).
-6. Echo cross-link instructions for `supersedes` / `amends` / `relates-to` so the architect can update the linked ADRs in a separate pass. Remind them that ADR Explorer graph edges come from the new ADR's graph-compatible fields and direct ADR-file links, not from `superseded-by` / `superseded by` text on the old ADR or from index hub links. If Accepted ADRs are immutable in this repo, ask whether metadata-only relationship-link maintenance is allowed or needs an explicit governance exception.
+6. Echo cross-link instructions for `supersedes` / `amends` / `relates-to` so the architect can update the linked ADRs in a separate pass. Remind them that **ADR Explorer-style graph edges are drawn from the new ADR's YAML frontmatter only** — the parser reads `supersedes`, `amends`, and `relates-to` via `gray-matter` and ignores the Markdown body, including `superseded-by` / `superseded by` text on the old ADR, prose `Related ADRs:` lines, and index hub links. Use zero-padded four-digit ID strings (`"0008"`) in those lists for stable rendering, though bare integers also parse. If Accepted ADRs are immutable in this repo, ask whether metadata-only relationship-link maintenance is allowed or needs an explicit governance exception.
 
 ## Template (canonical fields)
 
@@ -134,9 +134,9 @@ status: proposed | accepted | superseded | deprecated
 date: 2026-05-20
 deciders:
   - <named human>
-supersedes: []  # ADR ids this decision replaces
+supersedes: []  # ADR ids (zero-padded 4-digit strings) this decision replaces
 amends: []      # ADR ids this decision adjusts without replacing
-relates-to:
+relates-to:     # the only three keys that create graph edges
   - id: "0000"
     reason: "one-line reason"
 tags: []
@@ -167,7 +167,7 @@ rfc-deadline: 2026-06-03  # only when status == proposed and acting as RFC
 - Option C -- one paragraph, single strongest con.
 
 ## Notes
-Optional. Keep `Related ADRs` separate from `Related docs`; ADR explorers often render graph edges only from ADR-file links to other ADR files. PARKED open questions cited here.
+Optional. **Body links never create graph edges.** ADR Explorer-style parsers read graph relationships from the frontmatter keys `supersedes`, `amends`, and `relates-to` only — they do not scan this section. Keep `Related ADRs:` (human navigation) distinct from `Related docs:` (provenance) for readers, but encode every machine-readable ADR-to-ADR relationship in the frontmatter above. PARKED open questions cited here.
 ```
 
 See `references/template-fields.md` for full field semantics.

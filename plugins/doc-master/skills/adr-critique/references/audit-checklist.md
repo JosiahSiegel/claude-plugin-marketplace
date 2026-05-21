@@ -103,7 +103,7 @@ A valid line answers both. An invalid line answers neither.
 
 ### Probe 1: supersession graph compatibility
 
-For every superseding decision, confirm the new ADR has `supersedes: ["X"]` or equivalent YAML list entries. A reverse `superseded by:` note on X is useful for human readers but is not enough for ADR Explorer graph rendering. Flag missing or scalar `supersedes` values.
+For every superseding decision, confirm the new ADR has `supersedes: ["X"]` (or an equivalent YAML list) in its **frontmatter**. ADR Explorer-style parsers read frontmatter only — a reverse `superseded by:` note on X, a body line such as `Related ADRs: [ADR-0004](0004-foo.md)`, or a link from the decision-log `README.md` index does **not** create the edge. Flag missing or scalar `supersedes` values, and flag any relationship that lives only in prose with a recommendation to promote it into frontmatter using zero-padded four-digit string IDs (`"0004"`).
 
 ### Probe 2: orphan amendments
 
