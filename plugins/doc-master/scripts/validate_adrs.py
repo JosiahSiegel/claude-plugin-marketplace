@@ -85,7 +85,7 @@ ID_NORMALIZE_RE = re.compile(r"(\d+)")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 RELATED_BODY_RE = re.compile(r"^\s*(?:related\s+adrs?|see\s+also)\s*:", re.IGNORECASE)
 
-# Body Relationships mirror -- doc-master MADR 3.0 convention.
+# Body Relationships mirror -- doc-master MADR (currently 4.0.0) convention.
 # Heading match is case-insensitive and accepts either `## More Information`
 # (with `### Relationships` sub-section) or a top-level `## Relationships`
 # section. The legacy MADR 2.x `## Links` heading is also accepted because

@@ -103,7 +103,7 @@ Section by section. Confirm each before moving to the next. **Frontmatter is the
 | More Information | Optional sub-sections, **`### Relationships` required if frontmatter relationships exist** | Mirrors frontmatter `supersedes` / `amends` / `relates-to` using the link-prefix vocabulary documented in `references/template-fields.md` (`Supersedes`, `Superseded by`, `Amends`, `Amended by`, `Related to`). Parsers that scan body links instead of frontmatter rely on this section. |
 | Notes | Optional | PARKED open questions cited here. Not a substitute for the Relationships mirror above. |
 
-**Default body structure:** unless the project's existing decision log already uses a different convention (Nygard plain, Y-statement, arc42, Tyree-Akerman), default to **MADR 3.0**: `## Context` (or `## Context and Problem Statement`) → `## Decision` (or `## Decision Outcome`) → `## Consequences` → `## Compliance` → `## Alternatives Considered` → `## More Information` (with `### Relationships` when relationships exist). If the project has an existing template, follow it.
+**Default body structure:** unless the project's existing decision log already uses a different convention (Nygard plain, Y-statement, arc42, Tyree-Akerman), default to **MADR (currently 4.0.0)**: `## Context` (or `## Context and Problem Statement`) → `## Decision` (or `## Decision Outcome`) → `## Consequences` → `## Compliance` → `## Alternatives Considered` → `## More Information` (with `### Relationships` when relationships exist). If the project has an existing template, follow it. Upstream MADR template: [adr.github.io/madr/](https://adr.github.io/madr/), source repo [github.com/adr/madr](https://github.com/adr/madr).
 
 ### Phase 6 — Self-Critique
 
@@ -134,7 +134,7 @@ Show the **full final draft** only when all violations are resolved or accepted.
 
 ## Template (canonical fields)
 
-YAML frontmatter is **mandatory** and goes first. The body uses MADR 3.0 by default and **mirrors every frontmatter relationship into a `### Relationships` block under `## More Information`** so the ADR renders edges in both classes of tooling: gray-matter-style parsers that read frontmatter, and parsers that scan body links under MADR-style sections.
+YAML frontmatter is **mandatory** and goes first. The body uses MADR (currently 4.0.0) by default and **mirrors every frontmatter relationship into a `### Relationships` block under `## More Information`** so the ADR renders edges in both classes of tooling: gray-matter-style parsers that read frontmatter, and parsers that scan body links under MADR-style sections.
 
 ```md
 ---
@@ -181,16 +181,14 @@ rfc-deadline: 2026-06-03  # only when status == proposed and acting as RFC
 
 Mirror every frontmatter relationship here using the link-prefix vocabulary. Required when frontmatter `supersedes` / `amends` / `relates-to` is non-empty.
 
-- Supersedes [ADR-0004](0004-old-decision.md) — replaced because <reason>.
-- Related to [ADR-0011](0011-tenancy.md) — shares the tenancy model.
+- Supersedes [ADR-0004](0004-old-decision.md) -- replaced because <reason>.
+- Related to [ADR-0011](0011-tenancy.md) -- shares the tenancy model.
 
 ### Notes
 Optional. PARKED open questions cited here.
 ```
 
-**Why both frontmatter AND a `### Relationships` body section:** ADR-graph tooling splits into two families. Gray-matter-style parsers (ADR Explorer and similar) read YAML frontmatter and ignore the body. Body-scanning parsers (ADR Manager and similar) walk the rendered Markdown looking for ADR-to-ADR links under known section headings, originally `## Links` in MADR 2.x and now community-conventionally under `## More Information` (often a `### Relationships` sub-section) in MADR 3.0. **An ADR with relationships in frontmatter but not in the body is invisible to body-scanners; an ADR with body links but no frontmatter is invisible to gray-matter parsers.** Mirror both. The two sources must agree.
-
-See `references/template-fields.md` for full field semantics and the link-prefix vocabulary.
+**Mirror both surfaces.** Frontmatter feeds gray-matter parsers (ADR Explorer); body `### Relationships` under `## More Information` feeds body-scanning parsers (ADR Manager). Either surface alone leaves the ADR half-rendered; the two must agree. Full rationale, field semantics, and the link-prefix vocabulary live in `references/template-fields.md`.
 
 ## Refusal behaviors
 
@@ -205,9 +203,8 @@ The skill **refuses to save** when:
 
 - Self-critique flags remain unresolved (Phase 6 not complete)
 - Numbering would collide with an existing ADR
-- The file does not begin with a `---` YAML frontmatter block containing **at minimum** `title`, `status`, `date`, and `deciders` (and `supersedes` / `amends` / `relates-to` whenever Phase 2 surfaced any related ADR). Frontmatter is not optional — without it the ADR is invisible to gray-matter-style parsers (ADR Explorer and similar).
-- The frontmatter populates `supersedes`, `amends`, or `relates-to`, but the body has no `## More Information` section with a `### Relationships` sub-section that mirrors those relationships using the link-prefix vocabulary. Mirroring is not optional — without it the ADR is invisible to body-scanning parsers (ADR Manager and similar).
-- The body has a `### Relationships` section but the frontmatter relationship keys are empty or absent. Either one alone is not enough; the two sources must agree.
+- The file does not begin with a `---` YAML frontmatter block containing **at minimum** `title`, `status`, `date`, and `deciders` (and `supersedes` / `amends` / `relates-to` whenever Phase 2 surfaced any related ADR).
+- Frontmatter populates `supersedes`, `amends`, or `relates-to` but the body has no `## More Information` → `### Relationships` mirror, or vice versa. Either surface alone leaves the ADR invisible to half the tooling; the two must agree.
 
 ## References
 

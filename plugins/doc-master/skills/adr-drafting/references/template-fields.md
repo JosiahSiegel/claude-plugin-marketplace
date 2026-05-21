@@ -1,6 +1,6 @@
 # ADR template — full field semantics
 
-The `adr-drafting` skill uses this canonical field set. It is MADR 3.0-compatible but enforces stricter limits to keep the ADR a decision record rather than a design doc.
+The `adr-drafting` skill uses this canonical field set. It is MADR (currently 4.0.0)-compatible but enforces stricter limits to keep the ADR a decision record rather than a design doc. Upstream template: [adr.github.io/madr/](https://adr.github.io/madr/); source repo: [github.com/adr/madr](https://github.com/adr/madr).
 
 ## The two-source rule (frontmatter and body must agree)
 
@@ -9,7 +9,7 @@ ADR-graph tooling does not converge on a single source. Two families dominate:
 | Parser family | What it reads | Examples |
 |---|---|---|
 | Frontmatter-scanning (gray-matter style) | YAML between `---` fences. Body is ignored. | ADR Explorer and similar |
-| Body-scanning (Markdown-AST style) | Rendered Markdown body, looking for ADR-to-ADR links under known section headings (originally `## Links` in MADR 2.x; now community-conventionally under `## More Information`, frequently a `### Relationships` sub-section, in MADR 3.0). Frontmatter is ignored. | ADR Manager and similar |
+| Body-scanning (Markdown-AST style) | Rendered Markdown body, looking for ADR-to-ADR links under known section headings (originally `## Links` in MADR 2.x; now community-conventionally under `## More Information`, frequently a `### Relationships` sub-section, in MADR 3.0 and 4.0). Frontmatter is ignored. | ADR Manager and similar |
 
 **A doc-master ADR is rendered correctly by both.** That means:
 
@@ -60,8 +60,8 @@ confidence: high
 
 ### Relationships
 
-- Supersedes [ADR-0004](0004-use-dynamodb-for-primary-store.md) — replaced because Q3 reporting workload requires multi-table joins under 200ms (ASR-12).
-- Related to [ADR-0011](0011-tenancy.md) — shares the tenancy model decided in 0011.
+- Supersedes [ADR-0004](0004-use-dynamodb-for-primary-store.md) -- replaced because Q3 reporting workload requires multi-table joins under 200ms (ASR-12).
+- Related to [ADR-0011](0011-tenancy.md) -- shares the tenancy model decided in 0011.
 ```
 
 In this example:
@@ -84,7 +84,7 @@ The body `### Relationships` section uses these link prefixes. Each prefix corre
 
 Notes:
 
-- These prefixes are **the doc-master convention**, distilled from MADR 3.0 community practice and the older MADR 2.x `## Links` lexer (which tokenized `## Links` as the relationship heading). They are not a formal MADR specification — the upstream MADR 3.0 template only suggests "Links to other decisions and resources might appear here" under `## More Information`. doc-master codifies the prefix names so frontmatter and body can always be mirrored mechanically.
+- These prefixes are **the doc-master convention**, distilled from MADR 3.0/4.0 community practice and the older MADR 2.x `## Links` lexer (which tokenized `## Links` as the relationship heading). They are not a formal MADR specification — the upstream MADR 4.0 template only suggests "Links to other decisions and resources might appear here" under `## More Information`. doc-master codifies the prefix names so frontmatter and body can always be mirrored mechanically. Upstream MADR template: [github.com/adr/madr/tree/4.0.0/template](https://github.com/adr/madr/tree/4.0.0/template).
 - Use a Markdown link with a path relative to the ADR (e.g., `[ADR-0004](0004-old-decision.md)`), not a bare ID.
 - The `— reason` trailing dash-clause is optional but recommended; for `relates-to` it should match the frontmatter `reason` field.
 - Reverse-direction prefixes (`Superseded by`, `Amended by`) are **human-only** courtesy notes added to the old ADR's header. They do not produce graph edges; the edge always lives in the new ADR's frontmatter `supersedes` / `amends` list.
@@ -189,7 +189,7 @@ Realistic options only. **At the same level of abstraction** — don't compare "
 
 ### More Information
 
-The MADR 3.0 catch-all section. doc-master pins **one required sub-section** and allows optional siblings.
+The MADR 4.0 catch-all section. doc-master pins **one required sub-section** and allows optional siblings.
 
 #### Relationships (required when frontmatter relationships exist)
 
@@ -198,8 +198,8 @@ Mirror every populated frontmatter relationship into this body section using the
 ```md
 ### Relationships
 
-- Supersedes [ADR-0004](0004-use-dynamodb-for-primary-store.md) — replaced because <reason>.
-- Related to [ADR-0011](0011-tenancy.md) — shares the tenancy model.
+- Supersedes [ADR-0004](0004-use-dynamodb-for-primary-store.md) -- replaced because <reason>.
+- Related to [ADR-0011](0011-tenancy.md) -- shares the tenancy model.
 ```
 
 If frontmatter `supersedes`, `amends`, and `relates-to` are all empty, this sub-section may be omitted. If any is populated, the sub-section is mandatory; the `adr-critique` skill flags ADRs that have one source but not the other.
