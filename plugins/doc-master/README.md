@@ -2,7 +2,7 @@
 
 Documentation diagnostic, Markdown style, and Architecture Decision Record (ADR) expert.
 
-**The plugin's value is avoiding unnecessary docs, routing the ones that earn their place to the right home, and keeping the Markdown of the docs that exist clean.**
+**The plugin's value is avoiding unnecessary docs, routing the ones that earn their place to the right home, and keeping the Markdown of the docs that exist clean.** Use it when you need to decide whether a document should exist, whether a proposed decision deserves an ADR, how to backfill a missing decision record honestly, or how to lint Markdown form without rewriting content.
 
 ## What this plugin is for
 
@@ -72,7 +72,7 @@ The most important interception is **before** an ADR gets written for a non-deci
 
 - **`/adr-new`** — Run the diagnostic on a proposed decision. If the decision is architecturally significant and made, draft the ADR using the project's existing template, with every required field populated honestly (or marked `TBD — needs <specific info>`). If not, route to the correct alternative form and explain why an ADR would be wrong.
 
-- **`/adr-discover`** — Run the zero-hallucination pre-flight Q&A *before* drafting. Confirms the domain, the architectural characteristic under pressure, the components (≤5), the related ADRs, and the named decider — one fact at a time. Produces `docs/architecture/discovery-brief.md` and `docs/architecture/open-questions.md`. Use when context is fuzzy.
+- **`/adr-discover`** — Run the zero-hallucination pre-flight Q&A *before* drafting. Confirms the domain, the architectural characteristic under pressure, the components (≤5), the related ADRs, and the named decider — one fact at a time. Produces a discovery brief and open-questions register in the project's documentation area. Use when context is fuzzy.
 
 - **`/adr-critique`** — Audit a pre-existing or legacy ADR line by line. Quotes the offending line verbatim, names the rule broken, proposes a shorter rewrite, requires per-line approval. For ADRs that didn't go through the co-thinking flow.
 
