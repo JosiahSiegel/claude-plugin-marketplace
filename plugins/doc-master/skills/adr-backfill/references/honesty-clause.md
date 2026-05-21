@@ -38,7 +38,7 @@ A clause that elides the terminal period (ends with `at backfill time` with no p
 
 The clause is the single non-negotiable element of a backfill ADR. If the user asks to remove it, soften it, paraphrase it into past-tense narrative, hide it in a footnote, or elide any required field, refuse. The reason: a backfill without the clause looks indistinguishable from a contemporaneous record, and a future reader has no way to tell the rationale was reconstructed rather than recorded in the moment.
 
-`adr-critique` enforces this independently. A record whose status begins with `accepted (backfilled` (or whose `tags:` contains `backfill`) but whose body lacks a compliant clause is a flag in the audit checklist. The audit routes back to `adr-backfill` for a redraft rather than patching the file in place.
+`adr-critique` enforces this independently. A record whose `tags:` contains `backfill` or whose frontmatter has `backfilled-on` but whose body lacks a compliant clause is a flag in the audit checklist. Older records that encode backfill text in `status` should be migrated to ADR Explorer-compatible `status: accepted` or `status: deprecated` without softening this clause. The audit routes back to `adr-backfill` for a redraft rather than patching the file in place.
 
 ## Where this clause is referenced
 

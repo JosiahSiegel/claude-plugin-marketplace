@@ -78,7 +78,7 @@ The clause exists so a future reader cannot mistake the backfill for a contempor
 
 Same save discipline as `adr-drafting`:
 
-1. Glob known ADR directories (`docs/adr/`, `docs/architecture/decisions/`, `architecture/decisions/`, `docs/decisions/`). Use the first that exists; if none, create `docs/adr/`.
+1. Glob ADR Explorer-friendly directories first (`docs/adr/`, `docs/decisions/`, `docs/architecture/decisions/`, `**/adr/*.md`); also check legacy `architecture/decisions/` but warn it may need custom ADR Explorer root configuration. Use the first existing directory; if none, create `docs/adr/`.
 2. Auto-number: read existing ADRs, take `max+1`, zero-pad to 4 digits. **The backfill ADR takes the next available number, not a number from the past.** Numbering reflects creation order, not decision order. The original decision date appears inside the file (see frontmatter); the number is just-now.
 3. Filename: `NNNN-kebab-imperative-title.md`.
 4. Write the file with the honesty clause and the backfill-specific frontmatter (see template below).
@@ -89,10 +89,11 @@ Same save discipline as `adr-drafting`:
 ```yaml
 ---
 title: "<imperative verb phrase>"
-status: "accepted (backfilled YYYY-MM-DD)"
+status: accepted                   # or deprecated if reversed; keep status ADR Explorer-compatible
 date: <original decision date if known, else first-evidence date in ISO 8601>
 backfilled-on: YYYY-MM-DD          # today
-deciders: <named humans, or "unrecoverable">
+deciders:
+  - <named human, or unrecoverable>
 evidence:                          # at least two locators
   - <commit SHA / file path / manifest line>
   - <commit SHA / file path / manifest line>
@@ -103,22 +104,22 @@ tags: [backfill]
 ---
 ```
 
-If the decision has since been reversed by a later shipped change, set `status: "deprecated (decision reversed since)"` and cite the reversing commit / migration in `evidence:`. The backfill still gets recorded — the historical decision matters even after reversal — but the status reflects current reality.
+If the decision has since been reversed by a later shipped change, set `status: deprecated` and cite the reversing commit / migration in `evidence:` plus the honesty clause or notes. The backfill still gets recorded — the historical decision matters even after reversal — but the status remains ADR Explorer-compatible.
 
 ## Status conventions
 
 | Status | Use when… |
 |---|---|
-| `accepted (backfilled YYYY-MM-DD)` | The decision is still in force today. Default. |
-| `deprecated (decision reversed since)` | A later shipped change undid the original decision. Cite the reversing evidence. |
+| `accepted` | The decision is still in force today. Default. |
+| `deprecated` | A later shipped change undid the original decision. Cite the reversing evidence. |
 
-Backfill ADRs never use `proposed` or `rfc` — a backfill is, by definition, a recording of a decision that was already shipped.
+Backfill ADRs never use `proposed` or `rfc` — a backfill is, by definition, a recording of a decision that was already shipped. Keep backfill identity in `tags: [backfill]`, `backfilled-on`, evidence fields, and the mandatory honesty clause; do not encode it in `status`.
 
 ## Refusal: when the user wants the honesty clause removed
 
 The honesty clause is the single non-negotiable element of a backfill ADR. If the user asks to remove it, soften it, or hide it in a footnote, refuse. Explain that a backfill without the clause looks like a contemporaneous record and silently poisons the decision log — a future reader has no way to tell the rationale was reconstructed rather than recorded in the moment. The clause stays in the body.
 
-`adr-critique` enforces this independently: a record whose status begins with `accepted (backfilled` but whose body lacks the honesty clause is a flag in the audit checklist.
+`adr-critique` enforces this independently: a record with `tags: [backfill]` or `backfilled-on` whose body lacks the honesty clause is a flag in the audit checklist.
 
 ## Hand-off
 

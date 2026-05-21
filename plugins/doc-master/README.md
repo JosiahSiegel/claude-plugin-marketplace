@@ -2,7 +2,7 @@
 
 Documentation diagnostic, Markdown style, and Architecture Decision Record (ADR) expert.
 
-**The plugin's value is avoiding unnecessary docs, routing the ones that earn their place to the right home, and keeping the Markdown of the docs that exist clean.**
+**The plugin's value is avoiding unnecessary docs, routing the ones that earn their place to the right home, and keeping the Markdown of the docs that exist clean.** Use it when you need to decide whether a document should exist, whether a proposed decision deserves an ADR, how to backfill a missing decision record honestly, or how to lint Markdown form without rewriting content.
 
 ## What this plugin is for
 
@@ -26,10 +26,13 @@ The `doc-expert` agent runs a diagnostic *before* it produces anything. It separ
 
 - Nygard's original template (2011), MADR short and long forms (Olaf Zimmermann's primer), Y-statements, and the 12+ templates in the community reference repo.
 - Template selection per project context — and the rule to pick one and stick to it.
-- The canonical status lifecycle: Proposed → Accepted → Superseded / Deprecated / Rejected.
+- The ADR Explorer-compatible status lifecycle: proposed → accepted → superseded / deprecated.
 - Append-only immutability and supersession instead of editing.
-- Numbering discipline (monotonic, zero-padded, never reused), naming (imperative verb phrase), and RACI ownership (Deciders / Consulted / Informed).
-- The required fields: Title, Status, Date, Owners, Supersedes, Superseded by, Related requirements (ASRs), Context, Decision, Decision drivers, Alternatives, Consequences, Confirmation/Validation, Re-evaluation triggers.
+- ADR-to-ADR graph edges encoded in **YAML frontmatter only** — the keys `supersedes`, `amends`, and `relates-to`. ADR Explorer-style parsers read frontmatter via `gray-matter` and ignore the Markdown body, so a body line such as `Related ADRs: [ADR-0001](0001-foo.md)` is human navigation, not a graph signal; index-hub links from the decision log's `README.md` are likewise ignored. ID values normalize via `/(\d+)/` and zero-pad to four characters, so `8`, `"08"`, `"0008"`, and `"ADR-0008"` all resolve to the same node — zero-padded four-digit strings (`"0008"`) are recommended for stable display and sorting. `Related ADRs:` and `Related docs:` are still kept distinct in the body for human readers.
+- Numbering discipline (monotonic, zero-padded, never reused), naming (filenames start with the numeric id, then an imperative verb phrase), and RACI ownership (Deciders / Consulted / Informed).
+- The required fields: Title, Status, Date, Owners, Supersedes, Related requirements (ASRs), Related ADRs, Related docs, Context, Decision, Decision drivers, Alternatives, Consequences, Confirmation/Validation, Re-evaluation triggers.
+
+A quick offline validator for this canon ships at [`scripts/validate_adrs.py`](scripts/validate_adrs.py) — a stdlib-only Python script that checks filenames, frontmatter required keys, status lifecycle, ISO dates, deciders, and the graph-bearing `supersedes` / `amends` / `relates-to` fields against ADR Explorer-style parser semantics. See [`scripts/README.md`](scripts/README.md) for CLI usage.
 
 **The alternatives catalog — when NOT to use an ADR:**
 
@@ -72,11 +75,13 @@ The most important interception is **before** an ADR gets written for a non-deci
 
 - **`/adr-new`** — Run the diagnostic on a proposed decision. If the decision is architecturally significant and made, draft the ADR using the project's existing template, with every required field populated honestly (or marked `TBD — needs <specific info>`). If not, route to the correct alternative form and explain why an ADR would be wrong.
 
-- **`/adr-discover`** — Run the zero-hallucination pre-flight Q&A *before* drafting. Confirms the domain, the architectural characteristic under pressure, the components (≤5), the related ADRs, and the named decider — one fact at a time. Produces `docs/architecture/discovery-brief.md` and `docs/architecture/open-questions.md`. Use when context is fuzzy.
+- **`/adr-discover`** — Run the zero-hallucination pre-flight Q&A *before* drafting. Confirms the domain, the architectural characteristic under pressure, the components (≤5), the related ADRs, and the named decider — one fact at a time. Produces a discovery brief and open-questions register in the project's documentation area. Use when context is fuzzy.
 
 - **`/adr-critique`** — Audit a pre-existing or legacy ADR line by line. Quotes the offending line verbatim, names the rule broken, proposes a shorter rewrite, requires per-line approval. For ADRs that didn't go through the co-thinking flow.
 
 - **`/doc-audit`** — Inventory a doc directory, test every ADR against the canon, test every non-ADR against the four-question check (Purpose / Audience / Owner / Update trigger), detect drift, duplication, misclassification, and *unrecorded past decisions* (the ASR test against shipped-change evidence — commits, migrations, removed subsystems, retired vendors). Produces a KEEP / MERGE / REWRITE / DELETE / MOVE / **BACKFILL-ADR** action list. `BACKFILL-ADR` rows are candidates only; the user decides whether to route them to `adr-backfill` for retroactive recording. Nothing is deleted without your sign-off.
+
+- **`/adr-scan`** — Scan code and history for architecturally significant decisions missing from the decision log. Produces `BACKFILL-ADR` candidates plus open questions only; never drafts without human confirmation. Use it for inherited repos, architecture archaeology, vendor removals, subsystem retirements, migrations, and suspicious ADR coverage gaps.
 
 - **`/doc-lint`** — Two-pass Markdown lint on any one file. Pass 1 (syntax must-fix) flags non-portable Markdown — setext where ATX is expected, unfenced code blocks, missing blank lines around block elements, mid-word underscore emphasis, etc. Pass 2 (style should-fix) applies the opinionated Google Markdown style overlay — single H1, ATX headings, `[TOC]` on long docs, 80-character lines, informative link text, fenced blocks with language tags. One finding at a time, per-line approval, no bulk rewrites.
 
@@ -108,7 +113,8 @@ The mandatory backfill **honesty clause** — its verbatim form, required fields
 - **Drafting** — once the five MUSTs are confirmed, `adr-drafting` produces the ADR through the seven-phase co-thinking flow.
 - **Diagram (optional)** — after saving, `c4-model` adds canonical Context + Container views alongside the ADR.
 - **Audit existing docs** — `/adr-critique` for one legacy ADR (line-by-line); `/doc-audit` for a whole directory (KEEP / MERGE / REWRITE / DELETE / MOVE / BACKFILL-ADR).
-- **Backfill a past decision** — when `/doc-audit` surfaces a `BACKFILL-ADR` candidate (or the user describes a long-ago shipped change with no record), `adr-backfill` retroactively records it. Mandatory honesty clause; evidence in two independent locations; refuses when reconstruction confidence is `low`.
+- **Find missing ADRs** — `/adr-scan` for code/history archaeology when ADR coverage is suspect but you don't need full doc cleanup.
+- **Backfill a past decision** — when `/doc-audit` or `/adr-scan` surfaces a `BACKFILL-ADR` candidate (or the user describes a long-ago shipped change with no record), `adr-backfill` retroactively records it. Mandatory honesty clause; evidence in two independent locations; refuses when reconstruction confidence is `low`.
 - **Lint any Markdown file** — `/doc-lint` for two-pass syntax-then-style review of one `.md` file. Works on READMEs, how-tos, runbooks, ADRs (form only — content goes through `/adr-critique`).
 
 ```text

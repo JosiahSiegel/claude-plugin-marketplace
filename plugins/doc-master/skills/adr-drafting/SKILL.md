@@ -85,7 +85,7 @@ Four separate exchanges:
 3. Confidence — "On a 1-5 scale, how confident is the decider? What would move them to 5?"
 4. Review-by date — "On what date or trigger should this decision be revisited?"
 
-**RFC routing:** If confidence ≤ 3, the architect isn't a single named human, or the decision touches > 5 components, propose **RFC status** with a feedback deadline (default: two weeks) instead of `Accepted`. ADRs at RFC status are real ADRs — they just have a deadline before they harden.
+**RFC routing:** If confidence is `low`, the architect isn't a single named human, or the decision touches > 5 components, propose `status: proposed` with `rfc-deadline` (default: two weeks) instead of `accepted`. ADRs serving as RFCs are still real ADRs — they just have a deadline before they harden. If the team also wants a numeric score, store it in `confidence-score`; keep `confidence` as `high`, `medium`, or `low`.
 
 ### Phase 5 — Draft
 
@@ -118,28 +118,33 @@ Show the **full final draft** only when all violations are resolved or accepted.
 
 ### Phase 7 — Save
 
-1. Glob known ADR directories: `docs/adr/`, `docs/architecture/decisions/`, `architecture/decisions/`, `docs/decisions/`. Use the first that exists; if none, create `docs/adr/`.
+1. Glob ADR Explorer-friendly directories first: `docs/adr/`, `docs/decisions/`, `docs/architecture/decisions/`, `**/adr/*.md`; also check legacy `architecture/decisions/` but warn it may need custom ADR Explorer root configuration. Use the first existing directory; if none, create `docs/adr/`.
 2. Auto-number: read existing ADRs, take `max+1`, zero-pad to 4 digits.
-3. Filename: `NNNN-kebab-imperative-title.md`.
+3. Filename: `NNNN-kebab-imperative-title.md` (must start with the numeric id).
 4. Write the file.
 5. Update the index in the directory's `README.md` (create if absent).
-6. Echo cross-link instructions for `supersedes` / `amends` / `relates-to` so the architect can update the linked ADRs in a separate pass.
+6. Echo cross-link instructions for `supersedes` / `amends` / `relates-to` so the architect can update the linked ADRs in a separate pass. Remind them that **ADR Explorer-style graph edges are drawn from the new ADR's YAML frontmatter only** — the parser reads `supersedes`, `amends`, and `relates-to` via `gray-matter` and ignores the Markdown body, including `superseded-by` / `superseded by` text on the old ADR, prose `Related ADRs:` lines, and index hub links. Use zero-padded four-digit ID strings (`"0008"`) in those lists for stable rendering, though bare integers also parse. If Accepted ADRs are immutable in this repo, ask whether metadata-only relationship-link maintenance is allowed or needs an explicit governance exception.
 
 ## Template (canonical fields)
 
 ```md
 ---
 title: "<imperative verb phrase>"
-status: proposed | rfc | accepted | superseded | deprecated
+status: proposed | accepted | superseded | deprecated
 date: 2026-05-20
-deciders: <named humans>
-supersedes:    # ADR id
-amends:        # ADR id
-relates-to:    # ADR id -- one-line reason
+deciders:
+  - <named human>
+supersedes: []  # ADR ids (zero-padded 4-digit strings) this decision replaces
+amends: []      # ADR ids this decision adjusts without replacing
+relates-to:     # the only three keys that create graph edges
+  - id: "0000"
+    reason: "one-line reason"
 tags: []
 review-by: 2026-11-20  # or trigger e.g. "100k DAU"
-confidence: 1-5
-rfc-deadline: 2026-06-03  # only when status == rfc
+expires: 2027-05-20    # optional; only when expiry is real
+confidence: high | medium | low
+confidence-score: 4    # optional numeric score
+rfc-deadline: 2026-06-03  # only when status == proposed and acting as RFC
 ---
 
 # NNNN. <Title>
@@ -162,7 +167,7 @@ rfc-deadline: 2026-06-03  # only when status == rfc
 - Option C -- one paragraph, single strongest con.
 
 ## Notes
-Optional. Cross-links. PARKED open questions cited here.
+Optional. **Body links never create graph edges.** ADR Explorer-style parsers read graph relationships from the frontmatter keys `supersedes`, `amends`, and `relates-to` only — they do not scan this section. Keep `Related ADRs:` (human navigation) distinct from `Related docs:` (provenance) for readers, but encode every machine-readable ADR-to-ADR relationship in the frontmatter above. PARKED open questions cited here.
 ```
 
 See `references/template-fields.md` for full field semantics.

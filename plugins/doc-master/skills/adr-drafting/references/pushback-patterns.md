@@ -44,11 +44,11 @@ The skill must deliver **one scripted push-back per ADR** — verbatim, in the a
 
 ## Pattern 6 — Hedging confidence
 
-**Trigger:** the architect rates confidence ≤ 3 but wants to mark the ADR `accepted`.
+**Trigger:** the architect rates confidence `low` but wants to mark the ADR `accepted`.
 
 **Push-back:**
 
-> Confidence of <N> on a decided ADR is a smell. Either name the unknown that's blocking you (we'll PARK it) and ship as RFC, or do the work that would move you to a 4, and come back.
+> Low confidence on a decided ADR is a smell. Either name the unknown that's blocking you (we'll PARK it) and ship as `proposed` with an RFC deadline, or do the work that would move confidence to `medium` or `high`, and come back.
 
 ## Pattern 7 — No failure mode
 

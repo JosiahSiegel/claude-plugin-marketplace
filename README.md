@@ -1,70 +1,77 @@
 # Claude Plugin Marketplace
 
-> A curated collection of Claude Code plugins for plugin development, context optimization, cloud infrastructure, DevOps automation, and productivity tools
+> A curated collection of Claude Code plugins for plugin development, context optimization, cloud infrastructure, DevOps automation, and productivity tools.
 
-## 🚀 Quick Start
+## Quick start
 
 **1. Add this marketplace:**
+
 ```bash
 /plugin marketplace add JosiahSiegel/claude-plugin-marketplace
 ```
 
 **2. Install any plugin:**
+
 ```bash
 /plugin install <plugin-name>@claude-plugin-marketplace
 ```
 
-**3. Browse available plugins below and install what you need!**
+**3. Browse the plugin catalog and install what you need.**
 
-## 📦 Available Plugins
+Plugin versions are defined in [`.claude-plugin/marketplace.json`](./.claude-plugin/marketplace.json) and mirrored in each plugin's `.claude-plugin/plugin.json`. Treat the marketplace manifest as the source for the full, current catalog; the list below highlights commonly used plugins.
 
-### Core Development Tools
+## Available plugins
 
-- **[plugin-master](./plugins/plugin-master)** `v2.2.0` ([Docs](./plugins/plugin-master/README.md)) - Complete plugin development with Agent Skills, hooks, MCP integration, testing, and Git Bash/Windows compatibility
-- **[context-master](./plugins/context-master)** `v2.2.0` ([Docs](./plugins/context-master/README.md)) - Universal context management with Windows/Git Bash support and cross-platform file operation guidance
+### Core development tools
 
-### Cloud & Infrastructure
+- **[plugin-master](./plugins/plugin-master)** ([Docs](./plugins/plugin-master/README.md)) - Claude Code plugin development with skills, commands, agents, hooks, MCP integration, testing, and marketplace publishing guidance.
+- **[context-master](./plugins/context-master)** ([Docs](./plugins/context-master/README.md)) - Context management for complex multi-file tasks, planning, delegation, token budgeting, and long-running sessions.
+- **[doc-master](./plugins/doc-master)** ([Docs](./plugins/doc-master/README.md)) - Documentation diagnostic, Markdown style, and ADR expert that routes docs to the right form before drafting.
 
-- **[azure-master](./plugins/azure-master)** `v1.1.0` ([Docs](./plugins/azure-master/README.md)) - Azure cloud with 2025 features, Git Bash/Windows CLI compatibility, and ARM/Bicep cross-platform deployments
-- **[azure-to-docker-master](./plugins/azure-to-docker-master)** `v1.2.0` ([Docs](./plugins/azure-to-docker-master/README.md)) - Azure-to-Docker migration with Git Bash volume mount fixes and cross-platform Docker Compose
-- **[terraform-master](./plugins/terraform-master)** `v1.7.0` ([Docs](./plugins/terraform-master/README.md)) - Terraform with Git Bash path handling, shell detection, and cross-platform state operations
+### Cloud and infrastructure
 
-### DevOps & CI/CD
+- **[azure-master](./plugins/azure-master)** ([Docs](./plugins/azure-master/README.md)) - Azure resource provisioning, AI Foundry, networking, deployment stacks, debugging, and cost optimization.
+- **[azure-to-docker-master](./plugins/azure-to-docker-master)** ([Docs](./plugins/azure-to-docker-master/README.md)) - Azure-to-Docker migration for local development, Compose generation, emulators, and dev-to-prod parity.
+- **[terraform-master](./plugins/terraform-master)** ([Docs](./plugins/terraform-master/README.md)) - Terraform and OpenTofu guidance for IaC design, state management, imports, providers, validation, and CI/CD.
 
-- **[docker-master](./plugins/docker-master)** `v1.5.0` ([Docs](./plugins/docker-master/README.md)) - Docker with Git Bash volume mount fixes, MINGW path conversion solutions, and Windows compatibility
-- **[ado-master](./plugins/ado-master)** `v1.5.0` ([Docs](./plugins/ado-master/README.md)) - Azure DevOps with Git Bash agent compatibility, Windows pipeline patterns, and shell detection
-- **[git-master](./plugins/git-master)** `v1.5.0` ([Docs](./plugins/git-master/README.md)) - Git 2.51 with Git Bash path conversion, stash import/export, and shell detection patterns
+### DevOps and CI/CD
 
-### Scripting & Automation
+- **[docker-master](./plugins/docker-master)** ([Docs](./plugins/docker-master/README.md)) - Docker build, run, debug, optimization, Compose, container security, networking, and registry workflows.
+- **[ado-master](./plugins/ado-master)** ([Docs](./plugins/ado-master/README.md)) - Azure DevOps and Azure Pipelines YAML, identity, security, templates, analytics, and troubleshooting.
+- **[git-master](./plugins/git-master)** ([Docs](./plugins/git-master/README.md)) - Git and GitHub workflows, history recovery, signed commits, worktrees, sparse checkouts, and repository operations.
 
-- **[bash-master](./plugins/bash-master)** `v1.5.0` ([Docs](./plugins/bash-master/README.md)) - Bash 5.3 with comprehensive Git Bash/MINGW path conversion, shell detection, and Claude Code issue #2602 solutions
-- **[powershell-master](./plugins/powershell-master)** `v1.5.0` ([Docs](./plugins/powershell-master/README.md)) - PowerShell with comprehensive shell detection (PowerShell vs Git Bash), cross-shell compatibility, and Windows environment expertise
+### Scripting and automation
 
-### Testing & Quality
+- **[bash-master](./plugins/bash-master)** ([Docs](./plugins/bash-master/README.md)) - Bash and shell scripting, ShellCheck guidance, POSIX portability, security-first patterns, and cross-platform execution.
+- **[powershell-master](./plugins/powershell-master)** ([Docs](./plugins/powershell-master/README.md)) - PowerShell scripting, modules, CI/CD automation, cloud administration, debugging, and cross-platform patterns.
 
-- **[test-master](./plugins/test-master)** `v1.6.0` ([Docs](./plugins/test-master/README.md)) - Vitest 4.0 + Playwright 1.56 AI agents with Windows/Git Bash test execution compatibility and cross-platform testing
+### Testing and quality
 
-### Backend & Microservices
+- **[test-master](./plugins/test-master)** ([Docs](./plugins/test-master/README.md)) - Vitest, Playwright, MSW, unit/integration/E2E testing, debugging, coverage, and CI test setup.
 
-- **[dotnet-microservices-master](./plugins/dotnet-microservices-master)** `v1.0.0` ([Docs](./plugins/dotnet-microservices-master/README.md)) - .NET microservices architecture expert with Docker, DDD, CQRS, and cloud-native patterns based on Microsoft's official guide
+### Backend and microservices
 
-### Languages & Frameworks
+- **[dotnet-microservices-master](./plugins/dotnet-microservices-master)** ([Docs](./plugins/dotnet-microservices-master/README.md)) - .NET microservices architecture, Docker, DDD, CQRS, resilience, API gateways, and cloud-native patterns.
 
-- **[python-master](./plugins/python-master)** `v1.0.0` ([Docs](./plugins/python-master/README.md)) - Python 3.13+ expertise with free-threading, JIT, asyncio, type hints, FastAPI, uv package management, pytest, and Cloudflare deployment
-- **[react-master](./plugins/react-master)** `v1.0.0` ([Docs](./plugins/react-master/README.md)) - React 19 expertise with Server/Client Components, hooks, state management, TypeScript, and testing patterns
-- **[nextjs-master](./plugins/nextjs-master)** `v1.0.0` ([Docs](./plugins/nextjs-master/README.md)) - Next.js 15 expertise with App Router, Server Actions, caching, middleware, NextAuth.js, and deployment
-- **[tailwindcss-master](./plugins/tailwindcss-master)** `v1.0.0` ([Docs](./plugins/tailwindcss-master/README.md)) - Tailwind CSS v4 expertise with CSS-first configuration, responsive design, dark mode, and framework integration
-- **[ffmpeg-master](./plugins/ffmpeg-master)** `v1.0.0` ([Docs](./plugins/ffmpeg-master/README.md)) - FFmpeg expertise with video/audio encoding, hardware acceleration, streaming, Docker, and Cloudflare deployment
+### Languages and frameworks
 
-### Database & Data
+- **[python-master](./plugins/python-master)** ([Docs](./plugins/python-master/README.md)) - Python, asyncio, typing, FastAPI, testing, packaging, performance, security, and deployment.
+- **[react-master](./plugins/react-master)** ([Docs](./plugins/react-master/README.md)) - React components, hooks, state management, TypeScript, forms, performance, and testing.
+- **[nextjs-master](./plugins/nextjs-master)** ([Docs](./plugins/nextjs-master/README.md)) - Next.js App Router, Server Components, Server Actions, caching, middleware, auth, and deployment.
+- **[tailwindcss-master](./plugins/tailwindcss-master)** ([Docs](./plugins/tailwindcss-master/README.md)) - Tailwind CSS configuration, utilities, responsive design, dark mode, performance, and framework integration.
+- **[ffmpeg-master](./plugins/ffmpeg-master)** ([Docs](./plugins/ffmpeg-master/README.md)) - FFmpeg meta-bundle for encoding, effects, platform deployment, Python integrations, and social-video workflows.
 
-- **[ssdt-master](./plugins/ssdt-master)** `v1.6.0` ([Docs](./plugins/ssdt-master/README.md)) - SQL Server with Git Bash SqlPackage compatibility, path conversion for database deployments, and Windows shell detection
-- **[adf-master](./plugins/adf-master)** `v3.3.0` ([Docs](./plugins/adf-master/README.md)) - Azure Data Factory with Git Bash npm build fixes, Windows CI/CD compatibility, and cross-platform deployment scripts
+### Database and data
 
-### Platform-Specific
+- **[ssdt-master](./plugins/ssdt-master)** ([Docs](./plugins/ssdt-master/README.md)) - SQL Server Data Tools, SqlPackage, DACPAC/BACPAC workflows, schema comparison, and database CI/CD.
+- **[adf-master](./plugins/adf-master)** ([Docs](./plugins/adf-master/README.md)) - Azure Data Factory pipeline JSON, activities, linked services, datasets, triggers, expressions, and deployment.
+- **[tsql-master](./plugins/tsql-master)** ([Docs](./plugins/tsql-master/README.md)) - T-SQL query optimization, execution plans, indexing, Query Store, window functions, and Azure SQL tuning.
 
-- **[salesforce-master](./plugins/salesforce-master)** `v2.2.0` ([Docs](./plugins/salesforce-master/README.md)) - Salesforce with Git Bash SF CLI compatibility, Windows deployment scripts, and cross-platform integration patterns
-- **[windows-path-master](./plugins/windows-path-master)** `v1.0.0` ([Docs](./plugins/windows-path-master/README.md)) - Windows path resolution and Git Bash MINGW compatibility for Claude Code
+### Platform-specific
+
+- **[salesforce-master](./plugins/salesforce-master)** ([Docs](./plugins/salesforce-master/README.md)) - Salesforce API, Apex, Lightning, Flow, data model, integrations, deployment, and security patterns.
+- **[windows-path-master](./plugins/windows-path-master)** ([Docs](./plugins/windows-path-master/README.md)) - Windows path resolution and Git Bash compatibility for Claude Code file operations.
+- **[cloudflare-master](./plugins/cloudflare-master)** ([Docs](./plugins/cloudflare-master/README.md)) - Cloudflare Workers, Pages, AI, storage primitives, Zero Trust, MCP, observability, and CI/CD.
 
 ## 🤝 Contributing
 

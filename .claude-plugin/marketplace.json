@@ -163,7 +163,7 @@
       "name": "doc-master",
       "source": "./plugins/doc-master",
       "description": "Documentation diagnostic, Markdown style, and ADR expert. Diagnostic-first: refuses to write ADRs for non-decisions and routes the rest to the right home (RFC / Diátaxis / runbook / code comment). Co-drafts ADRs with zero-hallucination discovery, scripted push-back, line-by-line audit of legacy ADRs, and canonical-C4 LikeC4 diagrams. Folder-level audits classify every doc as KEEP / MERGE / REWRITE / DELETE / MOVE / BACKFILL-ADR — the last surfaces past architectural decisions that were never recorded (shipped commits, migrations, retired vendors), retroactively recorded via adr-backfill with a mandatory honesty clause and two-locator evidence. Two-pass Markdown lint over any .md file: canonical syntax (Markdown Guide) plus opinionated style (Google Markdown style guide), per-finding with rule citations.",
-      "version": "1.3.4",
+      "version": "1.4.0",
       "author": {
         "name": "Josiah Siegel"
       },
@@ -182,6 +182,9 @@
         "architecturally-significant",
         "doc-audit",
         "doc-governance",
+        "adr-scan",
+        "missing-adr",
+        "architecture-archaeology",
         "adr-discovery",
         "adr-drafting",
         "adr-backfill",

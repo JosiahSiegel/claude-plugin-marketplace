@@ -156,7 +156,7 @@ To serve: npx likec4 serve   # static export
 
 ### Phase 8 — Drift check
 
-Glob ADR directories (`docs/adr/`, `docs/architecture/decisions/`, `architecture/decisions/`, `docs/decisions/`). For each ADR, compare component names mentioned in the text against names in the LikeC4 model. Report name mismatches as `drift` candidates — let the architect choose which side is canonical. Do not auto-rename either side.
+Glob ADR directories (`docs/adr/`, `docs/decisions/`, `docs/architecture/decisions/`, `**/adr/*.md`; also check legacy `architecture/decisions/`). For each ADR, compare component names mentioned in the text against names in the LikeC4 model. Report name mismatches as `drift` candidates — let the architect choose which side is canonical. Do not auto-rename either side.
 
 ## DSL notes
 
