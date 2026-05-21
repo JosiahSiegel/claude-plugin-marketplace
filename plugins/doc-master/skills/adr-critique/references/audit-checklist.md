@@ -8,6 +8,7 @@ The detailed probe set for `adr-critique` Phases 3 (missing-why), 4 (consistency
 
 | Probe | Flag if… |
 |---|---|
+| Frontmatter present at all? | The file does not begin with a `---` YAML frontmatter block. Without it the ADR is invisible to gray-matter-style parsers (ADR Explorer and similar). This is an error, not a style warning. |
 | `status` set? | Missing, non-lowercase, `proposed` for > 30 days, or not one of ADR Explorer's valid values: `proposed`, `accepted`, `deprecated`, `superseded`. Flag overloaded values such as `rfc`, `rejected`, or `accepted (backfilled YYYY-MM-DD)`. |
 | `date` ISO 8601? | Missing or in `MM/DD/YYYY` format. |
 | `deciders` named humans? | Not a YAML array, `"the team"`, `"engineering"`, `"leadership"`, or empty. (Exception: backfill ADRs may include the literal `unrecoverable` — see "Backfill ADRs" probe below.) |
@@ -17,6 +18,18 @@ The detailed probe set for `adr-critique` Phases 3 (missing-why), 4 (consistency
 | `confidence` shaped? | Present but not `high`, `medium`, or `low`; numeric confidence belongs in separate `confidence-score`. |
 | `expires` valid? | Present but not ISO 8601, or used for a decision that has no real expiry semantics. |
 | `review-by` concrete? | `"annually"`, `"as needed"`, `"when appropriate"` — fossils. |
+
+### Frontmatter / body mirror
+
+doc-master requires both sources to agree so the ADR renders edges in both parser families. Walk these probes for every ADR:
+
+| Probe | Flag if… |
+|---|---|
+| Mirror present? | Frontmatter populates `supersedes`, `amends`, or `relates-to`, but the body has no `## More Information` section with a `### Relationships` sub-section. Body-scanning parsers (ADR Manager and similar) cannot see the relationship. Error. |
+| Mirror reciprocal? | Body has a `### Relationships` section listing ADR-to-ADR links via doc-master link prefixes (`Supersedes`, `Superseded by`, `Amends`, `Amended by`, `Related to`), but the corresponding frontmatter relationship keys are empty or absent. Gray-matter parsers cannot see the relationship. Error. |
+| Mirror sets agree? | The set of relationships in frontmatter does not match the set in the body Relationships section. Quote the diff and ask which is correct. Error. |
+| Link-prefix vocabulary used? | The body Relationships section uses ad-hoc phrasing ("See ADR-0004", "Like in 0011", "Replaces ADR-0004") instead of the canonical link prefixes. Warning. |
+| Reverse-link in frontmatter? | The old ADR has `superseded-by:` / `amended-by:` in its frontmatter (these are not valid graph keys; only `supersedes`, `amends`, `relates-to` produce edges). The reverse direction belongs in the **new** ADR's frontmatter `supersedes` / `amends` list, with a courtesy `Superseded by [ADR-NNNN](...)` line in the old ADR's body for human readers. Warning. |
 
 ### Backfill ADRs
 

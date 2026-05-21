@@ -13,14 +13,23 @@ repository. Checks two things at once:
    status lifecycle, ISO 8601 date, non-generic deciders, graph-bearing
    keys (`supersedes`, `amends`, `relates-to`) with `id` + `reason`
    shape.
-2. **Compatibility with ADR Explorer-style parsers** — the parsers in
-   that family parse frontmatter via `gray-matter` and read
-   relationship edges from frontmatter only. Body prose like
-   `Related ADRs: [ADR-0001](...)` is invisible to the graph. ID
-   values normalize via `/(\d+)/` and zero-pad to four characters, so
-   `8`, `"08"`, `"0008"`, and `"ADR-0008"` all resolve to the same
-   node. The script enforces that and flags dangling, duplicate,
-   self-referential, and circular references.
+2. **Compatibility with gray-matter-style frontmatter parsers** (ADR
+   Explorer and similar) — the parsers in that family parse frontmatter
+   via `gray-matter` and read relationship edges from frontmatter only.
+   Body prose like `Related ADRs: [ADR-0001](...)` is invisible to the
+   graph. ID values normalize via `/(\d+)/` and zero-pad to four
+   characters, so `8`, `"08"`, `"0008"`, and `"ADR-0008"` all resolve
+   to the same node. The script enforces that and flags dangling,
+   duplicate, self-referential, and circular references.
+3. **Compatibility with body-scanning MADR parsers** (ADR Manager and
+   similar) — these parsers ignore frontmatter and walk the rendered
+   Markdown for ADR-to-ADR links under known section headings. The
+   script enforces doc-master's **mirror rule**: every frontmatter
+   relationship must also appear in a body `## More Information` ->
+   `### Relationships` section (or top-level `## Relationships`, or
+   the legacy MADR 2.x `## Links`) using doc-master's link-prefix
+   vocabulary — `Supersedes`, `Superseded by`, `Amends`, `Amended by`,
+   `Related to`. The two sources must agree.
 
 ### Usage
 
@@ -69,9 +78,20 @@ Flags:
   or bare ids (bare ids produce a warning recommending `reason`).
 - **Self / dangling / circular references** — flagged at corpus level.
 - **Body hint** — if the body contains a `Related ADRs:` or `See also:`
-  line, a warning reminds you that ADR Explorer-style parsers ignore
-  the body; promote those links into `relates-to` frontmatter to make
-  them graph-visible.
+  line (outside the `### Relationships` section), a warning reminds you
+  that gray-matter-style parsers ignore the body; promote those links
+  into `relates-to` frontmatter and mirror them in the body
+  `### Relationships` section.
+- **`missing-body-relationships`** *(error)* — frontmatter populates
+  `supersedes` / `amends` / `relates-to` but the body has no
+  `## More Information` -> `### Relationships` (or `## Relationships`,
+  or legacy `## Links`) section with the link-prefix prose. Body-
+  scanning parsers cannot see the relationships.
+- **`missing-frontmatter-relationships`** *(warning)* — the body has a
+  Relationships section listing ADR-to-ADR links via the doc-master
+  link-prefix vocabulary, but frontmatter `supersedes` / `amends` /
+  `relates-to` are empty or absent. Gray-matter-style parsers cannot
+  see the relationships.
 
 ### Corpus checks
 

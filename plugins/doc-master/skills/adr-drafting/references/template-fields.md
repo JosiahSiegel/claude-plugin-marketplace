@@ -1,6 +1,98 @@
 # ADR template — full field semantics
 
-The `adr-drafting` skill uses this canonical field set. It is MADR-compatible but enforces stricter limits to keep the ADR a decision record rather than a design doc.
+The `adr-drafting` skill uses this canonical field set. It is MADR 3.0-compatible but enforces stricter limits to keep the ADR a decision record rather than a design doc.
+
+## The two-source rule (frontmatter and body must agree)
+
+ADR-graph tooling does not converge on a single source. Two families dominate:
+
+| Parser family | What it reads | Examples |
+|---|---|---|
+| Frontmatter-scanning (gray-matter style) | YAML between `---` fences. Body is ignored. | ADR Explorer and similar |
+| Body-scanning (Markdown-AST style) | Rendered Markdown body, looking for ADR-to-ADR links under known section headings (originally `## Links` in MADR 2.x; now community-conventionally under `## More Information`, frequently a `### Relationships` sub-section, in MADR 3.0). Frontmatter is ignored. | ADR Manager and similar |
+
+**A doc-master ADR is rendered correctly by both.** That means:
+
+1. The file begins with a `---` YAML frontmatter block (mandatory — see refusal rule in `../SKILL.md`).
+2. The frontmatter populates `supersedes`, `amends`, and `relates-to` whenever any relationship exists.
+3. The body contains a `## More Information` section with a `### Relationships` sub-section that **mirrors the frontmatter relationships** using the link-prefix vocabulary below.
+4. The two sources do not disagree. If they do, the ADR is broken.
+
+## Canonical example — frontmatter and body side by side
+
+```md
+---
+title: "Use Postgres for primary store"
+status: accepted
+date: 2026-05-20
+deciders:
+  - Jane Doe
+supersedes:
+  - "0004"
+amends: []
+relates-to:
+  - id: "0011"
+    reason: "shares the tenancy model decided in 0011"
+tags: [storage, primary-store]
+review-by: 2026-11-20
+confidence: high
+---
+
+# 0017. Use Postgres for primary store
+
+## Context
+...
+
+## Decision
+...
+
+## Consequences
+- Good, because ...
+- Bad, because ...
+
+## Compliance
+...
+
+## Alternatives Considered
+- DynamoDB extension -- one paragraph, single strongest con.
+
+## More Information
+
+### Relationships
+
+- Supersedes [ADR-0004](0004-use-dynamodb-for-primary-store.md) — replaced because Q3 reporting workload requires multi-table joins under 200ms (ASR-12).
+- Related to [ADR-0011](0011-tenancy.md) — shares the tenancy model decided in 0011.
+```
+
+In this example:
+
+- `supersedes: ["0004"]` in frontmatter and `Supersedes [ADR-0004](...)` in body **must both be present**. Either one alone leaves the relationship invisible to half the tooling.
+- `relates-to: [{id: "0011", reason: ...}]` in frontmatter and `Related to [ADR-0011](...)` in body are likewise paired.
+- If the architect adds a body line `Amended by [ADR-0023](...)` later, they must also add `"0023"` to the **superseding ADR's** `amends:` list — not to this file's frontmatter (which is now immutable if `accepted`). See "Status transitions" below for the immutability rule.
+
+## Link-prefix vocabulary (doc-master convention)
+
+The body `### Relationships` section uses these link prefixes. Each prefix corresponds to a frontmatter key or its inverse, so a mechanical mirror is always possible. The exact strings:
+
+| Body link prefix | Frontmatter key (new ADR) | Frontmatter key (old ADR) | Direction |
+|---|---|---|---|
+| `Supersedes [ADR-NNNN](...)` | `supersedes: ["NNNN"]` | (none — old ADR is immutable) | Forward |
+| `Superseded by [ADR-NNNN](...)` | (none — already in old ADR's frontmatter via the new ADR's `supersedes` list) | reverse note for human readers | Backward |
+| `Amends [ADR-NNNN](...)` | `amends: ["NNNN"]` | (none) | Forward |
+| `Amended by [ADR-NNNN](...)` | (none) | reverse note for human readers | Backward |
+| `Related to [ADR-NNNN](...)` | `relates-to: [{id: "NNNN", reason: "..."}]` | (none — symmetric, but only one side needs it) | Symmetric |
+
+Notes:
+
+- These prefixes are **the doc-master convention**, distilled from MADR 3.0 community practice and the older MADR 2.x `## Links` lexer (which tokenized `## Links` as the relationship heading). They are not a formal MADR specification — the upstream MADR 3.0 template only suggests "Links to other decisions and resources might appear here" under `## More Information`. doc-master codifies the prefix names so frontmatter and body can always be mirrored mechanically.
+- Use a Markdown link with a path relative to the ADR (e.g., `[ADR-0004](0004-old-decision.md)`), not a bare ID.
+- The `— reason` trailing dash-clause is optional but recommended; for `relates-to` it should match the frontmatter `reason` field.
+- Reverse-direction prefixes (`Superseded by`, `Amended by`) are **human-only** courtesy notes added to the old ADR's header. They do not produce graph edges; the edge always lives in the new ADR's frontmatter `supersedes` / `amends` list.
+
+## Status vocabulary
+
+The lowercase status lifecycle is `proposed`, `accepted`, `superseded`, `deprecated`. Do **not** overload `status` with `rfc`, `rejected`, `backfilled`, or explanatory strings — those break gray-matter-based filters. For RFC routing, use `status: proposed` with a separate `rfc-deadline:` field.
+
 
 ## Frontmatter
 
@@ -95,15 +187,31 @@ How is conformance to this decision verified? A **fitness function** is allowed 
 
 Realistic options only. **At the same level of abstraction** — don't compare "a technology" to "a protocol." Each gets a one-paragraph "why not." Skip pseudo-alternatives like "do nothing."
 
-### Notes (optional)
+### More Information
 
-- Human-readable cross-links only. Prefer distinct labels so a reader can tell intent apart, for example:
-  - `Related ADRs: [ADR-0001](0001-dual-runtime.md)`
-  - `Related docs: [Architecture](../explanation/architecture.md)`
-- **Do not treat body links as a relationship signal.** ADR Explorer-style parsers ignore the body entirely; only frontmatter `supersedes`, `amends`, and `relates-to` create graph edges. Anything you want a tool to see must be in the frontmatter.
-- Do not rely on the decision-log `README.md` as a connection between ADRs either — index-hub links are also ignored when edges are drawn.
+The MADR 3.0 catch-all section. doc-master pins **one required sub-section** and allows optional siblings.
+
+#### Relationships (required when frontmatter relationships exist)
+
+Mirror every populated frontmatter relationship into this body section using the link-prefix vocabulary above. This is the section body-scanning parsers (ADR Manager and similar) read. Example:
+
+```md
+### Relationships
+
+- Supersedes [ADR-0004](0004-use-dynamodb-for-primary-store.md) — replaced because <reason>.
+- Related to [ADR-0011](0011-tenancy.md) — shares the tenancy model.
+```
+
+If frontmatter `supersedes`, `amends`, and `relates-to` are all empty, this sub-section may be omitted. If any is populated, the sub-section is mandatory; the `adr-critique` skill flags ADRs that have one source but not the other.
+
+#### Notes (optional)
+
 - `PARKED` open questions cited here, with the reason for parking.
+- Provenance links to other docs that are not ADRs (explanations, runbooks, architecture diagrams):
+  - `Related docs: [Architecture](../explanation/architecture.md)`
 - Anything that didn't fit but matters for the record. Resist using this section as overflow.
+
+**Do not put ADR-to-ADR links here.** They belong under `### Relationships` above, using the link-prefix vocabulary. A `Related ADRs:` line in this section is a smell — it's the legacy form `adr-critique` flags for promotion.
 
 ## Status transitions
 

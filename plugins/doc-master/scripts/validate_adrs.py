@@ -5,11 +5,20 @@ validate_adrs.py - Quick ADR validator for doc-master.
 Checks Architecture Decision Records (ADRs) under a target repository for:
   (a) conformance to the doc-master canon (filename, numbering, frontmatter
       required keys, lowercase status lifecycle, ISO date, deciders, graph
-      edges), and
-  (b) compatibility with ADR Explorer-style parsers (YAML frontmatter
-      parsed via gray-matter; relationship edges read from `supersedes`,
-      `amends`, and `relates-to` keys only; IDs normalized via `/(\\d+)/`
-      and zero-padded to four characters).
+      edges),
+  (b) compatibility with gray-matter-style frontmatter parsers (YAML
+      frontmatter; relationship edges read from `supersedes`, `amends`,
+      and `relates-to` keys only; IDs normalized via `/(\\d+)/` and
+      zero-padded to four characters), and
+  (c) compatibility with body-scanning MADR parsers -- the frontmatter
+      relationships must be mirrored in a body `## More Information` ->
+      `### Relationships` section using doc-master link prefixes
+      (`Supersedes`, `Superseded by`, `Amends`, `Amended by`,
+      `Related to`). The legacy MADR 2.x `## Links` heading is also
+      accepted. ADRs with frontmatter relationships but no body mirror
+      are reported as `missing-body-relationships` errors; ADRs with a
+      body Relationships section but empty frontmatter relationships
+      are reported as `missing-frontmatter-relationships` warnings.
 
 Cross-platform. Standard library only. Runs on `python3`, `py -3`, or
 `python` interchangeably.
@@ -75,6 +84,22 @@ FILENAME_RE = re.compile(r"^(\d{4})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 ID_NORMALIZE_RE = re.compile(r"(\d+)")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 RELATED_BODY_RE = re.compile(r"^\s*(?:related\s+adrs?|see\s+also)\s*:", re.IGNORECASE)
+
+# Body Relationships mirror -- doc-master MADR 3.0 convention.
+# Heading match is case-insensitive and accepts either `## More Information`
+# (with `### Relationships` sub-section) or a top-level `## Relationships`
+# section. The legacy MADR 2.x `## Links` heading is also accepted because
+# body-scanning parsers in that family use it as the relationship anchor.
+RELATIONSHIPS_HEADING_RE = re.compile(
+    r"^\s{0,3}#{2,3}\s+(relationships|links|more\s+information)\s*$",
+    re.IGNORECASE,
+)
+# Link-prefix vocabulary inside the Relationships section.
+RELATIONSHIPS_LINK_PREFIX_RE = re.compile(
+    r"^\s*(?:[-*]\s+)?(supersedes|superseded\s+by|amends|amended\s+by|"
+    r"related\s+to|refined\s+by)\s+\[",
+    re.IGNORECASE,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -579,13 +604,65 @@ def validate_file(path: Path, root: Path) -> tuple[dict[str, Any], list[Finding]
             findings.append(Finding(
                 "warn", "body-related-prose",
                 f"line uses prose `Related ADRs:`/`See also:` form; "
-                f"ADR Explorer-style parsers ignore the body — move ADR "
-                f"links into the `relates-to` frontmatter list to make them "
+                f"gray-matter-style parsers ignore the body — move ADR "
+                f"links into the `relates-to` frontmatter list (and mirror "
+                f"them in the body `### Relationships` section) to make them "
                 f"graph-visible",
                 file=rel,
                 line=body_start + offset,
             ))
             break  # one hint per file is enough
+
+    # Frontmatter / body Relationships mirror.
+    has_fm_relationships = any(
+        len(record["references"][gk]) > 0 for gk in GRAPH_KEYS
+    )
+    relationships_heading_line: int | None = None
+    relationships_link_lines: list[int] = []
+    in_relationships = False
+    for offset, line in enumerate(body_lines):
+        if RELATIONSHIPS_HEADING_RE.match(line):
+            relationships_heading_line = body_start + offset
+            in_relationships = True
+            continue
+        if in_relationships:
+            stripped = line.lstrip()
+            # Stop at the next heading of equal or higher level. Use the
+            # detected heading depth: any `## ...` ends an `### ...` section,
+            # and any subsequent `## ...` / `### ...` that does not match the
+            # relationships pattern ends scanning.
+            if stripped.startswith("#") and not RELATIONSHIPS_HEADING_RE.match(line):
+                in_relationships = False
+                continue
+            if RELATIONSHIPS_LINK_PREFIX_RE.match(line):
+                relationships_link_lines.append(body_start + offset)
+
+    has_body_relationships = (
+        relationships_heading_line is not None and len(relationships_link_lines) > 0
+    )
+
+    if has_fm_relationships and not has_body_relationships:
+        findings.append(Finding(
+            "error", "missing-body-relationships",
+            "frontmatter populates `supersedes` / `amends` / `relates-to` "
+            "but body has no `## More Information` -> `### Relationships` "
+            "(or `## Relationships`) section with link-prefix prose "
+            "(`Supersedes`, `Superseded by`, `Amends`, `Amended by`, "
+            "`Related to`); body-scanning parsers (ADR Manager and similar) "
+            "will not see the relationships -- mirror them into the body",
+            file=rel,
+        ))
+    elif has_body_relationships and not has_fm_relationships:
+        findings.append(Finding(
+            "warn", "missing-frontmatter-relationships",
+            "body has a Relationships section with link-prefix prose but "
+            "frontmatter `supersedes` / `amends` / `relates-to` are empty "
+            "or absent; gray-matter-style parsers (ADR Explorer and "
+            "similar) will not see the relationships -- promote each body "
+            "link into the matching frontmatter list",
+            file=rel,
+            line=relationships_heading_line,
+        ))
 
     return record, findings
 

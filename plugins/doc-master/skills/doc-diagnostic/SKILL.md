@@ -90,29 +90,32 @@ The cardinal rule: **"Don't alter existing information in an ADR."** Amend or su
 Every ADR should contain:
 
 1. **Title** — `NNNN. Decision (imperative verb phrase)`.
-2. **Header / metadata** — `status`, `date`, `deciders`, `supersedes`, `amends`, `relates-to`, Related ASRs / requirements, Related ADRs, Related docs. Prefer ADR Explorer-compatible YAML: `supersedes` and `amends` as lists, `relates-to` as `{id, reason}` objects, `confidence: high | medium | low`, optional `confidence-score`, and optional `expires`. **ADR-to-ADR graph edges are read from frontmatter only.** ADR Explorer-style parsers parse the YAML frontmatter via `gray-matter` and look exclusively at the keys `relates-to`, `supersedes`, and `amends`. They do **not** scan the Markdown body. A body line such as `Related ADRs: [ADR-0001](0001-foo.md)` is invisible to the graph — it is human-only navigation. Keep ADR-to-ADR links distinct from provenance links to explanations, runbooks, indexes, or architecture docs; index-hub links from the decision log's `README.md` are likewise ignored when edges are drawn.
-3. **Context** — architecturally significant forces: requirements, constraints, business pressure, team skills, prior decisions. Enough that a stranger three years later understands *why this decision had to be made now*.
-4. **Decision** — the choice, stated directly, present tense. ("We use Postgres for the primary store.") The ADR must stand alone even if it links to longer design material.
-5. **Decision drivers** *(MADR)* or implicit in Context *(Nygard)* — the qualities being optimized: latency, cost, operational simplicity, team familiarity, vendor lock-in, etc.
-6. **Alternatives considered** — at least the realistic ones, **at the same level of abstraction** (don't compare "a technology" to "a protocol"). Each alternative gets a one-paragraph "why not." Skip pseudo-alternatives ("we could do nothing").
-7. **Consequences** — both **Good, because...** and **Bad, because...** outcomes, plus follow-up work the decision triggers.
-8. **Confirmation / Validation** *(MADR full)* — how compliance with the decision is enforced and evaluated (lint rule? architecture test? ArchUnit? ADR audit? code review checklist?).
-9. **Re-evaluation triggers** — concrete conditions that should cause a new ADR to supersede this one.
+2. **YAML frontmatter — mandatory.** The file **must** begin with a `---` block containing at minimum `title`, `status`, `date`, and `deciders`. When relationships exist, also `supersedes`, `amends`, and / or `relates-to`. Optional: `tags`, `review-by`, `expires`, `confidence: high | medium | low`, separate `confidence-score`, and `rfc-deadline` when `status: proposed` is acting as an RFC. **An ADR without YAML frontmatter is invisible to any gray-matter-based explorer** (ADR Explorer and similar) — they parse the front block and ignore the body. This is the single biggest cause of ADRs that "have relationships" but show as orphan nodes in tooling. doc-master defaults to writing frontmatter on every ADR; the `adr-drafting` skill refuses to save without it.
+3. **Body Relationships mirror — mandatory whenever frontmatter relationships exist.** doc-master defaults to MADR 3.0 with a `## More Information` section containing a `### Relationships` sub-section that mirrors the frontmatter `supersedes` / `amends` / `relates-to` using doc-master's link-prefix vocabulary (`Supersedes`, `Superseded by`, `Amends`, `Amended by`, `Related to`). This second source is what body-scanning parsers (ADR Manager and similar) read; they do not look at frontmatter. **An ADR with frontmatter relationships but no body mirror is invisible to body-scanning tools, and vice versa.** The two sources must agree.
+4. **Context** — architecturally significant forces: requirements, constraints, business pressure, team skills, prior decisions. Enough that a stranger three years later understands *why this decision had to be made now*.
+5. **Decision** — the choice, stated directly, present tense. ("We use Postgres for the primary store.") The ADR must stand alone even if it links to longer design material.
+6. **Decision drivers** *(MADR)* or implicit in Context *(Nygard)* — the qualities being optimized: latency, cost, operational simplicity, team familiarity, vendor lock-in, etc.
+7. **Alternatives considered** — at least the realistic ones, **at the same level of abstraction** (don't compare "a technology" to "a protocol"). Each alternative gets a one-paragraph "why not." Skip pseudo-alternatives ("we could do nothing").
+8. **Consequences** — both **Good, because...** and **Bad, because...** outcomes, plus follow-up work the decision triggers.
+9. **Confirmation / Validation** *(MADR full)* — how compliance with the decision is enforced and evaluated (lint rule? architecture test? ArchUnit? ADR audit? code review checklist?).
+10. **Re-evaluation triggers** — concrete conditions that should cause a new ADR to supersede this one.
 
 ### Storage and discoverability
 
 - Keep ADRs **in the source repository, in source control**, alongside the code they govern.
 - ADR Explorer-friendly locations: `docs/adr/`, `docs/decisions/`, `docs/architecture/decisions/`, or `**/adr/*.md`. A bare `architecture/decisions/` directory can work as a legacy project convention, but warn that it may need custom ADR Explorer root configuration. Pick one per project; document the choice in the decision log's `README.md`.
 - Provide an **index** in the decision log `README.md` listing every ADR with its status and a one-line summary. Treat the index as navigation, not the relationship graph.
-- Express direct ADR-to-ADR relationships in the **YAML frontmatter** of the ADR file. The graph-bearing keys are `supersedes`, `amends`, and `relates-to`. A body line such as `Related ADRs: [ADR-0001](0001-dual-runtime.md)` is human navigation only — explorers parse frontmatter via `gray-matter` and do not read the body. Keep `Related ADRs:` (when present in prose) distinct from `Related docs:` so a reader can still tell the two apart, but treat the prose form as a courtesy, not the edge. Do not rely on an index page linking to both ADRs either; index-hub links are ignored when edges are drawn.
+- **Default to frontmatter-first.** Every ADR begins with a `---` YAML block. Without it, the file is invisible to gray-matter-style parsers (ADR Explorer and similar), which means relationships never render in the graph regardless of what the body says. This is the single most common failure mode for "ADRs that don't show up in tooling." doc-master refuses to save an ADR without frontmatter.
+- **Default to MADR 3.0 + body Relationships mirror.** Direct ADR-to-ADR relationships live in the **frontmatter** keys `supersedes`, `amends`, and `relates-to` **and** are mirrored in the body under `## More Information` → `### Relationships` using doc-master's link-prefix vocabulary (`Supersedes`, `Superseded by`, `Amends`, `Amended by`, `Related to`). Gray-matter-style parsers read the frontmatter and ignore the body; body-scanning parsers (ADR Manager and similar) read the body and ignore the frontmatter. Mirroring both is what makes the ADR render in every common tool. If the project already uses a different template (Nygard plain, Y-statement, arc42, Tyree-Akerman), follow it; otherwise, MADR 3.0 is the default.
+- A bare body line such as `Related ADRs: [ADR-0001](0001-dual-runtime.md)` outside the `### Relationships` section is human navigation only — neither parser family treats it as authoritative. Keep `Related docs:` (provenance to explanations, runbooks, architecture diagrams) in `### Notes`. Do not rely on an index page linking to both ADRs as a relationship signal; index-hub links are ignored when edges are drawn.
 - ID format inside the frontmatter lists: ADR Explorer-style parsers extract digits from each entry with `/(\d+)/` and zero-pad to four characters, so `8`, `"08"`, `"0008"`, and `"ADR-0008"` all resolve to the same node. **Use zero-padded four-digit strings (`"0008"`)** in `supersedes`, `amends`, and `relates-to[].id` for stable display, consistent sorting, and grep-ability; bare integers parse correctly but render less predictably.
 - Cross-link ADRs from the code they govern when feasible (`// See docs/adr/0007-use-postgres-for-primary-store.md`).
-- State the governance rule for relationship-link maintenance. If Accepted ADRs are otherwise immutable, either explicitly allow metadata-only relationship/link fixes or require a named governance exception; body changes still require amendment or supersession.
-- A quick offline check against the canon (filenames, required keys, lowercase status lifecycle, ISO date, deciders, ADR Explorer-compatible graph edges, duplicate / dangling / circular references) is available via `plugins/doc-master/scripts/validate_adrs.py`. Use it during `/doc-audit` triage or as a CI gate, not as a substitute for the four-question check on each ADR.
+- State the governance rule for relationship-link maintenance. If Accepted ADRs are otherwise immutable, either explicitly allow metadata-only relationship/link fixes (frontmatter list edits and body Relationships line additions) or require a named governance exception; body changes outside the Relationships mirror still require amendment or supersession.
+- A quick offline check against the canon (filenames, required keys, lowercase status lifecycle, ISO date, deciders, ADR Explorer-compatible graph edges, frontmatter / body Relationships mirror, duplicate / dangling / circular references) is available via `plugins/doc-master/scripts/validate_adrs.py`. Use it during `/doc-audit` triage or as a CI gate, not as a substitute for the four-question check on each ADR.
 
-Minimal canonical frontmatter for a graph-renderable ADR:
+Minimal canonical frontmatter **plus** body Relationships mirror for an ADR that renders edges in both parser families:
 
-```yaml
+```md
 ---
 title: "Use Postgres for primary store"
 status: accepted
@@ -126,9 +129,24 @@ relates-to:
   - id: "0011"
     reason: "shares the tenancy model decided in 0011"
 ---
+
+# 0017. Use Postgres for primary store
+
+## Context
+...
+
+## Decision
+...
+
+## More Information
+
+### Relationships
+
+- Supersedes [ADR-0004](0004-use-dynamodb-for-primary-store.md) — replaced because Q3 reporting needs sub-200ms joins.
+- Related to [ADR-0011](0011-tenancy.md) — shares the tenancy model decided in 0011.
 ```
 
-Only those three keys (`supersedes`, `amends`, `relates-to`) produce ADR-to-ADR edges. Prose links elsewhere in the file are not parsed.
+Three keys (`supersedes`, `amends`, `relates-to`) produce ADR-to-ADR edges for gray-matter-style parsers. The `### Relationships` body section produces the same edges for body-scanning parsers. Either alone leaves the ADR half-rendered. Prose links elsewhere in the file (a stray `Related ADRs:` line in `### Notes`, an index-hub entry in `README.md`, a `superseded-by` note in the old ADR's body) are not authoritative — they are courtesy navigation for human readers.
 
 ## ADR failure modes
 
