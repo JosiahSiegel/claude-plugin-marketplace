@@ -2,6 +2,7 @@
 name: modal-web-scheduling-knowledge
 description: |
   This skill should be used when the user asks to expose Modal.com functions as APIs or schedule Modal jobs. PROACTIVELY activate for: FastAPI endpoints, @modal.fastapi_endpoint, @modal.asgi_app, @modal.wsgi_app, webhooks, WebSockets, custom domains, endpoint timeouts, modal.Cron, modal.Period, scheduled ETL, cron timezones, deploy-vs-run schedule behavior, and endpoint debugging.
+  Provides: endpoint decorator selection guide, scheduling patterns, timezone/cron rules, and debugging recipes for endpoints and schedules.
 ---
 
 # Modal Web and Scheduling Knowledge

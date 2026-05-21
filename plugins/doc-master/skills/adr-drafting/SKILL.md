@@ -135,7 +135,7 @@ date: 2026-05-20
 deciders: <named humans>
 supersedes:    # ADR id
 amends:        # ADR id
-relates-to:    # ADR id — one-line reason
+relates-to:    # ADR id -- one-line reason
 tags: []
 review-by: 2026-11-20  # or trigger e.g. "100k DAU"
 confidence: 1-5
@@ -158,8 +158,8 @@ rfc-deadline: 2026-06-03  # only when status == rfc
 1-3 sentences. Fitness-function snippet if appropriate.
 
 ## Alternatives Considered
-- Option B — one paragraph, single strongest con.
-- Option C — one paragraph, single strongest con.
+- Option B -- one paragraph, single strongest con.
+- Option C -- one paragraph, single strongest con.
 
 ## Notes
 Optional. Cross-links. PARKED open questions cited here.

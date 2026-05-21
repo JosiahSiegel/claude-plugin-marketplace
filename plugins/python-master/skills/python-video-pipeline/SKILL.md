@@ -1,9 +1,9 @@
 ---
 name: python-video-pipeline
 description: |
-  Expert guide to building end-to-end Python video processing pipelines by combining FFmpeg, OpenCV, PyAV, ffmpegcv, Decord, VidGear, and Modal.com for scalable GPU-accelerated workflows.
-  PROACTIVELY activate for: (1) integrating FFmpeg + OpenCV in the same pipeline (decode, process, re-encode), (2) avoiding color-format mismatches (BGR vs RGB across OpenCV, PIL, PyAV, FFmpeg), (3) frame dimension ordering (HWC vs CHW) between OpenCV and ML frameworks, (4) preventing audio stream loss in video filter chains, (5) memory management for long/large videos (streaming vs in-memory), (6) choosing between ffmpegcv, Decord, VidGear, or PyAV for performance, (7) GPU-accelerated decode/encode on Modal.com, (8) parallel frame processing and chunk-based processing of large files on Modal, (9) video transcoding pipelines on serverless, (10) HLS streaming generation on Modal, (11) end-to-end upload → process → transcode → HLS workflows, (12) batch sizing for GPU memory, efficient pixel formats, and stream processing for very large videos.
-  Provides: library selection matrix, pattern-based integration recipes, Modal.com deployment examples, performance tuning for GPU pipelines, and complete production-ready example workflows.
+  Expert guide to end-to-end Python video pipelines combining FFmpeg, OpenCV, PyAV, ffmpegcv, Decord, VidGear, and Modal.com for scalable GPU-accelerated workflows.
+  PROACTIVELY activate for: (1) FFmpeg+OpenCV in same pipeline (decode, process, re-encode); (2) color-format mismatches (BGR vs RGB across OpenCV, PIL, PyAV, FFmpeg); (3) frame dim ordering (HWC vs CHW) between OpenCV and ML frameworks; (4) audio stream loss in filter chains; (5) memory mgmt for long/large videos (streaming vs in-memory); (6) choosing ffmpegcv/Decord/VidGear/PyAV for performance; (7) GPU decode/encode on Modal.com; (8) parallel + chunk-based processing on Modal; (9) transcoding pipelines on serverless; (10) HLS generation on Modal; (11) upload -> process -> transcode -> HLS workflows; (12) batch sizing for GPU memory, pixel formats, large-video streaming.
+  Provides: library selection matrix, integration recipes, Modal.com deployment examples, GPU pipeline tuning, production-ready workflow examples.
 ---
 
 # Python Video Pipeline Skill

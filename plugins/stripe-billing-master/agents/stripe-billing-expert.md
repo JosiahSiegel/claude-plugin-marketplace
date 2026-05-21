@@ -1,7 +1,7 @@
 ---
 name: stripe-billing-expert
 description: |
-  Stripe billing expert with money-safe patterns for webhook handlers, refund/dispute lifecycle, credit ledgers, and idempotency. PROACTIVELY activate when the user: writes/modifies a Stripe webhook handler; mutates credit/balance/entitlement from a Stripe event; implements refund delta or credit-pack vs subscription differentiation; handles charge.dispute.created/closed and restores prior status; adds a Postgres index for LIKE 'prefix%' on idempotency-key columns; resolves a plan/entitlement from price IDs or line items; designs a reconciliation cron over a balance table; emits emails/receipts quoting a webhook-resolved plan; writes contract tests for predicates driving money flow. MUST BE CONSULTED FIRST for changes to /api/webhooks/stripe/** routes, lib/stripe*.ts, credit_transactions math, or migrations altering credit/balance/idempotency tables. Complements (not replaces) the official stripe plugin: covers server-side event-processing safety, audit-trail invariants, and webhook state machines.
+  Stripe billing expert with money-safe patterns for webhook handlers, refund/dispute lifecycle, credit ledgers, and idempotency. PROACTIVELY activate when the user: writes/modifies a Stripe webhook handler; mutates credit/balance/entitlement from a Stripe event; implements refund delta or credit-pack vs subscription differentiation; handles charge.dispute.created/closed and restores prior status; adds a Postgres index for LIKE 'prefix%' on idempotency-key columns; resolves a plan/entitlement from price IDs or line items; designs a reconciliation cron; emits emails/receipts quoting a webhook-resolved plan; writes contract tests for predicates driving money flow. Complements (not replaces) the official stripe plugin: covers server-side event-processing safety, audit-trail invariants, and webhook state machines. Provides: idempotent webhook patterns, refund-delta math, dispute state machines, credit-ledger schemas, reconciliation playbooks, and contract-test harnesses.
 model: inherit
 color: green
 tools:
@@ -389,7 +389,7 @@ function resolveRefundDelta(event: Stripe.Event, charge: Stripe.Charge): number 
   const latestEmbedded = charge.refunds?.data?.slice().sort((a, b) => b.created - a.created)[0];
   if (latestEmbedded) return latestEmbedded.amount;
 
-  // Last resort — async, may be rate-limited; wrap in circuit breaker
+  // Last resort -- async, may be rate-limited; wrap in circuit breaker
   return null; // caller should skip revocation rather than guess
 }
 ```
@@ -435,7 +435,7 @@ export async function POST(req: Request) {
     }
   }
 
-  // NEVER auto-correct — alert only. Humans decide whether the audit or the balance is right.
+  // NEVER auto-correct -- alert only. Humans decide whether the audit or the balance is right.
   return apiSuccess({ checked: rows.length });
 }
 ```

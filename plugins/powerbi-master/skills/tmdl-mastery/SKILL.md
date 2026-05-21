@@ -10,24 +10,24 @@ description: |
 
 ## Overview
 
-Complete TMDL reference covering language syntax, folder structure, object types, expressions, serialization API, CI/CD integration, and deployment patterns. TMDL is the human-readable, source-control-friendly format for defining Power BI and Analysis Services semantic models at compatibility level 1200+.
+TMDL reference for language syntax, folder structure, object types, expressions, serialization API, CI/CD, and deployment. TMDL is the human-readable, source-control-friendly format for Power BI and Analysis Services semantic models at compatibility level 1200+.
 
 ## 2026 Status Snapshot
 
 | Aspect | Status (as of April 2026) |
 |--------|---------------------------|
 | TMDL language GA | GA since August 2024 -- no longer preview |
-| TMDL view in Power BI Desktop | GA -- includes semantic highlighting, autocomplete, code actions, diff preview, compatibility-level upgrade prompts |
+| TMDL view in Power BI Desktop | GA -- semantic highlighting, autocomplete, code actions, diff preview, compatibility prompts |
 | TMDL as default PBIP semantic-model format | Default -- `model.bim` is the legacy BIM format; new PBIP projects write `definition/*.tmdl` files |
 | Fabric Git integration | Exports semantic models as **TMDL** (not TMSL/BIM) |
 | TMSL / BIM | **Not deprecated** -- still supported for XMLA scripting commands and tools that require JSON. Use TMDL for source control, TMSL for XMLA `createOrReplace` command scripting |
 | Compatibility level | 1550+ recommended; 1601+ required for some newer properties (e.g., `formatStringDefinition`, calculation group multi/empty selection expressions) |
 | Tabular Editor 2 (free) | TMDL read/write support (2.17+) |
 | Tabular Editor 3 (paid) | Full TMDL IDE with DAX debugger and diagram view |
-| VS Code TMDL extensions | Microsoft `analysis-services.TMDL` and the richer community `CPIM.TMDL-language-support` (DAX + M semantic highlighting, code actions, formatting, breadcrumb navigation) |
+| VS Code TMDL extensions | Microsoft `analysis-services.TMDL` and community `CPIM.TMDL-language-support` (DAX + M highlighting, code actions, formatting, breadcrumbs) |
 | Report Server | **No TMDL support** -- continues to use legacy PBIX binary format |
 
-**Bottom line:** For any new Power BI / Fabric semantic model under source control, use TMDL. Retain TMSL only for XMLA command scripting scenarios or tools that still require `model.bim`.
+**Bottom line:** Use TMDL for new Power BI / Fabric semantic models under source control. Retain TMSL for XMLA scripting or tools that require `model.bim`.
 
 ## TMDL vs TMSL vs BIM
 
@@ -41,7 +41,7 @@ Complete TMDL reference covering language syntax, folder structure, object types
 | API | TmdlSerializer (.NET) | JsonSerializer (.NET), TMSL commands |
 | Migration | Can convert from BIM via Tabular Editor or Desktop | Default legacy format |
 
-**When to use TMDL:** Any new project requiring source control, CI/CD, or team collaboration. Prefer TMDL for all PBIP projects.
+**When to use TMDL:** Any new source-controlled, CI/CD, or team PBIP project.
 
 **When to use TMSL/BIM:** Legacy projects, Report Server (no TMDL support), or tools that only accept BIM.
 
@@ -105,7 +105,7 @@ Default properties use equals (`=`) on the same line or as multi-line expression
 
 ## Expressions -- Single-Line and Multi-Line
 
-```tmdl
+````tmdl
 /// Single-line expression
 measure 'Sales Amount' = SUM(Sales[Amount])
 
@@ -126,12 +126,12 @@ partition 'Sales-Part' = m
         in
             Sales
         ```
-```
+````
 
 **Expression rules:**
-- Multi-line expressions must be indented one level deeper than parent object properties
-- Trailing blank lines and whitespace are stripped (unless using triple-backtick blocks)
-- Triple-backtick enclosing preserves exact whitespace; end delimiter sets left boundary
+- Multi-line expressions indent one level deeper than parent properties
+- Trailing blanks are stripped unless using triple-backtick blocks
+- Triple-backtick blocks preserve whitespace; end delimiter sets left boundary
 
 ## Descriptions (/// Syntax)
 
@@ -144,7 +144,7 @@ table Sales
     measure 'Sales Amount' = SUM(Sales[Amount])
 ```
 
-Triple-slash comments directly above an object become its TOM `Description` property. No whitespace allowed between the description block and the object type keyword.
+Triple-slash comments above an object become its TOM `Description` property. No whitespace between description block and object type keyword.
 
 ## Ref Keyword
 

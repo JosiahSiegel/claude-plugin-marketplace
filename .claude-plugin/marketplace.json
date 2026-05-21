@@ -806,8 +806,8 @@
     {
       "name": "tsql-master",
       "source": "./plugins/tsql-master",
-      "description": "Comprehensive T-SQL and SQL Server expertise for query optimization, performance tuning, and Azure SQL Database. PROACTIVELY activate for: (1) T-SQL query optimization and SARGability, (2) SQL Server performance tuning, (3) index design, (4) execution plan analysis, (5) parameter sniffing fixes, (6) Azure SQL Database tuning, (7) window functions and advanced patterns, (8) columnstore and In-Memory OLTP, (9) Query Store and IQP features. Includes: tsql-expert agent, 5 progressive disclosure skills, 3 optimization commands, diagnostic scripts.",
-      "version": "2.0.9",
+      "description": "Comprehensive T-SQL and SQL Server expertise for query optimization, execution plan analysis, index strategy, performance tuning, and Azure SQL Database. PROACTIVELY activate for: (1) schema-first query optimization and SARGability, (2) .sqlplan and ShowPlan XML triage, (3) index design and partition alignment, (4) parameter sniffing fixes, (5) Azure SQL Database tuning, (6) window functions and advanced patterns, (7) columnstore and In-Memory OLTP, (8) Query Store and IQP features. Includes: tsql-expert agent, 6 progressive disclosure skills, 3 optimization commands, diagnostic scripts.",
+      "version": "2.0.10",
       "author": {
         "name": "Josiah Siegel"
       },

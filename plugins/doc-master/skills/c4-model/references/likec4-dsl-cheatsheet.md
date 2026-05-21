@@ -103,18 +103,18 @@ Three view kinds permitted by this skill:
 views {
   view context-of-shop of shop {
     include shop, customer, payment-gateway
-    title "Context — Shop"
+    title "Context -- Shop"
   }
 
   view containers-of-shop of shop {
     include shop, shop.*
-    title "Containers — Shop"
+    title "Containers -- Shop"
   }
 
   // Optional, only on architect request:
   view deployment-of-shop of shop {
     include shop, shop.*
-    title "Deployment — Shop"
+    title "Deployment -- Shop"
   }
 }
 ```

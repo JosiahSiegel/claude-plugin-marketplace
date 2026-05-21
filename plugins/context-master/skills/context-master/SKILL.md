@@ -38,17 +38,17 @@ For **any** multi-file project — websites, apps, APIs, documentation sets — 
 ```text
 User: "Create a portfolio with home, about, projects, and contact pages."
 
-Step 1 STOP    — do not start with index.html.
-Step 2 PLAN    — "Think hard about architecture: 5 files needed,
+Step 1 STOP    -- do not start with index.html.
+Step 2 PLAN    -- "Think hard about architecture: 5 files needed,
                   styles.css is the shared dependency."
-Step 3 ANNOUNCE — "I'll create:
+Step 3 ANNOUNCE -- "I'll create:
                   1. styles.css       (shared styling)
                   2. index.html       (references styles.css)
                   3. about.html
                   4. projects.html
                   5. contact.html"
-Step 4 CREATE   — write files in that order.
-Step 5 VERIFY   — every HTML file links styles.css; navigation resolves.
+Step 4 CREATE   -- write files in that order.
+Step 5 VERIFY   -- every HTML file links styles.css; navigation resolves.
 
 Result: no refactor, no re-export, no broken links.
 ```

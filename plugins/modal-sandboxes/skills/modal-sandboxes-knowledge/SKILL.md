@@ -2,6 +2,7 @@
 name: modal-sandboxes-knowledge
 description: |
   This skill should be used when the user asks to run isolated or untrusted code on Modal.com. PROACTIVELY activate for: modal.Sandbox, safe user code execution, coding playgrounds, named sandboxes, PTY sessions, filesystem snapshots, timeout and resource limits, egress policies, sandbox lifecycle cleanup, terminate(), and security review for code execution.
+  Provides: sandbox security checklist, lifecycle and cleanup patterns, egress/resource-limit recipes, and snapshot/PTY usage examples.
 ---
 
 # Modal Sandboxes Knowledge

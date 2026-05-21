@@ -183,13 +183,11 @@ Autonomous subagents in `agents/*.md`:
 ---
 name: agent-name
 description: |
-  Use this agent when... Examples:
-  <example>
-  Context: ...
-  user: "..."
-  assistant: "..."
-  <commentary>Why trigger</commentary>
-  </example>
+  Brief role summary. PROACTIVELY activate for: (1) trigger, (2) trigger, ..., (N) trigger. Provides: capability list.
+
+  # Optional. Include 3-5 <example> blocks ONLY when the agent body
+  # exceeds 2,500 words. Lean orchestrators omit them by design.
+  # See agent-development "Example-block requirement by agent body size".
 model: inherit
 color: blue
 ---
@@ -259,7 +257,7 @@ Never use hardcoded absolute paths.
 |-------|----------|
 | Plugin not loading | Check plugin.json is in `.claude-plugin/` |
 | Commands missing | Verify frontmatter has `description` field |
-| Agent not triggering | Add `<example>` blocks to description |
+| Agent not triggering | Check description has `PROACTIVELY activate for:` enumeration. Add 3-5 `<example>` blocks only if agent body > 2,500 words — see `agent-development` SKILL.md "Example-block requirement by agent body size". Lean orchestrators are exempt. |
 | Marketplace not found | Ensure repo is public, check path in marketplace.json |
 
 ## Additional Resources

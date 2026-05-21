@@ -152,7 +152,7 @@ The drafting skill reads the brief and does not re-ask anything in it.
 # Discovery Brief
 
 ## Domain
-[CONFIRMED 2026-05-20] One sentence — what does the system do, for whom.
+[CONFIRMED 2026-05-20] One sentence -- what does the system do, for whom.
 
 ## System in focus
 [CONFIRMED 2026-05-20] Single named system.
@@ -161,7 +161,7 @@ The drafting skill reads the brief and does not re-ask anything in it.
 [CONFIRMED 2026-05-20] e.g., "p95 read latency < 200ms on cross-entity reports."
 
 ## Components in scope (≤5)
-[CONFIRMED 2026-05-20] - Name — one-line description (architect's words)
+[CONFIRMED 2026-05-20] - Name -- one-line description (architect's words)
 ...
 
 ## Relationships
@@ -169,11 +169,11 @@ The drafting skill reads the brief and does not re-ask anything in it.
 ...
 
 ## External actors
-[CONFIRMED 2026-05-20] - Role — one-line description
+[CONFIRMED 2026-05-20] - Role -- one-line description
 ...
 
 ## Existing ADRs in play
-[CONFIRMED 2026-05-20] - 0007 — supersedes / amends / relates-to / tension
+[CONFIRMED 2026-05-20] - 0007 -- supersedes / amends / relates-to / tension
 
 ## Repos in play
 [CONFIRMED 2026-05-20] - repo: role / owner / access / ADRs / C4

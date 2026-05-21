@@ -2,6 +2,7 @@
 name: modal-storage-knowledge
 description: |
   This skill should be used when the user asks to work with Modal.com persistence or shared state. PROACTIVELY activate for: Modal Volumes, vol.commit, Dict, Queue, CloudBucketMount, S3 or GCS mounts, secret-backed storage credentials, model cache persistence, dataset staging, shared queues, distributed state, volume consistency, and storage troubleshooting.
+  Provides: storage primitive selection matrix, commit/consistency patterns, mount configuration recipes, and troubleshooting checklists.
 ---
 
 # Modal Storage Knowledge

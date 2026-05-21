@@ -406,7 +406,7 @@ expression 'Shared Query' =
 
 ### Annotations and Extended Properties
 
-```tmdl
+````tmdl
 table Sales
 
     annotation PBI_ResultType = Table
@@ -424,7 +424,7 @@ table Sales
             "LegacyRedirects": true
         }
         ```
-```
+````
 
 Annotations use `Value` (Text) as default property. JSON extended properties use `Value` (JSON) as default property. Both support single-line and triple-backtick multi-line values.
 

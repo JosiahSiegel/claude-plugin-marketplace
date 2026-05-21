@@ -53,7 +53,7 @@ Walk the ADR top to bottom. For every line that violates a rule, emit **one** fl
 ```yaml
 Original: <verbatim line from ADR>
 Violates: <rule number and name from adr-is-not.md, OR "missing-why" / "drift" / "tension">
-Rewrite:  <shorter, stricter replacement — or "delete">
+Rewrite:  <shorter, stricter replacement -- or "delete">
 Apply?    (yes / no / adjust)
 ```
 

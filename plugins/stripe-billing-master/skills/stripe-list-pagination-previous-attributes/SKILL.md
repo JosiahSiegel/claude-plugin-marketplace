@@ -74,7 +74,7 @@ export async function resolvePlanFromInvoice(invoice: Stripe.Invoice): Promise<{
   resolvedVia: "priceMap" | "safetyFallback";
 }> {
   try {
-    const items = await scanAllLineItems(invoice); // G3 — paginate first
+    const items = await scanAllLineItems(invoice); // G3 -- paginate first
     for (const item of items) {
       const mapped = PRICE_TO_PLAN[item.price?.id ?? ""];
       if (mapped) return { ...mapped, resolvedVia: "priceMap" };

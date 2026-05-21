@@ -99,7 +99,7 @@ When a SKILL.md exceeds ~2,000 words, split it:
 ### Description Standards (MANDATORY)
 
 - **Skills**: Third person — "This skill should be used when the user asks to..." with specific trigger phrases
-- **Agents**: "Use this agent when..." with 3-7 `<example>` blocks
+- **Agents**: `PROACTIVELY activate for: (1)... (N)...` enumeration plus `Provides:` capability list. `<example>` blocks are conditional on body word count — required only when the agent body exceeds 2,500 words (3-5 blocks); lean orchestrators under that threshold omit them by design. See `agent-development` skill "Example-block requirement by agent body size".
 - **Plugin.json**: Target 400-1000 characters (hard ceiling 1024); use keywords array for breadth beyond that
 
 ### Housekeeping (MANDATORY)
@@ -128,9 +128,22 @@ After creating all components, verify each of these before proceeding:
 1. **Trigger phrase completeness** — Each skill description has 5+ trigger phrases including synonyms, abbreviations, and problem-oriented terms users actually type
 2. **SKILL.md word count** — No SKILL.md exceeds 3,000 words. If it does, extract sections to references/
 3. **No intra-file duplication** — No table, list, or content block appears twice in the same SKILL.md
-4. **Agent trigger coverage** — Count skills and count agent `<example>` blocks. Every skill must map to at least one example
+4. **Agent trigger coverage (conditional)** — If the agent includes `<example>` blocks, count skills and count examples; every skill must map to at least one example. Lean orchestrators that omit examples by design (body < 2,500 words) are not subject to this rule.
 5. **No trigger overlap** — No keyword claimed by multiple skill descriptions without explicit disambiguation in the agent's skill activation table
 6. **Synonym coverage** — Descriptions use terms users actually say, not just formal feature names
+7. **Validator pass** — Run `python scripts/validate_plugins.py --plugin <name>` and resolve every error. The validator is the canonical quality gate.
+
+### Audit Caveat: check intent before "fixing" stripped content
+
+When auditing an existing plugin rather than authoring a new one, an apparent defect may be the deliberate result of a prior refactor. The canonical case: example blocks stripped from lean orchestrators during a fat-to-lean refactor. A follow-up audit that recommends re-adding them would undo the refactor.
+
+**Before listing any agent or skill finding in an audit report, run the three-question intent check:**
+
+1. **Word count tier** — Does the current size of the agent/skill make the apparent defect a defect, or is it exempt by design (e.g. lean orchestrator under 2,500 words)?
+2. **Git log** — Was the absent content recently removed on purpose? Look for refactor commits like "lean orchestrator refactor" or "stripped redundant example blocks".
+3. **Validator output** — Does `scripts/validate_plugins.py` flag it? If not, do not invent stricter rules in the audit than the validator enforces.
+
+Only when all three return "real defect" does the finding belong in the remediation list. Full rationale and the broader list of "stripped on purpose" patterns: `agent-development/references/validation-and-audits.md`.
 
 ## Output Format
 

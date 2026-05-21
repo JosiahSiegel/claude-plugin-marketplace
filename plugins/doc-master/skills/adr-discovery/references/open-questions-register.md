@@ -13,7 +13,7 @@ The open-questions register lives at `docs/architecture/open-questions.md`, deli
 Each entry is a short numbered block:
 
 ```md
-## Q12 — Should we run Postgres single-region or multi-region?
+## Q12 -- Should we run Postgres single-region or multi-region?
 
 - **Status:** OPEN
 - **Why it matters:** ASR-7 requires read latency < 50ms p95 for EU users; single-region from us-east-1 is ~110ms.

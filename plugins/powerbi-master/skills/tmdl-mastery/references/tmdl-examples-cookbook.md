@@ -111,7 +111,7 @@ function CalcMargin = (revenue : NUMERIC, cost : NUMERIC) =>
 
 ### tables/Sales.tmdl
 
-```tmdl
+````tmdl
 /// Core sales transaction table
 /// Contains all order-level data with incremental refresh
 table Sales
@@ -288,7 +288,7 @@ table Sales
             "incrementalPeriodMonths": 1
         }
         ```
-```
+````
 
 ## Calendar Table (Calculated)
 
@@ -543,7 +543,7 @@ table 'Currency Conversion'
 
 ## Field Parameters
 
-```tmdl
+````tmdl
 table 'Revenue Metric'
 
     column 'Revenue Metric'
@@ -577,7 +577,7 @@ table 'Revenue Metric'
     annotation ParameterMetadata = ```
         {"version":3,"kind":2}
         ```
-```
+````
 
 ## Roles with RLS
 

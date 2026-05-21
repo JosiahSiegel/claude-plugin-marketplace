@@ -40,6 +40,30 @@ python3 scripts/version_ops.py [OPTIONS] [PLUGIN_NAME]
 ./scripts/version-tracker.sh [OPTIONS] [PLUGIN_NAME]
 ```
 
+## Plugin Quality Validation
+
+Use `validate_plugins.py` as the read-only quality gate for marketplace plugins. It validates the central registry, each plugin's `.claude-plugin/plugin.json`, agent frontmatter, skill frontmatter and size limits, Markdown code fences, and stray working files under `plugins/`.
+
+```bash
+# Validate all registered plugins and plugin directories
+python3 scripts/validate_plugins.py
+
+# Machine-readable output for CI or scripts
+python3 scripts/validate_plugins.py --json
+
+# Treat warnings as failures
+python3 scripts/validate_plugins.py --strict
+
+# Validate a single registered plugin
+python3 scripts/validate_plugins.py --plugin doc-master
+```
+
+**Exit codes:**
+- `0` - All error checks pass. Warnings are allowed unless `--strict` is set.
+- `1` - One or more errors were found, or warnings were found in `--strict` mode.
+
+The validator is intentionally read-only. It must not be used to mutate plugin metadata or bump versions; use `version_ops.py` for version changes.
+
 ## Complete CLI Reference
 
 ```

@@ -1,3 +1,5 @@
+<!-- validator:allow-bare-fence -->
+<!-- This document is a verbatim Pandoc/eBook export of Microsoft's free .NET Microservices guide. Bare fences and stray code blocks are export artifacts, not authored content. -->
 
 EDITION v7.0 - Updated to ASP.NET Core 7.0
 Refer changelog for the book updates and community contributions.

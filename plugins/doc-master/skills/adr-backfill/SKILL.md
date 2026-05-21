@@ -3,7 +3,8 @@ name: adr-backfill
 description: |
   This skill should be used to retroactively record an architectural decision that was made in the past but never written up as an ADR — typically surfaced by a doc audit or by a user realising a long-ago shipped change should have been documented.
   PROACTIVELY activate on "backfill ADR", "retroactive ADR", "post-hoc ADR", "reconstruct an ADR from history", "write up a past decision", "we never documented this decision", "decision was made but no ADR exists", "we decided years ago", "back when", "before my time", or "the audit surfaced a backfill candidate."
-  Tense disambiguation: `adr-drafting` claims "we decided / we're deciding"; `adr-backfill` claims "we decided years ago / back when / before my time / never wrote it down." Refuses to draft when reconstruction confidence is `low` — routes to `open-questions.md`. Requires evidence in at least two independent locations and a verbatim honesty clause in the saved record.
+  Tense rule: `adr-drafting` claims "we decided / we're deciding"; `adr-backfill` claims "we decided years ago / back when / before my time / never wrote it down." Refuses when reconstruction confidence is `low` -- routes to `open-questions.md`. Requires evidence in two independent locations and a verbatim honesty clause in the record.
+  Provides: backfill ADR template, confidence rubric, evidence corroboration, honesty-clause boilerplate.
 ---
 
 # adr-backfill
@@ -97,7 +98,7 @@ evidence:                          # at least two locators
   - <commit SHA / file path / manifest line>
 reconstruction-confidence: high | medium
 asr-characteristic: <latency | cost | availability | security | maintainability | operability | portability | ...>
-asr-signal: "<measurable signal — e.g., removed 14k LOC and one vendor dependency>"
+asr-signal: "<measurable signal -- e.g., removed 14k LOC and one vendor dependency>"
 tags: [backfill]
 ---
 ```

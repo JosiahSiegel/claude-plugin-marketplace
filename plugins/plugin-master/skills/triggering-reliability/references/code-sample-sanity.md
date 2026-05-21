@@ -1,3 +1,6 @@
+<!-- validator:allow-smart-punct -->
+<!-- This reference legitimately catalogs the smart-punctuation codepoints the validator flags. -->
+
 # Code-sample sanity pass — extended reference
 
 This file holds the full sweeps and tables that `SKILL.md` summarises under the **Code-sample sanity pass** section. Run these before every ship. Any output is a finding to fix manually.
