@@ -90,7 +90,7 @@ The cardinal rule: **"Don't alter existing information in an ADR."** Amend or su
 Every ADR should contain:
 
 1. **Title** — `NNNN. Decision (imperative verb phrase)`.
-2. **Header / metadata** — `status`, `date`, `deciders`, `supersedes`, `amends`, `relates-to`, Related ASRs / requirements, Related docs. Prefer ADR Explorer-compatible YAML: `supersedes` and `amends` as lists, `relates-to` as `{id, reason}` objects, `confidence: high | medium | low`, optional `confidence-score`, and optional `expires`.
+2. **Header / metadata** — `status`, `date`, `deciders`, `supersedes`, `amends`, `relates-to`, Related ASRs / requirements, Related ADRs, Related docs. Prefer ADR Explorer-compatible YAML: `supersedes` and `amends` as lists, `relates-to` as `{id, reason}` objects, `confidence: high | medium | low`, optional `confidence-score`, and optional `expires`. Keep ADR-to-ADR links distinct from provenance links to explanations, runbooks, indexes, or architecture docs; many ADR explorers draw graph edges only from links inside an ADR file to another ADR file and may ignore hub links from the decision-log index.
 3. **Context** — architecturally significant forces: requirements, constraints, business pressure, team skills, prior decisions. Enough that a stranger three years later understands *why this decision had to be made now*.
 4. **Decision** — the choice, stated directly, present tense. ("We use Postgres for the primary store.") The ADR must stand alone even if it links to longer design material.
 5. **Decision drivers** *(MADR)* or implicit in Context *(Nygard)* — the qualities being optimized: latency, cost, operational simplicity, team familiarity, vendor lock-in, etc.
@@ -103,8 +103,10 @@ Every ADR should contain:
 
 - Keep ADRs **in the source repository, in source control**, alongside the code they govern.
 - ADR Explorer-friendly locations: `docs/adr/`, `docs/decisions/`, `docs/architecture/decisions/`, or `**/adr/*.md`. A bare `architecture/decisions/` directory can work as a legacy project convention, but warn that it may need custom ADR Explorer root configuration. Pick one per project; document the choice in the decision log's `README.md`.
-- Provide an **index** in the decision log `README.md` listing every ADR with its status and a one-line summary.
+- Provide an **index** in the decision log `README.md` listing every ADR with its status and a one-line summary. Treat the index as navigation, not the relationship graph.
+- Put direct ADR-to-ADR relationship links inside the ADR file itself. Use a distinct line such as `Related ADRs: [ADR-0001](0001-dual-runtime.md)` or graph-compatible frontmatter (`supersedes`, `amends`, `relates-to`) separate from `Related docs: [Architecture](../explanation/architecture.md)`. Do not rely on an index page linking to both ADRs; many ADR explorers ignore index hub links when drawing edges.
 - Cross-link ADRs from the code they govern when feasible (`// See docs/adr/0007-use-postgres-for-primary-store.md`).
+- State the governance rule for relationship-link maintenance. If Accepted ADRs are otherwise immutable, either explicitly allow metadata-only relationship/link fixes or require a named governance exception; body changes still require amendment or supersession.
 
 ## ADR failure modes
 

@@ -28,8 +28,9 @@ The `doc-expert` agent runs a diagnostic *before* it produces anything. It separ
 - Template selection per project context — and the rule to pick one and stick to it.
 - The ADR Explorer-compatible status lifecycle: proposed → accepted → superseded / deprecated.
 - Append-only immutability and supersession instead of editing.
+- Direct ADR-to-ADR relationship links, kept separate from related-document provenance, so ADR explorers can render decision graphs without relying on an index hub.
 - Numbering discipline (monotonic, zero-padded, never reused), naming (filenames start with the numeric id, then an imperative verb phrase), and RACI ownership (Deciders / Consulted / Informed).
-- The required fields: Title, Status, Date, Owners, Supersedes, Related requirements (ASRs), Context, Decision, Decision drivers, Alternatives, Consequences, Confirmation/Validation, Re-evaluation triggers.
+- The required fields: Title, Status, Date, Owners, Supersedes, Related requirements (ASRs), Related ADRs, Related docs, Context, Decision, Decision drivers, Alternatives, Consequences, Confirmation/Validation, Re-evaluation triggers.
 
 **The alternatives catalog — when NOT to use an ADR:**
 

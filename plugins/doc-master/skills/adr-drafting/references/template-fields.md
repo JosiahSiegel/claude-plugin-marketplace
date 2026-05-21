@@ -68,7 +68,11 @@ Realistic options only. **At the same level of abstraction** — don't compare "
 
 ### Notes (optional)
 
-- Cross-links to related ADRs.
+- Direct ADR-to-ADR links, separate from related-document provenance. Prefer distinct labels, for example:
+  - `Related ADRs: [ADR-0001](0001-dual-runtime.md)`
+  - `Related docs: [Architecture](../explanation/architecture.md)`
+- Use graph-compatible frontmatter (`supersedes`, `amends`, `relates-to`) for machine-readable ADR relationships; prose links are for human readers and tools that scan Markdown links.
+- Do not rely on the decision-log `README.md` as the only connection between ADRs. Many ADR explorers draw edges from links inside ADR files to other ADR files and may ignore index hub links.
 - `PARKED` open questions cited here, with the reason for parking.
 - Anything that didn't fit but matters for the record. Resist using this section as overflow.
 

@@ -123,7 +123,7 @@ Show the **full final draft** only when all violations are resolved or accepted.
 3. Filename: `NNNN-kebab-imperative-title.md` (must start with the numeric id).
 4. Write the file.
 5. Update the index in the directory's `README.md` (create if absent).
-6. Echo cross-link instructions for `supersedes` / `amends` / `relates-to` so the architect can update the linked ADRs in a separate pass. Remind them that ADR Explorer graph edges come from the new ADR's `supersedes` list, not from `superseded-by` / `superseded by` text on the old ADR.
+6. Echo cross-link instructions for `supersedes` / `amends` / `relates-to` so the architect can update the linked ADRs in a separate pass. Remind them that ADR Explorer graph edges come from the new ADR's graph-compatible fields and direct ADR-file links, not from `superseded-by` / `superseded by` text on the old ADR or from index hub links. If Accepted ADRs are immutable in this repo, ask whether metadata-only relationship-link maintenance is allowed or needs an explicit governance exception.
 
 ## Template (canonical fields)
 
@@ -167,7 +167,7 @@ rfc-deadline: 2026-06-03  # only when status == proposed and acting as RFC
 - Option C -- one paragraph, single strongest con.
 
 ## Notes
-Optional. Cross-links. PARKED open questions cited here.
+Optional. Keep `Related ADRs` separate from `Related docs`; ADR explorers often render graph edges only from ADR-file links to other ADR files. PARKED open questions cited here.
 ```
 
 See `references/template-fields.md` for full field semantics.
