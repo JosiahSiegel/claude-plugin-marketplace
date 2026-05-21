@@ -81,7 +81,7 @@ This plugin includes expert knowledge of:
 Create or review PowerShell scripts with best practices, error handling, and cross-platform compatibility.
 
 **Example:**
-```
+```text
 /pwsh-script to backup files with retention policy
 ```
 
@@ -89,7 +89,7 @@ Create or review PowerShell scripts with best practices, error handling, and cro
 Find, install, and manage PowerShell modules from PSGallery or other sources.
 
 **Example:**
-```
+```text
 /pwsh-module to work with Azure VMs
 ```
 
@@ -97,7 +97,7 @@ Find, install, and manage PowerShell modules from PSGallery or other sources.
 Set up PowerShell in CI/CD pipelines (GitHub Actions, Azure DevOps, Bitbucket).
 
 **Example:**
-```
+```text
 /pwsh-cicd for cross-platform testing
 ```
 
@@ -105,7 +105,7 @@ Set up PowerShell in CI/CD pipelines (GitHub Actions, Azure DevOps, Bitbucket).
 Automate Azure resources using the Az PowerShell module.
 
 **Example:**
-```
+```text
 /pwsh-azure to deploy virtual machines
 ```
 
@@ -113,7 +113,7 @@ Automate Azure resources using the Az PowerShell module.
 Optimize PowerShell scripts for performance with parallel processing, efficient filtering, and .NET 9 enhancements.
 
 **Example:**
-```
+```text
 /pwsh-performance to speed up file processing script
 ```
 
@@ -129,7 +129,7 @@ The plugin includes a specialized **powershell-expert** agent with comprehensive
 - Script debugging and optimization
 
 **Invoke explicitly via Task tool:**
-```
+```text
 Use powershell-expert agent to create Azure automation script
 ```
 
@@ -262,7 +262,7 @@ And always refers to:
 
 After installation, just ask Claude:
 
-```
+```text
 "Create a PowerShell script to..."
 "How do I install the Az module?"
 "Set up PowerShell in GitHub Actions"

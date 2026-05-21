@@ -1,6 +1,9 @@
 ---
 name: container-apps-gpu-2025
-description: Azure Container Apps with GPU support, serverless capabilities, and Foundry Models. PROACTIVELY activate for: (1) Container Apps GPU (serverless GPU workloads), (2) Container Apps with Dapr integration, (3) scale-to-zero AI workloads, (4) Container Apps Jobs (one-shot, scheduled, event-driven), (5) Container Apps Foundry Models integration, (6) revisions and traffic splitting, (7) custom domains and managed certificates, (8) ingress and authentication, (9) Container Apps Environment configuration, (10) Workload Profiles (Consumption vs Dedicated). Provides: GPU SKU reference, scale rule examples (HTTP, KEDA), Dapr building-block recipes, traffic-split patterns, and end-to-end serverless GPU deployment.
+description: |
+  Azure Container Apps with GPU support, serverless capabilities, and Foundry Models.
+  PROACTIVELY activate for: (1) Container Apps GPU (serverless GPU workloads), (2) Container Apps with Dapr integration, (3) scale-to-zero AI workloads, (4) Container Apps Jobs (one-shot, scheduled, event-driven), (5) Container Apps Foundry Models integration, (6) revisions and traffic splitting, (7) custom domains and managed certificates, (8) ingress and authentication, (9) Container Apps Environment configuration, (10) Workload Profiles (Consumption vs Dedicated).
+  Provides: GPU SKU reference, scale rule examples (HTTP, KEDA), Dapr building-block recipes, traffic-split patterns, and end-to-end serverless GPU deployment.
 ---
 
 # Azure Container Apps GPU Support - 2025 Features

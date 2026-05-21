@@ -1,6 +1,9 @@
 ---
 name: validation-testing
-description: TMDL and PBIR validation, linting, and pre-deployment testing. PROACTIVELY activate for: (1) validating TMDL syntax before deploy, (2) validating PBIR schema, (3) catching TmdlFormatException / TmdlSerializationException early, (4) Best Practice Analyzer (BPA) rules and BPA CLI, (5) Tabular Editor BPA scripting, (6) PBI-Inspector / PBI-InspectorV2 / Fab Inspector, (7) PBIR JSON schema validation, (8) pre-deployment validation in CI, (9) fabric-cicd parameter.yml validation, (10) catching breaking changes between TMDL versions. Provides: BPA rule library, validation CLI commands, CI integration for validation, error catalog (TmdlFormatException, etc.), and a pre-deploy validation playbook.
+description: |
+  TMDL and PBIR validation, linting, and pre-deployment testing.
+  PROACTIVELY activate for: (1) validating TMDL syntax before deploy, (2) validating PBIR schema, (3) catching TmdlFormatException / TmdlSerializationException early, (4) Best Practice Analyzer (BPA) rules and BPA CLI, (5) Tabular Editor BPA scripting, (6) PBI-Inspector / PBI-InspectorV2 / Fab Inspector, (7) PBIR JSON schema validation, (8) pre-deployment validation in CI, (9) fabric-cicd parameter.yml validation, (10) catching breaking changes between TMDL versions.
+  Provides: BPA rule library, validation CLI commands, CI integration for validation, error catalog (TmdlFormatException, etc.), and a pre-deploy validation playbook.
 ---
 
 # Power BI Validation and Self-Testing
@@ -269,163 +272,9 @@ PBIInspectorCLI \
 
 Full rule examples and CI gating patterns in `references/pbir-validation-recipes.md`.
 
-## fabric-cicd Pre-Deployment Validation
+## Fabric CI/CD, DAX, Lineage, CI Gates & Error Catalog
 
-`fabric-cicd` runs **automatic parameter.yml validation** before publishing. If `parameter.yml` is malformed or contains an unknown environment, the deployment **fails before touching the workspace**. This is the cheapest possible CI safety net.
-
-**Trigger validation manually** without deploying:
-
-```bash
-# Use the debug script shipped in the fabric-cicd devtools folder
-python debug_parameterization.py \
-  --repository-directory ./MyProject \
-  --environment prod \
-  --item-type-in-scope SemanticModel,Report
-```
-
-This parses every `*.tmdl`, `*.json`, and `*.pbir` file, applies the `find_replace` and `key_value_replace` transformations, and reports any unresolved placeholder. **Run this in CI on every PR**, regardless of whether the PR actually deploys.
-
-## DAX Syntax Validation (No Server Required)
-
-The free **DaxFormatter API** parses DAX text and reports formatting + syntax errors:
-
-```python
-import requests
-
-def check_dax(expression: str) -> tuple[bool, str]:
-    r = requests.post(
-        "https://www.daxformatter.com/api/daxformatter/DaxRichFormat",
-        json={
-            "dax": f"EVALUATE ROW(\"x\", {expression})",
-            "maxLineLenght": 120,
-            "skipSpaceAfterFunctionName": "BestPractice",
-        },
-    )
-    body = r.json()
-    return ("error" not in body, body.get("formatted", body.get("error", "")))
-
-ok, formatted = check_dax("CALCULATE([Total Sales], DATESYTD('Date'[Date]))")
-```
-
-For an offline DAX parser, Tabular Editor 2's `-S` C# script switch can call `Microsoft.AnalysisServices.Tabular.DAXLexer` directly. Recipe in `references/tmdl-validation-recipes.md`.
-
-## Lineage and Cross-Reference Validation
-
-Beyond syntax and BPA, an agent generating a model should verify:
-
-1. **Every measure references columns/measures that exist**
-2. **Every `sortByColumn` resolves**
-3. **Every relationship endpoint is a real column**
-4. **Every PBIR bookmark `targetSection` exists in `pages.json`**
-5. **Every PBIR drillthrough/tooltip `pageBinding` resolves**
-6. **No circular relationships or measure references**
-
-The simplest tool: **load the model with TmdlSerializer, then run** `model.Validate()` (TOM method) which returns `ValidationResult.Errors`. For PBIR, walk the JSON tree comparing `name` references against the page/visual inventory.
-
-A complete cross-reference linter (Python, ~80 lines) lives in `references/pbir-validation-recipes.md`.
-
-## CI Gate Pattern (GitHub Actions)
-
-Minimum gate to put on every PR that touches a PBIP project:
-
-```yaml
-name: Power BI Validation Gate
-
-on:
-  pull_request:
-    paths:
-      - "**/*.tmdl"
-      - "**/*.pbir"
-      - "**/*.json"
-      - "MyProject.SemanticModel/**"
-      - "MyProject.Report/**"
-
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0'
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install validators
-        run: |
-          pip install jsonschema fabric-cicd
-          curl -L -o te2.zip https://github.com/TabularEditor/TabularEditor/releases/latest/download/TabularEditor.Portable.zip
-          unzip te2.zip -d te2
-
-      # Layer 1+2: TMDL parser + TOM schema
-      - name: Validate TMDL syntax and metadata
-        run: |
-          mono te2/TabularEditor.exe "MyProject.SemanticModel/definition" -B "/tmp/check.bim"
-
-      # Layer 3: BPA
-      - name: Run BPA (fails on Error severity)
-        run: |
-          mono te2/TabularEditor.exe "MyProject.SemanticModel/definition" \
-            -A "https://raw.githubusercontent.com/TabularEditor/BestPracticeRules/master/BPARules.json" \
-            -V -G
-
-      # Layer 1: PBIR JSON schemas
-      - name: Validate PBIR schemas
-        run: python ./scripts/validate_pbir.py "MyProject.Report/definition"
-
-      # Layer 3: PBIR rules
-      - name: Run PBI-InspectorV2
-        run: |
-          docker run --rm -v "$PWD:/work" natvang/pbi-inspector-v2:latest \
-            -fabricitem /work/MyProject.Report \
-            -rules /work/pbi-inspector-rules.json \
-            -formats GitHub
-
-      # fabric-cicd parameter.yml + structure
-      - name: Validate fabric-cicd parameters
-        run: python -m fabric_cicd.debug_parameterization --repository-directory . --environment prod
-```
-
-This gate runs in under 3 minutes for a typical PBIP and catches ~95% of issues that would otherwise fail at deploy time.
-
-## Common Errors Catalog (What Each Tool Catches)
-
-| Error Class | Caught by |
-|-------------|-----------|
-| Indentation / keyword typo in TMDL | `TmdlSerializer` (TmdlFormatException), Tabular Editor CLI `-B` |
-| Unknown property on a TMDL object | `TmdlSerializer` (TmdlSerializationException) |
-| Measure references undefined column | TOM `model.Validate()`, BPA, semantic-link-labs |
-| sortByColumn points to missing column | TOM `model.Validate()`, BPA |
-| DAX syntax error | DaxFormatter API, Tabular Editor (any deploy/load) |
-| M syntax error | Power Query engine on first refresh; partial check via Tabular Editor `-S` |
-| Implicit measures used | BPA `DAX_PERFORMANCE_AVOID_IMPLICIT_MEASURES` |
-| Auto date/time enabled | BPA `MODEL_PERFORMANCE_DISABLE_AUTO_DATETIME` |
-| Many-to-many relationship without explicit intent | BPA `MODEL_PRACTICE_AVOID_MANY_TO_MANY` |
-| PBIR file fails JSON schema | `jsonschema` Python library, VS Code with `$schema` IntelliSense |
-| PBIR visual missing required field | PBI-InspectorV2 `mustExist` rules |
-| PBIR bookmark references deleted page | PBI-InspectorV2 lineage rule, custom Python linter |
-| PBIR page count > 1000 | PBI-InspectorV2 `arrayLengthLessThan`, fabric-cicd at deploy |
-| `parameter.yml` references unknown env | fabric-cicd built-in pre-deployment validation |
-| Connection string still has dev GUID after parameterization | fabric-cicd `debug_parameterization.py` |
-| Service principal lacks workspace role | Caught only at deploy -- no static check |
-
-## What Validation CANNOT Catch (Run-Time Checks)
-
-These categories require an actual deploy or refresh and cannot be statically validated:
-
-- Data source credentials (gateway, Key Vault, OAuth tokens)
-- Direct Lake fallback to DirectQuery under load
-- DAX query timeouts on large data
-- Refresh failures on source schema drift
-- Visual rendering bugs in specific browsers
-- Mobile layout overflow
-
-For these, rely on Fabric Deployment Pipeline test stages, scheduled refresh alerts, and `semantic-link-labs.run_dax` smoke-test queries after deploy.
+Focused recipes for fabric-cicd pre-deployment validation, DAX syntax validation without a server, and lineage / cross-reference validation live in `references/fabric-dax-lineage-validation.md`. GitHub Actions CI gate patterns, common error mappings, and static-validation limits live in `references/ci-gates-and-error-catalog.md`.
 
 ## Additional Resources
 
@@ -433,6 +282,8 @@ For these, rely on Fabric Deployment Pipeline test stages, scheduled refresh ale
 - **`references/tmdl-validation-recipes.md`** -- Full TMDL validation cookbook: TmdlSerializer C# patterns, Python pythonnet wrapper, Tabular Editor C# scripts, INFO DAX introspection, offline parsing
 - **`references/pbir-validation-recipes.md`** -- PBIR JSON schema validation, PBI-InspectorV2 rule examples, lineage cross-reference linter, GitHub Actions integration
 - **`references/bpa-rules-reference.md`** -- The standard Microsoft BPA ruleset summary, rule authoring guide, severity strategy, and pinning recipes
+- **`references/fabric-dax-lineage-validation.md`** -- fabric-cicd, DAX syntax, and lineage validation recipes
+- **`references/ci-gates-and-error-catalog.md`** -- CI gate patterns, common validation errors, and static-validation limits
 
 ### Related Skills
 - **`powerbi-master:tmdl-mastery`** -- TMDL syntax reference (use this when generating TMDL; come back here to validate it)

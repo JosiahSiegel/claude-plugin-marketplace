@@ -12,7 +12,8 @@ When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in fil
 
 **Examples:**
 - WRONG: `D:/repos/project/file.tsx`
-- CORRECT: `D:epos\projectile.tsx`
+- CORRECT: `D:
+epos\projectile.tsx`
 
 This applies to:
 - Edit tool file_path parameter
@@ -55,7 +56,7 @@ Before creating any files in a multi-file project (3+ related files), this comma
 ### Step 1: Extended Thinking for Architecture
 IMMEDIATELY use extended thinking to analyze the project:
 
-```
+```bash
 "Think hard about the architecture for this [project type]:
 - What files are needed and what is their purpose?
 - What are the shared dependencies (CSS, config, base classes)?
@@ -67,7 +68,7 @@ IMMEDIATELY use extended thinking to analyze the project:
 ### Step 2: Create Architecture Plan
 Based on the thinking, create a plan following this template:
 
-```
+```bash
 ARCHITECTURE PLAN:
 
 FILES NEEDED:
@@ -93,7 +94,7 @@ POTENTIAL ISSUES TO AVOID:
 ### Step 3: Announce the Plan to User
 Tell the user your file creation order before starting:
 
-```
+```text
 "I'll create these files in this order:
 1. [file] - [reason]
 2. [file] - [reason]

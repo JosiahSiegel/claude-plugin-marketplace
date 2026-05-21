@@ -47,7 +47,7 @@ Debug the provided ADF error or pipeline issue and provide specific remediation 
 ### Copy Activity Errors
 
 **ErrorCode: SqlServerCannotConnect**
-```
+```text
 Solutions:
 1. Verify server name and database name
 2. Check firewall allows Azure services or specific IPs
@@ -56,7 +56,7 @@ Solutions:
 ```
 
 **ErrorCode: CosmosDbPartitionKeyRangeTooLarge**
-```
+```text
 Solutions:
 1. Increase Data Integration Units (DIUs)
 2. Add WHERE clause to limit data per copy
@@ -66,7 +66,7 @@ Solutions:
 ### Data Flow Errors
 
 **ErrorCode: DF-EXECUTOR-InvalidDataType**
-```
+```bash
 Solutions:
 1. Check source column types vs expected types
 2. Add explicit cast/convert in transformation
@@ -74,7 +74,7 @@ Solutions:
 ```
 
 **ErrorCode: DF-EXECUTOR-OutOfMemory**
-```
+```text
 Solutions:
 1. Increase cluster size (Core Count)
 2. Add partitioning before memory-intensive operations
@@ -85,7 +85,7 @@ Solutions:
 ### Linked Service Errors
 
 **ErrorCode: InvalidParameter**
-```
+```sql
 For Blob Storage with Managed Identity:
 - CRITICAL: Add "accountKind": "StorageV2" to typeProperties
 - Verify MI has Storage Blob Data Reader/Contributor role
@@ -98,7 +98,7 @@ For SQL with Managed Identity:
 ### Trigger Errors
 
 **ErrorCode: TriggerFailedToStart**
-```
+```text
 Solutions:
 1. Verify pipeline exists and is published
 2. Check trigger parameters match pipeline parameters
@@ -155,7 +155,7 @@ ADFActivityRun
 
 ## Output Format
 
-```
+```text
 === ADF Debug Analysis ===
 
 Error: [ErrorCode] - [Short Description]

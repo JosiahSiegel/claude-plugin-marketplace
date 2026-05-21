@@ -1,6 +1,9 @@
 ---
 name: windows-git-bash-testing
-description: Windows and Git Bash testing compatibility for Vitest, Playwright, and MSW. PROACTIVELY activate for: (1) Vitest tests failing on Windows but passing on Linux, (2) Playwright on Windows with Git Bash quirks, (3) MSW intercept issues across shells, (4) path normalization in test fixtures, (5) browser binaries on Windows (Playwright install), (6) line-ending issues in test snapshots (CRLF vs LF), (7) cross-platform test scripts in package.json, (8) shell detection in pretest/posttest hooks, (9) CI-on-Windows debugging. Provides: cross-platform package.json scripts, snapshot normalization, Playwright Windows install, MSW shell-aware setup, and CI Windows debugging recipes.
+description: |
+  Windows and Git Bash testing compatibility for Vitest, Playwright, and MSW.
+  PROACTIVELY activate for: (1) Vitest tests failing on Windows but passing on Linux, (2) Playwright on Windows with Git Bash quirks, (3) MSW intercept issues across shells, (4) path normalization in test fixtures, (5) browser binaries on Windows (Playwright install), (6) line-ending issues in test snapshots (CRLF vs LF), (7) cross-platform test scripts in package.json, (8) shell detection in pretest/posttest hooks, (9) CI-on-Windows debugging.
+  Provides: cross-platform package.json scripts, snapshot normalization, Playwright Windows install, MSW shell-aware setup, and CI Windows debugging recipes.
 ---
 
 # Windows and Git Bash Testing Compatibility Guide
@@ -361,7 +364,7 @@ node --version  # Should be 18+
 ### Error 1: "No such file or directory" in Git Bash
 
 **Symptom:**
-```
+```text
 Error: /usr/bin/bash: line 1: C:UsersUsername...No such file
 ```
 
@@ -382,7 +385,7 @@ npm test  # npm handles path issues automatically
 ### Error 2: Module Import Failures
 
 **Symptom:**
-```
+```bash
 Error: Cannot find module '../src/utils'
 ```
 
@@ -400,7 +403,7 @@ const utils = await import(utilsPath);
 ### Error 3: Playwright Browser Launch Failure
 
 **Symptom:**
-```
+```text
 Error: Failed to launch browser
 ```
 
@@ -419,7 +422,7 @@ npx playwright test
 ### Error 4: Coverage Report Path Issues
 
 **Symptom:**
-```
+```text
 Error: Failed to write coverage to /c/project/coverage
 ```
 

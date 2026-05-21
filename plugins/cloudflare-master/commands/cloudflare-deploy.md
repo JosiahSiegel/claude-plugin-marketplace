@@ -153,7 +153,7 @@ jobs:
 
 After successful deployment:
 
-```
+```yaml
 ✨ Successfully deployed my-worker
    https://my-worker.username.workers.dev
 

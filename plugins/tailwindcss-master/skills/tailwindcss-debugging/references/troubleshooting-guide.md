@@ -290,7 +290,7 @@ Add this test element to any page:
 
 ### Browser DevTools
 
-```
+```text
 1. Right-click element → Inspect
 2. Check "Styles" panel for your class
 3. If present but crossed out → specificity issue

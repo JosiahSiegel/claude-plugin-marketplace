@@ -1,6 +1,9 @@
 ---
 name: opentofu-guide
-description: OpenTofu (Terraform open-source fork) guide and migration. PROACTIVELY activate for: (1) OpenTofu installation and tofu CLI usage, (2) migrating from Terraform CLI to OpenTofu, (3) provider compatibility between Terraform and OpenTofu, (4) state file compatibility, (5) OpenTofu-specific features (encrypted state, dynamic provider config), (6) Terraform Registry vs OpenTofu Registry, (7) CI/CD with OpenTofu (GitHub Actions, Azure DevOps), (8) HashiCorp BSL license vs OpenTofu MPL, (9) using OpenTofu with Terragrunt. Provides: migration checklist, CLI command mapping, encrypted state setup, registry comparison, and CI YAML templates.
+description: |
+  OpenTofu (Terraform open-source fork) guide and migration.
+  PROACTIVELY activate for: (1) OpenTofu installation and tofu CLI usage, (2) migrating from Terraform CLI to OpenTofu, (3) provider compatibility between Terraform and OpenTofu, (4) state file compatibility, (5) OpenTofu-specific features (encrypted state, dynamic provider config), (6) Terraform Registry vs OpenTofu Registry, (7) CI/CD with OpenTofu (GitHub Actions, Azure DevOps), (8) HashiCorp BSL license vs OpenTofu MPL, (9) using OpenTofu with Terragrunt.
+  Provides: migration checklist, CLI command mapping, encrypted state setup, registry comparison, and CI YAML templates.
 ---
 
 <!--

@@ -88,13 +88,13 @@ Before proceeding, ask:
 Instead of doing analysis in Agent Skill context:
 
 **Bad (fills Agent Skill context):**
-```
+```text
 "Let me think deeply about the architecture..."
 [5K tokens of thinking in Agent Skill context]
 ```
 
 **Good (preserves Agent Skill context):**
-```
+```text
 "This needs deep analysis. Let me delegate:
 /agent deep-analyzer "Ultrathink about [architecture]"
 [Deep analysis happens in isolated agent context]
@@ -104,16 +104,19 @@ Instead of doing analysis in Agent Skill context:
 ## Pattern 3: Project-Specific Context Strategy
 
 **In your Agent Skill:**
-```
+
+```markdown
 ## When This Skill Activates
 
 1. Check if CLAUDE.md exists
 2. If yes: Load context strategy from CLAUDE.md
 3. If no: Use default context-master patterns
+```
 
 ## Recommended CLAUDE.md Strategy for This Skill
 
 Include in your project's CLAUDE.md:
+
 ```yaml
 ContextStrategy:
   - Use subagents for: [domain-specific searches]
@@ -150,7 +153,7 @@ Before doing any analysis:
 
 **For complex domains requiring multiple analyses:**
 
-```
+```text
 User Request → Triggers Your Agent Skill
               ↓
 Agent Skill identifies sub-questions:
@@ -180,7 +183,7 @@ Returns integrated recommendation to main
 
 Avoid loading all project context upfront:
 
-```
+```text
 // In your Agent Skill:
 
 Step 1: Minimal context
@@ -211,7 +214,7 @@ Step 3: Deep dive only if needed
 
 For creating domain-specific plugins:
 
-```
+```text
 1. User wants new plugin for domain X
 2. Agent Skill → plugin-master integration:
    /agent plugin-architect "Design plugin for X"

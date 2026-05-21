@@ -13,7 +13,7 @@ Initialize a modern Python project with best practices configuration.
 Creates a production-ready Python project structure with:
 
 1. **Project Structure** (src layout)
-   ```
+   ```text
    project/
    ├── src/
    │   └── package_name/

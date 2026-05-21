@@ -1,0 +1,27 @@
+{
+  "name": "ffmpeg-platforms",
+  "version": "1.0.0",
+  "description": "FFmpeg deployment, live delivery, and platform runtime patterns. PROACTIVELY activate for RTMP/HLS/DASH/SRT/WebRTC/WHIP streaming, Dockerized FFmpeg, GPU containers, Modal.com serverless video jobs, Cloudflare Containers or Workers, ffmpeg.wasm browser pipelines, CI/CD runners, and production media automation.",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/ffmpeg-platforms",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "ffmpeg",
+    "streaming",
+    "rtmp",
+    "hls",
+    "dash",
+    "srt",
+    "webrtc",
+    "whip",
+    "docker",
+    "modal",
+    "cloudflare",
+    "wasm",
+    "cicd"
+  ]
+}

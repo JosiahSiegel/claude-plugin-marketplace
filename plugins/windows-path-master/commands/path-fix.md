@@ -62,7 +62,7 @@ This command provides interactive assistance for fixing Windows file path issues
 
 **Ask the user (if path is not already provided):**
 
-```
+```bash
 I can help fix the file path format for Windows. Could you provide the file path you're trying to access?
 
 If you're in Git Bash, you can get the full path by running:
@@ -106,7 +106,7 @@ or for a specific file:
 **Use the appropriate conversion algorithm:**
 
 **For MINGW paths (`/x/...`):**
-```
+```text
 Input:  /s/repos/myproject/file.tsx
 
 Step 1: Extract drive letter from first segment → "s"
@@ -119,7 +119,7 @@ Output: S:\repos\myproject\file.tsx
 ```
 
 **For Windows paths with forward slashes (`X:/...`):**
-```
+```text
 Input:  S:/repos/project/file.tsx
 
 Step 1: Drive letter already present → "S:"
@@ -130,7 +130,7 @@ Output: S:\repos\project\file.tsx
 ```
 
 **For relative paths:**
-```
+```text
 Input:  ./src/components/Button.tsx
 Current directory (ask user for `pwd -W` output): S:/repos/my-project
 
@@ -143,7 +143,7 @@ Output: S:\repos\my-project\src\components\Button.tsx
 ```
 
 **For WSL paths (`/mnt/x/...`):**
-```
+```text
 Input:  /mnt/c/Users/name/project/file.tsx
 
 Step 1: Extract drive letter after /mnt/ → "c"
@@ -160,7 +160,7 @@ Output: C:\Users\name\project\file.tsx
 
 **Show the conversion clearly:**
 
-```
+```text
 ✅ Path Conversion Complete
 
 **Original Path (Git Bash/MINGW format):**
@@ -179,7 +179,7 @@ S:\repos\myproject\src\components\Button.tsx
 
 **If the original operation failed, retry with the converted path:**
 
-```
+```text
 I'll now retry the [Edit/Write/Read] operation with the correct Windows path format...
 ```
 
@@ -189,7 +189,7 @@ Then execute the intended file operation using the converted path.
 
 **Explain why the conversion was necessary:**
 
-```
+```bash
 📚 Why This Matters:
 
 **Git Bash displays paths in POSIX/MINGW format** (e.g., /s/repos/file.tsx), but
@@ -252,7 +252,7 @@ MSYS_NO_PATHCONV=1 docker run -v /app:/app myimage
 - Terraform or other IaC tools fail with path conversion issues
 
 **Example explanation for users:**
-```
+```bash
 💡 Pro Tip for Git Bash Users:
 
 Git Bash automatically converts Unix-style paths to Windows paths, which can
@@ -271,7 +271,7 @@ export MSYS_NO_PATHCONV=1
 **User:** "I'm trying to edit a file but getting 'file not found' error"
 
 **Response:**
-```
+```bash
 I can help fix that! This is likely a path format issue on Windows.
 
 Could you share the file path you're trying to access? If you're using Git Bash,
@@ -283,7 +283,7 @@ Then share the full path to the file you want to edit.
 ```
 
 **After receiving path `/s/repos/project/file.tsx`:**
-```
+```yaml
 I see the issue - this is Git Bash MINGW format. I'll convert it to Windows format:
 
 Original:  /s/repos/project/file.tsx
@@ -297,7 +297,7 @@ Now retrying the edit operation with the correct Windows path...
 **User:** "Please edit /c/Users/john/Documents/notes.txt"
 
 **Response (proactive conversion):**
-```
+```text
 I notice you're using Git Bash path format. I'll convert this to Windows format
 for Claude Code's Edit tool:
 
@@ -312,7 +312,7 @@ Editing the file now...
 **User:** "Edit the file ./src/components/Button.tsx"
 
 **Response:**
-```
+```bash
 To work with this relative path on Windows, I need the full Windows path.
 
 Could you run this command in Git Bash and share the output?
@@ -324,7 +324,7 @@ the full path.
 ```
 
 **After receiving `S:/repos/my-project`:**
-```
+```text
 Got it! Here's the conversion:
 
 Current directory: S:\repos\my-project
@@ -339,7 +339,7 @@ Editing the file now...
 **User:** "Edit these files: /s/repos/file1.ts, /s/repos/file2.ts, /s/repos/file3.ts"
 
 **Response:**
-```
+```text
 I'll convert all three paths from Git Bash to Windows format:
 
 1. /s/repos/file1.ts → S:\repos\file1.ts
@@ -373,7 +373,7 @@ Editing all three files with the correct Windows paths...
 4. Case sensitivity issue (rare on Windows but possible)
 
 **Actions:**
-```
+```bash
 The converted path appears correct, but the file might not exist. Let's verify:
 
 Could you run this command in Git Bash to check if the file exists?
@@ -391,7 +391,7 @@ This will show if the file exists and its exact name (including extension).
 3. File is in a protected directory
 
 **Actions:**
-```
+```text
 The path format is correct, but there's a permission issue.
 
 Could you check:

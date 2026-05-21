@@ -13,7 +13,7 @@ Common patterns and best practices for using subagents in Claude Code, with emph
 - Sustainable long sessions with multiple complex analyses
 
 **The architecture:**
-```
+```text
 Main Session: Makes decisions, stays focused
     ↓ delegates with thinking trigger
 Subagent: Uses extended thinking in isolation (5K tokens)
@@ -47,7 +47,7 @@ Main Session: Receives actionable conclusion (200 tokens)
 - Refactoring approach planning
 
 **Example usage:**
-```
+```text
 /agent architecture-advisor "Should we use microservices or modular monolith 
 for a 10M user e-commerce platform with 8 developers?"
 
@@ -72,7 +72,7 @@ for a 10M user e-commerce platform with 8 developers?"
 - Design pattern evaluation
 
 **Example usage:**
-```
+```text
 /agent pattern-researcher "Research authentication patterns in our codebase 
 and think hard about which approach fits our scale requirements"
 
@@ -97,7 +97,7 @@ and think hard about which approach fits our scale requirements"
 - Refactoring opportunity discovery
 
 **Example usage:**
-```
+```text
 /agent code-analyzer "Think deeply about our authentication system's 
 architecture and identify improvement opportunities"
 
@@ -122,7 +122,7 @@ architecture and identify improvement opportunities"
 - Coverage assessment
 
 **Example usage:**
-```
+```text
 /agent test-analyzer "Run the auth test suite and if failures occur, 
 think hard about root causes"
 
@@ -151,7 +151,7 @@ think hard about root causes"
 ### Pattern 1: Research → Plan → Implement
 
 **Main Context:**
-```
+```text
 1. "Use a subagent to search our codebase for similar authentication implementations"
 2. [Review subagent findings]
 3. "think about the best approach based on those examples"
@@ -165,7 +165,7 @@ think hard about root causes"
 ### Pattern 2: Parallel Investigation
 
 **Main Context:**
-```
+```text
 "Spin up three subagents:
 1. One to analyze our error handling patterns
 2. One to check test coverage
@@ -211,7 +211,7 @@ This applies to:
 ### Pattern 3: Test-Driven Workflow
 
 **Main Context:**
-```
+```text
 1. Write tests in main context
 2. "Use a subagent to run the test suite and report results"
 3. [Implement fixes based on failures]
@@ -226,7 +226,7 @@ This applies to:
 ### Pattern 4: Build Verification
 
 **Main Context:**
-```
+```text
 1. Make code changes
 2. "Subagent: run the build and verify it succeeds"
 3. [If build fails, review error]
@@ -240,7 +240,7 @@ This applies to:
 ### Pattern 5: Multi-File Analysis
 
 **Main Context:**
-```
+```text
 "Use a subagent to:
 1. Find all files using the old API
 2. Analyze migration complexity
@@ -256,13 +256,13 @@ This applies to:
 
 ### Starting a Subagent
 
-```
+```text
 /agent <agent-name> <task-description>
 ```
 
 or in natural language:
 
-```
+```text
 "Use a subagent to [task]"
 "Spin up a subagent for [task]"
 "Delegate [task] to a subagent"
@@ -271,12 +271,12 @@ or in natural language:
 ### Pre-configured vs Ad-hoc
 
 **Pre-configured agents** (stored in `.claude/agents/`):
-```
+```text
 /agent test-runner run the full test suite
 ```
 
 **Ad-hoc agents** (created on the fly):
-```
+```text
 "Use a subagent to search the codebase for error handling patterns"
 ```
 
@@ -364,14 +364,14 @@ Medium - Analyze autonomously, ask before making suggestions
 ### ❌ Using Subagents for Everything
 
 **Bad:**
-```
+```text
 "Use a subagent to edit this single file"
 ```
 
 **Why:** Overhead of subagent isn't worth it for simple tasks.
 
 **Good:**
-```
+```text
 "Edit this file to add the new function"
 ```
 
@@ -380,14 +380,14 @@ Medium - Analyze autonomously, ask before making suggestions
 ### ❌ Not Providing Clear Task Scope
 
 **Bad:**
-```
+```text
 "Use a subagent to look at the code"
 ```
 
 **Why:** Too vague. Subagent doesn't know what to focus on.
 
 **Good:**
-```
+```text
 "Use a subagent to search for all database query patterns and assess 
 which ones are vulnerable to SQL injection"
 ```
@@ -397,7 +397,7 @@ which ones are vulnerable to SQL injection"
 ### ❌ Expecting Full Context Transfer
 
 **Bad:**
-```
+```yaml
 Main: [Long discussion about architecture]
 Then: "Subagent: implement that plan we just discussed"
 ```
@@ -405,7 +405,7 @@ Then: "Subagent: implement that plan we just discussed"
 **Why:** Subagent doesn't have access to your conversation history.
 
 **Good:**
-```
+```text
 "Subagent: implement the authentication module with:
 - JWT tokens
 - Refresh token rotation
@@ -425,7 +425,7 @@ Based on our existing user service patterns."
 
 **Scenario:** Complex analysis requiring multiple specialized agents
 
-```
+```text
 1. "Subagent: search for all API endpoints and list them"
 2. [Review list]
 3. "Subagent: for each endpoint in that list, check test coverage"
@@ -444,13 +444,13 @@ Based on our existing user service patterns."
 **Problem:** Need to make complex architectural decision
 
 **Traditional approach (main context):**
-```
+```text
 "Think deeply about microservices vs monolith"
 [5K tokens of thinking in main context]
 ```
 
 **Thinking delegation approach:**
-```
+```text
 /agent deep-analyzer "Ultrathink about microservices vs monolith 
 for 10M user platform, 8 dev team, considering deployment, maintenance, 
 scaling, and team velocity"
@@ -468,7 +468,7 @@ scaling, and team velocity"
 **Problem:** Need to research options and provide reasoned recommendation
 
 **Workflow:**
-```
+```text
 Step 1: Research phase
 /agent pattern-researcher "Research state management libraries 
 and think hard about tradeoffs"
@@ -496,7 +496,7 @@ Step 3: Implementation
 **Problem:** Need to analyze multiple aspects without context accumulation
 
 **Workflow:**
-```
+```text
 Round 1: /agent analyzer "Think about performance implications"
 [Returns summary to main]
 
@@ -511,7 +511,7 @@ Main context: Make decision with 3 concise summaries (~600 tokens total)
 ```
 
 **vs Traditional:**
-```
+```text
 "Think about performance" [3K tokens in main]
 "Think about security" [3K tokens in main]
 "Synthesize" [needs both analyses in context]
@@ -527,7 +527,7 @@ Total: 6K+ tokens
 **Problem:** Multiple independent analyses needed
 
 **Workflow:**
-```
+```text
 /agent analyzer-1 "Think deeply about database options"
 /agent analyzer-2 "Think deeply about caching strategies"
 /agent analyzer-3 "Think deeply about API design patterns"
@@ -548,13 +548,13 @@ Total: 6K+ tokens
 **Problem:** TDD cycle fills context with test output and debugging analysis
 
 **Traditional TDD:**
-```
+```text
 Write test → Run test (verbose output) → Debug (thinking in main) → Fix → Repeat
 [Context fills with test output + debugging thinking]
 ```
 
 **Thinking delegation TDD:**
-```
+```text
 1. Write test in main context (focused)
 2. /agent test-analyzer "Run test, if failure think hard about root cause"
 3. [Subagent runs + analyzes in isolation]
@@ -573,7 +573,7 @@ Write test → Run test (verbose output) → Debug (thinking in main) → Fix �
 **Problem:** Large refactoring needs strategy without filling main context
 
 **Workflow:**
-```
+```text
 Step 1: Assessment
 /agent analyzer "Think deeply about refactoring scope, risks, 
 and approach for legacy auth system"
@@ -602,7 +602,7 @@ For each module:
 **Problem:** Multi-layer decision with dependencies
 
 **Workflow:**
-```
+```text
 Layer 1: Foundation decision
 /agent deep-analyzer "Ultrathink: Relational vs NoSQL for our use case"
 [Returns: Relational recommended]
@@ -630,7 +630,7 @@ Main context: Has 3 clear decisions (~600 tokens total)
 
 For extremely complex decisions requiring multiple analytical lenses:
 
-```
+```text
 1. /agent deep-analyzer "Analyze from business perspective"
 2. /agent deep-analyzer "Analyze from technical perspective"
 3. /agent deep-analyzer "Analyze from security perspective"
@@ -646,7 +646,7 @@ vs Traditional: 25K+ tokens of accumulated thinking
 
 When decision depends on answering prior questions:
 
-```
+```yaml
 Q1: /agent deep-analyzer "Should we build or buy?"
     [Returns: Build recommended because...]
 

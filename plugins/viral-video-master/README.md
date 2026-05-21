@@ -66,7 +66,7 @@ claude plugin add ./claude-code-marketplace/plugins/viral-video-master
 
 Simply ask Claude about viral video optimization:
 
-```
+```text
 How can I improve my TikTok hook?
 What's the optimal video length for YouTube Shorts?
 How do I improve my audience retention?
@@ -74,7 +74,7 @@ How do I improve my audience retention?
 
 ### Using Commands
 
-```
+```text
 /viral-audit
 /viral-hook
 /viral-optimize

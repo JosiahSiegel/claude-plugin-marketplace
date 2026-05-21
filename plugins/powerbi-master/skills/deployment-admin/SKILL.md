@@ -1,6 +1,9 @@
 ---
 name: deployment-admin
-description: Power BI deployment, CI/CD, governance, and administration. PROACTIVELY activate for: (1) Power BI deployment pipelines (Service deployment pipelines, fabric-cicd, custom workflows), (2) CI/CD for Power BI via GitHub Actions or Azure DevOps, (3) workspace management and roles, (4) row-level security (RLS) and object-level security (OLS), (5) capacity management (Premium, PPU, Fabric SKUs F2-F2048), (6) tenant settings and governance, (7) Power BI Report Server deployments, (8) service principal setup for automation, (9) data-gateway management. Provides: deployment-pipeline templates, GitHub Actions and Azure DevOps YAML, RLS/OLS implementation patterns, capacity sizing guidance, and service-principal auth recipes.
+description: |
+  Power BI deployment, CI/CD, governance, and administration.
+  PROACTIVELY activate for: (1) Power BI deployment pipelines (Service deployment pipelines, fabric-cicd, custom workflows), (2) CI/CD for Power BI via GitHub Actions or Azure DevOps, (3) workspace management and roles, (4) row-level security (RLS) and object-level security (OLS), (5) capacity management (Premium, PPU, Fabric SKUs F2-F2048), (6) tenant settings and governance, (7) Power BI Report Server deployments, (8) service principal setup for automation, (9) data-gateway management.
+  Provides: deployment-pipeline templates, GitHub Actions and Azure DevOps YAML, RLS/OLS implementation patterns, capacity sizing guidance, and service-principal auth recipes.
 ---
 
 # Deployment and Administration

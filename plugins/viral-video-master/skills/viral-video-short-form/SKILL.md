@@ -1,6 +1,9 @@
 ---
 name: viral-video-short-form
-description: Complete short-form video optimization for TikTok, Instagram Reels, YouTube Shorts, and Facebook Reels. PROACTIVELY activate for: (1) TikTok content strategy, (2) Instagram Reels optimization, (3) YouTube Shorts creation, (4) Facebook Reels strategy, (5) Short-form hook creation, (6) Vertical video best practices, (7) Trending audio selection, (8) Loop optimization, (9) Quick engagement tactics. Provides: Platform-specific length recommendations, algorithm insights, hook formulas, trending strategies, caption techniques, hashtag optimization, and posting schedules.
+description: |
+  Complete short-form video optimization for TikTok, Instagram Reels, YouTube Shorts, and Facebook Reels.
+  PROACTIVELY activate for: (1) TikTok content strategy, (2) Instagram Reels optimization, (3) YouTube Shorts creation, (4) Facebook Reels strategy, (5) Short-form hook creation, (6) Vertical video best practices, (7) Trending audio selection, (8) Loop optimization, (9) Quick engagement tactics.
+  Provides: Platform-specific length recommendations, algorithm insights, hook formulas, trending strategies, caption techniques, hashtag optimization, and posting schedules.
 references:
   - references/tiktok-algorithm-2026.md
   - references/youtube-shorts-2026.md
@@ -51,7 +54,7 @@ In 2025, attention spans have shortened to the point where you have just **1.3 s
 
 ### Hook Success Cascade
 
-```
+```text
 First 1.3 seconds: Scroll stop moment
      |
      v

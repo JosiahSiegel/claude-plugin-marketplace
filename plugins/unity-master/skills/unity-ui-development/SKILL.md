@@ -1,6 +1,9 @@
 ---
 name: unity-ui-development
-description: Unity UI development with UGUI and UI Toolkit. PROACTIVELY activate for: (1) building Unity user interfaces, (2) UGUI (Canvas, RectTransform, anchors), (3) UI Toolkit (USS, UXML, VisualElement), (4) EventSystem and input handling, (5) common UI components (buttons, scroll views, dropdowns), (6) inventory UIs, HUDs, health bars, menu systems, (7) TextMeshPro setup and rich text, (8) responsive UI (anchors, layout groups), (9) runtime UI generation, (10) world-space canvases for in-game UI. Provides: UGUI vs UI Toolkit comparison, RectTransform patterns, USS/UXML examples, layout group recipes, and TextMeshPro templates.
+description: |
+  Unity UI development with UGUI and UI Toolkit.
+  PROACTIVELY activate for: (1) building Unity user interfaces, (2) UGUI (Canvas, RectTransform, anchors), (3) UI Toolkit (USS, UXML, VisualElement), (4) EventSystem and input handling, (5) common UI components (buttons, scroll views, dropdowns), (6) inventory UIs, HUDs, health bars, menu systems, (7) TextMeshPro setup and rich text, (8) responsive UI (anchors, layout groups), (9) runtime UI generation, (10) world-space canvases for in-game UI.
+  Provides: UGUI vs UI Toolkit comparison, RectTransform patterns, USS/UXML examples, layout group recipes, and TextMeshPro templates.
 ---
 
 # Unity UI Development
@@ -38,7 +41,7 @@ Unity provides two UI systems: UGUI (the established GameObject-based system) an
 
 ### RectTransform Anchoring
 
-```
+```bash
 Anchor presets control how elements resize with parent:
 - Stretch-Stretch: Element fills parent (full-screen backgrounds)
 - Center-Center: Fixed size at center (popup dialogs)
@@ -96,7 +99,7 @@ Always use TextMeshPro (`TMP_Text`, `TextMeshProUGUI`) over legacy `Text`. Impor
 
 ### Architecture
 
-```
+```text
 UI Toolkit Stack:
   UXML  -- Structure (like HTML)
   USS   -- Styling (like CSS)

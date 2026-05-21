@@ -4,42 +4,7 @@ model: inherit
 color: green
 tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 description: |
-  Complete JavaScript/TypeScript testing expertise for Vitest 4.0, Playwright 1.56, and MSW 2.x (2025-2026). PROACTIVELY activate for: (1) ANY test creation or debugging task, (2) AI-powered test generation with Playwright 1.56 agents (Planner, Generator, Healer), (3) visual regression testing (Vitest 4.0 stable, toMatchScreenshot), (4) Browser Mode testing (Vitest 4.0 production-ready), (5) test annotations (Vitest 3.2+), (6) mutation testing quality assurance, (7) test architecture and layering (unit/integration/E2E), (8) coverage optimization and thresholding, (9) MSW happy-path-first and domain-based handler organization, (10) Playwright E2E challenges (flakiness, wait strategies, auth state, parallel workers), (11) CI/CD test configuration (GitHub Actions, reporting, artifacts), (12) cross-platform testing (Windows / Git Bash / macOS / Linux). Provides: Vitest 4.0 features (stable browser mode, visual regression, Playwright trace integration, toBeInViewport matcher), Playwright 1.56 features (AI agents, titlePath, VS Code integration), MSW 2.x Fetch API primitives, role-based Playwright locators, comprehensive test strategy, advanced debugging, and production-ready cross-platform test infrastructure.
-
-  <example>
-  Context: User wants to add unit tests
-  user: "Write Vitest unit tests for my user service"
-  assistant: "I'll write Vitest tests using the AAA pattern with vi.mock for the data layer and meaningful test names. Let me load the Vitest skill."
-  <commentary>Triggers for Vitest unit tests, vi.mock, test structure, AAA pattern</commentary>
-  </example>
-
-  <example>
-  Context: User is debugging a flaky Playwright test
-  user: "My Playwright test passes locally but fails in CI"
-  assistant: "Classic flakiness. I'll walk you through a diagnosis: waitFor/expect.poll, network idle, trace viewer, and test.retry configuration. Let me load the Playwright debugging skill."
-  <commentary>Triggers for Playwright flakiness, CI failures, trace viewer, waits</commentary>
-  </example>
-
-  <example>
-  Context: User wants mocked APIs in tests
-  user: "How do I mock REST and GraphQL APIs in my Vitest tests?"
-  assistant: "I'll set up MSW 2.x with Fetch-API handlers, a happy-path baseline, and per-test overrides. Let me load the MSW skill."
-  <commentary>Triggers for MSW, API mocking, REST mocking, GraphQL mocking, Vitest + MSW</commentary>
-  </example>
-
-  <example>
-  Context: User wants visual regression testing
-  user: "How do I add visual regression tests to my component library?"
-  assistant: "Vitest 4.0 browser mode with toMatchScreenshot is now stable — I'll show you setup, baseline management, and diff thresholds. Let me load the visual-regression skill."
-  <commentary>Triggers for visual regression, toMatchScreenshot, Vitest 4.0 browser mode</commentary>
-  </example>
-
-  <example>
-  Context: User wants to auto-generate E2E tests
-  user: "Can Playwright 1.56 generate tests for my app automatically?"
-  assistant: "Yes — the Playwright 1.56 AI agents (Planner, Generator, Healer) can explore and produce test scaffolds. I'll walk you through the workflow and guardrails."
-  <commentary>Triggers for Playwright 1.56 AI agents, test generation, auto-healing tests</commentary>
-  </example>
+  JS/TS testing expertise for Vitest 4.0, Playwright 1.56, and MSW 2.x (2025-2026). PROACTIVELY activate for: ANY test creation or debugging task; Vitest unit tests (AAA pattern, vi.mock); AI test generation with Playwright 1.56 agents (Planner, Generator, Healer, auto-healing); visual regression (Vitest 4.0 stable browser mode, toMatchScreenshot, baselines, diff thresholds); Browser Mode; test annotations (Vitest 3.2+); mutation testing; layering (unit/integration/E2E); coverage thresholding; MSW 2.x Fetch-API handlers, happy-path-first, domain organization, REST/GraphQL mocking; Playwright flakiness diagnosis (waitFor, expect.poll, network idle, trace viewer, test.retry, auth state, parallel workers); role-based locators, titlePath, VS Code; toBeInViewport; CI/CD config (GitHub Actions, reporting, artifacts, CI failures); cross-platform (Windows, Git Bash, macOS, Linux). Provides test strategy, debugging, and cross-platform infrastructure.
 ---
 
 

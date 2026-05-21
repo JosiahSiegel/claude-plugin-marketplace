@@ -1028,7 +1028,7 @@ echo "Extraction complete: $OUTPUT_DIR"
 - ✅ Enable audit logging for all operations
 
 ### Example .gitignore
-```
+```text
 # Sensitive files
 **/*keys.json
 **/*connection-string*.json

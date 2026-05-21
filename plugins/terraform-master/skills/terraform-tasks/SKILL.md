@@ -1,6 +1,9 @@
 ---
 name: terraform-tasks
-description: Terraform task patterns — common workflows and pipeline steps. PROACTIVELY activate for: (1) terraform init/plan/apply/destroy workflows, (2) terraform fmt and validate in CI, (3) workspace management (terraform workspace), (4) remote state backends (Azure Storage, S3, Terraform Cloud), (5) state locking and DynamoDB locks, (6) terraform import for existing resources, (7) terraform refresh and drift detection, (8) -target and -replace use cases, (9) version pinning (required_version, required_providers), (10) tfvars file conventions for environments. Provides: workflow templates, backend configuration examples, state-locking setup, import recipes, and CI pipeline patterns.
+description: |
+  Terraform task patterns — common workflows and pipeline steps.
+  PROACTIVELY activate for: (1) terraform init/plan/apply/destroy workflows, (2) terraform fmt and validate in CI, (3) workspace management (terraform workspace), (4) remote state backends (Azure Storage, S3, Terraform Cloud), (5) state locking and DynamoDB locks, (6) terraform import for existing resources, (7) terraform refresh and drift detection, (8) -target and -replace use cases, (9) version pinning (required_version, required_providers), (10) tfvars file conventions for environments.
+  Provides: workflow templates, backend configuration examples, state-locking setup, import recipes, and CI pipeline patterns.
 ---
 
 <!--

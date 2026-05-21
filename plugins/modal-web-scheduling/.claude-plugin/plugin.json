@@ -1,0 +1,25 @@
+{
+  "name": "modal-web-scheduling",
+  "version": "1.0.1",
+  "description": "Modal.com web endpoint and scheduled job patterns. PROACTIVELY activate for FastAPI endpoints, @modal.fastapi_endpoint, ASGI/WSGI apps, webhooks, custom domains, WebSockets, long-running APIs, cron schedules, modal.Cron, modal.Period, scheduled ETL, deployment behavior for schedules, and endpoint debugging.",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/modal-web-scheduling",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "modal",
+    "web-endpoints",
+    "fastapi",
+    "asgi",
+    "wsgi",
+    "webhooks",
+    "custom-domains",
+    "websockets",
+    "scheduling",
+    "cron",
+    "periodic-jobs"
+  ]
+}

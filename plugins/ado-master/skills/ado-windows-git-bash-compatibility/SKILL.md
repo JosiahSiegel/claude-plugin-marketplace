@@ -1,6 +1,9 @@
 ---
 name: ado-windows-git-bash-compatibility
-description: Windows and Git Bash compatibility for Azure Pipelines. PROACTIVELY activate for: (1) pipelines that pass on Linux but fail on Windows agents, (2) path conversion issues in pipeline scripts (MSYS, MINGW), (3) shell detection (bash@3, pwsh@2, powershell@2 task selection), (4) MSYS_NO_PATHCONV and MSYS2_ARG_CONV_EXCL workarounds, (5) Windows self-hosted agent configuration, (6) cross-platform script patterns, (7) line-ending issues (CRLF vs LF) in checked-in scripts, (8) Docker on Windows agents, (9) UNC and long-path limitations. Provides: shell-task selection matrix, path-conversion env-var recipes, line-ending fixes, and a Windows-specific pipeline troubleshooting playbook.
+description: |
+  Windows and Git Bash compatibility for Azure Pipelines.
+  PROACTIVELY activate for: (1) pipelines that pass on Linux but fail on Windows agents, (2) path conversion issues in pipeline scripts (MSYS, MINGW), (3) shell detection (bash@3, pwsh@2, powershell@2 task selection), (4) MSYS_NO_PATHCONV and MSYS2_ARG_CONV_EXCL workarounds, (5) Windows self-hosted agent configuration, (6) cross-platform script patterns, (7) line-ending issues (CRLF vs LF) in checked-in scripts, (8) Docker on Windows agents, (9) UNC and long-path limitations.
+  Provides: shell-task selection matrix, path-conversion env-var recipes, line-ending fixes, and a Windows-specific pipeline troubleshooting playbook.
 ---
 
 # Azure Pipelines: Windows & Git Bash Compatibility
@@ -24,7 +27,7 @@ Azure Pipelines frequently run on Windows agents, and teams often use Git Bash f
 - Override available via `System.PreferGitFromPath=true`
 
 **Git Bash Location on Windows Agents:**
-```
+```text
 C:\Program Files (x86)\Git\usr\bin\bash.exe
 C:\Program Files\Git\usr\bin\bash.exe
 ```

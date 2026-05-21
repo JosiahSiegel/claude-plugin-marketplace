@@ -10,7 +10,7 @@ Format Terraform configuration files to canonical style.
 
 ## Usage
 
-```
+```text
 /tf-fmt                   # Format current directory
 /tf-fmt -check           # Check without changing
 /tf-fmt -recursive       # Format all subdirectories

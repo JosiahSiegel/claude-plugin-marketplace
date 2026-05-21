@@ -12,7 +12,7 @@ The semantic model is saved as a `definition/` folder inside the semantic model 
 
 ### PBIP Project Structure with TMDL
 
-```
+```text
 MyReport.pbip
 MyReport.report/
     definition.pbir
@@ -114,7 +114,7 @@ The TMDL view provides an integrated code editor for scripting semantic model ch
 
 ### Branch Strategy for Power BI Teams
 
-```
+```text
 main (protected)
   |
   +-- dev (integration branch, connected to Dev Fabric workspace)
@@ -139,7 +139,7 @@ main (protected)
 TMDL's file-per-object structure minimizes conflicts. When they occur:
 
 **Common conflict: model.tmdl ref ordering**
-```
+```text
 <<<<<<< HEAD
 ref table Sales
 ref table Product
@@ -389,7 +389,7 @@ jobs:
 
 ### Fabric Git Workflow
 
-```
+```text
 Fabric Workspace (Dev)  <--->  Azure DevOps / GitHub (dev branch)
          |
          | (PR + pipeline validation)
@@ -424,7 +424,7 @@ Tabular Editor 3 can connect directly to TMDL folders in a cloned repo:
 
 ### Pattern 1: TMDL Source + XMLA Deploy (Recommended)
 
-```
+```text
 TMDL files (Git) --> TmdlSerializer.Deserialize --> TOM Model --> XMLA endpoint
 ```
 
@@ -432,7 +432,7 @@ Best for teams using Premium/Fabric capacity with XMLA read-write enabled.
 
 ### Pattern 2: TMDL Source + Tabular Editor CLI Deploy
 
-```
+```text
 TMDL files (Git) --> TabularEditor.exe -D <connection> --> XMLA endpoint
 ```
 
@@ -440,7 +440,7 @@ Simplest approach using Tabular Editor 2 (free). No custom code needed.
 
 ### Pattern 3: TMDL Source + Convert to BIM + Deploy
 
-```
+```text
 TMDL files --> TmdlSerializer --> JsonSerializer --> model.bim --> Deploy via TMSL/REST
 ```
 
@@ -475,7 +475,7 @@ Write-Host "Converted TMDL to BIM: $BimFilePath"
 
 Use Fabric's built-in deployment pipelines for promotion across environments without custom CI/CD:
 
-```
+```text
 Dev Workspace --> Test Workspace --> Production Workspace
     (linked to dev branch)  (linked to test branch)  (linked to main branch)
 ```

@@ -419,7 +419,7 @@ echo "$platform_info"
 ### Issue #2602: Snapshot Path Conversion Failure
 
 **Problem:**
-```
+```text
 /usr/bin/bash: line 1: C:UsersDavid...No such file
 ```
 

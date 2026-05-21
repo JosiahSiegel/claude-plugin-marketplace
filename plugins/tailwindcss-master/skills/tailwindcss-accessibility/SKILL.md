@@ -1,13 +1,16 @@
 ---
 name: tailwindcss-accessibility
-description: Tailwind CSS accessibility patterns including WCAG 2.2 compliance, touch targets, focus management, and ARIA. PROACTIVELY activate for: (1) building accessible UI with Tailwind, (2) WCAG 2.2 compliance (Level A, AA, AAA), (3) focus rings and focus-visible styling, (4) minimum touch-target sizes (24x24/44x44), (5) color contrast and text legibility, (6) screen-reader-only utilities (sr-only, not-sr-only), (7) prefers-reduced-motion handling, (8) ARIA attribute styling (data-state, aria-* selectors), (9) keyboard navigation patterns, (10) accessible forms (label association, error announcements). Provides: WCAG 2.2 checklist, focus-management utilities, touch-target sizing recipes, sr-only patterns, and accessible component templates.
+description: |
+  Tailwind CSS accessibility patterns including WCAG 2.2 compliance, touch targets, focus management, and ARIA.
+  PROACTIVELY activate for: (1) building accessible UI with Tailwind, (2) WCAG 2.2 compliance (Level A, AA, AAA), (3) focus rings and focus-visible styling, (4) minimum touch-target sizes (24x24/44x44), (5) color contrast and text legibility, (6) screen-reader-only utilities (sr-only, not-sr-only), (7) prefers-reduced-motion handling, (8) ARIA attribute styling (data-state, aria-* selectors), (9) keyboard navigation patterns, (10) accessible forms (label association, error announcements).
+  Provides: WCAG 2.2 checklist, focus-management utilities, touch-target sizing recipes, sr-only patterns, and accessible component templates.
 ---
 
 # Tailwind CSS Accessibility Patterns (WCAG 2.2 - 2025/2026)
 
 ## WCAG 2.2 Overview (Current Standard)
 
-WCAG 2.2 was released October 2023 and is the current W3C standard. Key additions relevant to Tailwind:
+WCAG 2.2 is the current W3C standard. Key Tailwind-relevant additions:
 
 - **2.5.8 Target Size (Level AA)**: 24x24 CSS pixels minimum, 44x44 recommended
 - **2.4.11 Focus Not Obscured**: Focus indicators must be visible
@@ -729,7 +732,7 @@ test('component is accessible', async () => {
 });
 ```
 
-## Best Practices Summary (WCAG 2.2 - 2025/2026)
+## Best Practices Summary
 
 | Pattern | Implementation | WCAG Level |
 |---------|---------------|------------|
@@ -744,34 +747,17 @@ test('component is accessible', async () => {
 | Form errors | `aria-invalid="true"` + `role="alert"` | 3.3.1 (A) |
 | Focus not obscured | Avoid `z-index` covering focused elements | 2.4.11 (AA) |
 
-### Quick Reference: Touch-Friendly Component
+### Touch-Friendly Button
 
 ```html
-<!-- Accessible, touch-friendly button component -->
 <button
   type="button"
   class="
-    /* Touch target size (44px minimum) */
     min-h-11 min-w-11 px-4 py-2.5
-
-    /* Typography */
     text-sm md:text-base font-medium
-
-    /* Colors with sufficient contrast */
-    bg-blue-600 text-white
-    hover:bg-blue-700
-
-    /* Focus indicator (visible, not obscured) */
-    focus:outline-none
-    focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
-
-    /* Shape */
-    rounded-lg
-
-    /* Disabled state */
-    disabled:opacity-50 disabled:cursor-not-allowed
-
-    /* Respect motion preferences */
+    bg-blue-600 text-white hover:bg-blue-700
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
+    rounded-lg disabled:opacity-50 disabled:cursor-not-allowed
     transition-colors motion-reduce:transition-none
   "
 >

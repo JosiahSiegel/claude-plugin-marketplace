@@ -1,6 +1,9 @@
 ---
 name: agentforce-2025
-description: Salesforce Agentforce AI agents and autonomous automation (2025-2026). PROACTIVELY activate for: (1) building Agentforce agents and topics, (2) Agent Builder configuration, (3) Atlas Reasoning Engine usage, (4) Agentforce action setup (Apex, Flow, Prompt Templates), (5) topic-based routing and instructions, (6) Agentforce Service Agent vs Sales Agent vs Custom, (7) Einstein Trust Layer (data masking, toxicity detection), (8) prompt engineering for grounded responses, (9) Agentforce testing and Test Center, (10) deploying agents across orgs. Provides: agent design patterns, topic and action templates, prompt engineering recipes, Trust Layer configuration, and deployment workflow.
+description: |
+  Salesforce Agentforce AI agents and autonomous automation (2025-2026).
+  PROACTIVELY activate for: (1) building Agentforce agents and topics, (2) Agent Builder configuration, (3) Atlas Reasoning Engine usage, (4) Agentforce action setup (Apex, Flow, Prompt Templates), (5) topic-based routing and instructions, (6) Agentforce Service Agent vs Sales Agent vs Custom, (7) Einstein Trust Layer (data masking, toxicity detection), (8) prompt engineering for grounded responses, (9) Agentforce testing and Test Center, (10) deploying agents across orgs.
+  Provides: agent design patterns, topic and action templates, prompt engineering recipes, Trust Layer configuration, and deployment workflow.
 ---
 
 ## 🚨 CRITICAL GUIDELINES
@@ -53,7 +56,7 @@ The Atlas Reasoning Engine is the brain of Agentforce, enabling agents to:
 
 ### Agent Components
 
-```
+```text
 ┌─────────────────────────────────────────────────┐
 │              Agentforce Agent                   │
 ├─────────────────────────────────────────────────┤
@@ -76,164 +79,9 @@ Agentforce 2.0 is the digital labor platform for enterprises, enabling a limitle
 - **Advanced Reasoning**: More sophisticated Atlas Reasoning Engine capabilities
 - **Pricing**: $2 per conversation (GA October 25, 2024)
 
-## Building Agents with Agentforce Builder (GA December 2024)
+## Agentforce Builder Workflow
 
-### Step 1: Define Agent Purpose
-
-Identify what the agent should accomplish:
-- **Service Agent**: Handle support cases, answer FAQs, resolve issues (4 new actions in Spring '25)
-- **Sales Development Agent**: Qualify leads, answer product questions, book meetings
-- **Personal Shopper Agent**: Recommend products, handle orders, track shipments
-- **Operations Agent**: Automate approvals, process requests, manage workflows
-- **Slack Agent**: Proactive notifications and collaboration assistance
-
-### Step 2: Configure Agent Topics
-
-Topics define what the agent can help with:
-
-```apex
-// Example: Service Agent Topics
-Topic: Password Reset
-- Intent: User wants to reset password
-- Required Data: Email, Username
-- Connected Action: PasswordResetFlow
-
-Topic: Order Status
-- Intent: User wants order status
-- Required Data: Order Number or Email
-- Connected Action: GetOrderStatus
-
-Topic: Escalate to Human
-- Intent: User needs human assistance
-- Required Data: Case context
-- Connected Action: CreateCase + NotifyAgent
-```
-
-### Step 3: Define Agent Actions
-
-Actions are what the agent can execute. These can be:
-- **Standard Actions**: Pre-built Salesforce actions (create/update records)
-- **Flow Actions**: Custom Flow automations
-- **Apex Actions**: Custom Apex invocable methods
-- **MuleSoft Actions**: API integrations via MuleSoft connectors
-- **External API Actions**: REST/SOAP callouts
-
-**Example Apex Action**:
-```apex
-public class AgentActions {
-    @InvocableMethod(label='Get Order Status' description='Retrieves order status for customer')
-    public static List<OrderStatus> getOrderStatus(List<OrderRequest> requests) {
-        List<OrderStatus> results = new List<OrderStatus>();
-
-        for (OrderRequest req : requests) {
-            Order order = [SELECT Id, Status, EstimatedDelivery__c
-                          FROM Order
-                          WHERE OrderNumber = :req.orderNumber
-                          LIMIT 1];
-
-            OrderStatus status = new OrderStatus();
-            status.orderNumber = req.orderNumber;
-            status.status = order.Status;
-            status.estimatedDelivery = order.EstimatedDelivery__c;
-            results.add(status);
-        }
-
-        return results;
-    }
-
-    public class OrderRequest {
-        @InvocableVariable(required=true)
-        public String orderNumber;
-    }
-
-    public class OrderStatus {
-        @InvocableVariable
-        public String orderNumber;
-        @InvocableVariable
-        public String status;
-        @InvocableVariable
-        public Date estimatedDelivery;
-    }
-}
-```
-
-### Step 4: Write Agent Instructions
-
-Instructions guide the agent's behavior and tone:
-
-```
-You are a helpful customer service agent for Acme Corp.
-
-Personality:
-- Friendly, professional, and empathetic
-- Patient with customers who are frustrated
-- Proactive in offering solutions
-
-Guidelines:
-- Always greet customers by name if available
-- Verify customer identity before sharing account information
-- Offer alternatives if the requested action cannot be completed
-- Escalate to human agent for: refunds >$500, legal issues, abusive customers
-- Use simple language, avoid jargon
-- Provide order numbers and case numbers in responses
-
-Security:
-- Never share: passwords, credit card numbers, SSN
-- Always verify identity using: email, phone, or account number
-- Log all interactions for compliance
-
-Response Format:
-- Keep responses under 3 sentences when possible
-- Use bullet points for multiple items
-- Include next steps or call-to-action
-```
-
-### Step 5: Connect Data Sources
-
-Agentforce agents can access:
-- **Salesforce Objects**: Standard and custom objects
-- **Data Cloud**: Unified customer data from all sources
-- **Knowledge Base**: Salesforce Knowledge articles
-- **External Systems**: Via APIs and MuleSoft connectors
-
-**Data Cloud Integration**:
-```apex
-// Query Data Cloud from Agentforce
-public class AgentDataCloudActions {
-    @InvocableMethod(label='Get Customer 360 View')
-    public static List<Customer360> getCustomer360(List<String> customerIds) {
-        // Query Data Cloud for unified customer data
-        List<Customer360> results = new List<Customer360>();
-
-        for (String customerId : customerIds) {
-            // Data Cloud connector provides unified view
-            DataCloudConnector.QueryRequest req = new DataCloudConnector.QueryRequest();
-            req.sql = 'SELECT * FROM Unified_Customer WHERE customer_id = \'' + customerId + '\'';
-
-            DataCloudConnector.QueryResponse res = DataCloudConnector.query(req);
-
-            Customer360 customer = new Customer360();
-            customer.customerId = customerId;
-            customer.totalPurchases = (Decimal)res.data.get('total_purchases');
-            customer.preferredChannel = (String)res.data.get('preferred_channel');
-            customer.lifetimeValue = (Decimal)res.data.get('lifetime_value');
-            results.add(customer);
-        }
-
-        return results;
-    }
-}
-```
-
-### Step 6: Configure Channels
-
-Deploy agents across multiple channels:
-- **Web Chat**: Embedded on website
-- **Mobile App**: In Salesforce Mobile or custom apps
-- **SMS/WhatsApp**: Messaging platforms
-- **Slack/Teams**: Collaboration tools
-- **Voice**: Phone support with voice-to-text
-- **Email**: Email case management
+Detailed Agentforce Builder workflow — agent creation, topics, instructions, actions, grounding, testing, publishing, Data Cloud integration, trust / guardrails, and deployment mechanics — lives in `references/agentforce-builder.md`. Load that reference when building or configuring agents rather than just selecting an architecture.
 
 ## Agent Types and Use Cases
 
@@ -248,7 +96,7 @@ Deploy agents across multiple channels:
 - Provide troubleshooting steps
 
 **Example Flow**:
-```
+```text
 Customer: "Where is my order #12345?"
 ↓
 Agent: Validates order number
@@ -272,7 +120,7 @@ Agent: "Your order #12345 shipped yesterday and will arrive Thursday.
 - Update lead scores based on engagement
 
 **Example Flow**:
-```
+```text
 Lead: "Tell me about your enterprise plan"
 ↓
 Agent: Retrieves product information
@@ -338,7 +186,7 @@ trigger OrderTrigger on Order (after update) {
 ```
 
 **Agentforce Flow** (subscribed to OrderStatusChangeEvent__e):
-```
+```text
 1. Receive event
 2. Query order and customer details
 3. Determine notification channel (email, SMS, push)
@@ -572,7 +420,7 @@ LIMIT 10
 
 If you have Einstein Copilot (now Agentforce Assistant), migration path:
 
-```
+```text
 Einstein Copilot → Agentforce (Default)
 - Automatically migrated in January 2025
 - Conversational UI remains the same

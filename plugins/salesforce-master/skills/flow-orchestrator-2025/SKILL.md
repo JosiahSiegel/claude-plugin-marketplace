@@ -1,6 +1,9 @@
 ---
 name: flow-orchestrator-2025
-description: Salesforce Flow Orchestrator for multi-user, multi-step business processes (2025). PROACTIVELY activate for: (1) building Flow Orchestrations (autolaunched and screen flows), (2) work assignment to users, queues, or roles, (3) interactive vs background steps, (4) approval-style workflows in Flow, (5) parallel and sequential stages, (6) Flow Orchestrator events (StageCompleted, OrchestrationCanceled), (7) error handling and resume patterns, (8) testing orchestrations, (9) migrating from legacy Process Builder/Workflow Rules, (10) Flow Orchestrator vs Approval Process tradeoffs. Provides: orchestration design patterns, stage/step templates, error-handling recipes, and migration guidance.
+description: |
+  Salesforce Flow Orchestrator for multi-user, multi-step business processes (2025).
+  PROACTIVELY activate for: (1) building Flow Orchestrations (autolaunched and screen flows), (2) work assignment to users, queues, or roles, (3) interactive vs background steps, (4) approval-style workflows in Flow, (5) parallel and sequential stages, (6) Flow Orchestrator events (StageCompleted, OrchestrationCanceled), (7) error handling and resume patterns, (8) testing orchestrations, (9) migrating from legacy Process Builder/Workflow Rules, (10) Flow Orchestrator vs Approval Process tradeoffs.
+  Provides: orchestration design patterns, stage/step templates, error-handling recipes, and migration guidance.
 ---
 
 ## 🚨 CRITICAL GUIDELINES
@@ -37,7 +40,7 @@ This applies to:
 
 ## What is Flow Orchestrator?
 
-Flow Orchestrator enables you to orchestrate multi-user, multi-step, and multi-stage business processes without code. It allows different users to complete sequential tasks within a unified workflow, with built-in approvals, conditional logic, and error handling.
+Flow Orchestrator coordinates multi-user, multi-step, multi-stage business processes without code. Different users complete sequential tasks in one workflow with built-in approvals, conditional logic, and error handling.
 
 **Key Capabilities**:
 - **Multi-User Workflows**: Assign tasks to different users/teams across stages
@@ -60,7 +63,7 @@ Flow Orchestrator enables you to orchestrate multi-user, multi-step, and multi-s
 
 ## Orchestration Architecture
 
-```
+```text
 Orchestration = Stages → Steps → Background Automations
 
 Stage 1: "HR Review"
@@ -90,7 +93,7 @@ Stage 3: "Manager Onboarding"
 
 ### Step 1: Create Orchestration
 
-```
+```yaml
 Setup → Flows → New Flow → Orchestration
 Name: Employee_Onboarding
 Object: Employee__c (custom object)
@@ -100,7 +103,7 @@ Trigger: Record Created, Status = 'Pending Onboarding'
 ### Step 2: Design Stages
 
 **Stage 1: HR Document Review**
-```
+```text
 Stage Name: HR_Document_Review
 Stage Description: HR verifies employee documentation
 Run Mode: One at a Time (sequential)
@@ -118,7 +121,7 @@ Step 1.2 (Background - Decision):
 ```
 
 **Stage 2: IT Provisioning**
-```
+```text
 Stage Name: IT_Provisioning
 Condition: Runs only if Stage 1 approved
 
@@ -142,7 +145,7 @@ Step 2.3 (Background):
 ```
 
 **Stage 3: Manager Setup**
-```
+```text
 Stage Name: Manager_Setup
 Depends On: Stage 2 complete
 
@@ -160,7 +163,7 @@ Step 3.2 (Background):
 ### Step 3: Implement Fault Paths (Summer '25)
 
 **Fault Path on IT Provisioning Failure**:
-```
+```text
 If Step 2.2 (Create_AD_Account) fails:
 ├─ Retry Step (1 attempt after 10 minutes)
 ├─ If still fails:
@@ -171,7 +174,7 @@ If Step 2.2 (Create_AD_Account) fails:
 ```
 
 **Configuration**:
-```
+```text
 Step 2.2: Create_AD_Account
 ├─ Fault Path Enabled: true
 ├─ Retry Attempts: 1
@@ -192,7 +195,7 @@ Step 2.2: Create_AD_Account
 
 **Use for**: Actions requiring human judgment or input
 
-```
+```text
 Interactive Step Configuration:
 ├─ Screen Flow: Define UI for user input
 ├─ Assigned To: User, Queue, or Role
@@ -203,7 +206,7 @@ Interactive Step Configuration:
 ```
 
 **Example Screen Flow** (HR Review):
-```
+```text
 Screen: Review Documents
 ├─ Display: Employee Name, Position, Documents Uploaded
 ├─ Input: Radio Button (Approve / Reject)
@@ -219,7 +222,7 @@ Output Variables:
 
 **Use for**: Automated actions without user interaction
 
-```
+```text
 Background Step Types:
 ├─ Autolaunched Flow: Call another flow
 ├─ Apex Action: Invoke Apex method
@@ -231,171 +234,15 @@ Background Step Types:
 └─ Wait: Pause for duration or until condition
 ```
 
-## Advanced Patterns
+## Advanced Patterns and Monitoring
 
-### Pattern 1: Conditional Stage Execution
-
-**Use Case**: Skip stages based on criteria
-
-```
-Stage 2: Manager Approval
-Condition: Order_Total__c > 10000
-
-Entry Criteria Formula:
-{!$Record.Order_Total__c} > 10000
-
-Result:
-- If order <= $10,000 → Skip Stage 2, go to Stage 3
-- If order > $10,000 → Execute Stage 2 (manager approval required)
-```
-
-### Pattern 2: Parallel Steps Within Stage
-
-**Use Case**: Multiple teams work simultaneously
-
-```
-Stage 3: Parallel Provisioning
-Run Mode: All at Once (parallel)
-
-Step 3.1 (Interactive): IT assigns laptop [Assigned to IT Queue]
-Step 3.2 (Interactive): Facilities assigns desk [Assigned to Facilities Queue]
-Step 3.3 (Interactive): HR orders business cards [Assigned to HR Queue]
-
-Stage completes when: All steps complete
-```
-
-### Pattern 3: Dynamic Assignment
-
-**Use Case**: Assign to different users based on record data
-
-```
-Step Assignment Formula:
-IF(
-  {!$Record.Region__c} = 'West',
-  {!$User.WestCoastManager},
-  IF(
-    {!$Record.Region__c} = 'East',
-    {!$User.EastCoastManager},
-    {!$User.DefaultManager}
-  )
-)
-```
-
-### Pattern 4: SLA Monitoring
-
-**Use Case**: Escalate if step not completed on time
-
-```
-Step Due Date: {!$Flow.CurrentDate} + 2 (2 days)
-
-Scheduled Flow: Check_Overdue_Steps
-- Schedule: Daily at 8 AM
-- Query: OrchestrationWorkItem where DueDate < TODAY AND Status = 'In Progress'
-- Action: Send escalation email to manager
-```
-
-**Monitor with SOQL**:
-```apex
-// Query overdue orchestration steps
-List<FlowOrchestrationWorkItem> overdueItems = [
-    SELECT Id, Label, StepDefinitionName, AssignedToId,
-           RelatedRecordId, DueDate, Status
-    FROM FlowOrchestrationWorkItem
-    WHERE DueDate < TODAY
-      AND Status = 'InProgress'
-    ORDER BY DueDate ASC
-];
-
-// Send escalation notifications
-for (FlowOrchestrationWorkItem item : overdueItems) {
-    sendEscalationEmail(item);
-}
-```
-
-## Monitoring and Reporting
-
-### FlowOrchestrationWorkItem Object
-
-**Query work items for reporting**:
-```apex
-// Active orchestrations
-List<FlowOrchestrationWorkItem> activeItems = [
-    SELECT Id, Label, StepDefinitionName, AssignedToId,
-           CreatedDate, LastModifiedDate, DueDate,
-           Status, RelatedRecordId
-    FROM FlowOrchestrationWorkItem
-    WHERE Status = 'InProgress'
-    ORDER BY DueDate ASC
-];
-
-// Calculate time spent in each step
-for (FlowOrchestrationWorkItem item : activeItems) {
-    Long milliseconds = item.LastModifiedDate.getTime() - item.CreatedDate.getTime();
-    Decimal hours = milliseconds / (1000.0 * 60 * 60);
-    System.debug('Step: ' + item.Label + ', Time: ' + hours + ' hours');
-}
-```
-
-### Dashboard Metrics
-
-**Key Metrics to Track**:
-```
-1. Average Time per Stage
-   SELECT StepDefinitionName,
-          AVG(LastModifiedDate - CreatedDate) as AvgDuration
-   FROM FlowOrchestrationWorkItem
-   WHERE Status = 'Completed'
-   GROUP BY StepDefinitionName
-
-2. Completion Rate by Assignee
-   SELECT AssignedToId,
-          COUNT(CASE WHEN Status = 'Completed' THEN 1 END) as Completed,
-          COUNT(CASE WHEN DueDate < TODAY AND Status = 'InProgress' THEN 1 END) as Overdue
-   FROM FlowOrchestrationWorkItem
-   GROUP BY AssignedToId
-
-3. Bottleneck Identification
-   - Which steps take longest?
-   - Which steps have highest rejection/failure rate?
-   - Which assignees have most overdue items?
-```
-
-### Custom Dashboard Component
-
-```apex
-public class OrchestrationMetrics {
-    @AuraEnabled(cacheable=true)
-    public static Map<String, Object> getMetrics() {
-        Map<String, Object> metrics = new Map<String, Object>();
-
-        // Total active orchestrations
-        Integer active = [SELECT COUNT() FROM FlowOrchestrationWorkItem WHERE Status = 'InProgress'];
-        metrics.put('active', active);
-
-        // Overdue count
-        Integer overdue = [SELECT COUNT() FROM FlowOrchestrationWorkItem
-                          WHERE Status = 'InProgress' AND DueDate < TODAY];
-        metrics.put('overdue', overdue);
-
-        // Average completion time (last 30 days)
-        AggregateResult[] avgTime = [
-            SELECT AVG(LastModifiedDate - CreatedDate) avgDuration
-            FROM FlowOrchestrationWorkItem
-            WHERE Status = 'Completed'
-              AND CreatedDate = LAST_N_DAYS:30
-        ];
-        metrics.put('avgCompletionHours', (Decimal)avgTime[0].get('avgDuration') / (1000.0 * 60 * 60));
-
-        return metrics;
-    }
-}
-```
+Advanced Flow Orchestrator designs (parallel approvals, conditional branches, retry / escalation, record-triggered orchestration, external integration handoffs) plus monitoring, reporting, and operational dashboards live in `references/advanced-patterns-monitoring.md`. Load that reference for complex multi-stage implementations and production observability.
 
 ## Integration with Other Features
 
 ### Pattern: Orchestration + Approval Process
 
-```
+```text
 Stage 2: Manager Approval
 ├─ Step 2.1 (Interactive): Manager reviews
 │  └─ Screen Flow with Approve/Reject buttons
@@ -442,7 +289,7 @@ client.subscribe('/event/OrchestrationStageEvent__e', (message) => {
 ### Pattern: Orchestration + Agentforce
 
 **AI agent handles certain steps**:
-```
+```text
 Stage 2: Document Verification
 ├─ Step 2.1 (Background): AI agent verifies documents
 │  └─ Agentforce Action: Verify_Document_Compliance
@@ -494,7 +341,7 @@ Stage 2: Document Verification
 ### Common Issues
 
 **Issue 1: Work items not appearing for users**
-```
+```yaml
 Causes:
 - User not in assigned queue
 - User lacks permission to object
@@ -507,7 +354,7 @@ Solution:
 ```
 
 **Issue 2: Background step failing silently**
-```
+```yaml
 Causes:
 - Apex error in called flow/action
 - Required field missing
@@ -520,7 +367,7 @@ Solution:
 ```
 
 **Issue 3: Orchestration not triggering**
-```
+```yaml
 Causes:
 - Trigger criteria not met
 - Record not updated properly
@@ -586,7 +433,7 @@ public class OrchestrationDebugger {
 ## Migration from Process Builder
 
 **Process Builder → Flow Orchestrator**:
-```
+```text
 Process Builder supports only simple automation
 Flow Orchestrator adds:
 - Multi-user coordination

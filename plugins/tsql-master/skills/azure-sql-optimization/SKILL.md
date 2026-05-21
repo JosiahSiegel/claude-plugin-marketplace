@@ -1,6 +1,9 @@
 ---
 name: azure-sql-optimization
-description: Azure SQL Database optimization and platform-specific features. PROACTIVELY activate for: (1) Azure SQL Database optimization, (2) DTU vs vCore selection and right-sizing, (3) automatic tuning (force last good plan, create/drop index), (4) Hyperscale tier and read replicas, (5) Serverless tier and auto-pause, (6) Azure SQL performance monitoring (Query Performance Insight, Intelligent Insights), (7) elastic pools, (8) Always Encrypted with secure enclaves, (9) Managed Instance vs Azure SQL DB tradeoffs, (10) failover groups and geo-replication. Provides: tier-selection matrix, automatic-tuning enablement steps, Hyperscale architecture overview, monitoring queries, and elastic pool sizing guidance.
+description: |
+  Azure SQL Database optimization and platform-specific features.
+  PROACTIVELY activate for: (1) Azure SQL Database optimization, (2) DTU vs vCore selection and right-sizing, (3) automatic tuning (force last good plan, create/drop index), (4) Hyperscale tier and read replicas, (5) Serverless tier and auto-pause, (6) Azure SQL performance monitoring (Query Performance Insight, Intelligent Insights), (7) elastic pools, (8) Always Encrypted with secure enclaves, (9) Managed Instance vs Azure SQL DB tradeoffs, (10) failover groups and geo-replication.
+  Provides: tier-selection matrix, automatic-tuning enablement steps, Hyperscale architecture overview, monitoring queries, and elastic pool sizing guidance.
 ---
 
 # Azure SQL Database Optimization

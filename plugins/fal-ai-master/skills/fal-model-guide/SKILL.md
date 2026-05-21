@@ -1,6 +1,10 @@
 ---
 name: fal-model-guide
-description: Complete fal.ai model selection system. PROACTIVELY activate for: (1) Choosing image generation models (FLUX, SDXL), (2) Choosing video models (Kling, Sora, LTX), (3) Choosing audio models (Whisper, ElevenLabs), (4) Model quality vs speed comparison, (5) Cost optimization by model tier, (6) 3D generation models, (7) Model-specific parameters, (8) Development vs production model selection. Provides: Model comparison tables, decision trees, pricing tiers, performance benchmarks. Ensures optimal model selection for quality, speed, and cost.
+description: |
+  Complete fal.ai model selection system.
+  PROACTIVELY activate for: (1) Choosing image generation models (FLUX, SDXL), (2) Choosing video models (Kling, Sora, LTX), (3) Choosing audio models (Whisper, ElevenLabs), (4) Model quality vs speed comparison, (5) Cost optimization by model tier, (6) 3D generation models, (7) Model-specific parameters, (8) Development vs production model selection.
+  Provides: Model comparison tables, decision trees, pricing tiers, performance benchmarks.
+  Ensures optimal model selection for quality, speed, and cost.
 ---
 
 ## Quick Reference
@@ -287,7 +291,7 @@ console.log(result.model_mesh.url);  // GLB/OBJ file
 
 ## Model Selection Decision Tree
 
-```
+```text
 What do you want to create?
 ├── Image
 │   ├── From text only?

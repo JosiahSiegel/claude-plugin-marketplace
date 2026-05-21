@@ -1,244 +1,209 @@
 ---
 name: index-strategies
-description: SQL Server index design and optimization strategies. PROACTIVELY activate for: (1) designing indexes for new tables, (2) clustered vs nonclustered index selection, (3) columnstore index optimization (clustered, nonclustered), (4) filtered indexes for partial coverage, (5) covering indexes (INCLUDE columns), (6) index maintenance and fragmentation analysis, (7) missing-index DMV interpretation, (8) duplicate or unused index detection, (9) page split and fill-factor tuning, (10) index compression (row, page, columnstore archival). Provides: index-design playbook, columnstore vs rowstore decision tree, fragmentation queries, missing-index harvest script, and maintenance job templates.
+description: |
+  This skill should be used when the user asks to design, review, add, drop, consolidate, or tune SQL Server indexes. PROACTIVELY activate for clustered vs nonclustered design, covering indexes and INCLUDE columns, filtered indexes, columnstore indexes, missing-index DMV interpretation, duplicate or unused indexes, index maintenance, fragmentation, fill factor, compression, partition-aligned indexes, partition elimination proof, huge-table index constraints, online/resumable rebuilds, and index changes for slow T-SQL queries.
+  Provides: index-design decision tree, workload-aware tradeoff checklist, DMV interpretation guidance, and maintenance/rebuild patterns.
 ---
 
 # Index Strategies
 
-Comprehensive guide to SQL Server index design and optimization.
+Comprehensive guide to SQL Server index design and optimization. Index advice must be workload-aware and constraint-aware: the best index for one query can be harmful for writes, storage, maintenance, partition switching, or other critical queries.
+
+## Mandatory Intake
+
+Before recommending index DDL, collect or mark unknown:
+
+- SQL Server version, edition, compatibility level, and Azure SQL tier.
+- Query text, representative parameters, actual plan, row counts, and predicate selectivity.
+- Existing clustered, nonclustered, filtered, columnstore, unique, disabled, duplicate, and overlapping indexes.
+- Table DDL, constraints, data types, computed columns, compression, partitioning, and statistics.
+- Write workload: insert/update/delete frequency, bulk loads, maintenance window, storage budget.
+- Change constraints: can new indexes be added, can huge-table indexes be changed, is online/resumable index creation allowed, is partition switching required, are staging tables allowed, and who approves write overhead.
+
+Use `../_shared/optimization-intake.md` and `../_shared/assumption-tracker.md`. Do not present missing-index DMV output as final design without existing-index and workload review.
 
 ## Quick Reference
 
-### Index Types
+| Type | Best for | Cautions |
+|---|---|---|
+| Clustered | Primary table order, range access, narrow stable key | Expensive to change; clustering key is included in nonclustered indexes. |
+| Nonclustered | Query-specific seeks, joins, ordering | Adds write and storage overhead. |
+| Covering | Avoiding repeated key lookups | INCLUDE bloat can hurt cache and writes. |
+| Filtered | Stable, selective subsets | Query predicate must imply filter; parameters can block use. |
+| Columnstore | Analytics, scans, aggregations, compression | Small updates and singleton lookups can suffer. |
+| Unique | Enforcing business rules and optimizer proof | Must match real semantics. |
 
-| Type | Description | Best For |
-|------|-------------|----------|
-| Clustered | Table data order | Primary access path, range scans |
-| Nonclustered | Separate structure | Specific query patterns |
-| Columnstore | Column-based storage | Analytics, aggregations |
-| Filtered | Partial index | Well-known subsets |
-| Covering | All columns needed | Avoiding key lookups |
+## Index Design Workflow
 
-### Clustered Index Guidelines
+### 1. Start from Query Shape
 
-**Ideal Clustered Key:**
-- Narrow (small data type)
-- Unique or mostly unique
-- Ever-increasing (identity, sequential GUID)
-- Static (rarely updated)
+Map query columns by role:
 
-```sql
--- Good: Identity column
-CREATE CLUSTERED INDEX CIX_Orders ON Orders(OrderID);
+| Role | Index design implication |
+|---|---|
+| Equality predicates | Usually first key columns, ordered by selectivity and workload reuse. |
+| Join keys | Useful as seek keys and join order support. |
+| Range predicates | Usually after equality keys; only one range can be deeply seekable. |
+| `ORDER BY` / `GROUP BY` | Consider key order to avoid sorts or stream aggregates. |
+| Selected columns | INCLUDE only when lookup cost justifies storage/write cost. |
 
--- Good: Sequential GUID
-CREATE TABLE Orders (
-    OrderID UNIQUEIDENTIFIER DEFAULT NEWSEQUENTIALID() PRIMARY KEY CLUSTERED
-);
-
--- Avoid: Wide composite keys, frequently updated columns, GUIDs (NEWID)
-```
-
-### Nonclustered Index Design
+Example:
 
 ```sql
--- Basic index
-CREATE NONCLUSTERED INDEX IX_Orders_CustomerID
-ON Orders(CustomerID);
-
--- Covering index (avoids key lookup)
-CREATE NONCLUSTERED INDEX IX_Orders_CustomerID_Cover
-ON Orders(CustomerID)
-INCLUDE (OrderDate, TotalAmount, Status);
-
--- Filtered index (partial)
-CREATE NONCLUSTERED INDEX IX_Orders_Active
-ON Orders(CustomerID, OrderDate)
-WHERE Status = 'Active';
-
--- Descending order
-CREATE NONCLUSTERED INDEX IX_Orders_DateDesc
-ON Orders(OrderDate DESC, OrderID DESC);
+CREATE NONCLUSTERED INDEX IX_Orders_CustomerDate
+ON dbo.Orders(CustomerID, OrderDate)
+INCLUDE (Status, TotalAmount);
 ```
 
-## Index Selection Guide
+### 2. Validate Data Types and SARGability
 
-### By Query Pattern
+An index cannot fully help if predicates are non-SARGable or types mismatch. Confirm parameter, temp-table, and source column types before adding indexes. Fix `CONVERT_IMPLICIT` on join/filter columns first when possible.
 
-| Pattern | Recommended Index |
-|---------|-------------------|
-| `WHERE Col = value` | Nonclustered on Col |
-| `WHERE Col = v1 AND Col2 = v2` | Nonclustered on (Col, Col2) |
-| `WHERE Col = v ORDER BY Col2` | Nonclustered on (Col, Col2) |
-| `WHERE Col BETWEEN x AND y` | Col as leftmost key |
-| `SELECT * WHERE Col = v` | Clustered or covering NC |
-| Large aggregations | Columnstore |
-| Specific subset queries | Filtered index |
+### 3. Compare Existing Indexes
 
-### Column Order in Composite Keys
+Before adding a new index:
+
+- Check whether an existing index can be extended safely.
+- Merge overlapping missing-index requests.
+- Identify duplicates with same leading keys.
+- Evaluate lookup count and selected columns before adding INCLUDE columns.
+- Consider whether filtered or narrower indexes solve the hot path with less write cost.
+
+### 4. Account for Change Constraints
+
+Classify the recommendation:
+
+| Constraint | Safer response |
+|---|---|
+| Cannot add indexes | Query rewrite, stats, hints, temp staging, or Query Store hints. |
+| Cannot change huge-table indexes | Add narrow filtered index, indexed staging table, or reduce rows before touching table. |
+| Online index not allowed | Plan maintenance window and blocking risk; consider resumable where supported. |
+| Partition switching required | Prefer aligned indexes; avoid nonaligned indexes unless explicitly accepted. |
+| Heavy write workload | Minimize key width and INCLUDE list; prove read benefit. |
+| Storage constrained | Consolidate duplicates and avoid speculative covering indexes. |
+
+## Clustered Index Guidelines
+
+Ideal clustered keys are narrow, unique, static, and usually ever-increasing for OLTP insert patterns.
 
 ```sql
--- Order matters! Left-to-right matching
-CREATE INDEX IX_Example ON Table(A, B, C);
-
--- These queries CAN use the index:
-WHERE A = 1
-WHERE A = 1 AND B = 2
-WHERE A = 1 AND B = 2 AND C = 3
-WHERE A = 1 AND B > 5 ORDER BY B
-
--- These queries CANNOT use index seek:
-WHERE B = 2                    -- A not specified
-WHERE B = 2 AND C = 3          -- A not specified
-WHERE A = 1 AND C = 3          -- B skipped (partial match only)
+CREATE CLUSTERED INDEX CIX_Orders ON dbo.Orders(OrderID);
 ```
 
-## Columnstore Indexes
-
-### Clustered Columnstore
-```sql
--- Best for data warehousing
-CREATE CLUSTERED COLUMNSTORE INDEX CCI_FactSales
-ON FactSales;
-
--- Ordered columnstore (SQL 2022+)
-CREATE CLUSTERED COLUMNSTORE INDEX CCI_FactSales
-ON FactSales
-ORDER (DateKey, ProductKey);
-```
-
-### Nonclustered Columnstore
-```sql
--- Hybrid OLTP/OLAP
-CREATE NONCLUSTERED COLUMNSTORE INDEX NCCI_Orders_Analysis
-ON Orders(OrderDate, ProductID, Quantity, Amount)
-WHERE Status = 'Completed';
-```
-
-### Columnstore Best Practices
-1. **Load batches >= 102,400 rows** - Creates compressed segments
-2. **Order data by filtered columns** - Better segment elimination
-3. **Use REORGANIZE, not REBUILD** - More efficient maintenance
-4. **Avoid frequent small updates** - Causes deltastore fragmentation
-5. **Partition by date** - Enables partition elimination
-
-```sql
--- Maintenance
-ALTER INDEX CCI_FactSales ON FactSales REORGANIZE;
-
--- Check fragmentation
-SELECT
-    object_name(object_id) AS TableName,
-    index_id,
-    avg_fragmentation_in_percent,
-    fragment_count
-FROM sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL, 'LIMITED');
-```
-
-## Filtered Indexes
-
-```sql
--- Index active orders only
-CREATE NONCLUSTERED INDEX IX_Orders_Active
-ON Orders(CustomerID, OrderDate)
-WHERE Status = 'Active';
-
--- Index non-NULL values
-CREATE UNIQUE INDEX IX_Users_Email
-ON Users(Email)
-WHERE Email IS NOT NULL;
-
--- Constraints:
--- - Cannot use variable in filter
--- - Query WHERE must match or be subset of filter WHERE
--- - May cause parameter sniffing issues
-```
+Avoid wide composite clustered keys unless they match a deliberate access pattern and write trade-off. Random GUID clustering can cause page splits; consider `NEWSEQUENTIALID()`, a surrogate key, or fill-factor strategy when appropriate.
 
 ## Covering Indexes
 
+Covering indexes avoid lookups when the lookup cost is significant.
+
 ```sql
--- Eliminate key lookups
--- Original: Index on CustomerID, query selects OrderDate, Amount
--- Execution plan shows Key Lookup
-
--- Solution: Covering index
-CREATE INDEX IX_Orders_CustomerID_Cover
-ON Orders(CustomerID)
-INCLUDE (OrderDate, Amount, Status);
-
--- INCLUDE columns:
--- - Not in key (not sorted)
--- - Stored at leaf level only
--- - Don't contribute to 900-byte key limit
--- - Perfect for frequently selected columns
+CREATE NONCLUSTERED INDEX IX_Orders_CustomerID_Cover
+ON dbo.Orders(CustomerID)
+INCLUDE (OrderDate, TotalAmount, Status);
 ```
 
-## Index Maintenance
+Use INCLUDE columns for output-only columns, not for filtering or ordering. Keep INCLUDE lists minimal; wide includes can be worse than occasional lookups.
 
-### Fragmentation Guidelines
+## Filtered Indexes
 
-| Fragmentation % | Action |
-|-----------------|--------|
-| < 5% | None needed |
-| 5-30% | REORGANIZE |
-| > 30% | REBUILD |
+Filtered indexes are strong for stable subsets:
 
 ```sql
--- Reorganize (online, minimal locking)
-ALTER INDEX IX_Orders_CustomerID ON Orders REORGANIZE;
+CREATE NONCLUSTERED INDEX IX_Orders_Open_ByCustomer
+ON dbo.Orders(CustomerID, OrderDate)
+WHERE Status = 'Open';
+```
 
--- Rebuild (offline by default, more thorough)
-ALTER INDEX IX_Orders_CustomerID ON Orders REBUILD;
+Requirements:
 
--- Online rebuild (Enterprise Edition)
-ALTER INDEX IX_Orders_CustomerID ON Orders
-REBUILD WITH (ONLINE = ON);
+- Query predicate must imply the filter.
+- Parameterized queries may need recompilation or literal-specific dynamic SQL to match reliably.
+- Filter column may need to be included when it is not obvious to the optimizer.
+- Validate parameter sniffing risk and plan cache behavior.
 
--- Resumable rebuild (SQL 2017+)
-ALTER INDEX IX_Orders_CustomerID ON Orders
+## Columnstore Indexes
+
+Use columnstore for analytic scans, aggregations, and compression.
+
+```sql
+CREATE CLUSTERED COLUMNSTORE INDEX CCI_FactSales
+ON dbo.FactSales;
+
+CREATE NONCLUSTERED COLUMNSTORE INDEX NCCI_Orders_Analysis
+ON dbo.Orders(OrderDate, ProductID, Quantity, Amount)
+WHERE Status = 'Completed';
+```
+
+Best practices:
+
+1. Load batches of at least 102,400 rows where possible.
+2. Order data by common elimination columns for better segment elimination.
+3. Use `REORGANIZE` to compress delta rowgroups and merge rowgroups.
+4. Avoid high-frequency singleton updates on pure columnstore designs.
+5. Pair with partitioning for manageability when large fact tables require sliding windows.
+
+## Partition Alignment Checks
+
+For partitioned tables, index design must account for elimination and maintenance.
+
+Verify:
+
+- Partition function/scheme, boundary type, and `RANGE LEFT` vs `RANGE RIGHT`.
+- Base partitioning column vs query predicate column.
+- Whether each important nonclustered index is aligned or intentionally nonaligned.
+- Whether unique indexes include the partitioning column when required.
+- Actual partition elimination from the execution plan.
+- Unsafe predicates: functions on partition column, mismatched types, filtering a related non-partition date, OR catch-all predicates, or remote sources.
+
+Do not claim partition elimination from a date filter unless it targets the partitioning column in a compatible, SARGable form or a trusted constraint proves equivalence. See `references/partition-alignment-analysis.md`.
+
+## Maintenance and Operations
+
+Fragmentation rules are workload-dependent, but a common starting point is:
+
+| Fragmentation | Typical action |
+|---|---|
+| Less than 5% | No action. |
+| 5-30% | Reorganize if page count and workload justify it. |
+| More than 30% | Rebuild if maintenance window, edition, and blocking allow it. |
+
+```sql
+ALTER INDEX IX_Orders_CustomerID ON dbo.Orders REORGANIZE;
+
+ALTER INDEX IX_Orders_CustomerID ON dbo.Orders
 REBUILD WITH (ONLINE = ON, RESUMABLE = ON, MAX_DURATION = 60);
-
--- Resume interrupted rebuild
-ALTER INDEX IX_Orders_CustomerID ON Orders RESUME;
 ```
 
-### Statistics Update
+Update statistics after meaningful index changes when auto-created stats or sampled stats are insufficient:
+
 ```sql
--- Update after index changes
-UPDATE STATISTICS Orders;
-
--- Full scan for accurate stats
-UPDATE STATISTICS Orders WITH FULLSCAN;
-
--- Check last update
-SELECT
-    OBJECT_NAME(object_id) AS TableName,
-    name AS StatsName,
-    STATS_DATE(object_id, stats_id) AS LastUpdated
-FROM sys.stats
-WHERE object_id = OBJECT_ID('Orders');
+UPDATE STATISTICS dbo.Orders IX_Orders_CustomerID WITH FULLSCAN;
 ```
 
-## Performance Monitoring
+## Useful Diagnostics
 
-### Index Usage Stats
+Index usage since last restart or database attach:
+
 ```sql
 SELECT
+    OBJECT_SCHEMA_NAME(i.object_id) AS SchemaName,
     OBJECT_NAME(i.object_id) AS TableName,
     i.name AS IndexName,
     ius.user_seeks,
     ius.user_scans,
     ius.user_lookups,
     ius.user_updates
-FROM sys.indexes i
-LEFT JOIN sys.dm_db_index_usage_stats ius
-    ON i.object_id = ius.object_id
-    AND i.index_id = ius.index_id
+FROM sys.indexes AS i
+LEFT JOIN sys.dm_db_index_usage_stats AS ius
+  ON i.object_id = ius.object_id
+ AND i.index_id = ius.index_id
+ AND ius.database_id = DB_ID()
 WHERE OBJECTPROPERTY(i.object_id, 'IsUserTable') = 1
-ORDER BY ius.user_seeks + ius.user_scans DESC;
+ORDER BY COALESCE(ius.user_seeks, 0) + COALESCE(ius.user_scans, 0) DESC;
 ```
 
-### Missing Index Recommendations
+Missing-index candidates:
+
 ```sql
 SELECT
     migs.avg_user_impact AS ImpactPercent,
@@ -246,10 +211,28 @@ SELECT
     mid.equality_columns,
     mid.inequality_columns,
     mid.included_columns
-FROM sys.dm_db_missing_index_groups mig
-JOIN sys.dm_db_missing_index_group_stats migs
-    ON mig.index_group_handle = migs.group_handle
-JOIN sys.dm_db_missing_index_details mid
-    ON mig.index_handle = mid.index_handle
+FROM sys.dm_db_missing_index_groups AS mig
+JOIN sys.dm_db_missing_index_group_stats AS migs
+  ON mig.index_group_handle = migs.group_handle
+JOIN sys.dm_db_missing_index_details AS mid
+  ON mig.index_handle = mid.index_handle
+WHERE mid.database_id = DB_ID()
 ORDER BY migs.avg_user_impact DESC;
 ```
+
+## Recommendation Format
+
+Provide:
+
+1. **Evidence**: plan operator, reads, lookups, estimates, missing-index request, or workload metric.
+2. **DDL**: proposed index with schema-qualified name and minimal keys/includes.
+3. **Why**: access path, ordering, coverage, or elimination benefit.
+4. **Cost**: storage, writes, blocking, maintenance, partition implications.
+5. **Validation**: before/after plan, logical reads, CPU, elapsed time, write impact.
+6. **Rollback or alternative**: especially for huge tables.
+
+## References
+
+- `../_shared/optimization-intake.md` - pre-optimization intake.
+- `../_shared/assumption-tracker.md` - assumption status tracking.
+- `references/partition-alignment-analysis.md` - partition scheme and elimination analysis.

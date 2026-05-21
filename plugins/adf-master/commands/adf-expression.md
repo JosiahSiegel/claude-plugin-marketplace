@@ -51,22 +51,22 @@ Create valid ADF expressions based on the described requirement.
 ### Date/Time
 
 **Yesterday's Date:**
-```
+```text
 @formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')
 ```
 
 **First Day of Month:**
-```
+```text
 @formatDateTime(startOfMonth(utcnow()), 'yyyy-MM-dd')
 ```
 
 **Last Day of Previous Month:**
-```
+```text
 @formatDateTime(adddays(startOfMonth(utcnow()), -1), 'yyyy-MM-dd')
 ```
 
 **Date Partition Path (year/month/day):**
-```
+```text
 @concat(
   formatDateTime(utcnow(), 'yyyy'), '/',
   formatDateTime(utcnow(), 'MM'), '/',
@@ -75,7 +75,7 @@ Create valid ADF expressions based on the described requirement.
 ```
 
 **Hive Partition Path:**
-```
+```text
 @concat(
   'year=', formatDateTime(pipeline().parameters.ProcessDate, 'yyyy'),
   '/month=', formatDateTime(pipeline().parameters.ProcessDate, 'MM'),
@@ -84,19 +84,19 @@ Create valid ADF expressions based on the described requirement.
 ```
 
 **Is Weekday Check:**
-```
+```bash
 @and(greater(dayOfWeek(utcnow()), 0), less(dayOfWeek(utcnow()), 6))
 ```
 
 **N Days Ago:**
-```
+```text
 @formatDateTime(adddays(utcnow(), -7), 'yyyy-MM-dd')
 ```
 
 ### String Operations
 
 **Extract Filename from Path:**
-```
+```text
 @substring(
   variables('FilePath'),
   add(lastIndexOf(variables('FilePath'), '/'), 1),
@@ -105,7 +105,7 @@ Create valid ADF expressions based on the described requirement.
 ```
 
 **Remove File Extension:**
-```
+```text
 @substring(
   item().name,
   0,
@@ -114,19 +114,19 @@ Create valid ADF expressions based on the described requirement.
 ```
 
 **Build Dynamic Table Name:**
-```
+```text
 @concat(pipeline().parameters.Schema, '.', pipeline().parameters.Table)
 ```
 
 **Safe Property Access:**
-```
+```text
 @coalesce(activity('Lookup').output.firstRow.Value, 'default')
 ```
 
 ### Conditional Logic
 
 **Conditional SQL Query:**
-```
+```sql
 @if(
   equals(pipeline().parameters.FullLoad, true),
   'SELECT * FROM dbo.Table',
@@ -135,7 +135,7 @@ Create valid ADF expressions based on the described requirement.
 ```
 
 **Conditional File Path:**
-```
+```text
 @if(
   equals(pipeline().parameters.Environment, 'prod'),
   'production/data/',
@@ -146,29 +146,29 @@ Create valid ADF expressions based on the described requirement.
 ### Collections
 
 **Array to Comma-Separated String:**
-```
+```text
 @join(activity('Lookup').output.value, ',')
 ```
 
 **Check Array Not Empty:**
-```
+```text
 @greater(length(activity('Lookup').output.value), 0)
 ```
 
 **Get First N Items:**
-```
+```text
 @take(activity('Lookup').output.value, 10)
 ```
 
 **Skip First N Items:**
-```
+```text
 @skip(activity('Lookup').output.value, 10)
 ```
 
 ### Pipeline/Activity References
 
 **Current Pipeline Info:**
-```
+```text
 @pipeline().Pipeline          // Pipeline name
 @pipeline().DataFactory       // Data factory name
 @pipeline().RunId             // Current run ID
@@ -177,7 +177,7 @@ Create valid ADF expressions based on the described requirement.
 ```
 
 **Activity Output:**
-```
+```text
 @activity('LookupConfig').output.firstRow.ColumnName
 @activity('CopyData').output.rowsCopied
 @activity('CopyData').output.rowsRead
@@ -185,13 +185,13 @@ Create valid ADF expressions based on the described requirement.
 ```
 
 **Tumbling Window:**
-```
+```text
 @trigger().outputs.windowStartTime
 @trigger().outputs.windowEndTime
 ```
 
 **Blob Event Trigger:**
-```
+```text
 @trigger().outputs.body.fileName
 @trigger().outputs.body.folderPath
 ```
@@ -199,7 +199,7 @@ Create valid ADF expressions based on the described requirement.
 ### ForEach Item Access
 
 **Inside ForEach:**
-```
+```text
 @item()                       // Current item
 @item().tableName             // Property access
 @item()['property-with-dash'] // Bracket notation for special chars

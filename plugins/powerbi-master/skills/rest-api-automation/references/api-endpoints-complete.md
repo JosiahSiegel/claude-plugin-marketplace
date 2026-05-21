@@ -9,7 +9,7 @@
 | Admin | `https://api.powerbi.com/v1.0/myorg/admin/` |
 
 **Required header for all requests:**
-```
+```text
 Authorization: Bearer {access_token}
 Content-Type: application/json
 ```

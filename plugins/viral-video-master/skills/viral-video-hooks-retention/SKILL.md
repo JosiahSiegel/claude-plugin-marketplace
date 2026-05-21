@@ -1,6 +1,9 @@
 ---
 name: viral-video-hooks-retention
-description: Master hook creation and audience retention for viral video success. PROACTIVELY activate for: (1) Video hook optimization, (2) Opening second strategies, (3) Audience retention improvement, (4) Attention capture techniques, (5) Psychological triggers, (6) Pattern interrupts, (7) Watch time optimization, (8) Drop-off prevention, (9) Engagement psychology. Provides: Hook formulas, psychological trigger frameworks, retention benchmarks, pattern interrupt techniques, and actionable retention improvement strategies.
+description: |
+  Master hook creation and audience retention for viral video success.
+  PROACTIVELY activate for: (1) Video hook optimization, (2) Opening second strategies, (3) Audience retention improvement, (4) Attention capture techniques, (5) Psychological triggers, (6) Pattern interrupts, (7) Watch time optimization, (8) Drop-off prevention, (9) Engagement psychology.
+  Provides: Hook formulas, psychological trigger frameworks, retention benchmarks, pattern interrupt techniques, and actionable retention improvement strategies.
 references:
   - references/hook-psychology.md
   - references/retention-optimization.md
@@ -31,7 +34,7 @@ Complete guide to capturing attention in the first moments and maintaining engag
 
 ### The Hook Success Cascade
 
-```
+```text
 0-1.3 seconds: Scroll stop decision
     |
     v
@@ -215,7 +218,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ## Hook Template Library
 
 ### Curiosity Hooks
-```
+```text
 "Here's why [common belief] is completely wrong..."
 "I discovered something that changed everything about..."
 "Most people don't know this about [topic]..."
@@ -226,7 +229,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Pattern Interrupt Hooks
-```
+```text
 [Start mid-sentence] "...and that's why I stopped doing it"
 [Show end result first without context]
 [Controversial statement] "I quit [popular thing] and here's why"
@@ -235,7 +238,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Open Loop Hooks
-```
+```text
 "By the end of this video, you'll understand why..."
 "What happened next shocked everyone..."
 "The third tip is the one that actually works..."
@@ -245,7 +248,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### FOMO/Urgency Hooks
-```
+```text
 "If you're not doing this, you're losing..."
 "This trend is about to explode..."
 "Before everyone else figures this out..."
@@ -255,7 +258,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Self-Identification Hooks
-```
+```text
 "If you're someone who [struggle], this is for you..."
 "POV: You're a [audience type] who..."
 "Only [niche] people will understand this..."
@@ -265,7 +268,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Story Hooks
-```
+```text
 "I was about to give up when..."
 "Nobody believed me until..."
 "This one decision changed my life..."
@@ -275,7 +278,7 @@ When viewers see themselves in content, they commit to watching because it becom
 ```
 
 ### Educational Hooks
-```
+```text
 "Here's exactly how to [result] in [timeframe]..."
 "[Number] things I wish I knew before..."
 "The simple trick that [achievement]..."
@@ -286,185 +289,9 @@ When viewers see themselves in content, they commit to watching because it becom
 
 ---
 
-## Audience Retention Mastery
+## Retention, Emotional Engagement & Advanced Strategies
 
-### Retention Benchmarks (2025)
-
-| Metric | Value | Classification |
-|--------|-------|----------------|
-| 2025 average | 23.7% | Baseline |
-| 50%+ retention | 16.8% of videos | Above average |
-| Final 10 seconds reached | 16% of videos | Excellent |
-| 60%+ completion (short-form) | Good | Algorithm favorable |
-| 80%+ completion (short-form) | Viral distribution | Maximum boost |
-
-### The Retention Formula
-
-**10% retention improvement = 25%+ impression increase**
-
-**First 30 Seconds Critical:**
-70%+ retention in first 30 seconds = much higher ranking chance
-
-### Retention Killers (Eliminate These)
-
-**Opening Mistakes:**
-- "Hey guys, welcome back to my channel..."
-- Long animated intros (any length)
-- Explaining what you won't cover
-- Thanking viewers for watching (at start)
-- Asking for likes/subscribes before value
-
-**Content Mistakes:**
-- Off-topic tangents
-- Unnecessary filler content
-- Repetitive points
-- Slow pacing with dead time
-- Over-explaining simple concepts
-
-**Format Mistakes:**
-- Long sponsor segments
-- Mid-video subscribe reminders
-- Product promotions breaking flow
-- AI narration (35% drop vs human)
-- Poor audio quality
-
-### Pattern Interrupt Techniques
-
-**Why Pattern Interrupts Work:**
-The brain habituates to consistent stimuli. Pattern interrupts reset attention.
-
-**Visual Interrupts:**
-- Camera angle changes
-- B-roll footage
-- Graphics and animations
-- Location changes
-- Zoom changes
-
-**Audio Interrupts:**
-- Music changes
-- Sound effects
-- Voice tone shifts
-- Silence (strategic)
-- Different speakers
-
-**Content Interrupts:**
-- New information introduction
-- "But here's the thing..."
-- Story shifts
-- Question to viewer
-- Preview of upcoming content
-
-**Frequency:**
-Insert pattern interrupts every 30-60 seconds for optimal retention.
-
-### The Retention Graph
-
-**Understanding Your Retention Curve:**
-
-| Pattern | Meaning | Solution |
-|---------|---------|----------|
-| Cliff drop at start | Hook failing | Improve opening |
-| Gradual decline | Normal, optimize | Add more interrupts |
-| Sharp drops | Specific problem points | Identify and fix |
-| Spikes | Rewatching or seeking | Good content moments |
-| High end retention | Quality content | Replicate approach |
-
-### Re-Engagement Triggers
-
-**When viewers start losing interest, use these:**
-
-"But wait, it gets better..."
-"Here's where it gets interesting..."
-"Now pay attention to this part..."
-"This is the most important thing..."
-"Don't skip this next part..."
-"The real secret is coming up..."
-
----
-
-## Emotional Engagement
-
-### Emotions That Drive Engagement
-
-**High-Arousal Emotions (Most Shareable):**
-- Awe - "I can't believe that's possible"
-- Amusement - "This is hilarious"
-- Excitement - "This is amazing"
-- Anger - "This is outrageous"
-- Anxiety - "This is concerning"
-
-**Most Effective for Virality:**
-- Joy
-- Inspiration
-- Admiration
-- Surprise
-
-### Emotional Arc Design
-
-**Structure Your Content with Emotional Peaks:**
-
-```
-Start: Curiosity/Anticipation
-  |
-  v
-Build: Increasing interest/investment
-  |
-  v
-Peak: Emotional high point (multiple throughout)
-  |
-  v
-Resolution: Satisfaction + desire to share
-```
-
-### Creating Emotional Connection
-
-**Techniques:**
-- Share vulnerable moments
-- Use specific, relatable details
-- Show genuine enthusiasm
-- Include human elements (faces, emotions)
-- Create stakes and tension
-
----
-
-## Advanced Retention Strategies
-
-### The "Serial" Technique
-
-Inspired by Reesa Teesa's 50-part viral series:
-
-- Break content into compelling episodes
-- End each with cliffhanger
-- Create anticipation for continuation
-- Build cumulative engagement
-
-### The "Payoff Preview" Technique
-
-Show the end result at the beginning, then show how to get there:
-
-1. Display impressive result
-2. "Here's how I did it..."
-3. Step-by-step journey
-4. Return to result with full context
-
-### The "Multi-Loop" Technique
-
-Open multiple curiosity loops at different points:
-
-- Main loop: Overall video promise
-- Secondary loops: "I'll explain this in a moment"
-- Mini loops: Teasing upcoming sections
-
-Close loops strategically to maintain engagement while always having at least one open loop.
-
-### The "Value Stacking" Technique
-
-Continuously add value throughout:
-
-- "And there's more..."
-- "Here's a bonus..."
-- "I almost forgot to mention..."
-- "This is actually the most important part..."
+Detailed audience retention mastery, emotional engagement techniques, and advanced retention strategies (pattern interrupts, open loops, callbacks, pacing) live in `references/retention-emotional-advanced.md`. Load that reference when optimizing beyond first-hook formulation into full-video retention curves.
 
 ---
 

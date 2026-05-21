@@ -4,7 +4,7 @@ A complete plugin demonstrating all component types.
 
 ## Structure
 
-```
+```text
 docker-master/
 ├── .claude-plugin/
 │   └── plugin.json
@@ -137,7 +137,7 @@ Provide:
 
 ### commands/docker-compose-up.md
 
-```markdown
+````markdown
 ---
 description: Start Docker Compose services with proper checks
 ---
@@ -170,11 +170,11 @@ docker compose ps
 - If no compose file: prompt user to create one
 - If syntax error: show specific error and line
 - If Docker not running: provide start instructions
-```
+````
 
 ### skills/docker-patterns/SKILL.md
 
-```markdown
+````markdown
 ---
 name: docker-patterns
 description: |
@@ -225,7 +225,7 @@ CMD ["node", "server.js"]
 
 See `references/dockerfile-best-practices.md` for detailed guidance.
 See `examples/multi-stage-build.md` for complete examples.
-```
+````
 
 ### hooks/hooks.json
 
@@ -291,7 +291,7 @@ Complete Docker expertise for Claude Code.
 ```
 /plugin marketplace add example/marketplace
 /plugin install docker-master@example
-```
+```bash
 
 ## Usage
 

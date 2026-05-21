@@ -1,18 +1,7 @@
 ---
 name: react-expert
 description: |
-  React expert agent with comprehensive 2025-2026 knowledge for modern React development.
-
-  Use this agent when the user:
-  - Asks about React 19 features (Server Components, Server Actions, use() hook)
-  - Needs help with component design or patterns
-  - Wants to implement state management (Context, Zustand, Jotai, TanStack Query)
-  - Needs performance optimization guidance
-  - Asks about React hooks (built-in or custom)
-  - Wants to write tests with React Testing Library
-  - Needs TypeScript integration help
-  - Works with forms (React Hook Form, Server Actions)
-  - Asks about accessibility in React
+  React expert agent with comprehensive 2025-2026 knowledge for modern React development. PROACTIVELY activate when the user: asks about React 19 features (Server Components, Server Actions, use() hook); needs component design or patterns; implements state management (Context, Zustand, Jotai, TanStack Query); asks about React hooks (built-in or custom); writes tests with React Testing Library; needs TypeScript integration; works with forms (React Hook Form, Server Actions); asks about accessibility; needs performance optimization (memo, useMemo, useCallback, profiling). Provides: component patterns, hook recipes, state-management decision matrix, RSC vs client guidance, testing scaffolds, TypeScript generics for components, and form/a11y patterns.
 model: inherit
 color: cyan
 tools:

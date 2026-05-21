@@ -1,6 +1,9 @@
 ---
 name: advanced-patterns
-description: Advanced T-SQL patterns and techniques for SQL Server and Azure SQL. PROACTIVELY activate for: (1) writing CTEs and recursive queries, (2) APPLY operator (CROSS APPLY, OUTER APPLY), (3) MERGE statement and OUTPUT clause, (4) temporal tables (system-versioned), (5) In-Memory OLTP / memory-optimized tables, (6) advanced grouping (ROLLUP, CUBE, GROUPING SETS), (7) PIVOT and UNPIVOT, (8) ROW_NUMBER/RANK/DENSE_RANK with PARTITION BY, (9) hierarchies via recursive CTE or HierarchyId, (10) JSON_ARRAYAGG and STRING_AGG patterns. Provides: pattern catalog with examples for each technique, performance tradeoffs, and copy-pasteable templates for common advanced query shapes.
+description: |
+  Advanced T-SQL patterns and techniques for SQL Server and Azure SQL.
+  PROACTIVELY activate for: (1) writing CTEs and recursive queries, (2) APPLY operator (CROSS APPLY, OUTER APPLY), (3) MERGE statement and OUTPUT clause, (4) temporal tables (system-versioned), (5) In-Memory OLTP / memory-optimized tables, (6) advanced grouping (ROLLUP, CUBE, GROUPING SETS), (7) PIVOT and UNPIVOT, (8) ROW_NUMBER/RANK/DENSE_RANK with PARTITION BY, (9) hierarchies via recursive CTE or HierarchyId, (10) JSON_ARRAYAGG and STRING_AGG patterns.
+  Provides: pattern catalog with examples for each technique, performance tradeoffs, and copy-pasteable templates for common advanced query shapes.
 ---
 
 # Advanced T-SQL Patterns

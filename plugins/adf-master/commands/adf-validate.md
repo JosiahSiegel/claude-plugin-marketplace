@@ -55,7 +55,7 @@ Run comprehensive validation on the specified ADF pipeline folder (or detect aut
 
 ## Output Format
 
-```
+```text
 === ADF Pipeline Validation ===
 
 Scanning: [path]

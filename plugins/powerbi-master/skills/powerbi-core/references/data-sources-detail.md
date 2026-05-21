@@ -3,7 +3,7 @@
 ## SQL Server Family
 
 ### SQL Server (on-premises)
-```
+```yaml
 Server: servername\instancename
 Database: DatabaseName
 Authentication: Windows | SQL Server | Azure AD
@@ -12,14 +12,14 @@ Connectivity: Import or DirectQuery
 ```
 
 **Connection string format:**
-```
+```text
 Data Source=server\instance;Initial Catalog=dbname;Integrated Security=True
 ```
 
 **Query folding:** Fully supported. Native SQL query passthrough available.
 
 ### Azure SQL Database
-```
+```yaml
 Server: servername.database.windows.net
 Database: DatabaseName
 Authentication: SQL Server | Azure AD | Managed Identity (for dataflows)
@@ -30,7 +30,7 @@ Connectivity: Import or DirectQuery
 **Best practice:** Use Azure AD authentication with conditional access policies. Enable "Assume Referential Integrity" for DirectQuery.
 
 ### Azure Synapse Analytics (Dedicated SQL Pool)
-```
+```yaml
 Server: workspacename.sql.azuresynapse.net
 Database: PoolName
 Authentication: SQL | Azure AD
@@ -40,7 +40,7 @@ Connectivity: Import or DirectQuery (preferred for large datasets)
 **DirectQuery recommended** for Synapse due to massive data volumes. Synapse handles query distribution across nodes.
 
 ### Azure Synapse Analytics (Serverless SQL Pool)
-```
+```yaml
 Server: workspacename-ondemand.sql.azuresynapse.net
 Database: DatabaseName (or master for ad-hoc)
 Connectivity: DirectQuery strongly recommended
@@ -51,7 +51,7 @@ Connectivity: DirectQuery strongly recommended
 ## Azure Data Services
 
 ### Azure Cosmos DB
-```
+```yaml
 Connector: Azure Cosmos DB v2 (recommended)
 Connection: AccountEndpoint=https://account.documents.azure.com:443/;AccountKey=...
 Container: collection name
@@ -64,7 +64,7 @@ Connectivity: Import only (no DirectQuery)
 - RU consumption during refresh can be significant
 
 ### Azure Data Explorer (Kusto)
-```
+```yaml
 Cluster: https://clustername.region.kusto.windows.net
 Database: DatabaseName
 Authentication: Azure AD
@@ -74,7 +74,7 @@ Connectivity: Import or DirectQuery
 **DirectQuery is preferred** for Kusto -- it translates DAX to KQL efficiently. Native KQL passthrough supported.
 
 ### Azure Blob Storage / Data Lake Storage Gen2
-```
+```yaml
 Account: https://accountname.blob.core.windows.net (Blob)
          https://accountname.dfs.core.windows.net (ADLS Gen2)
 Authentication: Account Key | SAS Token | Azure AD
@@ -87,7 +87,7 @@ Connectivity: Import only
 ## Cloud Databases
 
 ### Snowflake
-```
+```yaml
 Server: account.region.snowflakecomputing.com
 Warehouse: WAREHOUSE_NAME
 Database: DATABASE_NAME
@@ -101,7 +101,7 @@ Connectivity: Import or DirectQuery
 **DirectQuery:** Supported but test performance. Snowflake auto-suspend can cause initial query delays.
 
 ### Databricks (SQL Warehouse)
-```
+```yaml
 Server hostname: adb-workspace-id.azuredatabricks.net
 HTTP Path: /sql/1.0/warehouses/warehouse-id
 Authentication: Personal Access Token | Azure AD
@@ -111,7 +111,7 @@ Connectivity: Import or DirectQuery
 **Best practice:** Use Databricks SQL Warehouse (not cluster) for Power BI connectivity. SQL Warehouse is optimized for BI queries.
 
 ### Google BigQuery
-```
+```yaml
 Project: project-id
 Authentication: Google Account | Service Account
 Connectivity: Import or DirectQuery
@@ -121,7 +121,7 @@ Billing: Charged per query in DirectQuery mode
 **Warning:** DirectQuery with BigQuery charges per TB scanned. Use Import or create materialized views.
 
 ### Amazon Redshift
-```
+```yaml
 Server: cluster.region.redshift.amazonaws.com:5439
 Database: database_name
 Authentication: Username/Password
@@ -131,7 +131,7 @@ Connectivity: Import or DirectQuery
 ## Files
 
 ### Excel
-```
+```yaml
 Source: Local file, SharePoint, OneDrive
 Supported: .xlsx, .xls, .xlsm
 Load: Tables, Named Ranges, Sheets
@@ -140,7 +140,7 @@ Load: Tables, Named Ranges, Sheets
 **Best practice:** Always use Excel Tables (Ctrl+T) for clean data loading. Avoid named ranges that include headers inconsistently.
 
 ### CSV / Delimited Text
-```
+```yaml
 Encoding: UTF-8 (default), UTF-16, ASCII, others
 Delimiter: Comma, Tab, Semicolon, Pipe, custom
 Header: First row as header (default)
@@ -149,7 +149,7 @@ Header: First row as header (default)
 **Query folding:** Not supported. All transformations happen in the mashup engine.
 
 ### Parquet
-```
+```yaml
 Source: Local file, Azure Blob, ADLS Gen2, S3
 Schema: Embedded in file metadata
 Types: Preserved from Parquet schema
@@ -158,7 +158,7 @@ Types: Preserved from Parquet schema
 **Best performance** for file-based sources. Column pruning and predicate pushdown supported in some connectors.
 
 ### JSON
-```
+```yaml
 Source: Local file, Web API, Azure Blob
 Expansion: Record/List expansion in Power Query
 Pagination: Manual implementation required for APIs
@@ -167,7 +167,7 @@ Pagination: Manual implementation required for APIs
 ## Web and API Sources
 
 ### OData Feed
-```
+```yaml
 URL: https://service/odata/v4/EntitySet
 Authentication: Anonymous | Basic | OAuth2 | Azure AD
 Query folding: Supported (OData $filter, $select, $expand translated)
@@ -176,7 +176,7 @@ Query folding: Supported (OData $filter, $select, $expand translated)
 **Query folding with OData:** Many Power Query steps fold to OData query parameters. Check "View Native Query" to verify.
 
 ### Web / REST API
-```
+```yaml
 URL: https://api.example.com/endpoint
 Method: GET (default), POST via Web.Contents options
 Authentication: Anonymous | Basic | API Key | OAuth2
@@ -201,7 +201,7 @@ in
 ```
 
 ### SharePoint
-```
+```yaml
 Site URL: https://tenant.sharepoint.com/sites/SiteName
 Authentication: Microsoft Account | Azure AD
 Lists: SharePoint List connector
@@ -215,7 +215,7 @@ Files: SharePoint Folder connector
 ### Streaming Datasets (Push)
 Push data via REST API for real-time dashboards:
 
-```
+```text
 POST https://api.powerbi.com/v1.0/myorg/datasets/{datasetId}/rows
 Content-Type: application/json
 Authorization: Bearer {token}
@@ -236,7 +236,7 @@ Authorization: Bearer {token}
 | Hybrid (push + streaming) | Yes | Real-time tiles + reports | Yes |
 
 ### Azure Stream Analytics
-```
+```text
 Output: Power BI (streaming dataset)
 Configuration: Set in Stream Analytics job output
 Real-time: Yes, sub-second latency
@@ -246,7 +246,7 @@ History: Configurable retention
 ## Fabric Data Sources (2025-2026)
 
 ### Fabric Lakehouse
-```
+```yaml
 Connection: SQL Analytics Endpoint or Direct Lake
 Server: workspace-guid.datawarehouse.fabric.microsoft.com
 Authentication: Azure AD / Workspace Identity
@@ -256,7 +256,7 @@ Connectivity: Direct Lake (preferred) or DirectQuery via SQL endpoint
 **Direct Lake:** Zero-copy access to delta tables in OneLake. No gateway needed. Framing (metadata refresh) completes in seconds.
 
 ### Fabric Warehouse
-```
+```yaml
 Connection: SQL Analytics Endpoint or Direct Lake
 Server: workspace-guid.datawarehouse.fabric.microsoft.com
 Authentication: Azure AD / Workspace Identity
@@ -265,7 +265,7 @@ T-SQL: Full DML support (INSERT, UPDATE, DELETE, MERGE)
 ```
 
 ### KQL Database (Real-Time Intelligence)
-```
+```yaml
 Cluster: https://clustername.kusto.fabric.microsoft.com
 Database: DatabaseName
 Authentication: Azure AD
@@ -275,7 +275,7 @@ Connectivity: DirectQuery via KQL connector
 **Use case:** Real-time event data from Eventstream, IoT Hub, or Event Hubs ingested into KQL, then queried by Power BI.
 
 ### Eventstream
-```
+```text
 Integration: Eventstream -> KQL Database -> Power BI DirectQuery
              Eventstream -> Lakehouse -> Power BI Direct Lake
 Sources: Azure Event Hubs, Kafka, IoT Hub, custom REST

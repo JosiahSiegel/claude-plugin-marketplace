@@ -218,7 +218,7 @@ Processes data in fixed-time windows with built-in retry and dependency support.
 ```
 
 **Available Trigger Outputs:**
-```
+```text
 @trigger().outputs.body.fileName
 @trigger().outputs.body.folderPath
 @trigger().outputs.body.uri
@@ -354,7 +354,7 @@ Processes data in fixed-time windows with built-in retry and dependency support.
 ## Common Trigger Expressions
 
 ### Access Trigger Properties in Pipeline
-```
+```text
 @trigger().name                          → Trigger name
 @trigger().scheduledTime                 → Scheduled time (schedule trigger)
 @trigger().startTime                     → Actual start time
@@ -413,7 +413,7 @@ Supported time zone values:
 | Stopped | Trigger is disabled |
 
 **Start/Stop via REST API:**
-```
+```text
 POST /triggers/{triggerName}/start
 POST /triggers/{triggerName}/stop
 ```

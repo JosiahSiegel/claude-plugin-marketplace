@@ -64,7 +64,7 @@ Suggest CREATE INDEX statement.
 
 ### Step 7: Generate Report
 
-```
+```sql
 ================================
 Query Analysis Report
 ================================

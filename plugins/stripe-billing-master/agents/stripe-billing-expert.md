@@ -1,28 +1,7 @@
 ---
 name: stripe-billing-expert
 description: |
-  Stripe billing expert agent with comprehensive money-safe patterns for webhook handlers, refund/dispute lifecycle, credit ledgers, and idempotency.
-
-  Use this agent when the user:
-  - Writes or modifies a Stripe webhook handler (any event type)
-  - Mutates a credit / balance / entitlement column based on a Stripe event
-  - Implements refund delta computation, credit-pack vs subscription differentiation
-  - Handles charge.dispute.created / charge.dispute.closed and restores prior status
-  - Adds a Postgres index that will serve LIKE 'prefix%' queries on an idempotency key column
-  - Resolves a plan / entitlement from Stripe price IDs or line items
-  - Designs a daily reconciliation cron over a credit / balance table
-  - Emits an email / receipt whose description quotes a webhook-resolved plan name
-  - Writes contract tests for any branch predicate driving money flow
-
-  MUST BE CONSULTED FIRST (hard rule in caller project) when any change touches:
-  - */api/webhooks/stripe/** route handlers
-  - */lib/stripe*.ts, */lib/stripe-disputes.ts, */lib/refund-credits.ts
-  - credit-transaction math (any INSERT into credit_transactions, any UPDATE to a balance column)
-  - migrations that add / alter credit, balance, or idempotency tables
-
-  Complements (does NOT replace) the official stripe plugin. That plugin covers test cards,
-  error explanation, and API-selection best practices; this agent covers server-side
-  event-processing safety, audit-trail invariants, and webhook state machines.
+  Stripe billing expert with money-safe patterns for webhook handlers, refund/dispute lifecycle, credit ledgers, and idempotency. PROACTIVELY activate when the user: writes/modifies a Stripe webhook handler; mutates credit/balance/entitlement from a Stripe event; implements refund delta or credit-pack vs subscription differentiation; handles charge.dispute.created/closed and restores prior status; adds a Postgres index for LIKE 'prefix%' on idempotency-key columns; resolves a plan/entitlement from price IDs or line items; designs a reconciliation cron; emits emails/receipts quoting a webhook-resolved plan; writes contract tests for predicates driving money flow. Complements (not replaces) the official stripe plugin: covers server-side event-processing safety, audit-trail invariants, and webhook state machines. Provides: idempotent webhook patterns, refund-delta math, dispute state machines, credit-ledger schemas, reconciliation playbooks, and contract-test harnesses.
 model: inherit
 color: green
 tools:
@@ -123,7 +102,7 @@ await db.transaction(async (tx) => {
 ### G2 — `previous_attributes.amount_refunded` is the authoritative refund delta
 
 Rule: on `charge.refunded`, derive the per-event refund delta from `event.data.previous_attributes.amount_refunded`:
-```
+```text
 delta = charge.amount_refunded - (event.data.previous_attributes.amount_refunded ?? 0)
 ```
 `charge.amount_refunded` alone is CUMULATIVE — never per-event. Embedded `charge.refunds.data` "latest Refund" and `stripe.refunds.list({charge, limit:1})` are fallbacks when `previous_attributes` is absent.
@@ -410,7 +389,7 @@ function resolveRefundDelta(event: Stripe.Event, charge: Stripe.Charge): number 
   const latestEmbedded = charge.refunds?.data?.slice().sort((a, b) => b.created - a.created)[0];
   if (latestEmbedded) return latestEmbedded.amount;
 
-  // Last resort — async, may be rate-limited; wrap in circuit breaker
+  // Last resort -- async, may be rate-limited; wrap in circuit breaker
   return null; // caller should skip revocation rather than guess
 }
 ```
@@ -456,7 +435,7 @@ export async function POST(req: Request) {
     }
   }
 
-  // NEVER auto-correct — alert only. Humans decide whether the audit or the balance is right.
+  // NEVER auto-correct -- alert only. Humans decide whether the audit or the balance is right.
   return apiSuccess({ checked: rows.length });
 }
 ```

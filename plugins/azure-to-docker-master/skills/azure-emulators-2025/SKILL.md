@@ -1,6 +1,9 @@
 ---
 name: azure-emulators-2025
-description: Azure service emulators for local development in Docker (2025). PROACTIVELY activate for: (1) Azurite for Storage (Blob, Queue, Table) emulation, (2) Cosmos DB Linux Emulator container, (3) Event Hubs emulator, (4) Service Bus emulator, (5) Azure Functions Core Tools image, (6) Azure SQL Edge container, (7) Azure App Configuration emulator, (8) connection-string conventions for emulators, (9) seeding emulators with fixtures, (10) running integration tests against emulators in CI. Provides: emulator selection matrix, docker-compose templates, well-known dev connection strings, seed-data patterns, and CI integration recipes.
+description: |
+  Azure service emulators for local development in Docker (2025).
+  PROACTIVELY activate for: (1) Azurite for Storage (Blob, Queue, Table) emulation, (2) Cosmos DB Linux Emulator container, (3) Event Hubs emulator, (4) Service Bus emulator, (5) Azure Functions Core Tools image, (6) Azure SQL Edge container, (7) Azure App Configuration emulator, (8) connection-string conventions for emulators, (9) seeding emulators with fixtures, (10) running integration tests against emulators in CI.
+  Provides: emulator selection matrix, docker-compose templates, well-known dev connection strings, seed-data patterns, and CI integration recipes.
 ---
 
 # Azure Service Emulators for Local Development (2025)
@@ -39,7 +42,7 @@ services:
 ```
 
 **Standard Development Connection String:**
-```
+```text
 DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;QueueEndpoint=http://azurite:10001/devstoreaccount1;TableEndpoint=http://azurite:10002/devstoreaccount1;
 ```
 
@@ -146,7 +149,7 @@ volumes:
 ```
 
 **Connection String:**
-```
+```text
 Server=sqlserver;Database=MyApp;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
 ```
 
@@ -217,12 +220,12 @@ services:
 ```
 
 **Emulator Endpoint:**
-```
+```text
 https://localhost:8081
 ```
 
 **Emulator Key (Standard):**
-```
+```text
 C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
 ```
 
@@ -264,7 +267,7 @@ var client = new CosmosClient(endpoint, key);
 **Official Emulator Image:** `mcr.microsoft.com/azure-messaging/servicebus-emulator:latest`
 
 **Connection String:**
-```
+```bash
 Endpoint=sb://host.docker.internal;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;
 ```
 

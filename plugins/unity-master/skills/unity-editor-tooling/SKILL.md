@@ -1,6 +1,9 @@
 ---
 name: unity-editor-tooling
-description: Unity Editor tooling, build automation, and asset pipeline customization. PROACTIVELY activate for: (1) writing custom Editor scripts, (2) custom inspectors and PropertyDrawer attributes, (3) EditorWindow creation, (4) ScriptedImporter for custom asset types, (5) build pipeline scripting (BuildPipeline.BuildPlayer, IBuildPostprocessor), (6) platform-switching automation, (7) CI/CD for Unity (GameCI, GitHub Actions, Unity Build Automation), (8) Assembly Definition (.asmdef) organization, (9) preprocessor symbols and platform defines, (10) Editor-only code with #if UNITY_EDITOR. Provides: custom inspector templates, EditorWindow examples, build script patterns, GameCI setup, .asmdef best practices, and CI YAML for Unity builds.
+description: |
+  Unity Editor tooling, build automation, and asset pipeline customization.
+  PROACTIVELY activate for: (1) writing custom Editor scripts, (2) custom inspectors and PropertyDrawer attributes, (3) EditorWindow creation, (4) ScriptedImporter for custom asset types, (5) build pipeline scripting (BuildPipeline.BuildPlayer, IBuildPostprocessor), (6) platform-switching automation, (7) CI/CD for Unity (GameCI, GitHub Actions, Unity Build Automation), (8) Assembly Definition (.asmdef) organization, (9) preprocessor symbols and platform defines, (10) Editor-only code with #if UNITY_EDITOR.
+  Provides: custom inspector templates, EditorWindow examples, build script patterns, GameCI setup, .asmdef best practices, and CI YAML for Unity builds.
 ---
 
 # Unity Editor Scripting and Tooling
@@ -217,7 +220,7 @@ Activate a Unity license first using `game-ci/unity-activate`. Use Unity Build A
 
 ## Assembly Definitions
 
-```
+```text
 Project/
 ├── Scripts/
 │   ├── Core/             Core.asmdef          (no references)
@@ -283,7 +286,7 @@ Run tests via Window > General > Test Runner. Edit Mode tests run instantly. Pla
 
 ### Unity .gitignore (Essential Entries)
 
-```
+```text
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -311,7 +314,7 @@ Run tests via Window > General > Test Runner. Edit Mode tests run instantly. Pla
 
 ## Custom Packages (UPM)
 
-```
+```text
 com.company.my-package/
 ├── package.json
 ├── Runtime/

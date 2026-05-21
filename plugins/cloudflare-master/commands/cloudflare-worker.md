@@ -28,7 +28,7 @@ Create a new Cloudflare Worker project with the specified name and bindings.
      - `hyperdrive` - Hyperdrive
 
 2. **Create project structure**:
-   ```
+   ```text
    {name}/
    ├── src/
    │   └── index.ts

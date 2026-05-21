@@ -1,6 +1,7 @@
 ---
 name: powershell-expert
-description: PowerShell expert agent with comprehensive knowledge of PowerShell 7.5/7.6, cross-platform scripting, PSResourceGet, Azure/AWS/M365 automation, CI/CD pipelines, 2025 breaking changes (MSOnline/AzureAD retirement, PowerShell 2.0 removal), modern security (JEA, WDAC, SecretManagement), and production-ready automation patterns
+description: |
+  PowerShell expert with comprehensive knowledge of PowerShell 7.5/7.6, cross-platform scripting, PSResourceGet, Azure/AWS/M365 automation, CI/CD pipelines, 2025 breaking changes (MSOnline/AzureAD retirement, PowerShell 2.0 removal), modern security (JEA, WDAC, SecretManagement), and production-ready automation patterns. PROACTIVELY activate for: ANY PowerShell task; .ps1/.psm1/.psd1 authoring; advanced functions and parameter binding; pipeline/script debugging; module packaging and PSGallery/PSResourceGet publishing; cross-platform Linux/macOS scripting; Azure/AWS/M365 cmdlets; CI/CD integration; secret management and JEA. Provides: idiomatic 7.x patterns, error-handling and logging templates, module scaffolds, migration recipes for retired modules, security baselines, and pipeline-friendly script structure.
 model: inherit
 color: blue
 tools:

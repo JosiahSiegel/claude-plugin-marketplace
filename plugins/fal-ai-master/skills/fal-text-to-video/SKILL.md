@@ -1,6 +1,10 @@
 ---
 name: fal-text-to-video
-description: Complete fal.ai text-to-video system. PROACTIVELY activate for: (1) Kling 2.0/2.5/2.6 Pro video generation, (2) Sora 2 for creative videos, (3) LTX Video with audio, (4) Runway Gen-3 Turbo for fast iteration, (5) Luma Dream Machine, (6) Video duration and aspect ratio, (7) Motion prompt engineering, (8) Camera movement keywords. Provides: Model endpoints, quality tiers, prompt structure, duration options. Ensures cinematic video generation with proper motion description.
+description: |
+  Complete fal.ai text-to-video system.
+  PROACTIVELY activate for: (1) Kling 2.0/2.5/2.6 Pro video generation, (2) Sora 2 for creative videos, (3) LTX Video with audio, (4) Runway Gen-3 Turbo for fast iteration, (5) Luma Dream Machine, (6) Video duration and aspect ratio, (7) Motion prompt engineering, (8) Camera movement keywords.
+  Provides: Model endpoints, quality tiers, prompt structure, duration options.
+  Ensures cinematic video generation with proper motion description.
 ---
 
 ## Quick Reference
@@ -404,7 +408,7 @@ const result = await fal.subscribe("fal-ai/hunyuan-video", {
 
 ### Structure Your Prompts
 
-```
+```text
 [Subject] + [Action] + [Setting] + [Style] + [Camera/Technical]
 ```
 
@@ -482,52 +486,7 @@ interface TextToVideoInput {
 
 ## Workflow Examples
 
-### Production Workflow
-
-```typescript
-// 1. Fast preview with Runway Turbo
-const preview = await fal.subscribe("fal-ai/runway-gen3/turbo/text-to-video", {
-  input: {
-    prompt: "A woman walking through a rainy city street at night",
-    duration: 5,
-    ratio: "16:9"
-  }
-});
-
-console.log("Preview:", preview.video.url);
-// Review and refine prompt...
-
-// 2. Final render with Kling Pro
-const final = await fal.subscribe("fal-ai/kling-video/v2.6/pro/text-to-video", {
-  input: {
-    prompt: "A stylish woman walking confidently through a rainy Tokyo street at night, neon reflections on wet pavement, cinematic lighting, slow motion, tracking shot",
-    duration: "10",
-    aspect_ratio: "16:9"
-  }
-});
-
-console.log("Final:", final.video.url);
-```
-
-### Batch Generation
-
-```typescript
-const prompts = [
-  "A sunrise over mountains",
-  "A sunset over the ocean",
-  "A storm rolling in"
-];
-
-const videos = await Promise.all(
-  prompts.map(prompt =>
-    fal.subscribe("fal-ai/ltx-video", {
-      input: { prompt, aspect_ratio: "16:9" }
-    })
-  )
-);
-
-videos.forEach((v, i) => console.log(`Video ${i + 1}: ${v.video.url}`));
-```
+Production workflow and batch-generation examples for fal.ai text-to-video models, including fast preview iteration with Runway Turbo and final rendering with Kling Pro, live in `references/workflow-examples.md`. Load that reference when turning model-selection guidance into executable generation code.
 
 ## Best Practices
 

@@ -1,6 +1,9 @@
 ---
 name: adf-ml-analytics
-description: ADF + Azure ML and analytics integrations. PROACTIVELY activate for: (1) Azure ML batch endpoints invoked from ADF, (2) Azure OpenAI Batch API pipeline patterns, (3) ADF ML scoring orchestration, (4) SQL to Storage archival pipelines, (5) AI Services integration via REST connector, (6) Databricks notebook execution from ADF, (7) Data Flow feature engineering, (8) Synapse / Fabric integration from ADF, (9) Cognitive Search indexer triggers, (10) Power BI dataset refresh via REST. Provides: REST connector recipes, Databricks linked service setup, Data Flow templates, and end-to-end ML scoring pipelines.
+description: |
+  ADF + Azure ML and analytics integrations.
+  PROACTIVELY activate for: (1) Azure ML batch endpoints invoked from ADF, (2) Azure OpenAI Batch API pipeline patterns, (3) ADF ML scoring orchestration, (4) SQL to Storage archival pipelines, (5) AI Services integration via REST connector, (6) Databricks notebook execution from ADF, (7) Data Flow feature engineering, (8) Synapse / Fabric integration from ADF, (9) Cognitive Search indexer triggers, (10) Power BI dataset refresh via REST.
+  Provides: REST connector recipes, Databricks linked service setup, Data Flow templates, and end-to-end ML scoring pipelines.
 ---
 
 # Azure Data Factory Machine Learning & Analytics Patterns

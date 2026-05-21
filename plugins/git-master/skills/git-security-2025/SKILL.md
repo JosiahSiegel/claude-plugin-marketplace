@@ -1,6 +1,9 @@
 ---
 name: git-security-2025
-description: Git security best practices for 2025-2026 (signed commits, zero-trust, secret scanning). PROACTIVELY activate for: (1) configuring signed commits (GPG, SSH, S/MIME), (2) verifying commit signatures, (3) zero-trust Git workflows, (4) secret scanning (GitHub Advanced Security, gitleaks, trufflehog), (5) preventing secret leaks via pre-commit hooks, (6) protected branches and required reviewers, (7) CODEOWNERS for sensitive paths, (8) Sigstore-style attestations, (9) detecting and remediating leaked credentials, (10) supply-chain security (provenance, SBOM, SLSA). Provides: signed commit setup, secret-scanning integration, pre-commit hook templates, branch protection patterns, and incident-response checklist for credential exposure.
+description: |
+  Git security best practices for 2025-2026 (signed commits, zero-trust, secret scanning).
+  PROACTIVELY activate for: (1) configuring signed commits (GPG, SSH, S/MIME), (2) verifying commit signatures, (3) zero-trust Git workflows, (4) secret scanning (GitHub Advanced Security, gitleaks, trufflehog), (5) preventing secret leaks via pre-commit hooks, (6) protected branches and required reviewers, (7) CODEOWNERS for sensitive paths, (8) Sigstore-style attestations, (9) detecting and remediating leaked credentials, (10) supply-chain security (provenance, SBOM, SLSA).
+  Provides: signed commit setup, secret-scanning integration, pre-commit hook templates, branch protection patterns, and incident-response checklist for credential exposure.
 ---
 
 ## 🚨 CRITICAL GUIDELINES
@@ -258,7 +261,7 @@ remote: - Push cannot contain secrets
 remote:
 remote:   Resolve the following violations before pushing again
 remote:
-remote:   — AWS Access Key
+remote:   -- AWS Access Key
 remote:     locations:
 remote:       - config.py:12
 remote:
@@ -362,7 +365,7 @@ git secrets --scan-history
 
 **GitHub:**
 
-```
+```text
 Repository → Settings → Branches → Branch protection rules
 ☑ Require signed commits
 ☑ Require linear history
@@ -371,7 +374,7 @@ Repository → Settings → Branches → Branch protection rules
 
 **GitLab:**
 
-```
+```text
 Repository → Settings → Repository → Protected branches
 ☑ Allowed to push: No one
 ☑ Allowed to merge: Maintainers
@@ -380,7 +383,7 @@ Repository → Settings → Repository → Protected branches
 
 **Azure DevOps:**
 
-```
+```text
 Branch Policies → Add policy → Require signed commits
 ```
 
@@ -489,128 +492,9 @@ node_modules/
 vendor/
 ```
 
-## Credential Management
+## Credential Management and CodeQL Scanning
 
-### SSH Keys
-
-```bash
-# Generate secure SSH key
-ssh-keygen -t ed25519 -C "your.email@example.com" -f ~/.ssh/id_ed25519_work
-
-# Use ed25519 (modern, secure, fast)
-# Avoid RSA < 4096 bits
-# Avoid DSA (deprecated)
-
-# Configure SSH agent
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519_work
-
-# Test connection
-ssh -T git@github.com
-
-# Use different keys for different services
-# ~/.ssh/config
-Host github.com
-  IdentityFile ~/.ssh/id_ed25519_github
-
-Host gitlab.com
-  IdentityFile ~/.ssh/id_ed25519_gitlab
-```
-
-### HTTPS Credentials
-
-```bash
-# Use credential manager (not plaintext!)
-
-# Windows
-git config --global credential.helper wincred
-
-# macOS
-git config --global credential.helper osxkeychain
-
-# Linux (libsecret)
-git config --global credential.helper /usr/share/git/credential/libsecret/git-credential-libsecret
-
-# Cache for limited time (temporary projects)
-git config --global credential.helper 'cache --timeout=3600'
-```
-
-### Personal Access Tokens (PAT)
-
-**GitHub:**
-- Settings → Developer settings → Personal access tokens → Fine-grained tokens
-- Set expiration (max 1 year)
-- Minimum scopes needed
-- Use for HTTPS authentication
-
-**Never commit tokens:**
-
-```bash
-# Use environment variable
-export GITHUB_TOKEN="ghp_xxxxxxxxxxxx"
-git clone https://$GITHUB_TOKEN@github.com/user/repo.git
-
-# Or use Git credential helper
-gh auth login  # GitHub CLI method
-```
-
-## CodeQL & Security Scanning
-
-### GitHub CodeQL
-
-**.github/workflows/codeql.yml:**
-
-```yaml
-name: "CodeQL Security Scan"
-
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    - cron: '0 0 * * 1'  # Weekly scan
-
-jobs:
-  analyze:
-    name: Analyze
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      contents: read
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'javascript', 'python', 'java' ]
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: ${{ matrix.language }}
-        queries: security-and-quality
-
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v3
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{ matrix.language }}"
-```
-
-**Detects:**
-- SQL injection
-- XSS vulnerabilities
-- Path traversal
-- Command injection
-- Insecure deserialization
-- Authentication bypass
-- Hardcoded secrets
+Detailed credential-management guidance (PATs, SSH keys, Git Credential Manager, rotation, storage) and CodeQL / security scanning setup live in `references/credential-and-code-scanning.md`. Load that reference when hardening developer credentials or adding repository-level static security analysis.
 
 ## Audit Trail
 

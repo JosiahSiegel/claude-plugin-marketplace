@@ -1,6 +1,9 @@
 ---
 name: stripe-credit-audit-trail
-description: credit_transactions audit trail invariants and daily reconciliation patterns. PROACTIVELY activate for: (1) Designing a credit / balance / entitlement ledger, (2) credit_transactions row shape (delta, balanceAfter, reason, referenceType, referenceId, idempotencyKey), (3) Canonical idempotency key formats (refund:/debit:/stripe_checkout:/stripe_invoice:/stripe_refund:/stripe_signup_bonus:/dispute_hold:/dispute_restore:), (4) Daily reconciliation cron design (snapshot comparison, not full-sum), (5) Alert-only policy (never auto-correct drift), (6) Canonical refund helper pattern (single source of truth across pg-raw and Drizzle call sites), (7) Past_due block + credit balance shared preflight, (8) creditsDeducted boolean return pattern for pre- vs post-deduction error differentiation, (9) Money-safe email description based on resolvedVia flag, (10) Skip-users-without-baseline-snapshot reconciliation logic. Provides: table schema, canonical helper skeleton, reconciliation SQL, email gating pattern.
+description: |
+  credit_transactions audit trail invariants and daily reconciliation patterns.
+  PROACTIVELY activate for: (1) Designing a credit / balance / entitlement ledger, (2) credit_transactions row shape (delta, balanceAfter, reason, referenceType, referenceId, idempotencyKey), (3) Canonical idempotency key formats (refund:/debit:/stripe_checkout:/stripe_invoice:/stripe_refund:/stripe_signup_bonus:/dispute_hold:/dispute_restore:), (4) Daily reconciliation cron design (snapshot comparison, not full-sum), (5) Alert-only policy (never auto-correct drift), (6) Canonical refund helper pattern (single source of truth across pg-raw and Drizzle call sites), (7) Past_due block + credit balance shared preflight, (8) creditsDeducted boolean return pattern for pre- vs post-deduction error differentiation, (9) Money-safe email description based on resolvedVia flag, (10) Skip-users-without-baseline-snapshot reconciliation logic.
+  Provides: table schema, canonical helper skeleton, reconciliation SQL, email gating pattern.
 ---
 
 ## Quick Reference

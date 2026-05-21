@@ -10,7 +10,7 @@ Apply changes to reach the desired infrastructure state.
 
 ## Usage
 
-```
+```text
 /tf-apply                         # Interactive apply
 /tf-apply tfplan                  # Apply saved plan
 /tf-apply -auto-approve          # Non-interactive apply

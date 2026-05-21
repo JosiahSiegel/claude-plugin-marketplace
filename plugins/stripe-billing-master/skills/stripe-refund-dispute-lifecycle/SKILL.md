@@ -1,6 +1,9 @@
 ---
 name: stripe-refund-dispute-lifecycle
-description: Complete Stripe refund and dispute lifecycle handling. PROACTIVELY activate for: (1) charge.refunded handler design, (2) charge.dispute.created / charge.dispute.closed handlers, (3) Refund delta computation from event.data.previous_attributes.amount_refunded, (4) Dispute-hold past_due status management, (5) shouldRestoreStatus predicate with satisfies Record<Stripe.Dispute.Status, boolean>, (6) Credit-pack vs subscription refund differentiation, (7) Checkout Session lookup for refund proportion math, (8) Allowlist default-deny for external enums, (9) stripe.checkout.sessions.list({payment_intent}) pattern, (10) Dispute outcome branch logic (won / lost / warning_closed / prevented). Provides: full handler patterns for all three events, predicate examples, credit-pack vs subscription math, exhaustive switch patterns.
+description: |
+  Complete Stripe refund and dispute lifecycle handling.
+  PROACTIVELY activate for: (1) charge.refunded handler design, (2) charge.dispute.created / charge.dispute.closed handlers, (3) Refund delta computation from event.data.previous_attributes.amount_refunded, (4) Dispute-hold past_due status management, (5) shouldRestoreStatus predicate with satisfies Record<Stripe.Dispute.Status, boolean>, (6) Credit-pack vs subscription refund differentiation, (7) Checkout Session lookup for refund proportion math, (8) Allowlist default-deny for external enums, (9) stripe.checkout.sessions.list({payment_intent}) pattern, (10) Dispute outcome branch logic (won / lost / warning_closed / prevented).
+  Provides: full handler patterns for all three events, predicate examples, credit-pack vs subscription math, exhaustive switch patterns.
 ---
 
 ## Quick Reference

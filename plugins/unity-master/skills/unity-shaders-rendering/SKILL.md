@@ -1,6 +1,9 @@
 ---
 name: unity-shaders-rendering
-description: Unity shaders, materials, and rendering pipelines (URP/HDRP/Built-in). PROACTIVELY activate for: (1) writing shaders in Shader Graph, HLSL, or ShaderLab, (2) URP and HDRP shader authoring, (3) custom render pipeline work (SRP), (4) lighting setup (baked vs realtime, lightmaps, Global Illumination), (5) post-processing stacks, (6) reflection probes and light probes, (7) custom render features and full-screen passes, (8) shader stripping and variant management, (9) compute shaders, (10) ray tracing in HDRP. Provides: Shader Graph templates, HLSL snippets, URP/HDRP differences, lighting setup recipes, render-feature examples, and shader-variant guidance.
+description: |
+  Unity shaders, materials, and rendering pipelines (URP/HDRP/Built-in).
+  PROACTIVELY activate for: (1) writing shaders in Shader Graph, HLSL, or ShaderLab, (2) URP and HDRP shader authoring, (3) custom render pipeline work (SRP), (4) lighting setup (baked vs realtime, lightmaps, Global Illumination), (5) post-processing stacks, (6) reflection probes and light probes, (7) custom render features and full-screen passes, (8) shader stripping and variant management, (9) compute shaders, (10) ray tracing in HDRP.
+  Provides: Shader Graph templates, HLSL snippets, URP/HDRP differences, lighting setup recipes, render-feature examples, and shader-variant guidance.
 ---
 
 # Unity Shaders and Rendering
@@ -160,7 +163,7 @@ Shader "Custom/SimpleUnlit"
 
 ## Post-Processing (Volume System)
 
-```
+```text
 Setup:
 1. Add a Volume (Global or Local) to the scene
 2. Create a Volume Profile asset

@@ -27,7 +27,7 @@ Detailed workflows and strategies for managing context efficiently in Claude Cod
 - If you notice Claude getting distracted or referencing old context
 
 **Example workflow:**
-```
+```text
 1. Complete feature A
 2. Run tests and commit
 3. /clear
@@ -43,7 +43,7 @@ Detailed workflows and strategies for managing context efficiently in Claude Cod
 **What it does:** Summarizes conversation history while retaining key information.
 
 **Example workflow:**
-```
+```text
 1. Long research and planning session
 2. /compact "Summarize architecture decisions and open TODOs"
 3. Continue with implementation
@@ -56,7 +56,7 @@ Detailed workflows and strategies for managing context efficiently in Claude Cod
 - To pick up where you left off
 
 **Combines well with:**
-```
+```text
 claude --continue  # Resume last session in current project
 ```
 
@@ -65,7 +65,7 @@ claude --continue  # Resume last session in current project
 **Goal:** Keep each task in its own context bubble.
 
 **Workflow:**
-```
+```text
 1. Start task → /clear (if needed)
 2. Use subagents for research/analysis
 3. Main context focuses on implementation
@@ -90,7 +90,7 @@ claude --continue  # Resume last session in current project
 **Goal:** Build up context deliberately, clearing non-essential information.
 
 **Workflow:**
-```
+```text
 1. Research phase
    - Subagents search and analyze
    - Main context reviews summaries
@@ -159,7 +159,7 @@ This applies to:
 **Goal:** Work on multiple aspects simultaneously using subagents.
 
 **Workflow:**
-```
+```text
 1. Main context: High-level orchestration
 2. Subagent A: Frontend work
 3. Subagent B: Backend work  
@@ -184,7 +184,7 @@ This applies to:
 **Goal:** Keep context focused on current test/implementation cycle.
 
 **Workflow:**
-```
+```text
 1. Write test in main context
 2. /agent test-runner "run new test"
 3. Implement feature to pass test
@@ -231,7 +231,7 @@ Sprint goal: User authentication system
 ```
 
 **Workflow:**
-```
+```text
 1. CLAUDE.md provides persistent context
 2. Each session references current focus
 3. Update CLAUDE.md with new decisions
@@ -257,7 +257,7 @@ Sprint goal: User authentication system
 **Challenge:** Need broad codebase understanding but context fills quickly.
 
 **Strategy:**
-```
+```text
 1. Subagent: "Map all files using old pattern"
 2. Review map, create refactoring plan
 3. Save plan to REFACTOR.md
@@ -276,7 +276,7 @@ Sprint goal: User authentication system
 **Challenge:** Unknown cause, need to search widely but track findings.
 
 **Strategy:**
-```
+```text
 1. Create BUG_NOTES.md to track findings
 2. Subagent: "Search logs for error X"
 3. Document findings in BUG_NOTES.md
@@ -294,7 +294,7 @@ Sprint goal: User authentication system
 **Challenge:** Need to research existing patterns without cluttering context.
 
 **Strategy:**
-```
+```text
 1. Subagent: "Find similar features in codebase"
 2. Subagent: "Extract common patterns from those features"
 3. Main context reviews patterns
@@ -312,7 +312,7 @@ Sprint goal: User authentication system
 **Challenge:** Changes span many files, hard to keep all in context.
 
 **Strategy:**
-```
+```text
 1. Create FEATURE.md with:
    - Overall design
    - File change checklist
@@ -337,7 +337,7 @@ Sprint goal: User authentication system
 
 **Save key state to files before clearing:**
 
-```
+```text
 1. Long planning session
 2. "Create PLAN.md with our architecture decisions"
 3. /clear
@@ -348,7 +348,7 @@ Sprint goal: User authentication system
 
 **Load information progressively as needed:**
 
-```
+```text
 1. Start with just current file
 2. If need more context: "show me the caller"
 3. If need more: "show me the config"
@@ -359,7 +359,7 @@ Sprint goal: User authentication system
 
 **Use subagents to create digestible summaries:**
 
-```
+```text
 Subagent: "Analyze all 50 test files and create a summary:
 - Total coverage percentage
 - Files with <50% coverage
@@ -372,7 +372,7 @@ Then work from the summary, not the raw test files.
 
 **Compress context multiple times in long sessions:**
 
-```
+```text
 1. Research phase → /compact "Keep research findings"
 2. Planning phase → /compact "Keep findings and plan"
 3. Implementation → /compact "Keep plan and decisions"

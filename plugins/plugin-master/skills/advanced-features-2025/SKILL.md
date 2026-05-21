@@ -1,6 +1,9 @@
 ---
 name: advanced-features-2025
-description: Advanced Claude Code plugin features (2025-2026) — hooks, MCP integration, team distribution, and progressive disclosure. PROACTIVELY activate for: (1) progressive disclosure design (3-level loading: metadata, body, references), (2) hook automation and event-driven plugins, (3) PreToolUse and PostToolUse hooks, (4) MCP server integration, (5) .mcp.json configuration and stdio/sse/http/ws transports, (6) team plugin distribution patterns (project-level, repo-level), (7) repository-level plugin layouts, (8) context efficiency techniques, (9) plugin sharing and private marketplaces, (10) ${CLAUDE_PLUGIN_ROOT} for cross-platform paths. Provides: hooks reference, MCP integration patterns, team distribution playbook, context efficiency tips, and migration guidance from legacy patterns.
+description: |
+  Advanced Claude Code plugin features for hooks, MCP integration, team distribution, and progressive disclosure.
+  PROACTIVELY activate for: (1) progressive disclosure design, (2) hook automation, (3) PreToolUse and PostToolUse hooks, (4) MCP server integration, (5) .mcp.json configuration, (6) team plugin distribution, (7) repository-level plugin layouts, (8) context efficiency, (9) private marketplaces, (10) ${CLAUDE_PLUGIN_ROOT}.
+  Provides: hooks reference, MCP patterns, team distribution, and context-efficiency guidance.
 ---
 
 # Advanced Plugin Features (2025)
@@ -48,7 +51,7 @@ Skills are dynamically loaded based on task context, enabling:
 
 ### Structure
 
-```
+```text
 skills/
 └── skill-name/
     ├── SKILL.md           # Core content

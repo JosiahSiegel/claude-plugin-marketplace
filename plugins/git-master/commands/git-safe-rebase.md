@@ -66,7 +66,7 @@ Guide the user through a safe interactive rebase with proper backups and recover
    ```
 
 6. **Provide recovery instructions**:
-   ```
+   ```bash
    If something goes wrong:
    - Abort: git rebase --abort
    - Recover: git reset --hard backup-before-rebase-XXXXXXXX

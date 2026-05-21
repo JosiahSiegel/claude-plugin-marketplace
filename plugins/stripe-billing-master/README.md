@@ -31,9 +31,9 @@ In your caller project's master expert agent, install a HARD delegation rule:
 
 Standard marketplace install:
 
-```
-/plugin marketplace add josiahsiegel/claude-code-marketplace
-/plugin install stripe-billing-master
+```text
+/plugin marketplace add JosiahSiegel/claude-plugin-marketplace
+/plugin install stripe-billing-master@claude-plugin-marketplace
 ```
 
 ## Agent: stripe-billing-expert

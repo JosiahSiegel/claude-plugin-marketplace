@@ -1,6 +1,9 @@
 ---
 name: windows-path-troubleshooting
-description: Complete Windows file path troubleshooting knowledge for Claude Code on Git Bash and Windows environments. PROACTIVELY activate for: (1) file path errors on Windows, (2) backslash vs forward slash issues, (3) Edit/Write/Read tool failures, (4) MINGW path resolution, (5) cross-platform path conversion, (6) MSYS_NO_PATHCONV usage, (7) double-slash escape patterns (//c/foo), (8) UNC and long path limits, (9) WSL vs native Windows interop. Provides: path-conversion rules, troubleshooting flowchart, MSYS env-var recipes, double-slash escape patterns, and Windows file-operation best practices.
+description: |
+  Complete Windows file path troubleshooting knowledge for Claude Code on Git Bash and Windows environments.
+  PROACTIVELY activate for: (1) file path errors on Windows, (2) backslash vs forward slash issues, (3) Edit/Write/Read tool failures, (4) MINGW path resolution, (5) cross-platform path conversion, (6) MSYS_NO_PATHCONV usage, (7) double-slash escape patterns (//c/foo), (8) UNC and long path limits, (9) WSL vs native Windows interop.
+  Provides: path-conversion rules, troubleshooting flowchart, MSYS env-var recipes, double-slash escape patterns, and Windows file-operation best practices.
 ---
 
 ## 🚨 CRITICAL GUIDELINES
@@ -54,7 +57,7 @@ This applies to:
 ### Why This Matters
 
 **Common error message when using forward slashes on Windows:**
-```
+```text
 Error: ENOENT: no such file or directory
 ```
 
@@ -69,7 +72,7 @@ Error: ENOENT: no such file or directory
 ### Issue 1: Forward Slashes in Tool Calls
 
 **Symptom:**
-```
+```text
 Edit tool fails with "file not found" or "no such file or directory"
 ```
 
@@ -81,12 +84,12 @@ Using forward slashes copied from Git Bash output:
 ```
 
 **Incorrect usage:**
-```
+```text
 Edit(file_path="/s/repos/myproject/file.tsx")
 ```
 
 **Correct usage:**
-```
+```text
 Edit(file_path="S:\repos\myproject\file.tsx")
 ```
 
@@ -179,7 +182,7 @@ echo %USERPROFILE%
 Paths with spaces break or cause "file not found" errors
 
 **Correct handling:**
-```
+```text
 ✅ CORRECT: Edit(file_path="C:\Program Files\My App\config.json")
 ✅ CORRECT: Edit(file_path="D:\My Documents\project\file.txt")
 ```
@@ -195,17 +198,17 @@ Paths with spaces break or cause "file not found" errors
 Network paths like `\\server\share\file.txt` fail
 
 **Windows UNC format:**
-```
+```text
 \\server\share\folder\file.txt
 ```
 
 **Git Bash representation:**
-```
+```text
 //server/share/folder/file.txt
 ```
 
 **Correct usage in Claude Code:**
-```
+```text
 Edit(file_path="\\\\server\\share\\folder\\file.txt")
 ```
 
@@ -241,7 +244,7 @@ When a user provides a file path, follow this decision tree:
 ### Step 2: Conversion Process
 
 **For MINGW paths (`/x/...`):**
-```
+```text
 Input: /s/repos/myproject/src/components/Button.tsx
 
 Process:
@@ -255,7 +258,7 @@ Output: S:\repos\myproject\src\components\Button.tsx
 ```
 
 **For Windows paths with forward slashes (`X:/...`):**
-```
+```text
 Input: S:/repos/project/file.tsx
 
 Process:
@@ -267,7 +270,7 @@ Output: S:\repos\project\file.tsx
 ```
 
 **For relative paths:**
-```
+```text
 Input: ./src/components/Button.tsx
 Current directory (from user or detection): S:\repos\my-project
 
@@ -302,7 +305,7 @@ When you encounter a file path error on Windows:
 ### Step 3: Request Clarification (If Needed)
 
 **If the path is ambiguous, ask:**
-```
+```bash
 I see you're working on Windows with Git Bash. To ensure I use the correct path format,
 could you run this command and share the output?
 
@@ -314,7 +317,7 @@ This will give me the Windows-formatted path.
 ### Step 4: Convert and Retry
 
 **Conversion template:**
-```
+```text
 I'll convert the path from Git Bash format to Windows format:
 - Git Bash: /s/repos/project/file.tsx
 - Windows: S:\repos\project\file.tsx
@@ -325,7 +328,7 @@ Retrying with the correct Windows path...
 ### Step 5: Verify Success
 
 After conversion, verify the operation succeeded and explain what was fixed:
-```
+```text
 ✅ Successfully edited the file using the Windows path format (S:\repos\...).
 
 Note: On Windows with Git Bash, always use backslashes (\) in file paths for
@@ -364,7 +367,7 @@ When file operations fail on Windows:
 
 **Don't wait for errors** - If you see a path that looks like MINGW format, convert it immediately:
 
-```
+```text
 User provides: /s/repos/project/file.tsx
 You think: "This is MINGW format, I need to convert it to S:\repos\project\file.tsx"
 You do: Convert before calling Edit/Write/Read tool
@@ -386,7 +389,7 @@ Then convert the forward slashes to backslashes.
 ### 3. Communicate Path Format Changes
 
 **Always explain when you convert paths:**
-```
+```text
 I'll convert the Git Bash path to Windows format for the Edit tool:
 - From: /s/repos/project/file.tsx
 - To: S:\repos\project\file.tsx
@@ -397,7 +400,7 @@ This helps users understand the requirement and learn for future interactions.
 ### 4. Validate Before Tool Use
 
 **Before calling Edit/Write/Read tools on Windows:**
-```
+```text
 Pre-flight checklist:
 ✅ Path starts with drive letter and colon (e.g., C:, S:)
 ✅ Path uses backslashes (\) not forward slashes (/)
@@ -415,143 +418,9 @@ Pre-flight checklist:
 
 **Always detect and convert as needed.**
 
-## 🐛 Common Error Messages and Solutions
+## Error Lookup, Platform Notes, User Teaching & Advanced Scenarios
 
-### Error: "ENOENT: no such file or directory"
-
-**Most likely cause:** Forward slashes instead of backslashes
-
-**Solution:**
-1. Check if path uses forward slashes
-2. Convert to backslashes
-3. Verify drive letter format
-4. Retry operation
-
-### Error: "Invalid file path"
-
-**Most likely cause:** MINGW path format
-
-**Solution:**
-1. Detect `/x/` pattern at start
-2. Convert to `X:` format
-3. Replace all forward slashes with backslashes
-4. Retry operation
-
-### Error: "Access denied" or "Permission denied"
-
-**Most likely cause:** Path is correct but permissions issue
-
-**Solution:**
-1. Verify file exists and is accessible
-2. Check if file is locked by another process
-3. Verify user has read/write permissions
-4. Consider running Git Bash as administrator
-
-### Error: "File not found" but path looks correct
-
-**Possible causes:**
-1. Path has hidden characters (copy-paste issue)
-2. File extension is hidden in Windows
-3. Path has trailing spaces
-4. Case sensitivity (some tools are case-sensitive)
-
-**Solution:**
-1. Ask user to run `ls -la` in Git Bash to verify exact filename
-2. Check for file extensions
-3. Trim whitespace from path
-4. Match exact case of filename
-
-## 📚 Platform-Specific Knowledge
-
-### Windows File System Characteristics
-
-**Path characteristics:**
-- Drive letters: A-Z (typically C: for system, D-Z for additional drives)
-- Path separator: Backslash (`\`)
-- Case insensitive: `File.txt` same as `file.txt`
-- Special characters: Avoid `< > : " | ? *` in filenames
-- Maximum path length: 260 characters (legacy limit, can be increased)
-
-### Git Bash on Windows
-
-**Git Bash is a POSIX-compatible environment:**
-- Uses MINGW (Minimalist GNU for Windows)
-- Translates POSIX paths to Windows paths internally
-- Commands like `ls`, `pwd`, `cd` use POSIX format
-- Native Windows programs need Windows format paths
-
-**Key insight:** Git Bash displays and accepts POSIX paths, but Windows APIs (used by Claude Code) require Windows paths.
-
-### WSL (Windows Subsystem for Linux)
-
-**WSL path mounting:**
-- Windows drives mounted at `/mnt/c/`, `/mnt/d/`, etc.
-- WSL path: `/mnt/c/Users/name/project`
-- Windows path: `C:\Users\name\project`
-
-**Conversion:**
-1. Replace `/mnt/x/` with `X:`
-2. Replace forward slashes with backslashes
-
-## 🎓 Teaching Users
-
-When explaining path issues to users, use this template:
-
-```
-I encountered a path format issue. Here's what happened:
-
-**The Problem:**
-Claude Code's file tools (Edit, Write, Read) on Windows require paths in Windows
-native format with backslashes (\), but Git Bash displays paths in POSIX format
-with forward slashes (/).
-
-**The Path Formats:**
-- Git Bash shows: /s/repos/project/file.tsx
-- Windows needs: S:\repos\project\file.tsx
-
-**The Solution:**
-I've converted your path to Windows format. For future reference, when working
-with Claude Code on Windows with Git Bash:
-1. Use backslashes (\) in file paths
-2. Use drive letter format (C:, D:, S:) not MINGW format (/c/, /d/, /s/)
-3. Run `pwd -W` in Git Bash to get Windows-formatted paths
-
-**The Fix:**
-✅ Now using: S:\repos\project\file.tsx
-```
-
-## 🔍 Advanced Scenarios
-
-### Scenario 1: Mixed Path Contexts
-
-**User is working with both WSL and Git Bash:**
-- Ask which environment they're in
-- Use appropriate conversion
-- Document the choice
-
-### Scenario 2: Symbolic Links
-
-**Windows symbolic links:**
-```
-mklink /D C:\link C:\target
-```
-
-**Handling:**
-- Follow the link to actual path
-- Use actual path in tool calls
-- Inform user if link resolution needed
-
-### Scenario 3: Docker Volumes
-
-**Docker volume mounts on Windows:**
-```
-docker run -v C:\repos:/app
-```
-
-**Path translation:**
-- Outside container: `C:\repos\file.txt`
-- Inside container: `/app/file.txt`
-- Use context-appropriate format
+Detailed lookup tables for common Claude Code Windows path errors, platform-specific behavior (PowerShell, CMD, Git Bash, WSL, Node/Python), user-teaching scripts, and advanced path scenarios (UNC paths, long paths, spaces, special characters) live in `references/error-platform-advanced.md`. Load that reference when the quick conversion workflow does not explain a path failure.
 
 ## ✅ Success Criteria
 

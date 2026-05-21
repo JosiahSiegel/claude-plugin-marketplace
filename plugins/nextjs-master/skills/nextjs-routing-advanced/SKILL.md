@@ -1,6 +1,10 @@
 ---
 name: nextjs-routing-advanced
-description: Complete Next.js advanced routing system. PROACTIVELY activate for: (1) Dynamic routes with [slug], (2) Catch-all routes [...slug], (3) Route groups for organization, (4) Parallel routes with @slot, (5) Intercepting routes for modals, (6) Private folders with _prefix, (7) Route Handlers (API), (8) Search params handling, (9) Programmatic navigation. Provides: Dynamic routing patterns, parallel route slots, modal interception, API handlers. Ensures flexible routing with proper URL structure.
+description: |
+  Complete Next.js advanced routing system.
+  PROACTIVELY activate for: (1) Dynamic routes with [slug], (2) Catch-all routes [...slug], (3) Route groups for organization, (4) Parallel routes with @slot, (5) Intercepting routes for modals, (6) Private folders with _prefix, (7) Route Handlers (API), (8) Search params handling, (9) Programmatic navigation.
+  Provides: Dynamic routing patterns, parallel route slots, modal interception, API handlers.
+  Ensures flexible routing with proper URL structure.
 ---
 
 ## Quick Reference
@@ -139,7 +143,7 @@ export default async function ShopPage({ params }: PageProps) {
 
 ### Organizing Without URL Impact
 
-```
+```text
 app/
 ├── (marketing)/
 │   ├── layout.tsx      # Marketing layout
@@ -204,7 +208,7 @@ export default function AppLayout({
 
 ### Basic Parallel Routes
 
-```
+```text
 app/
 ├── layout.tsx
 ├── page.tsx
@@ -284,7 +288,7 @@ export default function AnalyticsDefault() {
 
 ### Modal Pattern
 
-```
+```text
 app/
 ├── feed/
 │   └── page.tsx              # /feed - main feed
@@ -299,7 +303,7 @@ app/
 
 ### Intercepting Conventions
 
-```
+```text
 (.)  - Match same level
 (..) - Match one level above
 (..)(..) - Match two levels above
@@ -410,7 +414,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
 ## Private Folders
 
-```
+```text
 app/
 ├── _components/         # Private - not a route
 │   ├── Button.tsx

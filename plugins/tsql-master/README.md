@@ -1,6 +1,6 @@
 # T-SQL Master
 
-Comprehensive T-SQL and SQL Server expertise for query optimization, performance tuning, and Azure SQL Database.
+Comprehensive T-SQL and SQL Server expertise for schema-first query optimization, ShowPlan XML analysis, index strategy, performance tuning, and Azure SQL Database.
 
 ## Features
 
@@ -15,7 +15,7 @@ Comprehensive T-SQL and SQL Server expertise for query optimization, performance
 
 ```bash
 /plugin marketplace add JosiahSiegel/claude-plugin-marketplace
-/plugin install tsql-master@JosiahSiegel
+/plugin install tsql-master@claude-plugin-marketplace
 ```
 
 ### Local Installation
@@ -31,7 +31,9 @@ Just ask about T-SQL optimization:
 
 - "Optimize this query for better performance"
 - "What indexes should I create for this table?"
-- "Help me understand this execution plan"
+- "Help me understand this execution plan or .sqlplan file"
+- "Why is my partitioned table reading every partition?"
+- "Prove whether this join can be removed or replaced with EXISTS"
 - "How do I fix parameter sniffing?"
 - "Best practices for Azure SQL Database"
 
@@ -48,8 +50,9 @@ Just ask about T-SQL optimization:
 | Skill | Purpose |
 |-------|---------|
 | `tsql-functions` | Complete T-SQL function reference (string, date, window, JSON, XML) |
-| `query-optimization` | SARGability, joins, hints, statistics, execution plans |
-| `index-strategies` | Clustered, nonclustered, columnstore, filtered indexes |
+| `query-optimization` | Schema-first optimization, SARGability, joins, hints, statistics, rewrite proof |
+| `execution-plan-analysis` | `.sqlplan` and ShowPlan XML triage, plan warnings, estimates, partition access |
+| `index-strategies` | Clustered, nonclustered, columnstore, filtered, partition-aligned indexes |
 | `azure-sql-optimization` | Azure SQL Database features, DTU/vCore, Hyperscale |
 | `advanced-patterns` | CTEs, APPLY, MERGE, temporal tables, In-Memory OLTP |
 
@@ -110,7 +113,7 @@ Just ask about T-SQL optimization:
 
 ## Plugin Structure
 
-```
+```text
 tsql-master/
 ├── .claude-plugin/
 │   └── plugin.json
@@ -121,6 +124,9 @@ tsql-master/
 │   │   ├── SKILL.md
 │   │   └── references/
 │   ├── query-optimization/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   ├── execution-plan-analysis/
 │   │   ├── SKILL.md
 │   │   └── references/
 │   ├── index-strategies/

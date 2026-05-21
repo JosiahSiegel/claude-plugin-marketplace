@@ -110,7 +110,7 @@ CTV viewers accept and expect longer content.
 
 ### Chapter Best Practices
 
-```
+```text
 0:00 Introduction
 2:30 Part 1: [Topic]
 8:45 Part 2: [Topic]

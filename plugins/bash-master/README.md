@@ -82,27 +82,27 @@ unzip bash-master.zip -d ~/.local/share/claude/plugins/
 ## Usage Examples
 
 ### Create a Script
-```
+```text
 Create a backup script that archives /data to S3 with error handling and logging
 ```
 
 ### Analyze Existing Script
-```
+```text
 /bash-analyze deploy.sh focus on security vulnerabilities
 ```
 
 ### Generate Template
-```
+```text
 /bash-template daemon --full --logging
 ```
 
 ### Optimize Performance
-```
+```text
 /bash-optimize process.sh target: speed
 ```
 
 ### Complex Task (Agent)
-```
+```text
 I need to create a complete CI/CD deployment system with parallel builds and rollback support
 ```
 

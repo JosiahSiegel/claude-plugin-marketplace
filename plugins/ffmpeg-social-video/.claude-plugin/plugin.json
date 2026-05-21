@@ -1,0 +1,26 @@
+{
+  "name": "ffmpeg-social-video",
+  "version": "1.0.1",
+  "description": "FFmpeg workflows for short-form social and viral video production. PROACTIVELY activate for TikTok, YouTube Shorts, Instagram/Facebook Reels, vertical 9:16 conversion, platform export specs, multi-platform batch exports, hook overlays, retention boosters, CapCut-style animated captions, auto-captions, and social video encoding presets.",
+  "author": {
+    "name": "Josiah Siegel",
+    "email": "JosiahSiegel@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/JosiahSiegel/claude-plugin-marketplace/tree/main/plugins/ffmpeg-social-video",
+  "repository": "https://github.com/JosiahSiegel/claude-plugin-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "ffmpeg",
+    "social-video",
+    "viral-video",
+    "tiktok",
+    "youtube-shorts",
+    "instagram-reels",
+    "vertical-video",
+    "9-16",
+    "captions",
+    "hooks",
+    "retention",
+    "batch-export"
+  ]
+}

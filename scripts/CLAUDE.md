@@ -8,7 +8,7 @@ The marketplace uses two locations for plugin versions:
 1. **`.claude-plugin/marketplace.json`** - Central registry with all plugin metadata
 2. **`plugins/<plugin-name>/.claude-plugin/plugin.json`** - Individual plugin configuration
 
-Both locations MUST have matching versions. The `version_ops.py` script ensures consistency.
+Both locations MUST have matching versions. The central marketplace also mirrors plugin keywords from each plugin's `plugin.json`; the plugin-owned `keywords` array is the source of truth for keyword sync. The `version_ops.py` script ensures consistency.
 
 ## File Locations
 
@@ -19,11 +19,11 @@ claude-code-marketplace/
 ├── plugins/
 │   ├── bash-master/
 │   │   └── .claude-plugin/
-│   │       └── plugin.json       # Plugin-specific version
+│   │       └── plugin.json       # Plugin-owned version and keywords
 │   ├── ffmpeg-master/
 │   │   └── .claude-plugin/
 │   │       └── plugin.json
-│   └── ...                       # 25 plugins total
+│   └── ...                       # registered plugins
 └── scripts/
     ├── version_ops.py            # Main Python script
     ├── version-tracker.sh        # Bash wrapper
@@ -40,17 +40,44 @@ python3 scripts/version_ops.py [OPTIONS] [PLUGIN_NAME]
 ./scripts/version-tracker.sh [OPTIONS] [PLUGIN_NAME]
 ```
 
+## Plugin Quality Validation
+
+Use `validate_plugins.py` as the read-only quality gate for marketplace plugins. It validates the central registry, each plugin's `.claude-plugin/plugin.json`, agent frontmatter, skill frontmatter and size limits, Markdown code fences, and stray working files under `plugins/`.
+
+```bash
+# Validate all registered plugins and plugin directories
+python3 scripts/validate_plugins.py
+
+# Machine-readable output for CI or scripts
+python3 scripts/validate_plugins.py --json
+
+# Treat warnings as failures
+python3 scripts/validate_plugins.py --strict
+
+# Validate a single registered plugin
+python3 scripts/validate_plugins.py --plugin doc-master
+```
+
+**Exit codes:**
+- `0` - All error checks pass. Warnings are allowed unless `--strict` is set.
+- `1` - One or more errors were found, or warnings were found in `--strict` mode.
+
+The validator is intentionally read-only. It must not be used to mutate plugin metadata or bump versions; use `version_ops.py` for version changes.
+
 ## Complete CLI Reference
 
 ```
-usage: version_ops.py [-h] [-v] [-s] [-b {patch,minor,major}]
-                      [-i {patch,minor,major}] [-p PLUGIN] [-a] [-d] [-q]
-                      [--json] [plugin_name]
+usage: version_ops.py [-h] [-v] [-s] [--metadata {versions,keywords,all}]
+                      [-b {patch,minor,major}] [-i {patch,minor,major}]
+                      [-p PLUGIN] [-a] [-d] [-q] [--json] [plugin_name]
 
 Options:
   -h, --help                 Show help message
-  -v, --validate             Validate all versions match (default action)
-  -s, --sync                 Sync versions using highest (never downgrades)
+  -v, --validate             Validate metadata (default action)
+  -s, --sync                 Sync versions or keywords based on --metadata
+  --metadata {versions,keywords,all}
+                             Metadata type for validate/sync. Default: versions.
+                             Keyword source of truth is plugin.json.
   -b, --bump {patch,minor,major}
                              Bump version type
   -i, --increment {patch,minor,major}
@@ -89,11 +116,25 @@ Synchronize versions using the highest version (never downgrades):
 
 ```bash
 python3 scripts/version_ops.py --sync
+python3 scripts/version_ops.py --sync --metadata versions
 python3 scripts/version_ops.py --sync --dry-run  # Preview changes
 python3 scripts/version_ops.py -s -d             # Short form
 ```
 
 **Behavior:** Compares versions between marketplace.json and plugin.json. Updates BOTH files to the higher version. This ensures versions never go down.
+
+### Validate and Sync Keywords
+
+Validate or synchronize keyword metadata between marketplace.json and plugin.json files:
+
+```bash
+python3 scripts/version_ops.py --validate --metadata keywords
+python3 scripts/version_ops.py --sync --metadata keywords --dry-run
+python3 scripts/version_ops.py --sync --metadata keywords
+python3 scripts/version_ops.py --validate --metadata all
+```
+
+**Source of truth:** `plugins/<plugin-name>/.claude-plugin/plugin.json` owns keywords. `marketplace.json` mirrors those keywords for marketplace discovery. Keyword sync updates marketplace entries only; it does not modify plugin-owned keywords.
 
 ### Bump Single Plugin
 
@@ -115,7 +156,7 @@ python3 scripts/version_ops.py -b patch -p bash-master --dry-run
 
 ### Bump ALL Plugins
 
-Increment version for all 25 plugins at once:
+Increment versions for all registered plugins at once:
 
 ```bash
 # Preview first (recommended)
@@ -134,7 +175,7 @@ python3 scripts/version_ops.py -b major --all    # Breaking changes
 - `minor` - New features, skills, agents (1.0.0 -> 1.1.0)
 - `major` - Breaking changes, rewrites (1.0.0 -> 2.0.0)
 
-## Current Plugins (25 total)
+## Current Plugins
 
 | Plugin | Description |
 |--------|-------------|
@@ -215,16 +256,17 @@ python3 scripts/version_ops.py -b patch --all            # Apply
 
 ## Guidelines for AI Agents
 
-1. **Always validate before committing** - Run `--validate` to ensure versions are in sync
+1. **Always validate before committing** - Run `--validate` to ensure versions are in sync and `--validate --metadata keywords` when editing keyword metadata
 2. **Bump versions after changes** - Every plugin modification should include a version bump
-3. **Use appropriate bump type:**
+3. **Use keyword sync for metadata drift** - Run `--sync --metadata keywords --dry-run` first, then apply if marketplace keywords need to mirror plugin.json
+4. **Use appropriate bump type:**
    - `patch` for bug fixes, documentation updates, minor tweaks
    - `minor` for new skills, agents, or features
    - `major` for breaking changes, major rewrites, API changes
-4. **Never manually edit versions** - Always use this script to maintain consistency
-5. **Preview with --dry-run** - Use dry-run before sync or bump operations to verify
-6. **Use --all for bulk operations** - When updating multiple plugins, use `--all` flag
-7. **Check JSON output** - Use `--json` flag for programmatic parsing of validation results
+5. **Never manually edit versions** - Always use this script to maintain consistency
+6. **Preview with --dry-run** - Use dry-run before sync or bump operations to verify
+7. **Use --all for bulk operations** - When updating multiple plugins, use `--all` flag
+8. **Check JSON output** - Use `--json` flag for programmatic parsing of validation results
 
 ## Examples
 

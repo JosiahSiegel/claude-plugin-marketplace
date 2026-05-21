@@ -154,7 +154,7 @@
 ## Performance Recommendations
 
 ### High-Volume Scenarios
-```
+```text
 | Scenario | Recommendation |
 |----------|----------------|
 | 1M+ rows | Use Staging with PolyBase |

@@ -1,6 +1,10 @@
 ---
 name: python-fastapi
-description: Complete FastAPI production system. PROACTIVELY activate for: (1) Project structure (scalable layout), (2) Pydantic schemas (input/output separation), (3) Dependency injection, (4) Async database with SQLAlchemy, (5) JWT authentication, (6) Error handling patterns, (7) Docker deployment, (8) Gunicorn + Uvicorn production, (9) Rate limiting, (10) Testing with httpx. Provides: Project templates, schema patterns, auth setup, Docker config. Ensures production-ready FastAPI applications.
+description: |
+  Complete FastAPI production system.
+  PROACTIVELY activate for: (1) Project structure (scalable layout), (2) Pydantic schemas (input/output separation), (3) Dependency injection, (4) Async database with SQLAlchemy, (5) JWT authentication, (6) Error handling patterns, (7) Docker deployment, (8) Gunicorn + Uvicorn production, (9) Rate limiting, (10) Testing with httpx.
+  Provides: Project templates, schema patterns, auth setup, Docker config.
+  Ensures production-ready FastAPI applications.
 ---
 
 ## Quick Reference
@@ -59,7 +63,7 @@ FastAPI is a modern, high-performance web framework for building APIs. Built on 
 
 ### Scalable Structure (Recommended)
 
-```
+```text
 src/
 ├── app/
 │   ├── __init__.py

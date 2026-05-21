@@ -984,7 +984,7 @@ echo "IMPORTANT: This file contains sensitive data. Ensure it's in .gitignore!"
 
 ### Project Structure
 
-```
+```text
 my-azure-project/
 ├── docker-compose.yml
 ├── docker-compose.override.yml
@@ -1519,7 +1519,7 @@ echo "2. Review docker-compose.yml"
 echo "3. Update environment variables"
 echo "4. Run: make up"
 echo ""
-```
+```bash
 
 Make it executable:
 

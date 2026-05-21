@@ -217,28 +217,28 @@ bash -x script.sh 2>&1 | ts -s '%.s'
 ## Usage Examples
 
 **General optimization:**
-```
+```text
 /bash-optimize deploy.sh
 ```
 
 **Focus on speed:**
-```
+```text
 /bash-optimize process.sh target: speed
 ```
 
 **Focus on memory:**
-```
+```text
 /bash-optimize large-file-handler.sh target: memory
 ```
 
 **Both speed and memory:**
-```
+```text
 /bash-optimize etl-script.sh target: both
 ```
 
 ## Output Format
 
-```
+```bash
 ## Optimization Report: <script>
 
 ### Performance Profile

@@ -1,6 +1,9 @@
 ---
 name: docker-git-bash-guide
-description: Docker on Windows with Git Bash / MINGW path conversion. PROACTIVELY activate for: (1) Docker commands failing on Windows Git Bash with path errors, (2) volume mount path conversion (-v $(pwd):/app), (3) MSYS_NO_PATHCONV and MSYS2_ARG_CONV_EXCL workarounds, (4) double-slash escapes (//c/foo) for MINGW, (5) docker-compose volume mounts on Windows, (6) WSL2 vs Hyper-V backend path interop, (7) line-ending issues in mounted scripts (CRLF vs LF), (8) UNC path limitations. Provides: MSYS path-conversion explainer, copy-pasteable env-var workarounds, double-slash recipes, line-ending fixes, and compose-mount patterns for Windows.
+description: |
+  Docker on Windows with Git Bash / MINGW path conversion.
+  PROACTIVELY activate for: (1) Docker commands failing on Windows Git Bash with path errors, (2) volume mount path conversion (-v $(pwd):/app), (3) MSYS_NO_PATHCONV and MSYS2_ARG_CONV_EXCL workarounds, (4) double-slash escapes (//c/foo) for MINGW, (5) docker-compose volume mounts on Windows, (6) WSL2 vs Hyper-V backend path interop, (7) line-ending issues in mounted scripts (CRLF vs LF), (8) UNC path limitations.
+  Provides: MSYS path-conversion explainer, copy-pasteable env-var workarounds, double-slash recipes, line-ending fixes, and compose-mount patterns for Windows.
 ---
 
 # Docker on Windows Git Bash / MINGW - Path Conversion Guide
@@ -325,7 +328,7 @@ MSYS_NO_PATHCONV=1 docker compose run -v $(pwd)/scripts:/scripts backend bash
 ### Problem: "No such file or directory" errors
 
 **Symptoms:**
-```
+```bash
 Error response from daemon: invalid mount config for type "bind":
 bind source path does not exist: C:\Program Files\Git\c\Users\project
 ```
@@ -366,7 +369,7 @@ docker run -v my-named-volume:/data myimage
 ### Problem: Path with spaces fails
 
 **Symptoms:**
-```
+```text
 Error: invalid reference format
 ```
 

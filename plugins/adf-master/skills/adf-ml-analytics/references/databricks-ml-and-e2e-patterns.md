@@ -223,7 +223,7 @@ Use Mapping Data Flows for feature engineering before ML scoring.
 ```
 
 **Common Feature Engineering Transformations:**
-```
+```text
 # Data Flow Script (DFS) patterns for ML features
 
 # Aggregate window features

@@ -128,28 +128,25 @@ Use MIT License for consistency with the marketplace, or another permissive open
    - Include `LICENSE` file
 
 6. **Update marketplace.json**
+
+   Add a marketplace entry for the plugin. The entry must mirror the plugin `version` and `keywords`, but do not hand-edit those fields after creation. Use `scripts/version_ops.py` to validate and synchronize metadata.
+
    ```json
    {
-     "name": "claude-plugin-marketplace",
-     "description": "A curated collection of Claude Code plugins for plugin development, context optimization, and productivity tools",
-     "owner": {
-       "name": "Josiah Siegel",
-       "email": "JosiahSiegel@users.noreply.github.com"
+     "name": "your-plugin-name",
+     "source": "./plugins/your-plugin-name",
+     "description": "Brief description for marketplace listing",
+     "version": "1.0.0",
+     "author": {
+       "name": "Your Name"
      },
-     "plugins": [
-       // ... existing plugins ...
-       {
-         "name": "your-plugin-name",
-         "source": "./plugins/your-plugin-name",
-         "description": "Brief description for marketplace listing",
-         "version": "1.0.0",
-         "author": {
-           "name": "Your Name"
-         },
-         "keywords": ["relevant", "keywords"]
-       }
-     ]
+     "keywords": ["relevant", "keywords"]
    }
+   ```
+
+   ```bash
+   python3 scripts/version_ops.py --validate --metadata all
+   python3 scripts/version_ops.py --sync --metadata keywords --dry-run
    ```
 
 7. **Test your plugin locally**
@@ -184,10 +181,11 @@ To update an existing plugin:
 1. Fork and clone the repository
 2. Create a new branch: `git checkout -b update-plugin-name`
 3. Make your changes
-4. Update the version number in `plugin.json`
-5. Update the version in `.claude-plugin/marketplace.json`
-6. Document changes in the plugin's README
-7. Submit a pull request
+4. Bump the plugin version with `python3 scripts/version_ops.py -b patch -p <plugin-name>` (use `minor` or `major` when appropriate)
+5. If you changed plugin keywords in `plugins/<plugin-name>/.claude-plugin/plugin.json`, run `python3 scripts/version_ops.py --sync --metadata keywords --dry-run` and then `python3 scripts/version_ops.py --sync --metadata keywords`
+6. Validate metadata with `python3 scripts/version_ops.py --validate --metadata all`
+7. Document changes in the plugin's README
+8. Submit a pull request
 
 ## Plugin Guidelines
 
@@ -226,12 +224,15 @@ To update an existing plugin:
 Before submitting, ensure:
 
 - [ ] Plugin follows the required structure
-- [ ] `plugin.json` includes all required fields
+- [ ] `plugin.json` includes all required fields, including public-marketplace keywords
 - [ ] README.md is comprehensive and well-formatted
 - [ ] LICENSE file is included
-- [ ] `.claude-plugin/marketplace.json` is updated
+- [ ] `.claude-plugin/marketplace.json` includes the plugin entry
+- [ ] Versions were bumped only with `scripts/version_ops.py`
+- [ ] Marketplace keywords were synchronized from plugin-owned `plugin.json` with `scripts/version_ops.py --sync --metadata keywords`
+- [ ] `python3 scripts/version_ops.py --validate --metadata all` passes
 - [ ] All commands/agents/skills are tested
-- [ ] No sensitive information (API keys, personal emails)
+- [ ] No sensitive information, private project names, internal paths, or personal emails
 - [ ] Plugin name is unique in the marketplace
 - [ ] Version number follows semantic versioning (1.0.0)
 
@@ -261,8 +262,9 @@ Describe how you tested the plugin:
 ### Checklist
 - [ ] Plugin structure follows guidelines
 - [ ] Documentation is complete
-- [ ] No sensitive information included
-- [ ] marketplace.json updated
+- [ ] No sensitive information, private project references, or internal paths included
+- [ ] marketplace.json entry added or updated
+- [ ] Versions and marketplace keyword mirrors validated with `scripts/version_ops.py`
 - [ ] License included
 ```
 

@@ -21,7 +21,7 @@ Create a production-ready PowerShell module with:
 
 ## Module Structure
 
-```
+```text
 ModuleName/
 ├── ModuleName.psd1          # Module manifest
 ├── ModuleName.psm1          # Root module

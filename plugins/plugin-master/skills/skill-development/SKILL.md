@@ -1,6 +1,9 @@
 ---
 name: skill-development
-description: Canonical guide to authoring SKILL.md files for Claude Code plugin skills. PROACTIVELY activate for: (1) creating a new skill, (2) adding a skill to a plugin, (3) writing SKILL.md frontmatter (name, description with PROACTIVELY/Provides enumeration), (4) fixing skills that never trigger, (5) organizing skill content (core vs references vs examples vs scripts vs assets), (6) improving a weak skill description, (7) setting up progressive disclosure (3-level loading), (8) splitting oversized SKILL.md (>2000 words) into references, (9) writing skill body in imperative voice, (10) diagnosing and fixing zero-frontmatter SKILL.md files, (11) moving cross-cutting boilerplate (Windows paths, docs policy) out of YAML descriptions. Provides: canonical skill frontmatter template, broken-pattern catalog, progressive-disclosure layout, trigger-phrase completeness checklist, size guidelines and enforcement process, and a validation checklist covering every known mistake that breaks skill triggering.
+description: |
+  Canonical guide to authoring SKILL.md files for Claude Code plugin skills.
+  PROACTIVELY activate for: (1) creating a new skill, (2) adding a skill to a plugin, (3) writing SKILL.md frontmatter, (4) fixing skills that never trigger, (5) organizing core vs references vs examples, (6) improving weak skill descriptions, (7) progressive disclosure design, (8) splitting oversized SKILL.md files, (9) imperative body style, (10) zero-frontmatter SKILL.md files, (11) removing boilerplate from YAML descriptions.
+  Provides: skill template, trigger checklist, size rules, and validation process.
 ---
 
 # Skill Development for Claude Code Plugins
@@ -17,7 +20,7 @@ Skills use **progressive disclosure** - a three-level loading system that manage
 
 ## Skill Structure
 
-```
+```text
 skill-name/
 ├── SKILL.md              # Required: Core instructions
 ├── references/           # Optional: Detailed documentation
@@ -64,7 +67,7 @@ description: |
 4. **Enumerate concrete, named triggers — not abstract capabilities.** "PROACTIVELY activate for: (1) creating Azure Functions, (2) binding config" is good. "Use this skill when working with Azure" is NOT.
 5. **Describe WHEN to use, not WHAT it does.** The description drives routing, so it must read as a trigger list from the user's point of view. Put the capability summary in `Provides: ...` at the end.
 6. **Keep descriptions single-line YAML-safe.** If you use `|` block scalar, do not embed unescaped colons or other YAML-confusing characters in the middle of lines.
-7. **Target under ~800 characters for the description.** Longer descriptions dilute matching. If you genuinely need more triggers, prefer splitting into two skills over a bloated description.
+7. **Target 400-1000 characters for the description; hard ceiling is 1024 characters (Claude Code API spec).** Claude's current listing cap is 1536 chars per entry (raised from 250 in v2.1.105), and the aggregate budget across all installed skills is ~1% of the model context window. Front-load trigger keywords. If you genuinely need more triggers than fit in ~1000 chars, prefer splitting into two skills over a bloated description.
 8. **Do NOT put cross-cutting boilerplate (Windows paths, docs policy) inside the YAML description.** Put it in the markdown body.
 
 ### Canonical "good" description
@@ -77,7 +80,7 @@ description: Expert guide to Terraform AzureRM provider for Azure infrastructure
 
 ```yaml
 # BROKEN: no frontmatter at all
-# (file starts with `# Skill Title` — will not appear in discovery)
+# (file starts with `# Skill Title` - will not appear in discovery)
 
 # BROKEN: wrong shape, no enumeration
 description: Use this skill when working with Terraform.
@@ -106,7 +109,7 @@ description: |
 Write the entire skill body using **imperative/infinitive form** (verb-first instructions):
 
 **Correct (imperative):**
-```
+```text
 To create a hook, define the event type.
 Configure the MCP server with authentication.
 Validate settings before use.
@@ -114,7 +117,7 @@ Start by reading the configuration file.
 ```
 
 **Incorrect (second person):**
-```
+```bash
 You should create a hook by defining the event type.
 You need to configure the MCP server.
 You can use the grep tool to search.
@@ -165,6 +168,27 @@ You can use the grep tool to search.
 
 **Across SKILL.md and references/**, information lives in one place only. If a detailed table is in `references/patterns.md`, SKILL.md should contain only a brief summary and a pointer to the reference file — not a copy of the table.
 
+### The "≥ 2 verbatim copies = extract" gate (MANDATORY)
+
+When authoring or revising any skill, before pasting a paragraph, table, checklist, or fenced code block into a SKILL.md or reference file, run this check:
+
+```bash
+# From the plugin root - adjust path to the candidate paragraph's first distinctive line:
+grep -rn "FIRST_DISTINCTIVE_LINE_OF_THE_BLOCK" skills/ agents/ commands/ README.md
+```
+
+**Decision rule** (apply without exception):
+
+| grep finds the block in | Action |
+|---|---|
+| 0 other files | Safe to add. Proceed. |
+| 1 other file (this will be the 2nd copy) | **STOP.** Extract to `skills/_shared/<topic>.md` (cross-skill content) or `skills/<this-skill>/references/<topic>.md` (single-skill detail). Replace both call sites with a one-line pointer. |
+| 2+ other files | Treat as a P1 bug. Extract immediately, then audit for further occurrences. |
+
+This rule applies to canonical procedure paragraphs, checklists, audit tables, and any block that reads "this is the one true definition of X." It does NOT apply to short one-line definitions, frontmatter examples, or generic phrases like "Use this skill when..." — those are too small to extract usefully.
+
+**Why "treat slices independently" is the bug it sounds like:** when revising one file at a time without grepping the rest of the plugin tree, identical canonical text ends up landing in two files. The fix is mechanical: every time you are about to commit a block longer than ~3 lines, grep first.
+
 ## Resource Types
 
 ### references/ - Documentation loaded as needed
@@ -191,80 +215,18 @@ You can use the grep tool to search.
 - Templates, images, icons, boilerplate code, fonts
 - Used within the output Claude produces, not for Claude to read
 
-## Skill Creation Process
+## Skill Creation Process & Common Mistakes
 
-### Step 1: Understand Use Cases
+Six-step process (use cases -> plan resources -> create structure -> write content -> validate -> iterate) and the full common-mistakes table live in `references/creation-process-and-mistakes.md`. Core distillation:
 
-Identify concrete examples of how the skill will be used. Ask:
-- What functionality should this skill support?
-- What would a user say that should trigger this skill?
-- What tasks does this skill help with?
+1. Identify concrete use cases and trigger phrases a user would actually say.
+2. Plan reusable resources: `scripts/`, `references/`, `assets/`, `examples/`.
+3. Create only the directories you need.
+4. Start with the resources, then write a lean SKILL.md (third-person description, imperative body, ~1,500-2,000 words).
+5. Validate frontmatter, trigger-phrase count (5+), no duplicate blocks, body under 3,000 words, all referenced files exist.
+6. Iterate based on real-task usage — strengthen triggers, extract long sections to `references/`.
 
-### Step 2: Plan Resources
-
-Analyze each use case to identify what reusable resources would help:
-- **Scripts**: Code that gets rewritten repeatedly → `scripts/`
-- **References**: Documentation Claude should consult → `references/`
-- **Assets**: Files used in output → `assets/`
-- **Examples**: Working code to copy → `examples/`
-
-### Step 3: Create Structure
-
-```bash
-mkdir -p plugin-name/skills/skill-name/{references,examples,scripts}
-touch plugin-name/skills/skill-name/SKILL.md
-```
-
-Only create directories you actually need.
-
-### Step 4: Write Content
-
-1. Start with reusable resources (scripts/, references/, assets/)
-2. Write SKILL.md:
-   - Frontmatter with third-person description and trigger phrases
-   - Lean body (1,500-2,000 words) in imperative form
-   - Reference supporting files explicitly
-
-### Step 5: Validate
-
-- [ ] SKILL.md has valid YAML frontmatter with `name` and `description`
-- [ ] Description uses third person ("This skill should be used when...")
-- [ ] Description includes specific trigger phrases (minimum 5 distinct phrases)
-- [ ] Description includes common synonyms and informal terms users actually type
-- [ ] Description includes problem-oriented phrases, not just feature names
-- [ ] Body uses imperative/infinitive form (not second person)
-- [ ] Body is under 3,000 words (ideally 1,500-2,000; detailed content in references/)
-- [ ] No duplicate tables, lists, or content blocks within the same SKILL.md
-- [ ] No duplicated information between SKILL.md and references/
-- [ ] All referenced files actually exist
-- [ ] Examples are complete and working
-- [ ] Scripts are executable
-
-### Step 6: Iterate
-
-After using the skill on real tasks:
-1. Notice struggles or inefficiencies
-2. Strengthen trigger phrases in description
-3. Move long sections from SKILL.md to references/
-4. Add missing examples or scripts
-5. Clarify ambiguous instructions
-
-## Common Mistakes
-
-| Mistake | Fix |
-|---------|-----|
-| Weak trigger description ("Provides guidance") | Add specific phrases: "create X", "configure Y" |
-| Missing synonyms in description | Add informal terms users actually type: "slow report" not just "performance optimization" |
-| Duplicate table/block within same SKILL.md | Search the file before adding any table — never repeat the same content block |
-| Everything in one SKILL.md (8,000 words) | Move details to references/, keep SKILL.md under 2,000 |
-| Second person ("You should...") | Imperative form ("Configure the server...") |
-| Missing resource references | Add "Additional Resources" section listing references/ and examples/ |
-| Duplicated content across files | Put info in SKILL.md OR references/, never both |
-| Same block copied into multiple SKILL.md files | Cross-cutting content (platform guidelines, etc.) belongs in the agent body or one shared reference — NEVER copied into each skill |
-| Wrong person in description | Third person: "This skill should be used when..." |
-| Description too long (>500 chars) | Condense description; use plugin.json keywords for breadth |
-| Agent body duplicates skill content | Agent is a lean orchestrator — domain knowledge belongs in skills only |
-| Skill body too large (>3,000 words) | Split into core SKILL.md + references/ files |
+Common-mistake highlights: weak triggers, missing synonyms, duplicate blocks within a single SKILL.md, everything-in-one-file (8,000-word) skills, second-person body, descriptions over the 1024-char ceiling.
 
 ## Auto-Discovery
 
