@@ -26,10 +26,10 @@ The `doc-expert` agent runs a diagnostic *before* it produces anything. It separ
 
 - Nygard's original template (2011), MADR short and long forms (Olaf Zimmermann's primer), Y-statements, and the 12+ templates in the community reference repo.
 - Template selection per project context — and the rule to pick one and stick to it.
-- The canonical status lifecycle: Proposed → Accepted → Superseded / Deprecated / Rejected.
+- The ADR Explorer-compatible status lifecycle: proposed → accepted → superseded / deprecated.
 - Append-only immutability and supersession instead of editing.
-- Numbering discipline (monotonic, zero-padded, never reused), naming (imperative verb phrase), and RACI ownership (Deciders / Consulted / Informed).
-- The required fields: Title, Status, Date, Owners, Supersedes, Superseded by, Related requirements (ASRs), Context, Decision, Decision drivers, Alternatives, Consequences, Confirmation/Validation, Re-evaluation triggers.
+- Numbering discipline (monotonic, zero-padded, never reused), naming (filenames start with the numeric id, then an imperative verb phrase), and RACI ownership (Deciders / Consulted / Informed).
+- The required fields: Title, Status, Date, Owners, Supersedes, Related requirements (ASRs), Context, Decision, Decision drivers, Alternatives, Consequences, Confirmation/Validation, Re-evaluation triggers.
 
 **The alternatives catalog — when NOT to use an ADR:**
 
@@ -78,6 +78,8 @@ The most important interception is **before** an ADR gets written for a non-deci
 
 - **`/doc-audit`** — Inventory a doc directory, test every ADR against the canon, test every non-ADR against the four-question check (Purpose / Audience / Owner / Update trigger), detect drift, duplication, misclassification, and *unrecorded past decisions* (the ASR test against shipped-change evidence — commits, migrations, removed subsystems, retired vendors). Produces a KEEP / MERGE / REWRITE / DELETE / MOVE / **BACKFILL-ADR** action list. `BACKFILL-ADR` rows are candidates only; the user decides whether to route them to `adr-backfill` for retroactive recording. Nothing is deleted without your sign-off.
 
+- **`/adr-scan`** — Scan code and history for architecturally significant decisions missing from the decision log. Produces `BACKFILL-ADR` candidates plus open questions only; never drafts without human confirmation. Use it for inherited repos, architecture archaeology, vendor removals, subsystem retirements, migrations, and suspicious ADR coverage gaps.
+
 - **`/doc-lint`** — Two-pass Markdown lint on any one file. Pass 1 (syntax must-fix) flags non-portable Markdown — setext where ATX is expected, unfenced code blocks, missing blank lines around block elements, mid-word underscore emphasis, etc. Pass 2 (style should-fix) applies the opinionated Google Markdown style overlay — single H1, ATX headings, `[TOC]` on long docs, 80-character lines, informative link text, fenced blocks with language tags. One finding at a time, per-line approval, no bulk rewrites.
 
 Most of the time you don't need a command — just describe the doc situation and the agent will load the right skill (`doc-diagnostic`, `adr-discovery`, `adr-drafting`, `adr-backfill`, `adr-critique`, `c4-model`, or `markdown-style`). The commands give common workflows a one-token entry point. There is intentionally no top-level `/adr-backfill` command — backfill is reached either through a `/doc-audit` `BACKFILL-ADR` row or through direct user phrasing ("we decided years ago and never wrote it down"), to keep backfill from being the easy-default path it should not be.
@@ -108,7 +110,8 @@ The mandatory backfill **honesty clause** — its verbatim form, required fields
 - **Drafting** — once the five MUSTs are confirmed, `adr-drafting` produces the ADR through the seven-phase co-thinking flow.
 - **Diagram (optional)** — after saving, `c4-model` adds canonical Context + Container views alongside the ADR.
 - **Audit existing docs** — `/adr-critique` for one legacy ADR (line-by-line); `/doc-audit` for a whole directory (KEEP / MERGE / REWRITE / DELETE / MOVE / BACKFILL-ADR).
-- **Backfill a past decision** — when `/doc-audit` surfaces a `BACKFILL-ADR` candidate (or the user describes a long-ago shipped change with no record), `adr-backfill` retroactively records it. Mandatory honesty clause; evidence in two independent locations; refuses when reconstruction confidence is `low`.
+- **Find missing ADRs** — `/adr-scan` for code/history archaeology when ADR coverage is suspect but you don't need full doc cleanup.
+- **Backfill a past decision** — when `/doc-audit` or `/adr-scan` surfaces a `BACKFILL-ADR` candidate (or the user describes a long-ago shipped change with no record), `adr-backfill` retroactively records it. Mandatory honesty clause; evidence in two independent locations; refuses when reconstruction confidence is `low`.
 - **Lint any Markdown file** — `/doc-lint` for two-pass syntax-then-style review of one `.md` file. Works on READMEs, how-tos, runbooks, ADRs (form only — content goes through `/adr-critique`).
 
 ```text

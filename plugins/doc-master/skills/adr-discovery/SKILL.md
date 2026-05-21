@@ -54,7 +54,7 @@ Every confirmed fact is dated and tagged in the brief: `[CONFIRMED YYYY-MM-DD]`.
 
 Glob the repo for signals — never assert what you find.
 
-- ADR directories: `docs/adr/`, `docs/architecture/decisions/`, `architecture/decisions/`, `docs/decisions/`
+- ADR directories: `docs/adr/`, `docs/decisions/`, `docs/architecture/decisions/`, `**/adr/*.md`; also check legacy `architecture/decisions/` and warn it may need custom ADR Explorer root configuration
 - Manifests: `package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `pom.xml`, `*.csproj`
 - READMEs at the repo root and one level down
 - LikeC4 files: `**/*.c4`, `likec4.config.*`

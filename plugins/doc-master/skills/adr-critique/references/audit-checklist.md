@@ -8,16 +8,19 @@ The detailed probe set for `adr-critique` Phases 3 (missing-why), 4 (consistency
 
 | Probe | Flag if… |
 |---|---|
-| `status` set? | Missing or `Proposed` for > 30 days. |
+| `status` set? | Missing, non-lowercase, `proposed` for > 30 days, or not one of ADR Explorer's valid values: `proposed`, `accepted`, `deprecated`, `superseded`. Flag overloaded values such as `rfc`, `rejected`, or `accepted (backfilled YYYY-MM-DD)`. |
 | `date` ISO 8601? | Missing or in `MM/DD/YYYY` format. |
-| `deciders` named humans? | `"the team"`, `"engineering"`, `"leadership"`, or empty. (Exception: backfill ADRs may use the literal `unrecoverable` — see "Backfill ADRs" probe below.) |
-| `supersedes` bidirectional? | This ADR claims `supersedes: X` but X has no `superseded by`. |
-| `relates-to` reasoned? | List of bare IDs with no one-line reason each. |
+| `deciders` named humans? | Not a YAML array, `"the team"`, `"engineering"`, `"leadership"`, or empty. (Exception: backfill ADRs may include the literal `unrecoverable` — see "Backfill ADRs" probe below.) |
+| `supersedes` graph edge? | Not a YAML list, or the new ADR relies only on `superseded-by` / `superseded by` text instead of listing the old ADR id in `supersedes`. |
+| `amends` shaped? | Present but not a YAML list of ADR ids. |
+| `relates-to` reasoned? | Not a YAML list of `{id, reason}` objects, or reason is missing. |
+| `confidence` shaped? | Present but not `high`, `medium`, or `low`; numeric confidence belongs in separate `confidence-score`. |
+| `expires` valid? | Present but not ISO 8601, or used for a decision that has no real expiry semantics. |
 | `review-by` concrete? | `"annually"`, `"as needed"`, `"when appropriate"` — fossils. |
 
 ### Backfill ADRs
 
-A backfill ADR is detectable by `status: accepted (backfilled YYYY-MM-DD)` (or `status: deprecated (decision reversed since)` with `tags: [backfill]`). These records have a small set of probes of their own — they are subject to all other probes in this file as well.
+A backfill ADR is detectable by `tags: [backfill]` plus `backfilled-on: YYYY-MM-DD`. Older records may use `status: accepted (backfilled YYYY-MM-DD)` or `status: deprecated (decision reversed since)`; flag those for header migration to ADR Explorer-compatible status values without changing the body. These records have a small set of probes of their own — they are subject to all other probes in this file as well.
 
 | Probe | Flag if… |
 |---|---|
@@ -25,7 +28,7 @@ A backfill ADR is detectable by `status: accepted (backfilled YYYY-MM-DD)` (or `
 | Honesty-clause completeness | Clause present but missing a required field (record date, evidence locators, decider) or terminal period. |
 | Evidence locators ≥ 2? | Fewer than two independent locators in the frontmatter `evidence:` list. One commit message alone is not enough. |
 | ASR signal measurable? | `asr-signal` is vague ("felt cleaner," "improved DX") rather than a measurable signal ("removed 14k LOC and one vendor dependency"). |
-| Status / tags consistent? | `status` begins with `accepted (backfilled` or `deprecated (decision reversed` but `tags` does not include `backfill`. |
+| Status / tags consistent? | `tags` does not include `backfill`, `backfilled-on` is missing, or `status` is overloaded with backfill/reversal text instead of plain `accepted` or `deprecated`. |
 | Honesty clause softened? | The clause has been rewritten to hide the backfill nature (e.g., moved to a footnote, paraphrased into past-tense narrative, fields omitted). The clause is non-negotiable; flag and route to redraft via `adr-backfill`. |
 
 ### Context
@@ -98,13 +101,13 @@ A valid line answers both. An invalid line answers neither.
 
 ## Phase 4 — consistency probes
 
-### Probe 1: bidirectional supersession
+### Probe 1: supersession graph compatibility
 
-For every `supersedes: X` in the ADR, read X and confirm `superseded by:` is set to the current ADR's ID. Flag asymmetry in either direction.
+For every superseding decision, confirm the new ADR has `supersedes: ["X"]` or equivalent YAML list entries. A reverse `superseded by:` note on X is useful for human readers but is not enough for ADR Explorer graph rendering. Flag missing or scalar `supersedes` values.
 
 ### Probe 2: orphan amendments
 
-For every `amends: X`, confirm X exists and is `accepted`. An amendment to a non-existent or `rejected` ADR is a flag.
+For every id in `amends: [X]`, confirm X exists and is `accepted`. An amendment to a non-existent, `deprecated`, or `superseded` ADR is a flag.
 
 ### Probe 3: tension detection
 

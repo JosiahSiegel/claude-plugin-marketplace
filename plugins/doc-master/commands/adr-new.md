@@ -12,7 +12,7 @@ Hands the request to the `doc-expert` agent with the diagnostic-first stance. Th
 
 1. **Run the four-question check** — Purpose, Audience, Owner, Update trigger. If any are unanswerable, the agent will ask you for the missing piece before proceeding.
 2. **Apply the "is this architecturally significant?" test** — measurable effect on architecture or quality? hard to reverse? one decision (not a bundle)? made (not a proposal)?
-3. **If yes** — detect the project's existing decision log (`docs/adr/`, `docs/architecture/decisions/`, `architecture/decisions/`, or `docs/decisions/`), confirm the template flavor in use (Nygard / MADR light / MADR full / Y-statement / project-custom), compute the next ADR number, propose an imperative-verb-phrase filename, and draft the ADR with every required field populated honestly. Fields that need human input are marked `TBD — needs <specific info>` rather than invented.
+3. **If yes** — detect the project's existing decision log (`docs/adr/`, `docs/decisions/`, `docs/architecture/decisions/`, `**/adr/*.md`, or legacy `architecture/decisions/` with a custom-root warning), confirm the template flavor in use (Nygard / MADR light / MADR full / Y-statement / project-custom), compute the next ADR number, propose an imperative-verb-phrase filename that starts with the numeric id, and draft the ADR with every required field populated honestly. Fields that need human input are marked `TBD — needs <specific info>` rather than invented.
 4. **If no** — name the correct alternative home (Diátaxis tutorial / how-to / reference / explanation; RFC; design doc; runbook; README; CONTRIBUTING; code comment; PR description), explain why an ADR would be wrong, and apply the four-question check to the alternative.
 
 ## Your input

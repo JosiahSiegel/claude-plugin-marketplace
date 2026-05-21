@@ -1,9 +1,9 @@
 ---
 name: doc-diagnostic
 description: |
-  This skill should be used when deciding whether a doc should exist, where it belongs, or whether something is really an ADR.
-  PROACTIVELY activate on "should this be an ADR?", "where should I document X?", "is this architecturally significant?", "ADR vs RFC vs design doc vs runbook", "Diátaxis", "audit docs folder", "clean up the decision log", "doc drift", "doc governance", "ADR template selection", "Nygard vs MADR vs Y-statement."
-  Provides: doc placement diagnostic, alternatives catalog, ADR canon, and folder audit procedure.
+  This skill should be used when deciding whether a doc should exist, where it belongs, whether something is really an ADR, or whether an architectural decision is missing from the record.
+  PROACTIVELY activate on "should this be an ADR?", "where should I document X?", "is this architecturally significant?", "ADR vs RFC vs design doc vs runbook", "Diátaxis", "audit docs folder", "clean up the decision log", "doc drift", "doc governance", "ADR template selection", "Nygard vs MADR vs Y-statement", "missing ADR", "missing decision record", "undocumented architecture", "implicit decision", "historical documentation clutter", "inherited repo", "large legacy repo", "architecture archaeology", "code archaeology", "scan for decision records", "find decisions not captured in ADRs."
+  Provides: doc placement diagnostic, alternatives catalog, ADR canon, folder audit procedure, and BACKFILL-ADR candidate detection.
 ---
 
 # doc-diagnostic
@@ -57,30 +57,31 @@ Pick once per project, then "stick to what you have decided for." Don't mix temp
 ### Canonical status lifecycle
 
 ```text
-  Proposed  ----accepted---->  Accepted  ----changed---->  Superseded by NNNN
-     |                            |
-     +--rejected-->  Rejected     +--no-longer-applies-->  Deprecated
+  proposed  ----accepted---->  accepted  ----changed---->  superseded
+                                      |
+                                      +--no-longer-applies-->  deprecated
 ```
 
-- **Proposed** — under discussion. (Some teams skip this and use an RFC instead.)
-- **Accepted** — the decision is in force.
-- **Superseded by NNNN** — replaced by a later ADR. Link both ways. Do **not** edit the old ADR's body except to add the supersession link.
-- **Deprecated** — the decision no longer applies but no new decision replaces it.
-- **Rejected** — proposed and decided against. Worth keeping if the rejection encodes useful "why not" reasoning.
+ADR Explorer-compatible status values are lowercase `proposed`, `accepted`, `deprecated`, and `superseded`. Do not overload `status` with `rfc`, `rejected`, `backfilled`, or explanatory strings.
+
+- **proposed** — under discussion, including ADRs serving as RFCs. Add `rfc-deadline` for the RFC window instead of inventing `status: rfc`.
+- **accepted** — the decision is in force.
+- **superseded** — replaced by a later ADR. The new ADR's `supersedes` list creates the graph edge; the old ADR may also receive a human-readable reverse link.
+- **deprecated** — the decision no longer applies but no new decision replaces it, or a proposal was rejected but kept for its "why not" reasoning. Explain the reason in the body or notes, not in `status`.
 
 ### Immutability and supersession
 
 The cardinal rule: **"Don't alter existing information in an ADR."** Amend or supersede instead.
 
-- Once Accepted, treat the body as append-only. Allowed edits: typo fixes, adding a `Superseded by` link, adding dated notes at the bottom under an explicit "Amendments" heading.
-- A changed decision is a **new ADR** that names the old one in its `Supersedes:` field. The old ADR gets `Superseded by: NNNN` added to its header — and otherwise stays untouched.
+- Once Accepted, treat the body as append-only. Allowed edits: typo fixes, adding a `superseded by` note, adding dated notes at the bottom under an explicit "Amendments" heading.
+- A changed decision is a **new ADR** that names the old one in its `supersedes` list. The old ADR may get a `superseded by: NNNN` note for human readers — and otherwise stays untouched. Do not rely on `superseded-by` / `superseded by` for ADR Explorer graph rendering; the new ADR's `supersedes` list is the edge.
 - Some teams prefer a "living document" stance with dated inline amendments. State the project's stance up front in the decision log's `README.md` and stick to it.
 
 ### Numbering, naming, ownership
 
 - **Numbering**: monotonically increasing, zero-padded (`0001`, `0002`, ...). Never reuse a number, even for a rejected ADR. The number IS the identity.
-- **Filename**: present-tense imperative verb phrase, lowercase, hyphenated, `.md` (e.g., `0007-use-postgres-for-primary-store.md`). Not `decision-7.md`. Not `database-stuff.md`.
-- **Ownership**: name `deciders` (accountable) and, if relevant, `consulted` (two-way input) and `informed` (one-way notice) — the RACI distinction in MADR. "The team" is not an owner.
+- **Filename**: starts with the zero-padded numeric id, then a present-tense imperative verb phrase, lowercase, hyphenated, `.md` (e.g., `0007-use-postgres-for-primary-store.md`). Not `decision-7.md`. Not `database-stuff.md`.
+- **Ownership**: name `deciders` as a YAML array (accountable) and, if relevant, `consulted` (two-way input) and `informed` (one-way notice) — the RACI distinction in MADR. "The team" is not an owner.
 - **Date**: ISO 8601 (`YYYY-MM-DD`). Stamp at acceptance, not first draft.
 - **Review cadence**: state the re-evaluation trigger on the ADR itself. "Revisit when we exceed 10k QPS" is concrete; "revisit annually" is a fossil-in-waiting.
 
@@ -89,7 +90,7 @@ The cardinal rule: **"Don't alter existing information in an ADR."** Amend or su
 Every ADR should contain:
 
 1. **Title** — `NNNN. Decision (imperative verb phrase)`.
-2. **Header / metadata** — Status, Date, Owners/Deciders, Supersedes, Superseded by, Related ASRs / requirements, Related docs.
+2. **Header / metadata** — `status`, `date`, `deciders`, `supersedes`, `amends`, `relates-to`, Related ASRs / requirements, Related docs. Prefer ADR Explorer-compatible YAML: `supersedes` and `amends` as lists, `relates-to` as `{id, reason}` objects, `confidence: high | medium | low`, optional `confidence-score`, and optional `expires`.
 3. **Context** — architecturally significant forces: requirements, constraints, business pressure, team skills, prior decisions. Enough that a stranger three years later understands *why this decision had to be made now*.
 4. **Decision** — the choice, stated directly, present tense. ("We use Postgres for the primary store.") The ADR must stand alone even if it links to longer design material.
 5. **Decision drivers** *(MADR)* or implicit in Context *(Nygard)* — the qualities being optimized: latency, cost, operational simplicity, team familiarity, vendor lock-in, etc.
@@ -101,7 +102,7 @@ Every ADR should contain:
 ### Storage and discoverability
 
 - Keep ADRs **in the source repository, in source control**, alongside the code they govern.
-- Common location: `docs/adr/`, `docs/architecture/decisions/`, or `architecture/decisions/`. Pick one per project; document the choice in the decision log's `README.md`.
+- ADR Explorer-friendly locations: `docs/adr/`, `docs/decisions/`, `docs/architecture/decisions/`, or `**/adr/*.md`. A bare `architecture/decisions/` directory can work as a legacy project convention, but warn that it may need custom ADR Explorer root configuration. Pick one per project; document the choice in the decision log's `README.md`.
 - Provide an **index** in the decision log `README.md` listing every ADR with its status and a one-line summary.
 - Cross-link ADRs from the code they govern when feasible (`// See docs/adr/0007-use-postgres-for-primary-store.md`).
 

@@ -79,7 +79,7 @@ See `references/audit-checklist.md` for the full missing-why interrogation.
 Across the ADR and its graph neighbors, look for:
 
 - **Tensions** — two ADRs claim incompatible decisions without one superseding the other. Flag both and ask which supersedes.
-- **Missing relationships** — the ADR says "supersedes 0004" but ADR 0004 has no `superseded by`. Flag for bidirectional fix.
+- **Missing relationships** — a later decision claims to replace 0004 but lacks `supersedes: ["0004"]`, or related/amended links are not valid YAML lists. Flag for graph-compatible frontmatter fixes.
 - **Duplicate authoritative claims** — two ADRs claim authority over the same component/decision. One must defer.
 
 See `references/audit-checklist.md` for the consistency probes.
@@ -105,7 +105,7 @@ Once all flags are resolved, apply the architect-approved edits in **one** edit 
 ## Output discipline
 
 - **Never bulk-edit.** Per-line approval is the discipline that keeps the audit useful.
-- **Never edit an Accepted ADR's body.** Allowed edits to an Accepted ADR: typo fixes, adding a `Superseded by` link in the header, adding a dated "Amendments" note at the bottom under an explicit heading. Anything else is a new ADR.
+- **Never edit an Accepted ADR's body.** Allowed edits to an Accepted ADR: typo fixes, graph-compatible header fixes, adding a human-readable `superseded by` note in the header, or adding a dated "Amendments" note at the bottom under an explicit heading. Anything else is a new ADR.
 - **Surface, don't decide.** Tensions, drift, and missing-why are flagged; the architect decides how to resolve.
 - **Report at the end.** After applying changes, emit a one-line summary: "Audited NNNN-title.md. <N> flags raised, <M> applied. <K> open items: <list>."
 
