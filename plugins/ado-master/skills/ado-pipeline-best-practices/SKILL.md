@@ -6,39 +6,18 @@ description: |
   Provides: YAML pattern catalog, template library structure, caching recipes, deployment strategy templates, and a pipeline-quality checklist.
 ---
 
-## 🚨 CRITICAL GUIDELINES
-
-### Windows File Path Requirements
-
-**MANDATORY: Always Use Backslashes on Windows for File Paths**
-
-When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
-
-**Examples:**
-- ❌ WRONG: `D:/repos/project/file.tsx`
-- ✅ CORRECT: `D:\repos\project\file.tsx`
-
-This applies to:
-- Edit tool file_path parameter
-- Write tool file_path parameter
-- All file operations on Windows systems
-
-
-### Documentation Guidelines
-
-**NEVER create new documentation files unless explicitly requested by the user.**
-
-- **Priority**: Update existing README.md files rather than creating new documentation
-- **Repository cleanliness**: Keep repository root clean - only README.md unless user requests otherwise
-- **Style**: Documentation should be concise, direct, and professional - avoid AI-generated tone
-- **User preference**: Only create additional .md files when user specifically asks for documentation
-
-
----
-
 # Azure Pipelines Best Practices
 
 Comprehensive best practices for creating and maintaining Azure DevOps YAML pipelines.
+
+## Core Review Procedure
+
+1. Identify trigger scope, deployment environments, and required approvals before editing YAML.
+2. Verify secrets flow through service connections, Key Vault, secret variables, or secure files; never inline credentials.
+3. Pin task major versions and centralize repeated steps in templates.
+4. Add path filters, caching, and parallel jobs only when they reduce real build cost without hiding validation.
+5. Keep build, test, package, and deploy concerns separated by stages or jobs.
+6. Validate with Azure DevOps pipeline YAML validation or a dry run before recommending rollout.
 
 ## Pipeline Structure
 
@@ -154,5 +133,11 @@ Implement caching for:
 - Test pass rates
 - Deployment frequency
 - Mean time to recovery (MTTR)
+
+## References and Pairings
+
+- Use Microsoft Azure Pipelines YAML schema documentation for task syntax and newly released features.
+- Pair with workload-identity/OIDC guidance when replacing service principal secrets.
+- Pair with security scanning guidance when adding SAST, dependency, container, or IaC checks.
 
 Always verify best practices against latest Azure DevOps documentation.

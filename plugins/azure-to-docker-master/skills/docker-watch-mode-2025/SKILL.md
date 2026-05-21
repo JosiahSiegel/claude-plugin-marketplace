@@ -24,6 +24,15 @@ Rebuilds image and recreates container when files change.
 For configuration files requiring restart.
 Syncs files and restarts container.
 
+## Core Procedure
+
+1. Confirm the app already starts with `docker compose up` before adding watch rules.
+2. Prefer `sync` for source directories when the runtime already reloads files.
+3. Use `rebuild` for dependency manifests, Dockerfiles, compiled artifacts, or base-image changes.
+4. Use `sync+restart` for configuration files that are read only at process startup.
+5. Add narrow `ignore` rules for dependency folders, build outputs, VCS folders, caches, secrets, and generated files.
+6. Run `docker compose up --watch` and verify both fast source edits and dependency changes.
+
 ## Usage
 
 ```yaml
@@ -35,16 +44,27 @@ services:
         - action: sync
           path: ./frontend/src
           target: /app/src
-          ignore: [node_modules/, .git/]
+          ignore: [node_modules/, .git/, dist/]
         - action: rebuild
           path: ./frontend/package.json
 ```
 
-Start with: `docker compose up --watch`
+Start with: `docker compose up --watch`.
+
+## Troubleshooting Checklist
+
+- Change not detected: verify the watched path is relative to the Compose file and not excluded by `ignore`.
+- Hot reload not firing: confirm the application inside the container has its own watcher enabled.
+- Container restarts too often: split source `sync` from manifest `rebuild` rules.
+- File ownership issues: prefer named volumes for dependency directories and sync only application code.
+- Slow sync: narrow watched paths and exclude build outputs or large generated folders.
+
+## References
+
+Use `docker compose watch --help` and Docker's Compose Watch documentation for the current action set and CLI flags. Pair this skill with `compose-patterns-2025` when watch rules interact with service dependencies, profiles, networks, or volumes.
 
 ## Benefits
-- Better performance than bind mounts
-- No file permission issues
-- Intelligent syncing
-- Supports rebuild capability
-- Works on all platforms
+- Better performance than broad bind mounts
+- Fewer host/container file permission issues
+- Intelligent syncing with rebuild capability
+- Works across supported Docker Desktop and Compose platforms

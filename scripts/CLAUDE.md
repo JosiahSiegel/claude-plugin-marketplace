@@ -8,7 +8,7 @@ The marketplace uses two locations for plugin versions:
 1. **`.claude-plugin/marketplace.json`** - Central registry with all plugin metadata
 2. **`plugins/<plugin-name>/.claude-plugin/plugin.json`** - Individual plugin configuration
 
-Both locations MUST have matching versions. The `version_ops.py` script ensures consistency.
+Both locations MUST have matching versions. The central marketplace also mirrors plugin keywords from each plugin's `plugin.json`; the plugin-owned `keywords` array is the source of truth for keyword sync. The `version_ops.py` script ensures consistency.
 
 ## File Locations
 
@@ -67,14 +67,17 @@ The validator is intentionally read-only. It must not be used to mutate plugin m
 ## Complete CLI Reference
 
 ```
-usage: version_ops.py [-h] [-v] [-s] [-b {patch,minor,major}]
-                      [-i {patch,minor,major}] [-p PLUGIN] [-a] [-d] [-q]
-                      [--json] [plugin_name]
+usage: version_ops.py [-h] [-v] [-s] [--metadata {versions,keywords,all}]
+                      [-b {patch,minor,major}] [-i {patch,minor,major}]
+                      [-p PLUGIN] [-a] [-d] [-q] [--json] [plugin_name]
 
 Options:
   -h, --help                 Show help message
-  -v, --validate             Validate all versions match (default action)
-  -s, --sync                 Sync versions using highest (never downgrades)
+  -v, --validate             Validate metadata (default action)
+  -s, --sync                 Sync versions or keywords based on --metadata
+  --metadata {versions,keywords,all}
+                             Metadata type for validate/sync. Default: versions.
+                             Keyword source of truth is plugin.json.
   -b, --bump {patch,minor,major}
                              Bump version type
   -i, --increment {patch,minor,major}
@@ -113,11 +116,25 @@ Synchronize versions using the highest version (never downgrades):
 
 ```bash
 python3 scripts/version_ops.py --sync
+python3 scripts/version_ops.py --sync --metadata versions
 python3 scripts/version_ops.py --sync --dry-run  # Preview changes
 python3 scripts/version_ops.py -s -d             # Short form
 ```
 
 **Behavior:** Compares versions between marketplace.json and plugin.json. Updates BOTH files to the higher version. This ensures versions never go down.
+
+### Validate and Sync Keywords
+
+Validate or synchronize keyword metadata between marketplace.json and plugin.json files:
+
+```bash
+python3 scripts/version_ops.py --validate --metadata keywords
+python3 scripts/version_ops.py --sync --metadata keywords --dry-run
+python3 scripts/version_ops.py --sync --metadata keywords
+python3 scripts/version_ops.py --validate --metadata all
+```
+
+**Source of truth:** `plugins/<plugin-name>/.claude-plugin/plugin.json` owns keywords. `marketplace.json` mirrors those keywords for marketplace discovery. Keyword sync updates marketplace entries only; it does not modify plugin-owned keywords.
 
 ### Bump Single Plugin
 
@@ -239,9 +256,10 @@ python3 scripts/version_ops.py -b patch --all            # Apply
 
 ## Guidelines for AI Agents
 
-1. **Always validate before committing** - Run `--validate` to ensure versions are in sync
+1. **Always validate before committing** - Run `--validate` to ensure versions are in sync and `--validate --metadata keywords` when editing keyword metadata
 2. **Bump versions after changes** - Every plugin modification should include a version bump
-3. **Use appropriate bump type:**
+3. **Use keyword sync for metadata drift** - Run `--sync --metadata keywords --dry-run` first, then apply if marketplace keywords need to mirror plugin.json
+4. **Use appropriate bump type:**
    - `patch` for bug fixes, documentation updates, minor tweaks
    - `minor` for new skills, agents, or features
    - `major` for breaking changes, major rewrites, API changes

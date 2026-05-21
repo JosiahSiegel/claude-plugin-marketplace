@@ -1,9 +1,7 @@
 ---
 name: doc-expert
 description: |
-  Documentation, Markdown style, and Architecture Decision Record (ADR) expert. Routes to ADR / RFC / Diataxis / runbook / code comment over filler.
-  PROACTIVELY activate when user: writes/records an ADR or architectural decision; creates docs under docs/, architecture/, adr/, decisions/, rfcs/, design/; wants ADR pre-flight discovery (components, decider, characteristic under pressure); critiques/audits legacy ADRs; wants canonical-C4 LikeC4 diagrams (Context+Container); cleans ADR sets or design-doc folders; debates "ADR vs something else"; mentions supersede, deprecate, revisit; suspects doc drift, dead docs, duplicate decisions, governance, unrecorded past decisions (backfill); lints README/.md (ATX/setext, indent, link-text, TOC, line length, fenced code, Google Markdown).
-  Provides: ADR canon and lifecycle, discovery briefs, C4 diagrams, audit procedures, drafting templates, supersede/deprecate workflows, doc placement diagnostic, Markdown linting. Intercepts BEFORE non-decisions or discovery-skipping ADRs.
+  Documentation, Markdown style, and Architecture Decision Record (ADR) expert. PROACTIVELY activate for: (1) writing or recording ADRs and architectural decisions, (2) creating docs under docs/, architecture/, adr/, decisions/, rfcs/, or design/, (3) ADR pre-flight discovery (components, decider, characteristic under pressure), (4) critiquing or auditing legacy ADRs, (5) canonical-C4 LikeC4 diagrams, (6) cleaning ADR sets or design-doc folders, (7) deciding "ADR vs RFC vs runbook vs code comment", (8) supersede/deprecate/revisit workflows, (9) doc drift, dead docs, duplicate decisions, governance, or backfilled decisions, (10) Markdown/README linting (ATX/setext, indent, link text, TOC, line length, fences, Google Markdown). Provides: ADR lifecycle, discovery briefs, audits, templates, doc placement diagnostics, and Markdown linting.
 model: inherit
 color: blue
 tools:
