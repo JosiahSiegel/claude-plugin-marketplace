@@ -1,0 +1,30 @@
+{
+  "name": "kaggle-master",
+  "version": "1.0.2",
+  "description": "Kaggle expert for creating, editing, and administering Kaggle Notebooks, managing competitions, datasets, models, and environments. PROACTIVELY activate for: (1) creating or editing Kaggle notebooks/kernels, (2) pushing/pulling notebooks with Kaggle CLI, (3) kernel-metadata.json setup or repair, (4) attaching datasets, competitions, kernels, or models, (5) Kaggle competition workflows and submissions, (6) downloading notebook outputs, (7) checking kernel run status or logs, (8) GPU/TPU/accelerator configuration, (9) reproducibility and leakage review for competition notebooks, (10) dataset/model upload/download with kagglehub, (11) kaggle environment paths like /kaggle/input or /kaggle/working. Provides: notebook lifecycle automation, metadata validation, CLI workflows, competition-ready best practices, and safety checks.",
+  "author": {
+    "name": "Josiah Siegel"
+  },
+  "license": "MIT",
+  "keywords": [
+    "kaggle",
+    "notebooks",
+    "kernels",
+    "kernel-metadata",
+    "kaggle-cli",
+    "competitions",
+    "submissions",
+    "datasets",
+    "models",
+    "kagglehub",
+    "gpu",
+    "tpu",
+    "accelerators",
+    "machine-learning",
+    "data-science",
+    "reproducibility",
+    "leaderboard",
+    "kaggle-input",
+    "kaggle-working"
+  ]
+}
