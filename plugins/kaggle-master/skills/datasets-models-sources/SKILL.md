@@ -1,6 +1,7 @@
 ---
 name: datasets-models-sources
-description: Kaggle datasets, models, sources, and kagglehub workflows. PROACTIVELY activate for: (1) downloading datasets with kagglehub, (2) uploading datasets, (3) downloading or uploading Kaggle models, (4) competition_download, (5) notebook_output_download, (6) choosing Kaggle CLI vs kagglehub, (7) attaching dataset_sources, competition_sources, kernel_sources, or model_sources, (8) model artifact transfer, (9) source dependency cleanup, (10) kagglehub limitations for notebooks. Provides: dataset/model transfer patterns, source attachment guidance, tool selection, and limitation checks.
+description: |
+  Kaggle datasets, models, sources, and kagglehub workflows. PROACTIVELY activate for: (1) downloading datasets with kagglehub, (2) uploading datasets, (3) downloading or uploading Kaggle models, (4) competition_download, (5) notebook_output_download, (6) choosing Kaggle CLI vs kagglehub, (7) attaching dataset_sources, competition_sources, kernel_sources, or model_sources, (8) model artifact transfer, (9) source dependency cleanup, (10) kagglehub limitations for notebooks. Provides: dataset/model transfer patterns, source attachment guidance, tool selection, and limitation checks.
 ---
 
 # Datasets, Models, and Sources

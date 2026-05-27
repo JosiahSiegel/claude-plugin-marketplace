@@ -117,6 +117,18 @@ def parse_frontmatter(text):
     return result
 
 
+def validate_frontmatter(path, text, plugin, findings):
+    fm_text = frontmatter(text)
+    if fm_text is not None:
+        try:
+            import yaml
+            yaml.safe_load(fm_text)
+        except Exception as exc:
+            add(findings, "error", "Invalid YAML frontmatter", path,
+                f"YAML parsing failed: {exc}", plugin)
+
+
+
 SUPPRESS_SMART_MARKER = "<!-- validator:allow-smart-punct -->"
 SUPPRESS_BARE_FENCE_MARKER = "<!-- validator:allow-bare-fence -->"
 # Pandoc-style fenced div opener (e.g. ::: {.callout-note}). Treat everything between
@@ -225,6 +237,7 @@ AGENT_OVERSIZED_WORDS = 3000
 
 def validate_agent(path, plugin, findings):
     text = read_text(path)
+    validate_frontmatter(path, text, plugin, findings)
     fm_text = frontmatter(text)
     fm = parse_frontmatter(text) or {}
     if fm_text is None or "model: inherit" not in fm_text:
@@ -259,6 +272,7 @@ def validate_agent(path, plugin, findings):
 
 def validate_skill(path, plugin, findings):
     text = read_text(path)
+    validate_frontmatter(path, text, plugin, findings)
     fm = parse_frontmatter(text)
     words = len(text.split())
     if fm is None:
@@ -285,7 +299,9 @@ def validate_skill(path, plugin, findings):
 
 
 def validate_markdown_file(path, plugin, findings):
-    validate_code_fences(path, read_text(path), plugin, findings)
+    text = read_text(path)
+    validate_frontmatter(path, text, plugin, findings)
+    validate_code_fences(path, text, plugin, findings)
 
 
 def validate_plugin(entry, findings):

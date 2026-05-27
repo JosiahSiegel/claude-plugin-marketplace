@@ -1,6 +1,7 @@
 ---
 name: kaggle-environment
-description: Kaggle runtime environment, paths, accelerators, and reproducibility. PROACTIVELY activate for: (1) `/kaggle/input` path errors, (2) `/kaggle/working` output placement, (3) local vs Kaggle notebook behavior, (4) GPU/TPU/accelerator selection, (5) internet enablement, (6) package/version pinning, (7) memory cleanup and timeout issues, (8) DEBUG flags for fast runs, (9) Kaggle Secrets usage guidance, (10) quota-consuming runtime settings. Provides: path conventions, runtime checklist, accelerator IDs, reproducibility patterns, and resource safeguards.
+description: |
+  Kaggle runtime environment, paths, accelerators, and reproducibility. PROACTIVELY activate for: (1) `/kaggle/input` path errors, (2) `/kaggle/working` output placement, (3) local vs Kaggle notebook behavior, (4) GPU/TPU/accelerator selection, (5) internet enablement, (6) package/version pinning, (7) memory cleanup and timeout issues, (8) DEBUG flags for fast runs, (9) Kaggle Secrets usage guidance, (10) quota-consuming runtime settings. Provides: path conventions, runtime checklist, accelerator IDs, reproducibility patterns, and resource safeguards.
 ---
 
 # Kaggle Environment

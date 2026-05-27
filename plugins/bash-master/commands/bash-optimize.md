@@ -1,7 +1,7 @@
 ---
 name: bash-optimize
 description: Optimize bash scripts for performance, reducing execution time and resource usage
-argument-hint: <script.sh> [target: speed|memory|both]
+argument-hint: "<script.sh> [target: speed|memory|both]"
 ---
 
 ## CRITICAL GUIDELINES

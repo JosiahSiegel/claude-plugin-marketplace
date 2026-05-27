@@ -1,6 +1,7 @@
 ---
 name: notebook-lifecycle
-description: Kaggle notebook/kernel lifecycle operations. PROACTIVELY activate for: (1) creating Kaggle notebooks or kernels, (2) `kaggle kernels init`, (3) pushing or running notebooks with `kaggle kernels push`, (4) pulling notebooks with metadata, (5) checking kernel status, files, logs, or outputs, (6) downloading output artifacts with file patterns, (7) deleting kernels, (8) Python API kernel operations, (9) auth for notebook CLI workflows. Provides: safe CLI/Python lifecycle commands, run monitoring, output retrieval, destructive-action guardrails.
+description: |
+  Kaggle notebook/kernel lifecycle operations. PROACTIVELY activate for: (1) creating Kaggle notebooks or kernels, (2) `kaggle kernels init`, (3) pushing or running notebooks with `kaggle kernels push`, (4) pulling notebooks with metadata, (5) checking kernel status, files, logs, or outputs, (6) downloading output artifacts with file patterns, (7) deleting kernels, (8) Python API kernel operations, (9) auth for notebook CLI workflows. Provides: safe CLI/Python lifecycle commands, run monitoring, output retrieval, destructive-action guardrails.
 ---
 
 # Notebook Lifecycle
