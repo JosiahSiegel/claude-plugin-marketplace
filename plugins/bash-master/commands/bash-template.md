@@ -1,7 +1,7 @@
 ---
 name: bash-template
 description: Generate production-ready bash script templates with modern patterns, error handling, and configurable features
-argument-hint: <type> [options] (types: cli, daemon, library, installer, ci)
+argument-hint: "<type> [options] (types: cli, daemon, library, installer, ci)"
 ---
 
 ## CRITICAL GUIDELINES

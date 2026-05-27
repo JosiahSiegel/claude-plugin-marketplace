@@ -1,6 +1,7 @@
 ---
 name: kernel-metadata
-description: Kaggle `kernel-metadata.json` setup and repair. PROACTIVELY activate for: (1) creating kernel-metadata.json, (2) fixing metadata validation errors, (3) setting `id`, `title`, `code_file`, language, or kernel type, (4) configuring private/public, internet, GPU, or accelerator behavior, (5) attaching dataset_sources, competition_sources, kernel_sources, or model_sources, (6) preparing metadata before `kaggle kernels push`, (7) converting script/notebook metadata. Provides: schema checklist, valid fields, source arrays, defaults, and push-readiness review.
+description: |
+  Kaggle `kernel-metadata.json` setup and repair. PROACTIVELY activate for: (1) creating kernel-metadata.json, (2) fixing metadata validation errors, (3) setting `id`, `title`, `code_file`, language, or kernel type, (4) configuring private/public, internet, GPU, or accelerator behavior, (5) attaching dataset_sources, competition_sources, kernel_sources, or model_sources, (6) preparing metadata before `kaggle kernels push`, (7) converting script/notebook metadata. Provides: schema checklist, valid fields, source arrays, defaults, and push-readiness review.
 ---
 
 # Kernel Metadata

@@ -1,6 +1,7 @@
 ---
 name: competition-workflows
-description: Kaggle competition notebook workflows and submissions. PROACTIVELY activate for: (1) submitting notebook outputs to competitions, (2) `kaggle competitions submit -k`, (3) downloading competition data, (4) validating submission.csv format, (5) leakage review, (6) cross-validation split design, (7) public leaderboard overfitting concerns, (8) competition rule compliance, (9) reproducible top-to-bottom notebook execution, (10) fold-aware preprocessing for ML pipelines. Provides: submission commands, validation checklist, leakage controls, and competition-ready notebook guidance.
+description: |
+  Kaggle competition notebook workflows and submissions. PROACTIVELY activate for: (1) submitting notebook outputs to competitions, (2) `kaggle competitions submit -k`, (3) downloading competition data, (4) validating submission.csv format, (5) leakage review, (6) cross-validation split design, (7) public leaderboard overfitting concerns, (8) competition rule compliance, (9) reproducible top-to-bottom notebook execution, (10) fold-aware preprocessing for ML pipelines. Provides: submission commands, validation checklist, leakage controls, and competition-ready notebook guidance.
 ---
 
 # Competition Workflows

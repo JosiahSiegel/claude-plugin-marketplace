@@ -1607,6 +1607,61 @@
         "kaggle-input",
         "kaggle-working"
       ]
+    },
+    {
+      "name": "ml-master",
+      "source": "./plugins/ml-master",
+      "description": "Comprehensive machine learning expertise across training, evaluation, deployment, MLOps, data pipelines, fine-tuning, inference optimization, and cloud ML platforms. PROACTIVELY activate for: (1) any ML task, (2) PyTorch/TensorFlow/JAX/scikit-learn/XGBoost/Hugging Face work, (3) SageMaker/Vertex AI/Azure ML/Databricks/Ray workflows, (4) model serving with Triton/ONNX/TensorRT/BentoML, (5) reproducibility, leakage, drift, monitoring, responsible AI, and cost optimization. Provides: best-practice guidance from data validation through production operations.",
+      "version": "0.1.1",
+      "author": {
+        "name": "Josiah Siegel"
+      },
+      "keywords": [
+        "machine-learning",
+        "ml",
+        "data-science",
+        "deep-learning",
+        "pytorch",
+        "tensorflow",
+        "keras",
+        "jax",
+        "flax",
+        "huggingface",
+        "transformers",
+        "diffusers",
+        "accelerate",
+        "peft",
+        "scikit-learn",
+        "xgboost",
+        "lightgbm",
+        "catboost",
+        "mlflow",
+        "wandb",
+        "kubeflow",
+        "sagemaker",
+        "vertex-ai",
+        "azure-ml",
+        "databricks",
+        "ray",
+        "triton",
+        "onnx",
+        "tensorrt",
+        "bentoml",
+        "mlops",
+        "model-training",
+        "model-evaluation",
+        "hyperparameter-tuning",
+        "fine-tuning",
+        "lora",
+        "qlora",
+        "rag",
+        "feature-engineering",
+        "feature-store",
+        "inference-optimization",
+        "model-monitoring",
+        "drift-detection",
+        "responsible-ai"
+      ]
     }
   ]
 }
