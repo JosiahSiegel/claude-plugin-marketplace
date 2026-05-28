@@ -109,7 +109,7 @@ Choose orchestration by operational environment:
 | Databricks Workflows | Lakehouse-centric feature engineering, MLflow registry, Spark, Delta, notebooks/jobs |
 | Airflow/Prefect/Dagster | General data/ML orchestration with broad ecosystem integrations |
 
-Keep pipelines modular: data validation, feature generation, training, evaluation, registration, deployment, and monitoring setup should be separate steps with explicit inputs and outputs. Make steps idempotent and cache-aware where safe.
+Keep pipelines modular: data validation, feature generation, training, evaluation, registration, deployment, and monitoring setup should be separate steps with explicit inputs and outputs. Make steps idempotent and cache-aware where safe. For Azure ML code asset registration in CI, ADF-to-Azure-ML version propagation, pointer blobs, or runtime validation of ADF WebActivity paths, load `ml-azureml-adf-automation`.
 
 ## CI/CD for ML
 

@@ -22,7 +22,7 @@ Use this skill for data ingestion, validation, preprocessing, feature engineerin
 
 ## Ingestion and Storage
 
-Choose storage based on data shape and access pattern. Object storage with Parquet/Arrow is a strong default for tabular batch ML. Delta Lake, Apache Iceberg, or Hudi add ACID tables, schema evolution, and time travel. Use warehouses for governed SQL features, vector stores for embedding retrieval, and streaming logs for online behavior. Store raw, cleaned, feature, and model-ready layers separately.
+Choose storage based on data shape and access pattern. Object storage with Parquet/Arrow is a strong default for tabular batch ML. Delta Lake, Apache Iceberg, or Hudi add ACID tables, schema evolution, and time travel. Use warehouses for governed SQL features, vector stores for embedding retrieval, and streaming logs for online behavior. Store raw, cleaned, feature, and model-ready layers separately. For Azure Storage pointer blobs used by ADF to pass Azure ML code asset versions, load `ml-azureml-adf-automation`.
 
 For large datasets, prefer columnar formats, partitioning by time or high-level domain, compression, predicate pushdown, and manifest files. Avoid many tiny files; compact when necessary. Record dataset snapshot identifiers in every training run.
 

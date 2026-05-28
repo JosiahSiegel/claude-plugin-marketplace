@@ -196,7 +196,7 @@ gcloud ai endpoints predict <ENDPOINT-ID> \
 
 ## Azure Patterns
 
-Azure AI Foundry / Azure Machine Learning Workspace orchestrates the entire ML lifecycle. Workspace, computes, environments, data assets, training jobs, models, and endpoints can be managed natively using the Azure CLI `ml` extension.
+Azure AI Foundry / Azure Machine Learning Workspace orchestrates the entire ML lifecycle. Workspace, computes, environments, data assets, training jobs, models, and endpoints can be managed natively using the Azure CLI `ml` extension. For Azure ML code asset registration from CI, ADF orchestration, ADF WebActivity networking, `result.version` propagation, pointer blobs, or private storage firewall handling, load `ml-azureml-adf-automation`.
 
 ### Azure ML v2 CLI Online Endpoint & Deployment YAML (`azure_deploy.yaml`)
 ```yaml
